@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_LAND]
+    FROM VARCHAR (4) NOT NULL;
+

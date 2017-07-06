@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_C1]
+    FROM NVARCHAR (1) NOT NULL;
+

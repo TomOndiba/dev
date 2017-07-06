@@ -1,0 +1,15 @@
+﻿CREATE TABLE [dbo].[MD_ICIS_PRODUCT] (
+    [ICIS_PRODUCT]        [dbo].[N_C100]     NOT NULL,
+    [DESCRIPTION]         [dbo].[N_C100]     NULL,
+    [INDEX100_DATE]       [dbo].[D_DATE]     NULL,
+    [UNIT_OF_MEASUREMENT] [dbo].[N_C20]      NULL,
+    [CURRENCY]            [dbo].[N_CURRENCY] NULL,
+    [CREATE_DATE]         [dbo].[D_DATE]     NULL,
+    [CREATE_BY]           [dbo].[N_USER]     NULL,
+    [UPDATE_DATE]         [dbo].[D_DATE]     NULL,
+    [UPDATE_BY]           [dbo].[N_USER]     NULL,
+    CONSTRAINT [PK_MD_ICIS_PRODUCT] PRIMARY KEY CLUSTERED ([ICIS_PRODUCT] ASC),
+    CONSTRAINT [FK_MD_ICIS_PRODUCT_MD_CURRENCY] FOREIGN KEY ([CURRENCY]) REFERENCES [dbo].[MD_CURRENCY] ([CURRENCY]),
+    CONSTRAINT [FK_MD_ICIS_PRODUCT_MD_UNIT] FOREIGN KEY ([UNIT_OF_MEASUREMENT]) REFERENCES [dbo].[MD_UNIT] ([UOM])
+);
+

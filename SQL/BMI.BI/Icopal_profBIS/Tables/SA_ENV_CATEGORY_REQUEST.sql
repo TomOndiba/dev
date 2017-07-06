@@ -1,0 +1,16 @@
+﻿CREATE TABLE [dbo].[SA_ENV_CATEGORY_REQUEST] (
+    [ENV_REQUEST_ID]       [dbo].[D_INT]       NOT NULL,
+    [ENV_CATEGORY_ID]      [dbo].[D_INT]       NOT NULL,
+    [NAME_SUGGESTION]      [dbo].[N_C50]       NOT NULL,
+    [INGROUP]              [dbo].[N_MEMO]      NULL,
+    [DESCRIPTION]          [dbo].[N_MEMO]      NULL,
+    [CREATE_BY]            [dbo].[N_USER]      NULL,
+    [CREATE_DATE]          [dbo].[D_DATE]      NULL,
+    [CATEGORY_CREATED]     [dbo].[N_BOOLEAN_N] NULL,
+    [CATEGORY_REJECTED]    [dbo].[N_BOOLEAN_N] NULL,
+    [REQUEST_MANAGER]      [dbo].[N_USER]      NULL,
+    [REQUEST_MANAGER_DATE] [dbo].[D_DATE]      NULL,
+    CONSTRAINT [PK_SA_ENV_CATEGORY_REQUEST] PRIMARY KEY CLUSTERED ([ENV_REQUEST_ID] ASC),
+    CONSTRAINT [FK_SA_ENV_CATEGORY_REQUEST_SA_ENV_CATEGORY] FOREIGN KEY ([ENV_CATEGORY_ID]) REFERENCES [dbo].[SA_ENV_CATEGORY] ([ENV_CATEGORY_ID])
+);
+

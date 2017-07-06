@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[MD_COUNTRY] (
+    [COUNTRY_ID]  [dbo].[N_C20]   NOT NULL,
+    [NAME]        [dbo].[N_C100]  NULL,
+    [LATITUDE]    DECIMAL (10, 6) NULL,
+    [LONGITUDE]   DECIMAL (10, 6) NULL,
+    [CREATE_BY]   [dbo].[N_USER]  NULL,
+    [CREATE_DATE] [dbo].[D_DATE]  NULL,
+    CONSTRAINT [PK_MD_COUNTRY] PRIMARY KEY CLUSTERED ([COUNTRY_ID] ASC)
+);
+

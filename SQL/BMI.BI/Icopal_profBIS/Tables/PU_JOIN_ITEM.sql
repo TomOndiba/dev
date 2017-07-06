@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[PU_JOIN_ITEM] (
+    [JOIN_ITEM_NO]   [dbo].[N_C50]  NOT NULL,
+    [JOIN_ITEM_NAME] [dbo].[N_C100] NULL,
+    [CATEGORY_ID]    [dbo].[D_INT]  NULL,
+    [UPDATE_BY]      [dbo].[N_USER] NULL,
+    [UPDATE_DATE]    [dbo].[D_DATE] NULL,
+    [CREATE_BY]      [dbo].[N_USER] NULL,
+    [CREATE_DATE]    [dbo].[D_DATE] NULL,
+    CONSTRAINT [PK_PU_JOIN_MATERIAL] PRIMARY KEY CLUSTERED ([JOIN_ITEM_NO] ASC)
+);
+

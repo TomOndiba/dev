@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_USER]
+    FROM NVARCHAR (100) NOT NULL;
+

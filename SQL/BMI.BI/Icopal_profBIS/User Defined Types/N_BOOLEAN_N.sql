@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_BOOLEAN_N]
+    FROM NVARCHAR (1) NOT NULL;
+

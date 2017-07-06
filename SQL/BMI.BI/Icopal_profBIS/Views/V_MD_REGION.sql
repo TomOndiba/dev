@@ -1,0 +1,3 @@
+﻿create view [dbo].[V_MD_REGION] as 
+select REGION_ID, REGION as REGION_NAME, REGION_DESCRIPTION
+from MD_REGION

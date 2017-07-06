@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[MD_PRODLINE_TYPE] (
+    [PRODLINE_TYPE_ID]   [dbo].[D_INT]  NOT NULL,
+    [PRODLINE_TYPE_NAME] [dbo].[N_C100] NULL,
+    [PRODLINE_SORT_NO]   [dbo].[D_INT]  NULL,
+    [UPDATE_BY]          [dbo].[N_USER] NULL,
+    [UPDATE_DATE]        [dbo].[D_DATE] NULL,
+    [CREATE_BY]          [dbo].[N_USER] NULL,
+    [CREATE_DATE]        [dbo].[D_DATE] NULL,
+    CONSTRAINT [PK_MD_PRODLINE_TYPE] PRIMARY KEY CLUSTERED ([PRODLINE_TYPE_ID] ASC)
+);
+

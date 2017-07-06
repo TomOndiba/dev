@@ -1,0 +1,23 @@
+﻿CREATE TABLE [dbo].[SA_ITEM_PRICE_DEVELOPMENT] (
+    [SYSTEM_ID]              [dbo].[D_INT]     NOT NULL,
+    [ITEM_NO]                [dbo].[N_C20]     NOT NULL,
+    [CUSTOMER_NO]            [dbo].[N_C20]     NOT NULL,
+    [PRICE_YEAR]             [dbo].[D_INT]     NOT NULL,
+    [PRICE_MONTH]            [dbo].[D_INT]     NOT NULL,
+    [SBU]                    [dbo].[D_SBU]     NOT NULL,
+    [ACTUAL1_GROUP_AMOUNT]   [dbo].[D_DEC15,4] NULL,
+    [ACTUAL1_LOCAL_AMOUNT]   [dbo].[D_DEC15,4] NULL,
+    [ACTUAL2_GROUP_AMOUNT]   [dbo].[D_DEC15,4] NULL,
+    [ACTUAL2_LOCAL_AMOUNT]   [dbo].[D_DEC15,4] NULL,
+    [CALC1_GROUP_AMOUNT]     [dbo].[D_DEC15,4] NULL,
+    [CALC1_LOCAL_AMOUNT]     [dbo].[D_DEC15,4] NULL,
+    [CALC2_GROUP_AMOUNT]     [dbo].[D_DEC15,4] NULL,
+    [CALC2_LOCAL_AMOUNT]     [dbo].[D_DEC15,4] NULL,
+    [INDEX1001_LOCAL_AMOUNT] [dbo].[D_DEC15,4] NULL,
+    [INDEX1001_GROUP_AMOUNT] [dbo].[D_DEC15,4] NULL,
+    [INDEX1002_LOCAL_AMOUNT] [dbo].[D_DEC15,4] NULL,
+    [INDEX1002_GROUP_AMOUNT] [dbo].[D_DEC15,4] NULL,
+    [QUANTITY]               [dbo].[D_DEC15,4] NULL,
+    CONSTRAINT [PK_SA_ITEM_PRICE_DEVELOPMENT] PRIMARY KEY CLUSTERED ([SYSTEM_ID] ASC, [ITEM_NO] ASC, [CUSTOMER_NO] ASC, [PRICE_YEAR] ASC, [PRICE_MONTH] ASC, [SBU] ASC)
+);
+

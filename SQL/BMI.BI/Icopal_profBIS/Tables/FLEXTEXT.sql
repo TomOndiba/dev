@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[FLEXTEXT] (
+    [FORM_NAME]      [dbo].[N_C50]  NOT NULL,
+    [COMPONENT_NAME] [dbo].[N_C100] NOT NULL,
+    [LANGUAGE_NAME]  [dbo].[N_C4]   NOT NULL,
+    [TEXT]           [dbo].[N_MEMO] NULL,
+    [CREATE_BY]      [dbo].[N_USER] NULL,
+    [CREATE_DATE]    [dbo].[D_DAY]  NULL,
+    [UPDATE_BY]      [dbo].[N_USER] NULL,
+    [UPDATE_DATE]    [dbo].[D_DAY]  NULL,
+    CONSTRAINT [PK_FLEXTEXT] PRIMARY KEY CLUSTERED ([FORM_NAME] ASC, [COMPONENT_NAME] ASC, [LANGUAGE_NAME] ASC)
+);
+

@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[PU_DELIVERY_DAYS] (
+    [DELIVERY_DAY_START] [dbo].[D_INT]  NULL,
+    [DELIVERY_DAY_END]   [dbo].[D_INT]  NULL,
+    [DELIVERY_DAY_TEXT]  [dbo].[N_C100] NULL
+);
+

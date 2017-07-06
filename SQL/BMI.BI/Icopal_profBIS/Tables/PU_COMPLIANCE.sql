@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[PU_COMPLIANCE] (
+    [COMPLIANCE_ID]                [dbo].[D_INT]       NOT NULL,
+    [COMPLIANCE_DESCRIPTION]       [dbo].[N_C100]      NULL,
+    [IMPORTED]                     [dbo].[N_BOOLEAN_N] NULL,
+    [FROM_DATE]                    [dbo].[D_DATE]      NULL,
+    [TO_DATE]                      [dbo].[D_DATE]      NULL,
+    [CREATE_DATE]                  [dbo].[D_DATE]      NULL,
+    [CREATE_USER]                  [dbo].[N_USER]      NULL,
+    [UPDATE_DATE]                  [dbo].[D_DATE]      NULL,
+    [UPDATE_USER]                  [dbo].[N_USER]      NULL,
+    [BONUS_AMOUNT]                 [dbo].[D_DEC12.2]   NULL,
+    [BONUS_AMOUNT_GROUP]           [dbo].[D_DEC12.2]   NULL,
+    [BONUS_REMARK]                 [dbo].[N_C100]      NULL,
+    [BONUS_NEXT_STEP_PCT]          [dbo].[D_DEC12.2]   NULL,
+    [BONUS_NEXT_STEP_AMOUNT]       [dbo].[D_DEC12.2]   NULL,
+    [BONUS_NEXT_STEP_AMOUNT_GROUP] [dbo].[D_DEC12.2]   NULL,
+    [BONUS_ID]                     [dbo].[D_INT]       NULL,
+    [SPEND_AMOUNT]                 [dbo].[D_DEC12.2]   NULL,
+    [SPEND_AMOUNT_GROUP]           [dbo].[D_DEC12.2]   NULL,
+    [CURRENCY]                     [dbo].[N_CURRENCY]  NULL,
+    [BONUS_DIFFERENT_PERIOD]       [dbo].[N_BOOLEAN_Y] NOT NULL,
+    [BONUS_FROM_DATE]              [dbo].[D_DATE]      NULL,
+    [BONUS_TO_DATE]                [dbo].[D_DATE]      NULL,
+    CONSTRAINT [PK_PU_COMPLIANCE] PRIMARY KEY CLUSTERED ([COMPLIANCE_ID] ASC),
+    CONSTRAINT [FK_PU_COMPLIANCE_PU_COMPLIANCE_BONUSTYPE] FOREIGN KEY ([BONUS_ID]) REFERENCES [dbo].[PU_COMPLIANCE_BONUSTYPE] ([BONUS_ID])
+);
+

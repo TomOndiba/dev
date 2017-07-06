@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[PU_DELIVERY_QUANTITY] (
+    [QUANTITY_PCT_START] [dbo].[D_DEC7.2] NULL,
+    [QUANTITY_PCT_END]   [dbo].[D_DEC7.2] NULL,
+    [QUANTITY_PCT_TEXT]  [dbo].[N_C100]   NULL
+);
+

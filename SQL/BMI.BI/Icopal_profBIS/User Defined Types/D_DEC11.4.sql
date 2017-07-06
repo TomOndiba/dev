@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_DEC11.4]
+    FROM DECIMAL (11, 4) NOT NULL;
+

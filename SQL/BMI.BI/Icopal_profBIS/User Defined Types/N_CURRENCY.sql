@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_CURRENCY]
+    FROM NVARCHAR (3) NOT NULL;
+

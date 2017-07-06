@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Icopal_profBIS</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{416a3df6-504e-402b-ac1c-550597fd72d4}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Icopal_profBIS</RootNamespace>
+    <AssemblyName>Icopal_profBIS</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables\" />
+    <Folder Include="Views\" />
+    <Folder Include="Defaults\" />
+    <Folder Include="Security\" />
+    <Folder Include="Stored Procedures\" />
+    <Folder Include="User Defined Types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\MD_COUNTRY.sql" />
+    <Build Include="Tables\PU_PRICELIST.sql" />
+    <Build Include="Tables\MD_CURRENCY.sql" />
+    <Build Include="Tables\PU_PRICELIST_ITEMS.sql" />
+    <Build Include="Tables\PU_PURCHASE.sql" />
+    <Build Include="Tables\MD_CURRENCY_RATE.sql" />
+    <Build Include="Tables\PU_PURCHASE_BACKUP.sql" />
+    <Build Include="Tables\MD_CURRENCY_RATE_TYPE.sql" />
+    <Build Include="Tables\PU_PURCHASE_EXCEPTIONS.sql" />
+    <Build Include="Tables\MD_ICIS_PRICE.sql" />
+    <Build Include="Tables\PU_PURCHASE_KEYWORD.sql" />
+    <Build Include="Tables\MD_ICIS_PRODUCT.sql" />
+    <Build Include="Tables\PU_PURCHASE_MAP.sql" />
+    <Build Include="Tables\PU_SUPPLIER.sql" />
+    <Build Include="Tables\MD_ITEMS.sql" />
+    <Build Include="Tables\PU_SUPPLIER_BACKUP.sql" />
+    <Build Include="Tables\MD_LANGUAGE.sql" />
+    <Build Include="Tables\PU_SUPPLIER_BONUS.sql" />
+    <Build Include="Tables\MD_LINK_COMPANY.sql" />
+    <Build Include="Tables\PU_SUPPLIER_BONUS_ADJUST.sql" />
+    <Build Include="Tables\MD_LINK_UNSPSC.sql" />
+    <Build Include="Tables\PU_SUPPLIER_BONUS_STEP.sql" />
+    <Build Include="Tables\MD_MATCH_EVALTYPE.sql" />
+    <Build Include="Tables\PU_SUPPLIER_CATEGORY.sql" />
+    <Build Include="Tables\MD_MATCH_FIELD.sql" />
+    <Build Include="Tables\PU_UOM_CALC.sql" />
+    <Build Include="Tables\PU_WARNING.sql" />
+    <Build Include="Tables\MD_MATCH_LINE.sql" />
+    <Build Include="Tables\MD_MATCH_RULES.sql" />
+    <Build Include="Tables\SA_CUSTOMER.sql" />
+    <Build Include="Tables\MD_MATCH_TYPE.sql" />
+    <Build Include="Tables\SA_CUSTOMER_BONUS_LTM.sql" />
+    <Build Include="Tables\MD_PLANT.sql" />
+    <Build Include="Tables\SA_CUSTOMER_CATEGORY.sql" />
+    <Build Include="Tables\MD_PLANT_PRODLINE.sql" />
+    <Build Include="Tables\SA_CUSTOMER_LOG.sql" />
+    <Build Include="Tables\MD_PRODLINE_TYPE.sql" />
+    <Build Include="Tables\SA_CUSTOMER_MAP.sql" />
+    <Build Include="Tables\AMM_BUDGET.sql" />
+    <Build Include="Tables\MD_PRODUCTGROUPS.sql" />
+    <Build Include="Tables\SA_ENV_CATEGORY.sql" />
+    <Build Include="Tables\AMM_MONTHDATA.sql" />
+    <Build Include="Tables\MD_PROJECT_ELEMENT.sql" />
+    <Build Include="Tables\SA_ENV_CATEGORY_REQUEST.sql" />
+    <Build Include="Tables\AMM_YEARDATA.sql" />
+    <Build Include="Tables\MD_REGION.sql" />
+    <Build Include="Tables\SA_INVOICE.sql" />
+    <Build Include="Tables\AX_COMPLAINT.sql" />
+    <Build Include="Tables\MD_SBU.sql" />
+    <Build Include="Tables\SA_INVOICE_ENV_MAP.sql" />
+    <Build Include="Tables\AX_ORDER_CONFIRMATION.sql" />
+    <Build Include="Tables\SA_INVOICE_MAP.sql" />
+    <Build Include="Tables\MD_SITE.sql" />
+    <Build Include="Tables\SA_ITEM_CATEGORY.sql" />
+    <Build Include="Tables\AX_ORDER_CONFIRMATION_HISTORY.sql" />
+    <Build Include="Tables\MD_STOCK.sql" />
+    <Build Include="Tables\CEX_FINANCE.sql" />
+    <Build Include="Tables\SA_ITEM_CATEGORY_REQUEST.sql" />
+    <Build Include="Tables\MD_STOCK_SIMPLE.sql" />
+    <Build Include="Tables\FLEXCONSTRAINTERRORS.sql" />
+    <Build Include="Tables\SA_ITEM_PRICE_DEVELOPMENT.sql" />
+    <Build Include="Tables\MD_SUB_SBU.sql" />
+    <Build Include="Tables\FLEXERRORREPORTS.sql" />
+    <Build Include="Tables\SA_LINK_CUSTOMER.sql" />
+    <Build Include="Tables\FLEXFORM.sql" />
+    <Build Include="Tables\MD_SYSTEMID.sql" />
+    <Build Include="Tables\SA_LINK_ENV.sql" />
+    <Build Include="Tables\FLEXIMAGE.sql" />
+    <Build Include="Tables\MD_TEXT.sql" />
+    <Build Include="Tables\SA_LINK_ITEM.sql" />
+    <Build Include="Tables\FLEXLBNR.sql" />
+    <Build Include="Tables\MD_UNIT.sql" />
+    <Build Include="Tables\SA_ORDER_BACKLOG.sql" />
+    <Build Include="Tables\FLEXLOG.sql" />
+    <Build Include="Tables\MD_UNIT_CHANGE.sql" />
+    <Build Include="Tables\FLEXMENUITEMS.sql" />
+    <Build Include="Tables\SA_ORDER_DATE.sql" />
+    <Build Include="Tables\MD_UNSPSC.sql" />
+    <Build Include="Tables\FLEXMENUS.sql" />
+    <Build Include="Tables\SA_ORDER_SNI.sql" />
+    <Build Include="Tables\PU_CATEGORY.sql" />
+    <Build Include="Tables\FLEXPARAMS.sql" />
+    <Build Include="Tables\SA_REDUCTION.sql" />
+    <Build Include="Tables\PU_CATEGORY_REQUEST.sql" />
+    <Build Include="Tables\FLEXPROGRAMS.sql" />
+    <Build Include="Tables\SA_UOM_CALC.sql" />
+    <Build Include="Tables\PU_COMPLIANCE.sql" />
+    <Build Include="Tables\FLEXPROGRAMSECUR.sql" />
+    <Build Include="Tables\PU_COMPLIANCE_BONUS.sql" />
+    <Build Include="Tables\PU_COMPLIANCE_BONUSTYPE.sql" />
+    <Build Include="Tables\FLEXSEARCH.sql" />
+    <Build Include="Tables\PU_COMPLIANCE_IMAGE.sql" />
+    <Build Include="Tables\FLEXTEXT.sql" />
+    <Build Include="Tables\PU_COMPLIANCE_ITEM.sql" />
+    <Build Include="Tables\PU_COMPLIANCE_RESULT.sql" />
+    <Build Include="Tables\FLEXUSERGROUPS.sql" />
+    <Build Include="Tables\PU_COMPLIANCE_SUPPLIER.sql" />
+    <Build Include="Tables\FLEXUSERS.sql" />
+    <Build Include="Tables\PU_CONTRACTING.sql" />
+    <Build Include="Tables\PU_CONTRACTING_CATEGORY.sql" />
+    <Build Include="Tables\FLEXUSERS_SBU.sql" />
+    <Build Include="Tables\PU_CONTRACTING_MAP.sql" />
+    <Build Include="Tables\FLEXUSERS_SYSTEM.sql" />
+    <Build Include="Tables\PU_CONTRACTING_REQUEST.sql" />
+    <Build Include="Tables\FLEXUSERSINGROUP.sql" />
+    <Build Include="Tables\PU_CUSTOMER_CATEGORY.sql" />
+    <Build Include="Tables\KPI_HR.sql" />
+    <Build Include="Tables\PU_DELIVERY_DAYS.sql" />
+    <Build Include="Tables\PU_DELIVERY_QUANTITY.sql" />
+    <Build Include="Tables\KPI_LINK_PRODLINE.sql" />
+    <Build Include="Tables\PU_DELIVERYTERM.sql" />
+    <Build Include="Tables\KPI_LOCAL_PRODLINE.sql" />
+    <Build Include="Tables\PU_DEPARTMENT.sql" />
+    <Build Include="Tables\KPI_PRODLINE_ITEM_DATA.sql" />
+    <Build Include="Tables\PU_IGNORE_CHAR.sql" />
+    <Build Include="Tables\KPI_PRODLINE_ITEM_DATA_NEW.sql" />
+    <Build Include="Tables\PU_IGNORE_WORD.sql" />
+    <Build Include="Tables\KPI_PRODLINE_PRODUCTION_delete.sql" />
+    <Build Include="Tables\PU_INDEX100.sql" />
+    <Build Include="Tables\KPI_REPORT_CATEGORY.sql" />
+    <Build Include="Tables\PU_INDIRECT.sql" />
+    <Build Include="Tables\PU_INDIRECT_CATEGORY.sql" />
+    <Build Include="Tables\KPI_REPORT_TYPE.sql" />
+    <Build Include="Tables\PU_INDIRECT_MAP.sql" />
+    <Build Include="Tables\KPI_RMI_BUDGET.sql" />
+    <Build Include="Tables\PU_INDIRECT_REQUEST.sql" />
+    <Build Include="Tables\KPI_SCM_PLANT.sql" />
+    <Build Include="Tables\PU_JOIN_ITEM.sql" />
+    <Build Include="Tables\KPI_SCM_PLANT_MMA.sql" />
+    <Build Include="Tables\PU_LINK_ACCOUNT.sql" />
+    <Build Include="Tables\KPI_SCM_PLANT_YTD.sql" />
+    <Build Include="Tables\PU_LINK_AMM_CATEGORY.sql" />
+    <Build Include="Tables\KPI_SCM_PRODLINE.sql" />
+    <Build Include="Tables\PU_LINK_COUNTRY.sql" />
+    <Build Include="Tables\KPI_SCM_PRODLINE_MMA.sql" />
+    <Build Include="Tables\PU_LINK_CUSTOMER_SUPPLIER.sql" />
+    <Build Include="Tables\KPI_SCM_PRODLINE_YTD.sql" />
+    <Build Include="Tables\PU_LINK_DELIVERYTERM.sql" />
+    <Build Include="Tables\KPI_SHIFT_DATA.sql" />
+    <Build Include="Tables\PU_LINK_DEPARTMENT.sql" />
+    <Build Include="Tables\KPI_SHIFT_ID.sql" />
+    <Build Include="Tables\PU_LINK_ELEMENT.sql" />
+    <Build Include="Tables\KPI_SHIFT_ITEMS.sql" />
+    <Build Include="Tables\PU_LINK_ITEM.sql" />
+    <Build Include="Tables\KPI_SHIFT_PRODUCTION.sql" />
+    <Build Include="Tables\PU_LINK_ITEM_BACKUP.sql" />
+    <Build Include="Tables\KPI_SHIFT_PRODUCTION_NEW.sql" />
+    <Build Include="Tables\PU_LINK_JOIN.sql" />
+    <Build Include="Tables\KPI_SHIFT_REPORT.sql" />
+    <Build Include="Tables\PU_LINK_PAYMENTTERM.sql" />
+    <Build Include="Tables\MD_ACCOUNT.sql" />
+    <Build Include="Tables\PU_LINK_RMI_CATEGORY.sql" />
+    <Build Include="Tables\MD_AMM_GROUP.sql" />
+    <Build Include="Tables\PU_LINK_SITE.sql" />
+    <Build Include="Tables\MD_AMM_TYPE.sql" />
+    <Build Include="Tables\PU_LINK_SITE_BACKUP.sql" />
+    <Build Include="Tables\PU_LINK_SUPPLIER_CATEGORY.sql" />
+    <Build Include="Tables\MD_BONUSTYPE.sql" />
+    <Build Include="Tables\PU_LINK_UOM.sql" />
+    <Build Include="Tables\MD_CALENDAR_445.sql" />
+    <Build Include="Tables\MD_COMPANY_CATEGORY.sql" />
+    <Build Include="Tables\PU_PAYMENTTERM.sql" />
+    <Build Include="Views\V_AMM_DATA1.sql" />
+    <Build Include="Views\V_AMM_RMI.sql" />
+    <Build Include="Views\V_CEX_FINANCE.sql" />
+    <Build Include="Views\V_CUSTOMER_TRANS.sql" />
+    <Build Include="Views\V_FLEX_PARAMETER.sql" />
+    <Build Include="Views\V_GENERATE_CUSTOMER_MAP.sql" />
+    <Build Include="Views\V_ICIS_RMI_PRICE.sql" />
+    <Build Include="Views\V_ICIS_RMI_PRODUCT.sql" />
+    <Build Include="Views\V_KPI_RMI_BUDGET.sql" />
+    <Build Include="Views\V_MAPPED_ACCOUNTS.sql" />
+    <Build Include="Views\V_MAPPED_MATERIALS.sql" />
+    <Build Include="Views\V_MAPPED_SUPPLIERS.sql" />
+    <Build Include="Views\V_MD_BONUSTYPE.sql" />
+    <Build Include="Views\V_MD_CURRENCY.sql" />
+    <Build Include="Views\V_MD_REGION.sql" />
+    <Build Include="Views\V_MD_SBU_CEX.sql" />
+    <Build Include="Views\v_MD_SBU_CONTRACTING.sql" />
+    <Build Include="Views\V_MD_SBU_CRM.sql" />
+    <Build Include="Views\v_MD_SBU_DIRECT.sql" />
+    <Build Include="Views\v_MD_SBU_INDIRECT.sql" />
+    <Build Include="Views\V_MD_SBU_SABIS.sql" />
+    <Build Include="Views\V_MD_SBU_SCM.sql" />
+    <Build Include="Views\V_MD_SITE.sql" />
+    <Build Include="Views\V_MD_SITE_CONTRACTING.sql" />
+    <Build Include="Views\V_MD_SITE_DIRECT.sql" />
+    <Build Include="Views\V_MD_SITE_INDIRECT.sql" />
+    <Build Include="Views\V_MD_SITE_SABIS.sql" />
+    <Build Include="Views\V_MD_SYSTEMID.sql" />
+    <Build Include="Views\V_PU_CATEGORY.sql" />
+    <Build Include="Views\V_PU_CONTRACTING.sql" />
+    <Build Include="Views\V_PU_CONTRACTING_CATEGORY.sql" />
+    <Build Include="Views\V_PU_INDIRECT.sql" />
+    <Build Include="Views\v_PU_ITEMS.sql" />
+    <Build Include="Views\v_PU_ITEMS_NHA.sql" />
+    <Build Include="Views\V_PU_PAYMENTERM.sql" />
+    <Build Include="Views\V_PU_PURCHASE.sql" />
+    <Build Include="Views\V_PU_PURCHASE_DIRECT.sql" />
+    <Build Include="Views\V_PU_PURCHASE_EXCL_GROUP.sql" />
+    <Build Include="Views\V_PU_PURCHASE_RMI.sql" />
+    <Build Include="Views\V_PU_SUPPLIER.sql" />
+    <Build Include="Views\V_PU_SUPPLIER_BONUS.sql" />
+    <Build Include="Views\V_PU_SUPPLIER_BONUS_STEP.sql" />
+    <Build Include="Views\V_PU_SUPPLIER_CATEGORY.sql" />
+    <Build Include="Views\V_PU_SUPPLIER_DIRECT.sql" />
+    <Build Include="Views\v_RMI_ICIS.sql" />
+    <Build Include="Views\V_SA_CUSTOMER.sql" />
+    <Build Include="Views\V_SA_CUSTOMER_CATEGORY.sql" />
+    <Build Include="Views\V_SA_ENV_CATEGORY.sql" />
+    <Build Include="Views\V_SA_INVOICE.sql" />
+    <Build Include="Views\V_SA_INVOICE_2016-12-30_delete.sql" />
+    <Build Include="Views\V_SA_INVOICE_TEST_delete.sql" />
+    <Build Include="Views\V_SA_ITEM_CATEGORY_20161216_delete.sql" />
+    <Build Include="Views\V_SA_ITEMS.sql" />
+    <Build Include="Views\V_SA_ITEMS_20161216_delete.sql" />
+    <Build Include="Views\V_SA_ORDERBACKLOG.sql" />
+    <Build Include="Views\V_SA_ORDERSNI.sql" />
+    <Build Include="Views\V_SA_PRICE_DEVELOPMENT.sql" />
+    <Build Include="Views\V_SCM_ITEMS.sql" />
+    <Build Include="Views\V_SCM_ORGANIZATION.sql" />
+    <Build Include="Views\V_UNKNOWN_SUPPLIERS.sql" />
+    <Build Include="Views\V_UNKNOWN_SUPPLIERS_TYPE.sql" />
+    <Build Include="Views\V_UNMAPPED_ACCOUNTS.sql" />
+    <Build Include="Views\V_UNMAPPED_ACCOUNTS_SBU.sql" />
+    <Build Include="Views\V_UNMAPPED_COUNTRIES.sql" />
+    <Build Include="Views\V_UNMAPPED_MATERIALS_SBU.sql" />
+    <Build Include="Views\V_UNMAPPED_PAYMENTS.sql" />
+    <Build Include="Views\V_UNMAPPED_SITES.sql" />
+    <Build Include="Views\V_UNMAPPED_SUPPLIERS.sql" />
+    <Build Include="Views\V_UNMAPPED_SUPPLIERS_SBU.sql" />
+    <Build Include="Views\V_UNMAPPED_UOM.sql" />
+    <Build Include="Views\V_AMM_PRICE_TRACKING.sql" />
+    <Build Include="Views\V_MD_REGION_CRM.sql" />
+    <Build Include="Views\V_MD_REGION_DIRECT.sql" />
+    <Build Include="Views\V_MD_REGION_INDIRECT.sql" />
+    <Build Include="Views\V_MD_REGION_SABIS.sql" />
+    <Build Include="Views\V_MD_SBU_AMM.sql" />
+    <Build Include="Views\V_PU_MAPRATE_DIRECT.sql" />
+    <Build Include="Views\V_PU_MAPRATE_INDIRECT.sql" />
+    <Build Include="Views\V_SA_ITEM_CATEGORY.sql" />
+    <Build Include="Defaults\Blank.sql" />
+    <Build Include="Defaults\Boolean N.sql" />
+    <Build Include="Defaults\Boolean Y.sql" />
+    <Build Include="Defaults\NOW.sql" />
+    <Build Include="Defaults\Nul_.sql" />
+    <Build Include="Stored Procedures\sp_GetLbnr.sql" />
+    <Build Include="Stored Procedures\sp_Update_Supplier.sql" />
+    <Build Include="User Defined Types\D_C1.sql" />
+    <Build Include="User Defined Types\D_C100.sql" />
+    <Build Include="User Defined Types\D_C20.sql" />
+    <Build Include="User Defined Types\D_C4.sql" />
+    <Build Include="User Defined Types\D_C50.sql" />
+    <Build Include="User Defined Types\D_COUNTRY.sql" />
+    <Build Include="User Defined Types\D_CURRENCY.sql" />
+    <Build Include="User Defined Types\D_DATE.sql" />
+    <Build Include="User Defined Types\D_DAY.sql" />
+    <Build Include="User Defined Types\D_DEC11.4.sql" />
+    <Build Include="User Defined Types\D_DEC12.2.sql" />
+    <Build Include="User Defined Types\D_DEC15,4.sql" />
+    <Build Include="User Defined Types\D_DEC7.2.sql" />
+    <Build Include="User Defined Types\D_ENHED.sql" />
+    <Build Include="User Defined Types\D_INT.sql" />
+    <Build Include="User Defined Types\D_LAND.sql" />
+    <Build Include="User Defined Types\D_LANGUAGE.sql" />
+    <Build Include="User Defined Types\D_MEMO.sql" />
+    <Build Include="User Defined Types\D_SBU.sql" />
+    <Build Include="User Defined Types\D_USER.sql" />
+    <Build Include="User Defined Types\N_BOOLEAN_N.sql" />
+    <Build Include="User Defined Types\N_BOOLEAN_Y.sql" />
+    <Build Include="User Defined Types\N_C1.sql" />
+    <Build Include="User Defined Types\N_C100.sql" />
+    <Build Include="User Defined Types\N_C20.sql" />
+    <Build Include="User Defined Types\N_C4.sql" />
+    <Build Include="User Defined Types\N_C50.sql" />
+    <Build Include="User Defined Types\N_COUNTRY.sql" />
+    <Build Include="User Defined Types\N_CURRENCY.sql" />
+    <Build Include="User Defined Types\N_LAND.sql" />
+    <Build Include="User Defined Types\N_LANGUAGE.sql" />
+    <Build Include="User Defined Types\N_MEMO.sql" />
+    <Build Include="User Defined Types\N_SBU.sql" />
+    <Build Include="User Defined Types\N_USER.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icopal_profBIS.sandbox.publish.xml" />
+    <None Include="Icopal_profBIS.localdb-ProjectsV13.publish.xml" />
+  </ItemGroup>
+</Project>

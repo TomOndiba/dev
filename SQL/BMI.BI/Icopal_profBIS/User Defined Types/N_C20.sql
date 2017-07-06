@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_C20]
+    FROM NVARCHAR (20) NOT NULL;
+

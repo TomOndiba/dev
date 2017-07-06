@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_MEMO]
+    FROM NVARCHAR (1000) NOT NULL;
+

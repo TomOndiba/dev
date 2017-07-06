@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Icopal_profBIS", "Icopal_profBIS\Icopal_profBIS.sqlproj", "{416A3DF6-504E-402B-AC1C-550597FD72D4}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "profBIS_View", "profBIS_View\profBIS_View.sqlproj", "{9589FF7A-3121-4E6A-BF94-1CB8987068B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{416A3DF6-504E-402B-AC1C-550597FD72D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{416A3DF6-504E-402B-AC1C-550597FD72D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{416A3DF6-504E-402B-AC1C-550597FD72D4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{416A3DF6-504E-402B-AC1C-550597FD72D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{416A3DF6-504E-402B-AC1C-550597FD72D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{416A3DF6-504E-402B-AC1C-550597FD72D4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

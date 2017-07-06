@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[MD_AMM_TYPE] (
+    [AMM_TYPE_ID]   [dbo].[D_INT]  NOT NULL,
+    [AMM_TYPE_NAME] [dbo].[N_C100] NULL,
+    [CREATE_DATE]   [dbo].[D_DATE] NULL,
+    [CREATE_BY]     [dbo].[N_USER] NULL,
+    [UPDATE_DATE]   [dbo].[D_DATE] NULL,
+    [UPDATE_BY]     [dbo].[N_USER] NULL,
+    CONSTRAINT [PK_AMM_TYPE] PRIMARY KEY CLUSTERED ([AMM_TYPE_ID] ASC)
+);
+

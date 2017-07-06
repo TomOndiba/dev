@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[PU_LINK_ITEM_BACKUP] (
+    [CATEGORY_ID]          [dbo].[D_INT]  NOT NULL,
+    [SYSTEM_ID]            [dbo].[D_INT]  NOT NULL,
+    [MATERIAL_CODE]        [dbo].[N_C50]  NOT NULL,
+    [MATERIAL_CATEGORY_ID] [dbo].[D_INT]  NULL,
+    [CREATE_BY]            [dbo].[N_USER] NULL,
+    [CREATE_DATE]          [dbo].[D_DATE] NULL,
+    CONSTRAINT [PK_PU_LINK_CATEGORY_BACKUP_1] PRIMARY KEY CLUSTERED ([CATEGORY_ID] ASC, [SYSTEM_ID] ASC, [MATERIAL_CODE] ASC)
+);
+

@@ -1,0 +1,13 @@
+﻿
+
+
+CREATE view [dbo].[v_RMI_ICIS] as
+SELECT SBU, REGION_ID, SBU_NAME, ICIS_PRODUCT_1 as ICIS_PRODUCT 
+FROM MD_SBU
+where IPROBIS_PURCHASE = 'Y' and ICIS_PCT_1 = 100
+
+union
+
+select SBU, REGION_ID, SBU_NAME, 'IndexMix ' + SBU as ICIS_PRODUCT
+from MD_SBU
+where IPROBIS_PURCHASE = 'Y' and ICIS_PCT_1 <> 100

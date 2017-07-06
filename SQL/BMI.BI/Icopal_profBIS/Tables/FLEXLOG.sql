@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[FLEXLOG] (
+    [USERID]    [dbo].[N_C100] NOT NULL,
+    [SESSIONNO] [dbo].[D_INT]  NOT NULL,
+    [LOG_NO]    [dbo].[D_INT]  NOT NULL,
+    [LOG_DATE]  [dbo].[D_DAY]  NOT NULL,
+    [LOG_TEXT]  [dbo].[N_MEMO] NULL
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_FLEXLOG]
+    ON [dbo].[FLEXLOG]([USERID] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_FLEXLOG_1]
+    ON [dbo].[FLEXLOG]([LOG_DATE] ASC);
+

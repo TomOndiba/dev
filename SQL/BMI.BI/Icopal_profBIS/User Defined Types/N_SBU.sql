@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_SBU]
+    FROM NVARCHAR (20) NOT NULL;
+

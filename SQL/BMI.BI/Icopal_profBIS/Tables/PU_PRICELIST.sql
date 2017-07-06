@@ -1,0 +1,16 @@
+﻿CREATE TABLE [dbo].[PU_PRICELIST] (
+    [PRICELIST_ID]   [dbo].[D_INT]       NOT NULL,
+    [SYSTEM_ID]      [dbo].[D_INT]       NULL,
+    [SUPPLIER_CODE]  [dbo].[N_C50]       NULL,
+    [FROM_DATE]      [dbo].[D_DATE]      NULL,
+    [TO_DATE]        [dbo].[D_DATE]      NULL,
+    [PRICELIST_NAME] [dbo].[N_C100]      NULL,
+    [IMPORTED]       [dbo].[N_BOOLEAN_N] NULL,
+    CONSTRAINT [PK_PU_PRICELIST] PRIMARY KEY CLUSTERED ([PRICELIST_ID] ASC)
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_PU_PRICELIST]
+    ON [dbo].[PU_PRICELIST]([SYSTEM_ID] ASC, [SUPPLIER_CODE] ASC);
+

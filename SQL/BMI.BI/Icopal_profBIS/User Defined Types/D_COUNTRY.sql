@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_COUNTRY]
+    FROM VARCHAR (3) NOT NULL;
+

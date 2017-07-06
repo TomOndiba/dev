@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_CURRENCY]
+    FROM VARCHAR (3) NOT NULL;
+

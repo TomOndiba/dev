@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_INT]
+    FROM INT NOT NULL;
+

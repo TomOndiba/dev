@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[SA_ORDER_DATE] (
+    [SYSTEM_ID]         [dbo].[D_INT]  NOT NULL,
+    [ORDER_NUMBER]      [dbo].[N_C20]  NOT NULL,
+    [ORDER_LINE_NUMBER] [dbo].[N_C20]  NOT NULL,
+    [ORDER_DATE]        [dbo].[D_DATE] NULL,
+    [FOUND_IN]          [dbo].[N_C20]  NULL,
+    CONSTRAINT [PK_SA_ORDER_DATEX] PRIMARY KEY CLUSTERED ([SYSTEM_ID] ASC, [ORDER_NUMBER] ASC, [ORDER_LINE_NUMBER] ASC)
+);
+

@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_SBU]
+    FROM VARCHAR (20) NOT NULL;
+

@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_C100]
+    FROM VARCHAR (100) NOT NULL;
+

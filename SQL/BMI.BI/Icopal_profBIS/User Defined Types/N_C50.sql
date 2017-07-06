@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_C50]
+    FROM NVARCHAR (50) NOT NULL;
+

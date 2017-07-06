@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[N_LANGUAGE]
+    FROM NVARCHAR (4) NOT NULL;
+

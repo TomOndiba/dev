@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_DEC7.2]
+    FROM DECIMAL (7, 2) NOT NULL;
+

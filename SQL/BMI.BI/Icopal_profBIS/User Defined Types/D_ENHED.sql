@@ -1,0 +1,3 @@
+﻿CREATE TYPE [dbo].[D_ENHED]
+    FROM VARCHAR (10) NOT NULL;
+

@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BMI_BI_DW</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{1baa9b66-ece7-4da8-a9f5-af432fbd7e00}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BMI_BI_DW</RootNamespace>
+    <AssemblyName>BMI_BI_DW</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <GenerateCreateScript>False</GenerateCreateScript>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+    <IsReadyRollProject>True</IsReadyRollProject>
+    <ReadyRollToolsVersion>1.12</ReadyRollToolsVersion>
+    <DeployOnceSubFolder>Migrations</DeployOnceSubFolder>
+    <DeployChangesSubFolder>Programmable Objects</DeployChangesSubFolder>
+    <DeployChangesImportSchemaFolders>True</DeployChangesImportSchemaFolders>
+    <PreDeploymentSubFolder>Pre-Deployment</PreDeploymentSubFolder>
+    <PostDeploymentSubFolder>Post-Deployment</PostDeploymentSubFolder>
+    <GenerateSqlPackage>True</GenerateSqlPackage>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
+    <DeployOnceUseSemver>True</DeployOnceUseSemver>
+    <SemverInitialBaseline>True</SemverInitialBaseline>
+    <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
+    <ExcludeObjectsFromSync />
+    <IncludeObjectsInDataSync />
+    <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
+    <DeployChangesExecutionOrder>
+15a0517b-b658-5cbc-bd7b-cbc0ce53aeb8|Programmable Objects\log4Private\Stored Procedures\SessionInfoOutput.sql;
+28783bd6-0909-5fd2-bcad-81dede3f3869|Programmable Objects\log4\Stored Procedures\ExceptionHandler.sql;
+9b6216f6-590d-5cd1-9162-2d51fd502792|Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_StageSales.sql;
+c0d556c8-ce9a-5bea-9d20-58b5127859f1|Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_StageVolumes.sql;
+ec8184f0-82d7-5ef9-b351-539162651d6c|Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_TransformSales.sql;
+baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_TransformVolumes.sql;
+8e9c1173-a546-5dd2-830a-58c55c40ffb8|Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_ValidateSales.sql;
+27911421-928e-59e4-ac71-a22766f8d91a|Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_ValidateVolumes.sql;
+1985ff3a-104d-5014-8e85-c57cba5968f2|Programmable Objects\log4\Stored Procedures\JournalWriter.sql;
+6c9d6d3a-15cc-5cef-863c-542a924944c0|Programmable Objects\log4\Functions\FormatElapsedTime.sql;
+2ea3489a-569e-5ce8-84e6-472f4aab2830|Programmable Objects\log4Utils\Stored Procedures\JournalCleanup.sql;
+3225b809-e790-51bb-9b80-895f9adf2f08|Programmable Objects\log4Utils\Stored Procedures\PrintString.sql;
+670576e6-3bc5-5ece-a037-8b11d9f6c0fc|Programmable Objects\log4Utils\Stored Procedures\JournalPrinter.sql;
+67693b34-7581-5c4d-9fd7-a11538fae713|Programmable Objects\dbo\Functions\Numbers.sql;
+8117c898-6c56-5981-850f-dc0a51ec2ac9|Programmable Objects\utils\Stored Procedures\LoadDateDimension.sql;
+</DeployChangesExecutionOrder>
+  </PropertyGroup>
+  <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
+  <PropertyGroup>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <!--
+    <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
+    <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
+    <SchemaModelSubFolder>Schema-Model</SchemaModelSubFolder>
+    -->
+  </PropertyGroup>
+  <!-- READYROLL PROGRAMMABLE OBJECT OPTIONS -->
+  <PropertyGroup>
+    <!--
+    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
+    <DeployChangesInitialImportDone>False</DeployChangesInitialImportDone>
+    <DeployChangesImportObjectTypes>StoredProcedure;UserDefinedFunction;View;Trigger;DatabaseDdlTrigger</DeployChangesImportObjectTypes>
+    <DeployChangesSubFolder>Deploy-Changes</DeployChangesSubFolder>
+    -->
+  </PropertyGroup>
+  <!-- READYROLL SCRIPT GENERATION OPTIONS -->
+  <PropertyGroup>
+    <!-- These properties might be set by the Developer -->
+    <!--
+    <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>
+    <SyncOptionIncludeExistenceChecks>False</SyncOptionIncludeExistenceChecks>
+    <SyncOptionUseDropCreateInsteadOfAlter>False</SyncOptionUseDropCreateInsteadOfAlter>
+    <SyncOptionDisableDdlTriggers>True</SyncOptionDisableDdlTriggers>
+    <SyncOptionCaseSensitiveObjectDefinition>False</SyncOptionCaseSensitiveObjectDefinition>
+
+    <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
+    <SyncOptionIgnoreCommentsInBodies>False</SyncOptionIgnoreCommentsInBodies>
+    <SyncOptionIgnoreAnsiOptions>False</SyncOptionIgnoreAnsiOptions>
+    <SyncOptionIgnoreCollations>True</SyncOptionIgnoreCollations>
+    <SyncOptionIgnoreColumnsOrder>True</SyncOptionIgnoreColumnsOrder>
+    <SyncOptionIgnoreWhiteSpace>True</SyncOptionIgnoreWhiteSpace>
+    <SyncOptionIgnoreSynonymDatabaseAndServerName>True</SyncOptionIgnoreSynonymDatabaseAndServerName>
+    <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
+    <SyncOptionIgnoreDmlTriggers>False</SyncOptionIgnoreDmlTriggers> 
+    <SyncOptionIgnoreInsteadOfTriggers>False</SyncOptionIgnoreInsteadOfTriggers>
+    <SyncOptionIgnoreBindings>False</SyncOptionIgnoreBindings>
+    <SyncOptionIgnoreQueueEventNotifications>False</SyncOptionIgnoreQueueEventNotifications>
+    <SyncOptionIgnoreSquareBrackets>False</SyncOptionIgnoreSquareBrackets>
+    <SyncOptionIgnoreWithElementOrder>True</SyncOptionIgnoreWithElementOrder>
+    <SyncOptionIgnoreWithEncryption>False</SyncOptionIgnoreWithEncryption>
+    -->
+    <!-- These properties might be set by the DBA -->
+    <!--
+    <SyncOptionIgnoreDataspaces>True</SyncOptionIgnoreDataspaces>
+    <SyncOptionIgnoreConstraintNotForReplicationAttribute>True</SyncOptionIgnoreConstraintNotForReplicationAttribute>
+    <SyncOptionIgnoreFillFactor>True</SyncOptionIgnoreFillFactor>
+    <SyncOptionIgnoreIndexLockAttributes>False</SyncOptionIgnoreIndexLockAttributes>
+    <SyncOptionIgnoreStatistics>True</SyncOptionIgnoreStatistics>
+    <SyncOptionIgnoreDataCompression>True</SyncOptionIgnoreDataCompression>
+    <SyncOptionIgnoreFullTextIndexing>False</SyncOptionIgnoreFullTextIndexing>
+    <SyncOptionIgnoreReplicationTriggers>True</SyncOptionIgnoreReplicationTriggers>
+    <SyncOptionIgnoreSchemaObjectAuthorization>False</SyncOptionIgnoreSchemaObjectAuthorization>
+    <SyncOptionIgnoreStatisticsNorecompute>False</SyncOptionIgnoreStatisticsNorecompute>
+    <SyncOptionConsiderNextFilegroupInPartitionSchemes>False</SyncOptionConsiderNextFilegroupInPartitionSchemes>
+    -->
+    <!-- Shared Developer/DBA options -->
+    <!--
+    <SyncOptionIgnoreIndexes>False</SyncOptionIgnoreIndexes>
+    <SyncOptionIgnorePermissions>False</SyncOptionIgnorePermissions>
+    <SyncOptionIgnoreConstraintWithNoCheckAttribute>True</SyncOptionIgnoreConstraintWithNoCheckAttribute>
+    <SyncOptionIgnoreNocheckAndWithNocheckAttributes>False</SyncOptionIgnoreNocheckAndWithNocheckAttributes>
+    <SyncOptionIgnoreIdentitySeedAndIncrement>False</SyncOptionIgnoreIdentitySeedAndIncrement>
+    <SyncOptionIgnoreUserProperties>True</SyncOptionIgnoreUserProperties>
+    <SyncOptionIgnoreUsersPermissionsAndRoleMemberships>False</SyncOptionIgnoreUsersPermissionsAndRoleMemberships>
+    <SyncOptionAddWithEncryption>False</SyncOptionAddWithEncryption>
+    <SyncOptionDecryptEncryptedObjects>True</SyncOptionDecryptEncryptedObjects>
+    <SyncOptionUseCompatibilityLevel>False</SyncOptionUseCompatibilityLevel>
+    -->
+    <!-- Data comparison/sync options -->
+    <!--
+    <SyncDataOptionDropKeysIndexesAndConstraints>False</SyncDataOptionDropKeysIndexesAndConstraints>
+    <SyncDataOptionDisableForeignKeys>False</SyncDataOptionDisableForeignKeys>
+    <SyncDataOptionIncludeTimestampColumns>False</SyncDataOptionIncludeTimestampColumns>
+    <SyncDataOptionCaseSensitiveObjectDefinition>True</SyncDataOptionCaseSensitiveObjectDefinition>
+    <SyncDataOptionForceBinaryCollation>True</SyncDataOptionForceBinaryCollation>
+    <SyncDataOptionTrimTrailingSpaces>False</SyncDataOptionTrimTrailingSpaces>
+    <SyncDataOptionDisableDmlTriggers>False</SyncDataOptionDisableDmlTriggers>
+    <SyncDataOptionDisableDdlTriggers>True</SyncDataOptionDisableDdlTriggers>
+    <SyncDataOptionDontIncludeCommentsInScript>False</SyncDataOptionDontIncludeCommentsInScript>
+    <SyncDataOptionReseedIdentityColumns>False</SyncDataOptionReseedIdentityColumns>
+    <SyncDataOptionSkipIntegrityChecksForForeignKeys>False</SyncDataOptionSkipIntegrityChecksForForeignKeys>
+    <SyncDataOptionTransportClrDataTypesAsBinary>False</SyncDataOptionTransportClrDataTypesAsBinary>
+    <SyncDataOptionCompressTemporaryFiles>False</SyncDataOptionCompressTemporaryFiles>
+    <SyncDataOptionTreatEmptyStringAsNull>False</SyncDataOptionTreatEmptyStringAsNull>
+    <SyncDataOptionUseChecksumComparison>False</SyncDataOptionUseChecksumComparison>
+    <SyncDataOptionUseMaxPrecisionForFloatComparison>False</SyncDataOptionUseMaxPrecisionForFloatComparison>
+    -->
+    <!-- Exclude specific objects from being scripted, by object type & object name (using regular expression for name) -->
+    <!--
+    <ExcludeObjectsFromImport>
+      Assembly=\[myschemaname\];
+      Credential=\[mycredential\];
+      DatabaseDdlTrigger=\[ddltriggername\];
+      Default=\[dbautil\]\.\[(.*?)\];
+      PartitionFunction=\[mypartitionfunction\];
+      PartitionScheme=\[mypartitionfunction\];
+      Role=\[myrole\];
+      Rule=\[dbautil\]\.\[(.*?)\];
+      Schema=\[dbautil\];
+      Sequence=\[dbautil\]\.\[(.*?)\];
+      StoredProcedure=\[dbautil\]\.\[(.*?)\];
+      Synonym=\[dbautil\]\.\[(.*?)\];
+      Table=\[dbautil\]\.\[(.*?)\];
+      User=\[myusername\];
+      UserDefinedDataType=\[dbautil\]\.\[(.*?)\];
+      UserDefinedFunction=\[dbautil\]\.\[(.*?)\];
+      View=\[dbautil\]\.\[(.*?)\];
+      XmlSchemaCollection=\[dbautil\]\.\[(.*?)\];
+
+      Contract=\[myservicebrokercontract\];
+      EventNotification=\[myservicebrokereventnotification\];
+      MessageType=\[myservicebrokermessagetype\];
+      Queue=\[myservicebrokerqueue\];
+      RemoteServiceBinding=\[myservicebrokerremotebinding\];
+      Route=\[myservicebrokerroute\];
+      Service=\[myservicebrokerservice\];
+
+    </ExcludeObjectsFromImport>
+    -->
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!--Import the settings-->
+  <PropertyGroup>
+    <AppDataPath>$(LOCALAPPDATA)</AppDataPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(AppDataPath)==''">
+    <AppDataPath>$(APPDATA)</AppDataPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ReadyRollTargetsPath>$(AppDataPath)\Microsoft\VisualStudio\12.0Exp\Extensions\ReadyRoll\ReadyRoll SQL Server Database Projects\1.0\ReadyRoll.Data.Schema.SSDT.targets</ReadyRollTargetsPath>
+  </PropertyGroup>
+  <Import Condition="Exists('$(ReadyRollTargetsPath)')" Project="$(ReadyRollTargetsPath)" />
+  <Import Condition="!Exists('$(ReadyRollTargetsPath)')" Project="$(MSBuildExtensionsPath)\ReadyRoll\ReadyRoll.Data.Schema.SSDT.targets" />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Pre-Deployment\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Post-Deployment\" />
+    <Folder Include="Schema-Model\" />
+    <Folder Include="Schema-Model\dbo\" />
+    <Folder Include="Schema-Model\dbo\Sequences\" />
+    <Folder Include="Schema-Model\dbo\Tables\" />
+    <Folder Include="Schema-Model\log4Private\" />
+    <Folder Include="Schema-Model\log4Private\Tables\" />
+    <Folder Include="Schema-Model\qvstg\" />
+    <Folder Include="Schema-Model\qvstg\Tables\" />
+    <Folder Include="Schema-Model\Security\" />
+    <Folder Include="Schema-Model\Security\Roles\" />
+    <Folder Include="Schema-Model\Security\Schemas\" />
+    <Folder Include="Schema-Model\stg\" />
+    <Folder Include="Schema-Model\stg\Tables\" />
+    <Folder Include="Programmable Objects\" />
+    <Folder Include="Programmable Objects\dbo\" />
+    <Folder Include="Programmable Objects\dbo\Functions\" />
+    <Folder Include="Programmable Objects\etl\" />
+    <Folder Include="Programmable Objects\etl\Stored Procedures\" />
+    <Folder Include="Programmable Objects\log4\" />
+    <Folder Include="Programmable Objects\log4\Functions\" />
+    <Folder Include="Programmable Objects\log4\Stored Procedures\" />
+    <Folder Include="Programmable Objects\log4Private\" />
+    <Folder Include="Programmable Objects\log4Private\Stored Procedures\" />
+    <Folder Include="Programmable Objects\log4Utils\" />
+    <Folder Include="Programmable Objects\log4Utils\Stored Procedures\" />
+    <Folder Include="Programmable Objects\pbi\" />
+    <Folder Include="Programmable Objects\pbi\Views\" />
+    <Folder Include="Programmable Objects\utils\" />
+    <Folder Include="Programmable Objects\utils\Stored Procedures\" />
+    <Folder Include="Migrations\1.0.0\" />
+    <Folder Include="Static Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pre-Deployment\01_Create_Database.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Sequences\ReferenceTypeHistorySequence.sql" />
+    <None Include="Schema-Model\dbo\Sequences\ReferenceTypeKeySequence.sql" />
+    <None Include="Schema-Model\dbo\Tables\DataSource.sql" />
+    <None Include="Schema-Model\dbo\Tables\dimDate.sql" />
+    <None Include="Schema-Model\log4Private\Tables\Journal.sql" />
+    <None Include="Schema-Model\log4Private\Tables\JournalControl.sql" />
+    <None Include="Schema-Model\log4Private\Tables\JournalDetail.sql" />
+    <None Include="Schema-Model\log4Private\Tables\Severity.sql" />
+    <None Include="Schema-Model\log4Private\Tables\SqlException.sql" />
+    <None Include="Schema-Model\qvstg\Tables\BudgetSales.sql" />
+    <None Include="Schema-Model\qvstg\Tables\BudgetVolumes.sql" />
+    <None Include="Schema-Model\qvstg\Tables\BusinessUnit.sql" />
+    <None Include="Schema-Model\qvstg\Tables\Customer.sql" />
+    <None Include="Schema-Model\qvstg\Tables\Invoice.sql" />
+    <None Include="Schema-Model\qvstg\Tables\OrderBacklog.sql" />
+    <None Include="Schema-Model\qvstg\Tables\OrderShippedNotInvoiced.sql" />
+    <None Include="Schema-Model\qvstg\Tables\PaymentTerm.sql" />
+    <None Include="Schema-Model\qvstg\Tables\Product.sql" />
+    <None Include="Schema-Model\qvstg\Tables\ProductCategory.sql" />
+    <None Include="Schema-Model\qvstg\Tables\Site.sql" />
+    <None Include="Schema-Model\Security\Roles\AppDevelopersDEV.sql" />
+    <None Include="Schema-Model\Security\Roles\AppDevelopersPROD.sql" />
+    <None Include="Schema-Model\Security\Roles\AppDevelopersTEST.sql" />
+    <None Include="Schema-Model\Security\Roles\AppSupportReadOnly.sql" />
+    <None Include="Schema-Model\Security\Roles\BatchManagers.sql" />
+    <None Include="Schema-Model\Security\Roles\BusinessAnalystsDEV.sql" />
+    <None Include="Schema-Model\Security\Roles\BusinessAnalystsPROD.sql" />
+    <None Include="Schema-Model\Security\Roles\BusinessAnalystsTEST.sql" />
+    <None Include="Schema-Model\Security\Roles\CodeReviewers.sql" />
+    <None Include="Schema-Model\Security\Roles\DataFeedReaders.sql" />
+    <None Include="Schema-Model\Security\Roles\DataFeeds.sql" />
+    <None Include="Schema-Model\Security\Roles\DataFeedWriters.sql" />
+    <None Include="Schema-Model\Security\Roles\db_datareader.sql" />
+    <None Include="Schema-Model\Security\Roles\db_datawriter.sql" />
+    <None Include="Schema-Model\Security\Roles\db_ddladmin.sql" />
+    <None Include="Schema-Model\Security\Roles\db_owner.sql" />
+    <None Include="Schema-Model\Security\Roles\DeploymentManagers.sql" />
+    <None Include="Schema-Model\Security\Roles\EtlDevelopersDEV.sql" />
+    <None Include="Schema-Model\Security\Roles\EtlDevelopersPROD.sql" />
+    <None Include="Schema-Model\Security\Roles\EtlDevelopersTEST.sql" />
+    <None Include="Schema-Model\Security\Roles\PowerBiReporters.sql" />
+    <None Include="Schema-Model\Security\Roles\SqlDevelopersDEV.sql" />
+    <None Include="Schema-Model\Security\Roles\SqlDevelopersPROD.sql" />
+    <None Include="Schema-Model\Security\Roles\SqlDevelopersTEST.sql" />
+    <None Include="Schema-Model\Security\Schemas\etl.sql" />
+    <None Include="Schema-Model\Security\Schemas\INFORMATION_SCHEMA.sql" />
+    <None Include="Schema-Model\Security\Schemas\log4.sql" />
+    <None Include="Schema-Model\Security\Schemas\log4Private.sql" />
+    <None Include="Schema-Model\Security\Schemas\log4Utils.sql" />
+    <None Include="Schema-Model\Security\Schemas\pbi.sql" />
+    <None Include="Schema-Model\Security\Schemas\qvstg.sql" />
+    <None Include="Schema-Model\Security\Schemas\stg.sql" />
+    <None Include="Schema-Model\Security\Schemas\utils.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_BUDGET_BusinessUnitLookup.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_BUDGET_ProductCategoryGroupLookup.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_BUDGET_ProductCategoryLookup.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_BUDGET_RegionLookup.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_LAND_BUDGET_2017_Sales.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_LAND_BUDGET_2017_Volume.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_STG_BUDGET_2017_Sales.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_STG_BUDGET_2017_SalesCheck.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_STG_BUDGET_2017_Volume.sql" />
+    <None Include="Schema-Model\stg\Tables\SSIS_STG_BUDGET_2017_VolumeCheck.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Functions\Numbers.sql" />
+    <None Include="Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_StageSales.sql" />
+    <None Include="Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_StageVolumes.sql" />
+    <None Include="Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_TransformSales.sql" />
+    <None Include="Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_TransformVolumes.sql" />
+    <None Include="Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_ValidateSales.sql" />
+    <None Include="Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_ValidateVolumes.sql" />
+    <None Include="Programmable Objects\log4\Functions\FormatElapsedTime.sql" />
+    <None Include="Programmable Objects\log4\Functions\GetJournalControl.sql" />
+    <None Include="Programmable Objects\log4\Stored Procedures\ExceptionHandler.sql" />
+    <None Include="Programmable Objects\log4\Stored Procedures\JournalWriter.sql" />
+    <None Include="Programmable Objects\log4Private\Stored Procedures\SessionInfoOutput.sql" />
+    <None Include="Programmable Objects\log4Utils\Stored Procedures\ExceptionReader.sql" />
+    <None Include="Programmable Objects\log4Utils\Stored Procedures\JournalCleanup.sql" />
+    <None Include="Programmable Objects\log4Utils\Stored Procedures\JournalPrinter.sql" />
+    <None Include="Programmable Objects\log4Utils\Stored Procedures\JournalReader.sql" />
+    <None Include="Programmable Objects\log4Utils\Stored Procedures\PrintString.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimActualDeliveryDate.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimActualPaymentDate.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimBudgetMonth.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimBusinessUnit.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimCustomerShippedTo.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimCustomerSoldTo.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimExpectedPaymentDate.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimInvoiceDate.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimPaymentTerm.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimProduct.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimProductCategory.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimPromisedDeliveryDate.sql" />
+    <None Include="Programmable Objects\pbi\Views\dimSite.sql" />
+    <None Include="Programmable Objects\pbi\Views\factBudgetSales.sql" />
+    <None Include="Programmable Objects\pbi\Views\factBudgetVolumes.sql" />
+    <None Include="Programmable Objects\pbi\Views\factInvoice.sql" />
+    <None Include="Programmable Objects\pbi\Views\factOrderBacklog.sql" />
+    <None Include="Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql" />
+    <None Include="Programmable Objects\pbi\Views\factSaleForecastTotal.sql" />
+    <None Include="Programmable Objects\utils\Stored Procedures\LoadDateDimension.sql" />
+    <None Include="Migrations\1.0.0\001_InitialProductionRelease_20170705.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Security\Schemas\dbo.sql" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

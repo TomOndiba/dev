@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BMI_BI_MART</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{a741e739-fc10-4bb0-9520-9750b15da32c}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BMI_BI_MART</RootNamespace>
+    <AssemblyName>BMI_BI_MART</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="_migrations" />
+    <Folder Include="_migrations\up" />
+    <Folder Include="_migrations\down" />
+    <Folder Include="_migrations\code" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_migrations\up\000101.utils.schema.sql" />
+    <None Include="_migrations\up\000102.qvi.schema.sql" />
+    <None Include="_migrations\up\000103.pbi.schema.sql" />
+    <None Include="_migrations\up\000201.dbo.dimDate.table.sql" />
+    <None Include="_migrations\up\000202.dbo.refDataSource.table.sql" />
+    <None Include="_migrations\up\000221.qvi.dimProduct.table.sql" />
+    <None Include="_migrations\up\000222.qvi.dimCustomer.table.sql" />
+    <None Include="_migrations\up\000223.qvi.dimPaymentTerm.table.sql" />
+    <None Include="_migrations\up\000225.qvi.dimSite.table.sql" />
+    <None Include="_migrations\up\000226.qvi.factInvoice.table.sql" />
+    <None Include="_migrations\up\000227.qvi.factOrderShippedNotInvoiced.table.sql" />
+    <None Include="_migrations\up\000228.qvi.factOrderBacklog.table.sql" />
+    <None Include="_migrations\code\pbi.dimCustomerShippedTo.view.sql" />
+    <None Include="_migrations\code\pbi.dimPaymentTerm.view.sql" />
+    <None Include="_migrations\code\pbi.dimProduct.view.sql" />
+    <None Include="_migrations\code\pbi.dimSite.view.sql" />
+    <None Include="_migrations\code\pbi.factInvoice.view.sql" />
+    <None Include="_migrations\code\pbi.factOrderBacklog.view.sql" />
+    <None Include="_migrations\code\pbi.factOrderShippedNotInvoiced.view.sql" />
+    <None Include="_migrations\up\000224.qvi.dimBusinessUnit.table.sql" />
+    <None Include="_migrations\code\pbi.dimBusinessUnit.sql" />
+    <None Include="_migrations\up\000229.qvi.dimProductCategory.table.sql" />
+    <None Include="_migrations\code\pbi.dimProductCategory.sql" />
+    <None Include="_migrations\code\pbi.factSaleForecastTotal.sql" />
+    <None Include="_migrations\code\pbi.dimCustomerSoldTo.view.sql" />
+    <None Include="_migrations\code\pbi.dimInvoiceDate.sql" />
+    <None Include="_migrations\code\pbi.dimBudgetMonth.sql" />
+    <None Include="_migrations\up\000230.qvi.factBudgetSales.table.sql" />
+    <None Include="_migrations\code\pbi.factBudgetSales.sql" />
+    <None Include="_migrations\code\pbi.dimActualDeliveryDate.sql" />
+    <None Include="_migrations\code\pbi.dimExpectedPaymentDate.sql" />
+    <None Include="_migrations\code\pbi.dimActualPaymentDate.sql" />
+    <None Include="_migrations\code\pbi.dimPromisedDeliveryDate.sql" />
+    <None Include="_migrations\up\000231.qvi.factBudgetVolumes.table.sql" />
+    <None Include="_migrations\code\pbi.factBudgetVolumes.sql" />
+  </ItemGroup>
+</Project>

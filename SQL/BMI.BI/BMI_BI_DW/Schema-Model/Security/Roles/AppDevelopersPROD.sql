@@ -1,0 +1,3 @@
+CREATE ROLE [AppDevelopersPROD]
+AUTHORIZATION [dbo]
+GO

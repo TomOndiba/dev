@@ -1,0 +1,3 @@
+CREATE ROLE [EtlDevelopersTEST]
+AUTHORIZATION [dbo]
+GO

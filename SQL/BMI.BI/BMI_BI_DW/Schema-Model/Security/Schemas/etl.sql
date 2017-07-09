@@ -1,0 +1,31 @@
+CREATE SCHEMA [etl]
+AUTHORIZATION [dbo]
+GO
+GRANT SELECT ON SCHEMA:: [etl] TO [AppDevelopersPROD]
+GO
+GRANT SELECT ON SCHEMA:: [etl] TO [BatchManagers]
+GO
+GRANT SELECT ON SCHEMA:: [etl] TO [BusinessAnalystsPROD]
+GO
+GRANT SELECT ON SCHEMA:: [etl] TO [DataFeedWriters]
+GO
+GRANT EXECUTE ON SCHEMA:: [etl] TO [DataFeedWriters]
+GO
+GRANT SELECT ON SCHEMA:: [etl] TO [EtlDevelopersDEV]
+GO
+GRANT INSERT ON SCHEMA:: [etl] TO [EtlDevelopersDEV]
+GO
+GRANT DELETE ON SCHEMA:: [etl] TO [EtlDevelopersDEV]
+GO
+GRANT UPDATE ON SCHEMA:: [etl] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON SCHEMA:: [etl] TO [EtlDevelopersDEV]
+GO
+GRANT SELECT ON SCHEMA:: [etl] TO [EtlDevelopersPROD]
+GO
+GRANT SELECT ON SCHEMA:: [etl] TO [EtlDevelopersTEST]
+GO
+GRANT UPDATE ON SCHEMA:: [etl] TO [EtlDevelopersTEST]
+GO
+GRANT EXECUTE ON SCHEMA:: [etl] TO [EtlDevelopersTEST]
+GO

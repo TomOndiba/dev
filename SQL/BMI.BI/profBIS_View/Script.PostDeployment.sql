@@ -9,15 +9,15 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r ".\_data\log4Private.JournalControl.data.sql"
-:r ".\_data\privy.StagingLoadParameter.data.sql"
+:r ".\Static Data\log4Private.JournalControl.data.sql"
+:r ".\Static Data\privy.StagingLoadParameter.data.sql"
 
-:r ".\_data\log4Private.Severity.data.sql"
+:r ".\Static Data\log4Private.Severity.data.sql"
 
-:r ".\_data\stg.ProductCategory.data.sql"
-:r ".\_data\stg.Product.data.sql"
-:r ".\_data\stg.Customer.data.sql"
-:r ".\_data\stg.PaymentTerm.data.sql"
-:r ".\_data\stg.BusinessUnit.data.sql"
-:r ".\_data\stg.Site.data.sql"
+:r ".\Static Data\stg.ProductCategory.data.sql"
+:r ".\Static Data\stg.Product.data.sql"
+:r ".\Static Data\stg.Customer.data.sql"
+:r ".\Static Data\stg.PaymentTerm.data.sql"
+:r ".\Static Data\stg.BusinessUnit.data.sql"
+:r ".\Static Data\stg.Site.data.sql"
 

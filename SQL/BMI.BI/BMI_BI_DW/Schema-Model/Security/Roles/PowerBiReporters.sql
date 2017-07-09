@@ -1,0 +1,3 @@
+CREATE ROLE [PowerBiReporters]
+AUTHORIZATION [dbo]
+GO

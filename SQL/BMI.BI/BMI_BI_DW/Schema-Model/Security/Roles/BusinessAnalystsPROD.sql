@@ -1,0 +1,3 @@
+CREATE ROLE [BusinessAnalystsPROD]
+AUTHORIZATION [dbo]
+GO

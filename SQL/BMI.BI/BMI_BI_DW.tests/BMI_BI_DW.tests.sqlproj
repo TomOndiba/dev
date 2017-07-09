@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BMI_BI_DW.tests</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{0821c4cc-2356-40d8-b838-757d26c7c84e}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BMI_BI_DW.tests</RootNamespace>
+    <AssemblyName>BMI_BI_DW.tests</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchema</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="Test Classes" />
+    <Folder Include="utils-tests\" />
+    <Folder Include="sqlcop\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Permissions.sql" />
+    <Build Include="dbo\IcopalCalendar.sql" />
+    <Build Include="utils-tests\test LoadDateDimension generates correct placeholders.sql" />
+    <Build Include="utils-tests\test LoadDateDimension generates correct 2017 fiscal values.sql" />
+    <Build Include="utils-tests\test LoadDateDimension generates correct 2017 calendar values.sql" />
+    <Build Include="sqlcop\test Forwarded Records.sql" />
+    <Build Include="sqlcop\test Fragmented Indexes.sql" />
+    <Build Include="sqlcop\test Orphaned Users.sql" />
+    <Build Include="sqlcop\test Procedures Named SP_.sql" />
+    <Build Include="sqlcop\test Procedures that start with usp.sql" />
+    <Build Include="sqlcop\test Procedures using dynamic SQL without sp_executesql.sql" />
+    <Build Include="sqlcop\test Procedures using xp_cmdshell.sql" />
+    <Build Include="sqlcop\test Procedures with %40%40Identity.sql" />
+    <Build Include="sqlcop\test Procedures without SET NOCOUNT ON.sql" />
+    <Build Include="sqlcop\test Table name problems.sql" />
+    <Build Include="sqlcop\test Tables that start with tbl.sql" />
+    <Build Include="sqlcop\test Tables without a primary key.sql" />
+    <Build Include="sqlcop\test Unnamed Constraints.sql" />
+    <Build Include="sqlcop\test User Aliases.sql" />
+    <Build Include="sqlcop\test Varchar Size Problem.sql" />
+    <Build Include="sqlcop\test Views that start with vw.sql" />
+    <Build Include="sqlcop\test Wide Table.sql" />
+    <Build Include="sqlcop\test Ad hoc distributed queries.sql" />
+    <Build Include="sqlcop\test Auto Shrink.sql" />
+    <Build Include="sqlcop\test Column data types _Numeric vs. Int_.sql" />
+    <Build Include="sqlcop\test Column Name Problems.sql" />
+    <Build Include="sqlcop\test Columns of data type Text_nText.sql" />
+    <Build Include="sqlcop\test Columns with float data type.sql" />
+    <Build Include="sqlcop\test Decimal Size Problem.sql" />
+    <Build Include="Test Classes\sqlcop.sql" />
+    <Build Include="Test Classes\utils-tests.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+    <ArtifactReference Include="..\..\References\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">
+      <HintPath>..\..\References\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+    </ArtifactReference>
+    <ArtifactReference Include="..\dacpacs\BMI_BI_DW_SQL2016.dacpac">
+      <HintPath>..\dacpacs\BMI_BI_DW_SQL2016.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+    </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BMI_BI_DW.tests.sandbox.publish.xml" />
+    <None Include="BMI_BI_DW.tests.localdb-ProjectsV13.publish.xml" />
+  </ItemGroup>
+</Project>

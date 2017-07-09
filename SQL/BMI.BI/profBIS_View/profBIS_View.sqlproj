@@ -142,8 +142,7 @@
     <Folder Include="log4Private\Stored Procedures\" />
     <Folder Include="Security\Roles" />
     <Folder Include="Security\Schemas" />
-    <Folder Include="_data" />
-    <Folder Include="_scripts" />
+    <Folder Include="Static Data" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="log4Private\Tables\Severity.sql" />
@@ -226,10 +225,6 @@
     <Build Include="Security\Schemas\privy.sql" />
     <Build Include="Security\Roles\SqlDevelopers.sql" />
     <Build Include="Security\Schemas\stg.sql" />
-    <None Include="_scripts\DKSQL1 Logins.sql" />
-    <None Include="_scripts\Icopal_profBIS Users.sql" />
-    <None Include="_scripts\profBIS_View Roles and Role Permissions.sql" />
-    <None Include="_scripts\profBIS_View Users.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Icopal_profBIS\Icopal_profBIS.sqlproj">
@@ -250,15 +245,15 @@
     <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="_data\log4Private.JournalControl.data.sql" />
-    <None Include="_data\log4Private.Severity.data.sql" />
-    <None Include="_data\privy.StagingLoadParameter.data.sql" />
-    <None Include="_data\stg.BusinessUnit.data.sql" />
-    <None Include="_data\stg.Customer.data.sql" />
-    <None Include="_data\stg.PaymentTerm.data.sql" />
-    <None Include="_data\stg.Product.data.sql" />
-    <None Include="_data\stg.ProductCategory.data.sql" />
-    <None Include="_data\stg.Site.data.sql" />
+    <None Include="Static Data\log4Private.JournalControl.data.sql" />
+    <None Include="Static Data\log4Private.Severity.data.sql" />
+    <None Include="Static Data\privy.StagingLoadParameter.data.sql" />
+    <None Include="Static Data\stg.BusinessUnit.data.sql" />
+    <None Include="Static Data\stg.Customer.data.sql" />
+    <None Include="Static Data\stg.PaymentTerm.data.sql" />
+    <None Include="Static Data\stg.Product.data.sql" />
+    <None Include="Static Data\stg.ProductCategory.data.sql" />
+    <None Include="Static Data\stg.Site.data.sql" />
     <None Include="profBIS_View.sandbox.publish.xml" />
     <None Include="profBIS_View.localdb-ProjectsV13.publish.xml" />
     <None Include="profBIS_View.DKSQL1.publish.xml" />

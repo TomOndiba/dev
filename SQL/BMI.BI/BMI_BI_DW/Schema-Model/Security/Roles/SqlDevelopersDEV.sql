@@ -1,0 +1,3 @@
+CREATE ROLE [SqlDevelopersDEV]
+AUTHORIZATION [dbo]
+GO

@@ -1,0 +1,5 @@
+CREATE SCHEMA [log4Utils]
+AUTHORIZATION [dbo]
+GO
+GRANT EXECUTE ON SCHEMA:: [log4Utils] TO [public]
+GO

@@ -1,0 +1,3 @@
+CREATE ROLE [DataFeedWriters]
+AUTHORIZATION [dbo]
+GO

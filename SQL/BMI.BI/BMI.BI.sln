@@ -7,6 +7,60 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Icopal_profBIS", "Icopal_pr
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "profBIS_View", "profBIS_View\profBIS_View.sqlproj", "{9589FF7A-3121-4E6A-BF94-1CB8987068B4}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BI_DW", "BMI_BI_DW\BMI_BI_DW.sqlproj", "{1BAA9B66-ECE7-4DA8-A9F5-AF432FBD7E00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateDatabaseScripts", "CreateDatabaseScripts", "{212DC471-3BA2-40BD-946A-7289315BE6F9}"
+	ProjectSection(SolutionItems) = preProject
+		CreateDatabaseScripts\BMI_BI_DW Create Database.sql = CreateDatabaseScripts\BMI_BI_DW Create Database.sql
+		CreateDatabaseScripts\BMI_BI_DW Database Options.sql = CreateDatabaseScripts\BMI_BI_DW Database Options.sql
+		CreateDatabaseScripts\BMI_BI_MART Create Database.sql = CreateDatabaseScripts\BMI_BI_MART Create Database.sql
+		CreateDatabaseScripts\BMI_BI_MART Database Options.sql = CreateDatabaseScripts\BMI_BI_MART Database Options.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateLoginScripts", "CreateLoginScripts", "{E09ED1C5-6287-4341-943E-8D1F717FAA2E}"
+	ProjectSection(SolutionItems) = preProject
+		CreateLoginScripts\Azure AD Admins.BMI_BI_DW_DEV.sql = CreateLoginScripts\Azure AD Admins.BMI_BI_DW_DEV.sql
+		CreateLoginScripts\Azure AD Admins.BMI_BI_DW_PROD.sql = CreateLoginScripts\Azure AD Admins.BMI_BI_DW_PROD.sql
+		CreateLoginScripts\Azure AD Admins.BMI_BI_MART_DEV.sql = CreateLoginScripts\Azure AD Admins.BMI_BI_MART_DEV.sql
+		CreateLoginScripts\Azure AD Admins.BMI_BI_MART_PROD.sql = CreateLoginScripts\Azure AD Admins.BMI_BI_MART_PROD.sql
+		CreateLoginScripts\Azure AD Logins.DEV.sql = CreateLoginScripts\Azure AD Logins.DEV.sql
+		CreateLoginScripts\Azure AD Logins.PROD.sql = CreateLoginScripts\Azure AD Logins.PROD.sql
+		CreateLoginScripts\Azure SQL Logins.DEV.sql = CreateLoginScripts\Azure SQL Logins.DEV.sql
+		CreateLoginScripts\Azure SQL Logins.PROD.sql = CreateLoginScripts\Azure SQL Logins.PROD.sql
+		CreateLoginScripts\DKSQL1 Logins.sql = CreateLoginScripts\DKSQL1 Logins.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateRoleScripts", "CreateRoleScripts", "{52BE18F2-7F4B-4D78-B956-C8879FED778A}"
+	ProjectSection(SolutionItems) = preProject
+		CreateRoleScripts\BMI_BI_DW Roles and Permissions.sql = CreateRoleScripts\BMI_BI_DW Roles and Permissions.sql
+		CreateRoleScripts\BMI_BI_MART Roles and Permissions.sql = CreateRoleScripts\BMI_BI_MART Roles and Permissions.sql
+		CreateRoleScripts\profBIS_View Roles and Role Permissions.sql = CreateRoleScripts\profBIS_View Roles and Role Permissions.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateUserScripts", "CreateUserScripts", "{7F80BF99-58F0-495B-81A0-A5B9AD1CBCBB}"
+	ProjectSection(SolutionItems) = preProject
+		CreateUserScripts\BM_BI_DW Users.sql = CreateUserScripts\BM_BI_DW Users.sql
+		CreateUserScripts\BM_BI_MART Users.sql = CreateUserScripts\BM_BI_MART Users.sql
+		CreateUserScripts\Icopal_profBIS Users.sql = CreateUserScripts\Icopal_profBIS Users.sql
+		CreateUserScripts\profBIS_View Users.sql = CreateUserScripts\profBIS_View Users.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SchemaComparisons", "SchemaComparisons", "{446CA341-C1D8-4249-8168-BB9010C304AC}"
+	ProjectSection(SolutionItems) = preProject
+		SchemaComparisons\BMI_BI_DW.scmp = SchemaComparisons\BMI_BI_DW.scmp
+		SchemaComparisons\BMI_BI_DW.Tests Comparison.scmp = SchemaComparisons\BMI_BI_DW.Tests Comparison.scmp
+		SchemaComparisons\profBIS_View.scmp = SchemaComparisons\profBIS_View.scmp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dacpacs", "dacpacs", "{C469F7AE-520A-4BF8-86E1-F086F41D747F}"
+	ProjectSection(SolutionItems) = preProject
+		dacpacs\BMI_BI_DW_SQL2016.dacpac = dacpacs\BMI_BI_DW_SQL2016.dacpac
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BI_DW.tests", "BMI_BI_DW.tests\BMI_BI_DW.tests.sqlproj", "{0821C4CC-2356-40D8-B838-757D26C7C84E}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BI_MART", "BMI_BI_MART\BMI_BI_MART.sqlproj", "{A741E739-FC10-4BB0-9520-9750B15DA32C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +79,24 @@ Global
 		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9589FF7A-3121-4E6A-BF94-1CB8987068B4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1BAA9B66-ECE7-4DA8-A9F5-AF432FBD7E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BAA9B66-ECE7-4DA8-A9F5-AF432FBD7E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BAA9B66-ECE7-4DA8-A9F5-AF432FBD7E00}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1BAA9B66-ECE7-4DA8-A9F5-AF432FBD7E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BAA9B66-ECE7-4DA8-A9F5-AF432FBD7E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BAA9B66-ECE7-4DA8-A9F5-AF432FBD7E00}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0821C4CC-2356-40D8-B838-757D26C7C84E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0821C4CC-2356-40D8-B838-757D26C7C84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0821C4CC-2356-40D8-B838-757D26C7C84E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0821C4CC-2356-40D8-B838-757D26C7C84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0821C4CC-2356-40D8-B838-757D26C7C84E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0821C4CC-2356-40D8-B838-757D26C7C84E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

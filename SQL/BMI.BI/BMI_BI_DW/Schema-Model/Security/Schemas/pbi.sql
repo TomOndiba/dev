@@ -1,0 +1,5 @@
+CREATE SCHEMA [pbi]
+AUTHORIZATION [dbo]
+GO
+GRANT SELECT ON SCHEMA:: [pbi] TO [PowerBiReporters]
+GO

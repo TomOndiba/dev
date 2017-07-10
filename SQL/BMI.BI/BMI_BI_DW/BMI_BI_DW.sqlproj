@@ -251,6 +251,11 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
     <Folder Include="Programmable Objects\utils\Stored Procedures\" />
     <Folder Include="Migrations\1.0.0\" />
     <Folder Include="Static Data" />
+    <Folder Include="Schema-Model\psa\" />
+    <Folder Include="Schema-Model\psa\Tables\" />
+    <Folder Include="Schema-Model\tsa\" />
+    <Folder Include="Schema-Model\tsa\Tables\" />
+    <Folder Include="Migrations\1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -386,6 +391,15 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\Security\Schemas\dbo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName.sql" />
+    <None Include="Schema-Model\Security\Schemas\psa.sql" />
+    <None Include="Schema-Model\Security\Schemas\tsa.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\001_TSA_PSA_schemas_and_samples.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

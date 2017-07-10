@@ -28,6 +28,8 @@ grant select on schema :: [dbo] to [DataFeedWriters];
 go
 if schema_id('qvi') is not null
 	begin
+		--! Needs db_owner to be able to CREATE EXTERNAL TABLE (and associated tasks)
+		exec sp_addrolemember N'db_owner', N'DataFeedWriters' ;
 		--! ALTER permission is required to allow TRUNCATE
 		--exec (N'grant alter on schema :: qvi to [DataFeedWriters];');
 		exec (N'grant select, insert, update on schema :: [qvi] to [DataFeedWriters];');

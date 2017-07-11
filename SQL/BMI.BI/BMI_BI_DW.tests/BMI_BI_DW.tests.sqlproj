@@ -104,12 +104,12 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
     </ArtifactReference>
-    <ArtifactReference Include="..\..\References\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">
-      <HintPath>..\..\References\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac</HintPath>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-    </ArtifactReference>
     <ArtifactReference Include="..\dacpacs\BMI_BI_DW_SQL2016.dacpac">
       <HintPath>..\dacpacs\BMI_BI_DW_SQL2016.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+    </ArtifactReference>
+    <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">
+      <HintPath>..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac</HintPath>
       <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
     </ArtifactReference>
   </ItemGroup>

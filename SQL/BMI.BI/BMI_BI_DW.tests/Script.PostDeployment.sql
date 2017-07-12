@@ -22,6 +22,8 @@ Post-Deployment Script Template
 :r "..\BMI_BI_DW\Static Data\dbo.Country.data.sql"
 :r "..\BMI_BI_DW\Static Data\dbo.Culture.data.sql"
 
+:r "..\BMI_BI_DW\Static Data\dbo.TranslationStatus.data.sql"
+
 go
 exec tSQLt.RunAll;
 go

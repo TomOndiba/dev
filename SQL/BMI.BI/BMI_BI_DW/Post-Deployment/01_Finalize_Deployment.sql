@@ -9,12 +9,3 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]
 --------------------------------------------------------------------------------------
 */
-:r $(DeployPath)"Static Data\log4Private.JournalControl.data.sql"
-:r $(DeployPath)"Static Data\log4Private.Severity.data.sql"
-
-:r $(DeployPath)"Static Data\dbo.DataSource.data.sql"
-
-:r $(DeployPath)"Static Data\stg.SSIS_BUDGET_RegionLookup.data.sql"
-:r $(DeployPath)"Static Data\stg.SSIS_BUDGET_BusinessUnitLookup.data.sql"
-:r $(DeployPath)"Static Data\stg.SSIS_BUDGET_ProductCategoryGroupLookup.data.sql"
-:r $(DeployPath)"Static Data\stg.SSIS_BUDGET_ProductCategoryLookup.data.sql"

@@ -425,6 +425,14 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
   <ItemGroup>
     <None Include="Migrations\1.0.1\004_add_Culture_table.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\TranslationStatus.sql" />
+    <None Include="Schema-Model\qvstg\Tables\ProductColourTranslation.sql" />
+    <None Include="Schema-Model\qvstg\Tables\ProductTranslation.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\005_add_ProductTranslation_tables_01.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

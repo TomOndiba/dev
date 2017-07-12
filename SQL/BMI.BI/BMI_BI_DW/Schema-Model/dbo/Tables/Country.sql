@@ -23,9 +23,7 @@ CREATE TABLE [dbo].[Country]
 [ISO3166OfficialEnglishShortName] [varchar] (100) NOT NULL,
 [CountryNameEnglish] [nvarchar] (200) NULL,
 [CountryNameLocal] [nvarchar] (200) NOT NULL,
-[RegionCode] [varchar] (4) NOT NULL,
-[ConsolidationHubCountryId] [int] NULL,
-[ConsolidationHubLastTouchedOn] [datetime] NOT NULL
+[RegionCode] [varchar] (4) NOT NULL
 )
 GO
 ALTER TABLE [dbo].[Country] ADD CONSTRAINT [CK_Country_IsCurrent] CHECK (([IsCurrent]='N' OR [IsCurrent]='Y' OR [IsCurrent]='I'))

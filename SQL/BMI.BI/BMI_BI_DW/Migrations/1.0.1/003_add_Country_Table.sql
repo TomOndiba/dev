@@ -28,9 +28,7 @@ create table [dbo].[Country]
 [ISO3166OfficialEnglishShortName] [varchar] (100) not null,
 [CountryNameEnglish] [nvarchar] (200) null,
 [CountryNameLocal] [nvarchar] (200) not null,
-[RegionCode] [varchar] (4) not null,
-[ConsolidationHubCountryId] [int] null,
-[ConsolidationHubLastTouchedOn] [datetime] not null
+[RegionCode] [varchar] (4) not null
 )
 go
 print N'Creating primary key [PK_Country] on [dbo].[Country]'
@@ -107,4 +105,8 @@ go
 exec sp_addextendedproperty N'MS_Description', N'The UTC date and time from which this record was valid, defaults to UTC date and time of insert. On a row that represents a change, this value should be one second ahead of the Valid To Date/Time of the immediately preceding historic record for this entity instance.', 'SCHEMA', N'dbo', 'TABLE', N'Country', 'COLUMN', N'RowValidFromUTC'
 go
 exec sp_addextendedproperty N'MS_Description', N'The UTC date and time, up to which this record is valid, if the current record this will always be 00:00:00.000 on 31-Dec-9999.  In a non-current record, this value should be one second behind the Valid From point of immediately following historic record for this entity instance.', 'SCHEMA', N'dbo', 'TABLE', N'Country', 'COLUMN', N'RowValidToUTC'
+go
+exec sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for the last soft-delete of this record; will NOT be set back to null if this record is subsequently re-activated', 'SCHEMA', N'dbo', 'TABLE', N'Country', 'COLUMN', N'EtlDeletedBy'
+go
+exec sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process last soft-deleted this record; will NOT be set back to null if this record is subsequently re-activated.', 'SCHEMA', N'dbo', 'TABLE', N'Country', 'COLUMN', N'EtlDeletedOn'
 go

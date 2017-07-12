@@ -36,7 +36,14 @@
     <DeployOnceUseSemver>True</DeployOnceUseSemver>
     <SemverInitialBaseline>True</SemverInitialBaseline>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
-    <ExcludeObjectsFromSync />
+    <ExcludeObjectsFromSync>
+StoredProcedure=[tsa].[BatchEndOnError];
+StoredProcedure=[tsa].[BatchEndOnStop];
+StoredProcedure=[tsa].[BatchEndOnSuccess];
+StoredProcedure=[tsa].[BatchRunStart];
+StoredProcedure=[tsa].[StepRunStart];
+StoredProcedure=[tsa].[ThreadRunData];
+</ExcludeObjectsFromSync>
     <IncludeObjectsInDataSync />
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -280,6 +287,7 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
     <None Include="Static Data\stg.SSIS_BUDGET_RegionLookup.data.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Static Data\dbo.Country.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -403,6 +411,12 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.1\002_TSA_PSA_permissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\Country.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\003_add_Country_Table.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

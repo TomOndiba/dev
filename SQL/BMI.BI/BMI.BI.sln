@@ -66,6 +66,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateUserScripts", "Create
 		CreateUserScripts\BMIBI_INFA_WORKFLOW_DEV Users.sql = CreateUserScripts\BMIBI_INFA_WORKFLOW_DEV Users.sql
 		CreateUserScripts\BMIBI_INFA_WORKFLOW_PROD Users.sql = CreateUserScripts\BMIBI_INFA_WORKFLOW_PROD Users.sql
 		CreateUserScripts\Icopal_profBIS Users.sql = CreateUserScripts\Icopal_profBIS Users.sql
+		CreateUserScripts\JASON_SANDBOX.users.sql = CreateUserScripts\JASON_SANDBOX.users.sql
 		CreateUserScripts\profBIS_View Users.sql = CreateUserScripts\profBIS_View Users.sql
 	EndProjectSection
 EndProject

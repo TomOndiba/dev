@@ -29,7 +29,16 @@ if schema_id('stg') is not null
 		exec (N'grant execute, select on schema :: [stg] to [DataFeedReaders];');
 	end
 go
-
+if schema_id('tsa') is not null
+	begin
+		exec (N'grant execute, select on schema :: [tsa] to [DataFeedReaders];');
+	end
+go
+if schema_id('psa') is not null
+	begin
+		exec (N'grant execute, select on schema :: [psa] to [DataFeedReaders];');
+	end
+go
 
 if not exists (select * from sys.database_principals where type = 'R' and name = 'DataFeedWriters')
 	exec(N'create role [DataFeedWriters] authorization [dbo];') ;
@@ -52,7 +61,19 @@ if schema_id('stg') is not null
 		exec (N'grant execute, select, insert, update on schema :: [stg] to [DataFeedWriters];');
 	end
 go
-
+if schema_id('tsa') is not null
+	begin
+		--! ALTER permission is required to allow TRUNCATE
+		exec (N'grant alter on schema :: tsa to [DataFeedWriters];');
+		exec (N'grant execute, select, insert, update on schema :: [tsa] to [DataFeedWriters];');
+	end
+go
+if schema_id('psa') is not null
+	begin
+		--! TRUNCATE not required on PSA tables
+		exec (N'grant select on schema :: [psa] to [DataFeedWriters];');
+	end
+go
 if schema_id('etl') is not null
 	exec (N'grant execute, select on schema :: [etl] to [DataFeedWriters];');
 go
@@ -69,6 +90,8 @@ go
 if schema_id('log4Private') is not null exec (N'grant select on schema :: [log4Private] to [BatchManagers];') ;
 if schema_id('qvstg') is not null exec (N'grant select on schema :: [qvstg] to [BatchManagers];') ;
 if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [BatchManagers];') ;
+if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [BatchManagers];') ;
+if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [BatchManagers];') ;
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [BatchManagers];') ;
 if objectpropertyex(object_id(N'utils.LoadDateDimension'), N'IsProcedure') is not null exec (N'grant exec on utils.LoadDateDimension to [BatchManagers];') ;
 if objectpropertyex(object_id(N'qvstg.DataSource'), N'IsUserTable') is not null exec (N'grant select on qvstg.DataSource to [BatchManagers];') ;
@@ -171,6 +194,9 @@ if schema_id('qvstg') is not null exec (N'grant alter on schema :: qvstg to [Etl
 if schema_id('qvstg') is not null exec (N'grant execute, select, insert, update, delete on schema :: [qvstg] to [EtlDevelopersDEV];');
 if schema_id('stg') is not null exec (N'grant alter on schema :: stg to [EtlDevelopersDEV];');
 if schema_id('stg') is not null exec (N'grant execute, select, insert, update, delete on schema :: [stg] to [EtlDevelopersDEV];');
+if schema_id('tsa') is not null exec (N'grant alter on schema :: tsa to [EtlDevelopersDEV];');
+if schema_id('tsa') is not null exec (N'grant execute, select, insert, update, delete on schema :: [tsa] to [EtlDevelopersDEV];');
+if schema_id('psa') is not null exec (N'grant execute, select, insert, update, delete on schema :: [psa] to [EtlDevelopersDEV];');
 if schema_id('etl') is not null exec (N'grant execute, select, insert, update, delete on schema :: [etl] to [EtlDevelopersDEV];');
 go
 
@@ -183,6 +209,8 @@ go
 if schema_id('etl') is not null exec (N'grant execute, select, update on schema :: [etl] to [EtlDevelopersTEST];');
 if schema_id('qvstg') is not null exec (N'grant select, insert, update, delete on schema :: [qvstg] to [EtlDevelopersTEST];');
 if schema_id('stg') is not null exec (N'grant select, insert, update, delete on schema :: [stg] to [EtlDevelopersTEST];');
+if schema_id('tsa') is not null exec (N'grant select, insert, update, delete on schema :: [tsa] to [EtlDevelopersTEST];');
+if schema_id('psa') is not null exec (N'grant select, insert, update, delete on schema :: [psa] to [EtlDevelopersTEST];');
 go
 
 grant view definition to [EtlDevelopersPROD];
@@ -190,6 +218,8 @@ go
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [EtlDevelopersPROD];');
 if schema_id('qvstg') is not null exec (N'grant select on schema :: [qvstg] to [EtlDevelopersPROD];');
 if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [EtlDevelopersPROD];');
+if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [EtlDevelopersPROD];');
+if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [EtlDevelopersPROD];');
 go
 
 --!
@@ -224,6 +254,8 @@ grant showplan to [AppDevelopersPROD]
 go
 if schema_id('qvstg') is not null exec (N'grant select on schema :: [qvstg] to [AppDevelopersPROD];');
 if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [AppDevelopersPROD];');
+if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [AppDevelopersPROD];');
+if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [AppDevelopersPROD];');
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [AppDevelopersPROD];');
 go
 
@@ -252,6 +284,8 @@ grant view definition to [BusinessAnalystsPROD];
 go
 if schema_id('qvstg') is not null exec (N'grant select on schema :: [qvstg] to [BusinessAnalystsPROD];');
 if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [BusinessAnalystsPROD];');
+if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [BusinessAnalystsPROD];');
+if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [BusinessAnalystsPROD];');
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [BusinessAnalystsPROD];');
 go
 

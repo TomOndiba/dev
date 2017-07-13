@@ -119,8 +119,8 @@ Static Data;
   </PropertyGroup>
   <!-- READYROLL SCRIPT GENERATION OPTIONS -->
   <PropertyGroup>
-     <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
-   <!-- These properties might be set by the Developer -->
+    <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
+    <!-- These properties might be set by the Developer -->
     <!--
     <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>
     <SyncOptionIncludeExistenceChecks>False</SyncOptionIncludeExistenceChecks>
@@ -468,6 +468,12 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.1\005_add_ProductTranslation_tables_01.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\qvstg\Tables\TranslationColour.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\006_add_TranslationColour_table.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

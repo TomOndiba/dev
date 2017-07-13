@@ -225,6 +225,7 @@
     <Build Include="Security\Schemas\privy.sql" />
     <Build Include="Security\Roles\SqlDevelopers.sql" />
     <Build Include="Security\Schemas\stg.sql" />
+    <Build Include="privy\Functions\InvoiceDeltaHash.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Icopal_profBIS\Icopal_profBIS.sqlproj">

@@ -208,7 +208,8 @@ begin
 		as
 		(
 			--! The following columns are defined as NOT NULL on the underlying table: REC_ID, SYSTEM_ID, SITE_SOLD, INVOICE_NUMBER, INVOICE_LINE_NUMBER
-			--! We use the following columns to uniquely identify each row: SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER, INVOICE_DATE, Uniqueifier
+			--! In the first pass we use REC_ID (a GUID) to uniquely identify each source record.  Then later, we use the following columns to de-dupe:
+			--! SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER
 			select
 				  inv.REC_ID
 				, inv.SYSTEM_ID
@@ -217,7 +218,7 @@ begin
 				, inv.INVOICE_LINE_NUMBER as [INVOICE_LINE_NUMBER]
 				, coalesce(inv.ORDER_NUMBER, '') as [ORDER_NUMBER]
 				, coalesce(inv.ORDER_LINE_NUMBER, '') as [ORDER_LINE_NUMBER]
-				, row_number() over (partition by inv.SYSTEM_ID, inv.INVOICE_NUMBER, inv.ORDER_NUMBER, inv.INVOICE_LINE_NUMBER, inv.ORDER_LINE_NUMBER order by inv.INVOICE_DATE desc, inv.REC_ID) as [Uniqueifier]
+				, coalesce(tgt.Uniqueifier, 1) as [Uniqueifier] -- assume no dupes on new records for now (we check properly later)
 				-----------------------------------------------------------------------------------------------------------------------
 				, coalesce(inv.INVOICE_TYPE, '') as [INVOICE_TYPE]
 				, case coalesce(inv.INVOICE_TYPE, '')
@@ -272,85 +273,62 @@ begin
 				, inv.BONUS_SHARE_AMOUNT
 				, inv.STD_COST
 				, inv.STD_FREIGHT
-				-----------------------------------------------------------------------------------------------------------------------
---				, coalesce(inv.MATERIAL_CHAR1, '') as [MATERIAL_CHAR1]
---				, inv.MATERIAL_CHAR1_VALUE
---				, coalesce(inv.MATERIAL_CHAR2, '') as [MATERIAL_CHAR2]
---				, inv.MATERIAL_CHAR2_VALUE
---				, coalesce(inv.MATERIAL_CHAR3, '') as [MATERIAL_CHAR3]
---				, inv.MATERIAL_CHAR3_VALUE
---				, coalesce(inv.MATERIAL_CHAR4, '') as [MATERIAL_CHAR4]
---				, inv.MATERIAL_CHAR4_VALUE
---				, coalesce(inv.MATERIAL_CHAR5, '') as [MATERIAL_CHAR5]
---				, inv.MATERIAL_CHAR5_VALUE
 				---------------------------------------------------------------------------------------------------
 				--! Encapsulate ALL non-key columns into a hash value to speed up CDC checks during susbseqent loads
-				, convert(nvarchar(32), hashbytes('MD5'
-					, coalesce(convert(varchar(24), inv.INVOICE_DATE, 120), 'INVOICE_DATE')
-						+ coalesce(inv.INVOICE_TYPE, 'INVOICE_TYPE')
-						+ case coalesce(inv.INVOICE_TYPE, '')
-							when '1' then 'TODO: Define Invoice Type (' + coalesce(inv.INVOICE_TYPE, '') + ')'
-							when '2' then 'TODO: Define Invoice Type (' + coalesce(inv.INVOICE_TYPE, '') + ')'
-							when '9' then 'TODO: Define Invoice Type (' + coalesce(inv.INVOICE_TYPE, '') + ')'
-							when '' then 'Not Specified At Source'
-							else 'Lookup Not Found (' + coalesce(inv.INVOICE_TYPE, '') + ')'
-						  end
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(inv.SITE_SOLD, 'SITE_SOLD')
-						+ coalesce(cast(ssite.SITE_ID as nvarchar(30)), 'SITE_ID') -- Don't need to collect SBU from this as per V_SA_INVOICE as we will expose SiteKey in the view later
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(inv.ITEM_NO, 'ITEM_NO')
-						+ coalesce(cast(coalesce(pCat.ITEM_CATEGORY_ID, @_UnmappedProductCategoryId) as varchar(30)), 'ITEM_CATEGORY_ID')
-						+ coalesce(cast(EnvPcat.ENV_CATEGORY_ID as nvarchar(30)), 'ENV_CATEGORY_ID')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(inv.SOLD_TO, 'SOLD_TO')
-						+ coalesce(inv.SHIP_TO, 'SHIP_TO')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(inv.SALESPERSON_ID, 'SALESPERSON_ID')
-						+ coalesce(inv.SALESPERSON_NAME, 'SALESPERSON_NAME')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(convert(char(19), inv.DELIVERY_DATE, 120), 'DELIVERY_DATE')
-						+ coalesce(convert(char(19), inv.EXPECTED_PAYMENT_DATE, 120), 'EXPECTED_PAYMENT_DATE')
-						+ coalesce(convert(char(19), inv.ACTUAL_PAYMENT_DATE, 120), 'ACTUAL_PAYMENT_DATE')
-						+ coalesce(inv.DELIVERY_TERM, 'DELIVERY_TERM')
-						+ coalesce(inv.DELIVERY_TERM_TEXT, 'DELIVERY_TERM_TEXT')
-						+ coalesce(cast(coalesce(lpt.PAYMENTTERM_ID, @_UnmappedPaymentTermId) as varchar(30)), 'PAYMENTTERM_ID')
-						+ coalesce(inv.PAYMENT_TERM, 'PAYMENT_TERM')
-						+ coalesce(inv.PAYMENT_TERM_TEXT, 'PAYMENT_TERM_TEXT')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(cast(inv.INVOICE_QUANTITY as nvarchar(30)), 'INVOICE_QUANTITY')
-						+ coalesce(inv.INVOICE_UOM, 'INVOICE_UOM') 
-						+ coalesce(cast(inv.STATISTIC_QUANTITY as nvarchar(30)), 'STATISTIC_QUANTITY')
-						+ coalesce( inv.STATISTIC_UOM, 'STATISTIC_UOM')
-						+ coalesce(cast(inv.QUANTITY as nvarchar(30)), 'QUANTITY')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(inv.UOM, 'UOM')
-						+ coalesce(lUom.HARMONIZED_UOM, 'HARMONIZED_UOM')
-						+ coalesce(cast(lUom.FACTOR as nvarchar(30)), 'FACTOR')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(cast(inv.INVOICE_AMOUNT as nvarchar(30)), 'INVOICE_AMOUNT')
-						+ coalesce(cast(inv.LOCAL_AMOUNT as nvarchar(30)), 'LOCAL_AMOUNT')
-						+ coalesce(cast(inv.GROUP_AMOUNT as nvarchar(30)), 'GROUP_AMOUNT')
-						+ coalesce(inv.INVOICE_CURRENCY, 'INVOICE_CURRENCY')
-						+ coalesce(inv.LOCAL_CURRENCY, 'LOCAL_CURRENCY')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(cast(inv.LINE_DISCOUNT_AMOUNT as nvarchar(30)), 'LINE_DISCOUNT_AMOUNT')
-						+ coalesce(cast(inv.INVOICE_DISCOUNT_AMOUNT as nvarchar(30)), 'INVOICE_DISCOUNT_AMOUNT')
-						+ coalesce(cast(inv.LINE_BONUS_AMOUNT as nvarchar(30)), 'LINE_BONUS_AMOUNT')
-						+ coalesce(cast(inv.BONUS_SHARE_AMOUNT as nvarchar(30)), 'BONUS_SHARE_AMOUNT')
-						+ coalesce(cast(inv.STD_COST as nvarchar(30)), 'STD_COST')
-						+ coalesce(cast(inv.STD_FREIGHT as nvarchar(30)), 'STD_FREIGHT')), 2) as [EtlDeltaHash]
-						-----------------------------------------------------------------------------------------------------------------------
---						+ coalesce(inv.MATERIAL_CHAR1, 'MATERIAL_CHAR1')
---						+ coalesce(cast(inv.MATERIAL_CHAR1_VALUE as nvarchar(30)), 'MATERIAL_CHAR1_VALUE')
---						+ coalesce(inv.MATERIAL_CHAR2, 'MATERIAL_CHAR2')
---						+ coalesce(cast(inv.MATERIAL_CHAR2_VALUE as nvarchar(30)), 'MATERIAL_CHAR2_VALUE')
---						+ coalesce(inv.MATERIAL_CHAR3, 'MATERIAL_CHAR3')
---						+ coalesce(cast(inv.MATERIAL_CHAR3_VALUE as nvarchar(30)), 'MATERIAL_CHAR3_VALUE')
---						+ coalesce(inv.MATERIAL_CHAR4, 'MATERIAL_CHAR4')
---						+ coalesce(cast(inv.MATERIAL_CHAR4_VALUE as nvarchar(30)), 'MATERIAL_CHAR4_VALUE')
---						+ coalesce(inv.MATERIAL_CHAR5, 'MATERIAL_CHAR5')
---						+ coalesce(cast(inv.MATERIAL_CHAR5_VALUE as nvarchar(30)), 'MATERIAL_CHAR5_VALUE')), 2) as [EtlDeltaHash]
+				, privy.InvoiceDeltaHash
+					(
+					  coalesce(tgt.Uniqueifier, 1)
+					, inv.SYSTEM_ID
+					, inv.INVOICE_NUMBER
+					, inv.ORDER_NUMBER
+					, inv.INVOICE_LINE_NUMBER
+					, inv.ORDER_LINE_NUMBER
+					, inv.INVOICE_DATE
+					, inv.INVOICE_TYPE
+					, case coalesce(inv.INVOICE_TYPE, '')
+						when '1' then 'TODO: Define Invoice Type (' + coalesce(inv.INVOICE_TYPE, '') + ')'
+						when '2' then 'TODO: Define Invoice Type (' + coalesce(inv.INVOICE_TYPE, '') + ')'
+						when '9' then 'TODO: Define Invoice Type (' + coalesce(inv.INVOICE_TYPE, '') + ')'
+						when '' then 'Not Specified At Source'
+						else 'Lookup Not Found (' + coalesce(inv.INVOICE_TYPE, '') + ')'
+					  end -- InvoiceTypeName
+					, inv.SITE_SOLD
+					, ssite.SITE_ID
+					, inv.ITEM_NO
+					, coalesce(pCat.ITEM_CATEGORY_ID, @_UnmappedProductCategoryId)
+					, EnvPcat.ENV_CATEGORY_ID
+					, inv.SOLD_TO
+					, inv.SHIP_TO
+					, inv.SALESPERSON_ID
+					, inv.SALESPERSON_NAME
+					, inv.DELIVERY_DATE
+					, inv.EXPECTED_PAYMENT_DATE
+					, inv.ACTUAL_PAYMENT_DATE
+					, inv.DELIVERY_TERM
+					, inv.DELIVERY_TERM_TEXT
+					, coalesce(lpt.PAYMENTTERM_ID, @_UnmappedPaymentTermId)
+					, inv.PAYMENT_TERM
+					, inv.PAYMENT_TERM_TEXT
+					, inv.INVOICE_QUANTITY
+					, inv.INVOICE_UOM
+					, inv.STATISTIC_QUANTITY
+					, inv.STATISTIC_UOM
+					, inv.QUANTITY
+					, inv.UOM
+					, lUom.HARMONIZED_UOM
+					, lUom.FACTOR
+					, inv.INVOICE_AMOUNT
+					, inv.LOCAL_AMOUNT
+					, inv.GROUP_AMOUNT
+					, inv.INVOICE_CURRENCY
+					, inv.LOCAL_CURRENCY
+					, inv.LINE_DISCOUNT_AMOUNT
+					, inv.INVOICE_DISCOUNT_AMOUNT
+					, inv.LINE_BONUS_AMOUNT
+					, inv.BONUS_SHARE_AMOUNT
+					, inv.STD_COST
+					, inv.STD_FREIGHT
+					) as [EtlDeltaHash]
 				---------------------------------------------------------------------------------------------------
 			from
 				[$(Icopal_profBIS)].dbo.SA_INVOICE as inv
@@ -377,6 +355,8 @@ begin
 			left outer join [$(Icopal_profBIS)].dbo.PU_LINK_PAYMENTTERM as lpt
 				on lpt.SYSTEM_ID = inv.SYSTEM_ID
 				and lpt.PAYMENT_TERM = inv.PAYMENT_TERM
+			left join stg.Invoice as tgt
+				on tgt.REC_ID = inv.REC_ID
 			where
 					inv.INVOICE_DATE between @_DataCaptureStart and @_DataCaptureEnd
 				--! Replicate all the filters used in Icopal_profBIS.dbo.V_SA_INVOICE (except date)
@@ -405,12 +385,7 @@ begin
 		)
 		merge into stg.Invoice as tgt
 		using sourceCte as src
-			on src.SYSTEM_ID = tgt.SYSTEM_ID
-			and src.INVOICE_NUMBER collate SQL_Latin1_General_CP1_CI_AS = tgt.INVOICE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
-			and src.ORDER_NUMBER collate SQL_Latin1_General_CP1_CI_AS = tgt.ORDER_NUMBER collate SQL_Latin1_General_CP1_CI_AS
-			and src.INVOICE_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS = tgt.INVOICE_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
-			and src.ORDER_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS = tgt.ORDER_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
-			and src.Uniqueifier = tgt.Uniqueifier
+			on src.REC_ID = tgt.REC_ID
 		when not matched by target
 			then insert
 			(  
@@ -429,7 +404,6 @@ begin
 			, INVOICE_LINE_NUMBER
 			, ORDER_NUMBER
 			, ORDER_LINE_NUMBER
-			, Uniqueifier
 			, INVOICE_TYPE
 			, InvoiceTypeName
 			, LOCAL_SITE_SOLD
@@ -486,7 +460,6 @@ begin
 			, src.INVOICE_LINE_NUMBER
 			, src.ORDER_NUMBER
 			, src.ORDER_LINE_NUMBER
-			, src.Uniqueifier
 			, src.INVOICE_TYPE
 			, src.InvoiceTypeName
 			, src.LOCAL_SITE_SOLD
@@ -532,7 +505,12 @@ begin
 					, tgt.EtlUpdatedOn = @LoadStart
 					, tgt.EtlUpdatedBy = @_FunctionName
 					, tgt.IsDeleted = 'N'
-					, tgt.REC_ID = src.REC_ID
+					, tgt.SYSTEM_ID = src.SYSTEM_ID
+					, tgt.INVOICE_NUMBER = src.INVOICE_NUMBER
+					, tgt.INVOICE_LINE_NUMBER = src.INVOICE_LINE_NUMBER
+					, tgt.ORDER_NUMBER = src.ORDER_NUMBER
+					, tgt.ORDER_LINE_NUMBER = src.ORDER_LINE_NUMBER
+					, tgt.INVOICE_DATE = src.INVOICE_DATE
 					, tgt.INVOICE_TYPE = src.INVOICE_TYPE
 					, tgt.InvoiceTypeName = src.InvoiceTypeName
 					, tgt.LOCAL_SITE_SOLD = src.LOCAL_SITE_SOLD
@@ -589,6 +567,155 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		--!
+		--! We need to be able to uniqueify transactions that appear duplicated within
+		--! QlikView and (new requirement) this needs to be based on last-change-wins
+		--! where possible.  Because the QlikView source tables have no ETL audit columns
+		--! the closest we can come to this is to pick out recent changes within our own
+		--! process - so we have to rank the dupes in a separate step (by ETL Update time)
+		--!
+		set @_Step = 'Identify Unique Invoices'
+		set @_StepStartTime = getdate();
+		declare @_UniquifierRowsAffected int;
+		--!
+		--! Start by finding all duplicates based on SYSTEM_ID, INVOICE_NUMBER,
+		--! ORDER_NUMBER, INVOICE_LINE_NUMBER and ORDER_LINE_NUMBER
+		--!
+		;with dupesCte
+		as
+		(
+			select
+				  SYSTEM_ID
+				, INVOICE_NUMBER
+				, ORDER_NUMBER
+				, INVOICE_LINE_NUMBER
+				, ORDER_LINE_NUMBER
+				, count(*) as [DupeCount]
+			from
+				stg.Invoice
+			group by
+				  SYSTEM_ID
+				, INVOICE_NUMBER
+				, ORDER_NUMBER
+				, INVOICE_LINE_NUMBER
+				, ORDER_LINE_NUMBER
+			having count(*) > 1
+		)
+		, uniqueifiedCte
+		as
+		(
+			select
+				  d.SYSTEM_ID
+				, d.INVOICE_NUMBER
+				, d.ORDER_NUMBER
+				, d.INVOICE_LINE_NUMBER
+				, d.ORDER_LINE_NUMBER
+				, d.DupeCount
+				, i.InvoiceKey
+				, i.REC_ID
+				, i.INVOICE_DATE
+				, i.EtlUpdatedOn
+				, row_number() over (partition by d.SYSTEM_ID, d.INVOICE_NUMBER, d.ORDER_NUMBER, d.INVOICE_LINE_NUMBER, d.ORDER_LINE_NUMBER order by i.INVOICE_DATE desc, i.EtlUpdatedOn desc, i.REC_ID) as [Uniqueifier]
+			from
+				dupesCte as d
+			inner join stg.Invoice as i
+				on i.SYSTEM_ID = d.SYSTEM_ID
+				and i.INVOICE_NUMBER = d.INVOICE_NUMBER
+				and i.ORDER_NUMBER = d.ORDER_NUMBER
+				and i.INVOICE_LINE_NUMBER = d.INVOICE_LINE_NUMBER
+				and i.ORDER_LINE_NUMBER = d.ORDER_LINE_NUMBER
+		)
+		, finalCte
+		as
+		(
+			select
+				  u.InvoiceKey
+				, u.Uniqueifier
+				, u.SYSTEM_ID
+				, u.INVOICE_NUMBER
+				, u.ORDER_NUMBER
+				, u.INVOICE_LINE_NUMBER
+				, u.ORDER_LINE_NUMBER
+				, u.INVOICE_DATE
+				, u.DupeCount
+				, privy.InvoiceDeltaHash
+					(
+					  u.Uniqueifier
+					, i.SYSTEM_ID
+					, i.INVOICE_NUMBER
+					, i.ORDER_NUMBER
+					, i.INVOICE_LINE_NUMBER
+					, i.ORDER_LINE_NUMBER
+					, i.INVOICE_DATE
+					, i.INVOICE_TYPE
+					, i.InvoiceTypeName
+					, i.LOCAL_SITE_SOLD
+					, i.SITE_ID
+					, i.ITEM_NO
+					, i.ITEM_CATEGORY_ID
+					, i.ENV_CATEGORY_ID
+					, i.SOLD_TO_CUSTOMER_NO
+					, i.SHIP_TO_CUSTOMER_NO
+					, i.SALESPERSON_ID
+					, i.SALESPERSON_NAME
+					, i.DELIVERY_DATE
+					, i.EXPECTED_PAYMENT_DATE
+					, i.ACTUAL_PAYMENT_DATE
+					, i.LOCAL_DELIVERY_TERM
+					, i.LOCAL_DELIVERY_TERM_TEXT
+					, i.PAYMENT_TERM_ID
+					, i.LOCAL_PAYMENT_TERM
+					, i.LOCAL_PAYMENT_TERM_TEXT
+					, i.INVOICE_QUANTITY
+					, i.INVOICE_UOM
+					, i.STATISTIC_QUANTITY
+					, i.STATISTIC_UOM
+					, i.QUANTITY
+					, i.LOCAL_UOM
+					, i.LOCAL_UOM_HARMONIZED
+					, i.LOCAL_UOM_FACTOR
+					, i.INVOICE_AMOUNT
+					, i.LOCAL_AMOUNT
+					, i.GROUP_AMOUNT
+					, i.INVOICE_CURRENCY
+					, i.LOCAL_CURRENCY
+					, i.LINE_DISCOUNT_AMOUNT
+					, i.INVOICE_DISCOUNT_AMOUNT
+					, i.LINE_BONUS_AMOUNT
+					, i.BONUS_SHARE_AMOUNT
+					, i.STD_COST
+					, i.STD_FREIGHT
+					) as [EtlDeltaHash]
+			from
+				uniqueifiedCte as u
+			inner join stg.Invoice as i
+				on i.InvoiceKey = u.InvoiceKey
+		)
+		update
+			tgt
+		set
+			  tgt.Uniqueifier = src.Uniqueifier
+			, tgt.DuplicateCount = src.DupeCount
+			, tgt.EtlDeltaHash = src.EtlDeltaHash
+			, tgt.EtlUpdatedOn = @LoadStart
+			, tgt.EtlUpdatedBy = @_FunctionName
+		from
+			stg.Invoice as tgt
+		inner join finalCte as src
+			on src.InvoiceKey = tgt.InvoiceKey
+		where
+				tgt.Uniqueifier <> src.Uniqueifier
+			or tgt.DuplicateCount <> src.DupeCount
+			or tgt.EtlDeltaHash <> src.EtlDeltaHash
+
+		set @_UniquifierRowsAffected = @@rowcount;
+		set @_ProgressMessage = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@_UniquifierRowsAffected as varchar(16)), 'NULL') + ' row(s)'
+				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)
+		set @_ProgressLog += coalesce(char(10) + @_ProgressMessage, '');
+
+		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
+		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 		--!
 		--! Only commit transactions started within this procedure
@@ -673,7 +800,5 @@ EndProc:
 	return (@_Error);
 end
 go
-exec sp_addextendedproperty 'MS_Description'
-, 'Merges any changes from the QlikView source into the staging area ready for consumption by the QV-to-IDW ETL process'
-, 'SCHEMA', 'privy', 'PROCEDURE', 'InvoiceRefresh', null, null;
+
 go

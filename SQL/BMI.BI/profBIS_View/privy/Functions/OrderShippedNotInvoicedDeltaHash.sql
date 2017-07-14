@@ -1,9 +1,10 @@
-﻿create function [privy].[OrderBacklogDeltaHash]
+﻿create function [privy].[OrderShippedNotInvoicedDeltaHash]
 (
   @Uniqueifier bigint
 , @SYSTEM_ID int
 , @ORDER_NUMBER nvarchar(50)
 , @ORDER_LINE_NUMBER nvarchar(50)
+, @SHIPPING_DOCUMENT nvarchar(50)
 , @EXPECTED_INVOICE_DATE datetime
 , @ORDER_TYPE nvarchar(1)
 , @OrderTypeName nvarchar(50)
@@ -16,18 +17,18 @@
 , @SHIP_TO_CUSTOMER_NO nvarchar(50)
 , @SALESPERSON_ID nvarchar(50)
 , @SALESPERSON_NAME nvarchar(100)
-, @ORDER_QUANTITY decimal(12,2)
-, @ORDER_UOM nvarchar(20)
+, @SHIPPED_QUANTITY decimal(12,2)
+, @SHIPPED_UOM nvarchar(20)
 , @STATISTIC_QUANTITY decimal(12,2)
 , @STATISTIC_UOM nvarchar(20)
 , @QUANTITY decimal(12,2)
 , @LOCAL_UOM nvarchar(20)
 , @LOCAL_UOM_HARMONIZED nvarchar(20)
-, @LOCAL_UOM_FACTOR decimal(11,4)
-, @ORDER_AMOUNT decimal(15,4)
-, @LOCAL_AMOUNT decimal(15,4)
-, @GROUP_AMOUNT decimal(15,4)
-, @ORDER_CURRENCY nvarchar(3)
+, @LOCAL_UOM_FACTOR decimal(11, 4)
+, @SHIPPED_AMOUNT decimal(15, 4)
+, @LOCAL_AMOUNT decimal(15, 4)
+, @GROUP_AMOUNT decimal(15, 4)
+, @SHIPPED_CURRENCY nvarchar(3)
 , @LOCAL_CURRENCY nvarchar(3)
 , @LINE_DISCOUNT_AMOUNT decimal(15,4)
 , @ORDER_DISCOUNT_AMOUNT decimal(15,4)
@@ -54,7 +55,7 @@ REVISION HISTORY
 =====================================================================================================================
 Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
-001		14-JUL-2017		GML		BSR-102	Created
+001		14-JUL-2017		GML		BSR-103	Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
@@ -69,6 +70,8 @@ begin
 							+ coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
 							+ coalesce(nullif(@ORDER_NUMBER, ''), 'INVOICE_NUMBER')
 							+ coalesce(nullif(@ORDER_LINE_NUMBER, ''), 'INVOICE_LINE_NUMBER')
+							+ coalesce(nullif(@SHIPPING_DOCUMENT, ''), 'SHIPPING_DOCUMENT')
+							-----------------------------------------------------------------------------------------------------------------------
 							+ coalesce(convert(varchar(24), @EXPECTED_INVOICE_DATE, 120), 'EXPECTED_INVOICE_DATE')
 							-----------------------------------------------------------------------------------------------------------------------
 							+ coalesce(nullif(@ORDER_TYPE, ''), 'ORDER_TYPE')
@@ -87,8 +90,8 @@ begin
 							+ coalesce(nullif(@SALESPERSON_ID, ''), 'SALESPERSON_ID')
 							+ coalesce(nullif(@SALESPERSON_NAME, ''), 'SALESPERSON_NAME')
 							-----------------------------------------------------------------------------------------------------------------------
-							+ coalesce(cast(@ORDER_QUANTITY as nvarchar(30)), 'ORDER_QUANTITY')
-							+ coalesce(@ORDER_UOM, 'ORDER_UOM') 
+							+ coalesce(cast(@SHIPPED_QUANTITY as nvarchar(30)), 'ORDER_QUANTITY')
+							+ coalesce(@SHIPPED_UOM, 'ORDER_UOM') 
 							+ coalesce(cast(@STATISTIC_QUANTITY as nvarchar(30)), 'STATISTIC_QUANTITY')
 							+ coalesce( @STATISTIC_UOM, 'STATISTIC_UOM')
 							+ coalesce(cast(@QUANTITY as nvarchar(30)), 'QUANTITY')
@@ -97,10 +100,10 @@ begin
 							+ coalesce(nullif(@LOCAL_UOM_HARMONIZED, ''), 'HARMONIZED_UOM')
 							+ coalesce(cast(@LOCAL_UOM_FACTOR as nvarchar(30)), 'FACTOR')
 							-----------------------------------------------------------------------------------------------------------------------
-							+ coalesce(cast(@ORDER_AMOUNT as nvarchar(30)), 'ORDER_AMOUNT')
+							+ coalesce(cast(@SHIPPED_AMOUNT as nvarchar(30)), 'ORDER_AMOUNT')
 							+ coalesce(cast(@LOCAL_AMOUNT as nvarchar(30)), 'LOCAL_AMOUNT')
 							+ coalesce(cast(@GROUP_AMOUNT as nvarchar(30)), 'GROUP_AMOUNT')
-							+ coalesce(@ORDER_CURRENCY, 'ORDER_CURRENCY')
+							+ coalesce(@SHIPPED_CURRENCY, 'ORDER_CURRENCY')
 							+ coalesce(@LOCAL_CURRENCY, 'LOCAL_CURRENCY')
 							-----------------------------------------------------------------------------------------------------------------------
 							+ coalesce(cast(@LINE_DISCOUNT_AMOUNT as nvarchar(30)), 'LINE_DISCOUNT_AMOUNT')

@@ -19,7 +19,7 @@
 , INVOICE_LINE_NUMBER nvarchar(20) not null
 , ORDER_NUMBER nvarchar(20) not null
 , ORDER_LINE_NUMBER nvarchar(20) not null
-, Uniqueifier bigint not null constraint DF_test_Invoice_Uniqueifier default (1)
+, Uniqueifier bigint not null constraint DF_stg_Invoice_Uniqueifier default (1)
 -----------------------------------------------------------
 , INVOICE_TYPE nvarchar(1) not null
 , InvoiceTypeName nvarchar(29) not null
@@ -59,7 +59,7 @@
 , BONUS_SHARE_AMOUNT decimal(15, 4) null
 , STD_COST decimal(15, 4) null
 , STD_FREIGHT decimal(15, 4) null
-, DuplicateCount int not null constraint DF_test_Invoice_DuplicateCount default (1)
+, DuplicateCount int not null constraint DF_stg_Invoice_DuplicateCount default (1)
 -----------------------------------------------------------------------------------------------------------------------
 , constraint PK_stg_Invoice primary key clustered (InvoiceKey)
 , constraint AK_stg_Invoice_REC_ID unique nonclustered (REC_ID)

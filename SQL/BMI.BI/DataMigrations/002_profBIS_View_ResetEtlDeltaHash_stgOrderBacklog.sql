@@ -7,19 +7,43 @@ go
 --! We need to re-set all DeltaHash values as the logic has changed (provided there are no differences now
 --!
 /*
-alter table stg.OrderBacklogControl add constraint PK_stg_OrderBacklogControl primary key clustered (OrderBacklogKey)
+drop procedure test.OrderBacklogRefresh;
 go
-create nonclustered index NCI_stg_OrderBacklogControl_ExtractFilter on stg.OrderBacklogControl (OrderBacklogKey, PreviousDeltaHash, IsDeleted);
+drop table test.OrderBacklogControl;
 go
-alter table stg.OrderBacklog add constraint PK_stg_OrderBacklog primary key clustered (OrderBacklogKey)
+drop table test.OrderBacklog;
 go
-alter table stg.OrderBacklog add constraint AK_stg_OrderBacklog_REC_ID unique nonclustered (REC_ID)
+drop schema [test];
 go
-create nonclustered index NCI_stg_OrderBacklog_ExtractFilter on stg.OrderBacklog (OrderBacklogKey, EtlDeltaHash, IsDeleted, Uniqueifier)
+create schema [test] authorization [dbo];
 go
-create nonclustered index NCI_stg_OrderBacklog_ExpectedUniqueKeys on stg.OrderBacklog (SYSTEM_ID, OrderBacklog_NUMBER, ORDER_NUMBER, OrderBacklog_LINE_NUMBER, ORDER_LINE_NUMBER, OrderBacklog_DATE, EtlUpdatedOn)
+select * into test.OrderBacklogControl from stg.OrderBacklogControl ;
 go
+select * into test.OrderBacklog from stg.OrderBacklog ;
+go
+
+alter table test.OrderBacklogControl add constraint PK_test_OrderBacklogControl primary key clustered (OrderBacklogKey)
+go
+create nonclustered index NCI_test_OrderBacklogControl_ExtractFilter on test.OrderBacklogControl (OrderBacklogKey, PreviousDeltaHash, IsDeleted);
+go
+alter table test.OrderBacklog add constraint PK_test_OrderBacklog primary key clustered (OrderBacklogKey)
+go
+alter table test.OrderBacklog add constraint AK_test_OrderBacklog_REC_ID unique nonclustered (REC_ID)
+go
+create nonclustered index NCI_test_OrderBacklog_ExtractFilter on test.OrderBacklog (OrderBacklogKey, EtlDeltaHash, IsDeleted, Uniqueifier)
+go
+create nonclustered index NCI_test_OrderBacklog_ExpectedUniqueKeys on test.OrderBacklog (SYSTEM_ID, ORDER_NUMBER, ORDER_LINE_NUMBER, EXPECTED_INVOICE_DATE, EtlUpdatedOn)
+go
+alter table test.OrderBacklog add constraint DF_test_OrderBacklog_Uniqueifier default (1) for Uniqueifier;
+go
+alter table test.OrderBacklog add DuplicateCount int not null constraint DF_test_OrderBacklog_DuplicateCount default (1)
+go
+
+backup log profBIS_View to disk = 'NUL:'
+
 */
+
+
 if exists
 	(
 		select
@@ -40,17 +64,15 @@ begin try
 		update
 			stg.OrderBacklog
 		set
-			EtlDeltaHash = privy.OrderBacklogDeltaHash
+			  EtlDeltaHash = privy.OrderBacklogDeltaHash
 					(
 					  Uniqueifier
 					, SYSTEM_ID
-					, OrderBacklog_NUMBER
 					, ORDER_NUMBER
-					, OrderBacklog_LINE_NUMBER
 					, ORDER_LINE_NUMBER
-					, OrderBacklog_DATE
-					, OrderBacklog_TYPE
-					, OrderBacklogTypeName
+					, EXPECTED_INVOICE_DATE
+					, ORDER_TYPE
+					, OrderTypeName
 					, LOCAL_SITE_SOLD
 					, SITE_ID
 					, ITEM_NO
@@ -60,33 +82,23 @@ begin try
 					, SHIP_TO_CUSTOMER_NO
 					, SALESPERSON_ID
 					, SALESPERSON_NAME
-					, DELIVERY_DATE
-					, EXPECTED_PAYMENT_DATE
-					, ACTUAL_PAYMENT_DATE
-					, LOCAL_DELIVERY_TERM
-					, LOCAL_DELIVERY_TERM_TEXT
-					, PAYMENT_TERM_ID
-					, LOCAL_PAYMENT_TERM
-					, LOCAL_PAYMENT_TERM_TEXT
-					, OrderBacklog_QUANTITY
-					, OrderBacklog_UOM
+					, ORDER_QUANTITY
+					, ORDER_UOM
 					, STATISTIC_QUANTITY
 					, STATISTIC_UOM
 					, QUANTITY
 					, LOCAL_UOM
 					, LOCAL_UOM_HARMONIZED
 					, LOCAL_UOM_FACTOR
-					, OrderBacklog_AMOUNT
+					, ORDER_AMOUNT
 					, LOCAL_AMOUNT
 					, GROUP_AMOUNT
-					, OrderBacklog_CURRENCY
+					, ORDER_CURRENCY
 					, LOCAL_CURRENCY
 					, LINE_DISCOUNT_AMOUNT
-					, OrderBacklog_DISCOUNT_AMOUNT
+					, ORDER_DISCOUNT_AMOUNT
 					, LINE_BONUS_AMOUNT
 					, BONUS_SHARE_AMOUNT
-					, STD_COST
-					, STD_FREIGHT
 					)
 		--! Stop SQL Prompt throwing spurious errors about no WHERE clause in an update statement
 		where
@@ -125,3 +137,4 @@ begin catch
 	select error_number(), error_message()
 end catch
 go
+

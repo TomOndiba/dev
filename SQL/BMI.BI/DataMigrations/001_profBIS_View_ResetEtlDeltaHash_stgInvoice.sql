@@ -3,44 +3,54 @@
 --!
 use profBIS_View
 go
-
 --!
 --! We need to re-set all DeltaHash values as the logic has changed (provided there are no differences now
 --!
 /*
+drop procedure test.InvoiceRefresh;
+go
 drop table test.InvoiceControl;
+go
 drop table test.Invoice;
+go
+drop schema [test];
+go
+create schema [test] authorization [dbo];
 go
 select * into test.InvoiceControl from stg.InvoiceControl ;
 go
 select * into test.Invoice from stg.Invoice ;
 go
 
-alter table test.InvoiceControl add constraint PK_stg_InvoiceControl primary key clustered (InvoiceKey)
+alter table test.InvoiceControl add constraint PK_test_InvoiceControl primary key clustered (InvoiceKey)
 go
-create nonclustered index NCI_stg_InvoiceControl_ExtractFilter on test.InvoiceControl (InvoiceKey, PreviousDeltaHash, IsDeleted);
+create nonclustered index NCI_test_InvoiceControl_ExtractFilter on test.InvoiceControl (InvoiceKey, PreviousDeltaHash, IsDeleted);
 go
-alter table test.Invoice add constraint PK_stg_Invoice primary key clustered (InvoiceKey)
+alter table test.Invoice add constraint PK_test_Invoice primary key clustered (InvoiceKey)
 go
-alter table test.Invoice add constraint AK_stg_Invoice_REC_ID unique nonclustered (REC_ID)
+alter table test.Invoice add constraint AK_test_Invoice_REC_ID unique nonclustered (REC_ID)
 go
-create nonclustered index NCI_stg_Invoice_ExtractFilter on test.Invoice (InvoiceKey, EtlDeltaHash, IsDeleted, Uniqueifier)
+create nonclustered index NCI_test_Invoice_ExtractFilter on test.Invoice (InvoiceKey, EtlDeltaHash, IsDeleted, Uniqueifier)
 go
-create nonclustered index NCI_stg_Invoice_ExpectedUniqueKeys on test.Invoice (SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER, INVOICE_DATE, EtlUpdatedOn)
+create nonclustered index NCI_test_Invoice_ExpectedUniqueKeys on test.Invoice (SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER, INVOICE_DATE, EtlUpdatedOn)
 go
 alter table test.Invoice add constraint DF_test_Invoice_Uniqueifier default (1) for Uniqueifier;
 go
 alter table test.Invoice add DuplicateCount int not null constraint DF_test_Invoice_DuplicateCount default (1)
 go
 
+backup log profBIS_View to disk = 'NUL:'
+
 */
+
+
 if exists
 	(
 		select
 			top 1 1
 		from
-			test.Invoice as i
-		inner join test.InvoiceControl as ic
+			stg.Invoice as i
+		inner join stg.InvoiceControl as ic
 			on ic.InvoiceKey = i.InvoiceKey
 		where
 			i.EtlDeltaHash <> ic.PreviousDeltaHash
@@ -52,7 +62,7 @@ begin try
 	begin tran;
 
 		update
-			test.Invoice
+			stg.Invoice
 		set
 			  EtlDeltaHash = privy.InvoiceDeltaHash
 					(
@@ -111,8 +121,8 @@ begin try
 		set
 			tgt.PreviousDeltaHash = src.EtlDeltaHash
 		from
-			test.Invoice as src
-		inner join test.InvoiceControl as tgt
+			stg.Invoice as src
+		inner join stg.InvoiceControl as tgt
 			on tgt.InvoiceKey = src.InvoiceKey
 		--! Stop SQL Prompt throwing spurious errors about no WHERE clause in an update statement
 		where
@@ -124,8 +134,8 @@ begin try
 			select
 				top 1 1
 			from
-				test.Invoice as i
-			inner join test.InvoiceControl as ic
+				stg.Invoice as i
+			inner join stg.InvoiceControl as ic
 				on ic.InvoiceKey = i.InvoiceKey
 			where
 				i.EtlDeltaHash <> ic.PreviousDeltaHash

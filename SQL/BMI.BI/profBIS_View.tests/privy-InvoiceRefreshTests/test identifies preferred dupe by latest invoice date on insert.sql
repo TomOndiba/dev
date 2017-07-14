@@ -1,4 +1,4 @@
-﻿CREATE procedure [privy-InvoiceRefreshTests].[test identifies preferred duplicate by latest invoice date on insert]
+﻿CREATE procedure [privy-InvoiceRefreshTests].[test identifies preferred dupe by latest invoice date on insert]
 as
 begin
 	exec tSQLt.FakeTable @TableName = 'stg.Invoice', @Identity = 1, @Defaults = 1 ;

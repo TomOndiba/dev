@@ -1,4 +1,4 @@
-﻿CREATE procedure [privy-InvoiceRefreshTests].[test no duplicate update on no change]
+﻿CREATE procedure [privy-InvoiceRefreshTests].[test no dupe is updated if no change at source]
 as
 begin
 	exec tSQLt.FakeTable @TableName = 'stg.Invoice', @Identity = 1, @Defaults = 1 ;

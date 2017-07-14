@@ -205,8 +205,10 @@
     <Build Include="Test Classes\privy-InvoiceRefreshTests.sql" />
     <Build Include="privy-InvoiceRefreshTests\test source values update correct columns.sql" />
     <Build Include="privy-InvoiceRefreshTests\test no row update on no change to any column.sql" />
-    <Build Include="privy-InvoiceRefreshTests\test no duplicate update on no change.sql" />
-    <Build Include="privy-InvoiceRefreshTests\test identifies preferred duplicate by latest invoice date on insert.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test preferred dupe is always the late arriving duplicate.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test no dupe is updated if no change at source.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test identifies preferred dupe by latest invoice date on insert.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test identifies preferred dupe by latest ETL update on same invoice dates.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="profBIS_View.tests.sandbox.publish.xml" />

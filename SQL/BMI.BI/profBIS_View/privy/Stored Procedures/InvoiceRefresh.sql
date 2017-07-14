@@ -29,6 +29,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		13-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+002		13-JUL-2017		GML		BSR-101	Revised Uniquifier logic to prefer most recently updated active duplicate
+------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -207,7 +209,7 @@ begin
 		;with sourceCte
 		as
 		(
-			--! The following columns are defined as NOT NULL on the underlying table: REC_ID, SYSTEM_ID, SITE_SOLD, INVOICE_NUMBER, INVOICE_LINE_NUMBER
+			--! The following columns are defined as NOT NULL on the source table: REC_ID, SYSTEM_ID, SITE_SOLD, INVOICE_NUMBER, INVOICE_LINE_NUMBER
 			--! In the first pass we use REC_ID (a GUID) to uniquely identify each source record.  Then later, we use the following columns to de-dupe:
 			--! SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER
 			select
@@ -364,24 +366,6 @@ begin
 				and inv.INVOICE_TYPE in ('1', '2', '9')
 				and isnull(pCat.ITEM_CATEGORY_ID, -1) <> @_ExcludeFromQlikViewProductCategoryId
 				and isnull(lcc.CUSTOMER_CATEGORY_ID, -1) <> @_ExcludeFromQlikViewCustomerCategoryId
---			and 
---				(
---						1 = 0
---					or (inv.SYSTEM_ID = 15 and inv.INVOICE_NUMBER = '3350489' and inv.INVOICE_LINE_NUMBER = '10' and inv.ITEM_NO = '102605') -- 20
---					or (inv.SYSTEM_ID = 15 and inv.INVOICE_NUMBER = '3150707' and inv.INVOICE_LINE_NUMBER = '10'and inv.ITEM_NO = '102605') -- 14
---					or (inv.SYSTEM_ID = 12 and inv.INVOICE_NUMBER = '170997' and inv.INVOICE_LINE_NUMBER = '1' and inv.ITEM_NO = '42820') -- 6
---					or (inv.SYSTEM_ID = 12 and inv.INVOICE_NUMBER = '170997' and inv.INVOICE_LINE_NUMBER = '10' and inv.ITEM_NO = '71170') -- 6
---					or (inv.SYSTEM_ID = 12 and inv.INVOICE_NUMBER = '170997' and inv.INVOICE_LINE_NUMBER = '2' and inv.ITEM_NO = '71150') -- 6
---					or (inv.SYSTEM_ID = 2 and inv.INVOICE_NUMBER = '001308113' and inv.INVOICE_LINE_NUMBER = '030' and inv.ITEM_NO = '23264')
---					or (inv.SYSTEM_ID = 2 and inv.INVOICE_NUMBER = '001505511' and inv.INVOICE_LINE_NUMBER = '005' and inv.ITEM_NO = '11092') -- 5
---					or (inv.SYSTEM_ID = 2 and inv.INVOICE_NUMBER = '001505511' and inv.INVOICE_LINE_NUMBER = '010' and inv.ITEM_NO = '11094') -- 5
---					or (inv.SYSTEM_ID = 2 and inv.INVOICE_NUMBER = '001505511' and inv.INVOICE_LINE_NUMBER = '015' and inv.ITEM_NO = '16282') -- 5
---					or (inv.SYSTEM_ID = 2 and inv.INVOICE_NUMBER = '001600622' and inv.INVOICE_LINE_NUMBER = '005' and inv.ITEM_NO = '22604') -- 5
---					or (inv.SYSTEM_ID = 2 and inv.INVOICE_NUMBER = '001308113' and inv.INVOICE_LINE_NUMBER = '030' and inv.ITEM_NO = '23264') -- 4
---					or (inv.SYSTEM_ID = 1 and inv.INVOICE_NUMBER = '0090748418' and inv.INVOICE_LINE_NUMBER = '000010' and inv.ITEM_NO = 'REBATE') -- 4
---					or (inv.SYSTEM_ID = 1 and inv.INVOICE_NUMBER = '0090751546' and inv.INVOICE_LINE_NUMBER = '000010' and inv.ITEM_NO = '3100407') -- 4
---					or (inv.SYSTEM_ID = 1 and inv.INVOICE_NUMBER = '0090751546' and inv.INVOICE_LINE_NUMBER = '000020' and inv.ITEM_NO = '3007163') -- 4
---				)
 		)
 		merge into stg.Invoice as tgt
 		using sourceCte as src
@@ -499,6 +483,7 @@ begin
 			, src.STD_COST
 			, src.STD_FREIGHT
 			)
+		--! If any value has changed or a previously soft-deleted record re-appears then update
 		when matched and tgt.EtlDeltaHash <> src.EtlDeltaHash or tgt.IsDeleted = 'Y'
 			then update set
 					  tgt.EtlDeltaHash = src.EtlDeltaHash
@@ -549,7 +534,8 @@ begin
 					, tgt.BONUS_SHARE_AMOUNT = src.BONUS_SHARE_AMOUNT
 					, tgt.STD_COST = src.STD_COST
 					, tgt.STD_FREIGHT = src.STD_FREIGHT
-		when not matched by source and (tgt.INVOICE_DATE between @_DataCaptureStart and @_DataCaptureEnd) and tgt.InvoiceKey >= 100
+		--! If the REC_ID no longer exists at source, the Invoice date is within the capture range and the staging row isn't already inactive then soft-delete
+		when not matched by source and (tgt.INVOICE_DATE between @_DataCaptureStart and @_DataCaptureEnd) and tgt.InvoiceKey >= 100 and tgt.IsDeleted = 'N'
 			then update set
 					  tgt.IsDeleted = 'Y'
 					, tgt.EtlDeletedOn = @LoadStart
@@ -615,7 +601,7 @@ begin
 				, i.REC_ID
 				, i.INVOICE_DATE
 				, i.EtlUpdatedOn
-				, row_number() over (partition by d.SYSTEM_ID, d.INVOICE_NUMBER, d.ORDER_NUMBER, d.INVOICE_LINE_NUMBER, d.ORDER_LINE_NUMBER order by i.INVOICE_DATE desc, i.EtlUpdatedOn desc, i.REC_ID) as [Uniqueifier]
+				, row_number() over (partition by d.SYSTEM_ID, d.INVOICE_NUMBER, d.ORDER_NUMBER, d.INVOICE_LINE_NUMBER, d.ORDER_LINE_NUMBER order by i.IsDeleted asc, i.INVOICE_DATE desc, i.EtlUpdatedOn desc, i.REC_ID) as [Uniqueifier]
 			from
 				dupesCte as d
 			inner join stg.Invoice as i
@@ -697,8 +683,9 @@ begin
 			  tgt.Uniqueifier = src.Uniqueifier
 			, tgt.DuplicateCount = src.DupeCount
 			, tgt.EtlDeltaHash = src.EtlDeltaHash
-			, tgt.EtlUpdatedOn = @LoadStart
 			, tgt.EtlUpdatedBy = @_FunctionName
+			--! As we use EtlUpdatedOn to find recently updated duplicates only set this for the preferred record
+			, tgt.EtlUpdatedOn = case when src.Uniqueifier = 1 then @LoadStart else tgt.EtlUpdatedOn end
 		from
 			stg.Invoice as tgt
 		inner join finalCte as src
@@ -799,6 +786,4 @@ EndProc:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
-go
-
 go

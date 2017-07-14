@@ -1,4 +1,4 @@
-﻿CREATE function [privy].[InvoiceDeltaHash]
+﻿create function [privy].[InvoiceDeltaHash]
 (
   @Uniqueifier bigint
 , @SYSTEM_ID int
@@ -54,18 +54,9 @@ as
 Properties
 ==========
 FUNCTION NAME:  privy.InvoiceDeltaHash
-DESCRIPTION:    Does something or other
+DESCRIPTION:    Generates an MD5 hash over all the non-key columns (including the Uniqueifier) on stg.Invoice table
 AUTHOR:         Greg M. Lucas
-ORIGIN DATE:    DD-MMM-YYYY
-Build version:  <<DbVersion>>
-Build Date:     <<DbBuildDate>>
-DEPENDANTS:     Calling functions
-DEPENDENCIES:   Called functions
-
-Inputs
-======
-- @SomeParam
-- @SomeOtherParam
+ORIGIN DATE:    12-JUL-2017
 
 Additional Notes
 ================
@@ -75,7 +66,7 @@ REVISION HISTORY
 =====================================================================================================================
 Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
-000		DD-MMM-YYYY		GML		CR0000	Created
+001		12-JUL-2017		GML		BSR-101	Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
@@ -143,3 +134,4 @@ begin
 
 	return @OutputValue
 end
+go

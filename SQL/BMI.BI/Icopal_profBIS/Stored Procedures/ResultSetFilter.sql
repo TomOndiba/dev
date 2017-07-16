@@ -1,4 +1,4 @@
 ﻿CREATE PROCEDURE [tSQLt].[ResultSetFilter]
-@ResultsetNo INT = null, @Command NVARCHAR (MAX) = null
+@ResultsetNo INT, @Command NVARCHAR (MAX)
 AS EXTERNAL NAME [tSQLtCLR].[tSQLtCLR.StoredProcedures].[ResultSetFilter]
 

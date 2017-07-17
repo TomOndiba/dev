@@ -479,6 +479,9 @@ Static Data;
   <ItemGroup>
     <None Include="Schema-Model\dbo\Tables\discard.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\pbi\Views\Today.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

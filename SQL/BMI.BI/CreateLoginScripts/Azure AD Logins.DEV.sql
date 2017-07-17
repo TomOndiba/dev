@@ -36,6 +36,11 @@ select * from sys.database_principals;
 --grant alter any user to [greg.lucas@icopal.com]
 --go
 
+if not exists (select * from sys.sysusers where name = 'razia.nazir@icopal.com')
+	begin
+		create user [razia.nazir@icopal.com] from external provider;
+	end
+go
 if not exists (select * from sys.sysusers where name = 'Vincent.Mitchell@icopal.com')
 	begin
 		create user [Vincent.Mitchell@icopal.com] from external provider;

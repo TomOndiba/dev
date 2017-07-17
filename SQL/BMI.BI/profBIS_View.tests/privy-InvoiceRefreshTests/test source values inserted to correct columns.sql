@@ -209,7 +209,57 @@ begin
 	exec privy.InvoiceRefresh @LoadStart = @_ModifiedOn, @DebugLevel = 0 ;
 	
 	--! Assert
-	declare @_I001A_DeltaHash char(32) = (select EtlDeltaHash from stg.Invoice where InvoiceKey = @_I001A_InvoiceKey);
+	declare @_I001A_DeltaHash char(32) -- = (select EtlDeltaHash from stg.Invoice where InvoiceKey = @_I001A_InvoiceKey);
+
+	set @_I001A_DeltaHash
+		= privy.InvoiceDeltaHash
+			(
+			  @_I001A_Uniqueifier
+			, @_I001A_SYSTEM_ID
+			, @_I001A_INVOICE_NUMBER
+			, @_I001A_ORDER_NUMBER
+			, @_I001A_INVOICE_LINE_NUMBER
+			, @_I001A_ORDER_LINE_NUMBER
+			, @_I001A_INVOICE_DATE
+			, @_I001A_INVOICE_TYPE
+			, @_I001A_InvoiceTypeName
+			, @_I001A_LOCAL_SITE_SOLD
+			, @_I001A_SITE_ID
+			, @_I001A_ITEM_NO
+			, @_I001A_ITEM_CATEGORY_ID
+			, @_I001A_ENV_CATEGORY_ID
+			, @_I001A_SOLD_TO_CUSTOMER_NO
+			, @_I001A_SHIP_TO_CUSTOMER_NO
+			, @_I001A_SALESPERSON_ID
+			, @_I001A_SALESPERSON_NAME
+			, @_I001A_DELIVERY_DATE
+			, @_I001A_EXPECTED_PAYMENT_DATE
+			, @_I001A_ACTUAL_PAYMENT_DATE
+			, @_I001A_LOCAL_DELIVERY_TERM
+			, @_I001A_LOCAL_DELIVERY_TERM_TEXT
+			, @_I001A_PAYMENT_TERM_ID
+			, @_I001A_LOCAL_PAYMENT_TERM
+			, @_I001A_LOCAL_PAYMENT_TERM_TEXT
+			, @_I001A_INVOICE_QUANTITY
+			, @_I001A_INVOICE_UOM
+			, @_I001A_STATISTIC_QUANTITY
+			, @_I001A_STATISTIC_UOM
+			, @_I001A_QUANTITY
+			, @_I001A_LOCAL_UOM
+			, @_I001A_LOCAL_UOM_HARMONIZED
+			, @_I001A_LOCAL_UOM_FACTOR
+			, @_I001A_INVOICE_AMOUNT
+			, @_I001A_LOCAL_AMOUNT
+			, @_I001A_GROUP_AMOUNT
+			, @_I001A_INVOICE_CURRENCY
+			, @_I001A_LOCAL_CURRENCY
+			, @_I001A_LINE_DISCOUNT_AMOUNT
+			, @_I001A_INVOICE_DISCOUNT_AMOUNT
+			, @_I001A_LINE_BONUS_AMOUNT
+			, @_I001A_BONUS_SHARE_AMOUNT
+			, @_I001A_STD_COST
+			, @_I001A_STD_FREIGHT
+			);
 
 	--! What do we expect to see?
 	insert #expected

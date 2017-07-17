@@ -65,7 +65,8 @@ begin
 
 	select
 		@OutputValue = convert(nvarchar(32), hashbytes('MD5'
-						, coalesce(cast(@Uniqueifier as nvarchar(30)), 'Uniqueifier')
+						, convert(nvarchar(max)
+							, coalesce(cast(@Uniqueifier as nvarchar(30)), 'Uniqueifier')
 							+ coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
 							+ coalesce(nullif(@ORDER_NUMBER, ''), 'INVOICE_NUMBER')
 							+ coalesce(nullif(@ORDER_LINE_NUMBER, ''), 'INVOICE_LINE_NUMBER')
@@ -106,7 +107,7 @@ begin
 							+ coalesce(cast(@LINE_DISCOUNT_AMOUNT as nvarchar(30)), 'LINE_DISCOUNT_AMOUNT')
 							+ coalesce(cast(@ORDER_DISCOUNT_AMOUNT as nvarchar(30)), 'ORDER_DISCOUNT_AMOUNT')
 							+ coalesce(cast(@LINE_BONUS_AMOUNT as nvarchar(30)), 'LINE_BONUS_AMOUNT')
-							+ coalesce(cast(@BONUS_SHARE_AMOUNT as nvarchar(30)), 'BONUS_SHARE_AMOUNT')), 2)
+							+ coalesce(cast(@BONUS_SHARE_AMOUNT as nvarchar(30)), 'BONUS_SHARE_AMOUNT')) collate SQL_Latin1_General_CP1_CI_AS), 2)
 							-----------------------------------------------------------------------------------------------------------------------
 	return @OutputValue
 end

@@ -71,6 +71,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateUserScripts", "Create
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SchemaComparisons", "SchemaComparisons", "{446CA341-C1D8-4249-8168-BB9010C304AC}"
 	ProjectSection(SolutionItems) = preProject
+		SchemaComparisons\BMI_BAT_MAN.tests comparison.scmp = SchemaComparisons\BMI_BAT_MAN.tests comparison.scmp
 		SchemaComparisons\BMI_BI_DW.scmp = SchemaComparisons\BMI_BI_DW.scmp
 		SchemaComparisons\BMI_BI_DW.Tests Comparison.scmp = SchemaComparisons\BMI_BI_DW.Tests Comparison.scmp
 		SchemaComparisons\profBIS_View.scmp = SchemaComparisons\profBIS_View.scmp
@@ -78,12 +79,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SchemaComparisons", "Schema
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dacpacs", "dacpacs", "{C469F7AE-520A-4BF8-86E1-F086F41D747F}"
 	ProjectSection(SolutionItems) = preProject
+		dacpacs\BMI_BAT_MAN_SQL2016.dacpac = dacpacs\BMI_BAT_MAN_SQL2016.dacpac
 		dacpacs\BMI_BI_DW_SQL2016.dacpac = dacpacs\BMI_BI_DW_SQL2016.dacpac
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BI_DW.tests", "BMI_BI_DW.tests\BMI_BI_DW.tests.sqlproj", "{0821C4CC-2356-40D8-B838-757D26C7C84E}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BI_MART", "BMI_BI_MART\BMI_BI_MART.sqlproj", "{A741E739-FC10-4BB0-9520-9750B15DA32C}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BAT_MAN", "BMI_BAT_MAN\BMI_BAT_MAN.sqlproj", "{356F3988-D140-4D3F-A860-D71D990EB793}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BAT_MAN.tests", "BMI_BAT_MAN.tests\BMI_BAT_MAN.tests.sqlproj", "{84ADE24A-D9CA-4945-AC19-F83C67049FF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +143,24 @@ Global
 		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A741E739-FC10-4BB0-9520-9750B15DA32C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356F3988-D140-4D3F-A860-D71D990EB793}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84ADE24A-D9CA-4945-AC19-F83C67049FF7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

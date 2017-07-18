@@ -477,9 +477,6 @@ Static Data;
     <None Include="Migrations\1.0.1\006_add_TranslationColour_table.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema-Model\dbo\Tables\discard.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Programmable Objects\pbi\Views\Today.sql" />
   </ItemGroup>
   <PropertyGroup>

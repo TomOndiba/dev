@@ -33,7 +33,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--! Some standard entities (N/S, N/F, N/I etc) already have the correct DataSourceKey
 		, case when ord.SYSTEM_ID = 100000 then ord.SYSTEM_ID else ord.SYSTEM_ID + 100100 end			as [DataSourceKey]
 		, cast(ord.REC_ID as nvarchar(50))																as [QlikViewOrderBacklogKey]
-		, cast(1 as int)																				as [LineCount]
+		, ord.DuplicateCount																			as [LineCount]
 		-----------------------------------------------------------------------------------------------------------------------
 		, ord.ORDER_NUMBER																				as [OrderNumber]
 		, case when isnumeric(ord.ORDER_LINE_NUMBER) = 1

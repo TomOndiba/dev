@@ -32,7 +32,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--! Some standard entities (N/S, N/F, N/I etc) already have the correct DataSourceKey
 		, case when i.SYSTEM_ID = 100000 then i.SYSTEM_ID else i.SYSTEM_ID + 100100 end				as [DataSourceKey]
 		, cast(i.REC_ID as nvarchar(50))															as [QlikViewInvoiceKey]
-		, cast(1 as int)																			as [LineCount]
+		, i.DuplicateCount																			as [LineCount]
 		, cast(convert(char(8), i.INVOICE_DATE, 112) as int)										as [InvoiceDateKey]
 		, i.INVOICE_DATE																			as [InvoiceDate]
 		-----------------------------------------------------------------------------------------------------------------------

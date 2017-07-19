@@ -64,7 +64,5 @@ ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [CK_qvstg_Invoice_IsDeleted] CHECK 
 GO
 ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [PK_qvstg_Invoice] PRIMARY KEY CLUSTERED  ([InvoiceKey])
 GO
-ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [AK_qvstg_Invoice_UniqueifiedBusinessKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [InvoiceNumber], [OrderNumber], [NativeInvoiceLineNumber], [NativeOrderLineNumber])
-GO
 ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [AK_qvstg_Invoice_DataSourceKey_QlikViewInvoiceKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [QlikViewInvoiceKey])
 GO

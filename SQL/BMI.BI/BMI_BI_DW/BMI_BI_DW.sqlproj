@@ -500,6 +500,9 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.1\008_RemoveUniqueifiedBusinessKeys.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\009_AddColumn_InvoiceQtyUoMConformed.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

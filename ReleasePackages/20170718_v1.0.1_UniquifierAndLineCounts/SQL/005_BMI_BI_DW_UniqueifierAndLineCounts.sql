@@ -1,7 +1,7 @@
 ﻿/*
 	Target database:	BMI_BI_DW (configurable)
 	Target instance:	(any)
-	Generated date:		19/07/2017 14:49:02
+	Generated date:		19/07/2017 16:46:09
 	Generated on:		UKX260-003
 	Package version:	1.0.1
 	Migration version:	1.0.1
@@ -4265,6 +4265,43 @@ GO
 IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2c98d0be-61cb-4776-9ba5-152add0adee2' AS UNIQUEIDENTIFIER))
   INSERT [$(DatabaseName)].[dbo].[__MigrationLog] ([migration_id], [script_checksum], [script_filename], [complete_dt], [applied_by], [deployed], [version], [package_version], [release_version])
   VALUES                                         (CAST ('2c98d0be-61cb-4776-9ba5-152add0adee2' AS UNIQUEIDENTIFIER), 'B5D6B5D87D1E5F68AEC467AF69A07743ECD9576DD25C412F052655918F931520', 'Migrations\1.0.1\008_RemoveUniqueifiedBusinessKeys.sql', SYSDATETIME(), SYSTEM_USER, 1, '1.0.1', '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
+
+GO
+SET IMPLICIT_TRANSACTIONS, NUMERIC_ROUNDABORT OFF;
+
+SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL, NOCOUNT, QUOTED_IDENTIFIER ON;
+
+GO
+IF DB_NAME() != '$(DatabaseName)'
+  RAISERROR ('Incorrect database context. Please check the connection details to ensure that this deployment package matches the target database. To force deployment, override the DatabaseName variable.', 16, 127);
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('6ec51e92-1659-468f-b881-19c53641ac3f' AS UNIQUEIDENTIFIER))
+  PRINT '
+
+***** EXECUTING MIGRATION "Migrations\1.0.1\009_AddColumn_InvoiceQtyUoMConformed.sql", ID: {6ec51e92-1659-468f-b881-19c53641ac3f} *****';
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('6ec51e92-1659-468f-b881-19c53641ac3f' AS UNIQUEIDENTIFIER))
+  EXECUTE ('
+PRINT N''Altering [qvstg].[Invoice]''
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('6ec51e92-1659-468f-b881-19c53641ac3f' AS UNIQUEIDENTIFIER))
+  EXECUTE ('ALTER TABLE [qvstg].[Invoice] ADD
+[InvoiceQuantityUnitOfMeasureConformed] [varchar] (16) NOT NULL CONSTRAINT [DF_qvstg_Invoice_InvoiceQuantityUnitOfMeasureConformed] DEFAULT ('''')
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('6ec51e92-1659-468f-b881-19c53641ac3f' AS UNIQUEIDENTIFIER))
+  PRINT '***** FINISHED EXECUTING MIGRATION "Migrations\1.0.1\009_AddColumn_InvoiceQtyUoMConformed.sql", ID: {6ec51e92-1659-468f-b881-19c53641ac3f} *****
+';
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('6ec51e92-1659-468f-b881-19c53641ac3f' AS UNIQUEIDENTIFIER))
+  INSERT [$(DatabaseName)].[dbo].[__MigrationLog] ([migration_id], [script_checksum], [script_filename], [complete_dt], [applied_by], [deployed], [version], [package_version], [release_version])
+  VALUES                                         (CAST ('6ec51e92-1659-468f-b881-19c53641ac3f' AS UNIQUEIDENTIFIER), '70EF5B08C8BA6E49C1D0156E6899B0F1F9E1A9E91D99082C2202A678D4195794', 'Migrations\1.0.1\009_AddColumn_InvoiceQtyUoMConformed.sql', SYSDATETIME(), SYSTEM_USER, 1, '1.0.1', '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
 
 GO
 SET IMPLICIT_TRANSACTIONS, NUMERIC_ROUNDABORT OFF;

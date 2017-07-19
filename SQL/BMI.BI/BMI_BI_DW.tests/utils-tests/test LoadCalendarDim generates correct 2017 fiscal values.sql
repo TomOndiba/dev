@@ -1,7 +1,7 @@
-﻿create   procedure [utils-tests].[test LoadDateDimension generates correct 2017 fiscal values]
+﻿create   procedure [utils-tests].[test LoadCalendarDim generates correct 2017 fiscal values]
 as
 begin
-	exec tSQLt.FakeTable 'dbo.dimDate'
+	exec tSQLt.FakeTable 'dbo.Calendar'
 	
 	--! Assemble
 	;with sourceCte (DateKey, FiscalPeriod, FiscalQuarter, FiscalYear, FiscalPeriodCode, FiscalPeriodName, FiscalYearPeriod, FiscalYearQuarter)
@@ -385,9 +385,9 @@ begin
 	select * into #expected from sourceCte where DateKey <> 0
 
 	--! Act
-	exec utils.LoadDateDimension @Year = '2017', @DoOutputInfo = 0 ;
+	exec utils.LoadCalendarDimension @Year = '2017', @DoOutputInfo = 0 ;
 
-	select * into #actual from dbo.dimDate where DateKey between 20170000 and 20179999 ;
+	select * into #actual from dbo.Calendar where DateKey between 20170000 and 20179999 ;
 
 	--! Assert
 	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = '#actual';

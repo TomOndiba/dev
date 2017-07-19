@@ -68,9 +68,9 @@
   <ItemGroup>
     <Build Include="Permissions.sql" />
     <Build Include="dbo\IcopalCalendar.sql" />
-    <Build Include="utils-tests\test LoadDateDimension generates correct placeholders.sql" />
-    <Build Include="utils-tests\test LoadDateDimension generates correct 2017 fiscal values.sql" />
-    <Build Include="utils-tests\test LoadDateDimension generates correct 2017 calendar values.sql" />
+    <Build Include="utils-tests\test LoadCalendarDim generates correct placeholders.sql" />
+    <Build Include="utils-tests\test LoadCalendarDim generates correct 2017 fiscal values.sql" />
+    <Build Include="utils-tests\test LoadCalendarDim generates correct 2017 calendar values.sql" />
     <Build Include="sqlcop\test Forwarded Records.sql" />
     <Build Include="sqlcop\test Fragmented Indexes.sql" />
     <Build Include="sqlcop\test Orphaned Users.sql" />

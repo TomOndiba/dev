@@ -1,7 +1,7 @@
-﻿CREATE procedure [utils-tests].[test LoadDateDimension generates correct placeholders]
+﻿CREATE procedure [utils-tests].[test LoadCalendarDim generates correct placeholders]
 as
 begin
-	exec tSQLt.FakeTable 'dbo.dimDate'
+	exec tSQLt.FakeTable 'dbo.Calendar'
 	
 	--! Assemble
 	;with sourceCte (DateKey, ActualDate, DateNameEU, DateNameUS, EnglishMonthCode, EnglishMonthName, EnglishDayCode, EnglishDayName
@@ -54,9 +54,9 @@ begin
 	select * into #expected from sourceCte where DateKey <> 0
 
 	--! Act
-	exec utils.LoadDateDimension @Year = null, @DoOutputInfo = 0 ;
+	exec utils.LoadCalendarDimension @Year = null, @DoOutputInfo = 0 ;
 
-	select * into #actual from dbo.dimDate --where DateKey < 19700101 or DateKey > 90000101 ;
+	select * into #actual from dbo.Calendar --where DateKey < 19700101 or DateKey > 90000101 ;
 
 	--! Assert
 	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = '#actual';

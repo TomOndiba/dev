@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[etl].[SSIS_BUDGET_2017_StageSales]') IS NOT NULL
+IF OBJECT_ID('[etl].[SSIS_BUDGET_2017_StageSales]') IS NOT NULL
 	DROP PROCEDURE [etl].[SSIS_BUDGET_2017_StageSales];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create procedure [etl].[SSIS_BUDGET_2017_StageSales]
+CREATE procedure [etl].[SSIS_BUDGET_2017_StageSales]
 (
   @BudgetYear char(4) = '2017'
 )
@@ -77,7 +77,7 @@ begin
 				  min(DateKey) as [DateKey]
 				, FiscalPeriodCode
 			from
-				dbo.dimDate
+				dbo.Calendar
 			where
 				cast(FiscalYear as char(4)) = @BudgetYear
 			group by

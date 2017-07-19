@@ -1,12 +1,12 @@
-﻿IF OBJECT_ID('[utils].[LoadDateDimension]') IS NOT NULL
-	DROP PROCEDURE [utils].[LoadDateDimension];
+if object_id('[utils].[LoadCalendarDimension]') is not null
+	drop procedure [utils].[LoadCalendarDimension];
 
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-create procedure [utils].[LoadDateDimension]
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create procedure [utils].[LoadCalendarDimension]
 (
   @Year char(4)
 , @DoOutputInfo bit = 1
@@ -16,8 +16,8 @@ as --<CommentHeader>
 
 Properties
 ==========
-FUNCTION NAME:  utils.LoadDateDimension
-DESCRIPTION:    Loads dbo.dimDate table with dates within provided date range
+FUNCTION NAME:  utils.LoadCalendarDimension
+DESCRIPTION:    Loads dbo.Calendar table with dates within provided date range
 AUTHOR:         Greg M Lucas
 ORIGIN DATE:    09-Jun-2017
 
@@ -446,7 +446,7 @@ begin
 			left join workDaysInMonthCte as wdim
 				on wdim.DateKey = d.DateKey
 		)
-		merge into dbo.dimDate as tgt
+		merge into dbo.Calendar tgt
 		using finalCte as src
 		on src.DateKey = tgt.DateKey
 		when not matched by target
@@ -602,7 +602,7 @@ begin
 				, YearMonth as [FiscalYearPeriod]
 				, YearQuarter as [FiscalYearQuarter]
 			from
-				dbo.dimDate
+				dbo.Calendar
 			where
 				ActualDate between @_YearStart and @_YearEnd
 		)
@@ -617,7 +617,7 @@ begin
 					else row_number() over(order by MondayWeekCommencing asc) - 1
 				  end as [FiscalWeekNumber]
 			from
-				dbo.dimDate
+				dbo.Calendar
 			where
 					ActualDate between @_YearStart and @_YearEnd
 				and MondayWeekCommencing is not null
@@ -657,7 +657,7 @@ begin
 			, tgt.FiscalYearPeriod = pn.FiscalYearPeriod
 			, tgt.FiscalYearQuarter = pn.FiscalYearQuarter
 		from
-			dbo.dimDate as tgt
+			dbo.Calendar as tgt
 		inner join fiscalPeriodCte as fp
 			on fp.MondayWeekCommencing = tgt.MondayWeekCommencing
 		inner join periodNamesCte as pn
@@ -676,7 +676,7 @@ begin
 				, sum(case when IsWeekend = 'Weekday' then 1 else 0 end) over(partition by FiscalYearPeriod) as [WorkDaysInPeriodTotal]
 				, sum(case when IsWeekend = 'Weekday' then 1 else 0 end) over(partition by FiscalYearPeriod order by DateKey rows unbounded preceding) as [WorkDaysInPeriodToDate]
 			from
-				dbo.dimDate
+				dbo.Calendar
 			where
 					ActualDate between @_YearStart and @_YearEnd
 				and FiscalPeriod is not null
@@ -687,7 +687,7 @@ begin
 			  tgt.WorkDaysInFiscalPeriodTotal = src.WorkDaysInPeriodTotal
 			, tgt.WorkDaysInFiscalPeriodToDate = src.WorkDaysInPeriodToDate
 		from
-			dbo.dimDate as tgt
+			dbo.Calendar as tgt
 		inner join workDaysInPeriodCte as src
 			on src.DateKey = tgt.DateKey
 		where
@@ -717,6 +717,6 @@ begin
 
 	set nocount off;
 end;
-GO
-GRANT EXECUTE ON  [utils].[LoadDateDimension] TO [BatchManagers]
-GO
+go
+grant execute on  [utils].[LoadCalendarDimension] to [BatchManagers]
+go

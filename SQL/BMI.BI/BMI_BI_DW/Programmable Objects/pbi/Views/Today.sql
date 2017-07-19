@@ -1,11 +1,11 @@
-﻿if object_id('[pbi].[Today]') is not null
+if object_id('[pbi].[Today]') is not null
 	drop view [pbi].[Today];
 go
-set quoted_identifier on
-go
-set ansi_nulls on
-go
-create view [pbi].[Today]
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE view [pbi].[Today]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -65,7 +65,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, WorkDaysInFiscalPeriodTotal as [TodayWorkDaysInFiscalPeriodTotal]
 		, WorkDaysInFiscalPeriodToDate as [TodayWorkDaysInFiscalPeriodToDate]
 	from
-		dbo.dimDate
+		dbo.Calendar
 	where
 		ActualDate = cast(getdate() as date)
-go
+GO

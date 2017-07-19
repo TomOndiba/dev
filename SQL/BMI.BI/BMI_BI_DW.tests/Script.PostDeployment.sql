@@ -24,6 +24,9 @@ Post-Deployment Script Template
 
 :r "..\BMI_BI_DW\Static Data\dbo.TranslationStatus.data.sql"
 
+--! It appears that not all roles and permissions get pulled across so re-apply those now
+:r "..\CreateRoleScripts\BMI_BI_DW Roles and Permissions.sql"
+
 go
 exec tSQLt.RunAll;
 go

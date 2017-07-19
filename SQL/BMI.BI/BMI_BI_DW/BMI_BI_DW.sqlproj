@@ -43,6 +43,19 @@ StoredProcedure=[tsa].[BatchEndOnSuccess];
 StoredProcedure=[tsa].[BatchRunStart];
 StoredProcedure=[tsa].[StepRunStart];
 StoredProcedure=[tsa].[ThreadRunData];
+Function=[log4].[FormatElapsedTime];
+Function=[log4].[GetJournalControl];
+Schema=[dbo].[qvstg];
+Schema=[dbo].[dbo];
+Schema=[INFORMATION_SCHEMA].[INFORMATION_SCHEMA];
+StoredProcedure=[log4].[JournalWriter];
+StoredProcedure=[log4].[ExceptionHandler];
+StoredProcedure=[log4Utils].[PrintString];
+StoredProcedure=[log4Utils].[JournalReader];
+StoredProcedure=[log4Utils].[JournalPrinter];
+StoredProcedure=[log4Utils].[ExceptionReader];
+StoredProcedure=[log4Private].[SessionInfoOutput];
+Table=[dbo].[IcopalCalendar];
 </ExcludeObjectsFromSync>
     <IncludeObjectsInDataSync />
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
@@ -334,7 +347,6 @@ Static Data;
     <None Include="Schema-Model\dbo\Sequences\ReferenceTypeHistorySequence.sql" />
     <None Include="Schema-Model\dbo\Sequences\ReferenceTypeKeySequence.sql" />
     <None Include="Schema-Model\dbo\Tables\DataSource.sql" />
-    <None Include="Schema-Model\dbo\Tables\dimDate.sql" />
     <None Include="Schema-Model\log4Private\Tables\Journal.sql" />
     <None Include="Schema-Model\log4Private\Tables\JournalControl.sql" />
     <None Include="Schema-Model\log4Private\Tables\JournalDetail.sql" />
@@ -432,7 +444,7 @@ Static Data;
     <None Include="Programmable Objects\pbi\Views\factOrderBacklog.sql" />
     <None Include="Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql" />
     <None Include="Programmable Objects\pbi\Views\factSaleForecastTotal.sql" />
-    <None Include="Programmable Objects\utils\Stored Procedures\LoadDateDimension.sql" />
+    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
     <None Include="Migrations\1.0.0\001_InitialProductionRelease_20170705.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +490,12 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\pbi\Views\Today.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\Calendar.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\007_Rename_dimDate_to_Calendar.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\130\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

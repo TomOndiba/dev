@@ -133,6 +133,7 @@ Static Data;
   <!-- READYROLL SCRIPT GENERATION OPTIONS -->
   <PropertyGroup>
     <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
+    <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <!-- These properties might be set by the Developer -->
     <!--
     <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>
@@ -147,7 +148,6 @@ Static Data;
     <SyncOptionIgnoreColumnsOrder>True</SyncOptionIgnoreColumnsOrder>
     <SyncOptionIgnoreWhiteSpace>True</SyncOptionIgnoreWhiteSpace>
     <SyncOptionIgnoreSynonymDatabaseAndServerName>True</SyncOptionIgnoreSynonymDatabaseAndServerName>
-    <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <SyncOptionIgnoreDmlTriggers>False</SyncOptionIgnoreDmlTriggers> 
     <SyncOptionIgnoreInsteadOfTriggers>False</SyncOptionIgnoreInsteadOfTriggers>
     <SyncOptionIgnoreBindings>False</SyncOptionIgnoreBindings>
@@ -498,6 +498,6 @@ Static Data;
     <None Include="Migrations\1.0.1\007_Rename_dimDate_to_Calendar.sql" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\130\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
+    <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>
 </Project>

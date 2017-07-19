@@ -51,8 +51,6 @@
 , DuplicateCount int not null constraint DF_stg_OrderShippedNotInvoiced_DuplicateCount default (1)
 -----------------------------------------------------------------------------------------------------------------------
 , constraint PK_stg_OrderShippedNotInvoiced primary key clustered (OrderShippedNotInvoicedKey)
-
-, constraint AK_stg_OrderShippedNotInvoiced_UniqueifiedBusinessKey unique nonclustered (SYSTEM_ID, ORDER_NUMBER, ORDER_LINE_NUMBER, SHIPPING_DOCUMENT, Uniqueifier)
 , constraint AK_stg_OrderShippedNotInvoiced_REC_ID unique nonclustered (REC_ID)
 , constraint CK_stg_OrderShippedNotInvoiced_IsDeleted check (IsDeleted = 'Y' or IsDeleted = 'N')
 ) on [default] ;

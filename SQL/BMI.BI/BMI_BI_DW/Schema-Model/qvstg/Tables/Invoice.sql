@@ -58,7 +58,8 @@ CREATE TABLE [qvstg].[Invoice]
 [BonusShareAmount] [decimal] (15, 4) NULL,
 [StandardCost] [decimal] (15, 4) NULL,
 [StandardFreight] [decimal] (15, 4) NULL,
-[InvoiceQuantityUnitOfMeasureConformed] [varchar] (16) NOT NULL CONSTRAINT [DF_qvstg_Invoice_InvoiceQuantityUnitOfMeasureConformed] DEFAULT ('')
+[InvoiceQuantityUnitOfMeasureConformed] [varchar] (16) NOT NULL CONSTRAINT [DF_qvstg_Invoice_InvoiceQuantityUnitOfMeasureConformed] DEFAULT (''),
+[InvoiceQuantityConformed] [decimal] (12, 2) NULL
 )
 GO
 ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [CK_qvstg_Invoice_IsDeleted] CHECK (([IsDeleted]='Y' OR [IsDeleted]='N'))

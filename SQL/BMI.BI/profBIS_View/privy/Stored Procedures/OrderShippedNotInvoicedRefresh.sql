@@ -29,6 +29,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		14-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+002		14-JUL-2017		GML		BSR-103	Revised Uniquifier logic to prefer most recently updated active duplicate
+------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -214,9 +216,9 @@ begin
 				, coalesce(ord.ORDER_NUMBER, '') as [ORDER_NUMBER]
 				, coalesce(ord.ORDER_LINE_NUMBER, '') as [ORDER_LINE_NUMBER]
 				, coalesce(ord.SHIPPING_DOCUMENT, '') as [SHIPPING_DOCUMENT]
-				, row_number() over (partition by ord.SYSTEM_ID, ord.ORDER_NUMBER, ord.ORDER_LINE_NUMBER, ord.SHIPPING_DOCUMENT order by ord.EXPECTED_INVOICE_DATE desc, ord.REC_ID) as [Uniqueifier]
-				, ord.EXPECTED_INVOICE_DATE
+				, coalesce(tgt.Uniqueifier, 1) as [Uniqueifier] -- assume no dupes on new records for now (we check properly later)
 				-----------------------------------------------------------------------------------------------------------------------
+				, ord.EXPECTED_INVOICE_DATE
 				, coalesce(ord.ORDER_TYPE, '') as [ORDER_TYPE]
 				, case coalesce(ord.ORDER_TYPE, '')
 					when '1' then 'TODO: Define Order Type (' + coalesce(ord.ORDER_TYPE, '') + ')'
@@ -260,49 +262,48 @@ begin
 				, ord.BONUS_SHARE_AMOUNT
 				-----------------------------------------------------------------------------------------------------------------------
 				--! Encapsulate ALL non-key columns into a hash value to speed up CDC checks during susbseqent loads
-				, convert(nvarchar(32), hashbytes('MD5'
-					, coalesce(convert(varchar(24), ord.EXPECTED_INVOICE_DATE, 120), 'EXPECTED_INVOICE_DATE')
-						+ coalesce(ord.ORDER_TYPE, 'ORDER_TYPE')
-						+ case coalesce(ord.ORDER_TYPE, '')
+				, privy.OrderShippedNotInvoicedDeltaHash
+					(
+					  coalesce(tgt.Uniqueifier, 1)
+					, ord.SYSTEM_ID
+					, ord.ORDER_NUMBER
+					, ord.ORDER_LINE_NUMBER
+					, ord.SHIPPING_DOCUMENT
+					, ord.EXPECTED_INVOICE_DATE
+					, ord.ORDER_TYPE
+					, case coalesce(ord.ORDER_TYPE, '')
 							when '1' then 'TODO: Define Order Type (' + coalesce(ord.ORDER_TYPE, '') + ')'
 							when '2' then 'TODO: Define Order Type (' + coalesce(ord.ORDER_TYPE, '') + ')'
 							when '' then 'Not Specified At Source'
 							else 'Lookup Not Found (' + coalesce(ord.ORDER_TYPE, '') + ')'
-						  end
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(ord.SITE_SOLD, 'SITE_SOLD')
-						+ coalesce(cast(ssite.SITE_ID as nvarchar(30)), 'SITE_ID') -- Don't need to collect SBU from this as per V_SA_INVOICE as we will expose SiteKey in the view later
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(ord.ITEM_NO, 'ITEM_NO')
-						+ coalesce(cast(coalesce(pCat.ITEM_CATEGORY_ID, @_UnmappedProductCategoryId) as varchar(30)), 'ITEM_CATEGORY_ID')
-						+ coalesce(cast(EnvPcat.ENV_CATEGORY_ID as nvarchar(30)), 'ENV_CATEGORY_ID')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(ord.SOLD_TO, 'SOLD_TO')
-						+ coalesce(ord.SHIP_TO, 'SHIP_TO')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(ord.SALESPERSON_ID, 'SALESPERSON_ID')
-						+ coalesce(ord.SALESPERSON_NAME, 'SALESPERSON_NAME')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(cast(ord.SHIPPED_QUANTITY as nvarchar(30)), 'SHIPPED_QUANTITY')
-						+ coalesce(ord.SHIPPED_UOM, 'SHIPPED_UOM') 
-						+ coalesce(cast(ord.STATISTIC_QUANTITY as nvarchar(30)), 'STATISTIC_QUANTITY')
-						+ coalesce( ord.STATISTIC_UOM, 'STATISTIC_UOM')
-						+ coalesce(cast(ord.QUANTITY as nvarchar(30)), 'QUANTITY')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(ord.UOM, 'UOM')
-						+ coalesce(lUom.HARMONIZED_UOM, 'HARMONIZED_UOM')
-						+ coalesce(cast(lUom.FACTOR as nvarchar(30)), 'FACTOR')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(cast(ord.SHIPPED_AMOUNT as nvarchar(30)), 'SHIPPED_AMOUNT')
-						+ coalesce(cast(ord.LOCAL_AMOUNT as nvarchar(30)), 'LOCAL_AMOUNT')
-						+ coalesce(cast(ord.GROUP_AMOUNT as nvarchar(30)), 'GROUP_AMOUNT')
-						+ coalesce(ord.SHIPPED_CURRENCY, 'SHIPPED_CURRENCY')
-						+ coalesce(ord.LOCAL_CURRENCY, 'LOCAL_CURRENCY')
-						-----------------------------------------------------------------------------------------------------------------------
-						+ coalesce(cast(ord.LINE_DISCOUNT_AMOUNT as nvarchar(30)), 'LINE_DISCOUNT_AMOUNT')
-						+ coalesce(cast(ord.ORDER_DISCOUNT_AMOUNT as nvarchar(30)), 'ORDER_DISCOUNT_AMOUNT')
-						+ coalesce(cast(ord.LINE_BONUS_AMOUNT as nvarchar(30)), 'LINE_BONUS_AMOUNT')
-						+ coalesce(cast(ord.BONUS_SHARE_AMOUNT as nvarchar(30)), 'BONUS_SHARE_AMOUNT')), 2) as [EtlDeltaHash]
+						  end -- OrderTypeName
+					, ord.SITE_SOLD 
+					, ssite.SITE_ID-- Don't need to collect SBU from this as per V_SA_ORDER_BACKLOG as we will expose SiteKey in the view later
+					, ord.ITEM_NO
+					, coalesce(pCat.ITEM_CATEGORY_ID, @_UnmappedProductCategoryId)
+					, EnvPcat.ENV_CATEGORY_ID
+					, ord.SOLD_TO
+					, ord.SHIP_TO
+					, ord.SALESPERSON_ID
+					, ord.SALESPERSON_NAME
+					, ord.SHIPPED_QUANTITY
+					, ord.SHIPPED_UOM
+					, ord.STATISTIC_QUANTITY
+					, ord.STATISTIC_UOM
+					, ord.QUANTITY
+					, ord.UOM
+					, lUom.HARMONIZED_UOM
+					, lUom.FACTOR
+					, ord.SHIPPED_AMOUNT
+					, ord.LOCAL_AMOUNT
+					, ord.GROUP_AMOUNT
+					, ord.SHIPPED_CURRENCY
+					, ord.LOCAL_CURRENCY
+					, ord.LINE_DISCOUNT_AMOUNT
+					, ord.ORDER_DISCOUNT_AMOUNT
+					, ord.LINE_BONUS_AMOUNT
+					, ord.BONUS_SHARE_AMOUNT
+					) as [EtlDeltaHash]
 				---------------------------------------------------------------------------------------------------
 			from
 				[$(Icopal_profBIS)].dbo.SA_ORDER_SNI as ord
@@ -326,6 +327,8 @@ begin
 			left outer join [$(Icopal_profBIS)].dbo.SA_LINK_CUSTOMER as lcc 
 				on lcc.SYSTEM_ID = ord.SYSTEM_ID
 				and lcc.CUSTOMER_NO = ord.SHIP_TO
+			left join stg.OrderShippedNotInvoiced as tgt
+				on tgt.REC_ID = ord.REC_ID
 			where
 					ord.EXPECTED_INVOICE_DATE between @_DataCaptureStart and @_DataCaptureEnd
 				--! Replicate all the filters used in Icopal_profBIS.dbo.V_SA_INVOICE (except date)
@@ -336,11 +339,7 @@ begin
 		)
 		merge into stg.OrderShippedNotInvoiced as tgt
 		using sourceCte as src
-			on src.SYSTEM_ID = tgt.SYSTEM_ID
-			and src.ORDER_NUMBER collate SQL_Latin1_General_CP1_CI_AS = tgt.ORDER_NUMBER collate SQL_Latin1_General_CP1_CI_AS
-			and src.ORDER_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS = tgt.ORDER_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
-			and src.SHIPPING_DOCUMENT collate SQL_Latin1_General_CP1_CI_AS = tgt.SHIPPING_DOCUMENT collate SQL_Latin1_General_CP1_CI_AS
-			and src.Uniqueifier = tgt.Uniqueifier
+			on src.REC_ID = tgt.REC_ID
 		when not matched by target
 			then insert
 			(  
@@ -434,13 +433,16 @@ begin
 			, src.LINE_BONUS_AMOUNT
 			, src.BONUS_SHARE_AMOUNT
 			)
+		--! If any value has changed or a previously soft-deleted record re-appears then update
 		when matched and tgt.EtlDeltaHash <> src.EtlDeltaHash or tgt.IsDeleted = 'Y'
 			then update set
 					  tgt.EtlDeltaHash = src.EtlDeltaHash
 					, tgt.EtlUpdatedOn = @LoadStart
 					, tgt.EtlUpdatedBy = @_FunctionName
 					, tgt.IsDeleted = 'N'
-					, tgt.REC_ID = src.REC_ID
+					, tgt.ORDER_NUMBER = src.ORDER_NUMBER
+					, tgt.ORDER_LINE_NUMBER = src.ORDER_LINE_NUMBER
+					, tgt.SHIPPING_DOCUMENT = src.SHIPPING_DOCUMENT
 					, tgt.EXPECTED_INVOICE_DATE = src.EXPECTED_INVOICE_DATE
 					, tgt.ORDER_TYPE = src.ORDER_TYPE
 					, tgt.OrderTypeName = src.OrderTypeName
@@ -470,7 +472,8 @@ begin
 					, tgt.ORDER_DISCOUNT_AMOUNT = src.ORDER_DISCOUNT_AMOUNT
 					, tgt.LINE_BONUS_AMOUNT = src.LINE_BONUS_AMOUNT
 					, tgt.BONUS_SHARE_AMOUNT = src.BONUS_SHARE_AMOUNT
-		when not matched by source and (tgt.EXPECTED_INVOICE_DATE between @_DataCaptureStart and @_DataCaptureEnd) and tgt.OrderShippedNotInvoicedKey >= 100
+		--! If the REC_ID no longer exists at source, the Invoice date is within the capture range and the staging row isn't already inactive then soft-delete
+		when not matched by source and (tgt.EXPECTED_INVOICE_DATE between @_DataCaptureStart and @_DataCaptureEnd) and tgt.OrderShippedNotInvoicedKey >= 100 and tgt.IsDeleted = 'N'
 			then update set
 					  tgt.IsDeleted = 'Y'
 					, tgt.EtlDeletedOn = @LoadStart
@@ -488,6 +491,139 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		--!
+		--! We need to be able to uniqueify transactions that appear duplicated within
+		--! QlikView and (new requirement) this needs to be based on last-change-wins
+		--! where possible.  Because the QlikView source tables have no ETL audit columns
+		--! the closest we can come to this is to pick out recent changes within our own
+		--! process - so we have to rank the dupes in a separate step (by ETL Update time)
+		--!
+		set @_Step = 'Identify Unique Orders'
+		set @_StepStartTime = getdate();
+		declare @_UniquifierRowsAffected int;
+		--!
+		--! Start by finding all duplicates based on SYSTEM_ID, ORDER_NUMBER and ORDER_LINE_NUMBER
+		--!
+		;with dupesCte
+		as
+		(
+			select
+				  SYSTEM_ID
+				, ORDER_NUMBER
+				, ORDER_LINE_NUMBER
+				, SHIPPING_DOCUMENT
+				, count(*) as [DupeCount]
+			from
+				stg.OrderShippedNotInvoiced
+			group by
+				  SYSTEM_ID
+				, ORDER_NUMBER
+				, ORDER_LINE_NUMBER
+				, SHIPPING_DOCUMENT
+			having count(*) > 1
+		)
+		, uniqueifiedCte
+		as
+		(
+			select
+				  d.SYSTEM_ID
+				, d.ORDER_NUMBER
+				, d.ORDER_LINE_NUMBER
+				, d.SHIPPING_DOCUMENT
+				, d.DupeCount
+				, osni.OrderShippedNotInvoicedKey
+				, osni.REC_ID
+				, osni.EXPECTED_INVOICE_DATE
+				, osni.EtlUpdatedOn
+				, row_number() over (partition by d.SYSTEM_ID, d.ORDER_NUMBER, d.ORDER_LINE_NUMBER, d.SHIPPING_DOCUMENT order by osni.IsDeleted asc, osni.EXPECTED_INVOICE_DATE desc, osni.EtlUpdatedOn desc, osni.REC_ID) as [Uniqueifier]
+			from
+				dupesCte as d
+			inner join stg.OrderShippedNotInvoiced as osni
+				on osni.SYSTEM_ID = d.SYSTEM_ID
+				and osni.ORDER_NUMBER = d.ORDER_NUMBER
+				and osni.ORDER_LINE_NUMBER = d.ORDER_LINE_NUMBER
+				and osni.SHIPPING_DOCUMENT = d.SHIPPING_DOCUMENT
+		)
+		, finalCte
+		as
+		(
+			select
+				  u.OrderShippedNotInvoicedKey
+				, u.Uniqueifier
+				, u.SYSTEM_ID
+				, u.ORDER_NUMBER
+				, u.ORDER_LINE_NUMBER
+				, u.SHIPPING_DOCUMENT
+				, u.EXPECTED_INVOICE_DATE
+				, u.DupeCount
+				, privy.OrderShippedNotInvoicedDeltaHash
+					(
+					  u.Uniqueifier
+					, ord.SYSTEM_ID
+					, ord.ORDER_NUMBER
+					, ord.ORDER_LINE_NUMBER
+					, ord.SHIPPING_DOCUMENT
+					, ord.EXPECTED_INVOICE_DATE
+					, ord.ORDER_TYPE
+					, ord.OrderTypeName
+					, ord.LOCAL_SITE_SOLD
+					, ord.SITE_ID
+					, ord.ITEM_NO
+					, ord.ITEM_CATEGORY_ID
+					, ord.ENV_CATEGORY_ID
+					, ord.SOLD_TO_CUSTOMER_NO
+					, ord.SHIP_TO_CUSTOMER_NO
+					, ord.SALESPERSON_ID
+					, ord.SALESPERSON_NAME
+					, ord.SHIPPED_QUANTITY
+					, ord.SHIPPED_UOM
+					, ord.STATISTIC_QUANTITY
+					, ord.STATISTIC_UOM
+					, ord.QUANTITY
+					, ord.LOCAL_UOM
+					, ord.LOCAL_UOM_HARMONIZED
+					, ord.LOCAL_UOM_FACTOR
+					, ord.SHIPPED_AMOUNT
+					, ord.LOCAL_AMOUNT
+					, ord.GROUP_AMOUNT
+					, ord.SHIPPED_CURRENCY
+					, ord.LOCAL_CURRENCY
+					, ord.LINE_DISCOUNT_AMOUNT
+					, ord.ORDER_DISCOUNT_AMOUNT
+					, ord.LINE_BONUS_AMOUNT
+					, ord.BONUS_SHARE_AMOUNT
+					) as [EtlDeltaHash]
+			from
+				uniqueifiedCte as u
+			inner join stg.OrderShippedNotInvoiced as ord
+				on ord.OrderShippedNotInvoicedKey = u.OrderShippedNotInvoicedKey
+		)
+		update
+			tgt
+		set
+			  tgt.Uniqueifier = src.Uniqueifier
+			, tgt.DuplicateCount = src.DupeCount
+			, tgt.EtlDeltaHash = src.EtlDeltaHash
+			, tgt.EtlUpdatedBy = @_FunctionName
+			--! As we use EtlUpdatedOn to find recently updated duplicates only set this for the preferred record
+			, tgt.EtlUpdatedOn = case when src.Uniqueifier = 1 then @LoadStart else tgt.EtlUpdatedOn end
+		from
+			stg.OrderShippedNotInvoiced as tgt
+		inner join finalCte as src
+			on src.OrderShippedNotInvoicedKey = tgt.OrderShippedNotInvoicedKey
+		where
+				tgt.Uniqueifier <> src.Uniqueifier
+			or tgt.DuplicateCount <> src.DupeCount
+			or tgt.EtlDeltaHash <> src.EtlDeltaHash
+
+		set @_UniquifierRowsAffected = @@rowcount;
+		set @_ProgressMessage = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@_UniquifierRowsAffected as varchar(16)), 'NULL') + ' row(s)'
+				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)
+		set @_ProgressLog += coalesce(char(10) + @_ProgressMessage, '');
+
+		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
+		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 		--!
 		--! Only commit transactions started within this procedure

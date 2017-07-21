@@ -123,6 +123,8 @@ values (0, '', '', '', 0, 0)
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
 --	, (1	, 'DEV'		, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
 --	, (1	, 'PROD'	, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
 	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
@@ -178,6 +180,9 @@ values ('', '')
 	, ('greg.lucas@icopal.com'					, 'SqlDevelopers')
 	, ('greg.lucas@icopal.com'					, 'BatchManagers')
 	, ('greg.lucas@icopal.com'					, 'CodeReviewers')
+	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
+	, ('razia.nazir@icopal.com'					, 'BatchManagers')
+	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
 
 	--! ETL Developers
 	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')

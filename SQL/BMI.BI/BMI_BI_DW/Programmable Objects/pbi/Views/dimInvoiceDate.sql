@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[pbi].[dimInvoiceDate]') IS NOT NULL
+IF OBJECT_ID('[pbi].[dimInvoiceDate]') IS NOT NULL
 	DROP VIEW [pbi].[dimInvoiceDate];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create view [pbi].[dimInvoiceDate]
+CREATE view [pbi].[dimInvoiceDate]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -66,5 +66,5 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, WorkDaysInFiscalPeriodTotal as [InvoiceDateWorkDaysInFiscalPeriodTotal]
 		, WorkDaysInFiscalPeriodToDate as [InvoiceDateWorkDaysInFiscalPeriodToDate]
 	from
-		dbo.dimDate
+		dbo.Calendar
 GO

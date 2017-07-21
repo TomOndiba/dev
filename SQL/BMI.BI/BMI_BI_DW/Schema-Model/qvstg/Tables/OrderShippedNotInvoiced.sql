@@ -49,7 +49,5 @@ ALTER TABLE [qvstg].[OrderShippedNotInvoiced] ADD CONSTRAINT [CK_qvstg_OrderShip
 GO
 ALTER TABLE [qvstg].[OrderShippedNotInvoiced] ADD CONSTRAINT [PK_qvstg_OrderShippedNotInvoiced] PRIMARY KEY CLUSTERED  ([OrderShippedNotInvoicedKey])
 GO
-ALTER TABLE [qvstg].[OrderShippedNotInvoiced] ADD CONSTRAINT [AK_qvstg_OrderShippedNotInvoiced_UniqueifiedBusinessKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [OrderNumber], [NativeOrderLineNumber], [NativeShippingDocumentKey])
-GO
 ALTER TABLE [qvstg].[OrderShippedNotInvoiced] ADD CONSTRAINT [AK_qvstg_OrderShippedNotInvoiced_DataSourceKey_QlikViewOrderShippedNotInvoicedKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [QlikViewOrderShippedNotInvoicedKey])
 GO

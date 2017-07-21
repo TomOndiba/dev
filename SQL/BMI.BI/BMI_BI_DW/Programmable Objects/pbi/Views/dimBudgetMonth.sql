@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[pbi].[dimBudgetMonth]') IS NOT NULL
+IF OBJECT_ID('[pbi].[dimBudgetMonth]') IS NOT NULL
 	DROP VIEW [pbi].[dimBudgetMonth];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create view [pbi].[dimBudgetMonth]
+CREATE view [pbi].[dimBudgetMonth]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -44,7 +44,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, FiscalYearQuarter as [BudgetFiscalYearQuarter]
 		, WorkDaysInFiscalPeriodTotal as [BudgetWorkDaysInFiscalPeriodTotal]
 	from
-		dbo.dimDate
+		dbo.Calendar
 	group by
 		  FiscalPeriod
 		, FiscalQuarter

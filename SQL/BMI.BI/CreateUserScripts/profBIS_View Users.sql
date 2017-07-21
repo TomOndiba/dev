@@ -11,6 +11,8 @@ go
 --if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukvmi') drop user [GROUPICOPAL\ukvmi];
 --if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjcz') drop user [GROUPICOPAL\ukjcz];
 --if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjbo') drop user [GROUPICOPAL\ukjbo];
+--if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uktma') drop user [GROUPICOPAL\uktma];
+--if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukrna') drop user [GROUPICOPAL\ukrna];
 --go
 
 if not exists (select 1 from dbo.sysusers where name = 'BmiBiEtlExtractor')
@@ -45,5 +47,17 @@ if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjbo')
 	create user [GROUPICOPAL\ukjbo] for login [GROUPICOPAL\ukjbo] with default_schema = [dbo];
 go
 exec sp_addrolemember N'EtlDevelopers', N'GROUPICOPAL\ukjbo' ;
+go
+if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uktma')
+	create user [GROUPICOPAL\uktma] for login [GROUPICOPAL\uktma] with default_schema = [dbo];
+go
+exec sp_addrolemember N'EtlDevelopers', N'GROUPICOPAL\uktma' ;
+go
+if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukrna')
+	create user [GROUPICOPAL\ukrna] for login [GROUPICOPAL\ukrna] with default_schema = [dbo];
+go
+exec sp_addrolemember N'DeploymentManagers', N'GROUPICOPAL\ukrna' ;
+exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\ukrna' ;
+exec sp_addrolemember N'db_owner', N'GROUPICOPAL\ukrna' ;
 go
 

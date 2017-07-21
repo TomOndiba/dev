@@ -19,7 +19,7 @@
 , INVOICE_LINE_NUMBER nvarchar(20) not null
 , ORDER_NUMBER nvarchar(20) not null
 , ORDER_LINE_NUMBER nvarchar(20) not null
-, Uniqueifier bigint not null
+, Uniqueifier bigint not null constraint DF_stg_Invoice_Uniqueifier default (1)
 -----------------------------------------------------------
 , INVOICE_TYPE nvarchar(1) not null
 , InvoiceTypeName nvarchar(29) not null
@@ -59,22 +59,16 @@
 , BONUS_SHARE_AMOUNT decimal(15, 4) null
 , STD_COST decimal(15, 4) null
 , STD_FREIGHT decimal(15, 4) null
---, MATERIAL_CHAR1 nvarchar(50) not null
---, MATERIAL_CHAR1_VALUE decimal(12, 2) null
---, MATERIAL_CHAR2 nvarchar(50) not null
---, MATERIAL_CHAR2_VALUE decimal(12, 2) null
---, MATERIAL_CHAR3 nvarchar(50) not null
---, MATERIAL_CHAR3_VALUE decimal(12, 2) null
---, MATERIAL_CHAR4 nvarchar(50) not null
---, MATERIAL_CHAR4_VALUE decimal(12, 2) null
---, MATERIAL_CHAR5 nvarchar(50) not null
---, MATERIAL_CHAR5_VALUE decimal(12, 2) null
+, DuplicateCount int not null constraint DF_stg_Invoice_DuplicateCount default (1)
 -----------------------------------------------------------------------------------------------------------------------
 , constraint PK_stg_Invoice primary key clustered (InvoiceKey)
-, constraint AK_stg_Invoice_UniqueifiedBusinessKey unique nonclustered (SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER, Uniqueifier)
+, constraint AK_stg_Invoice_REC_ID unique nonclustered (REC_ID)
 , constraint CK_stg_Invoice_IsDeleted check (IsDeleted = 'Y' or IsDeleted = 'N')
 ) on [default] ;
 go
 
 create nonclustered index NCI_stg_Invoice_ExtractFilter on stg.Invoice (InvoiceKey, EtlDeltaHash, IsDeleted, Uniqueifier)
+go
+create nonclustered index NCI_stg_Invoice_ExpectedUniqueKeys on stg.Invoice
+	(SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER, INVOICE_DATE, EtlUpdatedOn)
 go

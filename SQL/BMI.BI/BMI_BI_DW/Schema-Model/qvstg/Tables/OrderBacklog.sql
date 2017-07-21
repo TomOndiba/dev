@@ -48,7 +48,5 @@ ALTER TABLE [qvstg].[OrderBacklog] ADD CONSTRAINT [CK_qvstg_OrderBacklog_IsDelet
 GO
 ALTER TABLE [qvstg].[OrderBacklog] ADD CONSTRAINT [PK_qvstg_OrderBacklog] PRIMARY KEY CLUSTERED  ([OrderBacklogKey])
 GO
-ALTER TABLE [qvstg].[OrderBacklog] ADD CONSTRAINT [AK_qvstg_OrderBacklog_UniqueifiedBusinessKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [OrderNumber], [NativeOrderLineNumber])
-GO
 ALTER TABLE [qvstg].[OrderBacklog] ADD CONSTRAINT [AK_qvstg_OrderBacklog_DataSourceKey_QlikViewOrderBacklogKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [QlikViewOrderBacklogKey])
 GO

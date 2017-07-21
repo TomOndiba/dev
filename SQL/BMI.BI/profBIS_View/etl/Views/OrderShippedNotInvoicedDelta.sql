@@ -1,4 +1,4 @@
-﻿create view [etl].[OrderShippedNotInvoicedDelta]
+﻿CREATE view [etl].[OrderShippedNotInvoicedDelta]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -33,7 +33,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--! Some standard entities (N/S, N/F, N/I etc) already have the correct DataSourceKey
 		, case when ord.SYSTEM_ID = 100000 then ord.SYSTEM_ID else ord.SYSTEM_ID + 100100 end			as [DataSourceKey]
 		, cast(ord.REC_ID as nvarchar(50))																as [QlikViewOrderShippedNotInvoicedKey]
-		, cast(1 as int)																				as [LineCount]
+		, ord.DuplicateCount																			as [LineCount]
 		-----------------------------------------------------------------------------------------------------------------------
 		, ord.ORDER_NUMBER																				as [OrderNumber]
 		, case when isnumeric(ord.ORDER_LINE_NUMBER) = 1
@@ -103,13 +103,21 @@ Version	ChangeDate		Author	BugRef	Narrative
 		on shipc.NativeCustomerKey = ord.SHIP_TO_CUSTOMER_NO
 		and shipc.QlikViewSourceSystemId = ord.SYSTEM_ID
 	where
-		--! Exclude any duplicates based on SYSTEM_ID, ORDER_NUMBER and ORDER_LINE_NUMBER
-			ord.Uniqueifier = 1
-		and
 			(
-					ctrl.OrderShippedNotInvoicedKey is null --! New Orders (not yet added to control)
-				or ctrl.PreviousDeltaHash <> ord.EtlDeltaHash -- Existing Orders that have been updated
-				or ctrl.IsDeleted <> ord.IsDeleted --! Orders that have been soft-deleted or (possibly) re-activated
+				--! Exclude any duplicates based on SYSTEM_ID, ORDER_NUMBER,  ORDER_LINE_NUMBER and SHIPPING_DOCUMENT
+					ord.Uniqueifier = 1
+				and
+					(
+							ctrl.OrderShippedNotInvoicedKey is null --! New Orders (not yet added to control)
+						or ctrl.PreviousDeltaHash <> ord.EtlDeltaHash -- Existing Orders that have been updated
+					)
+			)
+			--! Get any records that have been deleted in the last 5 days
+		or
+			(
+					ctrl.LastTouchedOn < dateadd(day, -1, getdate())
+				and
+					ctrl.IsDeleted <> ord.IsDeleted --! Orders that have been soft-deleted or (possibly) re-activated
 			)
 go
 execute sp_addextendedproperty @name = N'MS_Description'

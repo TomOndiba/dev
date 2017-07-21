@@ -17,7 +17,7 @@
 , ORDER_NUMBER nvarchar(50) not null
 , ORDER_LINE_NUMBER nvarchar(50) not null
 , SHIPPING_DOCUMENT nvarchar(50) not null
-, Uniqueifier bigint not null
+, Uniqueifier bigint not null constraint DF_stg_OrderShippedNotInvoiced_Uniqueifier default (1)
 -----------------------------------------------------------
 , EXPECTED_INVOICE_DATE datetime not null
 , ORDER_TYPE nvarchar(1) not null
@@ -48,10 +48,16 @@
 , ORDER_DISCOUNT_AMOUNT decimal(15, 4) null
 , LINE_BONUS_AMOUNT decimal(15, 4) null
 , BONUS_SHARE_AMOUNT decimal(15, 4) null
+, DuplicateCount int not null constraint DF_stg_OrderShippedNotInvoiced_DuplicateCount default (1)
 -----------------------------------------------------------------------------------------------------------------------
 , constraint PK_stg_OrderShippedNotInvoiced primary key clustered (OrderShippedNotInvoicedKey)
-, constraint AK_stg_OrderShippedNotInvoiced_UniqueifiedBusinessKey unique nonclustered (SYSTEM_ID, ORDER_NUMBER, ORDER_LINE_NUMBER, SHIPPING_DOCUMENT, Uniqueifier)
 , constraint AK_stg_OrderShippedNotInvoiced_REC_ID unique nonclustered (REC_ID)
 , constraint CK_stg_OrderShippedNotInvoiced_IsDeleted check (IsDeleted = 'Y' or IsDeleted = 'N')
 ) on [default] ;
+go
+
+create nonclustered index NCI_stg_OrderShippedNotInvoiced_ExtractFilter on stg.OrderShippedNotInvoiced (OrderShippedNotInvoicedKey, EtlDeltaHash, IsDeleted, Uniqueifier)
+go
+create nonclustered index NCI_stg_OrderShippedNotInvoiced_ExpectedUniqueKeys on stg.OrderShippedNotInvoiced
+	(SYSTEM_ID, ORDER_NUMBER, ORDER_LINE_NUMBER, SHIPPING_DOCUMENT, Uniqueifier)
 go

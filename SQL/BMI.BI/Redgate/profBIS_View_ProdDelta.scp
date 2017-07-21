@@ -10,8 +10,8 @@ Version:12.3.3.4490-->
     <ServerName>Scripts</ServerName>
   </DataSource1>
   <DataSource2 version="3" type="LiveDatabaseSource">
-    <ServerName>.</ServerName>
-    <DatabaseName>target</DatabaseName>
+    <ServerName>DKSQL1</ServerName>
+    <DatabaseName>profBIS_View</DatabaseName>
     <Username />
     <SavePassword>False</SavePassword>
     <Password />
@@ -19,8 +19,8 @@ Version:12.3.3.4490-->
     <MigrationsFolderLocation />
     <IntegratedSecurity>True</IntegratedSecurity>
   </DataSource2>
-  <LastCompared>07/09/2017 12:29:54</LastCompared>
-  <Options>DecryptPost2kEncryptedObjects, IgnoreDatabaseAndServerName, IgnoreFileGroups, IgnoreFillFactor, IgnoreUserProperties, IgnoreWhiteSpace, IgnoreWithElementOrder</Options>
+  <LastCompared>07/19/2017 09:19:58</LastCompared>
+  <Options>DecryptPost2kEncryptedObjects, IgnoreCollations, IgnoreDatabaseAndServerName, IgnoreFileGroups, IgnoreFillFactor, IgnoreTSQLT, IgnoreUserProperties, IgnoreUsers, IgnoreWhiteSpace, IgnoreWithElementOrder</Options>
   <InRecycleBin>False</InRecycleBin>
   <Direction>0</Direction>
   <ProjectFilter version="1" type="DifferenceFilter">
@@ -173,14 +173,14 @@ Version:12.3.3.4490-->
       <value type="string">ZABiAG8A</value>
       <value type="string">UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA</value>
     </Schemas>
-    <bABvAGcANABQAHIAaQB2AGEAdABlAA__>sNJYxGMVgtaglgJbx2zBmAIAARTvEdQzBYAmqM26d4uhBK0CAAGXCQlidWJ/4UfXHOsMOA3MAgABK4czCvGh4Qaijq33qfTD8AIAAbCcv8ZLTE0iFqzVAZt3DfICAAHD+WIwyl+IO3737XU+uZmXAwAB</bABvAGcANABQAHIAaQB2AGEAdABlAA__>
-    <cAByAGkAdgB5AA__>Ra+V/qv0fGSWajbnzjyaWAIAAe1arBlxzZZ8r+H1aC1ekTYDAAHB+9nyzBLe+B0F0ZDso41lAwABbiR2OwWu4ugTwJkakwtiBgMAAbeRE2SdDaiHhlBca94YjAYDAAEWAnHwWCT1OOkaV/uaoGZgAwAByYKhdU1ZXnpeIhIAzArwAgMAAU6/PR9uOvgYo2zeF+bNNzIDAAFx86on8hVsuRnxjSB8duc2AwABFCnlgFwO7zWjmyEf4nJOGAMAAfb6I3u+YWNGv2GD5NSfo8EDAAHpbwM/x04kBNJnYZsvmspxAwABg3wyIBSOLJwddpkiE9Lk3gMAAWQoboESJYiz6K8C6YdNECADAAH+NMn9AAXnuusXx+pv2RpIAwABFTi3TO2vd0XtOR98296AgwMAASCteXFgWMXiBBk7DD9jjy0DAAHcQVOffwAIL65l1X35A0xYAwABQ6NrgX4W6WIQXyqjC08q2QMAAWysJoYT2XO+Fyz4K6gziMgDAAF79Vqo6AWBLTqkRRMcavzuAwABgcYH4rV3J5UF2TZ9O+oQbAcAAQ__</cAByAGkAdgB5AA__>
-    <cwB0AGcA>t2o8vPuXAW5iICrA4Mmu4gIAAb+22l0lSBTXDx42kmr4eV8CAAEUV8bVe0Iombdxk/XarGjRAgABq1es7iD9BkY52Vz9EC3R0AIAAfarpXY0vIjrVnvNuKyhOw4CAAGweXCehui7gZK7Psr9pUepAgABI1HrtRmSsGs8Uc/9FNOE6AIAAR0mCnUeK0H6kstDPViWaEwCAAELvYiyTP7iEL/NXnkODyVGAgABdxUDPO0djwzl7h/lAM4vCwIAAb5YokxJyyl9ewbjSv/+7zoCAAGbvTWwXE/hT2nz5RP+mSu6AgABvZcaJP1Q0bjMkWmdbRDGSQIAAb+nKOu+T971KtV8KO4DjhACAAGLOfcFCPDSsEhKsS5JiF8KAgABUGGJiknjeJlcYMV1No3/dwIAAd7W1mUlIVORIHLDTV4AEhUCAAEt/dG/KjahoUcIfaEHy5ytAgABk/1ZDpADZ88SxphSIl2WOgIAAY7kFrhrun3ChFwYreB6HZkCAAE_</cwB0AGcA>
-    <ZQB0AGwA>N4b0kn9D0FKsGwQSTIG8+gMAATfwclbyfKTIiQpaVCkh3ssDAAG1NJdiMvBC+N91kxqakh3XBAABi/5swpXelE0nPGSNyxIaUQQAAfH/rZxb3sntn/gGvRfaWgkEAAG5SRc0ZOUEYNWFj8cJNEYABAABEY1JUpjaPZCLzo08A1tY4AQAAfAp8ca9j5NEmafxyzEq32wEAAEj7QnLacM8vrPqYyWknA4oBAABJjx3GVucLoBglpo+94UwvgQAASf14CI0gJKNg5tpBnrfx5gEAAE_</ZQB0AGwA>
-    <bABvAGcANABVAHQAaQBsAHMA>3MLobuuwijZxJpHgrubJFgMAARo5wstsRylwbyu6LmNF7dYDAAEhJdsfGP8FlXYRl0rlAqquAwAB+rnE73+50ze+tYJ9tcscvwMAAdV2rhEGBCvAQcijtZYN4oMDAAE_</bABvAGcANABVAHQAaQBsAHMA>
-    <bABvAGcANAA_>fo0gcYmB19PqO6fT9cSmgAMAAXUV0tzzeG2TeMlFRDNHxfwDAAHEp1Cqdm0dRmQ8kc5fdKZwBwABaubmwE12hbZOjw/D+rR1swcAAQ__</bABvAGcANAA_>
-    <ZABiAG8A>TDpKTxsK4h/IHQ9XnR2FNQQAAQ__</ZABiAG8A>
-    <UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>/l92L8blloZZyVw7HOA0AQgAAQ2nDm2cnIizmgFHdQWGtwEIAAF4FJtFBsEm3jVKaMfN/3zsCAABlVbFAuLuxYbVMcfu23tYlggAAVeJb9XtOuyPGigSx1rKtEkIAgHlENJgnrE0Z8Y2ZZ6qt2/hCAIB+iV8ix6cmfx/Votn8tqazAgCAeu4iLCsIdiPKRF3yuE+ExkbAAFUyqQZaX6Vq8L0l5A9E3huGwABeJJ96cXjimBMbIES5ASLUxsAAZErIdZwFtijS+Y9b57gPiMbAAFrYUfYiOrLU2rJTXJksbFeGwABg1i4t8QNHDOZ/QO2snWwuRsAAQ__</UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>
+    <bABvAGcANABQAHIAaQB2AGEAdABlAA__ />
+    <cAByAGkAdgB5AA__>wfvZ8swS3vgdBdGQ7KONZQMCAG4kdjsFruLoE8CZGpMLYgYDAgAWAnHwWCT1OOkaV/uaoGZgAwIATr89H246+BijbN4X5s03MgMCARQp5YBcDu81o5shH+JyThgDAgHpbwM/x04kBNJnYZsvmspxAwIBZChugRIliLPorwLph00QIAMCABU4t0ztr3dF7TkffNvegIMDAgBDo2uBfhbpYhBfKqMLTyrZAwIAe/VaqOgFgS06pEUTHGr87gMCAJsbNVJmqzgEtkE/CM2wxoMHAgFzd2IQqTddF3T2eT+NVzqoBwIB0bF1utz7zsnGX53oDKKIBwcCAQ__</cAByAGkAdgB5AA__>
+    <cwB0AGcA>sHlwnobou4GSuz7K/aVHqQICASNR67UZkrBrPFHP/RTThOgCAgELvYiyTP7iEL/NXnkODyVGAgIBvliiTEnLKX17BuNK//7vOgICAQ__</cwB0AGcA>
+    <ZQB0AGwA>8f+tnFveye2f+Aa9F9paCQQCAblJFzRk5QRg1YWPxwk0RgAEAgERjUlSmNo9kIvOjTwDW1jgBAIB</ZQB0AGwA>
+    <bABvAGcANABVAHQAaQBsAHMA />
+    <bABvAGcANAA_ />
+    <ZABiAG8A>TDpKTxsK4h/IHQ9XnR2FNQQCAA__</ZABiAG8A>
+    <UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>4P0TRUy2JTh9hkHXK1jddgoBAGxVsYz4Hw9g109ngFQtArUKAQDDpzONbWv31u0uJ2UOCCIFCgEAvpZFuAXUYtJxcAcJcayr3QoBABVZagCX2QFEAi8M+UthwbUKAQC0Y2UPIPTfimlQiQyrHqxzCgEAHUqgxjjVGzUob2U+a4ZK7QoBAI96nwQwdTWZmIaeach12JAKAQABZ6SLrdhtVK3LC6+DwHX2CgEAjLfk60izUcaf2p5p2RUP0AoBAC/PW18XdAVnlcDglGiDJskKAQCL6u1meWb3jZqgMK05rLLJCgEAkdUfl3px14EzDHrOYTAIaQoBAFDzyDagkUT4wo8qEOyUZx8KAQAICC2iTrrBTIqVJ1AB/zBZCgEAEuhRS1ey8P3oarhMWTJffAoBAA__</UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>
     <Grouping type="ListByte" version="2">
       <value type="Byte">0</value>
       <value type="Byte">0</value>

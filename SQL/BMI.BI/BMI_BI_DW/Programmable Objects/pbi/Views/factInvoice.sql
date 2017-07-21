@@ -64,8 +64,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, i.PaymentTermKey
 		, i.LocalPaymentTerm
 		, i.LocalPaymentTermText
-		, i.InvoiceQuantityValue
-		, i.InvoiceQuantityUnitOfMeasure
+		, coalesce(i.InvoiceQuantityConformed, i.InvoiceQuantityValue) as [InvoiceQuantityValue]
+		, coalesce(i.InvoiceQuantityUnitOfMeasureConformed, i.InvoiceQuantityUnitOfMeasure) as [InvoiceQuantityUnitOfMeasure]
 		, i.StatisticQuantityValue
 		, i.StatisticQuantityUnitOfMeasure
 		, i.Quantity

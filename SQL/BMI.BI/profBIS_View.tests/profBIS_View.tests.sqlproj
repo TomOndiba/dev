@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>profBIS_View.tests</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{6c2681d7-22b9-4842-aa33-814d32d0b40f}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>profBIS_View.tests</RootNamespace>
+    <AssemblyName>profBIS_View.tests</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchema</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SuppressTSqlWarnings>71502,71562</SuppressTSqlWarnings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="tSQLt\" />
+    <Folder Include="Test Classes" />
+    <Folder Include="privy-InvoiceRefreshTests\" />
+    <Folder Include="CLR" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="tSQLt\Private_RenamedObjectLog.sql" />
+    <Build Include="tSQLt\CaptureOutputLog.sql" />
+    <Build Include="tSQLt\Private_Configurations.sql" />
+    <Build Include="tSQLt\Private_ExpectException.sql" />
+    <Build Include="tSQLt\Run_LastExecution.sql" />
+    <Build Include="tSQLt\TestMessage.sql" />
+    <Build Include="tSQLt\TestResult.sql" />
+    <Build Include="tSQLt\Private_AssertEqualsTableSchema_Expected.sql" />
+    <Build Include="tSQLt\Private_AssertEqualsTableSchema_Actual.sql" />
+    <Build Include="tSQLt\Private_NullCellTable.sql" />
+    <Build Include="tSQLt\Private_SysIndexes.sql" />
+    <Build Include="tSQLt\Tests.sql" />
+    <Build Include="tSQLt\TestClasses.sql" />
+    <Build Include="tSQLt\Private_SysTypes.sql" />
+    <Build Include="tSQLt\Private_IsTestClass.sql" />
+    <Build Include="tSQLt\Private_GetSchemaId.sql" />
+    <Build Include="tSQLt\Private_GetQuotedFullName.sql" />
+    <Build Include="tSQLt\Private_GetOriginalTableName.sql" />
+    <Build Include="tSQLt\Private_GetCleanObjectName.sql" />
+    <Build Include="tSQLt\Private_GetCleanSchemaName.sql" />
+    <Build Include="tSQLt\Private_GetLastTestNameIfNotProvided.sql" />
+    <Build Include="tSQLt\GetTestResultFormatter.sql" />
+    <Build Include="tSQLt\Private_QuoteClassNameForNewTestClass.sql" />
+    <Build Include="tSQLt\Private_SqlVariantFormatter.sql" />
+    <Build Include="tSQLt\Private_GetCommaSeparatedColumnList.sql" />
+    <Build Include="tSQLt\Private_ResolveApplyConstraintParameters.sql" />
+    <Build Include="tSQLt\Private_FindConstraint.sql" />
+    <Build Include="tSQLt\Private_GetQuotedTableNameForConstraint.sql" />
+    <Build Include="tSQLt\Private_GetForeignKeyDefinition.sql" />
+    <Build Include="tSQLt\Private_GetForeignKeyRefColumns.sql" />
+    <Build Include="tSQLt\Private_GetForeignKeyParColumns.sql" />
+    <Build Include="tSQLt\Private_ScriptIndex.sql" />
+    <Build Include="tSQLt\Info.sql" />
+    <Build Include="tSQLt\Private_SqlVersion.sql" />
+    <Build Include="tSQLt\Private_GetConfiguration.sql" />
+    <Build Include="tSQLt\Private_ResolveName.sql" />
+    <Build Include="tSQLt\Private_ResolveObjectName.sql" />
+    <Build Include="tSQLt\Private_ResolveSchemaName.sql" />
+    <Build Include="tSQLt\F_Num.sql" />
+    <Build Include="tSQLt\Private_GetOriginalTableInfo.sql" />
+    <Build Include="tSQLt\Private_ResolveFakeTableNamesForBackwardCompatibility.sql" />
+    <Build Include="tSQLt\TestCaseSummary.sql" />
+    <Build Include="tSQLt\Private_GetFullTypeName.sql" />
+    <Build Include="tSQLt\Private_GetUniqueConstraintDefinition.sql" />
+    <Build Include="tSQLt\Private_GetDefaultConstraintDefinition.sql" />
+    <Build Include="tSQLt\Private_GetIdentityDefinition.sql" />
+    <Build Include="tSQLt\Private_GetDataTypeOrComputedColumnDefinition.sql" />
+    <Build Include="tSQLt\Private_GetConstraintType.sql" />
+    <Build Include="tSQLt\SuppressOutput.sql" />
+    <Build Include="tSQLt\CaptureOutput.sql" />
+    <Build Include="tSQLt\NewConnection.sql" />
+    <Build Include="tSQLt\AssertResultSetsHaveSameMetaData.sql" />
+    <Build Include="tSQLt\ResultSetFilter.sql" />
+    <Build Include="tSQLt\Private_ApplyForeignKeyConstraint.sql" />
+    <Build Include="tSQLt\Private_ApplyCheckConstraint.sql" />
+    <Build Include="tSQLt\Private_RemoveSchemaBoundReferences.sql" />
+    <Build Include="tSQLt\Private_RemoveSchemaBinding.sql" />
+    <Build Include="tSQLt\ExpectNoException.sql" />
+    <Build Include="tSQLt\ExpectException.sql" />
+    <Build Include="tSQLt\RunTestClass.sql" />
+    <Build Include="tSQLt\NullTestResultFormatter.sql" />
+    <Build Include="tSQLt\XmlResultFormatter.sql" />
+    <Build Include="tSQLt\DefaultResultFormatter.sql" />
+    <Build Include="tSQLt\RunWithNullResults.sql" />
+    <Build Include="tSQLt\RunWithXmlResults.sql" />
+    <Build Include="tSQLt\RunC.sql" />
+    <Build Include="tSQLt\Private_InputBuffer.sql" />
+    <Build Include="tSQLt\Run.sql" />
+    <Build Include="tSQLt\RunTest.sql" />
+    <Build Include="tSQLt\RunAll.sql" />
+    <Build Include="tSQLt\Private_RunAll.sql" />
+    <Build Include="tSQLt\Private_Run.sql" />
+    <Build Include="tSQLt\Private_RunTestClass.sql" />
+    <Build Include="tSQLt\Private_RunTest.sql" />
+    <Build Include="tSQLt\Private_CleanTestResult.sql" />
+    <Build Include="tSQLt\Private_GetSetupProcedureName.sql" />
+    <Build Include="tSQLt\RemoveObjectIfExists.sql" />
+    <Build Include="tSQLt\RemoveObject.sql" />
+    <Build Include="tSQLt\Private_RenameObjectToUniqueNameUsingObjectId.sql" />
+    <Build Include="tSQLt\Private_RenameObjectToUniqueName.sql" />
+    <Build Include="tSQLt\Private_MarkObjectBeforeRename.sql" />
+    <Build Include="tSQLt\TableToText.sql" />
+    <Build Include="tSQLt\LogCapturedOutput.sql" />
+    <Build Include="tSQLt\SetVerbose.sql" />
+    <Build Include="tSQLt\Private_SetConfiguration.sql" />
+    <Build Include="tSQLt\Uninstall.sql" />
+    <Build Include="tSQLt\SetFakeViewOff.sql" />
+    <Build Include="tSQLt\Private_SetFakeViewOff_SingleView.sql" />
+    <Build Include="tSQLt\SetFakeViewOn.sql" />
+    <Build Include="tSQLt\Private_SetFakeViewOn_SingleView.sql" />
+    <Build Include="tSQLt\AssertEquals.sql" />
+    <Build Include="tSQLt\Private_ValidateProcedureCanBeUsedWithSpyProcedure.sql" />
+    <Build Include="tSQLt\Private_SaveTestNameForSession.sql" />
+    <Build Include="tSQLt\Private_OutputTestResults.sql" />
+    <Build Include="tSQLt\SetTestResultFormatter.sql" />
+    <Build Include="tSQLt\GetNewTranName.sql" />
+    <Build Include="tSQLt\Private_PrintXML.sql" />
+    <Build Include="tSQLt\Private_Print.sql" />
+    <Build Include="tSQLt\Fail.sql" />
+    <Build Include="tSQLt\NewTestClass.sql" />
+    <Build Include="tSQLt\Private_MarkSchemaAsTestClass.sql" />
+    <Build Include="tSQLt\Private_DisallowOverwritingNonTestSchema.sql" />
+    <Build Include="tSQLt\MarkSchemaAsTestClass.sql" />
+    <Build Include="tSQLt\AssertStringIn.sql" />
+    <Build Include="tSQLt\DropClass.sql" />
+    <Build Include="tSQLt\AssertEqualsTableSchema.sql" />
+    <Build Include="tSQLt\RenameClass.sql" />
+    <Build Include="tSQLt\FakeFunction.sql" />
+    <Build Include="tSQLt\Private_CreateFakeFunction.sql" />
+    <Build Include="tSQLt\Private_ValidateObjectsCompatibleWithFakeFunction.sql" />
+    <Build Include="tSQLt\ApplyTrigger.sql" />
+    <Build Include="tSQLt\AssertEmptyTable.sql" />
+    <Build Include="tSQLt\AssertNotEquals.sql" />
+    <Build Include="tSQLt\AssertLike.sql" />
+    <Build Include="tSQLt\StubRecord.sql" />
+    <Build Include="tSQLt\AssertEqualsTable.sql" />
+    <Build Include="tSQLt\AssertEqualsString.sql" />
+    <Build Include="tSQLt\AssertObjectDoesNotExist.sql" />
+    <Build Include="tSQLt\AssertObjectExists.sql" />
+    <Build Include="tSQLt\Private_CompareTables.sql" />
+    <Build Include="tSQLt\Private_CompareTablesFailIfUnequalRowsExists.sql" />
+    <Build Include="tSQLt\Private_ValidateThatAllDataTypesInTableAreSupported.sql" />
+    <Build Include="tSQLt\Private_CreateResultTableForCompareTables.sql" />
+    <Build Include="tSQLt\SpyProcedure.sql" />
+    <Build Include="tSQLt\Private_CreateProcedureSpy.sql" />
+    <Build Include="tSQLt\FakeTable.sql" />
+    <Build Include="tSQLt\Private_MarkFakeTable.sql" />
+    <Build Include="tSQLt\Private_CreateFakeOfTable.sql" />
+    <Build Include="tSQLt\Private_ValidateFakeTableParameters.sql" />
+    <Build Include="tSQLt\ApplyConstraint.sql" />
+    <Build Include="tSQLt\Private_ApplyUniqueConstraint.sql" />
+    <Build Include="tSQLt\Private.sql" />
+    <Build Include="tSQLt\AssertStringTable.sql" />
+    <Build Include="Test Classes\tSQLt.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test source values inserted to correct columns.sql" />
+    <Build Include="Test Classes\privy-InvoiceRefreshTests.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test source values update correct columns.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test no row update on no change to any column.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test preferred dupe is always the late arriving duplicate.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test no dupe is updated if no change at source.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test identifies preferred dupe by latest invoice date on insert.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test identifies preferred dupe by latest ETL update on same invoice dates.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="profBIS_View.tests.sandbox.publish.xml" />
+    <None Include="CLR\tSQLtCLR.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="tSQLtCLR">
+      <HintPath>tSQLtCLR.dll</HintPath>
+      <SqlAssemblyName>tSQLtCLR</SqlAssemblyName>
+      <IsModelAware>True</IsModelAware>
+      <GenerateSqlClrDdl>False</GenerateSqlClrDdl>
+      <SqlOwnerName>dbo</SqlOwnerName>
+      <SqlPermissionSet>SAFE</SqlPermissionSet>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\profBIS_View\profBIS_View.sqlproj">
+      <Name>profBIS_View</Name>
+      <Project>{9589ff7a-3121-4e6a-bf94-1cb8987068b4}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+  </ItemGroup>
+</Project>

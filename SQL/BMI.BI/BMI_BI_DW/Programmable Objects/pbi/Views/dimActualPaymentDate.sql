@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[pbi].[dimActualPaymentDate]') IS NOT NULL
+IF OBJECT_ID('[pbi].[dimActualPaymentDate]') IS NOT NULL
 	DROP VIEW [pbi].[dimActualPaymentDate];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create view [pbi].[dimActualPaymentDate]
+CREATE view [pbi].[dimActualPaymentDate]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -66,5 +66,5 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, WorkDaysInFiscalPeriodTotal as [ActualPaymentDateWorkDaysInFiscalPeriodTotal]
 		, WorkDaysInFiscalPeriodToDate as [ActualPaymentDateWorkDaysInFiscalPeriodToDate]
 	from
-		dbo.dimDate
+		dbo.Calendar
 GO

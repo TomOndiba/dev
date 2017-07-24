@@ -35,42 +35,42 @@ Version	ChangeDate		Author	BugRef	Narrative
 --</CommentHeader>
 
 	select
-		  osni.OrderBacklogKey
-		, osni.LineCount
-		, osni.OrderNumber
-		, osni.OrderLineNumber
-		, osni.NativeOrderLineNumber
-		, osni.ExpectedInvoiceDateKey
-		, osni.ExpectedInvoiceDate
-		, osni.NativeOrderType
-		, osni.OrderTypeName
-		, osni.LocalSellingSite
-		, osni.SiteKey
-		, osni.ProductKey
-		, osni.SoldToCustomerKey
-		, osni.ShippedToCustomerKey
-		, osni.NativeSalesPersonId
-		, osni.NativeSalesPersonName
-		, osni.OrderQuantityValue
-		, osni.OrderQuantityUnitOfMeasure
-		, osni.StatisticQuantityValue
-		, osni.StatisticQuantityUnitOfMeasure
-		, osni.Quantity
-		, osni.LocalUnitOfMeasure
-		, osni.LocalUnitOfMeasureHarmonised
-		, osni.LocalUnitOfMeasureFactor
-		, osni.OrderAmount
-		, osni.LocalAmount
-		, osni.GroupAmountEUR
-		, osni.OrderCurrency
-		, osni.LocalCurrency
-		, osni.LineDiscountAmount
-		, osni.OrderDiscountAmount
-		, osni.LineBonusAmount
-		, osni.BonusShareAmount
+		  ob.OrderBacklogKey
+		, ob.LineCount
+		, ob.OrderNumber
+		, ob.OrderLineNumber
+		, ob.NativeOrderLineNumber
+		, ob.ExpectedInvoiceDateKey
+		, ob.ExpectedInvoiceDate
+		, ob.NativeOrderType
+		, ob.OrderTypeName
+		, ob.LocalSellingSite
+		, ob.SiteKey
+		, ob.ProductKey
+		, ob.SoldToCustomerKey
+		, ob.ShippedToCustomerKey
+		, ob.NativeSalesPersonId
+		, ob.NativeSalesPersonName
+		, ob.OrderQuantityValue
+		, ob.OrderQuantityUnitOfMeasure
+		, ob.StatisticQuantityValue
+		, ob.StatisticQuantityUnitOfMeasure
+		, ob.Quantity
+		, ob.LocalUnitOfMeasure
+		, ob.LocalUnitOfMeasureHarmonised
+		, ob.LocalUnitOfMeasureFactor
+		, ob.OrderAmount
+		, ob.LocalAmount
+		, ob.GroupAmountEUR
+		, ob.OrderCurrency
+		, ob.LocalCurrency
+		, ob.LineDiscountAmount
+		, ob.OrderDiscountAmount
+		, ob.LineBonusAmount
+		, ob.BonusShareAmount
 		--! Quick and dirty hack for Bob's Gross-to-Net Sales Report
 		, cast(case when LocalCurrency <> OrderCurrency and LocalAmount > 0 and OrderAmount > 0 then LocalAmount / OrderAmount else 1 end as decimal(28,4)) as [InvoiceRate]
-		, osni.IsDeleted
+		, ob.IsDeleted
 	from
-		qvstg.OrderBacklog as osni
+		qvstg.OrderBacklog as ob
 GO

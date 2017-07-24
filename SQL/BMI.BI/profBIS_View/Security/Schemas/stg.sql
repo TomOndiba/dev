@@ -14,6 +14,8 @@
 
 
 
+
+
 GO
 GRANT SELECT
     ON SCHEMA::[stg] TO [EtlDevelopers];

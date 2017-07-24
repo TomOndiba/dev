@@ -57,14 +57,14 @@ CREATE TABLE [qvstg].[Invoice]
 [LineBonusAmount] [decimal] (15, 4) NULL,
 [BonusShareAmount] [decimal] (15, 4) NULL,
 [StandardCost] [decimal] (15, 4) NULL,
-[StandardFreight] [decimal] (15, 4) NULL
+[StandardFreight] [decimal] (15, 4) NULL,
+[InvoiceQuantityUnitOfMeasureConformed] [varchar] (16) NOT NULL CONSTRAINT [DF_qvstg_Invoice_InvoiceQuantityUnitOfMeasureConformed] DEFAULT (''),
+[InvoiceQuantityConformed] [decimal] (12, 2) NULL
 )
 GO
 ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [CK_qvstg_Invoice_IsDeleted] CHECK (([IsDeleted]='Y' OR [IsDeleted]='N'))
 GO
 ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [PK_qvstg_Invoice] PRIMARY KEY CLUSTERED  ([InvoiceKey])
-GO
-ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [AK_qvstg_Invoice_UniqueifiedBusinessKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [InvoiceNumber], [OrderNumber], [NativeInvoiceLineNumber], [NativeOrderLineNumber])
 GO
 ALTER TABLE [qvstg].[Invoice] ADD CONSTRAINT [AK_qvstg_Invoice_DataSourceKey_QlikViewInvoiceKey] UNIQUE NONCLUSTERED  ([DataSourceKey], [QlikViewInvoiceKey])
 GO

@@ -8,5 +8,5 @@
 ) on [DEFAULT] ;
 go
 create nonclustered index [NCI_stg_InvoiceControl_ExtractFilter]
-    on [stg].[Invoice] (InvoiceKey, EtlDeltaHash, IsDeleted);
+    on [stg].[InvoiceControl] (InvoiceKey, PreviousDeltaHash, IsDeleted);
 go

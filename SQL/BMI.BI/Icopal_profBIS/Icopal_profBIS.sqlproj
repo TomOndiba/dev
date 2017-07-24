@@ -48,7 +48,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <SuppressTSqlWarnings>71558</SuppressTSqlWarnings>
+    <SuppressTSqlWarnings>71558,71502</SuppressTSqlWarnings>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -66,6 +66,8 @@
     <Folder Include="Security\" />
     <Folder Include="Stored Procedures\" />
     <Folder Include="User Defined Types\" />
+    <Folder Include="Functions\" />
+    <Folder Include="Assemblies\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\MD_COUNTRY.sql" />
@@ -350,9 +352,161 @@
     <Build Include="User Defined Types\N_MEMO.sql" />
     <Build Include="User Defined Types\N_SBU.sql" />
     <Build Include="User Defined Types\N_USER.sql" />
+    <Build Include="Tables\Private_AssertEqualsTableSchema_Expected.sql" />
+    <Build Include="Tables\Private_AssertEqualsTableSchema_Actual.sql" />
+    <Build Include="Tables\Private_NullCellTable.sql" />
+    <Build Include="Tables\Private_RenamedObjectLog.sql" />
+    <Build Include="Tables\CaptureOutputLog.sql" />
+    <Build Include="Tables\Private_Configurations.sql" />
+    <Build Include="Tables\Private_ExpectException.sql" />
+    <Build Include="Tables\Run_LastExecution.sql" />
+    <Build Include="Tables\TestMessage.sql" />
+    <Build Include="Tables\TestResult.sql" />
+    <Build Include="Views\Private_SysTypes.sql" />
+    <Build Include="Views\Private_SysIndexes.sql" />
+    <Build Include="Views\Tests.sql" />
+    <Build Include="Views\TestClasses.sql" />
+    <Build Include="Functions\Private_SqlVariantFormatter.sql" />
+    <Build Include="Functions\Private_GetCommaSeparatedColumnList.sql" />
+    <Build Include="Functions\Private_IsTestClass.sql" />
+    <Build Include="Functions\Private_GetSchemaId.sql" />
+    <Build Include="Functions\Private_GetQuotedFullName.sql" />
+    <Build Include="Functions\Private_GetOriginalTableName.sql" />
+    <Build Include="Functions\Private_GetCleanObjectName.sql" />
+    <Build Include="Functions\Private_GetCleanSchemaName.sql" />
+    <Build Include="Functions\Private_GetLastTestNameIfNotProvided.sql" />
+    <Build Include="Functions\GetTestResultFormatter.sql" />
+    <Build Include="Functions\Private_QuoteClassNameForNewTestClass.sql" />
+    <Build Include="Functions\Private_GetUniqueConstraintDefinition.sql" />
+    <Build Include="Functions\Private_GetDefaultConstraintDefinition.sql" />
+    <Build Include="Functions\Private_GetIdentityDefinition.sql" />
+    <Build Include="Functions\Private_GetDataTypeOrComputedColumnDefinition.sql" />
+    <Build Include="Functions\Private_GetConstraintType.sql" />
+    <Build Include="Functions\Private_ResolveApplyConstraintParameters.sql" />
+    <Build Include="Functions\Private_FindConstraint.sql" />
+    <Build Include="Functions\Private_GetQuotedTableNameForConstraint.sql" />
+    <Build Include="Functions\Private_GetForeignKeyDefinition.sql" />
+    <Build Include="Functions\Private_GetForeignKeyRefColumns.sql" />
+    <Build Include="Functions\Private_GetForeignKeyParColumns.sql" />
+    <Build Include="Functions\Private_ScriptIndex.sql" />
+    <Build Include="Functions\Info.sql" />
+    <Build Include="Functions\Private_SqlVersion.sql" />
+    <Build Include="Functions\Private_GetConfiguration.sql" />
+    <Build Include="Functions\Private_ResolveName.sql" />
+    <Build Include="Functions\Private_ResolveObjectName.sql" />
+    <Build Include="Functions\Private_ResolveSchemaName.sql" />
+    <Build Include="Functions\F_Num.sql" />
+    <Build Include="Functions\Private_GetOriginalTableInfo.sql" />
+    <Build Include="Functions\Private_ResolveFakeTableNamesForBackwardCompatibility.sql" />
+    <Build Include="Functions\TestCaseSummary.sql" />
+    <Build Include="Functions\Private_GetFullTypeName.sql" />
+    <Build Include="Stored Procedures\SuppressOutput.sql" />
+    <Build Include="Stored Procedures\CaptureOutput.sql" />
+    <Build Include="Stored Procedures\NewConnection.sql" />
+    <Build Include="Stored Procedures\AssertResultSetsHaveSameMetaData.sql" />
+    <Build Include="Stored Procedures\ResultSetFilter.sql" />
+    <Build Include="Stored Procedures\DropClass.sql" />
+    <Build Include="Stored Procedures\AssertEqualsTableSchema.sql" />
+    <Build Include="Stored Procedures\RenameClass.sql" />
+    <Build Include="Stored Procedures\FakeFunction.sql" />
+    <Build Include="Stored Procedures\Private_CreateFakeFunction.sql" />
+    <Build Include="Stored Procedures\Private_ValidateObjectsCompatibleWithFakeFunction.sql" />
+    <Build Include="Stored Procedures\ApplyTrigger.sql" />
+    <Build Include="Stored Procedures\AssertEmptyTable.sql" />
+    <Build Include="Stored Procedures\AssertNotEquals.sql" />
+    <Build Include="Stored Procedures\AssertLike.sql" />
+    <Build Include="Stored Procedures\StubRecord.sql" />
+    <Build Include="Stored Procedures\AssertEqualsTable.sql" />
+    <Build Include="Stored Procedures\AssertEqualsString.sql" />
+    <Build Include="Stored Procedures\AssertObjectDoesNotExist.sql" />
+    <Build Include="Stored Procedures\AssertObjectExists.sql" />
+    <Build Include="Stored Procedures\Private_CompareTables.sql" />
+    <Build Include="Stored Procedures\Private_CompareTablesFailIfUnequalRowsExists.sql" />
+    <Build Include="Stored Procedures\Private_ValidateThatAllDataTypesInTableAreSupported.sql" />
+    <Build Include="Stored Procedures\Private_CreateResultTableForCompareTables.sql" />
+    <Build Include="Stored Procedures\SpyProcedure.sql" />
+    <Build Include="Stored Procedures\Private_CreateProcedureSpy.sql" />
+    <Build Include="Stored Procedures\FakeTable.sql" />
+    <Build Include="Stored Procedures\Private_MarkFakeTable.sql" />
+    <Build Include="Stored Procedures\Private_CreateFakeOfTable.sql" />
+    <Build Include="Stored Procedures\Private_ValidateFakeTableParameters.sql" />
+    <Build Include="Stored Procedures\ApplyConstraint.sql" />
+    <Build Include="Stored Procedures\Private_ApplyUniqueConstraint.sql" />
+    <Build Include="Stored Procedures\Private_ApplyForeignKeyConstraint.sql" />
+    <Build Include="Stored Procedures\Private_ApplyCheckConstraint.sql" />
+    <Build Include="Stored Procedures\Private_RemoveSchemaBoundReferences.sql" />
+    <Build Include="Stored Procedures\Private_RemoveSchemaBinding.sql" />
+    <Build Include="Stored Procedures\ExpectNoException.sql" />
+    <Build Include="Stored Procedures\ExpectException.sql" />
+    <Build Include="Stored Procedures\RunTestClass.sql" />
+    <Build Include="Stored Procedures\NullTestResultFormatter.sql" />
+    <Build Include="Stored Procedures\XmlResultFormatter.sql" />
+    <Build Include="Stored Procedures\DefaultResultFormatter.sql" />
+    <Build Include="Stored Procedures\RunWithNullResults.sql" />
+    <Build Include="Stored Procedures\RunWithXmlResults.sql" />
+    <Build Include="Stored Procedures\RunC.sql" />
+    <Build Include="Stored Procedures\Private_InputBuffer.sql" />
+    <Build Include="Stored Procedures\Run.sql" />
+    <Build Include="Stored Procedures\RunTest.sql" />
+    <Build Include="Stored Procedures\RunAll.sql" />
+    <Build Include="Stored Procedures\Private_RunAll.sql" />
+    <Build Include="Stored Procedures\Private_Run.sql" />
+    <Build Include="Stored Procedures\Private_RunTestClass.sql" />
+    <Build Include="Stored Procedures\Private_RunTest.sql" />
+    <Build Include="Stored Procedures\Private_CleanTestResult.sql" />
+    <Build Include="Stored Procedures\Private_GetSetupProcedureName.sql" />
+    <Build Include="Stored Procedures\RemoveObjectIfExists.sql" />
+    <Build Include="Stored Procedures\RemoveObject.sql" />
+    <Build Include="Stored Procedures\Private_RenameObjectToUniqueNameUsingObjectId.sql" />
+    <Build Include="Stored Procedures\Private_RenameObjectToUniqueName.sql" />
+    <Build Include="Stored Procedures\Private_MarkObjectBeforeRename.sql" />
+    <Build Include="Stored Procedures\TableToText.sql" />
+    <Build Include="Stored Procedures\LogCapturedOutput.sql" />
+    <Build Include="Stored Procedures\SetVerbose.sql" />
+    <Build Include="Stored Procedures\Private_SetConfiguration.sql" />
+    <Build Include="Stored Procedures\Uninstall.sql" />
+    <Build Include="Stored Procedures\SetFakeViewOff.sql" />
+    <Build Include="Stored Procedures\Private_SetFakeViewOff_SingleView.sql" />
+    <Build Include="Stored Procedures\SetFakeViewOn.sql" />
+    <Build Include="Stored Procedures\Private_SetFakeViewOn_SingleView.sql" />
+    <Build Include="Stored Procedures\AssertEquals.sql" />
+    <Build Include="Stored Procedures\Private_ValidateProcedureCanBeUsedWithSpyProcedure.sql" />
+    <Build Include="Stored Procedures\Private_SaveTestNameForSession.sql" />
+    <Build Include="Stored Procedures\Private_OutputTestResults.sql" />
+    <Build Include="Stored Procedures\SetTestResultFormatter.sql" />
+    <Build Include="Stored Procedures\GetNewTranName.sql" />
+    <Build Include="Stored Procedures\Private_PrintXML.sql" />
+    <Build Include="Stored Procedures\Private_Print.sql" />
+    <Build Include="Stored Procedures\Fail.sql" />
+    <Build Include="Stored Procedures\NewTestClass.sql" />
+    <Build Include="Stored Procedures\Private_MarkSchemaAsTestClass.sql" />
+    <Build Include="Stored Procedures\Private_DisallowOverwritingNonTestSchema.sql" />
+    <Build Include="Stored Procedures\MarkSchemaAsTestClass.sql" />
+    <Build Include="Stored Procedures\AssertStringIn.sql" />
+    <Build Include="User Defined Types\Private.sql" />
+    <Build Include="User Defined Types\AssertStringTable.sql" />
+    <Build Include="Security\tSQLt.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icopal_profBIS.sandbox.publish.xml" />
     <None Include="Icopal_profBIS.localdb-ProjectsV13.publish.xml" />
+    <None Include="Assemblies\tSQLtCLR.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="tSQLtCLR">
+      <HintPath>Assemblies\tSQLtCLR.dll</HintPath>
+      <SqlAssemblyName>tSQLtCLR</SqlAssemblyName>
+      <IsModelAware>True</IsModelAware>
+      <GenerateSqlClrDdl>False</GenerateSqlClrDdl>
+      <SqlOwnerName>dbo</SqlOwnerName>
+      <SqlPermissionSet>SAFE</SqlPermissionSet>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
 </Project>

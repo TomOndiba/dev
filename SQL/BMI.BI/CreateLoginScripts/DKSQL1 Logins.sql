@@ -41,3 +41,13 @@ if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL
 else
 	alter login [GROUPICOPAL\ukjbo] with default_language = British, default_database = [profBIS_View];
 go
+if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukrna' and [type] = 'U')
+	create login [GROUPICOPAL\ukrna] from windows with default_language = British, default_database = [profBIS_View];
+else
+	alter login [GROUPICOPAL\ukrna] with default_language = British, default_database = [profBIS_View];
+go
+if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\uktma' and [type] = 'U')
+	create login [GROUPICOPAL\uktma] from windows with default_language = British, default_database = [profBIS_View];
+else
+	alter login [GROUPICOPAL\uktma] with default_language = British, default_database = [profBIS_View];
+go

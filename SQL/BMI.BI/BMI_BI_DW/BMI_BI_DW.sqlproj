@@ -36,10 +36,40 @@
     <DeployOnceUseSemver>True</DeployOnceUseSemver>
     <SemverInitialBaseline>True</SemverInitialBaseline>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
-    <ExcludeObjectsFromSync />
+    <ExcludeObjectsFromSync>
+StoredProcedure=[tsa].[BatchEndOnError];
+StoredProcedure=[tsa].[BatchEndOnStop];
+StoredProcedure=[tsa].[BatchEndOnSuccess];
+StoredProcedure=[tsa].[BatchRunStart];
+StoredProcedure=[tsa].[StepRunStart];
+StoredProcedure=[tsa].[ThreadRunData];
+Function=[log4].[FormatElapsedTime];
+Function=[log4].[GetJournalControl];
+Schema=[dbo].[qvstg];
+Schema=[dbo].[dbo];
+Schema=[INFORMATION_SCHEMA].[INFORMATION_SCHEMA];
+StoredProcedure=[log4].[JournalWriter];
+StoredProcedure=[log4].[ExceptionHandler];
+StoredProcedure=[log4Utils].[PrintString];
+StoredProcedure=[log4Utils].[JournalReader];
+StoredProcedure=[log4Utils].[JournalPrinter];
+StoredProcedure=[log4Utils].[ExceptionReader];
+StoredProcedure=[log4Private].[SessionInfoOutput];
+Table=[dbo].[IcopalCalendar];
+</ExcludeObjectsFromSync>
     <IncludeObjectsInDataSync />
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
+ff6c22f0-34e6-51d1-9b8a-1e9e18d39e88|Static Data\log4Private.JournalControl.data.sql;
+265aaab9-1a36-5f05-b9a1-e076442aa545|Static Data\log4Private.Severity.data.sql;
+23d2834b-9483-5a99-a776-a14111f1ab8a|Static Data\dbo.DataSource.data.sql;
+ebde8f74-e8ec-52f4-a841-5d836fed6587|Static Data\dbo.Country.data.sql;
+a66304c1-992d-5bee-837d-7a1ea2fe9481|Static Data\dbo.Culture.data.sql;
+65fec69e-b638-50da-86c8-46cc842d126b|Static Data\dbo.TranslationStatus.data.sql;
+7597bbd1-fd62-5b52-bd6d-1a10d7bec00a|Static Data\stg.SSIS_BUDGET_RegionLookup.data.sql;
+b1c20a6d-7953-59a4-9b34-a58b9b00dd1b|Static Data\stg.SSIS_BUDGET_BusinessUnitLookup.data.sql;
+2e5debb3-ba03-5abf-aa73-8c7ab0f5e419|Static Data\stg.SSIS_BUDGET_ProductCategoryGroupLookup.data.sql;
+23c4ee75-8ae4-5d0f-b7c7-ab6d750e7aef|Static Data\stg.SSIS_BUDGET_ProductCategoryLookup.data.sql;
 15a0517b-b658-5cbc-bd7b-cbc0ce53aeb8|Programmable Objects\log4Private\Stored Procedures\SessionInfoOutput.sql;
 28783bd6-0909-5fd2-bcad-81dede3f3869|Programmable Objects\log4\Stored Procedures\ExceptionHandler.sql;
 9b6216f6-590d-5cd1-9162-2d51fd502792|Programmable Objects\etl\Stored Procedures\SSIS_BUDGET_2017_StageSales.sql;
@@ -55,7 +85,32 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
 670576e6-3bc5-5ece-a037-8b11d9f6c0fc|Programmable Objects\log4Utils\Stored Procedures\JournalPrinter.sql;
 67693b34-7581-5c4d-9fd7-a11538fae713|Programmable Objects\dbo\Functions\Numbers.sql;
 8117c898-6c56-5981-850f-dc0a51ec2ac9|Programmable Objects\utils\Stored Procedures\LoadDateDimension.sql;
+6fa1ede2-33fa-52c4-9851-10d1307aeabc|Programmable Objects\log4\Functions\GetJournalControl.sql;
+f1c132d0-a9be-559e-9b9f-df02fa90e78b|Programmable Objects\log4Utils\Stored Procedures\ExceptionReader.sql;
+a36600a2-33f7-5123-b295-e43d787c3464|Programmable Objects\log4Utils\Stored Procedures\JournalReader.sql;
+0f54719a-ffd1-5525-9c5a-73469c22af3e|Programmable Objects\pbi\Views\dimActualDeliveryDate.sql;
+60e2482f-8260-5b78-b625-8eb6ce7b7bc3|Programmable Objects\pbi\Views\dimActualPaymentDate.sql;
+8731163d-c2c7-56dd-a9f2-3d463589223c|Programmable Objects\pbi\Views\dimBudgetMonth.sql;
+4e167367-a91f-57ec-bcad-9f8d22d44823|Programmable Objects\pbi\Views\dimBusinessUnit.sql;
+d2908534-c307-5a54-8ab0-a04f61f9b5c2|Programmable Objects\pbi\Views\dimCustomerShippedTo.sql;
+55e15bee-bf14-54b9-98dd-9336e6878bc2|Programmable Objects\pbi\Views\dimCustomerSoldTo.sql;
+775044da-6739-563d-a790-777d96a634bf|Programmable Objects\pbi\Views\dimExpectedPaymentDate.sql;
+088e9de1-3504-5346-aba6-b31e57fb5cfb|Programmable Objects\pbi\Views\dimInvoiceDate.sql;
+67c006c4-3325-5a74-93bd-3a68d97ee549|Programmable Objects\pbi\Views\dimPaymentTerm.sql;
+56af30bc-351d-5f3e-a4f3-76df0868ac49|Programmable Objects\pbi\Views\dimProduct.sql;
+7f523199-2243-580f-9749-99d4daa6c107|Programmable Objects\pbi\Views\dimProductCategory.sql;
+dc8646ca-d49d-5b78-a511-7dced9d749ab|Programmable Objects\pbi\Views\dimPromisedDeliveryDate.sql;
+5a8c5a0f-19c9-56d6-b9f0-1069ca71458d|Programmable Objects\pbi\Views\dimSite.sql;
+16949ad0-cb95-5a54-a78e-b2d7459ac68b|Programmable Objects\pbi\Views\factBudgetSales.sql;
+f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVolumes.sql;
+4248b9c1-c289-57a9-9657-2797fc363d49|Programmable Objects\pbi\Views\factInvoice.sql;
+932a5491-2aa7-5f8a-a962-b2368db40ae3|Programmable Objects\pbi\Views\factOrderBacklog.sql;
+1c8c4dc5-8292-5543-a1fb-f2b75fa1e109|Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql;
+131969b2-c406-5950-a8d9-e7a552a86a97|Programmable Objects\pbi\Views\factSaleForecastTotal.sql;
 </DeployChangesExecutionOrder>
+    <AdditionalScriptFolders>
+Static Data;
+</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
@@ -77,6 +132,8 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
   </PropertyGroup>
   <!-- READYROLL SCRIPT GENERATION OPTIONS -->
   <PropertyGroup>
+    <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
+    <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <!-- These properties might be set by the Developer -->
     <!--
     <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>
@@ -85,14 +142,12 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
     <SyncOptionDisableDdlTriggers>True</SyncOptionDisableDdlTriggers>
     <SyncOptionCaseSensitiveObjectDefinition>False</SyncOptionCaseSensitiveObjectDefinition>
 
-    <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
     <SyncOptionIgnoreCommentsInBodies>False</SyncOptionIgnoreCommentsInBodies>
     <SyncOptionIgnoreAnsiOptions>False</SyncOptionIgnoreAnsiOptions>
     <SyncOptionIgnoreCollations>True</SyncOptionIgnoreCollations>
     <SyncOptionIgnoreColumnsOrder>True</SyncOptionIgnoreColumnsOrder>
     <SyncOptionIgnoreWhiteSpace>True</SyncOptionIgnoreWhiteSpace>
     <SyncOptionIgnoreSynonymDatabaseAndServerName>True</SyncOptionIgnoreSynonymDatabaseAndServerName>
-    <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <SyncOptionIgnoreDmlTriggers>False</SyncOptionIgnoreDmlTriggers> 
     <SyncOptionIgnoreInsteadOfTriggers>False</SyncOptionIgnoreInsteadOfTriggers>
     <SyncOptionIgnoreBindings>False</SyncOptionIgnoreBindings>
@@ -202,6 +257,7 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatTSqlWarningsAsErrors>True</TreatTSqlWarningsAsErrors>
   </PropertyGroup>
   <!--Import the settings-->
   <PropertyGroup>
@@ -280,6 +336,9 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
     <None Include="Static Data\stg.SSIS_BUDGET_RegionLookup.data.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Static Data\dbo.Country.data.sql" />
+    <None Include="Static Data\dbo.Culture.data.sql" />
+    <None Include="Static Data\dbo.TranslationStatus.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -288,7 +347,6 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
     <None Include="Schema-Model\dbo\Sequences\ReferenceTypeHistorySequence.sql" />
     <None Include="Schema-Model\dbo\Sequences\ReferenceTypeKeySequence.sql" />
     <None Include="Schema-Model\dbo\Tables\DataSource.sql" />
-    <None Include="Schema-Model\dbo\Tables\dimDate.sql" />
     <None Include="Schema-Model\log4Private\Tables\Journal.sql" />
     <None Include="Schema-Model\log4Private\Tables\JournalControl.sql" />
     <None Include="Schema-Model\log4Private\Tables\JournalDetail.sql" />
@@ -386,7 +444,7 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
     <None Include="Programmable Objects\pbi\Views\factOrderBacklog.sql" />
     <None Include="Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql" />
     <None Include="Programmable Objects\pbi\Views\factSaleForecastTotal.sql" />
-    <None Include="Programmable Objects\utils\Stored Procedures\LoadDateDimension.sql" />
+    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
     <None Include="Migrations\1.0.0\001_InitialProductionRelease_20170705.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +461,50 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.1\002_TSA_PSA_permissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\Country.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\003_add_Country_Table.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\Culture.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\004_add_Culture_table.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\TranslationStatus.sql" />
+    <None Include="Schema-Model\qvstg\Tables\ProductColourTranslation.sql" />
+    <None Include="Schema-Model\qvstg\Tables\ProductTranslation.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\005_add_ProductTranslation_tables_01.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\qvstg\Tables\TranslationColour.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\006_add_TranslationColour_table.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\pbi\Views\Today.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\Calendar.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\007_Rename_dimDate_to_Calendar.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\008_RemoveUniqueifiedBusinessKeys.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\009_AddColumn_InvoiceQtyUoMConformed.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\010_AddColumn_InvoiceQuantityConformed.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -1,4 +1,4 @@
-﻿create view [etl].[InvoiceDelta]
+﻿CREATE view [etl].[InvoiceDelta]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -32,7 +32,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--! Some standard entities (N/S, N/F, N/I etc) already have the correct DataSourceKey
 		, case when i.SYSTEM_ID = 100000 then i.SYSTEM_ID else i.SYSTEM_ID + 100100 end				as [DataSourceKey]
 		, cast(i.REC_ID as nvarchar(50))															as [QlikViewInvoiceKey]
-		, cast(1 as int)																			as [LineCount]
+		, i.DuplicateCount																			as [LineCount]
 		, cast(convert(char(8), i.INVOICE_DATE, 112) as int)										as [InvoiceDateKey]
 		, i.INVOICE_DATE																			as [InvoiceDate]
 		-----------------------------------------------------------------------------------------------------------------------
@@ -111,8 +111,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, i.STD_FREIGHT																				as [StandardFreight]
 	from
 		stg.Invoice as i
-	left join stg.InvoiceControl as ic
-		on ic.InvoiceKey = i.InvoiceKey
+	left join stg.InvoiceControl as ctrl
+		on ctrl.InvoiceKey = i.InvoiceKey
 	left join stg.[Site] as s
 		on s.NativeSiteKey = cast(i.SITE_ID as nvarchar(50))
 	left join stg.Product as p
@@ -127,13 +127,21 @@ Version	ChangeDate		Author	BugRef	Narrative
 	left join stg.PaymentTerm as pt
 		on pt.NativePaymentTermKey = cast(i.PAYMENT_TERM_ID as nvarchar(50))
 	where
-		--! Exclude any duplicates based on SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER and ORDER_LINE_NUMBER
-			i.Uniqueifier = 1
-		and
 			(
-					ic.InvoiceKey is null --! New Invoices (not yet added to control)
-				or ic.PreviousDeltaHash <> i.EtlDeltaHash -- Existing Invoices that have been updated
-				or ic.IsDeleted <> i.IsDeleted --! Invoices that have been soft-deleted or (possibly) re-activated
+				--! Exclude any duplicates based on SYSTEM_ID, ORDER_NUMBER and ORDER_LINE_NUMBER
+					i.Uniqueifier = 1
+				and
+					(
+							ctrl.InvoiceKey is null --! New Orders (not yet added to control)
+						or ctrl.PreviousDeltaHash <> i.EtlDeltaHash -- Existing Orders that have been updated
+					)
+			)
+			--! Get any records that have been deleted in the last 5 days
+		or
+			(
+					ctrl.LastTouchedOn < dateadd(day, -1, getdate())
+				and
+					ctrl.IsDeleted <> i.IsDeleted --! Orders that have been soft-deleted or (possibly) re-activated
 			)
 go
 execute sp_addextendedproperty @name = N'MS_Description'

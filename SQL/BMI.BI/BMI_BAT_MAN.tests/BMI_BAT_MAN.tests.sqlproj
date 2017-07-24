@@ -61,6 +61,8 @@
     <Folder Include="IcsApp-Tests\" />
     <Folder Include="IcsApp-Tests\Stored Procedures\" />
     <Folder Include="Security\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">
@@ -83,6 +85,15 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart throws error on %40ProcessName empty.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart returns expected resultset.sql" />
     <Build Include="Security\IcsApp-Tests.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40SubProcessName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40SubProcessName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40ProcessRunID zero.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40ProcessRunID null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40ProcessName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40ProcessName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart returns expected resultset.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart calls ExceptionalHandler on error.sql" />
+    <Build Include="dbo\Stored Procedures\SubProcessRunStart.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

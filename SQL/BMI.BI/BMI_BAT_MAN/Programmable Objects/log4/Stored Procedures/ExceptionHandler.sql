@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[log4].[ExceptionHandler]') IS NOT NULL
+IF OBJECT_ID('[log4].[ExceptionHandler]') IS NOT NULL
 	DROP PROCEDURE [log4].[ExceptionHandler];
 
 GO
@@ -193,6 +193,5 @@ OnComplete:
 
 	RETURN;
 END
-GO
-GRANT EXECUTE ON  [log4].[ExceptionHandler] TO [public]
+
 GO

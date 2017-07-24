@@ -37,6 +37,10 @@
     <ExcludeObjectsFromSync>
 Schema=[dbo].[log4];
 Schema=[dbo].[log4Utils];
+Table=[dbo].[TestData];
+StoredProcedure=[dbo].[ThreadRunStart];
+StoredProcedure=[dbo].[StepRunStart];
+StoredProcedure=[dbo].[BatchRunStart];
 </ExcludeObjectsFromSync>
     <IncludeObjectsInDataSync />
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
@@ -50,6 +54,9 @@ Schema=[dbo].[log4Utils];
 670576e6-3bc5-5ece-a037-8b11d9f6c0fc|Programmable Objects\log4Utils\Stored Procedures\JournalPrinter.sql;
 </DeployChangesExecutionOrder>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
+    <AdditionalScriptFolders>
+Static Data;
+</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
@@ -231,9 +238,17 @@ Schema=[dbo].[log4Utils];
     <Folder Include="Programmable Objects\log4Utils\" />
     <Folder Include="Programmable Objects\log4Utils\Stored Procedures\" />
     <Folder Include="Migrations\1.0.0\" />
+    <Folder Include="Schema-Model\dbo\" />
+    <Folder Include="Schema-Model\dbo\Tables\" />
+    <Folder Include="Programmable Objects\dbo\" />
+    <Folder Include="Programmable Objects\dbo\Stored Procedures\" />
+    <Folder Include="Static Data" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
+    <None Include="Static Data\dbo.StubResultSet.Data.sql" />
+    <None Include="Static Data\log4Private.JournalControl.data.sql" />
+    <None Include="Static Data\log4Private.Severity.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -260,6 +275,13 @@ Schema=[dbo].[log4Utils];
     <None Include="Programmable Objects\log4Utils\Stored Procedures\JournalReader.sql" />
     <None Include="Programmable Objects\log4Utils\Stored Procedures\PrintString.sql" />
     <None Include="Migrations\1.0.0\001_added_log4tsql_block.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\StubResultSet.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Stored Procedures\ProcessRunStart.sql" />
+    <None Include="Migrations\1.0.0\002_Add_Table_dbo_StubResultSet.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

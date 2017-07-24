@@ -58,6 +58,9 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="IcsApp-Tests\" />
+    <Folder Include="IcsApp-Tests\Stored Procedures\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">
@@ -71,5 +74,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BMI_BAT_MAN.tests.sandbox.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart calls ExceptionalHandler on error.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart throws error on %40ProcessID zero.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart throws error on %40ProcessName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart throws error on %40ProcessID null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart throws error on %40ProcessName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunStart returns expected resultset.sql" />
+    <Build Include="Security\IcsApp-Tests.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>

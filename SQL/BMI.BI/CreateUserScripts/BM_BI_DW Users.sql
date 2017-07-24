@@ -139,8 +139,8 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'Tom.Manville@icopal.com'					, 'dbo'	, 1	, 1)
 
 	--! Business Analysts/Testers/Management
-	, (1	, 'DEV'		, 'Mark.Bolton@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Mark.Bolton@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'Gary.Kearns@icopal.com'					, 'dbo'	, 1	, 1)
@@ -199,7 +199,7 @@ values ('', '')
 	, ('Tom.Manville@icopal.com'				, 'AppDevelopers')
 
 	--! Business Analysts/Testers/Management
-	, ('Mark.Bolton@icopal.com'					, 'BusinessAnalysts')
+	, ('mark.bolton@icopal.com'					, 'BusinessAnalysts')
 	, ('bob.abildgaard-joergensen@icopal.com'	, 'BusinessAnalysts')
 	, ('Gary.Kearns@icopal.com'					, 'BusinessAnalysts')
 

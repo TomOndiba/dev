@@ -123,6 +123,8 @@ values (0, '', '', '', 0, 0)
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
 --	, (1	, 'DEV'		, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
 --	, (1	, 'PROD'	, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
 	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
@@ -137,8 +139,8 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'Tom.Manville@icopal.com'					, 'dbo'	, 1	, 1)
 
 	--! Business Analysts/Testers/Management
-	, (1	, 'DEV'		, 'Mark.Bolton@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Mark.Bolton@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'Gary.Kearns@icopal.com'					, 'dbo'	, 1	, 1)
@@ -178,6 +180,9 @@ values ('', '')
 	, ('greg.lucas@icopal.com'					, 'SqlDevelopers')
 	, ('greg.lucas@icopal.com'					, 'BatchManagers')
 	, ('greg.lucas@icopal.com'					, 'CodeReviewers')
+	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
+	, ('razia.nazir@icopal.com'					, 'BatchManagers')
+	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
 
 	--! ETL Developers
 	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')
@@ -194,7 +199,7 @@ values ('', '')
 	, ('Tom.Manville@icopal.com'				, 'AppDevelopers')
 
 	--! Business Analysts/Testers/Management
-	, ('Mark.Bolton@icopal.com'					, 'BusinessAnalysts')
+	, ('mark.bolton@icopal.com'					, 'BusinessAnalysts')
 	, ('bob.abildgaard-joergensen@icopal.com'	, 'BusinessAnalysts')
 	, ('Gary.Kearns@icopal.com'					, 'BusinessAnalysts')
 

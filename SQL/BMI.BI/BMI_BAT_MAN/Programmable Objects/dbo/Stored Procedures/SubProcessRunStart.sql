@@ -83,7 +83,12 @@ BEGIN
 		set @_StepStartTime = getdate();
 	
 		
-		SELECT  @_SubProcessRunId=[SubProcessRunID],@_RunType=Runtype, @_Instruction=instruction,@_CompletionMessage=[Message]	FROM dbo.StubResultSet	WHERE FunctionName='[dbo].[SubProcessRunStart]';
+		SELECT @_SubProcessRunId = [SubProcessRunID],
+			   @_RunType = RunType,
+			   @_Instruction = Instruction,
+			   @_CompletionMessage = [Message]
+		FROM dbo.StubResultSet
+		WHERE FunctionName = '[dbo].[SubProcessRunStart]';
 	
 		EXEC log4.JournalWriter
 			  @Task = 'POC'

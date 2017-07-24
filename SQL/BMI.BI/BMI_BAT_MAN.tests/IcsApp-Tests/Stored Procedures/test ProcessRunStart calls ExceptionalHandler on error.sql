@@ -28,5 +28,5 @@ BEGIN
 	@ProcessID=1
 
 
-	EXEC tsqlt.AssertEqualsTable @Expected ='[IcsApp-Tests].expected'  ,   @Actual = N'log4.ExceptionHandler_spyprocedureLog'
+	EXEC tSQLt.AssertEqualsTable @Expected ='[IcsApp-Tests].expected'  ,   @Actual = N'log4.ExceptionHandler_spyprocedureLog'
 END;

@@ -47,6 +47,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatTSqlWarningsAsErrors>True</TreatTSqlWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -61,8 +62,6 @@
     <Folder Include="IcsApp-Tests\" />
     <Folder Include="IcsApp-Tests\Stored Procedures\" />
     <Folder Include="Security\" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">
@@ -93,7 +92,6 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40ProcessName empty.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart returns expected resultset.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart calls ExceptionalHandler on error.sql" />
-    <Build Include="dbo\Stored Procedures\SubProcessRunStart.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

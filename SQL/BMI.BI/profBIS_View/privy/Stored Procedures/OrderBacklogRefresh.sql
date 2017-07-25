@@ -31,6 +31,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 002		14-JUL-2017		GML		BSR-102	Revised Uniquifier logic to prefer most recently updated active duplicate
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+003		25-JUL-2017		GML		BSR-132	Further revised Uniqueifier logic mark all non-preferred dupes as inactive
+------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -303,6 +305,7 @@ begin
 					, ord.BONUS_SHARE_AMOUNT
 					) as [EtlDeltaHash]
 				---------------------------------------------------------------------------------------------------
+				, coalesce(tgt.Uniqueifier, 1) as [CurrentUniqueifier]
 			from
 				[$(Icopal_profBIS)].dbo.SA_ORDER_BACKLOG as ord
 			inner join [$(Icopal_profBIS)].dbo.PU_LINK_SITE as ssite
@@ -430,12 +433,12 @@ begin
 			, src.BONUS_SHARE_AMOUNT
 			)
 		--! If any value has changed or a previously soft-deleted record re-appears then update
-		when matched and tgt.EtlDeltaHash <> src.EtlDeltaHash or tgt.IsDeleted = 'Y'
+		when matched and tgt.EtlDeltaHash <> src.EtlDeltaHash or (tgt.IsDeleted = 'Y' and src.CurrentUniqueifier = 1)
 			then update set
 					  tgt.EtlDeltaHash = src.EtlDeltaHash
 					, tgt.EtlUpdatedOn = @LoadStart
 					, tgt.EtlUpdatedBy = @_FunctionName
-					, tgt.IsDeleted = 'N'
+					, tgt.IsDeleted = case when src.CurrentUniqueifier > 1 then 'Y' else 'N' end
 					, tgt.SYSTEM_ID = src.SYSTEM_ID
 					, tgt.ORDER_NUMBER = src.ORDER_NUMBER
 					, tgt.ORDER_LINE_NUMBER = src.ORDER_LINE_NUMBER
@@ -528,7 +531,7 @@ begin
 				, ob.REC_ID
 				, ob.EXPECTED_INVOICE_DATE
 				, ob.EtlUpdatedOn
-				, row_number() over (partition by d.SYSTEM_ID, d.ORDER_NUMBER, d.ORDER_LINE_NUMBER order by ob.IsDeleted asc, ob.EXPECTED_INVOICE_DATE desc, ob.EtlUpdatedOn desc, ob.REC_ID) as [Uniqueifier]
+				, row_number() over (partition by d.SYSTEM_ID, d.ORDER_NUMBER, d.ORDER_LINE_NUMBER order by ob.EXPECTED_INVOICE_DATE desc, ob.EtlUpdatedOn desc, ob.OrderBacklogKey desc) as [Uniqueifier]
 			from
 				dupesCte as d
 			inner join stg.OrderBacklog as ob
@@ -595,8 +598,29 @@ begin
 			, tgt.DuplicateCount = src.DupeCount
 			, tgt.EtlDeltaHash = src.EtlDeltaHash
 			, tgt.EtlUpdatedBy = @_FunctionName
+			---------------------------------------------------------------------------------------------------
 			--! As we use EtlUpdatedOn to find recently updated duplicates only set this for the preferred record
 			, tgt.EtlUpdatedOn = case when src.Uniqueifier = 1 then @LoadStart else tgt.EtlUpdatedOn end
+			---------------------------------------------------------------------------------------------------
+			--! Only the most preferred record of any duplicate should be active
+			, tgt.IsDeleted = case
+								when tgt.IsDeleted = 'Y' and src.Uniqueifier = 1 then 'N'
+								when tgt.IsDeleted = 'N' and src.Uniqueifier > 1 then 'Y'
+								else tgt.IsDeleted
+							  end
+			---------------------------------------------------------------------------------------------------
+			, tgt.EtlDeletedOn = case
+									when tgt.IsDeleted = 'Y' and src.Uniqueifier = 1 then null
+									when tgt.IsDeleted = 'N' and src.Uniqueifier > 1 then @LoadStart
+									else tgt.EtlDeletedOn 
+								 end
+			---------------------------------------------------------------------------------------------------
+			, tgt.EtlDeletedBy = case
+									when tgt.IsDeleted = 'Y' and src.Uniqueifier = 1 then null
+									when tgt.IsDeleted = 'N' and src.Uniqueifier > 1 then @_FunctionName
+									else tgt.EtlDeletedBy
+								  end
+			---------------------------------------------------------------------------------------------------
 		from
 			stg.OrderBacklog as tgt
 		inner join finalCte as src

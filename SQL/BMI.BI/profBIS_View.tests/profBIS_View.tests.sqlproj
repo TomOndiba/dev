@@ -209,6 +209,8 @@
     <Build Include="privy-InvoiceRefreshTests\test no dupe is updated if no change at source.sql" />
     <Build Include="privy-InvoiceRefreshTests\test identifies preferred dupe by latest invoice date on insert.sql" />
     <Build Include="privy-InvoiceRefreshTests\test identifies preferred dupe by latest ETL update on same invoice dates.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test preferred dupe is the only active copy on update.sql" />
+    <Build Include="privy-InvoiceRefreshTests\test preferred dupe is the only active copy on insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="profBIS_View.tests.sandbox.publish.xml" />

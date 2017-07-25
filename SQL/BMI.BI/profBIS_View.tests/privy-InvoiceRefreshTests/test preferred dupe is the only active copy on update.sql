@@ -1,4 +1,4 @@
-﻿CREATE procedure [privy-InvoiceRefreshTests].[test identifies preferred dupe by latest ETL update on same invoice dates]
+﻿create   procedure [privy-InvoiceRefreshTests].[test preferred dupe is the only active copy on update]
 as
 begin
 	exec tSQLt.FakeTable @TableName = 'stg.Invoice', @Identity = 1, @Defaults = 1 ;
@@ -9,8 +9,11 @@ begin
 	create table #expected
 	(
 	  InvoiceKey int not null
+	, EtlDeltaHash char(32) collate SQL_Latin1_General_CP1_CI_AS null
 	, EtlCreatedOn datetime null
-	, EtlUpdatedOn datetime not null
+	, EtlUpdatedOn datetime null
+	, EtlDeletedOn datetime null
+	, IsDeleted char(1) collate SQL_Latin1_General_CP1_CI_AS null
 	, REC_ID uniqueidentifier null -- QlikView surrogate key
 	, Uniqueifier bigint null
 	, GROUP_AMOUNT decimal(15, 4) null
@@ -19,12 +22,11 @@ begin
 
 	--! What are the values we are going to insert?
 	declare @_SBU varchar(8) = 'XXX'
-		, @_InsertedOn datetime = dateadd(day, -1, getdate())
+		, @_InsertedOn datetime = dateadd(day, -1, dateadd(hour, -1, dateadd(minute, -1, dateadd(second, -1, getdate()))))
 		, @_ModifiedOn datetime = getdate()
 		, @_ModifiedBy varchar(200) = '[privy].[InvoiceRefresh]'
 		, @_STD_ITEM_CATEGORY_ID int = 46247
 		, @_STD_PAYMENT_TERM_ID int = 152
-		, @_IsDeleted char(1) = 'N'
 		, @_LOCAL_UOM nvarchar(20) = 'X'
 		, @_LOCAL_UOM_HARMONIZED nvarchar(20) = 'Y'
 		, @_LOCAL_UOM_FACTOR decimal(11, 4) = 1.4
@@ -36,13 +38,12 @@ begin
 	--!
 	--! We need to start by setting up three completely identical records
 	--! (the Uniqueifier will then be based on the REC_ID which is a GUID)
-	--! Then we update a value one of the records (that is not already
+	--! Then we update a value for one of the records (that is not already
 	--! preferred) and validate that the Uniqueifier reflects the change
 	--!
 	declare @_I001A_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001A_InvoiceKey int
-		, @_I001A_DeltaHashOnInsert char(32)
-		, @_I001A_DeltaHashOnUpdate char(32)
+		, @_I001A_DeltaHash char(32)
 		-----------------------------------------------------------
 		--! This is effectively the business key that the ETL process will lookup
 		, @_I001A_INVOICE_NUMBER nvarchar(20) = 'IN001'
@@ -55,12 +56,10 @@ begin
 		, @_I001A_INVOICE_QUANTITY decimal(12, 2) = 1234.12
 		, @_I001A_INVOICE_AMOUNT decimal(15, 4) = 1234.23
 		, @_I001A_GROUP_AMOUNT decimal(15, 4) = 1234.45
-		, @_I001A_DuplicateCount int  = 3
 
 	declare @_I001B_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001B_InvoiceKey int
-		, @_I001B_DeltaHashOnInsert char(32)
-		, @_I001B_DeltaHashOnUpdate char(32)
+		, @_I001B_DeltaHash char(32)
 		-----------------------------------------------------------
 		--! This is effectively the business key that the ETL process will lookup
 		, @_I001B_INVOICE_NUMBER nvarchar(20) = 'IN001'
@@ -73,12 +72,10 @@ begin
 		, @_I001B_INVOICE_QUANTITY decimal(12, 2) = 1234.12
 		, @_I001B_INVOICE_AMOUNT decimal(15, 4) = 1234.23
 		, @_I001B_GROUP_AMOUNT decimal(15, 4) = 1234.45
-		, @_I001B_DuplicateCount int  = 3
 
 	declare @_I001C_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001C_InvoiceKey int
-		, @_I001C_DeltaHashOnInsert char(32)
-		, @_I001C_DeltaHashOnUpdate char(32)
+		, @_I001C_DeltaHash char(32)
 		-----------------------------------------------------------
 		--! This is effectively the business key that the ETL process will lookup
 		, @_I001C_INVOICE_NUMBER nvarchar(20) = 'IN001'
@@ -91,7 +88,22 @@ begin
 		, @_I001C_INVOICE_QUANTITY decimal(12, 2) = 1234.12
 		, @_I001C_INVOICE_AMOUNT decimal(15, 4) = 1234.23
 		, @_I001C_GROUP_AMOUNT decimal(15, 4) = 1234.45
-		, @_I001C_DuplicateCount int  = 3
+
+	declare @_I001D_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
+		, @_I001D_InvoiceKey int
+		, @_I001D_DeltaHash char(32)
+		-----------------------------------------------------------
+		--! This is effectively the business key that the ETL process will lookup
+		, @_I001D_INVOICE_NUMBER nvarchar(20) = 'IN001'
+		, @_I001D_INVOICE_LINE_NUMBER nvarchar(20) = 'IN001-L1'
+		, @_I001D_ORDER_NUMBER nvarchar(20) = 'ON001'
+		, @_I001D_ORDER_LINE_NUMBER nvarchar(20)  = 'ON001-L1'
+		-----------------------------------------------------------
+		, @_I001D_INVOICE_DATE datetime = '20170710'
+		, @_I001D_ITEM_NO nvarchar(50) = 'B'
+		, @_I001D_INVOICE_QUANTITY decimal(12, 2) = 1234.12
+		, @_I001D_INVOICE_AMOUNT decimal(15, 4) = 1234.23
+		, @_I001D_GROUP_AMOUNT decimal(15, 4) = 1222.45
 
 	--! Fake all the source tables
 	exec Icopal_profBIS.tSQLt.FakeTable 'dbo.FLEXPARAMS' ;
@@ -162,18 +174,45 @@ begin
 	, @_I001C_INVOICE_QUANTITY, @_I001C_INVOICE_AMOUNT, @_I001C_GROUP_AMOUNT
 	)
 
-	--! Because privy.InvoiceDeltaHash() seems to generate the MD5 hash for the same values differently
-	--! when passing variables as opposed to reading columns, use privy.InvoiceRefresh to set the data up
-	--! It also requires fewer lines of code :-)
+	--! Call privy.InvoiceRefresh to set up the first three duplicates
 	exec privy.InvoiceRefresh @LoadStart = @_InsertedOn, @DebugLevel = 0 ;
 
-	--! Get the current Key and Hash values (we check later to ensure that the hash changes for all updated records)
-	select @_I001A_InvoiceKey = InvoiceKey, @_I001A_DeltaHashOnInsert = EtlDeltaHash from stg.Invoice where REC_ID = @_I001A_REC_ID ;
-	select @_I001B_InvoiceKey = InvoiceKey, @_I001B_DeltaHashOnInsert = EtlDeltaHash from stg.Invoice where REC_ID = @_I001B_REC_ID ;
-	select @_I001C_InvoiceKey = InvoiceKey, @_I001C_DeltaHashOnInsert = EtlDeltaHash from stg.Invoice where REC_ID = @_I001C_REC_ID ;
+	--! Now add the new row at source
+	insert Icopal_profBIS.dbo.SA_INVOICE
+	(
+	  REC_ID
+	, SYSTEM_ID
+	, SITE_SOLD
+	, INVOICE_NUMBER
+	, INVOICE_LINE_NUMBER
+	, ORDER_NUMBER
+	, ORDER_LINE_NUMBER
+	, INVOICE_DATE
+	, INVOICE_TYPE
+	, ITEM_NO
+	, INVOICE_QUANTITY
+	, INVOICE_AMOUNT
+	, GROUP_AMOUNT
+	)
+	values
+	(
+	  @_I001D_REC_ID, @_SYSTEM_ID, @_LOCAL_SITE_SOLD
+	, @_I001D_INVOICE_NUMBER, @_I001D_INVOICE_LINE_NUMBER, @_I001D_ORDER_NUMBER, @_I001D_ORDER_LINE_NUMBER
+	, @_I001D_INVOICE_DATE, @_INVOICE_TYPE, @_I001D_ITEM_NO
+	, @_I001D_INVOICE_QUANTITY, @_I001D_INVOICE_AMOUNT, @_I001D_GROUP_AMOUNT
+	)
+
+	--! Run InvoiceRefresh again to pick up the new duplicate then get the key and hash values
+	exec privy.InvoiceRefresh @LoadStart = @_ModifiedOn, @DebugLevel = 0 ;
+
+	--! Get the latest Key and Hash values (so we can use them in our expected results)
+	select @_I001A_InvoiceKey = InvoiceKey, @_I001A_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001A_REC_ID ;
+	select @_I001B_InvoiceKey = InvoiceKey, @_I001B_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001B_REC_ID ;
+	select @_I001C_InvoiceKey = InvoiceKey, @_I001C_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001C_REC_ID ;
+	select @_I001D_InvoiceKey = InvoiceKey, @_I001D_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001D_REC_ID ;
 
 	--! Get the ranking for each row (from which we can derive the Uniqueifier)
-	declare @_I001A_Uniqueifier bigint = 0, @_I001B_Uniqueifier bigint = 0, @_I001C_Uniqueifier bigint = 0;
+	declare @_I001A_Uniqueifier bigint = 0, @_I001B_Uniqueifier bigint = 0, @_I001C_Uniqueifier bigint = 0, @_I001D_Uniqueifier bigint = 1;
 
 	; with guidsCte (RecordId, InvoiceKey)
 	as
@@ -203,8 +242,11 @@ begin
 	insert #expected
 	(
 	  InvoiceKey
+	, EtlDeltaHash
 	, EtlCreatedOn
 	, EtlUpdatedOn
+	, EtlDeletedOn
+	, IsDeleted
 	, REC_ID
 	, Uniqueifier
 	, GROUP_AMOUNT
@@ -212,67 +254,53 @@ begin
 	)
 		select
 			  @_I001B_InvoiceKey
+			, @_I001B_DeltaHash
 			, @_InsertedOn
 			, @_InsertedOn
+			, case @_I001B_Uniqueifier when 1 then @_ModifiedOn else @_InsertedOn end
+			, 'Y'
 			, @_I001B_REC_ID
-			, @_I001B_Uniqueifier
+			, @_I001B_Uniqueifier + 1
 			, @_I001B_GROUP_AMOUNT
-			, @_I001B_DuplicateCount
+			, 4
 	union all
 		select
 			  @_I001A_InvoiceKey
+			, @_I001A_DeltaHash
 			, @_InsertedOn
 			, @_InsertedOn
+			, case @_I001A_Uniqueifier when 1 then @_ModifiedOn else @_InsertedOn end
+			, 'Y'
 			, @_I001A_REC_ID
-			, @_I001A_Uniqueifier
+			, @_I001A_Uniqueifier + 1
 			, @_I001A_GROUP_AMOUNT
-			, @_I001A_DuplicateCount
+			, 4
 	union all
 		select
 			  @_I001C_InvoiceKey
+			, @_I001C_DeltaHash
 			, @_InsertedOn
 			, @_InsertedOn
+			, case @_I001C_Uniqueifier when 1 then @_ModifiedOn else @_InsertedOn end
+			, 'Y'
 			, @_I001C_REC_ID
-			, @_I001C_Uniqueifier
+			, @_I001C_Uniqueifier + 1
 			, @_I001C_GROUP_AMOUNT
-			, @_I001C_DuplicateCount
-
-	exec tSQLt.AssertEqualsTable '#expected', 'stg.Invoice', ' One or more values do not match the expected result after the initial invoice refresh'
-
-	--!
-	--! Now update the values 
-	--! Find out which one is currently ranked 3nd and change something so that
-	--! it changes to first (and the other Uniquifiers should also change.
-	--!
-	declare @_REC_ID uniqueidentifier = (select REC_ID from stg.Invoice where Uniqueifier = 3)
-
-	--! Change a source value for the record of interest
-	update Icopal_profBIS.dbo.SA_INVOICE set GROUP_AMOUNT = GROUP_AMOUNT + 10 where REC_ID = @_REC_ID;
-	
-	--! Updated the record of interest in the expected data set
-	update #expected set GROUP_AMOUNT = GROUP_AMOUNT + 10, Uniqueifier = 1, EtlUpdatedOn = @_ModifiedOn where REC_ID = @_REC_ID;
-
-	--! We expect the Uniqueifier to change for non-preferred records too
-	update #expected set Uniqueifier = Uniqueifier + 1 where REC_ID <> @_REC_ID
-
-	--! Act - run InvoiceRefresh again to pick up the changes
-	exec privy.InvoiceRefresh @LoadStart = @_ModifiedOn, @DebugLevel = 0 ;
+			, 4
+	union all
+		select
+			  @_I001D_InvoiceKey
+			, @_I001D_DeltaHash
+			, @_ModifiedOn
+			, @_ModifiedOn
+			, NULL
+			, 'N'
+			, @_I001D_REC_ID
+			, 1
+			, @_I001D_GROUP_AMOUNT
+			, 4
 
 	exec tSQLt.AssertEqualsTable '#expected', 'stg.Invoice', ' One or more values do not match the expected result after the updating invoice refresh'
-
-	--! Get the new Hash values so we can make sure they've all been updated
-	select @_I001A_DeltaHashOnUpdate = EtlDeltaHash from stg.Invoice where REC_ID = @_I001A_REC_ID ;
-	select @_I001B_DeltaHashOnUpdate = EtlDeltaHash from stg.Invoice where REC_ID = @_I001B_REC_ID ;
-	select @_I001C_DeltaHashOnUpdate = EtlDeltaHash from stg.Invoice where REC_ID = @_I001C_REC_ID ;
-
-	if @_I001A_DeltaHashOnUpdate = @_I001A_DeltaHashOnInsert
-		exec tSQLt.Fail @Message0 = N'Expected MD5 hash for I001A to be different but both hashes were identical' ;
-
-	if @_I001B_DeltaHashOnUpdate = @_I001B_DeltaHashOnInsert
-		exec tSQLt.Fail @Message0 = N'Expected MD5 hash for I001B to be different but both hashes were identical' ;
-
-	if @_I001C_DeltaHashOnUpdate = @_I001C_DeltaHashOnInsert
-		exec tSQLt.Fail @Message0 = N'Expected MD5 hash for I001C to be different but both hashes were identical' ;
 
 	--! Act - run InvoiceRefresh one last time to ensure we are not making unnecessary changes
 	set @_ModifiedOn = dateadd(hour, 1, @_ModifiedOn);

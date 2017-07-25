@@ -43,7 +43,6 @@ begin
 		, @_ModifiedBy varchar(200) = '[privy].[InvoiceRefresh]'
 		, @_STD_ITEM_CATEGORY_ID int = 46247
 		, @_STD_PAYMENT_TERM_ID int = 152
-		, @_IsDeleted char(1) = 'N'
 		, @_LOCAL_UOM nvarchar(20) = 'X'
 		, @_LOCAL_UOM_HARMONIZED nvarchar(20) = 'Y'
 		, @_LOCAL_UOM_FACTOR decimal(11, 4) = 1.4
@@ -55,6 +54,7 @@ begin
 	declare @_I001A_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001A_InvoiceKey int
 		, @_I001A_DeltaHash char(32)
+		, @_I001A_IsDeleted char(1) = 'Y'
 		-----------------------------------------------------------
 		--! This is effectively the business key that the ETL process will lookup
 		, @_I001A_INVOICE_NUMBER nvarchar(20) = 'IN001'
@@ -73,6 +73,7 @@ begin
 	declare @_I001B_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001B_InvoiceKey int
 		, @_I001B_DeltaHash char(32)
+		, @_I001B_IsDeleted char(1) = 'N'
 		-----------------------------------------------------------
 		--! This is effectively the business key that the ETL process will lookup
 		, @_I001B_INVOICE_NUMBER nvarchar(20) = 'IN001'
@@ -91,6 +92,7 @@ begin
 	declare @_I001C_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001C_InvoiceKey int
 		, @_I001C_DeltaHash char(32)
+		, @_I001C_IsDeleted char(1) = 'Y'
 		-----------------------------------------------------------
 		--! This is effectively the business key that the ETL process will lookup
 		, @_I001C_INVOICE_NUMBER nvarchar(20) = 'IN001'
@@ -222,7 +224,7 @@ begin
 	, @_ModifiedBy
 	, @_InsertedOn
 	, @_ModifiedBy
-	, @_IsDeleted
+	, @_I001B_IsDeleted
 	, @_I001B_REC_ID
 	, @_SYSTEM_ID
 	, @_I001B_INVOICE_DATE
@@ -246,7 +248,7 @@ begin
 	, @_ModifiedBy
 	, @_InsertedOn
 	, @_ModifiedBy
-	, @_IsDeleted
+	, @_I001A_IsDeleted
 	, @_I001A_REC_ID
 	, @_SYSTEM_ID
 	, @_I001A_INVOICE_DATE
@@ -270,7 +272,7 @@ begin
 	, @_ModifiedBy
 	, @_InsertedOn
 	, @_ModifiedBy
-	, @_IsDeleted
+	, @_I001C_IsDeleted
 	, @_I001C_REC_ID
 	, @_SYSTEM_ID
 	, @_I001C_INVOICE_DATE

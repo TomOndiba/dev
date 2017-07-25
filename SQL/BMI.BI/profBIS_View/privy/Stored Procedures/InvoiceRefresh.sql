@@ -31,7 +31,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 002		13-JUL-2017		GML		BSR-101	Revised Uniquifier logic to prefer most recently updated active duplicate
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-003		25-JUL-2017		GML		BSR-132	Further revised Uniquifier logic mark all non-preferred dupes as inactive
+003		25-JUL-2017		GML		BSR-132	Further revised Uniqueifier logic mark all non-preferred dupes as inactive
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/

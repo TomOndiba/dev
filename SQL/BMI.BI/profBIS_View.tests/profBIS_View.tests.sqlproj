@@ -65,6 +65,7 @@
     <Folder Include="Test Classes" />
     <Folder Include="privy-InvoiceRefreshTests\" />
     <Folder Include="CLR" />
+    <Folder Include="etl-ViewTests\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tSQLt\Private_RenamedObjectLog.sql" />
@@ -211,6 +212,13 @@
     <Build Include="privy-InvoiceRefreshTests\test identifies preferred dupe by latest ETL update on same invoice dates.sql" />
     <Build Include="privy-InvoiceRefreshTests\test preferred dupe is the only active copy on update.sql" />
     <Build Include="privy-InvoiceRefreshTests\test preferred dupe is the only active copy on insert.sql" />
+    <Build Include="etl-ViewTests\test InvoiceDelta excludes rows with no DeltaHash difference.sql" />
+    <Build Include="etl-ViewTests\test InvoiceDelta includes preferred new duplicate record.sql" />
+    <Build Include="etl-ViewTests\test InvoiceDelta includes changed singleton records.sql" />
+    <Build Include="etl-ViewTests\test InvoiceDelta includes new singleton records.sql" />
+    <Build Include="etl-ViewTests\test InvoiceDelta includes duplicates with material changes only.sql" />
+    <Build Include="etl-ViewTests\test InvoiceDelta includes rows with only IsDeleted different.sql" />
+    <Build Include="etl-ViewTests.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="profBIS_View.tests.sandbox.publish.xml" />

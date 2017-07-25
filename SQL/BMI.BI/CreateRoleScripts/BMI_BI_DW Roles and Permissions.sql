@@ -257,6 +257,7 @@ if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [AppD
 if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [AppDevelopersPROD];');
 if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [AppDevelopersPROD];');
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [AppDevelopersPROD];');
+if schema_id('pbi') is not null exec (N'grant select on schema :: [pbi] to [AppDevelopersPROD];');
 go
 
 --!
@@ -287,5 +288,6 @@ if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [Busi
 if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [BusinessAnalystsPROD];');
 if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [BusinessAnalystsPROD];');
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [BusinessAnalystsPROD];');
+if schema_id('pbi') is not null exec (N'grant select on schema :: [pbi] to [BusinessAnalystsPROD];');
 go
 

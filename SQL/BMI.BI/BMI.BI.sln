@@ -11,10 +11,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BI_DW", "BMI_BI_DW\BMI_
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateDatabaseScripts", "CreateDatabaseScripts", "{212DC471-3BA2-40BD-946A-7289315BE6F9}"
 	ProjectSection(SolutionItems) = preProject
-		CreateDatabaseScripts\BMI_BI_DW Create Database.sql = CreateDatabaseScripts\BMI_BI_DW Create Database.sql
-		CreateDatabaseScripts\BMI_BI_DW Database Options.sql = CreateDatabaseScripts\BMI_BI_DW Database Options.sql
-		CreateDatabaseScripts\BMI_BI_MART Create Database.sql = CreateDatabaseScripts\BMI_BI_MART Create Database.sql
-		CreateDatabaseScripts\BMI_BI_MART Database Options.sql = CreateDatabaseScripts\BMI_BI_MART Database Options.sql
+		CreateDatabaseScripts\BMI_BI_DW Database.Alter.sql = CreateDatabaseScripts\BMI_BI_DW Database.Alter.sql
+		CreateDatabaseScripts\BMI_BI_DW Database.Create.sql = CreateDatabaseScripts\BMI_BI_DW Database.Create.sql
+		CreateDatabaseScripts\BMI_BI_DW Database.Options.sql = CreateDatabaseScripts\BMI_BI_DW Database.Options.sql
+		CreateDatabaseScripts\BMI_BI_MART Database.Alter.sql = CreateDatabaseScripts\BMI_BI_MART Database.Alter.sql
+		CreateDatabaseScripts\BMI_BI_MART Database.Create.sql = CreateDatabaseScripts\BMI_BI_MART Database.Create.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateLoginScripts", "CreateLoginScripts", "{E09ED1C5-6287-4341-943E-8D1F717FAA2E}"

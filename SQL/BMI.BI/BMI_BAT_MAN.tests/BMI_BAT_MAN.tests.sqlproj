@@ -92,6 +92,32 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart throws error on %40ProcessName empty.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart returns expected resultset.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunStart calls ExceptionalHandler on error.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40SubProcessRunID zero.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40SubProcessRunID null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40MappingName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40MappingName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40MappingConfigTaskName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40MappingConfigTaskName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart returns expected resultset.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart calls ExceptionalHandler on error.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40ThreadRunID zero.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40ThreadRunID null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40SuccessTargetRows null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40SuccessSourceRows null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40MappingName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40MappingName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40MappingConfigTaskName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40MappingConfigTaskName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40FailedTargetRows null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40FailedSourceRows null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40EndState null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40EndState empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40EndState _SUCCESS_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40EndState _ERRORED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd does not throw error on %40EndMessage optional.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd calls ExceptionalHandler on error.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd accepts %40EndState _SUCCEEDED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd accepts %40EndState _FAILED_.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

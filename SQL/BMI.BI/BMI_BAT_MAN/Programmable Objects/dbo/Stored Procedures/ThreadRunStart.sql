@@ -1,16 +1,18 @@
-IF OBJECT_ID('[dbo].[SubProcessRunStart]') IS NOT NULL
-	DROP PROCEDURE [dbo].[SubProcessRunStart];
+﻿IF OBJECT_ID('[dbo].[ThreadRunStart]') IS NOT NULL
+	DROP PROCEDURE [dbo].[ThreadRunStart];
 
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-CREATE  PROCEDURE [dbo].[SubProcessRunStart]
-( @ProcessName VARCHAR(200) 
- ,@SubProcessName  VARCHAR(200) 
- ,@ProcessRunID  INT 
- )
+CREATE   PROCEDURE [dbo].[ThreadRunStart]
+(
+   
+ @MappingName VARCHAR(200) 
+, @MappingConfigTaskName VARCHAR(200) 
+, @SubProcessRunID VARCHAR(200)
+)
 
 AS
 --<CommentHeader>
@@ -18,7 +20,7 @@ AS
 
 Properties
 ==========
-PROCEDURE NAME:		IcsApp.SubProcessRunStart
+PROCEDURE NAME:		IcsApp.ThreadRunStart
 DESCRIPTION:		POC stub procedure
 ORIGIN DATE:		24-JUL-2017
 ORIGINAL AUTHOR:	Razia Nazir
@@ -29,21 +31,20 @@ Returns
 
 Additional Notes
 ================
-Stubs 
+Stubs
 
 REVISION HISTORY
 =====================================================================================================================
 Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
-001		24-JUL-2017		RN		N/A		Created
+001		11-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-
 **********************************************************************************************************************/
 --</CommentHeader>
 
 BEGIN
 	set nocount on;
-	
+
 	--! Standard/ExceptionHandler variables
 	declare	@_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid));
 	declare	@_Error int = 0;
@@ -54,71 +55,80 @@ BEGIN
 	declare	@_SprocStartTime datetime = getdate()
 	declare	@_StepStartTime datetime
 	declare	@_StepEndTime datetime
-	declare	@_Step varchar(128);
+	declare	@_step varchar(128);
 	declare	@_ProgressMessage varchar(2000)
 	declare	@_ExceptionId int
-	declare @_ProgressLog varchar(max);
+	declare @_ProgressLog nvarchar(max);
 	declare @_RowsAffected int = 0;
-	declare @_SubProcessRunId int = null;
-	declare @_Instruction varchar(255) = null; -- RUN/SKIP/STOP/ERROR
+	declare @_ThreadRunId int = null;
+	declare @_Instruction varchar(8) = null; -- RUN/SKIP/STOP/ERROR
 	declare @_RunType varchar(8) = null; -- DELTA/FULL
-	declare	@_CompletionMessage varchar(500) = null;
+	declare	@_CompletionMessage varchar(500) = null
+	declare @_StartCapturePoint datetime;
+	declare @_EndCapturePoint datetime;
 
 	set @_ProgressMessage = @_FunctionName
 			+ ' starting at ' + coalesce(convert(varchar(24), @_SprocStartTime, 120), '') + ' with inputs: '
-				+ char(10) + '    Process Name                     : ' + coalesce(@ProcessName, 'NULL')
-				+ char(10) + '    Process Run ID	                   : ' + CAST(coalesce(@ProcessRunID, 0) AS VARCHAR(255))
-
+			
+				+ char(10) + '    Mapping Name                     : ' + coalesce(@MappingName, 'NULL')
+				+ char(10) + '    Mapping Configuration Task Name  : ' + coalesce(@MappingConfigTaskName, 'NULL')
+				+ char(10) + '    Sub Process Run ID               : ' + CAST(coalesce(@SubProcessRunID, 0) AS VARCHAR(255))
+				+ char(10)
 	set @_ProgressLog = @_ProgressMessage;
 
 	BEGIN TRY
-		set @_Step = 'Validate Inputs';
+		set @_step= 'Validate Inputs';
 		set @_StepStartTime = getdate();
 
-		IF COALESCE(@ProcessName, '') = ''		RAISERROR ('ProcessName can not be null or empty',16,1)
-		IF COALESCE(@ProcessRunID, 0) = 0		RAISERROR ('MappingName can not be null or zero',16,1)
-		IF COALESCE(@SubProcessName, '') = ''	RAISERROR ('MappingName can not be null or empty',16,1)
-		
-		set @_Step = 'Build output values';
+		IF COALESCE(@MappingName, '') = '' RAISERROR ('MappingName can not be null or empty',16,1)
+		IF COALESCE(@MappingConfigTaskName, '') = '' RAISERROR ('MappingConfigTaskName can not be null or empty',16,1)
+		IF COALESCE(@SubProcessRunID, 0) = 0 RAISERROR ('ProcessRunID can not be null or zero',16,1)
+		--!
+		--!
+		--!
+		set @_step = 'Build output values';
 		set @_StepStartTime = getdate();
-	
-		
-		SELECT @_SubProcessRunId = [SubProcessRunID],
+
+		SELECT @_ThreadRunId = [ThreadRunID],
 			   @_RunType = RunType,
 			   @_Instruction = Instruction,
-			   @_CompletionMessage = [Message]
+			   @_CompletionMessage = [Message],
+			   @_StartCapturePoint=[StartCapturePoint],
+			   @_EndCapturePoint=[EndCapturePoint]
 		FROM dbo.StubResultSet
 		WHERE FunctionName = @_FunctionName;
-	
+
 		EXEC log4.JournalWriter
 			  @Task = 'POC'
 			, @FunctionName = @_FunctionName
-			, @StepInFunction = @_Step
+			, @StepInFunction = @_step
 			, @MessageText = @_CompletionMessage
 			, @ExtraInfo = @_ProgressLog
 			, @Severity = 1024 -- DEBUG
 
 		--! Return the results as a result set
-			SELECT
-			  @_SubProcessRunId AS [SubProcessRunId]
+		SELECT
+			  @_ThreadRunId AS [ThreadRunId]
 			, @_Instruction AS [Instruction]
 			, @_RunType AS [RunType]
 			, @_CompletionMessage AS [Message]
-		
-		END TRY
-	
+			,@_StartCapturePoint AS StartCapturePoint
+			,@_EndCapturePoint As EndCapturePoint
+	END TRY
 	BEGIN CATCH
-		SET @_ErrorContext = 'Failed to start new batch run at step: ' + COALESCE('[' + @_Step + ']', 'NULL')
-
+		SET @_ErrorContext = 'Failed to start new batch run at Step: ' + COALESCE('[' + @_step + ']', 'NULL')
+							
 		EXEC log4.ExceptionHandler
-				  @ErrorContext   = @_ErrorContext
-				, @ErrorProcedure = @_FunctionName
-				, @ErrorNumber    = @_Error OUT
-				, @ReturnMessage  = @_Message OUT
-				, @ExceptionId    = @_ExceptionId OUT
-
+			  @ErrorContext   = @_ErrorContext
+			, @ErrorProcedure = @_FunctionName
+			, @ErrorNumber    = @_Error OUT
+			, @ReturnMessage  = @_Message OUT
+			, @ExceptionId    = @_ExceptionId OUT
+			;
 	END CATCH
-	
+
+
+
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 EndEx:
 --/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,9 +136,10 @@ EndEx:
 	--! Finally, throw an exception that will be detected by the caller
 	IF @_Error > 0 RAISERROR(@_Message, 16, 99);
 	SET NOCOUNT OFF;
+	
+
 
 	--! Return the value of @@ERROR (which will be zero on success)
 	RETURN (@_Error);
-	
 END
 GO

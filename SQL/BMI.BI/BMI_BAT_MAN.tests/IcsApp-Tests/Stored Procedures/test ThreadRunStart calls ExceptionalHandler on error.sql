@@ -1,39 +1,37 @@
-﻿create procedure [IcsApp-Tests].[test ThreadRunStart calls ExceptionalHandler on error]
-as
-	begin
-		create table [IcsApp-Tests].Expected1
-		(
-			ErrorContext   nvarchar(512)  null
-		  , ErrorProcedure nvarchar(128)  null
-		  , ErrorNumber	   int			  null
-		  , ErrorSeverity  int			  null
-		  , ErrorState	   int			  null
-		  , ErrorLine	   int			  null
-		  , ErrorMessage   nvarchar(4000) null
-		  , ReturnMessage  nvarchar(1000) null
-		  , ExceptionId	   int			  null
-		) ;
+﻿CREATE      PROCEDURE [IcsApp-Tests].[test ThreadRunStart calls ExceptionalHandler on error]
+AS
+BEGIN
+	CREATE TABLE [IcsApp-Tests].Expected1
+	(
+	  ErrorContext		nvarchar(512)	NULL
+	, ErrorProcedure	nvarchar(128)	NULL
+	, ErrorNumber		int				NULL
+	, ErrorSeverity		INT				NULL
+	, ErrorState		INT				NULL
+	, ErrorLine			INT				NULL
+	, ErrorMessage		nvarchar(4000)	NULL
+	, ReturnMessage		NVARCHAR(1000)	NULL
+	, ExceptionId		int				NULL
+	)
 
-		insert into [IcsApp-Tests].Expected1
-		(
-			ErrorContext
-		  , ErrorProcedure
-		  , ErrorNumber
-		)
-		values
-		(
-			'Failed to start new batch run at step: [Validate Inputs]', '[dbo].[ThreadRunStart]', 0
-		) ;
 
-		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
+	INSERT INTO [IcsApp-Tests].Expected1  (ErrorContext, ErrorProcedure, ErrorNumber)
+	VALUES ('Failed to start new batch run at step: [Validate Inputs]', '[dbo].[ThreadRunStart]', 0)
 
-		exec dbo.ThreadRunStart
-			@MappingName = ''
-		  , @MappingConfigTaskName = 'd'
-		  , @SubProcessRunID = 1 ;
 
-		exec tSQLt.AssertEqualsTable
-			@Expected = '[IcsApp-Tests].Expected1'
-		  , @Actual = N'log4.ExceptionHandler_spyprocedureLog' ;
-	end ;
+
+	EXEC tSQLt.SpyProcedure N'log4.ExceptionHandler';
+
+	EXEC dbo.ThreadRunStart
+	@MappingName = '',
+	@MappingConfigTaskName = 'd',
+	@SubProcessRunID=1
+
+	EXEC tSQLt.AssertEqualsTable @Expected ='[IcsApp-Tests].Expected1'  ,   @Actual = N'log4.ExceptionHandler_spyprocedureLog'
+
+END;
+
+
+
+--EXEC  tsqlt.run '[IcsApp-Tests].[test ThreadRunStart calls ExceptionalHandler on error]'
 go

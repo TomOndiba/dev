@@ -118,6 +118,20 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd calls ExceptionalHandler on error.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd accepts %40EndState _SUCCEEDED_.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd accepts %40EndState _FAILED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd throws error on %40ProcessRunID zero.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd throws error on %40ProcessRunID null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd throws error on %40ProcessName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd throws error on %40ProcessName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd throws error on %40EndState null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd throws error on %40EndState empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd does not throw error on %40EndMessage optional.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd does not throw error on %40ChangeDataCaptureStart optional.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd does not throw error on %40ChangeDataCaptureEnd optional.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd calls ExceptionalHandler on error.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd accepts %40EndState _Succeeded_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd accepts %40EndState _Stopped_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd accepts %40EndState _Skipped_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd accepts %40EndState _FAILED_.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

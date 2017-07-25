@@ -21,6 +21,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		13-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+003		25-JUL-2017		GML		BSR-132	Revised filters to better reflect active/inactive duplicates
+------- ------------	------	-------	-----------------------------------------------------------------------------
 
 
 **********************************************************************************************************************/
@@ -127,22 +129,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 	left join stg.PaymentTerm as pt
 		on pt.NativePaymentTermKey = cast(i.PAYMENT_TERM_ID as nvarchar(50))
 	where
-			(
-				--! Exclude any duplicates based on SYSTEM_ID, ORDER_NUMBER and ORDER_LINE_NUMBER
-					i.Uniqueifier = 1
-				and
-					(
-							ctrl.InvoiceKey is null --! New Orders (not yet added to control)
-						or ctrl.PreviousDeltaHash <> i.EtlDeltaHash -- Existing Orders that have been updated
-					)
-			)
-			--! Get any records that have been deleted in the last 5 days
-		or
-			(
-					ctrl.LastTouchedOn < dateadd(day, -1, getdate())
-				and
-					ctrl.IsDeleted <> i.IsDeleted --! Orders that have been soft-deleted or (possibly) re-activated
-			)
+			(i.Uniqueifier = 1 and ctrl.InvoiceKey is null) --! New Invoices (not yet added to control)
+		or (i.Uniqueifier = 1 and ctrl.PreviousDeltaHash <> i.EtlDeltaHash) --! Existing Invoices that have been updated
+		or (ctrl.IsDeleted <> i.IsDeleted) --! Invoices that have been soft-deleted or (possibly) re-activated
 go
 execute sp_addextendedproperty @name = N'MS_Description'
 , @value = 'Exposes Invoice changes (new, changed and deleted) in the format best suited to populate the Interim Data Warehouse/Mart'

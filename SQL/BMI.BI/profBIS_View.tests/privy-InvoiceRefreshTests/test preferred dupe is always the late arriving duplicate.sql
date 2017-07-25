@@ -55,7 +55,6 @@ begin
 		, @_I001A_INVOICE_QUANTITY decimal(12, 2) = 1234.12
 		, @_I001A_INVOICE_AMOUNT decimal(15, 4) = 1234.23
 		, @_I001A_GROUP_AMOUNT decimal(15, 4) = 1234.45
-		, @_I001A_Uniqueifier bigint = 0
 
 	declare @_I001B_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001B_InvoiceKey int
@@ -72,7 +71,6 @@ begin
 		, @_I001B_INVOICE_QUANTITY decimal(12, 2) = 1234.12
 		, @_I001B_INVOICE_AMOUNT decimal(15, 4) = 1234.23
 		, @_I001B_GROUP_AMOUNT decimal(15, 4) = 1234.45
-		, @_I001B_Uniqueifier bigint = 0
 
 	declare @_I001C_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001C_InvoiceKey int
@@ -89,7 +87,6 @@ begin
 		, @_I001C_INVOICE_QUANTITY decimal(12, 2) = 1234.12
 		, @_I001C_INVOICE_AMOUNT decimal(15, 4) = 1234.23
 		, @_I001C_GROUP_AMOUNT decimal(15, 4) = 1234.45
-		, @_I001C_Uniqueifier bigint = 0
 
 	declare @_I001D_REC_ID uniqueidentifier = newid()-- QlikView surrogate key
 		, @_I001D_InvoiceKey int
@@ -106,33 +103,6 @@ begin
 		, @_I001D_INVOICE_QUANTITY decimal(12, 2) = 1234.12
 		, @_I001D_INVOICE_AMOUNT decimal(15, 4) = 1234.23
 		, @_I001D_GROUP_AMOUNT decimal(15, 4) = 1222.45
-		, @_I001D_Uniqueifier bigint = 1
-
-	--! Because GUID's aren't sequential, we need to work out
-	--! the Uniqueifier order for each test execution but
-	--! increment by 1 to take account of the late arrive duplicate
-	; with guidsCte (RecordId)
-	as
-	(
-				  select @_I001A_REC_ID
-		union all select @_I001B_REC_ID
-		union all select @_I001C_REC_ID
-	)
-	, rankedCte (RecordId, Ranking)
-	as
-	(
-		select
-			  RecordId
-			, row_number() over(order by RecordId asc)
-		from
-			guidsCte
-	)
-	select
-		  @_I001A_Uniqueifier = case when RecordId = @_I001A_REC_ID then Ranking + 1 else @_I001A_Uniqueifier end
-		, @_I001B_Uniqueifier = case when RecordId = @_I001B_REC_ID then Ranking + 1 else @_I001B_Uniqueifier end
-		, @_I001C_Uniqueifier = case when RecordId = @_I001C_REC_ID then Ranking + 1 else @_I001C_Uniqueifier end
-	from
-		rankedCte ;
 
 	--! Fake all the source tables
 	exec Icopal_profBIS.tSQLt.FakeTable 'dbo.FLEXPARAMS' ;
@@ -239,6 +209,33 @@ begin
 	select @_I001B_InvoiceKey = InvoiceKey, @_I001B_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001B_REC_ID ;
 	select @_I001C_InvoiceKey = InvoiceKey, @_I001C_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001C_REC_ID ;
 	select @_I001D_InvoiceKey = InvoiceKey, @_I001D_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001D_REC_ID ;
+
+	--! Get the ranking for each row (from which we can derive the Uniqueifier)
+	declare @_I001A_Uniqueifier bigint = 0, @_I001B_Uniqueifier bigint = 0, @_I001C_Uniqueifier bigint = 0, @_I001D_Uniqueifier bigint = 1;
+
+	; with guidsCte (RecordId, InvoiceKey)
+	as
+	(
+				  select @_I001A_REC_ID, @_I001A_InvoiceKey
+		union all select @_I001B_REC_ID, @_I001B_InvoiceKey
+		union all select @_I001C_REC_ID, @_I001C_InvoiceKey
+	)
+	, rankedCte (RecordId, InvoiceKey, Ranking)
+	as
+	(
+		select
+			  RecordId
+			, InvoiceKey
+			, row_number() over(order by InvoiceKey desc)
+		from
+			guidsCte
+	)
+	select
+		  @_I001A_Uniqueifier = case when RecordId = @_I001A_REC_ID then Ranking + 1 else @_I001A_Uniqueifier end
+		, @_I001B_Uniqueifier = case when RecordId = @_I001B_REC_ID then Ranking + 1 else @_I001B_Uniqueifier end
+		, @_I001C_Uniqueifier = case when RecordId = @_I001C_REC_ID then Ranking + 1 else @_I001C_Uniqueifier end
+	from
+		rankedCte ;
 
 	--! What do we expect to see?
 	insert #expected

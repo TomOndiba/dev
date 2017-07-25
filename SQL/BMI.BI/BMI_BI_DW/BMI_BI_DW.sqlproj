@@ -312,6 +312,7 @@ Static Data;
     <Folder Include="Schema-Model\tsa\" />
     <Folder Include="Schema-Model\tsa\Tables\" />
     <Folder Include="Migrations\1.0.1" />
+    <Folder Include="Migrations\1.0.2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -505,6 +506,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.1\010_AddColumn_InvoiceQuantityConformed.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.2\001_GrantExtraRolesSelectOnPbiSchema.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

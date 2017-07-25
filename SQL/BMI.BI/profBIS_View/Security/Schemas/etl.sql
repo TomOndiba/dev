@@ -10,6 +10,8 @@
 
 
 
+
+
 GO
 GRANT SELECT
     ON SCHEMA::[etl] TO [EtlReaders];

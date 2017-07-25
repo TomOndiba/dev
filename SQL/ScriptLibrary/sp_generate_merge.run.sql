@@ -1,0 +1,21 @@
+exec sp_generate_merge
+	  @table_name = 'TranslationStatus' -- varchar(776) The table/view for which the MERGE statement will be generated using the existing data
+	, @target_table = null -- varchar(776) Use this parameter to specify a different table name into which the data will be inserted/updated/deleted
+	, @from = null -- varchar(800) Use this parameter to filter the rows based on a filter condition (using WHERE)
+	, @include_timestamp = 0 -- bit Specify 1 for this parameter, if you want to include the TIMESTAMP/ROWVERSION column's data in the MERGE statement
+	, @debug_mode = 0 -- bit If @debug_mode is set to 1, the SQL statements constructed by this procedure will be printed for later examination
+	, @schema = 'dbo' -- varchar(64) Use this parameter if you are not the owner of the table
+	, @ommit_images = 0 -- bit Use this parameter to generate MERGE statement by omitting the 'image' columns
+	, @ommit_identity = 0 -- bit Use this parameter to ommit the identity columns
+	, @top = null -- int Use this parameter to generate a MERGE statement only for the TOP n rows
+	, @cols_to_include = null -- varchar(8000) List of columns to be included in the MERGE statement
+	, @cols_to_exclude = null -- varchar(8000) List of columns to be excluded from the MERGE statement
+	, @update_only_if_changed = 1 -- bit When 1, only performs an UPDATE operation if an included column in a matched row has changed.
+	, @delete_if_not_matched = 1 -- bit When 1, deletes unmatched source rows from target, when 0 source rows will only be used to update existing rows or insert new.
+	, @disable_constraints = 0 -- bit When 1, disables foreign key constraints and enables them after the MERGE statement
+	, @ommit_computed_cols = 0 -- bit When 1, computed columns will not be included in the MERGE statement
+	, @include_use_db = 1 -- bit When 1, includes a USE [DatabaseName] statement at the beginning of the generated batch
+	, @results_to_text = 0 -- bit When 1, outputs results to grid/messages window. When 0, outputs MERGE statement in an XML fragment.
+	, @include_rowsaffected = 1 -- bit When 1, a section is added to the end of the batch which outputs rows affected by the MERGE
+	, @nologo = 0 -- bit When 1, the "About" comment is suppressed from output
+	, @batch_separator = 'GO' -- varchar(50) Batch separator to use

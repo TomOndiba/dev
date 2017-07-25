@@ -1,4 +1,4 @@
-﻿create procedure [privy].[InvoiceRefresh]
+﻿CREATE procedure [privy].[InvoiceRefresh]
 (
   @LoadStart datetime
 , @DebugLevel tinyint = 0
@@ -30,6 +30,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 001		13-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 002		13-JUL-2017		GML		BSR-101	Revised Uniquifier logic to prefer most recently updated active duplicate
+------- ------------	------	-------	-----------------------------------------------------------------------------
+003		25-JUL-2017		GML		BSR-132	Further revised Uniqueifier logic mark all non-preferred dupes as inactive
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
@@ -332,6 +334,7 @@ begin
 					, inv.STD_FREIGHT
 					) as [EtlDeltaHash]
 				---------------------------------------------------------------------------------------------------
+				, coalesce(tgt.Uniqueifier, 1) as [CurrentUniqueifier]
 			from
 				[$(Icopal_profBIS)].dbo.SA_INVOICE as inv
 			inner join [$(Icopal_profBIS)].dbo.PU_LINK_SITE as ssite
@@ -484,12 +487,12 @@ begin
 			, src.STD_FREIGHT
 			)
 		--! If any value has changed or a previously soft-deleted record re-appears then update
-		when matched and tgt.EtlDeltaHash <> src.EtlDeltaHash or tgt.IsDeleted = 'Y'
+		when matched and tgt.EtlDeltaHash <> src.EtlDeltaHash or (tgt.IsDeleted = 'Y' and src.CurrentUniqueifier = 1)
 			then update set
 					  tgt.EtlDeltaHash = src.EtlDeltaHash
 					, tgt.EtlUpdatedOn = @LoadStart
 					, tgt.EtlUpdatedBy = @_FunctionName
-					, tgt.IsDeleted = 'N'
+					, tgt.IsDeleted = case when src.CurrentUniqueifier > 1 then 'Y' else 'N' end
 					, tgt.SYSTEM_ID = src.SYSTEM_ID
 					, tgt.INVOICE_NUMBER = src.INVOICE_NUMBER
 					, tgt.INVOICE_LINE_NUMBER = src.INVOICE_LINE_NUMBER
@@ -564,8 +567,7 @@ begin
 		set @_StepStartTime = getdate();
 		declare @_UniquifierRowsAffected int;
 		--!
-		--! Start by finding all duplicates based on SYSTEM_ID, INVOICE_NUMBER,
-		--! ORDER_NUMBER, INVOICE_LINE_NUMBER and ORDER_LINE_NUMBER
+		--! Start by finding all duplicates based on SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER and ORDER_LINE_NUMBER
 		--!
 		;with dupesCte
 		as
@@ -601,7 +603,7 @@ begin
 				, i.REC_ID
 				, i.INVOICE_DATE
 				, i.EtlUpdatedOn
-				, row_number() over (partition by d.SYSTEM_ID, d.INVOICE_NUMBER, d.ORDER_NUMBER, d.INVOICE_LINE_NUMBER, d.ORDER_LINE_NUMBER order by i.IsDeleted asc, i.INVOICE_DATE desc, i.EtlUpdatedOn desc, i.REC_ID) as [Uniqueifier]
+				, row_number() over (partition by d.SYSTEM_ID, d.INVOICE_NUMBER, d.ORDER_NUMBER, d.INVOICE_LINE_NUMBER, d.ORDER_LINE_NUMBER order by i.INVOICE_DATE desc, i.EtlUpdatedOn desc, i.InvoiceKey desc) as [Uniqueifier]
 			from
 				dupesCte as d
 			inner join stg.Invoice as i
@@ -684,8 +686,29 @@ begin
 			, tgt.DuplicateCount = src.DupeCount
 			, tgt.EtlDeltaHash = src.EtlDeltaHash
 			, tgt.EtlUpdatedBy = @_FunctionName
+			---------------------------------------------------------------------------------------------------
 			--! As we use EtlUpdatedOn to find recently updated duplicates only set this for the preferred record
 			, tgt.EtlUpdatedOn = case when src.Uniqueifier = 1 then @LoadStart else tgt.EtlUpdatedOn end
+			---------------------------------------------------------------------------------------------------
+			--! Only the most preferred record of any duplicate should be active
+			, tgt.IsDeleted = case
+								when tgt.IsDeleted = 'Y' and src.Uniqueifier = 1 then 'N'
+								when tgt.IsDeleted = 'N' and src.Uniqueifier > 1 then 'Y'
+								else tgt.IsDeleted
+							  end
+			---------------------------------------------------------------------------------------------------
+			, tgt.EtlDeletedOn = case
+									when tgt.IsDeleted = 'Y' and src.Uniqueifier = 1 then null
+									when tgt.IsDeleted = 'N' and src.Uniqueifier > 1 then @LoadStart
+									else tgt.EtlDeletedOn 
+								 end
+			---------------------------------------------------------------------------------------------------
+			, tgt.EtlDeletedBy = case
+									when tgt.IsDeleted = 'Y' and src.Uniqueifier = 1 then null
+									when tgt.IsDeleted = 'N' and src.Uniqueifier > 1 then @_FunctionName
+									else tgt.EtlDeletedBy
+								  end
+			---------------------------------------------------------------------------------------------------
 		from
 			stg.Invoice as tgt
 		inner join finalCte as src

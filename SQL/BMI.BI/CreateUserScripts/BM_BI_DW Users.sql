@@ -135,16 +135,16 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
 
 	--! App/Report Developers
-	, (1	, 'DEV'		, 'Tom.Manville@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Tom.Manville@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'tom.manville@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'tom.manville@icopal.com'					, 'dbo'	, 1	, 1)
 
 	--! Business Analysts/Testers/Management
 	, (1	, 'DEV'		, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Gary.Kearns@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Gary.Kearns@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
 
 	--! Supply Chain Users
 	, (1	, 'DEV'		, 'Amelie.Pogson@icopal.com'				, 'dbo'	, 1	, 1)
@@ -196,12 +196,12 @@ values ('', '')
 	, ('Jarek.Czujak@icopal.com'				, 'CodeReviewers')
 
 	--! App/Report Developers
-	, ('Tom.Manville@icopal.com'				, 'AppDevelopers')
+	, ('tom.manville@icopal.com'				, 'AppDevelopers')
 
 	--! Business Analysts/Testers/Management
 	, ('mark.bolton@icopal.com'					, 'BusinessAnalysts')
 	, ('bob.abildgaard-joergensen@icopal.com'	, 'BusinessAnalysts')
-	, ('Gary.Kearns@icopal.com'					, 'BusinessAnalysts')
+	, ('gary.kearns@icopal.com'					, 'BusinessAnalysts')
 
 	--! Supply Chain Users
 	, ('Amelie.Pogson@icopal.com'				, 'PowerBiReporters')

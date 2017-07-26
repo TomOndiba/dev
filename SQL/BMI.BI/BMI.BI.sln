@@ -49,6 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateLoginScripts", "Creat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateRoleScripts", "CreateRoleScripts", "{52BE18F2-7F4B-4D78-B956-C8879FED778A}"
 	ProjectSection(SolutionItems) = preProject
+		CreateRoleScripts\BMI_BAT_MAN Roles and Permissions.sql = CreateRoleScripts\BMI_BAT_MAN Roles and Permissions.sql
 		CreateRoleScripts\BMI_BI_DW Roles and Permissions.sql = CreateRoleScripts\BMI_BI_DW Roles and Permissions.sql
 		CreateRoleScripts\BMI_BI_MART Roles and Permissions.sql = CreateRoleScripts\BMI_BI_MART Roles and Permissions.sql
 		CreateRoleScripts\profBIS_View Roles and Role Permissions.sql = CreateRoleScripts\profBIS_View Roles and Role Permissions.sql
@@ -58,6 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateUserScripts", "Create
 	ProjectSection(SolutionItems) = preProject
 		CreateUserScripts\BM_BI_DW Users.sql = CreateUserScripts\BM_BI_DW Users.sql
 		CreateUserScripts\BM_BI_MART Users.sql = CreateUserScripts\BM_BI_MART Users.sql
+		CreateUserScripts\BMI_BAT_MAN Users.sql = CreateUserScripts\BMI_BAT_MAN Users.sql
 		CreateUserScripts\BMIBI_INFA_CACHE_DEV Users.sql = CreateUserScripts\BMIBI_INFA_CACHE_DEV Users.sql
 		CreateUserScripts\BMIBI_INFA_CACHE_PROD Users.sql = CreateUserScripts\BMIBI_INFA_CACHE_PROD Users.sql
 		CreateUserScripts\BMIBI_INFA_DOMAIN_DEV Users.sql = CreateUserScripts\BMIBI_INFA_DOMAIN_DEV Users.sql

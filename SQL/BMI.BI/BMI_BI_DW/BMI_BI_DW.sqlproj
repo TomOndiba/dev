@@ -313,6 +313,7 @@ Static Data;
     <Folder Include="Schema-Model\tsa\Tables\" />
     <Folder Include="Migrations\1.0.1" />
     <Folder Include="Migrations\1.0.2" />
+    <Folder Include="Migrations\1.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />

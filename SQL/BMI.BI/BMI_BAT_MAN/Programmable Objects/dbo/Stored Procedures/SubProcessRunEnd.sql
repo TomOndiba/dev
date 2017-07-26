@@ -1,18 +1,18 @@
-﻿IF OBJECT_ID('[dbo].[SubProcessRunEnd]') IS NOT NULL
-	DROP PROCEDURE [dbo].[SubProcessRunEnd];
+﻿if object_id('[dbo].[SubProcessRunEnd]') is not null
+	drop procedure [dbo].[SubProcessRunEnd];
 
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-CREATE proc [dbo].[SubProcessRunEnd]
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create proc [dbo].[SubProcessRunEnd]
 (
 	@ProcessName		   varchar(255)
   , @SubProcessName		   varchar(255)
   , @SubProcessRunID		   int
   , @EndState			   varchar(255)
-  , @EndMessage			   varchar(255) = 'default'
+  , @EndMessage			   varchar(255) = null
   
 )
 as
@@ -109,4 +109,4 @@ begin
 	return (@_Error) ;
 
 end ;
-GO
+go

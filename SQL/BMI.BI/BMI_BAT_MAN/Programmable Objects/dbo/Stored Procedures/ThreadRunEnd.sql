@@ -1,18 +1,18 @@
-﻿IF OBJECT_ID('[dbo].[ThreadRunEnd]') IS NOT NULL
-	DROP PROCEDURE [dbo].[ThreadRunEnd];
+﻿if object_id('[dbo].[ThreadRunEnd]') is not null
+	drop procedure [dbo].[ThreadRunEnd];
 
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-CREATE proc [dbo].[ThreadRunEnd]
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create proc [dbo].[ThreadRunEnd]
 (
 	@MappingName		   varchar(255)
   , @MappingConfigTaskName varchar(255)
   , @ThreadRunID		   int
   , @EndState			   varchar(255)
-  , @EndMessage			   varchar(255) = 'default'
+  , @EndMessage			   varchar(255) = null
   , @SuccessSourceRows	   int
   , @FailedSourceRows	   int
   , @SuccessTargetRows	   int
@@ -118,4 +118,4 @@ begin
 	return (@_Error) ;
 
 end ;
-GO
+go

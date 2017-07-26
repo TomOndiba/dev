@@ -1,18 +1,18 @@
-﻿IF OBJECT_ID('[dbo].[SubProcessCheckThreads]') IS NOT NULL
-	DROP PROCEDURE [dbo].[SubProcessCheckThreads];
+﻿if object_id('[dbo].[SubProcessCheckThreads]') is not null
+	drop procedure [dbo].[SubProcessCheckThreads];
 
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-CREATE   PROCEDURE [dbo].[SubProcessCheckThreads]
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create   procedure [dbo].[SubProcessCheckThreads]
 ( 
-  @SubProcessName  VARCHAR(200) 
- ,@SubProcessRunID  INT 
+  @SubProcessName  varchar(200) 
+ ,@SubProcessRunID  int 
  )
 
-AS
+as
 --<CommentHeader>
 /**********************************************************************************************************************
 
@@ -41,7 +41,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 **********************************************************************************************************************/
 --</CommentHeader>
 
-BEGIN
+begin
 	set nocount on;
 	
 	--! Standard/ExceptionHandler variables
@@ -73,76 +73,78 @@ BEGIN
 
 	set @_ProgressMessage = @_FunctionName
 	+ ' starting at ' + coalesce(convert(varchar(24), @_SprocStartTime, 120), '') + ' with inputs: '
-	+ char(10) + '    Process Run ID	                   : ' + CAST(coalesce(@SubProcessRunID, 0) AS VARCHAR(255))
+	+ char(10) + '    Process Run ID	                   : ' + cast(coalesce(@SubProcessRunID, 0) as varchar(255))
 
 	set @_ProgressLog = @_ProgressMessage;
 
-	BEGIN TRY
+	begin try
 		set @_Step = 'Validate Inputs';
 		set @_StepStartTime = getdate();
 
-		IF COALESCE(@SubProcessRunID, 0) = 0	RAISERROR ('@SubProcessRunID can not be null or zero',16,1)
-		IF COALESCE(@SubProcessName, '') = ''	RAISERROR ('@SubProcessName can not be null or empty',16,1)
+		if coalesce(@SubProcessRunID, 0) = 0	raiserror ('@SubProcessRunID can not be null or zero',16,1)
+		if coalesce(@SubProcessName, '') = ''	raiserror ('@SubProcessName can not be null or empty',16,1)
 		
 		set @_Step = 'Build output values';
 		set @_StepStartTime = getdate();
 	
-		SELECT @_SubProcessRunId = [SubProcessRunID],
-		@_Outcome=[Outcome],
-		@_CompletionMessage = [Message],
-		@_ExpectedThreadCount=[ExpectedThreadCount],
-		@_ActualThreadCount=[ActualThreadCount],
-		@_ThreadsSucceeded=[ThreadsSucceeded],
-		@_ThreadsSkipped=[ThreadsSkipped],
-		@_ThreadsStopped=[ThreadsStopped],
-		@_ThreadsFailed=[ThreadsFailed]  
-		FROM dbo.StubResultSet
-		WHERE FunctionName = @_FunctionName;
+		select
+			@_SubProcessRunId	  = [SubProcessRunID]
+		  , @_Outcome			  = [Outcome]
+		  , @_CompletionMessage	  = [Message]
+		  , @_ExpectedThreadCount = [ExpectedThreadCount]
+		  , @_ActualThreadCount	  = [ActualThreadCount]
+		  , @_ThreadsSucceeded	  = [ThreadsSucceeded]
+		  , @_ThreadsSkipped	  = [ThreadsSkipped]
+		  , @_ThreadsStopped	  = [ThreadsStopped]
+		  , @_ThreadsFailed		  = [ThreadsFailed]
+		from
+			dbo.StubResultSet
+		where
+			FunctionName = @_FunctionName ;
 	
-		EXEC log4.JournalWriter
-			  @Task = 'POC'
-			, @FunctionName = @_FunctionName
-			, @StepInFunction = @_Step
-			, @MessageText = @_CompletionMessage
-			, @ExtraInfo = @_ProgressLog
-			, @Severity = 1024 -- DEBUG
+		exec log4.JournalWriter
+			@Task = 'POC'
+		  , @FunctionName = @_FunctionName
+		  , @StepInFunction = @_Step
+		  , @MessageText = @_CompletionMessage
+		  , @ExtraInfo = @_ProgressLog
+		  , @Severity = 1024 ;	-- DEBUG
 
 		--! Return the results as a result set
-			SELECT
-				@_SubProcessRunId AS [SubProcessRunId]
-				,@_Outcome as [Outcome]
-				,@_CompletionMessage AS [Message]
-				,@_ExpectedThreadCount AS[ExpectedThreadCount]
-				,@_ActualThreadCount as [ActualThreadCount]
-				,@_ThreadsSucceeded as [ThreadsSucceeded]
-				,@_ThreadsSkipped as [ThreadsSkipped]
-				,@_ThreadsStopped as [ThreadsStopped]
-				,@_ThreadsFailed as [ThreadsFailed] 
+		select
+			@_SubProcessRunId	  as [SubProcessRunId]
+		  , @_Outcome			  as [Outcome]
+		  , @_CompletionMessage	  as [Message]
+		  , @_ExpectedThreadCount as [ExpectedThreadCount]
+		  , @_ActualThreadCount	  as [ActualThreadCount]
+		  , @_ThreadsSucceeded	  as [ThreadsSucceeded]
+		  , @_ThreadsSkipped	  as [ThreadsSkipped]
+		  , @_ThreadsStopped	  as [ThreadsStopped]
+		  , @_ThreadsFailed		  as [ThreadsFailed] ;
 		
-		END TRY
+		end try
 	
-	BEGIN CATCH
-		SET @_ErrorContext = 'Failed to start new batch run at step: ' + COALESCE('[' + @_Step + ']', 'NULL')
+	begin catch
+		set @_ErrorContext = 'Failed to start new batch run at step: ' + coalesce('[' + @_Step + ']', 'NULL')
 
-		EXEC log4.ExceptionHandler
+		exec log4.ExceptionHandler
 				  @ErrorContext   = @_ErrorContext
 				, @ErrorProcedure = @_FunctionName
-				, @ErrorNumber    = @_Error OUT
-				, @ReturnMessage  = @_Message OUT
-				, @ExceptionId    = @_ExceptionId OUT
+				, @ErrorNumber    = @_Error out
+				, @ReturnMessage  = @_Message out
+				, @ExceptionId    = @_ExceptionId out
 
-	END CATCH
+	end catch
 	
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 EndEx:
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 
 	--! Finally, throw an exception that will be detected by the caller
-	IF @_Error > 0 RAISERROR(@_Message, 16, 99);
-	SET NOCOUNT OFF;
+	if @_Error > 0 raiserror(@_Message, 16, 99);
+	set nocount off;
 
 	--! Return the value of @@ERROR (which will be zero on success)
-	RETURN (@_Error);
-	
-END
-GO
+	return (@_Error);
+end
+go

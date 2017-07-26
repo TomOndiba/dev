@@ -1,19 +1,19 @@
-﻿IF OBJECT_ID('[dbo].[ProcessRunEnd]') IS NOT NULL
-	DROP PROCEDURE [dbo].[ProcessRunEnd];
+﻿if object_id('[dbo].[ProcessRunEnd]') is not null
+	drop procedure [dbo].[ProcessRunEnd];
 
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-CREATE  proc [dbo].[ProcessRunEnd]
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create proc [dbo].[ProcessRunEnd]
 (
 	@ProcessName		   varchar(255)
   , @ProcessRunID		   int
   , @EndState			   varchar(255)
-  , @EndMessage			   varchar(255) = 'default'
-  , @ChangeDataCaptureStart datetime='24-July-2017'
-  , @ChangeDataCaptureEnd  datetime='24-July-2017'
+  , @EndMessage			   varchar(255) = null
+  , @ChangeDataCaptureStart datetime = null
+  , @ChangeDataCaptureEnd  datetime = null
 )
 as
 --<CommentHeader>
@@ -108,4 +108,4 @@ begin
 	return (@_Error) ;
 
 end ;
-GO
+go

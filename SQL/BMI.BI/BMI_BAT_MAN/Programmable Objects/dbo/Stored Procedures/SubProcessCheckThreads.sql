@@ -1,15 +1,15 @@
-IF OBJECT_ID('[dbo].[SubProcessRunStart]') IS NOT NULL
-	DROP PROCEDURE [dbo].[SubProcessRunStart];
+﻿IF OBJECT_ID('[dbo].[SubProcessCheckThreads]') IS NOT NULL
+	DROP PROCEDURE [dbo].[SubProcessCheckThreads];
 
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-CREATE  PROCEDURE [dbo].[SubProcessRunStart]
-( @ProcessName VARCHAR(200) 
- ,@SubProcessName  VARCHAR(200) 
- ,@ProcessRunID  INT 
+CREATE   PROCEDURE [dbo].[SubProcessCheckThreads]
+( 
+  @SubProcessName  VARCHAR(200) 
+ ,@SubProcessRunID  INT 
  )
 
 AS
@@ -18,9 +18,9 @@ AS
 
 Properties
 ==========
-PROCEDURE NAME:		IcsApp.SubProcessRunStart
+PROCEDURE NAME:		IcsApp.SubProcessCheckThreads
 DESCRIPTION:		POC stub procedure
-ORIGIN DATE:		24-JUL-2017
+ORIGIN DATE:		26-JUL-2017
 ORIGINAL AUTHOR:	Razia Nazir
 
 Returns
@@ -35,7 +35,7 @@ REVISION HISTORY
 =====================================================================================================================
 Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
-001		24-JUL-2017		RN		N/A		Created
+001		26-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
@@ -63,11 +63,17 @@ BEGIN
 	declare @_Instruction varchar(255) = null; -- RUN/SKIP/STOP/ERROR
 	declare @_RunType varchar(8) = null; -- DELTA/FULL
 	declare	@_CompletionMessage varchar(500) = null;
+	declare	@_Outcome varchar(255);
+	declare	@_ExpectedThreadCount int;
+	declare	@_ActualThreadCount int;
+	declare	@_ThreadsSucceeded int; 
+	declare	@_ThreadsSkipped int;
+	declare	@_ThreadsStopped int;
+	declare	@_ThreadsFailed int;
 
 	set @_ProgressMessage = @_FunctionName
-			+ ' starting at ' + coalesce(convert(varchar(24), @_SprocStartTime, 120), '') + ' with inputs: '
-				+ char(10) + '    Process Name                     : ' + coalesce(@ProcessName, 'NULL')
-				+ char(10) + '    Process Run ID	                   : ' + CAST(coalesce(@ProcessRunID, 0) AS VARCHAR(255))
+	+ ' starting at ' + coalesce(convert(varchar(24), @_SprocStartTime, 120), '') + ' with inputs: '
+	+ char(10) + '    Process Run ID	                   : ' + CAST(coalesce(@SubProcessRunID, 0) AS VARCHAR(255))
 
 	set @_ProgressLog = @_ProgressMessage;
 
@@ -75,18 +81,21 @@ BEGIN
 		set @_Step = 'Validate Inputs';
 		set @_StepStartTime = getdate();
 
-		IF COALESCE(@ProcessName, '') = ''		RAISERROR ('@ProcessName can not be null or empty',16,1)
-		IF COALESCE(@ProcessRunID, 0) = 0		RAISERROR ('@ProcessRunID can not be null or zero',16,1)
-		IF COALESCE(@SubProcessName, '') = ''	RAISERROR ('@MappingName can not be null or empty',16,1)
+		IF COALESCE(@SubProcessRunID, 0) = 0	RAISERROR ('@SubProcessRunID can not be null or zero',16,1)
+		IF COALESCE(@SubProcessName, '') = ''	RAISERROR ('@SubProcessName can not be null or empty',16,1)
 		
 		set @_Step = 'Build output values';
 		set @_StepStartTime = getdate();
 	
-		
 		SELECT @_SubProcessRunId = [SubProcessRunID],
-			   @_RunType = RunType,
-			   @_Instruction = Instruction,
-			   @_CompletionMessage = [Message]
+		@_Outcome=[Outcome],
+		@_CompletionMessage = [Message],
+		@_ExpectedThreadCount=[ExpectedThreadCount],
+		@_ActualThreadCount=[ActualThreadCount],
+		@_ThreadsSucceeded=[ThreadsSucceeded],
+		@_ThreadsSkipped=[ThreadsSkipped],
+		@_ThreadsStopped=[ThreadsStopped],
+		@_ThreadsFailed=[ThreadsFailed]  
 		FROM dbo.StubResultSet
 		WHERE FunctionName = @_FunctionName;
 	
@@ -100,10 +109,15 @@ BEGIN
 
 		--! Return the results as a result set
 			SELECT
-			  @_SubProcessRunId AS [SubProcessRunId]
-			, @_Instruction AS [Instruction]
-			, @_RunType AS [RunType]
-			, @_CompletionMessage AS [Message]
+				@_SubProcessRunId AS [SubProcessRunId]
+				,@_Outcome as [Outcome]
+				,@_CompletionMessage AS [Message]
+				,@_ExpectedThreadCount AS[ExpectedThreadCount]
+				,@_ActualThreadCount as [ActualThreadCount]
+				,@_ThreadsSucceeded as [ThreadsSucceeded]
+				,@_ThreadsSkipped as [ThreadsSkipped]
+				,@_ThreadsStopped as [ThreadsStopped]
+				,@_ThreadsFailed as [ThreadsFailed] 
 		
 		END TRY
 	

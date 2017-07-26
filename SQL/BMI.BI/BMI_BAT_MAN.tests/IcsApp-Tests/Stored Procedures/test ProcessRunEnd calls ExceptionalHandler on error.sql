@@ -1,7 +1,7 @@
-﻿create procedure [IcsApp-Tests].[test ProcessRunEnd calls ExceptionalHandler on error]
+﻿CREATE procedure [IcsApp-Tests].[test ProcessRunEnd calls ExceptionalHandler on error]
 as
 	begin
-		create table [IcsApp-Tests].Expected1
+		create table [IcsApp-Tests].Expected
 		(
 			ErrorContext   nvarchar(512)  null
 		  , ErrorProcedure nvarchar(128)  null
@@ -15,7 +15,7 @@ as
 		) ;
 
 
-		insert into [IcsApp-Tests].Expected1
+		insert into [IcsApp-Tests].Expected
 		(
 			ErrorContext
 		  , ErrorProcedure
@@ -23,27 +23,22 @@ as
 		)
 		values
 		(
-			'Failed to start new batch run at step: [Validate Inputs]', '[dbo].[ProcessRunEnd]', 0
+			'Failed to start new batch run at step: [Validate Inputs]', '[dbo].[SubProcessRunEnd]', 0
 		) ;
 
 
 
 		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
 
-		exec dbo.ProcessRunEnd
-			@ProcessName = ''
-		  , @ProcessRunID = 1
-		  , @EndState = 'es'
+		exec dbo.SubProcessRunEnd
+			@ProcessName = 'pn'
+		  , @SubProcessName = 'spn' 
+		  , @SubProcessRunID = 0
+		  , @EndState = 'Succeeded'
 		  , @EndMessage = 'default'
-		  , @ChangeDataCaptureStart = '24-July-2017'
-		  , @ChangeDataCaptureEnd = '24-July-2017' ;
 
 		exec tSQLt.AssertEqualsTable
-			@Expected = '[IcsApp-Tests].Expected1'
+			@Expected = '[IcsApp-Tests].Expected'
 		  , @Actual = N'log4.ExceptionHandler_spyprocedureLog' ;
 
 	end ;
-
-
-
---EXEC  tsqlt.run '[IcsApp-Tests].[test ThreadRunStart calls ExceptionalHandler on error]'

@@ -8,7 +8,14 @@ CREATE TABLE [dbo].[StubResultSet]
 [RunType] [varchar] (10) NULL,
 [Message] [varchar] (255) NULL,
 [StartCapturePoint] [datetime] NULL,
-[EndCapturePoint] [datetime] NULL
+[EndCapturePoint] [datetime] NULL,
+[Outcome] [varchar] (255) NULL,
+[ExpectedThreadCount] [int] NULL,
+[ActualThreadCount] [int] NULL,
+[ThreadsSucceeded] [int] NULL,
+[ThreadsSkipped] [int] NULL,
+[ThreadsStopped] [int] NULL,
+[ThreadsFailed] [int] NULL
 )
 GO
 ALTER TABLE [dbo].[StubResultSet] ADD CONSTRAINT [PK_StubResultSet] PRIMARY KEY CLUSTERED  ([FunctionName])

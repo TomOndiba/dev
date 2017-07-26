@@ -132,6 +132,22 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd accepts %40EndState _Stopped_.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd accepts %40EndState _Skipped_.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ProcessRunEnd accepts %40EndState _FAILED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd throws error on %40SubProcessRunID zero.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd throws error on %40SubProcessRunID null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd throws error on %40SubProcessName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd throws error on %40SubProcessName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd throws error on %40ProcessName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd throws error on %40ProcessName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd does not throw error on %40EndMessage optional.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd accepts %40EndState _SUCCEEDED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd accepts %40EndState _STOPPED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd accepts %40EndState _SKIPPED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessRunEnd accepts %40EndState _FAILED_.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40SubProcessRunID zero.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40SubProcessRunID null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName null.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName empty.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads returns expected resultset.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

@@ -64,6 +64,7 @@
     <Folder Include="Test Classes" />
     <Folder Include="utils-tests\" />
     <Folder Include="sqlcop\" />
+    <Folder Include="tsa-to-psa-tests\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Permissions.sql" />
@@ -97,6 +98,8 @@
     <Build Include="sqlcop\test Decimal Size Problem.sql" />
     <Build Include="Test Classes\sqlcop.sql" />
     <Build Include="Test Classes\utils-tests.sql" />
+    <Build Include="tsa-to-psa-tests\test source columns match target.sql" />
+    <Build Include="tsa-to-psa-tests\tsa-to-psa-tests.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

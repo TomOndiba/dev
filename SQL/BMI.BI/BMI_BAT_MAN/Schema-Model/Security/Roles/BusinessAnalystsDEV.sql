@@ -1,0 +1,4 @@
+CREATE ROLE [BusinessAnalystsDEV]
+AUTHORIZATION [dbo]
+GO
+GRANT VIEW DEFINITION TO [BusinessAnalystsDEV]

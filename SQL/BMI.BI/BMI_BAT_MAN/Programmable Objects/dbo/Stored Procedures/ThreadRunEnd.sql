@@ -1,4 +1,4 @@
-﻿if object_id('[dbo].[ThreadRunEnd]') is not null
+if object_id('[dbo].[ThreadRunEnd]') is not null
 	drop procedure [dbo].[ThreadRunEnd];
 
 go
@@ -118,4 +118,9 @@ begin
 	return (@_Error) ;
 
 end ;
-go
+
+GO
+GRANT EXECUTE ON  [dbo].[ThreadRunEnd] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON  [dbo].[ThreadRunEnd] TO [IcsDataFeeders]
+GO

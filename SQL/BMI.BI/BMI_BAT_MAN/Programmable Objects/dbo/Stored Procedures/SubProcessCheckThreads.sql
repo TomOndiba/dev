@@ -1,4 +1,4 @@
-﻿if object_id('[dbo].[SubProcessCheckThreads]') is not null
+if object_id('[dbo].[SubProcessCheckThreads]') is not null
 	drop procedure [dbo].[SubProcessCheckThreads];
 
 go
@@ -147,4 +147,9 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
-go
+
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessCheckThreads] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessCheckThreads] TO [IcsDataFeeders]
+GO

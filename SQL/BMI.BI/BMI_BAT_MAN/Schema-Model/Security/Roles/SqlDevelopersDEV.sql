@@ -1,0 +1,4 @@
+CREATE ROLE [SqlDevelopersDEV]
+AUTHORIZATION [dbo]
+GO
+GRANT EXECUTE TO [SqlDevelopersDEV]

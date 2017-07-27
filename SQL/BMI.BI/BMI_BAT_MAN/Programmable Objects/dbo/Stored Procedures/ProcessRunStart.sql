@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[dbo].[ProcessRunStart]') IS NOT NULL
+IF OBJECT_ID('[dbo].[ProcessRunStart]') IS NOT NULL
 	DROP PROCEDURE [dbo].[ProcessRunStart];
 
 GO
@@ -130,4 +130,9 @@ EndEx:
 	RETURN (@_Error);
 	
 END
+
+GO
+GRANT EXECUTE ON  [dbo].[ProcessRunStart] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON  [dbo].[ProcessRunStart] TO [IcsDataFeeders]
 GO

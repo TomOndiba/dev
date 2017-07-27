@@ -131,4 +131,9 @@ EndEx:
 	RETURN (@_Error);
 	
 END
+
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessRunStart] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessRunStart] TO [IcsDataFeeders]
 GO

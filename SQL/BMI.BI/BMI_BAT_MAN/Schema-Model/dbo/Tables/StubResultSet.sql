@@ -20,3 +20,7 @@ CREATE TABLE [dbo].[StubResultSet]
 GO
 ALTER TABLE [dbo].[StubResultSet] ADD CONSTRAINT [PK_StubResultSet] PRIMARY KEY CLUSTERED  ([FunctionName])
 GO
+GRANT SELECT ON  [dbo].[StubResultSet] TO [EtlDevelopersDEV]
+GO
+GRANT UPDATE ON  [dbo].[StubResultSet] TO [EtlDevelopersDEV]
+GO

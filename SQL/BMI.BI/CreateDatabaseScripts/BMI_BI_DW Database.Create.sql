@@ -1,7 +1,7 @@
 --!
 --! Create Database BMI_BI_DW.sql
 --!
-:setvar DatabaseName "BMI_BI_DW_PROD"
+:setvar DatabaseName "BMI_BI_DW_DEV"
 :setvar MaxSize "30 GB"-- { 100 MB | 500 MB | 1 | 5 | 10 | 20 | 30 … 150…500 } GB
 :setvar Edition "Standard" --  {  'basic' | 'standard' | 'premium' | 'premiumrs'}  
 :setvar ServiceObjective "S2" -- {  'basic' | 'S0' | 'S1' | 'S2' | 'S3' | 'P1' | 'P2' | 'P3' | 'P4'| 'P6' | 'P11'  | 'P15' | 'PRS1' | 'PRS2' | 'PRS4' | 'PRS6'| { ELASTIC_POOL(name = <elastic_pool_name>) } }

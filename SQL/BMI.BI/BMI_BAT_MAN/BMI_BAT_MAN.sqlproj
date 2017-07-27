@@ -296,7 +296,7 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\dbo\Stored Procedures\SubProcessCheckThreads.sql" />
     <None Include="Programmable Objects\dbo\Stored Procedures\SubProcessRunEnd.sql" />
-    <None Include="Migrations\1.0.0\004_20170726-1203_ukrna.sql" />
+    <None Include="Migrations\1.0.0\004_Add_columns_to_StubResultSet.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

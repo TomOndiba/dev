@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[dbo].[ProcessRunStart]') IS NOT NULL
+IF OBJECT_ID('[dbo].[ProcessRunStart]') IS NOT NULL
 	DROP PROCEDURE [dbo].[ProcessRunStart];
 
 GO
@@ -9,7 +9,11 @@ GO
 
 CREATE     PROCEDURE [dbo].[ProcessRunStart]
 ( @ProcessName VARCHAR(200) 
- ,@ProcessID  INT 
+, @ProcessID  INT 
+, @ProcessRunId  int=null output
+, @RunType varchar(8) =null output
+, @Instruction varchar(255)=null output
+, @Message varchar(500)=null output
  )
 
 AS
@@ -37,7 +41,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		24-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-
+001		31-JUL-2017		RN		N/A		Modified Output parameters added.
 **********************************************************************************************************************/
 --</CommentHeader>
 
@@ -75,17 +79,17 @@ BEGIN
 		set @_Step = 'Validate Inputs';
 		set @_StepStartTime = getdate();
 
-		IF COALESCE(@ProcessName, '') = '' RAISERROR ('ProcessName can not be null or empty',16,1)
-		IF COALESCE(@ProcessID, 0) = 0     RAISERROR ('MappingName can not be null or zero',16,1)
+		IF COALESCE(@ProcessName, '') = '' RAISERROR ('@ProcessName can not be null or empty',16,1)
+		IF COALESCE(@ProcessID, 0) = 0     RAISERROR ('@MappingName can not be null or zero',16,1)
 		
 		set @_Step = 'Build output values';
 		set @_StepStartTime = getdate();
 	
 		
-		SELECT @_ProcessRunId = [ProcessRunID],
-			   @_RunType = RunType,
-			   @_Instruction = Instruction,
-			   @_CompletionMessage = [Message]
+		SELECT @ProcessRunId = [ProcessRunID],
+			   @RunType = RunType,
+			   @Instruction = Instruction,
+			   @Message = [Message]
 		FROM dbo.StubResultSet
 		WHERE FunctionName = @_FunctionName;
 	
@@ -93,16 +97,16 @@ BEGIN
 			  @Task = 'POC'
 			, @FunctionName = @_FunctionName
 			, @StepInFunction = @_Step
-			, @MessageText = @_CompletionMessage
+			, @MessageText = @Message
 			, @ExtraInfo = @_ProgressLog
 			, @Severity = 1024 -- DEBUG
 
 		--! Return the results as a result set
 			SELECT
-			  @_ProcessRunId AS [ProcessRunId]
-			, @_Instruction AS [Instruction]
-			, @_RunType AS [RunType]
-			, @_CompletionMessage AS [Message]
+			  @ProcessRunId AS [ProcessRunId]
+			, @Instruction AS [Instruction]
+			, @RunType AS [RunType]
+			, @Message AS [Message]
 		
 		END TRY
 	

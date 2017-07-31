@@ -10,6 +10,11 @@ CREATE  PROCEDURE [dbo].[SubProcessRunStart]
 ( @ProcessName VARCHAR(200) 
  ,@SubProcessName  VARCHAR(200) 
  ,@ProcessRunID  INT 
+ ,@SubProcessRunId Int = null output
+ ,@RunType varchar(8) = null output
+ ,@Instruction varchar(255) = null output
+ ,@Message varchar(500) = null  output
+
  )
 
 AS
@@ -37,6 +42,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		24-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+002		31-JUL-2017		RN		N/A		Modified Output Parameters added
+
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -83,10 +90,10 @@ BEGIN
 		set @_StepStartTime = getdate();
 	
 		
-		SELECT @_SubProcessRunId = [SubProcessRunID],
-			   @_RunType = RunType,
-			   @_Instruction = Instruction,
-			   @_CompletionMessage = [Message]
+		SELECT @SubProcessRunId = [SubProcessRunID],
+			   @RunType = RunType,
+			   @Instruction = Instruction,
+			   @Message = [Message]
 		FROM dbo.StubResultSet
 		WHERE FunctionName = @_FunctionName;
 	
@@ -94,16 +101,16 @@ BEGIN
 			  @Task = 'POC'
 			, @FunctionName = @_FunctionName
 			, @StepInFunction = @_Step
-			, @MessageText = @_CompletionMessage
+			, @MessageText = Message
 			, @ExtraInfo = @_ProgressLog
 			, @Severity = 1024 -- DEBUG
 
 		--! Return the results as a result set
 			SELECT
-			  @_SubProcessRunId AS [SubProcessRunId]
-			, @_Instruction AS [Instruction]
-			, @_RunType AS [RunType]
-			, @_CompletionMessage AS [Message]
+			  @SubProcessRunId AS [SubProcessRunId]
+			, @Instruction AS [Instruction]
+			, @RunType AS [RunType]
+			, @Message AS [Message]
 		
 		END TRY
 	

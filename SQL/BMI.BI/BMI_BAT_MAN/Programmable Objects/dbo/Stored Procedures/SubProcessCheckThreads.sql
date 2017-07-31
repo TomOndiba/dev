@@ -1,15 +1,23 @@
-﻿if object_id('[dbo].[SubProcessCheckThreads]') is not null
+if object_id('[dbo].[SubProcessCheckThreads]') is not null
 	drop procedure [dbo].[SubProcessCheckThreads];
 
 go
-set quoted_identifier on
-go
-set ansi_nulls on
-go
-create   procedure [dbo].[SubProcessCheckThreads]
-( 
-  @SubProcessName  varchar(200) 
- ,@SubProcessRunID  int 
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [dbo].[SubProcessCheckThreads]
+(	
+  @SubProcessName	   varchar(200) 
+ ,@SubProcessRunID	   int output
+, @Outcome			   varchar(255) = null output
+, @Message			   varchar(500) = null output 
+, @ExpectedThreadCount int =null output 
+, @ActualThreadCount   int =null output 
+, @ThreadsSucceeded	   int =null output 
+, @ThreadsSkipped	   int =null output 
+, @ThreadsStopped	   int =null output 
+, @ThreadsFailed	   int =null output    
  )
 
 as
@@ -37,6 +45,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		26-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+002		31-JUL-2017		RN		N/A		Modified OIutput parameters added.
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -88,15 +97,15 @@ begin
 		set @_StepStartTime = getdate();
 	
 		select
-			@_SubProcessRunId	  = [SubProcessRunID]
-		  , @_Outcome			  = [Outcome]
-		  , @_CompletionMessage	  = [Message]
-		  , @_ExpectedThreadCount = [ExpectedThreadCount]
-		  , @_ActualThreadCount	  = [ActualThreadCount]
-		  , @_ThreadsSucceeded	  = [ThreadsSucceeded]
-		  , @_ThreadsSkipped	  = [ThreadsSkipped]
-		  , @_ThreadsStopped	  = [ThreadsStopped]
-		  , @_ThreadsFailed		  = [ThreadsFailed]
+			@SubProcessRunID	  = [SubProcessRunID]
+		  , @Outcome			  = [Outcome]
+		  , @Message			  = [Message]
+		  , @ExpectedThreadCount  = [ExpectedThreadCount]
+		  , @ActualThreadCount	  = [ActualThreadCount]
+		  , @ThreadsSucceeded	  = [ThreadsSucceeded]
+		  , @ThreadsSkipped		  = [ThreadsSkipped]
+		  , @ThreadsStopped		  = [ThreadsStopped]
+		  , @ThreadsFailed		  = [ThreadsFailed]
 		from
 			dbo.StubResultSet
 		where
@@ -106,21 +115,21 @@ begin
 			@Task = 'POC'
 		  , @FunctionName = @_FunctionName
 		  , @StepInFunction = @_Step
-		  , @MessageText = @_CompletionMessage
+		  , @MessageText = @Message
 		  , @ExtraInfo = @_ProgressLog
 		  , @Severity = 1024 ;	-- DEBUG
 
 		--! Return the results as a result set
 		select
-			@_SubProcessRunId	  as [SubProcessRunId]
-		  , @_Outcome			  as [Outcome]
-		  , @_CompletionMessage	  as [Message]
-		  , @_ExpectedThreadCount as [ExpectedThreadCount]
-		  , @_ActualThreadCount	  as [ActualThreadCount]
-		  , @_ThreadsSucceeded	  as [ThreadsSucceeded]
-		  , @_ThreadsSkipped	  as [ThreadsSkipped]
-		  , @_ThreadsStopped	  as [ThreadsStopped]
-		  , @_ThreadsFailed		  as [ThreadsFailed] ;
+			@SubProcessRunID	  as [SubProcessRunId]
+		  , @Outcome			  as [Outcome]
+		  , @Message			  as [Message]
+		  , @ExpectedThreadCount  as [ExpectedThreadCount]
+		  , @ActualThreadCount	  as [ActualThreadCount]
+		  , @ThreadsSucceeded	  as [ThreadsSucceeded]
+		  , @ThreadsSkipped	      as [ThreadsSkipped]
+		  , @ThreadsStopped	      as [ThreadsStopped]
+		  , @ThreadsFailed		  as [ThreadsFailed] ;
 		
 		end try
 	
@@ -147,4 +156,4 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
-go
+GO

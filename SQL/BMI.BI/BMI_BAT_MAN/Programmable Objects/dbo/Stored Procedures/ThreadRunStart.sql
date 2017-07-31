@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[dbo].[ThreadRunStart]') IS NOT NULL
+IF OBJECT_ID('[dbo].[ThreadRunStart]') IS NOT NULL
 	DROP PROCEDURE [dbo].[ThreadRunStart];
 
 GO
@@ -11,8 +11,15 @@ CREATE   PROCEDURE [dbo].[ThreadRunStart]
    
  @MappingName VARCHAR(200) 
 , @MappingConfigTaskName VARCHAR(200) 
-, @SubProcessRunID VARCHAR(200)
-)
+, @SubProcessRunID int
+, @ThreadRunId  int=null output
+, @RunType varchar(8) =null output
+, @Instruction varchar(255)=null output
+, @Message varchar(500)=null output
+, @StartCapturePoint  datetime=null output,
+  @EndCapturePoint  datetime = null output
+ 
+ )
 
 AS
 --<CommentHeader>
@@ -39,6 +46,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		11-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+001		31-JUL-2017		RN		N/A		Modified Output parameters added.
 **********************************************************************************************************************/
 --</CommentHeader>
 
@@ -80,21 +88,21 @@ BEGIN
 		set @_step= 'Validate Inputs';
 		set @_StepStartTime = getdate();
 
-		IF COALESCE(@MappingName, '') = '' RAISERROR ('MappingName can not be null or empty',16,1)
-		IF COALESCE(@MappingConfigTaskName, '') = '' RAISERROR ('MappingConfigTaskName can not be null or empty',16,1)
-		IF COALESCE(@SubProcessRunID, 0) = 0 RAISERROR ('ProcessRunID can not be null or zero',16,1)
+		IF COALESCE(@MappingName, '') = '' RAISERROR ('@MappingName can not be null or empty',16,1)
+		IF COALESCE(@MappingConfigTaskName, '') = '' RAISERROR ('@MappingConfigTaskName can not be null or empty',16,1)
+		IF COALESCE(@SubProcessRunID, 0) = 0 RAISERROR ('@SubProcessRunID can not be null or zero',16,1)
 		--!
 		--!
 		--!
 		set @_step = 'Build output values';
 		set @_StepStartTime = getdate();
 
-		SELECT @_ThreadRunId = [ThreadRunID],
-			   @_RunType = RunType,
-			   @_Instruction = Instruction,
-			   @_CompletionMessage = [Message],
-			   @_StartCapturePoint=[StartCapturePoint],
-			   @_EndCapturePoint=[EndCapturePoint]
+		SELECT @ThreadRunId = [ThreadRunID],
+			   @RunType = RunType,
+			   @Instruction = Instruction,
+			   @Message = [Message],
+			   @StartCapturePoint=[StartCapturePoint],
+			   @EndCapturePoint=[EndCapturePoint]
 		FROM dbo.StubResultSet
 		WHERE FunctionName = @_FunctionName;
 
@@ -102,18 +110,18 @@ BEGIN
 			  @Task = 'POC'
 			, @FunctionName = @_FunctionName
 			, @StepInFunction = @_step
-			, @MessageText = @_CompletionMessage
+			, @MessageText = @Message
 			, @ExtraInfo = @_ProgressLog
 			, @Severity = 1024 -- DEBUG
 
 		--! Return the results as a result set
 		SELECT
-			  @_ThreadRunId AS [ThreadRunId]
-			, @_Instruction AS [Instruction]
-			, @_RunType AS [RunType]
-			, @_CompletionMessage AS [Message]
-			,@_StartCapturePoint AS StartCapturePoint
-			,@_EndCapturePoint As EndCapturePoint
+			  @ThreadRunId AS [ThreadRunId]
+			, @Instruction AS [Instruction]
+			, @RunType AS [RunType]
+			, @Message AS [Message]
+			, @StartCapturePoint AS StartCapturePoint
+			, @EndCapturePoint As EndCapturePoint
 	END TRY
 	BEGIN CATCH
 		SET @_ErrorContext = 'Failed to start new batch run at Step: ' + COALESCE('[' + @_step + ']', 'NULL')

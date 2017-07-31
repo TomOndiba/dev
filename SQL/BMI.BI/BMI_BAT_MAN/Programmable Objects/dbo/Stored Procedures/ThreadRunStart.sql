@@ -150,4 +150,9 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	RETURN (@_Error);
 END
+
+GO
+GRANT EXECUTE ON  [dbo].[ThreadRunStart] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON  [dbo].[ThreadRunStart] TO [IcsDataFeeders]
 GO

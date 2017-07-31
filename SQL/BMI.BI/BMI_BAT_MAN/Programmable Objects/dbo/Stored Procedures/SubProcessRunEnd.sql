@@ -1,4 +1,4 @@
-﻿if object_id('[dbo].[SubProcessRunEnd]') is not null
+if object_id('[dbo].[SubProcessRunEnd]') is not null
 	drop procedure [dbo].[SubProcessRunEnd];
 
 go
@@ -109,4 +109,9 @@ begin
 	return (@_Error) ;
 
 end ;
-go
+
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessRunEnd] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessRunEnd] TO [IcsDataFeeders]
+GO

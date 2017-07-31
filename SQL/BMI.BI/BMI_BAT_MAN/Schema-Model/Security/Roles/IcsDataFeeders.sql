@@ -1,0 +1,3 @@
+CREATE ROLE [IcsDataFeeders]
+AUTHORIZATION [dbo]
+GO

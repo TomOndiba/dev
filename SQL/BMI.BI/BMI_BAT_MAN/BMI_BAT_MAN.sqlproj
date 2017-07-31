@@ -242,6 +242,7 @@ Static Data;
     <Folder Include="Programmable Objects\dbo\" />
     <Folder Include="Programmable Objects\dbo\Stored Procedures\" />
     <Folder Include="Static Data" />
+    <Folder Include="Schema-Model\Security\Roles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -297,6 +298,32 @@ Static Data;
     <None Include="Programmable Objects\dbo\Stored Procedures\SubProcessCheckThreads.sql" />
     <None Include="Programmable Objects\dbo\Stored Procedures\SubProcessRunEnd.sql" />
     <None Include="Migrations\1.0.0\004_Add_columns_to_StubResultSet.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Security\Roles\BatchManagers.sql" />
+    <None Include="Schema-Model\Security\Roles\BusinessAnalystsDEV.sql" />
+    <None Include="Schema-Model\Security\Roles\BusinessAnalystsPROD.sql" />
+    <None Include="Schema-Model\Security\Roles\BusinessAnalystsTEST.sql" />
+    <None Include="Schema-Model\Security\Roles\CodeReviewers.sql" />
+    <None Include="Schema-Model\Security\Roles\db_datareader.sql" />
+    <None Include="Schema-Model\Security\Roles\db_datawriter.sql" />
+    <None Include="Schema-Model\Security\Roles\db_ddladmin.sql" />
+    <None Include="Schema-Model\Security\Roles\db_owner.sql" />
+    <None Include="Schema-Model\Security\Roles\DeploymentManagers.sql" />
+    <None Include="Schema-Model\Security\Roles\EtlDevelopersDEV.sql" />
+    <None Include="Schema-Model\Security\Roles\EtlDevelopersPROD.sql" />
+    <None Include="Schema-Model\Security\Roles\EtlDevelopersTEST.sql" />
+    <None Include="Schema-Model\Security\Roles\IcsDataFeeders.sql" />
+    <None Include="Schema-Model\Security\Roles\SqlDevelopersDEV.sql" />
+    <None Include="Schema-Model\Security\Roles\SqlDevelopersPROD.sql" />
+    <None Include="Schema-Model\Security\Roles\SqlDevelopersTEST.sql" />
+    <None Include="Schema-Model\Security\Schemas\INFORMATION_SCHEMA.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\005_AddRolesAndPermissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Security\Schemas\dbo.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

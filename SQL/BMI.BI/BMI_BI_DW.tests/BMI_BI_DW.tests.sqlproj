@@ -99,7 +99,7 @@
     <Build Include="Test Classes\sqlcop.sql" />
     <Build Include="Test Classes\utils-tests.sql" />
     <Build Include="tsa-to-psa-tests\test source columns match target.sql" />
-    <Build Include="tsa-to-psa-tests\tsa-to-psa-tests.sql" />
+    <Build Include="Test Classes\tsa-to-psa-tests.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

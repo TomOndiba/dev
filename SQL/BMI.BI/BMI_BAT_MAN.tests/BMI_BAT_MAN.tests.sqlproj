@@ -147,7 +147,7 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName null.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName empty.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads returns expected resultset.sql" />
-    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart returns expected  output parameters.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart returns expected output parameters.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

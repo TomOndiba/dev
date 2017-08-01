@@ -98,7 +98,6 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40MappingName empty.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40MappingConfigTaskName null.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart throws error on %40MappingConfigTaskName empty.sql" />
-    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart returns expected resultset.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart calls ExceptionalHandler on error.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40ThreadRunID zero.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunEnd throws error on %40ThreadRunID null.sql" />
@@ -148,6 +147,7 @@
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName null.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName empty.sql" />
     <Build Include="IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads returns expected resultset.sql" />
+    <Build Include="IcsApp-Tests\Stored Procedures\test ThreadRunStart returns expected  output parameters.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

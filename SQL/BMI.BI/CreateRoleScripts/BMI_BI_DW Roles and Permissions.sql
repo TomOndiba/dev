@@ -183,6 +183,8 @@ if not exists (select * from sys.database_principals where type = 'R' and name =
 	exec(N'create role [EtlDevelopersPROD] authorization [dbo];') ;
 go
 
+grant create table to [EtlDevelopersDEV];
+go
 grant view definition to [EtlDevelopersDEV];
 go
 grant showplan to [EtlDevelopersDEV]

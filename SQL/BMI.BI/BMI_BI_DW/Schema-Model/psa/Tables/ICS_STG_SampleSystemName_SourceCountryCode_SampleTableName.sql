@@ -6,7 +6,7 @@ CREATE TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]
 [EtlThreadRunId] [int] NOT NULL,
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsIncomplete] DEFAULT ('N'),
 [DataSourceKey] [int] NOT NULL,
-[EtlSampleTable] [varchar] (200) NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
 [EtlCreatedBy] [varchar] (200) NOT NULL,
 [EtlUpdatedOn] [datetime] NOT NULL,

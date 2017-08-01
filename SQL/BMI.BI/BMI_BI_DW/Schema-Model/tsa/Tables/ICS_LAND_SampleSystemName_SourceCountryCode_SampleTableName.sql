@@ -4,7 +4,7 @@ CREATE TABLE [tsa].[ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName]
 [EtlStepRunId] [int] NOT NULL,
 [EtlThreadRunId] [int] NOT NULL,
 [DataSourceKey] [int] NOT NULL,
-[EtlSampleTable] [varchar] (200) NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
 [EtlCreatedBy] [varchar] (200) NOT NULL,
 [SourceTableKeyColumnA] [char] (8) NOT NULL,

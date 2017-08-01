@@ -514,6 +514,16 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.3\001_Rename_psa_IsProcessedToIsIncomplete.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\002_Add_ICS_sproc_dummy_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_sql_dummySource.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_sql_runLog.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\003_Rename_EtlSampleTable_column.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

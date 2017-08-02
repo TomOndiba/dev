@@ -84,6 +84,8 @@ a266bba8-8c3d-522b-a597-4810e685652f|Programmable Objects\dbo\Stored Procedures\
 1fe6716e-0baa-5cac-ac88-90836481b5c8|Static Data\dbo.StubResultSet.Data.sql;
 ff6c22f0-34e6-51d1-9b8a-1e9e18d39e88|Static Data\log4Private.JournalControl.data.sql;
 265aaab9-1a36-5f05-b9a1-e076442aa545|Static Data\log4Private.Severity.data.sql;
+90fe26fd-2281-579e-95eb-b163d77eccf1|Static Data\privy.RunStateFlag.data.sql;
+e154f279-356a-57ae-b591-a7d417762b1d|Static Data\privy.RunState.data.sql;
 </DeployChangesExecutionOrder>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
     <AdditionalScriptFolders>
@@ -276,12 +278,16 @@ Static Data;
     <Folder Include="Programmable Objects\dbo\Stored Procedures\" />
     <Folder Include="Static Data" />
     <Folder Include="Schema-Model\Security\Roles\" />
+    <Folder Include="Schema-Model\privy\" />
+    <Folder Include="Schema-Model\privy\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
     <None Include="Static Data\dbo.StubResultSet.Data.sql" />
     <None Include="Static Data\log4Private.JournalControl.data.sql" />
     <None Include="Static Data\log4Private.Severity.data.sql" />
+    <None Include="Static Data\privy.RunStateFlag.data.sql" />
+    <None Include="Static Data\privy.RunState.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -357,6 +363,14 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\Security\Schemas\dbo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\privy\Tables\RunState.sql" />
+    <None Include="Schema-Model\privy\Tables\RunStateFlag.sql" />
+    <None Include="Schema-Model\Security\Schemas\privy.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\006_Add_RunState_tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

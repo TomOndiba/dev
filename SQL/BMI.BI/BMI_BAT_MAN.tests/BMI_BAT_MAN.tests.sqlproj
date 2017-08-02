@@ -61,6 +61,7 @@
     <Folder Include="Properties" />
     <Folder Include="Test Classes" />
     <Folder Include="IcsApp-Tests\" />
+    <Folder Include="StaticDataTests\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="IcsApp-Tests\test SubProcessRunEnd throws error on %40ProcessName empty.sql" />
@@ -133,7 +134,10 @@
     <Build Include="IcsApp-Tests\test SubProcessRunEnd throws error on %40SubProcessName null.sql" />
     <Build Include="IcsApp-Tests\test SubProcessRunEnd throws error on %40SubProcessName empty.sql" />
     <Build Include="IcsApp-Tests\test SubProcessRunEnd throws error on %40ProcessName null.sql" />
-    <Build Include="IcsApp-Tests.sql" />
+    <Build Include="Test Classes\IcsApp-Tests.sql" />
+    <Build Include="StaticDataTests\test privy.RunState static data.sql" />
+    <Build Include="StaticDataTests\test privy.RunStateFlag static data.sql" />
+    <Build Include="Test Classes\StaticDataTests.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

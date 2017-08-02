@@ -27,6 +27,3 @@ begin
 	exec tSQLt.AssertEquals @Expected = 'Jul 25 2017 12:00AM', @Actual = @StartCapturePoint, @Message = N'Error: @StartCapturePoint not matched' ;
 	exec tSQLt.AssertEqualsString @Expected = 'Jul 25 2017 12:00AM', @Actual = @EndCapturePoint, @Message = N'Error: @EndCapturePoint not matched' ;
 end ;
-go
-
-

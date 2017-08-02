@@ -15,5 +15,5 @@ Post-Deployment Script Template
 :r "..\BMI_BAT_MAN\Static Data\log4Private.JournalControl.data.sql"
 :r "..\BMI_BAT_MAN\Static Data\log4Private.Severity.data.sql"
 
-EXEC tSQLt.RunAll;
+exec tSQLt.RunAll;
 

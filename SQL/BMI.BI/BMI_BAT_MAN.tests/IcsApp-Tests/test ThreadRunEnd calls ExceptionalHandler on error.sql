@@ -41,4 +41,3 @@ END;
 
 
 --EXEC  tsqlt.run '[IcsApp-Tests].[test ThreadRunStart calls ExceptionalHandler on error]'
-go

@@ -66,14 +66,12 @@ StoredProcedure=[log4].[JournalWriter];
     <DeployChangesExecutionOrder>
 15a0517b-b658-5cbc-bd7b-cbc0ce53aeb8|Programmable Objects\log4Private\Stored Procedures\SessionInfoOutput.sql;
 28783bd6-0909-5fd2-bcad-81dede3f3869|Programmable Objects\log4\Stored Procedures\ExceptionHandler.sql;
+f1c132d0-a9be-559e-9b9f-df02fa90e78b|Programmable Objects\log4Utils\Stored Procedures\ExceptionReader.sql;
 1985ff3a-104d-5014-8e85-c57cba5968f2|Programmable Objects\log4\Stored Procedures\JournalWriter.sql;
 6c9d6d3a-15cc-5cef-863c-542a924944c0|Programmable Objects\log4\Functions\FormatElapsedTime.sql;
 2ea3489a-569e-5ce8-84e6-472f4aab2830|Programmable Objects\log4Utils\Stored Procedures\JournalCleanup.sql;
 3225b809-e790-51bb-9b80-895f9adf2f08|Programmable Objects\log4Utils\Stored Procedures\PrintString.sql;
 670576e6-3bc5-5ece-a037-8b11d9f6c0fc|Programmable Objects\log4Utils\Stored Procedures\JournalPrinter.sql;
-6fa1ede2-33fa-52c4-9851-10d1307aeabc|Programmable Objects\log4\Functions\GetJournalControl.sql;
-f1c132d0-a9be-559e-9b9f-df02fa90e78b|Programmable Objects\log4Utils\Stored Procedures\ExceptionReader.sql;
-a36600a2-33f7-5123-b295-e43d787c3464|Programmable Objects\log4Utils\Stored Procedures\JournalReader.sql;
 014e73e0-8325-5f9e-98ed-0b2f097c563e|Programmable Objects\dbo\Stored Procedures\ProcessRunEnd.sql;
 8c70314e-a14a-58fe-b849-a5284adb4e21|Programmable Objects\dbo\Stored Procedures\ProcessRunStart.sql;
 f22b0e7e-f38c-5245-8fa6-7e0d0a829838|Programmable Objects\dbo\Stored Procedures\SubProcessCheckThreads.sql;
@@ -81,6 +79,8 @@ f22b0e7e-f38c-5245-8fa6-7e0d0a829838|Programmable Objects\dbo\Stored Procedures\
 c94a83fb-7764-53e8-98dc-de64fe5950be|Programmable Objects\dbo\Stored Procedures\SubProcessRunStart.sql;
 6f20a2b4-8415-5dea-be4c-9cbca551e48d|Programmable Objects\dbo\Stored Procedures\ThreadRunEnd.sql;
 a266bba8-8c3d-522b-a597-4810e685652f|Programmable Objects\dbo\Stored Procedures\ThreadRunStart.sql;
+6fa1ede2-33fa-52c4-9851-10d1307aeabc|Programmable Objects\log4\Functions\GetJournalControl.sql;
+a36600a2-33f7-5123-b295-e43d787c3464|Programmable Objects\log4Utils\Stored Procedures\JournalReader.sql;
 1fe6716e-0baa-5cac-ac88-90836481b5c8|Static Data\dbo.StubResultSet.Data.sql;
 ff6c22f0-34e6-51d1-9b8a-1e9e18d39e88|Static Data\log4Private.JournalControl.data.sql;
 265aaab9-1a36-5f05-b9a1-e076442aa545|Static Data\log4Private.Severity.data.sql;

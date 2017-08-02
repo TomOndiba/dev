@@ -1,4 +1,4 @@
-﻿create   procedure [tsa-to-psa-tests].[test source columns match target]
+﻿CREATE   procedure [tsa-to-psa-tests].[test source columns match target]
 as
 begin
 	select
@@ -17,7 +17,8 @@ begin
 	from
 		INFORMATION_SCHEMA.COLUMNS as c
 	where
-		c.TABLE_SCHEMA = 'tsa'
+			c.TABLE_SCHEMA = 'tsa'
+		and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
 
 	select
 		replace(c.TABLE_NAME, 'ICS_STG_', '') as [TABLE_NAME]
@@ -35,8 +36,9 @@ begin
 	from
 		INFORMATION_SCHEMA.COLUMNS as c
 	where
-		c.TABLE_SCHEMA = 'psa'	
-	and COLUMN_NAME not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted')
+			c.TABLE_SCHEMA = 'psa'	
+		and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
+		and COLUMN_NAME not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted')
 
 	exec tSQLt.AssertEqualsTable '#expected', '#actual' ;
 end

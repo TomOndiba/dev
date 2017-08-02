@@ -100,6 +100,13 @@
     <Build Include="Test Classes\utils-tests.sql" />
     <Build Include="tsa-to-psa-tests\test source columns match target.sql" />
     <Build Include="Test Classes\tsa-to-psa-tests.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on null mis-matched tsa column.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on null mis-matched psa column.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on missing psa tables.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on missing psa columns.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on mis-matched psa datatypes.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on mis-matched psa column lengths.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on mis-matched psa column datatypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

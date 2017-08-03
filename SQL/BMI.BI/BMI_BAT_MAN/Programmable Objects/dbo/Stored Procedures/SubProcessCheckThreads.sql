@@ -156,4 +156,9 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
+
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessCheckThreads] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON  [dbo].[SubProcessCheckThreads] TO [IcsDataFeeders]
 GO

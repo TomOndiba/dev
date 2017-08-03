@@ -18,5 +18,61 @@ Post-Deployment Script Template
 :r "..\BMI_BAT_MAN\Static Data\privy.RunStateFlag.data.sql"
 :r "..\BMI_BAT_MAN\Static Data\privy.RunState.data.sql"
 
+
+--!
+--! Seems like not all the permissions are carried across to the dacpac
+--! (which the "tests" project references so re-apply them again now
+--!
+:r "..\CreateRoleScripts\BMI_BAT_MAN Roles and Permissions.sql"
+go
+
+--!
+--! We need to fool ReadyRoll into thinking that all migrations have already been applied
+--! in BMI_BI_DW.tests (since it is derived from the BMI_BI_DW_ukglu_SHADOW dacpac which
+--! is the latest version of the ReadyRoll project anyway)
+--!
+truncate table dbo.__MigrationLog;
+go
+
+set identity_insert dbo.__MigrationLog on;
+go
+
+insert dbo.__MigrationLog
+(
+  migration_id
+, script_checksum
+, script_filename
+, complete_dt
+, applied_by
+, deployed
+, [version]
+, package_version
+, release_version
+, sequence_no
+)
+select
+	migration_id
+  , script_checksum
+  , script_filename
+  , complete_dt
+  , applied_by
+  , deployed
+  , [version]
+  , package_version
+  , release_version
+  , sequence_no
+from
+	BMI_BAT_MAN.dbo.__MigrationLog
+go
+
+set identity_insert dbo.__MigrationLog off;
+go
+
+--!
+--! Finally, run all un it tests as part of any build
+--!
 exec tSQLt.RunAll;
+go
+
+
 

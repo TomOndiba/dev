@@ -20,48 +20,46 @@ if schema_id('IcsApp') is not null
 	exec (N'grant execute, select on schema :: [IcsApp] to [IcsDataFeeders];');
 go
 
---grant execute on dbo.stubprocedure to IcsDataFeeders
---if objectpropertyex(object_id(N'utils.LoadDateDimension'), N'IsProcedure') is not null exec (N'grant exec on utils.LoadDateDimension to [BatchManagers];') ;
+if objectpropertyex(object_id(N'dbo.ProcessRunStart'), N'IsProcedure') is not null 
+	grant execute on [dbo].[ProcessRunStart] to [IcsDataFeeders]
+go
+
+if objectpropertyex(object_id(N'dbo.ProcessRunEnd'), N'IsProcedure') is not null 
+	grant execute on [dbo].[ProcessRunEnd] to [IcsDataFeeders]
+go
+
+if objectpropertyex(object_id(N'dbo.ThreadRunEnd'), N'IsProcedure') is not null 
+	grant execute on [dbo].[ThreadRunEnd] to [IcsDataFeeders]
+go
+
+if objectpropertyex(object_id(N'dbo.ThreadRunStart'), N'IsProcedure') is not null 
+	grant execute on [dbo].[ThreadRunStart] to [IcsDataFeeders]
+go
+
+if objectpropertyex(object_id(N'dbo.SubProcessRunEnd'), N'IsProcedure') is not null 
+	grant execute on [dbo].[SubProcessRunEnd] to [IcsDataFeeders]
+go
+
+if objectpropertyex(object_id(N'dbo.SubProcessRunStart'), N'IsProcedure') is not null 
+	grant execute on [dbo].[SubProcessRunStart] to [IcsDataFeeders]
+go
+
+if objectpropertyex(object_id(N'dbo.SubProcessCheckThreads'), N'IsProcedure') is not null 
+	grant execute on [dbo].[SubProcessCheckThreads] to [IcsDataFeeders]
+go
 
 --!
 --! Create a batch managers role to allow support users to change selected load-related metadata etc.
 --!
-
-if objectpropertyex(object_id(N'dbo.ProcessRunStart'), N'IsProcedure') is not null 
-grant execute on [dbo].[ProcessRunStart] to [IcsDataFeeders]
-go
-
-if objectpropertyex(object_id(N'dbo.ProcessRunEnd'), N'IsProcedure') is not null 
-grant execute on [dbo].[ProcessRunEnd] to [IcsDataFeeders]
-
-go
-if objectpropertyex(object_id(N'dbo.ThreadRunEnd'), N'IsProcedure') is not null 
-grant execute on [dbo].[ThreadRunEnd] to [IcsDataFeeders]
-
-go
-if objectpropertyex(object_id(N'dbo.ThreadRunStart'), N'IsProcedure') is not null 
-grant execute on [dbo].[ThreadRunStart] to [IcsDataFeeders]
-
-go
-if objectpropertyex(object_id(N'dbo.SubProcessRunEnd'), N'IsProcedure') is not null 
-grant execute on [dbo].[SubProcessRunEnd] to [IcsDataFeeders]
-
-go
-if objectpropertyex(object_id(N'dbo.SubProcessRunStart'), N'IsProcedure') is not null 
-grant execute on [dbo].[SubProcessRunStart] to [IcsDataFeeders]
-
-go
-if objectpropertyex(object_id(N'dbo.SubProcessCheckThreads'), N'IsProcedure') is not null 
-grant execute on [dbo].[SubProcessCheckThreads] to [IcsDataFeeders]
-
-
 if not exists (select * from sys.database_principals where type = 'R' and name = 'BatchManagers')
 	exec(N'create role [BatchManagers] authorization [dbo];') ;
 go
 
 if schema_id('log4Private') is not null exec (N'grant select on schema :: [log4Private] to [BatchManagers];') ;
 if schema_id('privy') is not null exec (N'grant select on schema :: [privy] to [BatchManagers];') ;
+if schema_id('ics') is not null exec (N'grant select on schema :: [ics] to [BatchManagers];') ;
 go
+
 
 --!
 --! Create a role to allow read-only access to the actual code
@@ -136,39 +134,42 @@ go
 exec sp_addrolemember N'db_datareader', N'EtlDevelopersDEV' ;
 exec sp_addrolemember N'CodeReviewers', N'EtlDevelopersDEV' ;
 go
-if objectpropertyex(object_id(N'dbo.StubResultSet'), N'IsUserTable') is not null exec (N'grant select,update on dbo.StubResultSet to [EtlDevelopersDEV];') ;
+
+if schema_id('ics') is not null exec (N'grant select on schema :: [ics] to [EtlDevelopersDEV];') ;
+if schema_id('IcsApp') is not null exec (N'grant execute on schema :: [IcsApp] to [EtlDevelopersDEV];') ;
+go
+
+if objectpropertyex(object_id(N'dbo.StubResultSet'), N'IsUserTable') is not null
+	exec (N'grant select,update on dbo.StubResultSet to [EtlDevelopersDEV];') ;
+go
 
 if objectpropertyex(object_id(N'dbo.ProcessRunStart'), N'IsProcedure') is not null 
-grant execute on [dbo].[ProcessRunStart] to EtlDevelopersDEV
+	grant execute on [dbo].[ProcessRunStart] to EtlDevelopersDEV ;
 go
 
 if objectpropertyex(object_id(N'dbo.ProcessRunEnd'), N'IsProcedure') is not null 
-grant execute on [dbo].[ProcessRunEnd] to EtlDevelopersDEV
+	grant execute on [dbo].[ProcessRunEnd] to EtlDevelopersDEV ;
 go
 
 if objectpropertyex(object_id(N'dbo.ThreadRunEnd'), N'IsProcedure') is not null
-grant execute on [dbo].[ThreadRunEnd] to EtlDevelopersDEV
+	grant execute on [dbo].[ThreadRunEnd] to EtlDevelopersDEV ;
 go
-
 
 if objectpropertyex(object_id(N'dbo.ThreadRunStart'), N'IsProcedure') is not null 
-grant execute on [dbo].[ThreadRunStart] to EtlDevelopersDEV
+	grant execute on [dbo].[ThreadRunStart] to EtlDevelopersDEV ;
 go
-
 
 if objectpropertyex(object_id(N'dbo.SubProcessRunEnd'), N'IsProcedure') is not null
-grant execute on [dbo].[SubProcessRunEnd] to EtlDevelopersDEV
+	grant execute on [dbo].[SubProcessRunEnd] to EtlDevelopersDEV ;
 go
 
-
 if objectpropertyex(object_id(N'dbo.SubProcessRunStart'), N'IsProcedure') is not null 
-grant execute on [dbo].[SubProcessRunStart] to EtlDevelopersDEV
+	grant execute on [dbo].[SubProcessRunStart] to EtlDevelopersDEV ;
 go
 
 if objectpropertyex(object_id(N'dbo.SubProcessCheckThreads'), N'IsProcedure') is not null
-grant execute on [dbo].[SubProcessCheckThreads] to EtlDevelopersDEV
-
---if objectpropertyex(object_id(N'utils.LoadDateDimension'), N'IsProcedure') is not null exec (N'grant exec on utils.LoadDateDimension to [EtlDevelopersDEV];') ;
+	grant execute on [dbo].[SubProcessCheckThreads] to EtlDevelopersDEV ;
+go
 
 grant view definition to [EtlDevelopersDEV];
 go
@@ -180,6 +181,8 @@ go
 grant view definition to [EtlDevelopersPROD];
 go
 if schema_id('privy') is not null exec (N'grant select on schema :: [privy] to [EtlDevelopersPROD];');
+go
+if schema_id('ics') is not null exec (N'grant select on schema :: [ics] to [EtlDevelopersPROD];') ;
 go
 
 --!

@@ -283,6 +283,8 @@ Static Data;
     <Folder Include="Schema-Model\ics\Tables\" />
     <Folder Include="Programmable Objects\ics\" />
     <Folder Include="Programmable Objects\ics\Stored Procedures\" />
+    <Folder Include="Programmable Objects\IcsApp\" />
+    <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -394,6 +396,19 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.0\009_Add_ICS_Links_to_Batch_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Security\Schemas\IcsApp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\ics\Stored Procedures\ProcessRunStart.sql" />
+    <None Include="Programmable Objects\ics\Stored Procedures\SubProcessRunStart.sql" />
+    <None Include="Programmable Objects\ics\Stored Procedures\ThreadRunStart.sql" />
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\StartRun.sql" />
+    <None Include="Migrations\1.0.0\010_Create_IcsApp_schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\011_Remove_dbo_RunStart_procedures.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

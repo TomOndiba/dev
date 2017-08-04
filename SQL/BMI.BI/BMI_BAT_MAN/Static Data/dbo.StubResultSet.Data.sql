@@ -12,6 +12,10 @@ USING (VALUES
  ,('[dbo].[SubProcessCheckThreads]',NULL,-888,NULL,NULL,NULL,NULL,NULL,NULL,'Outcome',1,1,1,1,1,1)
  ,('[dbo].[SubProcessRunStart]',NULL,-888,NULL,'Sub-Process Instruction','Run','Sub-Process Message',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
  ,('[dbo].[ThreadRunStart]',NULL,NULL,-777,'Thread Instruction','Run','Thread Message','2017-07-25T00:00:00','2017-07-25T00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+ ,('[ics].[ProcessRunStart]',-999,NULL,NULL,'Process Instruction','Run','Process Message',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+ ,('[IcsApp].[SubProcessCheckThreads]',NULL,-888,NULL,NULL,NULL,NULL,NULL,NULL,'Outcome',1,1,1,1,1,1)
+ ,('[ics].[SubProcessRunStart]',NULL,-888,NULL,'Sub-Process Instruction','Run','Sub-Process Message',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
+ ,('[ics].[ThreadRunStart]',NULL,NULL,-777,'Thread Instruction','Run','Thread Message','2017-07-25T00:00:00','2017-07-25T00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL)
 ) AS Source ([FunctionName],[ProcessRunID],[SubProcessRunID],[ThreadRunID],[Instruction],[RunType],[Message],[StartCapturePoint],[EndCapturePoint],[Outcome],[ExpectedThreadCount],[ActualThreadCount],[ThreadsSucceeded],[ThreadsSkipped],[ThreadsStopped],[ThreadsFailed])
 ON (Target.[FunctionName] = Source.[FunctionName])
 WHEN MATCHED AND (

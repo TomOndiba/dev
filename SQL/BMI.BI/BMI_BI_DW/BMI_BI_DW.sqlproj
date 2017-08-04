@@ -65,6 +65,10 @@ Role=[dbo].[DataFeeds];
 Role=[dbo].[EtlDevelopersDEV];
 Role=[dbo].[EtlDevelopersPROD];
 StoredProcedure=[utils].[LoadCalendarDimension];
+Table=[tsa].[Customer];
+Table=[psa].[Customer];
+Table=[dbo].[TableStructure];
+Table=[dbo].[PkeyTable];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -841,6 +845,9 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <None Include="Programmable Objects\dbo\Stored Procedures\PopulatepsaTotsaLoadControlTable.sql" />
     <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaValidateSchema.sql" />
     <None Include="Migrations\1.0.3\004_Create_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\privy\Stored Procedures\BuildAndRunMerge.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

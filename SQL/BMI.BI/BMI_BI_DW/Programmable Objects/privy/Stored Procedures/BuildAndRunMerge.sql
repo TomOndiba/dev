@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[privy].[BuildAndRunMerge]') IS NOT NULL
+IF OBJECT_ID('[privy].[BuildAndRunMerge]') IS NOT NULL
 	DROP PROCEDURE [privy].[BuildAndRunMerge];
 
 GO
@@ -48,13 +48,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 		set nocount on;
 
-		--declare
-		--	@Runtype		  varchar(10)  = 'full'
-		--  , @SourceTableName  varchar(200) = 'customer'
-		--  , @SourceSchemaName varchar(200) = 'tsa'
-		--  , @TargetTableName  varchar(200) = 'customer'
-		--  , @TargetSchemaName varchar(200) = 'psa'
-		--  , @LoadDateTime	  datetime	   = null ;
+
 
 
 		if object_id(N'TableStructure') is not null drop table TableStructure ;
@@ -62,11 +56,25 @@ Version	ChangeDate		Author	BugRef	Narrative
 		if object_id(N'PkeyTable') is not null drop table PkeyTable ;
 
 
+
+		--declare
+		--	@Runtype		  varchar(10)  = 'full'
+		--  , @SourceTableName  varchar(200) = 'customer'
+		--  , @SourceSchemaName varchar(200) = 'tsa'
+		--  , @TargetTableName  varchar(200) = 'customer'
+		--  , @TargetSchemaName varchar(200) = 'psa'
+		--  , @LoadDateTime	  datetime	   = null 
+	
+
+
+
+
+
 		declare @STableName nvarchar(200) = @SourceSchemaName + '.' + @SourceTableName ;
 		declare @TTableName nvarchar(200) = @TargetSchemaName + '.' + @TargetTableName ;
 		declare @sql nvarchar(max) = '' ;
 		declare @_LoadDateTime varchar(50) = isnull(@LoadDateTime, getdate()) ;
-
+	    declare @maxid int=null;
 		select
 			COLUMN_NAME ColumnName
 		into
@@ -76,12 +84,16 @@ Version	ChangeDate		Author	BugRef	Narrative
 		where
 			TABLE_SCHEMA + '.' + TABLE_NAME = @STableName ;
 
+			
+		alter table TableStructure add id int identity(1, 1) ;
+
 		declare @i int = 1 ;
 		declare @insertcolumnstring nvarchar(max) = '' ; ---prepares insert list of column
 		declare @updatecolumnstring nvarchar(max) = '' ; --prepares update list of column
 		declare @columnname nvarchar(255) = '' ;
 		declare @updatesetcolumnstring nvarchar(max) = '' ; --prepares set list of columns for update statement
 		declare @pkcolumns varchar(500) = '' ;
+		declare @pkcolumnsTemp varchar(500) = '' ;
 
 		select
 			col_name(ic.object_id, ic.column_id) as PK
@@ -96,14 +108,38 @@ Version	ChangeDate		Author	BugRef	Narrative
 			1 = 1
 			and i.is_primary_key = 1
 			and ic.object_id = object_id(@STableName) ;
+						
+		alter table PkeyTable add id int identity(1, 1) ;
 
 
-		set @pkcolumns =(select top 1	PK from dbo.PkeyTable) ;
+		set @maxid  = (select max(id) from PkeyTable) ;
 		
-		alter table TableStructure add id int identity(1, 1) ;
 
-		declare @maxid int = (select max(id) from TableStructure) ;
 
+			while (@i <=@maxid )
+			begin
+
+			set @pkcolumnsTemp =(select PK from dbo.PkeyTable where id=@i );
+	
+			select @pkcolumnsTemp
+			if (@maxid>1)
+
+			begin
+			set @pkcolumns= ' and '+'s.'+@pkcolumnsTemp + '=t.'+@pkcolumnsTemp + @pkcolumns
+			end
+			
+			set @i=@i+1;
+		end
+
+		set @pkcolumns= substring(@pkcolumns,5,len(@pkcolumns))
+		select @pkcolumns, @pkcolumnsTemp
+
+	
+				
+
+				
+
+		set @maxid  = (select max(id) from TableStructure) ;
 		while (@i <= @maxid)
 			begin
 
@@ -115,7 +151,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 				if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	) )
 					set @updatecolumnstring = @updatecolumnstring + ' or ' + 's.' + @columnname + '<>' + 't.' + @columnname ;
 
-				if ( @columnname not in  ( select	PK from PkeyTable )  and	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted') )
+				if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted') )
 					set @updatesetcolumnstring = @updatesetcolumnstring + ' , ' + 't.' + @columnname + '=' + 's.' + @columnname ;
 
 				set @i = @i + 1 ;
@@ -131,7 +167,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		if @Runtype = 'Delta'
 			begin
 
-				set @sql = 'merge ' + @TTableName + ' t using ' + @STableName + ' s on s.' + @pkcolumns + '=t.' + @pkcolumns
+				set @sql = 'merge ' + @TTableName + ' t using ' + @STableName + ' s on ' + @pkcolumns 
 						   + ' when not matched by target then 	insert ('	+ @insertcolumnstring + ',EtlUpdatedBy,EtlUpdatedOn' + ') values('
 						   + @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + 'when matched and ' + @updatecolumnstring
 						   + ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
@@ -143,7 +179,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		if @Runtype = 'Full' ---soft delete
 			begin
 
-				set @sql = 'merge ' + @TTableName + ' t using ' + @STableName + ' s on s.' + @pkcolumns + '=t.' + @pkcolumns
+				set @sql = 'merge ' + @TTableName + ' t using ' + @STableName + ' s on ' + @pkcolumns 
 						   + ' when not matched by target then 	insert ('	+ @insertcolumnstring + ',EtlUpdatedBy,EtlUpdatedOn' + ') values('
 						   + @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + 'when matched and ' + @updatecolumnstring
 						   + ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
@@ -154,6 +190,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 
 		select	@sql ;
+
+
 
 		execute sp_executesql @sql ;
 

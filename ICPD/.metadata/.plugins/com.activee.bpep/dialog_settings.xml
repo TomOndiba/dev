@@ -5,8 +5,8 @@
 		<item value="963" key="height"/>
 		<item value="126" key="DIALOG_Y_ORIGIN"/>
 		<item value="882" key="width"/>
-		<item value="527" key="DIALOG_X_ORIGIN"/>
 		<item value="963" key="DIALOG_HEIGHT"/>
+		<item value="527" key="DIALOG_X_ORIGIN"/>
 		<item value="true" key="evaluation.result.visibility"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<list key="vertical.sash.weights">
@@ -15,15 +15,13 @@
 			<item value="20"/>
 		</list>
 	</section>
-	<section name="com.activee.bpep.deploy.wizard.AevBPRExportWizard">
-	</section>
 	<section name="AE_Dialog_Settings_com.activee.bpep.view.tabbedProperties.support.AevPartXQueryControl$2$1">
 		<item value="1361" key="DIALOG_WIDTH"/>
 		<item value="1170" key="height"/>
 		<item value="8" key="DIALOG_Y_ORIGIN"/>
 		<item value="1361" key="width"/>
-		<item value="315" key="DIALOG_X_ORIGIN"/>
 		<item value="1170" key="DIALOG_HEIGHT"/>
+		<item value="315" key="DIALOG_X_ORIGIN"/>
 		<item value="true" key="evaluation.result.visibility"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<list key="vertical.sash.weights">
@@ -32,13 +30,15 @@
 			<item value="21"/>
 		</list>
 	</section>
+	<section name="com.activee.bpep.deploy.wizard.AevBPRExportWizard">
+	</section>
 	<section name="AE_Dialog_Settings_com.activee.bpep.editor.dialog.expression.AevPartOnlyQueryBuilder">
 		<item value="556" key="DIALOG_WIDTH"/>
 		<item value="405" key="height"/>
 		<item value="323" key="DIALOG_Y_ORIGIN"/>
 		<item value="556" key="width"/>
-		<item value="690" key="DIALOG_X_ORIGIN"/>
 		<item value="405" key="DIALOG_HEIGHT"/>
+		<item value="690" key="DIALOG_X_ORIGIN"/>
 		<item value="false" key="evaluation.result.visibility"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<list key="vertical.sash.weights">

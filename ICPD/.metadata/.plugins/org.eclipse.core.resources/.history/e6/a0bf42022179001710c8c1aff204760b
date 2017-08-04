@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pdd:process xmlns:bpelns="http://spRunEnd_Cloud" xmlns:pdd="http://schemas.active-endpoints.com/pdd/2006/08/pdd.xsd" location="bpel/spRunEnd_Cloud/bpel/spRunEnd_Cloud.bpel" name="bpelns:spRunEnd_Cloud" platform="enterprise">
+  <pdd:partnerLinks>
+    <pdd:partnerLink name="Process_Consumer">
+      <pdd:myRole allowedRoles="" binding="EXTERNAL" service="spRunEnd_Cloud"/>
+    </pdd:partnerLink>
+    <pdd:partnerLink name="Provider">
+      <pdd:partnerRole endpointReference="static" invokeHandler="process">
+        <wsa:EndpointReference xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <wsa:Address>agent:Prakash:spRunEnd_Agent</wsa:Address>
+</wsa:EndpointReference>
+      </pdd:partnerRole>
+    </pdd:partnerLink>
+  </pdd:partnerLinks>
+  <pdd:references>
+    <pdd:wsdl location="project:/com.activevos.socrates.repository.services/wsdl/avosAutomatedStep.wsdl" namespace="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosAutomatedStep.wsdl"/>
+    <pdd:wsdl location="project:/spRunEnd_Agent/wsdl/spRunEnd_Agent.wsdl" namespace="http://www.example.org/spRunEnd_Agent/"/>
+    <pdd:wsdl location="project:/spRunEnd_Agent/wsdl/bpel/spRunEnd_Agent.public.wsdl" namespace="http://spRunEnd_Agent/spRunEnd_Agent/public"/>
+  </pdd:references>
+</pdd:process>

@@ -7,14 +7,22 @@
 		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
-			<item value="C:\Informatica\ProcedureAgent"/>
-			<item value="C:\Informatica\ProcedureCloud"/>
-			<item value="C:\Sources\Call a Procedure\ProcedureCloud"/>
-			<item value="C:\Sources\Call a Procedure\ProcedureAgent"/>
+			<item value="C:\Informatica\ICPD\spRunEnd_Agent"/>
+			<item value="C:\Informatica\ICPD\spRunStart_Agent"/>
+			<item value="C:\Informatica\ICPD\spRunEnd_Cloud"/>
+			<item value="C:\Informatica\ICPD\spRunStart_Cloud"/>
+			<item value="C:\Informatica\ICPD\ProcedureCloud"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
 		</list>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item value="525" key="DIALOG_WIDTH"/>
+		<item value="177" key="DIALOG_Y_ORIGIN"/>
+		<item value="706" key="DIALOG_X_ORIGIN"/>
+		<item value="624" key="DIALOG_HEIGHT"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="NewWizardAction">
 		<item value="org.eclipse.ui.wizards.new.project" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>

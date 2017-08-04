@@ -113,6 +113,7 @@ Static Data;
   <PropertyGroup>
     <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
+    <SyncOptionIgnoreColumnsOrder>False</SyncOptionIgnoreColumnsOrder>
     <!-- These properties might be set by the Developer -->
     <!--
     <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>
@@ -124,7 +125,6 @@ Static Data;
     <SyncOptionIgnoreCommentsInBodies>False</SyncOptionIgnoreCommentsInBodies>
     <SyncOptionIgnoreAnsiOptions>False</SyncOptionIgnoreAnsiOptions>
     <SyncOptionIgnoreCollations>True</SyncOptionIgnoreCollations>
-    <SyncOptionIgnoreColumnsOrder>True</SyncOptionIgnoreColumnsOrder>
     <SyncOptionIgnoreWhiteSpace>True</SyncOptionIgnoreWhiteSpace>
     <SyncOptionIgnoreSynonymDatabaseAndServerName>True</SyncOptionIgnoreSynonymDatabaseAndServerName>
     <SyncOptionIgnoreDmlTriggers>False</SyncOptionIgnoreDmlTriggers> 
@@ -391,6 +391,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.0\008_Added_missing_extended_properties.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\009_Add_ICS_Links_to_Batch_tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

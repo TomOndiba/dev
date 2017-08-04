@@ -47,6 +47,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 --</CommentHeader>
 
 begin
+	set nocount on;
+
 	--! Standard/ExceptionHandler variables
 	declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid)) ;
 	declare @_Error int = 0 ;

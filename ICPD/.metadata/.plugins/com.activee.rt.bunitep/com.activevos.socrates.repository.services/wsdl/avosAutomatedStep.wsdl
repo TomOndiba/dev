@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosAutomatedStep.wsdl"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:xsd1="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  name="avosAutomatedStep"
+                  targetNamespace="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosAutomatedStep.wsdl">
+
+	  <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="AutomatedStepOperationsPLT">
+		    <plnk:role name="Provider" portType="tns:AutomatedStepOperations"/>
+	  </plnk:partnerLinkType>
+
+	  <wsdl:types>
+		    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			      <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+                    schemaLocation="../schema/avosScreenflow.xsd"/>
+		    </xs:schema>
+	  </wsdl:types>
+	  <wsdl:message name="automatedStepRequest">
+		    <wsdl:part element="xsd1:automatedStepRequest" name="automatedStepRequest"/>
+	  </wsdl:message>
+	  <wsdl:message name="automatedStepResponse">
+		    <wsdl:part element="xsd1:automatedStepResponse" name="automatedStepResponse"/>
+	  </wsdl:message>
+   <wsdl:message name="automatedStepFault">
+      <wsdl:part element="xsd1:faultResponse" name="automatedStepFaultResponse"/>
+   </wsdl:message>
+   <wsdl:message name="automatedStepValidationFault">
+      <wsdl:part element="xsd1:invalidData" name="automatedStepValidationFault"/>
+   </wsdl:message>
+	  <wsdl:portType name="AutomatedStepOperations">
+		    <wsdl:operation name="automatedStep">
+			      <wsdl:input message="tns:automatedStepRequest"/>
+			      <wsdl:output message="tns:automatedStepResponse"/>
+         	<wsdl:fault message="tns:automatedStepFault" name="fault"/>
+         	<wsdl:fault message="tns:automatedStepValidationFault" name="invalidData"/>
+		    </wsdl:operation>
+	  </wsdl:portType>
+</wsdl:definitions>

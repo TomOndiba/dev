@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screenflowContribution xmlns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosServiceDiscovery.xsd">
+   
+<service name="ProcedureCloud">
+	<displayName>sp-ProcessRunStart</displayName>
+	<description>Call Stored Proc ProcessRunStart</description>
+	<!-- <iconLocation>project:/auto/screenflow/service-contribs/icons/InstallAppointment.png</iconLocation> 
+	<largeIconLocation>project:/auto/screenflow/service-contribs/icons/InstallAppointment.png</largeIconLocation> -->
+<input>
+	<parameter name="ProcessName" type="string" required="true"/> 
+	<parameter name="ProcessID" type="integer" required="true"/>   
+</input>
+        
+<output>
+	<field name="ProcessRunID" type="integer"/>
+	<field name="RunType" type="string"/>
+	<field name="Instruction" type="string"/>
+	<field name="Message" type="string"/>
+</output>
+</service>
+     
+</screenflowContribution>

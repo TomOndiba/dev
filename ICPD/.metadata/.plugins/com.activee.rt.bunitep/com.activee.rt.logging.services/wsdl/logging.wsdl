@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+                  xmlns:ael="http://schemas.active-endpoints.com/logging/2009/05/logging.xsd"
+                  xmlns:tns="http://docs.active-endpoints/wsdl/logging/2009/05/logging.wsdl"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:logging="http://docs.active-endpoints/wsdl/logging/2009/05/logging.wsdl"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://docs.active-endpoints/wsdl/logging/2009/05/logging.wsdl">
+                  
+   <plnk:partnerLinkType name="loggingPLT">
+      <plnk:role name="sender">
+         <plnk:portType name="tns:logPT"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+   
+  <wsdl:types>
+      <xs:schema elementFormDefault="qualified"
+                 targetNamespace="http://docs.active-endpoints/wsdl/logging/2009/05/logging.wsdl">
+
+         <xs:import namespace="http://schemas.active-endpoints.com/logging/2009/05/logging.xsd"
+                    schemaLocation="../schema/logging.xsd"/>
+
+      </xs:schema>
+  </wsdl:types>
+
+	  <wsdl:message name="logMessage">
+		    <wsdl:part element="ael:logWriteMessage" name="logPart"/>
+	  </wsdl:message>
+
+	  <wsdl:portType name="logPT">
+		    <wsdl:operation name="send">
+			      <wsdl:input message="tns:logMessage"/>
+		    </wsdl:operation>
+	  </wsdl:portType>
+
+</wsdl:definitions>

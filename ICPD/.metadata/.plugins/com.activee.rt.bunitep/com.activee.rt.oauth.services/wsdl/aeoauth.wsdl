@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                  xmlns:oauth="http://schemas.activebpel.org/REST/2011/08/01/aeoauth.xsd"
+                  xmlns:tns="http://www.activebpel.org/REST/2011/08/01/aeoauth.wsdl"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://www.activebpel.org/REST/2011/08/01/aeoauth.wsdl">
+
+	  <plnk:partnerLinkType name="IAeOAuthPLT">
+		    <plnk:role name="process" portType="tns:IAeOAuthPortType"/>
+	  </plnk:partnerLinkType>
+
+	  <wsdl:types>
+		    <xs:schema elementFormDefault="qualified"
+                 targetNamespace="http://www.activebpel.org/REST/2011/08/01/aeoauth.wsdl">
+			      <xs:import namespace="http://schemas.activebpel.org/REST/2011/08/01/aeoauth.xsd"
+                    schemaLocation="../schema/aeoauth.xsd"/>
+		    </xs:schema>
+	  </wsdl:types>
+
+	  <wsdl:message name="getAuthorizationUrlRequest">
+		    <wsdl:part element="oauth:getAuthorizationUrlRequest"
+                 name="getAuthorizationUrlRequest"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="getAuthorizationUrlResponse">
+		    <wsdl:part element="oauth:getAuthorizationUrlResponse"
+                 name="getAuthorizationUrlResponse"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="getAuthorizationUrlFault">
+		    <wsdl:part element="oauth:getAuthorizationUrlFault"
+                 name="getAuthorizationUrlFault"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="authorizeRequest">
+		    <wsdl:part element="oauth:authorizeRequest" name="authorizeRequest"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="authorizeResponse">
+		    <wsdl:part element="oauth:authorizeResponse" name="authorizeResponse"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="authorizeFault">
+		    <wsdl:part element="oauth:authorizeFault" name="authorizeFault"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="getAccessTokenRequest">
+		    <wsdl:part element="oauth:getAccessTokenRequest" name="getAccessTokenRequest"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="getAccessTokenResponse">
+		    <wsdl:part element="oauth:getAccessTokenResponse" name="getAccessTokenResponse"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="getAccessTokenFault">
+		    <wsdl:part element="oauth:getAccessTokenFault" name="getAccessTokenFault"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="sendRequestRequest">
+		    <wsdl:part element="oauth:sendRequestRequest" name="sendRequestRequest"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="sendRequestResponse">
+		    <wsdl:part element="oauth:sendRequestResponse" name="sendRequestResponse"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="sendRequestFault">
+		    <wsdl:part element="oauth:sendRequestFault" name="sendRequestFault"/>
+	  </wsdl:message>
+
+	  <wsdl:portType name="IAeOAuthPortType">
+		    <wsdl:operation name="getAuthorizationUrl">
+			      <wsdl:input message="tns:getAuthorizationUrlRequest"/>
+			      <wsdl:output message="tns:getAuthorizationUrlResponse"/>
+			      <wsdl:fault message="tns:getAuthorizationUrlFault" name="getAuthorizationUrlFault"/>
+		    </wsdl:operation>
+		    <wsdl:operation name="authorize">
+			      <wsdl:input message="tns:authorizeRequest"/>
+			      <wsdl:output message="tns:authorizeResponse"/>
+			      <wsdl:fault message="tns:authorizeFault" name="authorizeFault"/>
+		    </wsdl:operation>
+		    <wsdl:operation name="getAccessToken">
+			      <wsdl:input message="tns:getAccessTokenRequest"/>
+			      <wsdl:output message="tns:getAccessTokenResponse"/>
+			      <wsdl:fault message="tns:getAccessTokenFault" name="getAccessTokenFault"/>
+		    </wsdl:operation>
+		    <wsdl:operation name="sendRequest">
+			      <wsdl:input message="tns:sendRequestRequest"/>
+			      <wsdl:output message="tns:sendRequestResponse"/>
+			      <wsdl:fault message="tns:sendRequestFault" name="sendRequestFault"/>
+		    </wsdl:operation>
+	  </wsdl:portType>
+
+</wsdl:definitions>

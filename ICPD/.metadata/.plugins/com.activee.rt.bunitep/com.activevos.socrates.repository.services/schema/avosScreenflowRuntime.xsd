@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:common="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+           xmlns:core="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd">
+
+	  <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+              schemaLocation="avosCommon.xsd"/>
+	  <xs:include schemaLocation="avosScreenflowModel.xsd"/>
+    <xs:include schemaLocation="avosCommonRuntime.xsd"/>
+
+	  <!-- 
+		screenFlowInitRequest - the request to start a new screen flow, it returns synchronously. 
+		Note all other requests from the screenflow are callbacks. 
+	-->	
+	  <xs:element name="screenFlowInitRequest">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element ref="tns:userId"/>
+				        <xs:element ref="tns:correlationId"/>
+				        <xs:element minOccurs="0" ref="tns:hostContext"/>
+				        <xs:element minOccurs="0" ref="tns:parameters"/>
+				        <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+			      </xs:sequence>
+			      <xs:anyAttribute namespace="##any" processContents="lax"/>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <!-- 
+		screenFlowInitResponse - Init request response of just return the process id that the new screenflow is running under.
+		Note that the first screen is returned via callback.
+	-->	
+	  <xs:element name="screenFlowInitResponse">
+		    <xs:complexType>
+			      <xs:sequence>
+					       <xs:element name="processId" type="xs:long"/>
+					       <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+			      </xs:sequence>
+			      <xs:anyAttribute namespace="##any" processContents="lax"/>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <!-- 
+		getScreenFlowData request to return all current data currently held by
+		the screenflow instance 
+	-->	
+	  <xs:element name="getScreenFlowDataRequest">
+		    <xs:complexType>
+			      <xs:sequence>
+			         <xs:element ref="tns:correlationId"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="getScreenFlowDataResponse">
+		    <xs:complexType>
+			      <xs:sequence>
+			         <xs:element ref="tns:correlationId"/>
+			         <xs:element minOccurs="0" ref="tns:hostContext"/>
+			         <xs:element minOccurs="0" ref="tns:parameters"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+	
+	  <!-- 
+		setScreenFlowData operation sets the screenflow data items specified. 
+		Existing elements not specified in this request are left unchanged
+	-->
+	  <xs:element name="setScreenFlowDataRequest">
+		    <xs:complexType>
+			      <xs:sequence>
+			         <xs:element ref="tns:correlationId"/>
+			         <xs:element minOccurs="0" ref="tns:hostContext"/>
+			         <xs:element minOccurs="0" ref="tns:parameters"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+		
+	  <xs:element name="setScreenFlowDataResponse">
+		    <xs:complexType>
+			      <xs:sequence>
+			         <xs:element ref="tns:correlationId"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+	
+	  <!-- 
+		screenFlowRequest - the callback to ask the driver to display the passed screen and data.
+	-->	
+	  <xs:element name="screenFlowRequest">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element ref="tns:userId"/>
+				        <xs:element ref="tns:correlationId"/>
+				        <xs:element ref="tns:nextScreenId"/>
+                <xs:element minOccurs="0" ref="tns:milestoneDirective"/>
+				        <xs:element minOccurs="0" ref="tns:screenData"/>
+				        <xs:element minOccurs="0" ref="tns:redirectTo"/>
+				        <xs:element minOccurs="0" ref="tns:error"/>
+				        <xs:element minOccurs="0" ref="tns:finalOutcome"/>
+				        <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:onRollback"/>
+				        <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+			      </xs:sequence>
+			      <!-- language code is used to get next screen with the correct translation -->
+			      <xs:attribute name="lang" type="tns:langCode" use="optional"/>
+			      <xs:anyAttribute namespace="##any" processContents="lax"/>
+		    </xs:complexType>
+	  </xs:element>
+	
+    <!-- 
+        screenFlowResponse - the response from the driver with the data and action selected by the user on the screen.
+    --> 
+    <xs:element name="screenFlowResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:userId"/>
+                <xs:element ref="tns:correlationId"/>
+                <xs:element ref="tns:selectedAction"/>
+                <xs:element minOccurs="0" ref="tns:screenData"/>
+                <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+            </xs:sequence>
+            <!-- The following  is set to true if the response from the browser is really just to close the open ima prior to go to history -->
+            <xs:attribute name="historyOpenIMACloser" type="xs:boolean" use="optional"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- 
+        Automated step request and response messages 
+    -->  
+    <xs:element name="automatedStepRequest" type="tns:TServiceRequest">
+    </xs:element>
+    <xs:element name="automatedStepResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="tns:hostContext"/>
+                <xs:element minOccurs="0" ref="tns:fields"/>
+                <xs:element minOccurs="0" ref="tns:guideData"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:onRollback"/>
+                <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+	
+   <xs:element name="onRollbackRequest" type="tns:rollbackCollectionType"/>
+    <!-- 
+        faultResponse - generic fault reply message from an automated step indicating a problem
+    --> 
+    <xs:element name="faultResponse" type="tns:faultResponseType"/>
+        
+    <!-- 
+        Browser request and response messages 
+    -->  
+	  <xs:element name="browserInitRequest">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element name="screenFlowId" type="xs:string"/>
+				        <xs:element minOccurs="0" ref="tns:hostContext"/>
+				        <xs:element minOccurs="0" ref="tns:parameters"/>
+				        <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+			      </xs:sequence>
+			      <xs:attribute name="locale" type="xs:string" use="optional"/>
+			      <xs:anyAttribute namespace="##any" processContents="lax"/>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="browserJoinRequest">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element name="screenFlowId" type="xs:string"/>
+				        <xs:element ref="tns:correlationId"/>
+				        <xs:element minOccurs="0" ref="tns:hostContext"/>
+				        <xs:element minOccurs="0" ref="tns:parameters"/>
+				        <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+			      </xs:sequence>
+			      <xs:attribute name="locale" type="xs:string" use="optional"/>
+			      <xs:anyAttribute namespace="##any" processContents="lax"/>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="browserRequest">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element ref="tns:correlationId"/>
+				        <xs:choice maxOccurs="1" minOccurs="0">
+					          <xs:element ref="tns:selectedAction"/>
+					          <xs:element ref="tns:historyScreenId"/>
+				        </xs:choice>
+				        <xs:element minOccurs="0" ref="tns:screenData"/>
+				        <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+			      </xs:sequence>
+			      <xs:anyAttribute namespace="##any" processContents="lax"/>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="browserResponse">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element ref="tns:correlationId"/>
+				        <xs:group ref="tns:TNextScreen"/>
+				        <xs:element minOccurs="0" ref="tns:error"/>
+				        <xs:element minOccurs="0" name="flowName" type="xs:string"/>
+				        <xs:element minOccurs="0" ref="tns:history"/>
+				        <xs:element minOccurs="0" ref="tns:themeURI"/>
+				        <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##other"
+                    processContents="lax"/>
+			      </xs:sequence>
+            <!-- the following attribute may be optionally set in response to a join or start request to disable user restart of a flow  -->
+            <xs:attribute name="allowRestart" type="xs:boolean" use="optional"/>
+            <!-- the following attribute can be used to tell the client to start sending all requests for screens to a new endpoint address  -->
+            <xs:attribute name="guideEndpoint" type="xs:string" use="optional"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
+		    </xs:complexType>
+	  </xs:element>
+   
+    <!-- The milestone directive gives instructions to the screenflow-runtime regarding how a milestone should be handled. -->
+    <xs:element name="milestoneDirective">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" name="onJoinAction">
+            	  <xs:complexType>
+            		    <xs:choice>
+            			      <xs:element name="advanceScreen">
+            				        <xs:complexType>
+            					          <xs:attribute name="actionId" type="xs:string" use="required"/>
+            					          <xs:attribute name="targetScreen" type="xs:NCName" use="required"/>
+            					          <xs:attribute name="actionText" type="xs:string"/>
+            				        </xs:complexType>
+            			      </xs:element>
+            			      <xs:element name="newGuide"/>
+            		    </xs:choice>
+            	  </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+         <xs:attribute default="true"
+                       name="disableHistory"
+                       type="xs:boolean"
+                       use="optional"/>
+         <xs:attribute default="false"
+                       name="dontShowScreen"
+                       type="xs:boolean"
+                       use="optional"/>
+      </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="guideDataMetadata">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="parameter"
+                        type="common:nameValueType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	  <xs:element name="nextScreenId" type="xs:NCName"/>
+	  <xs:element name="historyScreenId" type="xs:NCName"/>
+	  <!-- Theme to use for a screenflow instance -->
+    <xs:element name="themeURI" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>The template/theme to use during runtime. This field is required when browser response is used for init/join requests, and is ignored in other cases.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+	
+	  <!-- Driver screen history -->	
+	  <xs:element name="history">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element maxOccurs="unbounded" name="historyItem" type="tns:THistory"/>				  
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+	  <xs:complexType name="THistory">
+	    <xs:sequence>
+	       <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:onRollback"/>
+           <xs:element maxOccurs="1" minOccurs="0" ref="tns:rollbackSummary"/>
+           <xs:element minOccurs="0" ref="tns:milestoneDirective"/>
+	    </xs:sequence>
+		    <xs:attribute name="obsolete" type="xs:boolean" use="optional"/>
+		    <xs:attribute name="screenId" type="xs:NCName" use="required"/>
+		    <xs:attribute name="screenAction" type="xs:NCName" use="optional"/>
+		    <xs:attribute name="screenTitle" type="xs:string" use="required"/>
+		    <xs:attribute name="screenActionText" type="xs:string" use="required"/>
+	  </xs:complexType>
+
+	  <!-- Next screen to use for display -->
+	  <xs:group name="TNextScreen">
+	     <xs:choice>
+  		     <xs:element ref="tns:startScreen"/>
+  		     <xs:element ref="tns:screen"/>
+  		     <xs:element ref="tns:milestone"/>
+  		     <xs:element ref="tns:endScreen"/>
+	     </xs:choice>
+	  </xs:group>
+
+	  <!-- Error information to relay to client -->	
+	  <xs:element name="error" type="tns:errorType"/>
+	
+	  <xs:element name="listRequest" type="tns:TServiceRequest"/>
+
+	  <xs:complexType name="TServiceRequest">
+        <xs:sequence>
+           <xs:element ref="tns:userId"/>
+           <xs:element ref="tns:correlationId"/>
+           <xs:element ref="tns:serviceName"/>
+           <xs:element minOccurs="0" name="avosServiceName" type="xs:string"/>
+           <xs:element minOccurs="0" ref="tns:runAsUser"/>
+           <xs:element minOccurs="0" name="processId" type="xs:integer"/>
+           <xs:element minOccurs="0" name="stepId" type="xs:string"/>
+           <xs:element maxOccurs="1"
+                     minOccurs="0"
+                     name="avosStepTitle"
+                     type="xs:string">
+               <xs:annotation>
+                  <xs:documentation>Name of the step in a guide that used this automated step service.</xs:documentation>
+               </xs:annotation>
+         </xs:element>
+            <xs:element minOccurs="0" ref="tns:hostContext"/>
+           <xs:element minOccurs="0" ref="tns:parameters"/>
+           <xs:element minOccurs="0" ref="tns:guideData"/>
+           <xs:element minOccurs="0" ref="tns:guideDataMetadata"/>
+           <xs:any maxOccurs="unbounded"
+                 minOccurs="0"
+                 namespace="##other"
+                 processContents="lax"/>
+        </xs:sequence>
+        <xs:attribute name="sf_id" type="xs:NCName" use="optional"/>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+	  </xs:complexType>
+
+	  <xs:element name="listResponse">
+		    <xs:complexType>
+			      <xs:choice>
+				        <xs:element ref="tns:pickList"/>
+				        <xs:element ref="tns:table"/>
+                <xs:element ref="tns:objectList"/>
+			      </xs:choice>
+		    </xs:complexType>
+	  </xs:element>
+   
+   <xs:element name="objectList" type="tns:TObjectList"/>
+   <xs:complexType name="TObjectList">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="object">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:any maxOccurs="unbounded" namespace="##local" processContents="skip"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+	
+	  <xs:element name="pickList" type="tns:TPicklist"/>
+	  <xs:complexType name="TPicklist">
+		    <xs:sequence>
+			      <xs:element maxOccurs="unbounded" minOccurs="0" name="item">
+				        <xs:complexType>
+					          <xs:complexContent>
+						            <xs:extension base="xs:anyType">
+							              <xs:attribute name="label" type="xs:string" use="required"/>
+						            </xs:extension>
+					          </xs:complexContent>
+				        </xs:complexType>
+			      </xs:element>
+		    </xs:sequence>
+	  </xs:complexType>
+	
+	  <xs:element name="table" type="tns:TTable"/>
+	  <xs:complexType name="TTable">
+		    <xs:sequence>
+			      <xs:element maxOccurs="1" minOccurs="0" name="valueField" type="xs:string"/>
+			      <xs:element maxOccurs="unbounded" minOccurs="0" name="row">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element maxOccurs="unbounded" minOccurs="1" name="column">
+							              <xs:complexType>
+								                <xs:complexContent>
+									                  <xs:extension base="common:nameValueType">
+										                    <xs:attribute name="displayName" type="xs:boolean"/>
+									                  </xs:extension>
+								                </xs:complexContent>
+							              </xs:complexType>
+						            </xs:element>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+		    </xs:sequence>
+	  </xs:complexType>
+
+	  <xs:element name="eventingFault">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element name="code" type="xs:string"/>
+				        <xs:element name="message" type="xs:string"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+</xs:schema>

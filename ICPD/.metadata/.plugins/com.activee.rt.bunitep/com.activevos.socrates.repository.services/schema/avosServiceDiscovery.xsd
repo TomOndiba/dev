@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosServiceDiscovery.xsd"
+           xmlns:common="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosServiceDiscovery.xsd">
+   
+   <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+              schemaLocation="avosCommon.xsd"/>
+   
+   <!-- Request and response for discovering automated screenflow services in contributions. -->
+   <xs:element name="serviceDiscoveryRequest">
+      <xs:complexType>
+         <xs:sequence>
+         	  <xs:choice minOccurs="0">
+         		<!-- can be used to look for services by name -->
+         		    <xs:element name="serviceName" type="xs:string"/>
+         		    <!-- can be used to look for search services by full name with prefix or only by name -->
+         		    <xs:element name="searchServiceName" type="tns:SearchServiceNameType"/>
+         	  </xs:choice>
+            <xs:any minOccurs="0" namespace="##other"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="serviceDiscoveryResponse">
+      <xs:complexType>
+         <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="tns:service"/>
+            <xs:element ref="tns:eventSource"/>
+            <xs:element ref="tns:searchService"/>
+         </xs:choice>
+      </xs:complexType>
+   </xs:element>
+   
+   <!-- search serachService parameter -->
+   <xs:complexType name="SearchServiceNameType">
+   		<xs:simpleContent>
+   			   <xs:extension base="xs:string">
+   				     <xs:attribute name="anyPrefix" type="xs:boolean" use="optional"/>
+   			   </xs:extension>
+   		</xs:simpleContent>
+   </xs:complexType>
+
+   <!-- A list of items for the repository. -->
+   <xs:element name="screenflowContribution">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element ref="tns:service"/>
+               <xs:element ref="tns:serviceDef"/>
+               <xs:element ref="tns:serviceDiscoverer"/>
+               <xs:element ref="tns:searchService"/>
+               <xs:element ref="tns:eventSource"/>
+            </xs:choice>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- Structure of items in the repository. -->
+   <xs:element name="service" type="tns:TService"/>
+   <xs:element name="searchService" type="tns:TSearchService"/>
+   <xs:element name="eventSource" type="tns:TEvent"/>
+   
+   <!--  serviceDef is the same as a service, except it is not automatically discovered (due to QName) -->
+   <xs:element name="serviceDef" type="tns:TService"/>
+   <xs:element name="searchServiceDef" type="tns:TSearchService"/>
+   <xs:element name="serviceDiscoverer" type="tns:TServiceDiscoverer"/>
+
+   <!--  light weight elements that ref (by location) to a detailed def (serviceDef) for additional details such as input & output. -->   
+   <xs:element name="serviceRef" type="tns:TServiceRef"/>
+   <xs:element name="searchServiceRef" type="tns:TServiceRef"/>
+   
+   
+   <xs:complexType name="TEvent">
+      <xs:complexContent>
+         <xs:extension base="tns:eventBaseType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="displayName" type="xs:string"/>
+               <xs:element minOccurs="0" name="category" type="xs:string"/>
+               <xs:element minOccurs="0" name="description" type="xs:string"/>
+               <!-- the input parameters expected by this service -->
+               <xs:element maxOccurs="1" minOccurs="0" name="input" type="tns:TInputType"/>
+               <!-- the output fields returned by this service -->
+               <xs:element maxOccurs="1"
+                           minOccurs="0"
+                           name="output"
+                           type="tns:TOutputType"/>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##other"
+                       processContents="lax"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="TService">
+      <xs:complexContent>
+         <xs:extension base="tns:serviceBaseType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="category" type="xs:string"/>
+               <xs:element minOccurs="0" name="description" type="xs:string"/>
+               <xs:element minOccurs="0" name="tags" type="xs:string"/>
+               <!-- if any showForObject elements exist, then only show this service when one of these objects is the appliesTo -->
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="showForObject"
+                           type="xs:string"/>
+               <xs:element minOccurs="0" name="iconLocation" type="xs:string"/>
+               <xs:element minOccurs="0" name="largeIconLocation" type="xs:string"/>
+               <!-- the input parameters expected by this service -->
+               <xs:element maxOccurs="1" minOccurs="0" name="input" type="tns:TInputType"/>
+               <!-- the output fields returned by this service -->
+               <xs:element maxOccurs="1"
+                           minOccurs="0"
+                           name="output"
+                           type="tns:TOutputType"/>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##other"
+                       processContents="lax"/>
+            </xs:sequence>
+            <xs:attribute name="passAllData" type="xs:boolean" use="optional"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="TInputType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter">
+            <xs:complexType>
+               <xs:complexContent>
+                  <xs:extension base="tns:parameterType">
+                     <xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+                  </xs:extension>
+               </xs:complexContent>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+                  
+   <xs:complexType name="TOutputType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="field">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:options"/>
+               </xs:sequence>
+               <xs:attribute name="name" type="xs:string"/>
+               <xs:attribute name="label" type="xs:string" use="optional"/>
+               <xs:attribute name="type" type="xs:string" use="optional"/>
+               <xs:attribute name="description" type="xs:string" use="optional"/>
+               <xs:anyAttribute namespace="##any" processContents="lax"/>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="TSearchService">
+      <xs:complexContent>
+         <xs:extension base="tns:serviceBaseType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="description" type="xs:string"/>
+               <!-- the input parameters expected by this service -->
+               <xs:element minOccurs="0" name="mode">
+                  <xs:complexType>
+                     <xs:attribute name="name" type="tns:TModesType" use="required"/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element maxOccurs="1" minOccurs="0" name="input">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element maxOccurs="unbounded"
+                                    minOccurs="0"
+                                    name="parameter"
+                                    type="tns:parameterType"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <!-- the output fields returned by this service -->
+               <xs:element maxOccurs="1" minOccurs="0" name="searchOutput">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" ref="tns:options"/>
+                     </xs:sequence>
+                     <xs:attribute name="type" type="xs:string"/>
+                     <xs:anyAttribute/>
+                  </xs:complexType>
+               </xs:element>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##other"
+                       processContents="lax"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <!--  a light weight service that has additional info (input, output etc.) at the specified location. -->
+   <xs:complexType name="TServiceRef">
+      <xs:complexContent>
+         <xs:extension base="tns:serviceBaseType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="category" type="xs:string"/>
+               <!-- if any showForObject elements exist, then only show this service when one of these objects is the appliesTo -->
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="showForObject"
+                           type="xs:string"/>
+               <xs:element minOccurs="0" name="iconLocation" type="xs:string"/>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##other"
+                       processContents="lax"/>
+            </xs:sequence>
+            <!--  location of the service definition  -->
+            <xs:attribute name="location" type="xs:string" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>   
+   
+   <xs:complexType name="eventBaseType">
+      <!-- the name of the service, note this is also the real service name of a deployed process -->
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="deprecatedService" type="xs:boolean" use="optional"/>
+      <xs:anyAttribute namespace="##any" processContents="lax"/>
+   </xs:complexType>
+
+   <xs:complexType name="serviceBaseType">
+      <xs:complexContent>
+         <xs:extension base="tns:eventBaseType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="avosServiceName" type="xs:string"/>
+               <xs:element minOccurs="0" name="displayName" type="xs:string"/>
+               <!-- if showForMimeType contains a mime-type, then this service will be shown only if the specifed mime-type matches 
+                  the entry type def's mime type (e.g. screenflow, processes etc.). -->
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="showForMimeType"
+                           type="xs:string"/>
+			            <xs:element maxOccurs="1" minOccurs="0" name="agentOnly" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="parameterType">
+      <xs:sequence>
+         <xs:element minOccurs="0" ref="tns:options"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="label" type="xs:string" use="optional"/>
+      <xs:attribute name="type" type="xs:string" use="optional"/>
+      <xs:attribute name="required" type="xs:string" use="optional"/>
+      <xs:attribute name="description" type="xs:string" use="optional"/>
+      <xs:anyAttribute namespace="##any" processContents="lax"/>
+   </xs:complexType>
+
+   <!-- input and output field options values for rendering as well as value restrictions, like pick lists, number scale and precision -->
+   <xs:element name="options" type="tns:TOptions"/>
+   <xs:complexType name="TOptions">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="1"
+                     name="option"
+                     type="common:optionType"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="TServiceDiscoverer">
+      <xs:annotation>
+         <xs:documentation>Used to define an ActiveVOS process that will serve as a service discovery process. Invoking the process will return content that will screenflowContribution element with zero or more service elements.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="avosServiceName" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:simpleType name="TModesType">
+      <xs:list>
+         <xs:simpleType>
+            <xs:restriction base="xs:string">
+               <xs:enumeration value="designtime"/>
+               <xs:enumeration value="preview"/>
+               <xs:enumeration value="simulation"/>
+               <xs:enumeration value="runtime"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:list>
+   </xs:simpleType>
+</xs:schema>

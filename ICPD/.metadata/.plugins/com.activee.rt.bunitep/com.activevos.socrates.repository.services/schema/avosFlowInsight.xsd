@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:aesf="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/insight/2011/02/avosFlowInsight.xsd"
+           xmlns:common="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/insight/2011/02/avosFlowInsight.xsd">
+
+    <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+              schemaLocation="avosScreenflowRuntime.xsd"/>
+    <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+              schemaLocation="avosCommon.xsd"/>
+
+   <!-- Request and response for getting summary insight information -->
+   <xs:element name="getInsightSummaryRequest">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="PublishedContributionId" type="xs:string"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getInsightSummaryResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="RunningCount" type="xs:int"/>
+            <xs:element name="CompletedCount" type="xs:int"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- Request and response for getting summary insight information -->
+   <xs:element name="getInsightUserListRequest">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="PublishedContributionId" type="xs:string"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getInsightUserListResponse">
+      <xs:complexType>
+         <xs:sequence>
+             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:flowInsightUser"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+   <!-- Request and response for getting summary insight information -->
+   <xs:element name="getInsightUserListDetailRequest">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="PublishedContributionId" type="xs:string"/>
+            <xs:element name="Username" type="xs:string"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getInsightUserListDetailResponse">
+      <xs:complexType>
+         <xs:sequence>
+             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:flowInsightInstance"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+   <!-- Request and response for getting the list of active (no outcome instances) -->
+   <xs:element name="getInsightActiveRequest">
+      <xs:complexType>
+      	  <xs:sequence>
+      		    <xs:element name="PublishedContributionId" type="xs:string"/>
+      	  </xs:sequence>
+      	  <xs:attribute default="false" name="currentUserOnly" type="xs:boolean"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getInsightActiveResponse">
+      <xs:complexType>
+         <xs:sequence>
+             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:flowInsightInstance"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+    <xs:element name="flowInsightUser">
+       <xs:complexType>
+          <xs:sequence>
+                <xs:element name="Username" type="xs:string"/>
+                <xs:element name="RunningCount" type="xs:int"/>
+          </xs:sequence>
+       </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="flowInsightInstance">
+       <xs:complexType>
+          <xs:sequence>
+          	<xs:element minOccurs="0" name="Username" type="xs:string"/>
+          	<xs:element name="CorrelationId" type="xs:string"/>
+            <xs:element maxOccurs="1"
+                        minOccurs="0"
+                        name="ScreenflowName"
+                        type="xs:string"/>
+          	<xs:element name="CurrentScreen" type="xs:string"/>
+          	<xs:element name="Started" type="xs:string"/>
+          	<xs:element minOccurs="0" name="Completed" type="xs:string"/>
+          	<xs:element minOccurs="0" name="Outcome" type="xs:string"/>
+          	<xs:element minOccurs="0" name="ExtraInfo" type="xs:string"/>
+          	<xs:element minOccurs="0" name="ObjectId" type="xs:string"/>
+          </xs:sequence>
+       </xs:complexType>
+    </xs:element>
+
+   <!-- Request and response for getting the list of active (no outcome instances) -->
+   <xs:element name="getInsightLogRequest">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="CorrelationId" type="xs:string"/>
+            <xs:element minOccurs="0" name="ProcessId" type="xs:string"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getInsightLogResponse">
+      <xs:complexType>
+         <xs:sequence>
+             <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:screenFlowEvent"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+    
+   <!-- 
+      screenFlowEvent - event generated from screenflow execution
+   -->   
+   <xs:element name="screenFlowEvent">
+      <xs:complexType>
+         <xs:sequence>
+         	  <xs:element maxOccurs="1" minOccurs="0" ref="aesf:hostContext"/>
+         	  <xs:element minOccurs="0" name="tenantContextId" type="xs:string"/>
+         	  <xs:element maxOccurs="1"
+                        minOccurs="0"
+                        name="correlationId"
+                        type="xs:string"/>
+         	  <xs:element name="processId" type="xs:string"/>
+         	  <xs:element maxOccurs="1" minOccurs="0" name="guideName" type="xs:string"/>
+         	  <xs:element minOccurs="0" name="stepId" type="xs:string"/>
+         	  <xs:element minOccurs="0" name="stepTitle" type="xs:string"/>
+         	  <xs:element minOccurs="0" name="message" type="xs:string"/>
+         	  <xs:element maxOccurs="1" minOccurs="0" name="outcome" type="xs:string"/>
+         	  <xs:element maxOccurs="1" minOccurs="0" name="milestone" type="xs:string"/>
+         	  <xs:element minOccurs="0" ref="tns:eventData"/>
+         	  <xs:element maxOccurs="1" minOccurs="0" ref="aesf:avosScreenflow"/>
+         	  <xs:element maxOccurs="1" minOccurs="0" name="entryId" type="xs:string"/>
+         	  <xs:element maxOccurs="1"
+                        minOccurs="0"
+                        name="publishedContributionId"
+                        type="xs:string"/>
+         	  <xs:element maxOccurs="1" minOccurs="0" name="mimeType" type="xs:string"/>
+         	  <xs:element maxOccurs="1" minOccurs="0" name="appliesTo" type="xs:string"/>
+         </xs:sequence>
+         <xs:attribute name="eventType" type="tns:TEventCode" use="required"/>
+         <xs:attribute name="timestamp" type="xs:dateTime" use="required"/>
+         <xs:anyAttribute namespace="##any" processContents="lax"/>
+      </xs:complexType>
+   </xs:element>    
+   
+   <!-- This is a special kind of event that allows to group several screenFlow events together and send them as one batch -->
+   <xs:element name="screenFlowBatchEvent">
+   		<xs:complexType>
+   	   		<xs:sequence>
+   	   			  <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:screenFlowEvent"/>
+   	   		</xs:sequence>
+         	<xs:attribute name="timestamp" type="xs:dateTime" use="required"/>
+   		</xs:complexType>
+   </xs:element>
+
+   <xs:element name="eventData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" name="inputData" type="tns:TParameterList"/>
+            <xs:element minOccurs="0" name="outputData" type="tns:TParameterList"/>
+            <xs:element minOccurs="0" name="error">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="errorMessage" type="xs:string"/>
+                     <xs:element minOccurs="0" name="invalidData" type="tns:TParameterList"/>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:complexType name="TParameterList">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="parameter"
+                     type="common:nameValueType"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:simpleType name="TEventCode">
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="PUBLISH"/>
+        <xs:enumeration value="UNPUBLISH"/>
+        <xs:enumeration value="DELETE"/>
+        <xs:enumeration value="TERMINATE"/>
+        <xs:enumeration value="START"/>
+        <xs:enumeration value="ASSIGNMENT"/>
+        <xs:enumeration value="SHOW_SCREEN"/>
+        <xs:enumeration value="SCREEN_ACTION"/>        
+        <xs:enumeration value="SERVICE_STEP"/>
+        <xs:enumeration value="SUBFLOW_START"/>
+        <xs:enumeration value="SUBFLOW_END"/>        
+        <xs:enumeration value="DATA_DECISION_STEP"/>
+        <xs:enumeration value="JUMP_STEP"/>
+        <xs:enumeration value="HOST_READ"/>
+        <xs:enumeration value="HOST_UPDATE"/>
+        <xs:enumeration value="SEARCH_SERVICE"/>
+        <xs:enumeration value="END_STEP"/>        
+        <xs:enumeration value="MILESTONE_STEP"/>
+        <xs:enumeration value="DONE"/>
+        <xs:enumeration value="HISTORY"/>
+        <xs:enumeration value="ROLLBACK"/>
+        <xs:enumeration value="ERROR"/>
+        <xs:enumeration value="OTHER"/>
+      </xs:restriction>
+    </xs:simpleType>
+
+   <xs:element name="screenFlowEvents">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   			      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:screenFlowEvent"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="handleEventsFault">
+   	  <xs:complexType>
+   		    <xs:sequence>
+                <xs:element name="faultCode" type="xs:string"/>
+                <xs:element name="faultMessage" type="xs:string"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+</xs:schema>

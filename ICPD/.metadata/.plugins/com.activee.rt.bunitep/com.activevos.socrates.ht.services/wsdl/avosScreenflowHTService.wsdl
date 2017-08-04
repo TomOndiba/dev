@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosScreenflowHTService.wsdl"
+                  xmlns:types1="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenFlowType.xsd"
+                  name="avosScreenflowHTService"
+                  targetNamespace="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosScreenflowHTService.wsdl">
+	  <wsdl:types>
+		    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 xmlns:a="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenFlowType.xsd"
+                 elementFormDefault="qualified"
+                 targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenFlowType.xsd">
+			      <xs:complexType name="TNameValue">
+				        <xs:complexContent>
+					          <xs:extension base="xs:anyType">
+						            <xs:attribute name="name" type="xs:string" use="required"/>
+					          </xs:extension>
+				        </xs:complexContent>
+			      </xs:complexType>
+			      <xs:element name="parameters">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element maxOccurs="unbounded"
+                              minOccurs="0"
+                              name="parameter"
+                              type="a:TNameValue"/>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+			      <xs:element name="fields">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element maxOccurs="unbounded"
+                              minOccurs="0"
+                              name="field"
+                              type="a:TNameValue"/>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+			      <xs:element name="avosScreenflowHTServiceRequest">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element minOccurs="0" ref="a:parameters"/>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+			      <xs:element name="avosScreenflowHTServiceResponse">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element minOccurs="0" ref="a:fields"/>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+			      <!-- faultResponse - generic fault reply message from an automated step 
+				indicating a problem -->
+			      <xs:element name="faultResponse">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element name="reason" type="xs:string"/>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+
+			      <!-- invalidData - Element used to pass information about bad data -->
+			      <xs:element name="invalidData">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element maxOccurs="unbounded" name="field">
+							              <xs:complexType>
+								                <xs:attribute name="name" type="xs:string" use="required"/>
+								                <xs:attribute name="required" type="xs:string" use="optional"/>
+								                <xs:attribute name="reason" type="xs:string" use="optional"/>
+							              </xs:complexType>
+						            </xs:element>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+		    </xs:schema>
+	  </wsdl:types>
+	  <wsdl:message name="avosScreenflowHTServiceRequest">
+		    <wsdl:part element="types1:avosScreenflowHTServiceRequest"
+                 name="avosScreenflowHTServiceRequest"/>
+	  </wsdl:message>
+	  <wsdl:message name="avosScreenflowHTServiceResponse">
+		    <wsdl:part element="types1:avosScreenflowHTServiceResponse"
+                 name="avosScreenflowHTServiceResponse"/>
+	  </wsdl:message>
+	  <wsdl:message name="avosScreenflowHTServiceFault">
+		    <wsdl:part element="types1:faultResponse"
+                 name="avosScreenflowHTServiceFaultResponse"/>
+	  </wsdl:message>
+	  <wsdl:message name="avosScreenflowHTServiceValidationFault">
+		    <wsdl:part element="types1:invalidData"
+                 name="avosScreenflowHTServiceValidationFault"/>
+	  </wsdl:message>
+	  <wsdl:portType name="avosScreenflowHTService">
+		    <wsdl:operation name="avosScreenflowHTService">
+			      <wsdl:input message="tns:avosScreenflowHTServiceRequest"/>
+			      <wsdl:output message="tns:avosScreenflowHTServiceResponse"/>
+			      <wsdl:fault message="tns:avosScreenflowHTServiceFault" name="fault"/>
+			      <wsdl:fault message="tns:avosScreenflowHTServiceValidationFault" name="invalidData"/>
+		    </wsdl:operation>
+	  </wsdl:portType>
+</wsdl:definitions>

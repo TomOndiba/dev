@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pdd:process xmlns:bpelns="http://ProcedureAgent" xmlns:pdd="http://schemas.active-endpoints.com/pdd/2006/08/pdd.xsd" location="bpel/ProcedureAgent/bpel/ProcedureAgent.bpel" name="bpelns:ProcedureAgent" platform="enterprise">
+  <pdd:partnerLinks>
+    <pdd:partnerLink name="Process_Consumer">
+      <pdd:myRole allowedRoles="" binding="MSG" service="ProcedureAgent"/>
+    </pdd:partnerLink>
+    <pdd:partnerLink name="Provider">
+      <pdd:partnerRole endpointReference="dynamic" invokeHandler="system:JNDI/OracleJDBC"/>
+    </pdd:partnerLink>
+  </pdd:partnerLinks>
+  <pdd:references>
+    <pdd:wsdl location="project:/ProcedureAgent/wsdl/bpel/ProcedureAgent.public.wsdl" namespace="http://ProcedureAgent/procedureagent/public"/>
+    <pdd:wsdl location="project:/ProcedureAgent/wsdl/ProcedureAgent.wsdl" namespace="http://www.example.org/ProcedureAgent/"/>
+    <pdd:wsdl location="project:/com.activee.rt.data.access.services/wsdl/data-access.wsdl" namespace="http://docs.active-endpoints/wsdl/data-access/2010/04/data-access.wsdl"/>
+  </pdd:references>
+</pdd:process>

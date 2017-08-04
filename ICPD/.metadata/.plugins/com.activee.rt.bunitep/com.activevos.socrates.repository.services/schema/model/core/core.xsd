@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:common="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd">
+
+   <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+              schemaLocation="../../avosCommon.xsd"/>
+
+   <xs:complexType abstract="true" name="abstractProcessType">
+      <xs:attribute name="name" type="tns:processNameType" use="required"/>
+      <xs:attribute name="runAsUser" type="tns:runAsUser" use="optional"/>
+   </xs:complexType>
+
+   <xs:simpleType name="processNameType">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- Attributes common to all step types -->
+   <xs:complexType abstract="true" name="abstractStepType">
+      <xs:attribute name="id" type="xs:NCName" use="required"/>
+      <xs:anyAttribute namespace="##any" processContents="lax"/>
+   </xs:complexType>
+
+   <!-- Base step for all step types that can have a title -->
+   <xs:complexType name="titledStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:abstractStepType">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:title"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="extensibleStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##other"
+                       processContents="lax"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Assignment Step Type -->
+   <xs:complexType name="assignmentStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:choice maxOccurs="unbounded" minOccurs="0">
+                  <xs:element name="operation">
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="tns:structuredExpressionType">
+                              <xs:attribute name="to" type="xs:string"/>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Create Step Type -->
+   <xs:complexType abstract="true" name="abstractCreateStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="entityName" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="createStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:abstractCreateStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="createInput" type="tns:serviceInputType"/>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##other"
+                       processContents="lax"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Milestone Step Type -->
+   <xs:complexType abstract="true" name="milestoneStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:extensibleStepType"/>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Start Step Type -->
+   <xs:complexType abstract="true" name="startStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:extensibleStepType"/>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Empty Step Type -->
+   <xs:complexType name="emptyStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:extensibleStepType"/>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Jump Step Type -->
+   <xs:complexType name="jumpStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:abstractStepType">
+            <xs:attribute name="targetTitle" type="xs:string"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Service Step Type -->
+   <xs:complexType abstract="true" name="abstractServiceStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="serviceName" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="serviceStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:abstractServiceStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="serviceInput" type="tns:serviceInputType"/>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##other"
+                       processContents="lax"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Subprocess Step Type -->
+   <xs:complexType abstract="true" name="abstractSubprocessType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="subflowPath" type="xs:string"/>
+               <xs:element minOccurs="0" name="appliesTo" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:element name="appliesToDataName" type="tns:appliesToDataNameType"/>
+   <xs:complexType mixed="true" name="appliesToDataNameType">
+      <xs:sequence>
+         <xs:any minOccurs="0"
+                 namespace="##targetNamespace"
+                 processContents="strict"/>
+      </xs:sequence>
+      <xs:attribute default="field"
+                    name="source"
+                    type="tns:sourceEnumType"
+                    use="optional"/>
+   </xs:complexType>
+
+   <!-- Definition for inputs to external services, including subflow -->
+
+   <!-- parameter holds an individual parameter for a subflow or automated step -->
+   <xs:complexType abstract="true" mixed="true" name="abstractDataMappingType">
+      <xs:sequence>
+         <xs:any maxOccurs="unbounded"
+                 minOccurs="0"
+                 namespace="##any"
+                 processContents="lax"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <!-- this attribute indicates that modifications to this parameter by the service or subflow -->
+      <!-- will propagate the change back to the source. Prevents us from trying to modify readonly -->
+      <!-- host fields passed as parameters. -->
+      <xs:attribute name="updatable" type="xs:boolean" use="optional"/>
+      <!-- Identifier for this parameter to enable a different display name -->
+      <xs:attribute name="id" type="xs:string" use="optional"/>
+   </xs:complexType>
+
+   <xs:complexType mixed="true" name="dataMappingType">
+      <xs:complexContent>
+         <xs:extension base="tns:abstractDataMappingType">
+            <xs:attribute name="source" type="tns:sourceEnumType" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+
+   <!-- Basic type that can be used for elements that have source attribute (but not name, id, updatable etc.)   -->   
+   <xs:complexType mixed="true" name="simpleDataMappingType">
+      <xs:sequence>
+         <!--  
+             This is mixed type : contains a string/content/fieldName or an expression. 
+             No need to add expression into schema as this is mixed/anyType
+             <xs:element ref="tns:expression" minOccurs="0" maxOccurs="1" /> 
+         -->          
+         <xs:any maxOccurs="unbounded"
+                 minOccurs="0"
+                 namespace="##any"
+                 processContents="lax"/>
+      </xs:sequence>   
+      <xs:attribute name="source" type="tns:sourceEnumType" use="required"/>
+   </xs:complexType>   
+    
+   <xs:complexType name="serviceInputType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="parameter"
+                     type="tns:dataMappingType"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- input and output types for the process model -->
+   <xs:complexType name="baseInputOutputType">
+      <xs:sequence>
+         <xs:element minOccurs="0" ref="tns:options"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
+   </xs:complexType>
+
+   <xs:complexType name="processInputType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="parameter"
+                     type="tns:processInputParameter"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="processInputParameter">
+      <xs:complexContent>
+         <xs:extension base="tns:baseInputOutputType">
+            <xs:attribute name="required" type="xs:boolean" use="optional"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="processOutputType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="field"
+                     type="tns:baseInputOutputType"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- ******************************************************************* -->
+   <!-- Common elements used by both screenflow and bolt models. -->
+   <!-- ******************************************************************* -->
+
+   <!-- parameters and output fields available as variables in a screenflow -->
+   <xs:element name="input" type="tns:processInputType"/>
+   <xs:element name="output" type="tns:processOutputType"/>
+   <xs:element name="tempFields" type="tns:processOutputType"/>
+   <xs:element name="notes" type="xs:string"/>
+   <xs:element name="tags" type="xs:string"/>
+   <xs:element name="generator" type="xs:string"/>
+
+   <xs:element name="title">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="lang" type="common:language" use="optional"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name="appliesTo">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute default="false" name="isCopy" type="xs:boolean"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="description" type="xs:string"/>
+
+    <xs:complexType name="restType">
+        <!-- Include authorized users and whole payload information -->
+        <xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:element ref="tns:allowAnonymousAccess"/>
+                <xs:element ref="tns:allowedRoles"/>
+            </xs:choice>
+            <xs:element minOccurs="0" name="cors" type="tns:corsType"/>
+            <xs:element minOccurs="0" name="wholePayload" type="tns:wholePayloadType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="eventType">
+        <!-- Selection of a Connection containing events as a source -->
+        <xs:attribute name="eventSource" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:element name="deployment">
+        <xs:annotation>
+            <xs:documentation>
+                Container for all deployment related meta-data.  These are properties that support the runtime but are not
+                actually involved in the process flow execution.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="targetLocation" type="xs:string"/>
+                <xs:choice minOccurs="1">
+                    <xs:element name="rest" type="tns:restType"/>
+                    <xs:element name="event" type="tns:eventType"/>
+
+                    <!-- The following sequence here to support old schema and is deprecated. -->
+                    <xs:sequence>
+                        <xs:choice minOccurs="0">
+                            <xs:element ref="tns:allowAnonymousAccess"/>
+                            <xs:element ref="tns:allowedRoles"/>
+                        </xs:choice>
+                        <xs:element minOccurs="0" name="cors" type="tns:corsType"/>
+                        <xs:element minOccurs="0" name="wholePayload" type="tns:wholePayloadType"/>
+                    </xs:sequence>
+                </xs:choice>
+            </xs:sequence>
+            <!-- These only apply for process level deployment. -->
+            <xs:attribute name="suspendOnFault" type="xs:boolean"/>
+            <xs:attribute default="normal" name="tracingLevel" type="tns:tracingLevelEnum"/>
+            <xs:attribute name="disablePersistence" type="xs:boolean"/>
+        </xs:complexType>
+    </xs:element>
+   
+   <xs:simpleType name="tracingLevelEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="none"/>
+            <xs:enumeration value="terse"/>
+            <xs:enumeration value="normal"/>
+            <xs:enumeration value="verbose"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+   <xs:complexType name="wholePayloadType">
+       <xs:attribute default="false"
+                    name="inputWholePayload"
+                    type="xs:boolean"
+                    use="optional"/>
+       <xs:attribute default="false"
+                    name="outputWholePayload"
+                    type="xs:boolean"
+                    use="optional"/>
+   </xs:complexType>
+
+    <xs:element name="allowedRoles">
+       <xs:annotation>
+          <xs:documentation>A collection of role names that are allowed to execute the process.</xs:documentation>
+       </xs:annotation>
+       <xs:complexType>
+          <xs:sequence>
+             <xs:element maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="role"
+                        type="xs:string"/>
+          </xs:sequence>
+       </xs:complexType>
+    </xs:element>
+
+   <xs:element name="allowAnonymousAccess">
+      <xs:complexType/>
+   </xs:element>
+
+   <xs:complexType name="corsType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" name="allowed" type="tns:corsAllowedType"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="corsAllowedType">
+      <xs:sequence>
+         <xs:element name="origins" type="xs:string"/>
+         <xs:element name="methods" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+
+
+   <!-- Describes named value pairs option with a hide attribute -->
+   <xs:element name="fieldName" type="tns:fieldNameType"/>
+   <xs:simpleType name="fieldNameType">
+      <xs:restriction base="xs:string">
+         <!-- field names are prefixed with input.|output.|temp. -->
+         <!-- and can allow any char used in a word (\w) plus -->
+         <!-- space, period and : -->
+         <xs:pattern value="([input|output|temp]+\.)([a-zA-Z0-9\\_ \.])+"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- Describes named value pairs where the value can be of any type -->
+   <xs:complexType name="nameValuePairType">
+      <!-- the value of the option is the contents of the option element. -->
+      <xs:complexContent mixed="true">
+         <xs:extension base="xs:anyType">
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:anyAttribute namespace="##any" processContents="lax"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- options values for rendering as well as value restrictions, like pick lists, number scale and precision -->
+   <xs:element name="options" type="tns:optionsType"/>
+   <xs:complexType name="optionsType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="option"
+                     type="tns:nameValuePairType"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- Attachment types -->
+   <xs:element name="attachments" type="tns:attachmentsType"/>
+   <xs:complexType name="attachmentsType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="attachment"
+                     type="tns:attachmentType"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="attachmentType">
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="contentType" type="xs:string" use="optional"/>
+            <xs:attribute name="size" type="xs:long" use="optional"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+
+   <xs:simpleType name="runAsUser">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="$system"/>
+         <xs:enumeration value="$current"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- list of possible outcomes that can be used in end screens -->
+   <xs:element name="possibleOutcomes" type="tns:possibleOutcomesType"/>
+   <xs:complexType name="possibleOutcomesType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" ref="tns:outcome"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:element name="outcome" type="tns:outcomeType"/>
+   <xs:complexType name="outcomeType">
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute name="id" type="xs:NCName" use="optional"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+
+   <xs:simpleType name="sourceEnumType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="constant"/>
+         <xs:enumeration value="current"/>
+         <xs:enumeration value="screen"/>
+         <xs:enumeration value="field"/>
+         <xs:enumeration value="formula"/>
+         <xs:enumeration value="list"/>
+         <xs:enumeration value="query"/>
+         <xs:enumeration value="none">
+            <xs:annotation>
+               <xs:documentation>This option is deprecated and only exists for backwards compatibility.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- Query type -->
+   <xs:element name="query" type="tns:queryType"/>
+   <xs:complexType name="queryType">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="where">
+            <xs:complexType mixed="true"/>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="from" type="xs:string" use="required"/>
+   </xs:complexType>
+
+   <xs:complexType mixed="true" name="structuredExpressionType">
+      <xs:complexContent>
+         <xs:extension base="tns:baseExpressionType">
+            <xs:choice minOccurs="0">
+               <xs:element ref="tns:query"/>
+            </xs:choice>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType mixed="true" name="baseExpressionType">
+      <xs:choice minOccurs="0">
+         <xs:element minOccurs="0" ref="tns:function"/>
+         <xs:element minOccurs="0" ref="tns:expression"/>
+      </xs:choice>
+      <xs:attribute name="source" type="tns:sourceEnumType" use="required"/>
+   </xs:complexType>
+
+   <!-- Expression type -->
+   <xs:element name="expression" type="tns:expressionType"/>
+   <xs:complexType mixed="true" name="expressionType">
+      <xs:sequence>
+         <xs:any maxOccurs="unbounded"
+                 minOccurs="0"
+                 namespace="##other"
+                 processContents="lax"/>
+      </xs:sequence>
+      <xs:attribute name="language" type="tns:languageEnum" use="required"/>
+      <xs:anyAttribute namespace="##other" processContents="lax"/>
+   </xs:complexType>
+
+   <xs:simpleType name="languageEnum">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="XQuery"/>
+         <xs:enumeration value="JavaScript"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- Function type -->
+   <xs:element name="function" type="tns:functionType"/>
+   <xs:complexType name="functionType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="arg">
+            <xs:complexType mixed="true">
+               <xs:attribute name="name" type="xs:string"/>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:QName" use="required"/>
+   </xs:complexType>
+
+</xs:schema>

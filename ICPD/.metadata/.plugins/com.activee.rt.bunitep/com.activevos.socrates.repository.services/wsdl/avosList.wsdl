@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosList.wsdl"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:xsd1="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+                  name="avosList"
+                  targetNamespace="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosList.wsdl">
+
+	  <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="ListOperationsPLT">
+		    <plnk:role name="Provider" portType="tns:ListOperations"/>
+	  </plnk:partnerLinkType>
+	
+	  <wsdl:types>
+		    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			      <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+                    schemaLocation="../schema/avosScreenflow.xsd"/>
+			      <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+                    schemaLocation="../schema/avosScreenflowRuntime.xsd">
+			</xs:import>
+         </xs:schema>
+    </wsdl:types>
+	  <wsdl:message name="listRequest">
+		    <wsdl:part element="xsd1:listRequest" name="listRequest"/>
+	  </wsdl:message>
+	  <wsdl:message name="listResponse">
+		    <wsdl:part element="xsd1:listResponse" name="listResponse"/>
+	  </wsdl:message>
+	  <wsdl:message name="listFault">
+		    <wsdl:part element="xsd1:faultResponse" name="listFaultResponse"/>
+	  </wsdl:message>
+	  <wsdl:message name="listInvalidData">
+		    <wsdl:part element="xsd1:invalidData" name="listValidationResponse"/>
+	  </wsdl:message>
+	  <wsdl:portType name="ListOperations">
+		    <wsdl:operation name="list">
+			      <wsdl:input message="tns:listRequest"/>
+			      <wsdl:output message="tns:listResponse"/>
+            <wsdl:fault message="tns:listFault" name="fault"/>
+            <wsdl:fault message="tns:listInvalidData" name="invalidData"/>
+        </wsdl:operation>
+	  </wsdl:portType>
+</wsdl:definitions>

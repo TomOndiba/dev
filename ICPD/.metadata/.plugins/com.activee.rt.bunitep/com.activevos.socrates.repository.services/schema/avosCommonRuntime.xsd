@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:common="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd">
+
+	  <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+              schemaLocation="avosCommon.xsd"/>
+
+    <!-- Common parts of runtime messages -->
+    <xs:element name="userId" type="xs:string"/>
+    <xs:element name="correlationId" type="xs:string"/>
+    <xs:element name="serviceName" type="xs:string"/>
+    <xs:element name="runAsUser" type="xs:string"/>
+    <xs:element name="selectedAction" type="xs:string"/>
+    <xs:element name="finalOutcome">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="time" type="xs:dateTime" use="optional"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+   
+    <xs:complexType name="faultResponseType">
+       <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element name="reason" type="xs:string"/>
+          <xs:element minOccurs="0" name="details">
+             <xs:complexType mixed="true">
+		             <xs:sequence>
+			               <xs:any maxOccurs="unbounded"
+                          minOccurs="0"
+                          namespace="##any"
+                          processContents="lax"/>
+			            </xs:sequence>
+			         </xs:complexType>
+   	      </xs:element>
+       </xs:sequence>
+    </xs:complexType>
+   
+    <xs:complexType name="errorType">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+         <xs:element minOccurs="0" ref="tns:invalidData"/>
+      </xs:sequence>
+      <xs:attribute name="errorCode" type="common:errorCodesEnum" use="required"/>
+      <xs:attribute name="errorStep" type="xs:string" use="optional"/>
+   </xs:complexType>
+   
+   <xs:element name="invalidData" type="tns:invalidDataType"/>
+   <xs:complexType name="invalidDataType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" name="field">
+            <xs:complexType>
+               <xs:attribute name="name" type="xs:string" use="required"/>
+               <xs:attribute name="required" type="xs:string" use="optional"/>
+               <xs:attribute name="reason" type="xs:string" use="optional"/>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   
+    <xs:element name="hostContext" type="tns:contextType"/>
+    <xs:complexType name="contextType">
+       <xs:sequence>
+          <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="arg"
+                     type="common:nameValueType"/>
+       </xs:sequence>
+    </xs:complexType>
+    
+   <xs:complexType name="rollbackCollectionType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:onRollback"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+    <!-- Rollback request information to support compensation for automated steps -->
+    <xs:element name="onRollback" type="tns:TOnRollback"/>
+    <xs:complexType name="TOnRollback">
+       <xs:sequence>
+          <xs:element ref="tns:serviceName"/>
+          <xs:element minOccurs="0" name="avosServiceName" type="xs:string"/>
+          <xs:element minOccurs="0" ref="tns:runAsUser"/>
+          <xs:element minOccurs="0" ref="tns:hostContext"/>
+          <xs:element minOccurs="0" ref="tns:parameters"/>
+          <xs:element minOccurs="0" ref="tns:guideData"/>
+          <xs:any maxOccurs="unbounded"
+                 minOccurs="0"
+                 namespace="##other"
+                 processContents="lax"/>
+       </xs:sequence>
+       <xs:attribute name="deleteCount" type="xs:integer" use="optional"/>
+       <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>
+    <xs:element name="rollbackSummary">
+      <xs:complexType>
+        <xs:sequence>
+           <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="message"
+                        type="xs:string"/>
+        </xs:sequence> 
+        <xs:attribute name="deleteCount" type="xs:integer" use="optional"/>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+      </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="parameters" type="tns:parametersType"/>
+   <xs:complexType name="parametersType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="parameter"
+                     type="common:nameValueType"/>
+      </xs:sequence>
+      <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>
+    
+    <xs:element name="namespaces" type="tns:NamespacesType"/>
+    <xs:complexType name="NamespacesType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="namespace"
+                     type="tns:NamespaceType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="namespace" type="tns:NamespaceType"/>
+    <xs:complexType name="NamespaceType">
+        <xs:simpleContent>
+		       <xs:extension base="xs:string">
+	           <xs:attribute name="uri" type="xs:anyURI"/>
+	           <xs:attribute name="prefix" type="xs:string"/>
+	       </xs:extension>
+       </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:element name="imports" type="tns:ImportsType"/>
+    <xs:complexType name="ImportsType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="import"
+                     type="tns:ImportsType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="import" type="tns:ImportType"/>
+    <xs:complexType name="ImportType">
+        <xs:simpleContent>
+	        <xs:extension base="xs:string">
+	           <xs:attribute name="location" type="xs:anyURI"/>
+	           <xs:attribute name="namespace" type="xs:anyURI"/>
+	           <xs:attribute name="prefix" type="xs:string"/>
+	        </xs:extension>
+       </xs:simpleContent>
+    </xs:complexType>
+    
+    <!-- white list of functions available during xquery expression evaluation -->
+    <xs:element name="whiteListedFunctions" type="tns:WhiteListedFunctionsType"/>
+    <xs:complexType name="WhiteListedFunctionsType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="function"
+                     type="tns:WhitelistedFunctionType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="WhitelistedFunctionType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="namespace" type="xs:anyURI"/>
+                <xs:attribute name="name" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:element name="fields" type="tns:fieldsType"/>
+    <xs:complexType name="fieldsType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="field"
+                     type="common:nameValueType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="guideData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="parameter"
+                        type="common:nameValueType"/>
+            </xs:sequence>
+            <xs:attribute name="sf_id" type="xs:NCName" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Language code which is used in guide runtime -->
+    <xs:simpleType name="langCode">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="default|[a-z]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:identity="http://schemas.active-endpoints.com/identity/2007/01/identity.xsd"
+           xmlns:trt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+           xmlns:htd="http://www.example.org/WS-HT"
+           xmlns:tns="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-state-wsdl.xsd"
+           xmlns:sref="http://docs.oasis-open.org/wsbpel/2.0/serviceref"
+           xmlns:evt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-events-wsdl.xsd"
+           xmlns:api="http://www.example.org/WS-HT/api"
+           xmlns:htdt="http://www.example.org/WS-HT/api/xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-state-wsdl.xsd">
+
+   <xs:import namespace="http://www.w3.org/2001/XMLSchema"/>
+
+   <xs:import namespace="http://docs.oasis-open.org/wsbpel/2.0/serviceref"
+              schemaLocation="ws-bpel_serviceref.xsd"/>   		
+
+   <xs:import namespace="http://www.example.org/WS-HT"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask.xsd"/>
+      
+	  <xs:import namespace="http://www.example.org/WS-HT/api"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api.xsd"/>      
+
+	  <xs:import namespace="http://www.example.org/WS-HT/api/xsd"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api-wsdl.xsd"/>      
+      
+	  <xs:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+              schemaLocation="aeb4p-task-rt.xsd"/>      
+		
+	  <xs:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-events-wsdl.xsd"
+              schemaLocation="aeb4p-task-events-wsdl.xsd"/>
+		
+    <xs:import namespace="http://schemas.active-endpoints.com/identity/2007/01/identity.xsd"
+              schemaLocation="../../org.activebpel.rt.identity.services/schema/identity.xsd"/>
+
+	  <xs:element name="createTaskRequest">
+		    <xs:complexType>
+			      <xs:annotation>
+				        <xs:documentation>
+					Contains ws-ht task creation data.
+				</xs:documentation>
+			      </xs:annotation>
+			      <xs:sequence>
+				        <xs:choice>
+					          <xs:element ref="htd:task"/>
+					          <xs:element ref="htd:notification"/>
+				        </xs:choice>
+				        <xs:element ref="trt:initialState"/>
+				        <xs:element ref="trt:interfaceMetadata"/>
+				        <xs:element minOccurs="0" ref="trt:taskInstance"/>
+				        <xs:element minOccurs="0" ref="sref:service-ref"/>
+				        <xs:element minOccurs="0" ref="trt:peopleActivityData"/> 
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="createTaskResponse">
+	     <xs:complexType>
+	        <xs:annotation>
+	           <xs:documentation>
+	            Response after task has been created.
+	         </xs:documentation>
+	        </xs:annotation>    
+	        <xs:sequence>
+	           <xs:element ref="trt:identifier"/>
+	           <xs:element minOccurs="0" ref="evt:listenerId"/>
+	           <xs:element name="state" type="api:tStatus"/>
+            <xs:element ref="trt:taskInstance"/>
+	        </xs:sequence>
+	     </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="reassign">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element ref="trt:identifier"/>
+				        <xs:element ref="htd:organizationalEntity"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="updateComment">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   			      <xs:element ref="trt:identifier"/>
+   			      <xs:element ref="trt:commentId"/>
+   			      <xs:element name="text" type="xs:string"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   <xs:element name="deleteComment">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   			      <xs:element ref="trt:identifier"/>
+   			      <xs:element ref="trt:commentId"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="addDelegate">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   		       <xs:element name="delegate" type="xs:string"/>
+   		       <xs:element name="start" type="xs:dateTime"/>
+   		       <xs:element maxOccurs="1" minOccurs="0" name="end" type="xs:dateTime"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="removeDelegate">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   		       <xs:element name="delegate" type="xs:string"/>
+   		       <xs:element maxOccurs="1" minOccurs="0" name="start" type="xs:dateTime"/>
+   		       <xs:element maxOccurs="1" minOccurs="0" name="end" type="xs:dateTime"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="getPotentialTaskDelegateesRequest">
+      <xs:complexType>
+   		    <xs:sequence>
+   		       <xs:element ref="trt:identifier"/>
+   	    </xs:sequence>
+   	  </xs:complexType> 
+   </xs:element>
+   
+   <xs:element name="getPotentialTaskDelegateesResponse">
+      <xs:complexType>
+   		    <xs:sequence>
+   		       <xs:element ref="identity:identityResultSet"/>
+   	    </xs:sequence>
+   	  </xs:complexType> 
+   </xs:element>
+
+   <xs:element name="getAllDelegates">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   		       <xs:element maxOccurs="1" minOccurs="0" name="start" type="xs:dateTime"/>
+   		       <xs:element maxOccurs="1" minOccurs="0" name="end" type="xs:dateTime"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="getAllDelegatesResponse">
+      <xs:complexType>
+   		    <xs:sequence>
+   		       <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="delegateEntry"
+                        type="tns:tDelegateType"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:complexType name="tDelegateType">
+   		<xs:sequence>
+   		    <xs:element name="delegate" type="xs:string"/>
+   		    <xs:element name="start" type="xs:dateTime"/>
+   		    <xs:element maxOccurs="1" minOccurs="0" name="end" type="xs:dateTime"/>
+   		    <xs:element name="lastUpdated" type="xs:dateTime"/>
+   		</xs:sequence>
+   	</xs:complexType>
+
+   <xs:element name="getAttachmentById" type="tns:tAttachmentRequestType"/>
+   <xs:element name="getAttachmentByIdResponse" type="api:tAttachment"/>
+
+   <xs:element name="deleteAttachmentById" type="tns:tAttachmentRequestType"/>
+
+   	<xs:complexType name="tAttachmentRequestType">
+   		<xs:sequence>
+   			   <xs:element ref="trt:identifier"/>
+   			   <xs:element name="attachmentId" type="xs:long"/>
+   		</xs:sequence>
+   	</xs:complexType>
+
+	  <xs:complexType name="tAuthorizationType"/>
+
+   <xs:element name="authorizeRequest" type="tns:tAuthorizationType"/>
+   <xs:element name="authorizeResponse" type="tns:tAuthorizationType"/>
+
+   <xs:element name="getTaskInstance">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   			      <xs:element ref="trt:identifier"/>
+   			      <xs:element minOccurs="0" name="includeAttachments" type="xs:boolean"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   <xs:element name="activate" type="trt:tIdentifier"/>
+   <xs:element name="cancel" type="trt:tIdentifier"/>
+   <xs:element name="expire" type="trt:tIdentifier"/>
+   <xs:element name="finalize" type="trt:tIdentifier"/>
+   <xs:element name="escalate" type="trt:tIdentifier"/>
+   <xs:element name="resume">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   			      <xs:element ref="trt:identifier"/>
+   			      <xs:element name="resumerId" type="xs:long"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="stateOperationRequest">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="operation">
+               <xs:simpleType>
+	                 <xs:restriction base="xs:string">
+	                  <!-- State update operations -->
+				                 <xs:enumeration value="claim"/>
+				                 <xs:enumeration value="start"/>
+				                 <xs:enumeration value="stop"/>
+				                 <xs:enumeration value="release"/>
+				                 <xs:enumeration value="suspend"/>
+				                 <xs:enumeration value="suspenduntil"/>
+				                 <xs:enumeration value="resume"/>
+				                 <xs:enumeration value="setoutput"/>
+				                 <xs:enumeration value="deletefault"/>
+				                 <xs:enumeration value="complete"/>
+				                 <xs:enumeration value="fail"/>
+				                 <xs:enumeration value="setpriority"/>
+				                 <xs:enumeration value="skip"/>
+				                 <xs:enumeration value="forward"/>
+				                 <xs:enumeration value="delegate"/>
+				                 <xs:enumeration value="resumeInternal"/>
+				                 <xs:enumeration value="activate"/>
+				                 <xs:enumeration value="addcomment"/>
+				                 <xs:enumeration value="updatecomment"/>
+				                 <xs:enumeration value="deletecomment"/>
+				                 <xs:enumeration value="activateinternal"/>
+				                 <xs:enumeration value="expire"/>
+				                 <xs:enumeration value="addtaskstatechangelistener"/>
+				                 <xs:enumeration value="escalate"/>
+				                 <xs:enumeration value="reassign"/>
+				                 <xs:enumeration value="remove"/>
+				                 <xs:enumeration value="addattachment"/>
+				                 <xs:enumeration value="deleteattachments"/>
+				                 <xs:enumeration value="deleteattachmentbyid"/>
+				                 <xs:enumeration value="canceltask"/>
+				                 <xs:enumeration value="finalize"/>
+				                 <xs:enumeration value="nominate"/>
+				                 <xs:enumeration value="setgenerichumanrole"/>
+				                 <xs:enumeration value="deleteoutput"/>
+				                 <xs:enumeration value="setfault"/>
+				      
+				                 <!-- State retrieval operations -->
+				                 <xs:enumeration value="getAttachmentInfos"/>
+				                 <xs:enumeration value="getAttachments"/>
+				                 <xs:enumeration value="getAttachmentById"/>
+				                 <xs:enumeration value="getTaskInfo"/>
+				                 <xs:enumeration value="getTaskDescription"/>
+				                 <xs:enumeration value="getInput"/>
+				                 <xs:enumeration value="getOutput"/>
+				                 <xs:enumeration value="getFault"/>
+				                 <xs:enumeration value="aeGetTaskInstance"/>
+				                 <xs:enumeration value="InternalGetTask"/>
+				                 <xs:enumeration value="RemoveListener"/>
+				                 <xs:enumeration value="getRenderingTypes"/>
+				                 <xs:enumeration value="getRendering"/>
+				                 <xs:enumeration value="getTaskHistory"/>
+				                 <xs:enumeration value="getTaskHistoryById"/>
+				                 <xs:enumeration value="getComments"/>
+				              </xs:restriction>
+			            </xs:simpleType>
+            </xs:element>
+            <xs:element ref="trt:identifier"/>
+            <xs:element name="payload" type="xs:anyType"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="stateOperationResponse" type="xs:anyType"/>
+
+   <xs:element name="scheduleWakeupRequest">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   			      <xs:element ref="trt:identifier"/>
+   			      <xs:element name="alarm" type="xs:dateTime"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+
+   <xs:element name="scheduleWakeupResponse" type="xs:long"/>
+
+   <xs:element name="cancelWakeupRequest" type="xs:long"/>
+
+
+    <xs:element name="removeOwnerRequest">
+    	<xs:complexType>
+    		   <xs:sequence>
+    			     <xs:element name="recipients" nillable="true" type="htd:tOrganizationalEntity"/>
+
+                <xs:element ref="tns:excludedOwners"/>
+                <xs:element name="principalName" type="xs:string"/>
+    			     <xs:element name="excludedOwnersCount" type="xs:int"/>
+    		   </xs:sequence>
+    	</xs:complexType>
+   </xs:element>
+
+    <xs:element name="removeOwnerResponse">
+    	<xs:complexType>
+    		   <xs:sequence>
+	   			     <xs:element name="ownersRemovalComplete" type="xs:boolean"/>
+	   			     <xs:element ref="tns:excludedOwners"/>
+    		   </xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+    
+	  <xs:element name="excludedOwners"
+               nillable="true"
+               type="htd:tOrganizationalEntity"/>
+    
+   <!--  AE Task Inbox Listings  --> 
+	  <!--  search start index  -->
+	  <xs:element name="taskIndexOffset" type="xs:int"/>
+	  <!--  number of tasks that matched filter  -->        
+	  <xs:element name="taskTotalCount" type="xs:int"/>
+	  <!-- filter search-by value -->        
+	  <xs:element name="searchBy" type="xs:string"/>
+   	<!-- filter parent process id -->        
+    <xs:element name="paProcessId" type="xs:long"/>
+    <!-- number of times the people activity has executed -->        
+    <xs:element name="paExecutionCounter" type="xs:integer"/>       
+	  <!-- space separated list of custom task properties (presentation params) -->        
+	  <xs:element name="properties" type="xs:string"/>
+           
+	  <!-- task last-modified time value that is included as part htdt api task listings -->        
+	  <xs:element name="lastModifiedTime" type="xs:dateTime"/>
+   <!-- task last escalation time (if task was escalated) -->
+   <xs:element name="lastEscalationTime" type="xs:dateTime"/>
+   <!-- task startby and complete by time -->
+   <xs:element name="startByTime" type="xs:dateTime"/>
+   <xs:element name="completeByTime" type="xs:dateTime"/>
+	  <!--  RFC 822 formatted dates -->
+	  <xs:element name="rfc822CreatedOn" type="xs:string"/>
+	  <xs:element name="rfc822LastModifiedTime" type="xs:string"/>
+		
+	  <!--  column sortby fields -->
+	  <xs:element name="orderBy">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="fieldId"
+                        type="xs:string"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+	
+	  <!--  custom (presenation params) property values  -->
+	  <xs:element name="propertyValue"
+               nillable="true"
+               type="trt:tPresentationParamValue"/>	
+	  <xs:element name="propertyValues">	
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:propertyValue"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>	
+	
+	
+	  <!--  list tasks request -->
+	  <xs:element name="getTasks">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element ref="htdt:getMyTasks"/>
+				        <xs:element minOccurs="0" ref="tns:properties"/>
+				        <xs:element ref="tns:taskIndexOffset"/>				
+				        <xs:element minOccurs="0" ref="tns:orderBy"/>			
+				        <xs:element minOccurs="0" ref="tns:searchBy"/>				
+			      </xs:sequence>
+		    </xs:complexType>	
+	  </xs:element>
+	  <!--  list tasks response -->
+	  <xs:element name="getTasksResponse">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element ref="tns:taskTotalCount"/>
+				        <xs:element ref="htdt:getMyTasksResponse"/>
+			      </xs:sequence>
+		    </xs:complexType>	
+	  </xs:element>
+
+	  <!--  get task history list -->
+   <xs:element name="getTaskHistory">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="trt:identifier"/>
+            <!--  0 based start position index, useful for paging  -->
+            <xs:element minOccurs="0" name="startIndex" type="xs:integer"/>
+            <!--  maximum number of events to return  -->
+            <xs:element minOccurs="0" name="count" type="xs:integer"/>
+         </xs:sequence>
+         <!--  If true, then the data associated with the event is also included. E.g. output or comment. -->
+         <xs:attribute name="includeData" type="xs:boolean"/>         
+      </xs:complexType>       
+   </xs:element>
+   <xs:element name="getTaskHistoryResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="evt:taskEvent"/>
+         </xs:sequence>
+      </xs:complexType> 
+   </xs:element>
+   
+	  <!--  get a single task history entry -->
+   <xs:element name="getTaskHistoryById">
+      <xs:complexType>
+         <xs:sequence>
+         	  <xs:element ref="trt:identifier"/>
+            <xs:element name="eventId" type="xs:integer"/>
+         </xs:sequence>
+      </xs:complexType>       
+   </xs:element>   
+   <xs:element name="getTaskHistoryByIdResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" ref="evt:taskEvent"/>
+         </xs:sequence>
+      </xs:complexType> 
+   </xs:element>
+      
+</xs:schema>

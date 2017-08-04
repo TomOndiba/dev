@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:aetc="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl"
+             xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+             targetNamespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl">
+
+   <vprop:property name="identifier" type="xs:anyURI"/>
+   <vprop:property name="listenerId" type="xs:int"/>
+   <vprop:property name="peopleActivityPid" type="xs:long"/>     
+   <vprop:property name="peopleActivityId" type="xs:int"/>
+   <vprop:property name="peopleActivityExecCtr" type="xs:int"/>
+  </definitions>

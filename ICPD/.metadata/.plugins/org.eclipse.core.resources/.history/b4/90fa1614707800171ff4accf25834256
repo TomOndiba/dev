@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+              xmlns:ProcedureAgent="http://www.example.org/ProcedureAgent/"
+              xmlns:ext1="http://www.activebpel.org/2009/06/bpel/extension/links"
+              xmlns:avosAutomatedStep="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosAutomatedStep.wsdl"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+              xmlns:xsd1="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+              xmlns:ProcedureAgent.public="http://ProcedureAgent/procedureagent/public"
+              xmlns:ext="http://www.activebpel.org/2006/09/bpel/extension/query_handling"
+              xmlns:aei="http://www.activebpel.org/2009/02/bpel/extension/ignorable"
+              aei:editStyle="BPMN"
+              ext1:linksAreTransitions="yes"
+              ext:createTargetXPath="yes"
+              ext:disableSelectionFailure="yes"
+              name="ProcedureCloud"
+              suppressJoinFailure="yes"
+              targetNamespace="http://ProcedureCloud">
+   <bpmndi:BPMNDiagram xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                       xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                       aei:bpelDigest=""
+                       aei:editStyle="BPMN"
+                       aei:layoutNeeded="false"
+                       aei:modelVersion="5"
+                       aei:objectId="147395031472735335"
+                       aei:processInitiatorSim=""
+                       isHorizontal="false">
+      <bpmndi:BPMNPlane>
+         <bpmndi:BPMNShape aei:backgroundImageLocation="icons/bpmn/activity/ActivityBlock.png"
+                           aei:objectId="147395032937935593"
+                           aei:type="PARTNER_LINK"
+                           aei:visible="false,false,false,false,false,"
+                           bpmnElement="147395032937935593"/>
+         <bpmndi:BPMNShape aei:backgroundImageLocation="icons/bpmn/activity/ActivityBlock.png"
+                           aei:objectId="147395035779236057"
+                           aei:type="PARTNER_LINK"
+                           aei:visible="false,false,false,false,false,"
+                           bpmnElement="147395035779236057"/>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {180,10}"
+                           aei:absoluteSize="DIM {145,243}"
+                           aei:objectId="147395034555435813"
+                           aei:type="SEQUENCE"
+                           bpmnElement="147395034555435813"
+                           isHorizontal="false">
+            <dc:Bounds height="-1" width="-1" x="170" y="0"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {217,20}"
+                           aei:absoluteSize="DIM {70,60}"
+                           aei:attachments=""
+                           aei:name="automatedStep"
+                           aei:objectId="147395034555235809"
+                           aei:principal=""
+                           aei:text="automatedStep"
+                           aei:type="RECEIVE"
+                           bpmnElement="147395034555235809">
+            <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            <bpmndi:BPMNLabel aei:absoluteLocation="LOC {225,77}"
+                              aei:absoluteSize="DIM {74,13}"
+                              aei:anchor.location="1"
+                              aei:anchor.objectId="147395034555235809"
+                              aei:backgroundColor="RGB {255,255,255}"
+                              aei:objectId="147395034555535815"
+                              aei:relative.location="LOC {-37,47}"
+                              aei:text="automatedStep"
+                              bpmnElement="147395034555235809label">
+               <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {190,105}"
+                           aei:absoluteSize="DIM {125,53}"
+                           aei:attachments=""
+                           aei:name="NewOperation"
+                           aei:objectId="147395037956636113"
+                           aei:subprocessPath=""
+                           aei:text="NewOperation"
+                           aei:type="INVOKE"
+                           bpmnElement="147395037956636113">
+            <dc:Bounds height="-1" width="-1" x="202" y="204"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {217,183}"
+                           aei:absoluteSize="DIM {70,60}"
+                           aei:name="automatedStep-Reply"
+                           aei:objectId="147395034555335811"
+                           aei:text="automatedStep-Reply"
+                           aei:type="REPLY"
+                           bpmnElement="147395034555335811">
+            <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            <bpmndi:BPMNLabel aei:absoluteLocation="LOC {210,240}"
+                              aei:absoluteSize="DIM {105,13}"
+                              aei:anchor.location="1"
+                              aei:anchor.objectId="147395034555335811"
+                              aei:backgroundColor="RGB {255,255,255}"
+                              aei:objectId="147395034555535817"
+                              aei:relative.location="LOC {-52,47}"
+                              aei:text="automatedStep-Reply"
+                              bpmnElement="147395034555335811label">
+               <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+      </bpmndi:BPMNPlane>
+   </bpmndi:BPMNDiagram>
+   <bpel:extensions>
+      <bpel:extension mustUnderstand="no"
+                      namespace="http://www.activebpel.org/2009/02/bpel/extension/ignorable"/>
+      <bpel:extension mustUnderstand="no"
+                      namespace="http://www.omg.org/spec/BPMN/20100524/DI"/>
+      <bpel:extension mustUnderstand="yes"
+                      namespace="http://www.activebpel.org/2006/09/bpel/extension/query_handling"/>
+      <bpel:extension mustUnderstand="yes"
+                      namespace="http://www.activebpel.org/2009/06/bpel/extension/links"/>
+   </bpel:extensions>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+                namespace="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosAutomatedStep.wsdl"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+                location="../../ProcedureAgent/wsdl/ProcedureAgent.wsdl"
+                namespace="http://www.example.org/ProcedureAgent/"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+                location="../../ProcedureAgent/wsdl/bpel/ProcedureAgent.public.wsdl"
+                namespace="http://ProcedureAgent/procedureagent/public"/>
+   <bpel:partnerLinks>
+      <bpel:partnerLink aei:id="147395032937935593"
+                        myRole="Provider"
+                        name="Process_Consumer"
+                        partnerLinkType="avosAutomatedStep:AutomatedStepOperationsPLT"/>
+      <bpel:partnerLink aei:id="147395035779236057"
+                        name="Provider"
+                        partnerLinkType="ProcedureAgent.public:ProcedureAgentPLT"
+                        partnerRole="Provider"/>
+   </bpel:partnerLinks>
+   <bpel:variables>
+      <bpel:variable element="xsd1:automatedStepRequest" name="automatedStepRequest"/>
+      <bpel:variable element="ProcedureAgent:NewOperationResponse"
+                     name="NewOperationResponse"/>
+   </bpel:variables>
+   <bpel:sequence aei:id="147395034555435813">
+      <bpel:receive aei:id="147395034555235809"
+                    createInstance="yes"
+                    name="automatedStep"
+                    operation="automatedStep"
+                    partnerLink="Process_Consumer"
+                    variable="automatedStepRequest"/>
+      <bpel:scope aei:implicit="true" name="NewOperation">
+         <bpel:variables>
+            <bpel:variable messageType="ProcedureAgent:NewOperationRequest" name="parameters"/>
+         </bpel:variables>
+         <bpel:sequence>
+            <bpel:assign aei:assignType="XPATHS" aei:id="147395042154336451">
+               <bpel:copy>
+                  <bpel:from>$automatedStepRequest/xsd1:parameters/xsd1:parameter[@name="ProcessName"]/text()</bpel:from>
+                  <bpel:to part="parameters" variable="parameters">
+                     <bpel:query>ProcessName</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+               <bpel:copy>
+                  <bpel:from>$automatedStepRequest/xsd1:parameters/xsd1:parameter[@name="ProcessID"]/text()</bpel:from>
+                  <bpel:to part="parameters" variable="parameters">
+                     <bpel:query>ProcessID</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke aei:id="147395037956636113"
+                         inputVariable="parameters"
+                         name="NewOperation"
+                         operation="NewOperation"
+                         outputVariable="NewOperationResponse"
+                         partnerLink="Provider"/>
+         </bpel:sequence>
+      </bpel:scope>
+      <bpel:scope aei:implicit="true" name="automatedStep-Reply">
+         <bpel:variables>
+            <bpel:variable messageType="avosAutomatedStep:automatedStepResponse" name="parameters"/>
+         </bpel:variables>
+         <bpel:sequence>
+            <bpel:assign aei:assignType="XQUERY" aei:id="147395122548637889">
+               <bpel:copy>
+                  <bpel:from expressionLanguage="urn:active-endpoints:expression-language:xquery1.0">&lt;xsd1:automatedStepResponse xmlns:xsd1="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"&gt;
+    &lt;xsd1:fields&gt;
+     &lt;xsd1:field name="ProcessRunId"&gt;{ $NewOperationResponse/ProcessRunId/number() }&lt;/xsd1:field&gt;
+  &lt;xsd1:field name="RunType"&gt;{ $NewOperationResponse/RunType/text() }&lt;/xsd1:field&gt;
+&lt;xsd1:field name="Instruction"&gt;{ $NewOperationResponse/Instruction/text() }&lt;/xsd1:field&gt;
+&lt;xsd1:field name="Message"&gt;{ $NewOperationResponse/@Message/text() }&lt;/xsd1:field&gt;
+  &lt;/xsd1:fields&gt;
+&lt;/xsd1:automatedStepResponse&gt;</bpel:from>
+                  <bpel:to part="automatedStepResponse" variable="parameters"/>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:reply aei:id="147395034555335811"
+                        name="automatedStep-Reply"
+                        operation="automatedStep"
+                        partnerLink="Process_Consumer"
+                        variable="parameters"/>
+         </bpel:sequence>
+      </bpel:scope>
+   </bpel:sequence>
+</bpel:process>

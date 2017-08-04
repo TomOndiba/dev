@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="com.activee.coreep.registry.wizard.sampledata.AevSampleDataWizard">
+	</section>
+	<section name="com.activee.coreep.webreference.wizard.AevImportWebReferenceWizard">
+	</section>
+</section>

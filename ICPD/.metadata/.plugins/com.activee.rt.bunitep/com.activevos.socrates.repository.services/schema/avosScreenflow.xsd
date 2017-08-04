@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd">
+	
+   <xs:include schemaLocation="avosScreenflowModel.xsd"/>
+   <xs:include schemaLocation="avosScreenflowRuntime.xsd"/>
+   
+</xs:schema>

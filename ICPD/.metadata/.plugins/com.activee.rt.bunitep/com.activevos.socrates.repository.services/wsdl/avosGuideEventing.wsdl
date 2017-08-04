@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://wsdl.active-endpoints.com/appmodules/screenflow/2013/03/avosGuideEventing.wsdl"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:insight="http://schemas.active-endpoints.com/appmodules/insight/2011/02/avosFlowInsight.xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  name="avosGuideEventing"
+                  targetNamespace="http://wsdl.active-endpoints.com/appmodules/screenflow/2013/03/avosGuideEventing.wsdl">
+	  <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="avosGuideEventingPLT">
+		    <plnk:role name="EventingProvider" portType="tns:avosGuideEventing"/>
+	  </plnk:partnerLinkType>
+	  <wsdl:types>
+		    <xsd:schema>
+			      <xsd:import namespace="http://schemas.active-endpoints.com/appmodules/insight/2011/02/avosFlowInsight.xsd"
+                     schemaLocation="../schema/avosFlowInsight.xsd">
+			</xsd:import>
+		    </xsd:schema>
+    </wsdl:types>
+	  <wsdl:message name="handleEventsRequest">
+		    <wsdl:part element="insight:screenFlowEvents" name="parameters"/>
+	  </wsdl:message>
+	  <wsdl:message name="handleEventsFault">
+		    <wsdl:part element="insight:handleEventsFault" name="parameters"/>
+	  </wsdl:message>
+	  <wsdl:message name="handleEventsResponse">
+
+	</wsdl:message>
+	  <wsdl:portType name="avosGuideEventing">
+		    <wsdl:operation name="handleEvents">
+			      <wsdl:input message="tns:handleEventsRequest"/>
+			      <wsdl:output message="tns:handleEventsResponse"/>
+			      <wsdl:fault message="tns:handleEventsFault" name="fault"/>
+        </wsdl:operation>
+	  </wsdl:portType>
+</wsdl:definitions>

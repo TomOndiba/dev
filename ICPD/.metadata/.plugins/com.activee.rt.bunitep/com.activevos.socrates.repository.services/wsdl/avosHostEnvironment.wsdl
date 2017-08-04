@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://wsdl.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.wsdl"
+                  xmlns:types1="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                  targetNamespace="http://wsdl.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.wsdl">
+                   
+  <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="avHostEnvironmentMetaInfoAccessPLT">
+      <plnk:role name="HostEnvironmentProvider"
+                 portType="tns:avHostEnvironmentMetaInfoAccess"/>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="avHostEnvironmentRuntimeAccessPLT">
+      <plnk:role name="HostRuntimeProvider"
+                 portType="tns:avHostEnvironmentRuntimeAccess"/>
+  </plnk:partnerLinkType>
+  
+  <wsdl:types>
+      <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+                    schemaLocation="../schema/avosHostEnvironment.xsd"/>
+      </xs:schema>
+  </wsdl:types>
+  
+  <wsdl:message name="entityDiscoveryRequest">
+      <wsdl:part element="types1:entityDiscoveryRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="entityDiscoveryResponse">
+      <wsdl:part element="types1:entityDiscoveryResponse" name="response"/>
+  </wsdl:message>
+
+  <wsdl:message name="entityDetailRequest">
+      <wsdl:part element="types1:entityDetailRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="entityDetailResponse">
+      <wsdl:part element="types1:entityDetailResponse" name="response"/>
+  </wsdl:message>
+  
+  <wsdl:message name="entityDetailListRequest">
+      <wsdl:part element="types1:entityDetailListDiscoveryRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="entityDetailListResponse">
+      <wsdl:part element="types1:entityDetailListDiscoveryResponse" name="response"/>
+  </wsdl:message>
+
+  <wsdl:message name="readRequest">
+      <wsdl:part element="types1:readRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="readResponse">
+      <wsdl:part element="types1:readResponseWrapper" name="response"/>
+  </wsdl:message>
+
+  <wsdl:message name="updateRequest">
+      <wsdl:part element="types1:updateRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+      <wsdl:part element="types1:updateResponse" name="response"/>
+  </wsdl:message>
+  
+  <wsdl:message name="queryRequest">
+      <wsdl:part element="types1:queryRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="queryResponse">
+      <wsdl:part element="types1:queryResponseWrapper" name="response"/>
+  </wsdl:message>
+  
+  <wsdl:message name="createRequest">
+      <wsdl:part element="types1:createRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="createResponse">
+      <wsdl:part element="types1:createResponseWrapper" name="response"/>
+  </wsdl:message>
+  
+  <wsdl:message name="deleteRequest">
+      <wsdl:part element="types1:deleteRequest" name="request"/>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+      <wsdl:part element="types1:deleteResponse" name="response"/>
+  </wsdl:message>
+
+  <wsdl:message name="faultResponse">
+      <wsdl:part element="types1:faultResponse" name="response"/>
+  </wsdl:message>
+  
+  <wsdl:message name="objectNotFoundResponse">
+      <wsdl:part element="types1:objectNotFoundResponse" name="response"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="avHostEnvironmentMetaInfoAccess">
+      <wsdl:operation name="getEntityList">
+        <wsdl:input message="tns:entityDiscoveryRequest"/>
+        <wsdl:output message="tns:entityDiscoveryResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+      </wsdl:operation>
+      <wsdl:operation name="getEntityDetail">
+        <wsdl:input message="tns:entityDetailRequest"/>
+        <wsdl:output message="tns:entityDetailResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+      </wsdl:operation>
+      <wsdl:operation name="getEntityDetailList">
+        <wsdl:input message="tns:entityDetailListRequest"/>
+        <wsdl:output message="tns:entityDetailListResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+      </wsdl:operation>
+  </wsdl:portType>
+  
+  <wsdl:portType name="avHostEnvironmentRuntimeAccess">
+      <wsdl:operation name="read">
+        <wsdl:input message="tns:readRequest"/>
+        <wsdl:output message="tns:readResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+      </wsdl:operation>
+      <wsdl:operation name="update">
+        <wsdl:input message="tns:updateRequest"/>
+        <wsdl:output message="tns:updateResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+        <wsdl:fault message="tns:objectNotFoundResponse" name="objectNotFoundError"/>
+      </wsdl:operation>
+      <wsdl:operation name="delete">
+        <wsdl:input message="tns:deleteRequest"/>
+        <wsdl:output message="tns:deleteResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+      </wsdl:operation>
+      <wsdl:operation name="create">
+        <wsdl:input message="tns:createRequest"/>
+        <wsdl:output message="tns:createResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+      </wsdl:operation>
+      <wsdl:operation name="query">
+        <wsdl:input message="tns:queryRequest"/>
+        <wsdl:output message="tns:queryResponse"/>
+        <wsdl:fault message="tns:faultResponse" name="runtimeError"/>
+      </wsdl:operation>
+  </wsdl:portType>
+  
+</wsdl:definitions>

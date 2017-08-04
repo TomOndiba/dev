@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:trt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+           xmlns:tns="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-events-wsdl.xsd"
+           xmlns:sref="http://docs.oasis-open.org/wsbpel/2.0/serviceref"
+           xmlns:api="http://www.example.org/WS-HT/api"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-events-wsdl.xsd">
+
+   <xs:import namespace="http://www.w3.org/2001/XMLSchema"/>
+   <xs:import namespace="http://docs.oasis-open.org/wsbpel/2.0/serviceref"
+              schemaLocation="ws-bpel_serviceref.xsd"/>   		
+	  <xs:import namespace="http://www.example.org/WS-HT/api"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api.xsd"/>      
+	  <xs:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+              schemaLocation="aeb4p-task-rt.xsd"/>      
+ 	
+ 	<xs:element name="listenerId" type="tns:tListenerId"/>
+   <xs:complexType name="tListenerId">
+      <xs:annotation>
+         <xs:documentation>
+            A unique ID assigned to a listener when a listener registers with an event generator.
+         </xs:documentation>
+      </xs:annotation>   
+      <xs:simpleContent>
+         <xs:extension base="xs:int"/>
+      </xs:simpleContent>
+   </xs:complexType>      
+	
+	  <xs:element name="taskListener" type="tns:tTaskListener"/>
+   <xs:complexType name="tTaskListener">
+      <xs:annotation>
+         <xs:documentation>
+            Defines a task listener. A Task listener has a unique id (per task)
+            as well as the listener callback EPR.
+         </xs:documentation>
+      </xs:annotation>   
+      <xs:sequence>
+         <xs:element ref="tns:listenerId"/>
+         <xs:element ref="sref:service-ref"/>
+      </xs:sequence>      
+   </xs:complexType>  		
+	
+	  <xs:element name="listenerList" type="tns:tListenerList"/>   
+   <xs:complexType name="tListenerList">
+      <xs:annotation>
+         <xs:documentation>
+            Contains a list of listeners.
+         </xs:documentation>
+      </xs:annotation>   
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:taskListener"/>
+      </xs:sequence>      
+   </xs:complexType> 	
+   
+	  <xs:element name="addListenerData" type="tns:tAddListenerData"/> 
+   <xs:complexType name="tAddListenerData">
+      <xs:annotation>
+         <xs:documentation>
+            Contains task listener registration data.
+         </xs:documentation>
+      </xs:annotation>      
+      <xs:sequence>
+      	<!--  the task id is used for correlation purposes  -->
+         <xs:element ref="trt:identifier"/>
+         <xs:element ref="sref:service-ref"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+	  <xs:element name="removeListenerData" type="tns:tRemoveListenerData"/> 
+   <xs:complexType name="tRemoveListenerData">
+      <xs:annotation>
+         <xs:documentation>
+            Contains task listener de-registration data.
+         </xs:documentation>
+      </xs:annotation>      
+      <xs:sequence>
+         <xs:element ref="trt:identifier"/>
+         <xs:element ref="tns:listenerId"/>
+      </xs:sequence>
+   </xs:complexType>
+	
+	  <xs:element name="taskStateChangeEvent">	
+	     <xs:complexType>
+	        <xs:annotation>
+	           <xs:documentation>
+	            Defines a task state change event. These change events are for 
+	            lifecycle changes only.
+	         </xs:documentation>
+	        </xs:annotation>	   
+	        <xs:sequence>
+	           <xs:element ref="tns:listenerId"/>
+	           <xs:element ref="trt:identifier"/>
+	           <xs:element name="state" type="api:tStatus"/>
+	           <xs:element minOccurs="0" name="oldState" type="api:tStatus"/>
+	        </xs:sequence>
+	     </xs:complexType>
+	  </xs:element>	
+	
+	  <xs:element name="taskEvent">
+		    <xs:complexType>
+	        <xs:annotation>
+	           <xs:documentation>
+	            A detailed event that is fired from the task state machine or escalation 
+	            process to report a change in the task's data or lifecycle state. 
+	         </xs:documentation>
+	        </xs:annotation>	   
+	        <xs:sequence>
+	           <xs:element name="processId" type="xs:long"/>
+	           <xs:element name="paProcessId" type="xs:long"/>
+	           <xs:element name="paLocationPath" type="xs:string"/>
+	           <xs:element name="paLocationId" type="xs:int"/>
+	           <xs:element minOccurs="0" name="paExecutionCounter" type="xs:int"/>
+	           <xs:element minOccurs="0" name="principal" nillable="true" type="xs:string"/>
+	           <xs:element name="eventType">
+               <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                     <xs:enumeration value="create"/>
+                     <xs:enumeration value="claim"/>
+                     <xs:enumeration value="start"/>
+                     <xs:enumeration value="stop"/>
+                     <xs:enumeration value="release"/>
+                     <xs:enumeration value="suspend"/>
+                     <xs:enumeration value="suspendUntil"/>
+                     <xs:enumeration value="resume"/>
+                     <xs:enumeration value="complete"/>
+                     <xs:enumeration value="remove"/>
+                     <xs:enumeration value="fail"/>
+                     <xs:enumeration value="setPriority"/>
+                     <xs:enumeration value="addAttachment"/>
+                     <xs:enumeration value="deleteAttachments"/>
+                     <xs:enumeration value="addComment"/>
+                     <xs:enumeration value="skip"/>
+                     <xs:enumeration value="forward"/>
+                     <xs:enumeration value="delegate"/>
+                     <xs:enumeration value="setOutput"/>
+                     <xs:enumeration value="deleteOutput"/>
+                     <xs:enumeration value="setFault"/>
+                     <xs:enumeration value="deleteFault"/>
+                     <xs:enumeration value="activate"/>
+                     <xs:enumeration value="nominate"/>
+                     <xs:enumeration value="setGenericHumanRole"/>
+                     <xs:enumeration value="updateComment"/>
+                     <xs:enumeration value="deleteComment"/>
+                     <xs:enumeration value="deleteAttachmentById"/>
+                     <xs:enumeration value="expire"/>
+                     <xs:enumeration value="escalated"/>
+                     <xs:enumeration value="reassign"/>
+                     <xs:enumeration value="cancel"/>
+                     <xs:enumeration value="finalize"/>
+                  </xs:restriction>
+               </xs:simpleType>
+            </xs:element>
+	           <xs:element minOccurs="0"
+                        name="startOwner"
+                        nillable="true"
+                        type="xs:string"/>
+	           <xs:element minOccurs="0" name="endOwner" nillable="true" type="xs:string"/>
+	           <xs:element name="status" type="api:tStatus"/>
+	           <xs:element minOccurs="0" name="data" nillable="true" type="xs:anyType"/>
+	           <xs:element minOccurs="0" name="faultName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="eventTime" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="id" type="xs:integer"/>
+            <xs:element minOccurs="0" name="hasData" type="xs:boolean"/>
+	        </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+	
+</xs:schema>

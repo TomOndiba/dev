@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://services.informatica.com/spi/2013/12/spi-process/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:runtime="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:type="http://schemas.informatica.com/spi/types/2013/12/spi-interface/"
+                  name="bolt-interface"
+                  targetNamespace="http://services.informatica.com/spi/2013/12/spi-process/">
+
+   <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="spiPartnerLinkType">
+      <plnk:role name="Consumer" portType="tns:spiPortType"/>
+   </plnk:partnerLinkType>
+   <vprop:property xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+                   name="correlationId"
+                   type="xsd:string"/>
+   <vprop:propertyAlias xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+                        messageType="tns:InitiateRequest"
+                        part="request"
+                        propertyName="tns:correlationId">
+      <vprop:query>runtime:correlationId</vprop:query>
+   </vprop:propertyAlias>  
+   <wsdl:types>
+      <xsd:schema targetNamespace="http://schemas.informatica.com/spi/types/2013/12/spi-interface/">
+         <xsd:include schemaLocation="../../schema/runtime/bolt/spi-rt-common.xsd"/>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="InitiateRequest">
+      <wsdl:part element="type:initiate" name="request"/>
+   </wsdl:message>
+   <wsdl:message name="InitiateResponse">
+      <wsdl:part element="type:initiateResponse" name="response"/>
+   </wsdl:message>
+   <wsdl:message name="RuntimeFault">
+      <wsdl:part element="type:faultResponse" name="fault"/>
+   </wsdl:message>
+
+   <wsdl:portType name="spiPortType">
+      <wsdl:operation name="Initiate">
+         <wsdl:input message="tns:InitiateRequest"/>
+         <wsdl:output message="tns:InitiateResponse"/>
+         <wsdl:fault message="tns:RuntimeFault" name="fault"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   
+</wsdl:definitions>

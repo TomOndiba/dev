@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+                  xmlns:trt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+                  xmlns:tsst="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-state-wsdl.xsd"
+                  xmlns:htw="http://www.example.org/WS-HT/api/wsdl"
+                  xmlns:tns="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-storage.wsdl"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:htdt="http://www.example.org/WS-HT/api/xsd"
+                  targetNamespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-storage.wsdl">
+	
+	  <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="storagePLT">
+	     <plnk:role name="system" portType="tns:IAeTaskStorageService"/>
+	  </plnk:partnerLinkType>
+	
+     <wsdl:import location="../../org.activebpel.rt.ht.services/wsdl/ws-humantask-api.wsdl"
+                namespace="http://www.example.org/WS-HT/api/wsdl"/>
+   <wsdl:types>
+       <xsd:schema elementFormDefault="qualified"
+                  targetNamespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-storage.wsdl">
+         <xsd:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+                     schemaLocation="../schema/aeb4p-task-rt.xsd"/>
+         <xsd:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-state-wsdl.xsd"
+                     schemaLocation="../schema/aeb4p-task-state-wsdl.xsd"/>
+         <xsd:import namespace="http://www.example.org/WS-HT/api/xsd"
+                     schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api-wsdl.xsd"/>
+         <!-- Elements -->
+         <xsd:element name="storeTaskData">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="processId" type="xsd:long"/>
+                  <xsd:element ref="trt:taskInstance"/>
+                  <xsd:element name="update" type="xsd:boolean"/>
+                  <xsd:element minOccurs="0" ref="trt:peopleActivityData"/>"
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         
+         <xsd:element name="deleteTaskData" type="xsd:long"/>
+         <xsd:element name="principal" type="xsd:string"/>
+         <xsd:element name="faultData" type="xsd:string"/>
+         <xsd:complexType name="tGetFinalState">
+            <xsd:sequence>
+               <xsd:element ref="trt:identifier"/>
+            </xsd:sequence>
+         </xsd:complexType>         
+         <xsd:element name="getTaskFinalState" type="tns:tGetFinalState"/>
+         <xsd:element name="getTaskFinalStateThrows" type="tns:tGetFinalState"/>
+         <xsd:element name="getTaskFinalStateResponse" type="xsd:boolean"/>
+         <xsd:element name="roleList">
+         	  <xsd:complexType>
+         		    <xsd:sequence>
+         			      <xsd:element maxOccurs="unbounded"
+                               minOccurs="0"
+                               name="role"
+                               type="xsd:string"/>
+         		    </xsd:sequence>
+         	  </xsd:complexType>
+         </xsd:element>
+
+       	<xsd:complexType name="tGetMyTasksAuthorization">
+       		   <xsd:sequence>
+       			     <xsd:element ref="tns:principal"/>
+       			     <xsd:element ref="tns:roleList"/>
+       		   </xsd:sequence>
+       	</xsd:complexType>
+
+       	<xsd:element name="listTaskAbstracts">
+       		   <xsd:complexType>
+       			     <xsd:complexContent>
+       				       <xsd:extension base="tns:tGetMyTasksAuthorization">
+       					         <xsd:sequence>       						
+       						           <xsd:element ref="htdt:getMyTaskAbstracts"/> 
+       					         </xsd:sequence>
+       				       </xsd:extension>
+       			     </xsd:complexContent>
+       		   </xsd:complexType>
+       	</xsd:element>
+       	<xsd:element name="listTaskAbstractsResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+               	  <xsd:element ref="tsst:taskTotalCount"/>
+                  <xsd:element ref="htdt:getMyTaskAbstractsResponse"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>                  
+
+       	<xsd:element name="listTasks">
+       		   <xsd:complexType>
+       			     <xsd:complexContent>
+       				       <xsd:extension base="tns:tGetMyTasksAuthorization">
+       					         <xsd:sequence>
+       						           <xsd:element ref="htdt:getMyTasks"/>
+       						           <xsd:element minOccurs="0" ref="tsst:properties"/>
+       						           <xsd:element minOccurs="0" ref="tsst:taskIndexOffset"/>
+       						           <xsd:element minOccurs="0" ref="tsst:orderBy"/>
+       						           <xsd:element minOccurs="0" ref="tsst:searchBy"/>
+       					         </xsd:sequence>
+       				       </xsd:extension>
+       			     </xsd:complexContent>
+       		   </xsd:complexType>
+       	</xsd:element>
+         <xsd:element name="listTasksResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+               	  <xsd:element ref="tsst:taskTotalCount"/>
+                  <xsd:element ref="htdt:getMyTasksResponse"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>                  
+      </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="StoreTaskMessage">
+      <wsdl:part element="tns:storeTaskData" name="storeTaskData"/>
+  </wsdl:message>
+  <wsdl:message name="EmptyMessage">
+  </wsdl:message>
+  <wsdl:message name="DeleteTaskMessage">
+      <wsdl:part element="tns:deleteTaskData" name="deleteTaskData"/>
+  </wsdl:message>
+  <wsdl:message name="ListTaskAbstractsMessage">
+      <wsdl:part element="tns:listTaskAbstracts" name="listTaskAbstracts"/>
+  </wsdl:message>
+  <wsdl:message name="ListTaskAbstractsResponseMessage">
+      <wsdl:part element="tns:listTaskAbstractsResponse"
+                 name="listTaskAbstractsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ListTasksMessage">
+      <wsdl:part element="tns:listTasks" name="listTasks"/>
+  </wsdl:message>
+  <wsdl:message name="ListTasksResponseMessage">
+      <wsdl:part element="tns:listTasksResponse" name="listTasksResponse"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetTaskInstanceRequest">
+      <wsdl:part element="tsst:getTaskInstance" name="getTaskInstance"/>
+  </wsdl:message>  
+  <wsdl:message name="GetTaskInstanceResponse">
+      <wsdl:part element="trt:taskInstance" name="taskInstance"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetAttachmentByIdRequest">
+      <wsdl:part element="tsst:getAttachmentById" name="getAttachmentById"/>
+  </wsdl:message>  
+  <wsdl:message name="GetAttachmentByIdResponse">
+      <wsdl:part element="tsst:getAttachmentByIdResponse"
+                 name="getAttachmentByIdResponse"/>
+  </wsdl:message>  
+    
+  <wsdl:message name="GetAttachmentByNameRequest">
+      <wsdl:part element="htdt:getAttachments" name="getAttachments"/>
+  </wsdl:message>  
+  <wsdl:message name="GetAttachmentByNameResponse">
+      <wsdl:part element="htdt:getAttachmentsResponse" name="getAttachmentsResponse"/>
+  </wsdl:message>    
+  
+  <wsdl:message name="GetTaskHistory">
+      <wsdl:part element="tsst:getTaskHistory" name="getTaskHistory"/>
+  </wsdl:message>
+  <wsdl:message name="GetTaskHistoryResponse">
+      <wsdl:part element="tsst:getTaskHistoryResponse" name="getTaskHistoryResponse"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetTaskHistoryById">
+      <wsdl:part element="tsst:getTaskHistoryById" name="getTaskHistoryById"/>
+  </wsdl:message>
+  <wsdl:message name="GetTaskHistoryByIdResponse">
+      <wsdl:part element="tsst:getTaskHistoryByIdResponse"
+                 name="getTaskHistoryByIdResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetTaskFinalState">
+      <wsdl:part element="tns:getTaskFinalState" name="getTaskFinalState"/>
+  </wsdl:message>  
+  <wsdl:message name="GetTaskFinalStateResponse">
+      <wsdl:part element="tns:getTaskFinalStateResponse"
+                 name="getTaskFinalStateResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetTaskFinalStateThrows">
+      <wsdl:part element="tns:getTaskFinalStateThrows" name="getTaskFinalStateThrows"/>
+  </wsdl:message>  
+  
+  
+  <wsdl:message name="TaskStorageFaultMessage">
+      <wsdl:part element="tns:faultData" name="faultData"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="IAeTaskStorageService">
+      <wsdl:operation name="storeTask">
+         <wsdl:documentation>
+            <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+               <ae:desc>
+               Stores the task state data.
+            </ae:desc>
+            </ae:doc>
+         </wsdl:documentation>    
+         <wsdl:input message="tns:StoreTaskMessage"/>
+         <wsdl:output message="tns:EmptyMessage"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>
+      <wsdl:operation name="deleteTask">
+         <wsdl:documentation>
+            <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+               <ae:desc>
+               Deletes given task from storage.
+            </ae:desc>
+            </ae:doc>
+         </wsdl:documentation>        
+         <wsdl:input message="tns:DeleteTaskMessage"/>
+         <wsdl:output message="tns:EmptyMessage"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>
+      <wsdl:operation name="listTaskAbstracts">
+         <wsdl:documentation>
+            <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+               <ae:desc>
+               Returns list of task abstracts - based on WSHT API operation.
+            </ae:desc>
+            </ae:doc>
+         </wsdl:documentation>        
+         <wsdl:input message="tns:ListTaskAbstractsMessage"/>
+         <wsdl:output message="tns:ListTaskAbstractsResponseMessage"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>    
+      <wsdl:operation name="listTasks">
+         <wsdl:documentation>
+            <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+               <ae:desc>
+               Returns list of task - based on WSHT API operation.
+            </ae:desc>
+            </ae:doc>
+         </wsdl:documentation>            
+         <wsdl:input message="tns:ListTasksMessage"/>
+         <wsdl:output message="tns:ListTasksResponseMessage"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>    
+      <wsdl:operation name="getTaskHistory">
+         <wsdl:documentation>
+            <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+               <ae:desc>
+               Returns task history.
+            </ae:desc>
+            </ae:doc>
+         </wsdl:documentation>    
+         <wsdl:input message="tns:GetTaskHistory"/>
+         <wsdl:output message="tns:GetTaskHistoryResponse"/>
+      </wsdl:operation>
+      <wsdl:operation name="getTaskHistoryById">
+         <wsdl:documentation>
+            <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+               <ae:desc>
+               Returns task history event entry given event id.
+            </ae:desc>
+            </ae:doc>
+         </wsdl:documentation>    
+         <wsdl:input message="tns:GetTaskHistoryById"/>
+         <wsdl:output message="tns:GetTaskHistoryByIdResponse"/>
+      </wsdl:operation>        
+      <wsdl:operation name="getTaskFinalState">
+         <wsdl:documentation>
+            <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+               <ae:desc>
+               Returns true if the task exists and it is in a final state.
+            </ae:desc>
+            </ae:doc>
+         </wsdl:documentation>     
+         <wsdl:input message="tns:GetTaskFinalState"/>
+         <wsdl:output message="tns:GetTaskFinalStateResponse"/>
+         <wsdl:fault message="htw:illegalArgumentFault" name="illegalArgumentFault"/>
+         <wsdl:fault message="htw:illegalStateFault" name="illegalStateFault"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>
+      <wsdl:operation name="getTaskFinalStateThrows">
+   	     <wsdl:documentation>
+	           <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+	              <ae:desc>
+	            This is similar to getTaskFinalState() operation except that
+	            this operation throws an illegal state fault if the task exists
+	            and it is in a final state (to indicate that the task is now immutable).
+	         </ae:desc>
+	           </ae:doc>
+	        </wsdl:documentation>    
+         <wsdl:input message="tns:GetTaskFinalStateThrows"/>
+         <wsdl:output message="tns:GetTaskFinalStateResponse"/>
+         <wsdl:fault message="htw:illegalArgumentFault" name="illegalArgumentFault"/>
+         <wsdl:fault message="htw:illegalStateFault" name="illegalStateFault"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>
+    
+      <wsdl:operation name="getTaskInstance">
+         <wsdl:documentation>
+	           <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+	              <ae:desc>
+	            Returns task data including comments and attachment infos.
+	         </ae:desc>
+	           </ae:doc>
+         </wsdl:documentation>        
+         <wsdl:input message="tns:GetTaskInstanceRequest"/>
+         <wsdl:output message="tns:GetTaskInstanceResponse"/>
+         <wsdl:fault message="htw:illegalArgumentFault" name="illegalArgumentFault"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAttachmentById">
+	        <wsdl:documentation>    
+	           <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+	              <ae:desc>
+	            Returns task attachment given attachment id.
+	         </ae:desc>
+	           </ae:doc>
+         </wsdl:documentation>     
+         <wsdl:input message="tns:GetAttachmentByIdRequest"/>
+         <wsdl:output message="tns:GetAttachmentByIdResponse"/>
+         <wsdl:fault message="htw:illegalArgumentFault" name="illegalArgumentFault"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAttachmentByName">
+         <wsdl:documentation>
+	           <ae:doc xmlns:ae="urn:active-endpoints:documentation">
+	              <ae:desc>
+	            Returns list of task attachments given attachment name.
+	         </ae:desc>
+	           </ae:doc>
+         </wsdl:documentation>      
+         <wsdl:input message="tns:GetAttachmentByNameRequest"/>
+         <wsdl:output message="tns:GetAttachmentByNameResponse"/>
+         <wsdl:fault message="htw:illegalArgumentFault" name="illegalArgumentFault"/>
+         <wsdl:fault message="tns:TaskStorageFaultMessage" name="taskStoreFault"/>
+      </wsdl:operation>    
+  </wsdl:portType>
+</wsdl:definitions>

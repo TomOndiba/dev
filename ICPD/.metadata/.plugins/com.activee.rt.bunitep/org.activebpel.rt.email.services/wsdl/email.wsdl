@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Email Services
+	ActiveEndpoints, Inc.
+-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+                  xmlns:aem="http://schemas.active-endpoints.com/email/2007/01/email.xsd"
+                  xmlns:tns="http://docs.active-endpoints/wsdl/email/2007/04/email.wsdl"
+                  xmlns:email="http://docs.active-endpoints/wsdl/email/2007/04/email.wsdl"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://docs.active-endpoints/wsdl/email/2007/04/email.wsdl">
+
+   <plnk:partnerLinkType name="emailPLT">
+      <plnk:role name="sender">
+         <plnk:portType name="tns:emailPT"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+
+	  <wsdl:types>
+		    <xs:schema elementFormDefault="qualified"
+                 targetNamespace="http://docs.active-endpoints/wsdl/email/2007/04/email.wsdl">
+
+			      <xs:import namespace="http://schemas.active-endpoints.com/email/2007/01/email.xsd"
+                    schemaLocation="../schema/email.xsd"/>
+
+			      <xs:complexType name="resultElementType">
+				        <xs:sequence>
+					          <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="validSentAddress"
+                           type="xs:string"/>
+					          <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="validUnsentAddress"
+                           type="xs:string"/>
+					          <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="invalidAddress"
+                           type="xs:string"/>
+				        </xs:sequence>
+			      </xs:complexType>
+			      <xs:element name="resultElement" type="tns:resultElementType"/>
+
+			      <xs:complexType name="faultElementType">
+				        <xs:sequence>
+					          <xs:element maxOccurs="1" minOccurs="1" name="code" type="xs:int"/>
+					          <xs:element maxOccurs="1" minOccurs="1" name="message" type="xs:string"/>
+				        </xs:sequence>
+			      </xs:complexType>
+			      <xs:element name="faultElement" type="tns:faultElementType"/>
+
+		    </xs:schema>
+	  </wsdl:types>
+
+	  <wsdl:message name="emailMessage">
+		    <wsdl:part element="aem:emailMessage" name="emailPart"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="resultMessage">
+		    <wsdl:part element="tns:resultElement" name="resultPart"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="faultMessage">
+		    <wsdl:part element="tns:faultElement" name="faultPart"/>
+	  </wsdl:message>
+
+	  <wsdl:portType name="emailPT">
+		    <wsdl:operation name="send">
+			      <wsdl:input message="tns:emailMessage"/>
+			      <wsdl:output message="tns:resultMessage"/>
+			      <wsdl:fault message="tns:faultMessage" name="emailFault"/>
+		    </wsdl:operation>
+	  </wsdl:portType>
+
+</wsdl:definitions>

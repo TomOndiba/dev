@@ -6,7 +6,7 @@ begin
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.SubProcessRunStart' ;
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.ThreadRunStart' ;
 	
-	exec tSQLt.ExpectException @ExpectedMessagePattern = '%(ICRT) Process Name input must not be null or empty%'
+	exec tSQLt.ExpectException @ExpectedMessagePattern = '%ICRT Process Name input must not be null or empty%'
 	
 	exec IcsApp.StartRun
 		@ProcessName = ''

@@ -71,7 +71,11 @@ begin
 			FunctionName = @_FunctionName ;
 	end try
 	begin catch
-		set @_ErrorContext = 'Failed to start new process run at step: ' + coalesce('[' + @_Step + ']', 'NULL')
+		set @_ErrorContext = 'Failed to start new process run'
+			+ ' for ICRT Process Name: ' + coalesce('"' + @ProcessName + '"', 'NULL')
+			+ ' and ICRT Process Id: ' + coalesce(cast(@IcrtProcessId as varchar(32)), 'NULL')
+			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')
+			+ ' (New Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL') + ')'
 
 		exec log4.ExceptionHandler
 			  @ErrorContext = @_ErrorContext
@@ -82,9 +86,9 @@ begin
 
 	end catch
 
-	--/////////////////////////////////////////////////////////////////////////////////////////////////
-	EndEx:
-	--/////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////
+EndEx:
+--/////////////////////////////////////////////////////////////////////////////////////////////////
 
 	--! Finally, throw an exception that will be detected by the caller
 	if @_Error > 0 raiserror(@_Message, 16, 99) ;

@@ -6,7 +6,7 @@ begin
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.SubProcessRunStart' ;
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.ThreadRunStart' ;
 	
-	exec tSQLt.ExpectException @ExpectedMessagePattern = '%(BatMan) Sub-process Run Id can not be null or zero when starting a new thread: "D"%'
+	exec tSQLt.ExpectException @ExpectedMessagePattern = '%(BatMan) Sub-process Run Id can not be null, negative or zero when starting a new thread: "D"%'
 	
 	exec IcsApp.StartRun
 		@ProcessName = 'A'

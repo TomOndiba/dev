@@ -410,6 +410,12 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.0\011_Remove_dbo_RunStart_procedures.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\ics\Stored Procedures\ProcessRunEnd.sql" />
+    <None Include="Programmable Objects\ics\Stored Procedures\SubProcessRunEnd.sql" />
+    <None Include="Programmable Objects\ics\Stored Procedures\ThreadRunEnd.sql" />
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\StopRun.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

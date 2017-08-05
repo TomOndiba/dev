@@ -76,7 +76,12 @@ begin
 			FunctionName = @_FunctionName ;
 	end try
 	begin catch
-		set @_ErrorContext = 'Failed to start new thread run at Step: ' + coalesce('[' + @_step + ']', 'NULL')
+		set @_ErrorContext = 'Failed to start new thread run'
+			+ ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
+			+ ' , Mapping: ' + coalesce('"' + @MappingName + '"', 'NULL')
+			+ ' and (BatMan) Sub-process Run Id: ' + coalesce(cast(@SubProcessRunId as varchar(32)), 'NULL')
+			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')
+			+ ' (New Thread Run Id: ' + coalesce(cast(@ThreadRunId as varchar(32)), 'NULL') + ')'
 
 		exec log4.ExceptionHandler
 			  @ErrorContext = @_ErrorContext
@@ -86,9 +91,9 @@ begin
 			, @ExceptionId = @_ExceptionId out ;
 	end catch
 
-	--/////////////////////////////////////////////////////////////////////////////////////////////////
-	EndEx:
-	--/////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////
+EndEx:
+--/////////////////////////////////////////////////////////////////////////////////////////////////
 
 	--! Finally, throw an exception that will be detected by the caller
 	if @_Error > 0 raiserror(@_Message, 16, 99) ;

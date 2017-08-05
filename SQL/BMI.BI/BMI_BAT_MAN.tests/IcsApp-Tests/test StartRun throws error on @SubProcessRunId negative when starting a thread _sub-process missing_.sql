@@ -1,4 +1,4 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun throws error on @SubProcessRunId null when starting a thread (sub-process present)]
+﻿create   procedure [IcsApp-Tests].[test StartRun throws error on @SubProcessRunId negative when starting a thread (sub-process missing)]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -11,9 +11,9 @@ begin
 	exec IcsApp.StartRun
 		@ProcessName = 'A'
 	  , @IcrtProcessId = 99
-	  , @ProcessRunId = null
-	  , @SubProcessName = 'B'
-	  , @SubProcessRunId = null
+	  , @ProcessRunId = 11
+	  , @SubProcessName = ''
+	  , @SubProcessRunId = -1
 	  , @MappingConfigTaskName = 'D'
 	  , @MappingName = 'C'
 end;

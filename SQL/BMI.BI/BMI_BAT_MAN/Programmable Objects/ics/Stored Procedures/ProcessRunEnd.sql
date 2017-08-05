@@ -1,20 +1,17 @@
-IF OBJECT_ID('[ics].[SubProcessRunStart]') IS NOT NULL
-	DROP PROCEDURE [ics].[SubProcessRunStart];
+﻿IF OBJECT_ID('[ics].[ProcessRunEnd]') IS NOT NULL
+	DROP PROCEDURE [ics].[ProcessRunEnd];
 
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create   procedure [ics].[SubProcessRunStart]
+create   proc [ics].[ProcessRunEnd]
 (
-  @ProcessName varchar(200)
-, @SubProcessName varchar(200)
+  @ProcessName varchar(100)
 , @ProcessRunId int
-, @SubProcessRunId int = null output
-, @RunType varchar(8) = null output
-, @Instruction varchar(255) = null output
-, @Message varchar(500) = null output
+, @EndState varchar(16)
+, @EndMessage varchar(500) = null
 )
 as
 --<CommentHeader>
@@ -22,9 +19,9 @@ as
 
 Properties
 ==========
-PROCEDURE NAME:		ics.SubProcessRunStart
+PROCEDURE NAME:		ics.ProcessRunEnd
 DESCRIPTION:		POC stub procedure
-ORIGIN DATE:		24-JUL-2017
+ORIGIN DATE:		25-JUL-2017
 ORIGINAL AUTHOR:	Razia Nazir
 
 Returns
@@ -33,16 +30,14 @@ Returns
 
 Additional Notes
 ================
-Stubs 
+Stubs
 
 REVISION HISTORY
 =====================================================================================================================
 Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
-001		24-JUL-2017		RN		N/A		Created
+001		25-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-
-
 **********************************************************************************************************************/
 --</CommentHeader>
 
@@ -60,38 +55,44 @@ begin
 	declare	@_ExceptionId int;
 
 	begin try
-		set @_Step = 'Fetch dummy values for stub' ;
+		set @_step = 'Record POC' ;
 
-		select
-			  @SubProcessRunId = SubProcessRunID
-			, @RunType = RunType
-			, @Instruction = Instruction
-			, @Message = [Message]
-		from
-			dbo.StubResultSet
-		where
-			FunctionName = @_FunctionName ;
+		/*===============================================================================================*/
+		/**/	set @_Message = 'Record end of Process run - Not Yet Implemented'
+		/**/		+ ' for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
+		/**/		+ ' and (BatMan) Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL')
+		/**/		+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
+		/*===============================================================================================*/
+
 	end try
 	begin catch
-		set @_ErrorContext = 'Failed to start new sub-process run'
+		set @_ErrorContext = 'Failed to record end of process run'
 			+ ' for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
-			+ ' , ICRT Sub-Process: ' + coalesce('"' + @SubProcessName + '"', 'NULL')
 			+ ' and (BatMan) Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL')
+			+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
 			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')
-			+ ' (New Sub-process Run Id: ' + coalesce(cast(@SubProcessRunId as varchar(32)), 'NULL') + ')'
 
 		exec log4.ExceptionHandler
 			  @ErrorContext = @_ErrorContext
 			, @ErrorProcedure = @_FunctionName
 			, @ErrorNumber = @_Error out
 			, @ReturnMessage = @_Message out
-			, @ExceptionId = @_ExceptionId out
-
-	end catch
+			, @ExceptionId = @_ExceptionId out ;
+	end catch ;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 EndEx:
 --/////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*===========================================================================*/
+	/**/	exec log4.JournalWriter
+	/**/		  @Task = 'POC'
+	/**/		, @FunctionName = @_FunctionName
+	/**/		, @StepInFunction = @_Step
+	/**/		, @MessageText = @_Message
+	/**/		, @Severity = 1024 -- DEBUG
+	/**/		, @ExceptionId = @_ExceptionId
+	/*===========================================================================*/
 
 	--! Finally, throw an exception that will be detected by the caller
 	if @_Error > 0 raiserror(@_Message, 16, 99) ;
@@ -100,5 +101,5 @@ EndEx:
 
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
-end
+end ;
 GO

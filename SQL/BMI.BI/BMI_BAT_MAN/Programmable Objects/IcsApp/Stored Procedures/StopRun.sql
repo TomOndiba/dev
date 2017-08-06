@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[IcsApp].[StopRun]') IS NOT NULL
+IF OBJECT_ID('[IcsApp].[StopRun]') IS NOT NULL
 	DROP PROCEDURE [IcsApp].[StopRun];
 
 GO
@@ -143,17 +143,48 @@ begin
 		--! Define default values for any remaining inputs
 		set @EndMessage = coalesce(@EndMessage, '')
 
-		
-		--if len(@ProcessName) > 0 and coalesce(@SubProcessName, '') = '' and coalesce(@MappingConfigTaskName, '') = '' and coalesce(@MappingName, '') = ''
-		--	begin
-		--		/*===================================================================================================================*/
-		--		/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ProcessRunStart...' ;
-		--		/*===================================================================================================================*/
+		if @ThreadRunId > 0
+			begin
+				/*===================================================================================================================*/
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.SubProcessRunEnd...' ;
+				/*===================================================================================================================*/
 				
-		--		exec ics.ProcessRunStart
-		--			@ProcessName = @ProcessName
-		--		  , @ProcessRunId = @ProcessRunId out
-		--	end
+				exec ics.ThreadRunEnd
+					  @MappingConfigTaskName = @MappingConfigTaskName
+					, @MappingName = @MappingName
+					, @ThreadRunId = @ThreadRunId
+					, @EndState = @EndState
+					, @EndMessage = @EndMessage
+					, @SuccessSourceRows = @SuccessSourceRows
+					, @FailedSourceRows = @FailedSourceRows
+					, @SuccessTargetRows = @SuccessTargetRows
+					, @FailedTargetRows = @FailedTargetRows
+			end
+		else if @SubProcessRunId > 0
+			begin
+				/*===================================================================================================================*/
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.SubProcessRunEnd...' ;
+				/*===================================================================================================================*/
+				
+				exec ics.SubProcessRunEnd
+					  @ProcessName = @ProcessName
+					, @SubProcessName = @SubProcessName
+					, @SubProcessRunId = @SubProcessRunId
+					, @EndState = @EndState
+					, @EndMessage = @EndMessage
+			end
+		else if @ProcessRunId > 0
+			begin
+				/*===================================================================================================================*/
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ProcessRunEnd...' ;
+				/*===================================================================================================================*/
+				
+				exec ics.ProcessRunEnd
+					  @ProcessName = @ProcessName
+					, @ProcessRunId = @ProcessRunId
+					, @EndState = @EndState
+					, @EndMessage = @EndMessage
+			end
 
 		set @_Message = 'Successfully recorded end of run for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
 			+ ', ICRT Sub-Process: ' + coalesce('"' + @SubProcessName + '"', 'NULL')

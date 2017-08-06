@@ -12,6 +12,8 @@ ALTER TABLE [privy].[BatchStep] ADD CONSTRAINT [PK_privy_BatchStep] PRIMARY KEY 
 GO
 ALTER TABLE [privy].[BatchStep] ADD CONSTRAINT [AK_privy_BatchStep_BatchId_BatchStepName] UNIQUE NONCLUSTERED  ([BatchId], [BatchStepName])
 GO
+CREATE UNIQUE NONCLUSTERED INDEX [NDX_UNQ_privy_BatchStep_BatchId_IcrtSubProcessId] ON [privy].[BatchStep] ([BatchId], [IcrtSubProcessId]) WHERE ([IcrtSubProcessId] IS NOT NULL)
+GO
 ALTER TABLE [privy].[BatchStep] ADD CONSTRAINT [FK_privy_BatchStep_ics_IcrtSubProcess] FOREIGN KEY ([IcrtSubProcessId]) REFERENCES [ics].[IcrtSubProcess] ([IcrtSubProcessId])
 GO
 ALTER TABLE [privy].[BatchStep] ADD CONSTRAINT [FK_privy_BatchStep_privy_Batch] FOREIGN KEY ([BatchId]) REFERENCES [privy].[Batch] ([BatchId])

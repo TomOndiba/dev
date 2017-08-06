@@ -239,6 +239,11 @@
     <Build Include="IcsApp-Tests\test StopRun %40EndState allows _FAILED_.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId negative when starting a thread _sub-process present_.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId negative when starting a thread _sub-process missing_.sql" />
+    <Build Include="IcsApp-Tests\test StartRun replaces null %40EndMessage with empty string.sql" />
+    <Build Include="IcsApp-Tests\test StartRun calls only ics.ProcessRunEnd when process name and id are valid.sql" />
+    <Build Include="IcsApp-Tests\test StartRun calls ics.ThreadRunEnd mapping config task name is valid.sql" />
+    <Build Include="IcsApp-Tests\test StartRun calls ics.SubProcessRunEnd when sub-process name is valid.sql" />
+    <Build Include="IcsApp-Tests\test StartRun calls ics.ProcessRunEnd when process name and id are valid.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

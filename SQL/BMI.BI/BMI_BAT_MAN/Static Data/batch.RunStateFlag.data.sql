@@ -4,7 +4,7 @@
 
 set nocount on
 
-merge into [privy].[RunStateFlag] as Target
+merge into [batch].[RunStateFlag] as Target
 using (values
   (0,'Not Applicable')
  ,(1,'Started')
@@ -31,11 +31,11 @@ declare @mergeError int
 select @mergeError = @@error, @mergeCount = @@rowcount
 if @mergeError != 0
  begin
- print 'ERROR OCCURRED IN MERGE FOR [privy].[RunStateFlag]. Rows affected: ' + cast(@mergeCount as varchar(100)); -- SQL should always return zero rows affected
+ print 'ERROR OCCURRED IN MERGE FOR [batch].[RunStateFlag]. Rows affected: ' + cast(@mergeCount as varchar(100)); -- SQL should always return zero rows affected
  end
 else
  begin
- print '[privy].[RunStateFlag] rows affected by MERGE: ' + cast(@mergeCount as varchar(100));
+ print '[batch].[RunStateFlag] rows affected by MERGE: ' + cast(@mergeCount as varchar(100));
  end
 go
 

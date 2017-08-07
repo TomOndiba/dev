@@ -83,8 +83,21 @@ a266bba8-8c3d-522b-a597-4810e685652f|Programmable Objects\dbo\Stored Procedures\
 1fe6716e-0baa-5cac-ac88-90836481b5c8|Static Data\dbo.StubResultSet.Data.sql;
 ff6c22f0-34e6-51d1-9b8a-1e9e18d39e88|Static Data\log4Private.JournalControl.data.sql;
 265aaab9-1a36-5f05-b9a1-e076442aa545|Static Data\log4Private.Severity.data.sql;
-90fe26fd-2281-579e-95eb-b163d77eccf1|Static Data\privy.RunStateFlag.data.sql;
-e154f279-356a-57ae-b591-a7d417762b1d|Static Data\privy.RunState.data.sql;
+5179b23f-b32a-57bf-b334-257a75c4c7f7|Programmable Objects\batch\Stored Procedures\ProcessGetIdFromIcrtProcessName.sql;
+aba781f3-f8e0-5a75-8e4a-51fee3df6714|Programmable Objects\ics\Stored Procedures\BatchGetIdFromProcessName.sql;
+d97c8bf2-6979-5773-9063-b5bc29f01103|Programmable Objects\ics\Stored Procedures\IcrtSubProcessGetId.sql;
+3ded4893-b2d7-5038-af87-836bb05ff4d1|Programmable Objects\ics\Stored Procedures\MappingConfigTaskGetId.sql;
+1b204990-a5e2-5e79-899d-be4a461f7d1c|Programmable Objects\ics\Stored Procedures\ProcessRunEnd.sql;
+2fcbd326-7e16-58be-9244-a2bfd6eaabf2|Programmable Objects\ics\Stored Procedures\ProcessRunStart.sql;
+7fb322a2-499e-5202-ad73-1a9a39282bc4|Programmable Objects\ics\Stored Procedures\SubProcessRunEnd.sql;
+03e4360a-4242-5b42-912f-819900a36e5e|Programmable Objects\ics\Stored Procedures\SubProcessRunStart.sql;
+4352fe7e-65a0-55a0-80f7-4b9c188c215e|Programmable Objects\ics\Stored Procedures\ThreadRunEnd.sql;
+1d7b3929-02d6-59e4-ae5a-7330b517ab40|Programmable Objects\ics\Stored Procedures\ThreadRunStart.sql;
+0242496c-dc89-5ebe-8d5f-d68bf2a4ce06|Programmable Objects\IcsApp\Stored Procedures\StartRun.sql;
+1f7af49f-b592-591a-b3db-2d4eedd4a91c|Programmable Objects\IcsApp\Stored Procedures\StopRun.sql;
+5c5decea-a2b8-5de4-b033-8b98cb24ff39|Programmable Objects\IcsApp\Stored Procedures\SubProcessCheckThreads.sql;
+2ffbad93-7d72-5bdd-88bb-0549ef088425|Static Data\batch.RunStateFlag.data.sql;
+fefeebd1-8d51-528c-8869-49475887df83|Static Data\batch.RunState.data.sql;
 </DeployChangesExecutionOrder>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
     <AdditionalScriptFolders>
@@ -285,14 +298,18 @@ Static Data;
     <Folder Include="Programmable Objects\ics\Stored Procedures\" />
     <Folder Include="Programmable Objects\IcsApp\" />
     <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
+    <Folder Include="Schema-Model\batch\" />
+    <Folder Include="Schema-Model\batch\Tables\" />
+    <Folder Include="Programmable Objects\batch\" />
+    <Folder Include="Programmable Objects\batch\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
     <None Include="Static Data\dbo.StubResultSet.Data.sql" />
     <None Include="Static Data\log4Private.JournalControl.data.sql" />
     <None Include="Static Data\log4Private.Severity.data.sql" />
-    <None Include="Static Data\privy.RunStateFlag.data.sql" />
-    <None Include="Static Data\privy.RunState.data.sql" />
+    <None Include="Static Data\batch.RunStateFlag.data.sql" />
+    <None Include="Static Data\batch.RunState.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -425,6 +442,34 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\IcsApp\Stored Procedures\SubProcessCheckThreads.sql" />
     <None Include="Migrations\1.0.0\014_Drop_dbo_SubProcessCheckThreads.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\batch\Tables\Process.sql" />
+    <None Include="Schema-Model\batch\Tables\Step.sql" />
+    <None Include="Schema-Model\batch\Tables\Thread.sql" />
+    <None Include="Schema-Model\Security\Schemas\batch.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\015_Move_Batch_tables_to_batch_schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\batch\Stored Procedures\ProcessGetIdFromIcrtProcessName.sql" />
+    <None Include="Migrations\1.0.0\016_drop_ics_BatchGetIdFromProcessName.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\017_Move_RunState_tables_to_batch_schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\batch\Tables\RunState.sql" />
+    <None Include="Schema-Model\batch\Tables\RunStateFlag.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\batch\Tables\ProcessRun.sql" />
+    <None Include="Schema-Model\batch\Tables\StepRun.sql" />
+    <None Include="Schema-Model\batch\Tables\ThreadRun.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\018_Add_Batch_RunTime_tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create   proc [ics].[SubProcessRunEnd]
+create proc [ics].[SubProcessRunEnd]
 (
   @ProcessName varchar(100)
 , @SubProcessName varchar(100)

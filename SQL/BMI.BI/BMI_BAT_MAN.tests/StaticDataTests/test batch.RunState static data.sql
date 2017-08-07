@@ -1,4 +1,4 @@
-﻿create   procedure [StaticDataTests].[test privy.RunState static data]
+﻿create procedure [StaticDataTests].[test batch.RunState static data]
 as
 begin
 	--! Assemble
@@ -38,5 +38,5 @@ begin
 	select * into #expected from sourceCte where RunStateId >= -1
 
 	--! Assert
-	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = 'privy.RunState';
+	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = 'batch.RunState';
 end

@@ -1,12 +1,11 @@
-IF OBJECT_ID('[ics].[ProcessRunStart]') IS NOT NULL
-	DROP PROCEDURE [ics].[ProcessRunStart];
-
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-create   procedure [ics].[ProcessRunStart]
+if object_id('[ics].[ProcessRunStart]') is not null
+	drop procedure [ics].[ProcessRunStart];
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create procedure [ics].[ProcessRunStart]
 (
   @ProcessName varchar(200)
 , @IcrtProcessId int
@@ -98,4 +97,4 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end
-GO
+go

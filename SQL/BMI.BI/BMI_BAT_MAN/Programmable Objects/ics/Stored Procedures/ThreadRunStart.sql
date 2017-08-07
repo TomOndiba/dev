@@ -1,12 +1,11 @@
-IF OBJECT_ID('[ics].[ThreadRunStart]') IS NOT NULL
-	DROP PROCEDURE [ics].[ThreadRunStart];
-
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-create   procedure [ics].[ThreadRunStart]
+if object_id('[ics].[ThreadRunStart]') is not null
+	drop procedure [ics].[ThreadRunStart];
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create procedure [ics].[ThreadRunStart]
 (
   @MappingConfigTaskName varchar(200)
 , @MappingName varchar(200)
@@ -24,7 +23,7 @@ as
 
 Properties
 ==========
-PROCEDURE NAME:		IcsApp.ThreadRunStart
+PROCEDURE NAME:		ics.ThreadRunStart
 DESCRIPTION:		POC stub procedure
 ORIGIN DATE:		24-JUL-2017
 ORIGINAL AUTHOR:	Razia Nazir
@@ -103,4 +102,4 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end
-GO
+go

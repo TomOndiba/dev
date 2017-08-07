@@ -1,16 +1,16 @@
-IF OBJECT_ID('[ics].[IcrtSubProcessGetId]') IS NOT NULL
-	DROP PROCEDURE [ics].[IcrtSubProcessGetId];
+﻿IF OBJECT_ID('[batch].[ProcessGetIdFromIcrtProcessName]') IS NOT NULL
+	DROP PROCEDURE [batch].[ProcessGetIdFromIcrtProcessName];
 
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create procedure [ics].[IcrtSubProcessGetId]
+create procedure [batch].[ProcessGetIdFromIcrtProcessName]
 (
-  @IcrtSubProcessName varchar(100)
-, @BatchProcessId int
-, @IcrtSubProcessId int = null out
+  @IcrtProcessName varchar(100)
+, @BatchProcessName varchar(100) = null
+, @BatchProcessId int = null out
 )
 as
 --<CommentHeader>
@@ -18,10 +18,11 @@ as
 
 Properties
 ==========
-FUNCTION NAME:  ics.IcrtSubProcessGetId
-DESCRIPTION:    Creates an entry for the specified ICRT sub-process if not already present then outputs the Id
+FUNCTION NAME:  batch.ProcessGetIdFromIcrtProcessName
+DESCRIPTION:    Outputs the Id for the Batch Process indicated by the specified ICRT Process (creating a new entry
+				if not found)
 AUTHOR:         Greg M. Lucas
-ORIGIN DATE:    02-AUG-2017
+ORIGIN DATE:    03-AUG-2017
 
 Additional Notes
 ================
@@ -30,7 +31,7 @@ REVISION HISTORY
 =====================================================================================================================
 Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
-001		02-AUG-2017		GML		N/A		Created
+001		03-AUG-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
@@ -52,23 +53,25 @@ begin
 
 	begin try
 		set @_Step = 'Validate Inputs';
-		if coalesce(@IcrtSubProcessName, '') = '' raiserror('ICRT Sub-process Name input must not be null or empty', 16, 1);
-		if coalesce(@BatchProcessId, 0) !> 0 raiserror('Batch Process Id (derived from ICRT process name) must be greater than zero', 16, 1);
+		if coalesce(@IcrtProcessName, '') = '' raiserror('ICRT Process Name input must not be null or empty', 16, 1);
+
+		--! We need to allow a Batch Process name to be provided but if it isn't, use the ICRT Process Name
+		set @BatchProcessName = isnull(nullif(@BatchProcessName, ''), @IcrtProcessName);
 
 		--! As we have multiple steps, if there no outer transaction,
 		--! use an explicit transaction from this point forward 
 		if @_TxnIsExternal = 0 begin tran;
 
 		set @_Step = 'Get Id';
-		select @IcrtSubProcessId = IcrtSubProcessId from ics.IcrtSubProcess where IcrtSubProcessName = @IcrtSubProcessName ;
+		select @BatchProcessId = BatchProcessId from batch.Process where IcrtProcessName = @IcrtProcessName ;
 
-		if @IcrtSubProcessId is null
+		if @BatchProcessId is null
 			begin
 				set @_Step = 'Add Missing';
 
-				set @IcrtSubProcessId = coalesce((select max(IcrtSubProcessId) from ics.IcrtSubProcess) + 1, 1) ;
+				set @BatchProcessId = coalesce((select max(BatchProcessId) from batch.Process) + 1, 1) ;
 				
-				insert ics.IcrtSubProcess(IcrtSubProcessId, IcrtSubProcessName, BatchProcessId) values (@IcrtSubProcessId, @IcrtSubProcessName, @BatchProcessId);
+				insert batch.Process(BatchProcessId, BatchProcessName, IcrtProcessName) values (@BatchProcessId, @BatchProcessName, @IcrtProcessName);
 			end
 
 		--!
@@ -77,10 +80,9 @@ begin
 		if @_TxnIsExternal = 0 and (xact_state() = 1 or @@trancount > 0) commit tran ;
 	end try
 	begin catch
-		set @_ErrorContext = 'Failed to get Id for IcrtSubProcess: ' + coalesce('"' + @IcrtSubProcessName + '"', 'NULL')
-				+ ' and Batch Process Id: ' + coalesce(cast(@BatchProcessId as varchar(16)), 'NULL')
+		set @_ErrorContext = 'Failed to get Batch Process Id for ICRT process: ' + coalesce('"' + @IcrtProcessName + '"', 'NULL')
 				+ ' at step: [' + coalesce(@_Step, 'NULL') + ']'
-				+ ' (IcrtSubProcess Id: ' + coalesce(cast(@IcrtSubProcessId as varchar(16)), 'NULL') + ')' ;
+				+ ' (Process Id: ' + coalesce(cast(@BatchProcessId as varchar(16)), 'NULL') + ')' ;
 
 		--! If we have an uncommittable transaction (see BOL), or a deadlock we can't
 		--! do anything else until we roll that back. Alternatively, if we started
@@ -113,11 +115,11 @@ EndEx:
 	return (@_Error);
 end
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'Database-specific unique identifier for the batch process that is associated with the (master) process of this sub-process', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', 'PARAMETER', N'@BatchProcessId'
+EXEC sp_addextendedproperty N'MS_Description', N'Outputs the Id for the Batch Process indicated by the specified ICRT Process (creating a new entry if not found)', 'SCHEMA', N'batch', 'PROCEDURE', N'ProcessGetIdFromIcrtProcessName', NULL, NULL
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'Creates an entry for the specified ICRT sub-process if not already present then outputs the Id', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', NULL, NULL
+EXEC sp_addextendedproperty N'MS_Description', N'Optional output, the database-specific unique identifier for batch process that is managed/run by the specified ICRT process', 'SCHEMA', N'batch', 'PROCEDURE', N'ProcessGetIdFromIcrtProcessName', 'PARAMETER', N'@BatchProcessId'
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'Database-specific unique identifier for an ICRT sub-process', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', 'PARAMETER', N'@IcrtSubProcessId'
+EXEC sp_addextendedproperty N'MS_Description', N'Optional, the user-friendly name for a Batch Process', 'SCHEMA', N'batch', 'PROCEDURE', N'ProcessGetIdFromIcrtProcessName', 'PARAMETER', N'@BatchProcessName'
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'The unique physical name of the ICRT sub-process', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', 'PARAMETER', N'@IcrtSubProcessName'
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the unique physical name of the ICRT process that is responsible for running a batch', 'SCHEMA', N'batch', 'PROCEDURE', N'ProcessGetIdFromIcrtProcessName', 'PARAMETER', N'@IcrtProcessName'
 GO

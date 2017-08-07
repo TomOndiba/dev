@@ -6,7 +6,7 @@ Version:12.3.3.4490-->
 <Project version="3" type="SQLComparisonToolsProject">
   <DataSource1 version="3" type="LiveDatabaseSource">
     <ServerName>.</ServerName>
-    <DatabaseName>BMI_BAT_MAN.backup</DatabaseName>
+    <DatabaseName>BMI_BAT_MAN.tests</DatabaseName>
     <Username />
     <SavePassword>False</SavePassword>
     <Password />
@@ -16,7 +16,7 @@ Version:12.3.3.4490-->
   </DataSource1>
   <DataSource2 version="3" type="LiveDatabaseSource">
     <ServerName>.</ServerName>
-    <DatabaseName>BMI_BAT_MAN.tests</DatabaseName>
+    <DatabaseName>BMI_BAT_MAN</DatabaseName>
     <Username />
     <SavePassword>False</SavePassword>
     <Password />
@@ -24,8 +24,8 @@ Version:12.3.3.4490-->
     <MigrationsFolderLocation />
     <IntegratedSecurity>True</IntegratedSecurity>
   </DataSource2>
-  <LastCompared>08/03/2017 17:11:04</LastCompared>
-  <Options>DecryptPost2kEncryptedObjects, IgnoreDatabaseAndServerName, IgnoreFileGroups, IgnoreFillFactor, IgnoreUserProperties, IgnoreWhiteSpace, IgnoreWithElementOrder</Options>
+  <LastCompared>08/07/2017 13:59:29</LastCompared>
+  <Options>DecryptPost2kEncryptedObjects, IgnoreDatabaseAndServerName, IgnoreFileGroups, IgnoreFillFactor, IgnoreTSQLT, IgnoreUserProperties, IgnoreWhiteSpace, IgnoreWithElementOrder</Options>
   <InRecycleBin>False</InRecycleBin>
   <Direction>0</Direction>
   <ProjectFilter version="1" type="DifferenceFilter">
@@ -170,20 +170,24 @@ Version:12.3.3.4490-->
   <SelectedSyncObjects version="1" type="SelectedSyncObjects">
     <Schemas type="ListString" version="2">
       <value type="string">cAByAGkAdgB5AA__</value>
-      <value type="string">ZQB0AGwA</value>
       <value type="string">ZABiAG8A</value>
       <value type="string">UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA</value>
       <value type="string">aQBjAHMA</value>
       <value type="string">SQBjAHMALQBNAG8AZAB1AGwAZQBUAGUAcwB0AHMA</value>
       <value type="string">cwBxAGwAYwBvAHAA</value>
+      <value type="string">bABvAGcANABQAHIAaQB2AGEAdABlAA__</value>
+      <value type="string">bABvAGcANABVAHQAaQBsAHMA</value>
+      <value type="string">bABvAGcANAA_</value>
     </Schemas>
-    <cAByAGkAdgB5AA__>p/nMhAusOhW3bxlDSwtabAICAcX93amLNv2Ays0slBYZzTYCAgFQh72uywnWJ1WLTqTg9RCZAgIB</cAByAGkAdgB5AA__>
-    <ZQB0AGwA />
-    <ZABiAG8A>l3QM3ybcGxCE/nUc+BLi3QMCAWuhWcze41NuQID/HcXJ4qADAgFo4WKsQqA97O+04IZt8EpGAwIB</ZABiAG8A>
-    <UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>CZTPZ1cEFmvyqdAZ2UHOcBsAAWfUGG+zpcc66hB65a3p0DEbAgASKsaoJxJO+0BRvWUhIdxTGwAB</UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>
-    <aQBjAHMA>5KgEJhJsmOCha2b4jJ5LPAICAXInaxvUHF0LJhC+KsYXCTkCAgF9HFBdsDPpPMpEajJajHj7AwIBMRRIh7SDuixqXd3OCDWpCgMCAc3ZXZzN4xy4w5fiZrjGNoUDAgE_</aQBjAHMA>
-    <SQBjAHMALQBNAG8AZAB1AGwAZQBUAGUAcwB0AHMA>JkPW8c58nHMKEa//CrXbygMAAVvNR6CqMETIgzZM22HOvccDAAFWHH7RYrRdFEazpb7wREYYAwABRMOw3wadIAUCBAI6W0qqhgMAAR9MqpBiUfcwunE6aKRPPWMDAAGnNXPTalHBqCl3ICE2hInFAwAB3X1O1FfL9ELMFQxJqI4G9gMAAXd7RVwfoFQe4CjcKYfTLVUDAAHBZCTIeOxAwTNHHnYGORf4AwABoTnm/KBRPB6ELn8DEKPBLgMAAZxr9FZXeSZNrWnsoATlX6cDAAGSGaF6QC3bBrAw4+lWPH+PAwAB5IEhl0a6UInXisyHlV6LCQMAAZgd3DOU67hNQYAJVABXlR8DAAHdpO6A+LC5pHW+YVq72D9wAwABFFkuYzCsXVFgyIHsgFCrbwMAAQNxmwGpGxZOodez7gcdKiADAAEF028uvSoF66ZLFV/oEENKAwABqyBzTjDpd/RYr4NfxYvMuQMAAcTKokm/1IMAL4ElA+YsMjsDAAEX4chCsJbjooteZ2p8VyGmAwABVa+52ndgaDggQY+3Yc7h2AMAAbECuBNX0fKBG+X1dd8ckEsDAAHICs0oK4Rans+chHMAgra2AwABL60crUGCdcbnlz490uaWyQMAAS5jM6bpzxkWSThUVzZM//wDAAFmFGkDuEKEVKiRca49GQGhAwABIFjj15ayONDazbsoflKtRAMAAQ__</SQBjAHMALQBNAG8AZAB1AGwAZQBUAGUAcwB0AHMA>
-    <cwBxAGwAYwBvAHAA>45MPQ+xrsIaAERjrRVxvPwMAAW3HxbZLAnEAj9eipa4IH2wDAAFkKOdM4eoIwHOEyJWSLjqyAwABg1yO26XGjAkwAtzvyA/txAMAARL/VOwnXxH6Oe/LGXJPhysDAAF6XNw333AzYpVxL3V472qAAwABCSnFDurOAh6cTqEFBkqxXwMAAZ7luFXh1HvbI1aajP3tUykDAAHPAWNLXY+rbUvuWUaHMCv0AwABJgPb5iTtgCXESRGwTXfCOAMAAVqWe4bGWR+mXX7jMivqJe4DAAFbbx20eSL5AzAH3hEKGeQGAwAB2kc4wepr/7hgbIMPe9kZJAMAAfduoU7Gw+6le9616uETkhEDAAGdDZvshzAhs1gsbw+GvOK9AwABGJDTa/S6aYXmFz/KehPUUgMAAeuoSpcqJotS1okcqbal668DAAHUGCU7IGFljJLTvJnSLjCPAwABWxlJna2sWnENhdHjh8sF3gMAAQTE5A2YMy15Kau9LoAWY7IDAAH+bD/ZUukWBSxAPJDPaLkEAwABqlG/gdfWwvn4bLhWgUuXPgMAAWSh2n9X10WKL4q5Mgm/MukDAAEVz0DSdE2ciWt2TfuXVLRPAwAB</cwBxAGwAYwBvAHAA>
+    <cAByAGkAdgB5AA__ />
+    <ZABiAG8A />
+    <UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>Z9QYb7OlxzrqEHrlrenQMRsCAAf3vKT1PsDVLHg6mpPo4Z0bAgA_</UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>
+    <aQBjAHMA />
+    <SQBjAHMALQBNAG8AZAB1AGwAZQBUAGUAcwB0AHMA />
+    <cwBxAGwAYwBvAHAA />
+    <bABvAGcANABQAHIAaQB2AGEAdABlAA__>w/liMMpfiDt+9+11PrmZlwMCAA__</bABvAGcANABQAHIAaQB2AGEAdABlAA__>
+    <bABvAGcANABVAHQAaQBsAHMA>3MLobuuwijZxJpHgrubJFgMCACEl2x8Y/wWVdhGXSuUCqq4DAgD6ucTvf7nTN761gn21yxy/AwIA1XauEQYEK8BByKO1lg3igwMCAA__</bABvAGcANABVAHQAaQBsAHMA>
+    <bABvAGcANAA_>dRXS3PN4bZN4yUVEM0fF/AMCAMSnUKp2bR1GZDyRzl90pnAHAgBq5ubATXaFtk6PD8P6tHWzBwIA</bABvAGcANAA_>
     <Grouping type="ListByte" version="2">
       <value type="Byte">0</value>
       <value type="Byte">0</value>

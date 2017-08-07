@@ -4,7 +4,7 @@
 
 set nocount on
 
-merge into [privy].[RunState] as Target
+merge into [batch].[RunState] as Target
 using (values
   (-1,'Not Started','N','Used as run state placeholder when no BatchRunLog entries exist for a particular run',0)
  ,(1,'Process Started','N','',1)
@@ -58,11 +58,11 @@ declare @mergeError int
 select @mergeError = @@error, @mergeCount = @@rowcount
 if @mergeError != 0
  begin
- print 'ERROR OCCURRED IN MERGE FOR [privy].[RunState]. Rows affected: ' + cast(@mergeCount as varchar(100)); -- SQL should always return zero rows affected
+ print 'ERROR OCCURRED IN MERGE FOR [batch].[RunState]. Rows affected: ' + cast(@mergeCount as varchar(100)); -- SQL should always return zero rows affected
  end
 else
  begin
- print '[privy].[RunState] rows affected by MERGE: ' + cast(@mergeCount as varchar(100));
+ print '[batch].[RunState] rows affected by MERGE: ' + cast(@mergeCount as varchar(100));
  end
 go
 

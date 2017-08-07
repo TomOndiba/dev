@@ -1,15 +1,14 @@
-﻿IF OBJECT_ID('[IcsApp].[SubProcessCheckThreads]') IS NOT NULL
-	DROP PROCEDURE [IcsApp].[SubProcessCheckThreads];
-
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
+﻿if object_id('[IcsApp].[SubProcessCheckThreads]') is not null
+	drop procedure [IcsApp].[SubProcessCheckThreads];
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
 create procedure [IcsApp].[SubProcessCheckThreads]
 (	
   @SubProcessName	   varchar(200) 
-, @SubProcessRunID	   int output
+, @SubProcessRunId	   int output
 , @Outcome			   varchar(255) = null output
 , @Message			   varchar(500) = null output 
 , @ExpectedThreadCount int =null output 
@@ -18,7 +17,7 @@ create procedure [IcsApp].[SubProcessCheckThreads]
 , @ThreadsSkipped	   int =null output 
 , @ThreadsStopped	   int =null output 
 , @ThreadsFailed	   int =null output    
- )
+)
 
 as
 --<CommentHeader>
@@ -60,44 +59,37 @@ begin
 	declare @_ReturnValue int = 0;
 	declare	@_Message nvarchar(512);
 	declare	@_ErrorContext nvarchar(512);
-	declare	@_SprocStartTime datetime = getdate()
-	declare	@_StepStartTime datetime
-	declare	@_StepEndTime datetime
 	declare	@_Step varchar(128);
-	declare	@_ProgressMessage varchar(2000)
-	declare	@_ExceptionId int
-	declare @_ProgressLog varchar(max);
-	declare @_RowsAffected int = 0;
-	declare @_SubProcessRunId int = null;
-	declare @_Instruction varchar(255) = null; -- RUN/SKIP/STOP/ERROR
-	declare @_RunType varchar(8) = null; -- DELTA/FULL
-	declare	@_CompletionMessage varchar(500) = null;
-	declare	@_Outcome varchar(255);
-	declare	@_ExpectedThreadCount int;
-	declare	@_ActualThreadCount int;
-	declare	@_ThreadsSucceeded int; 
-	declare	@_ThreadsSkipped int;
-	declare	@_ThreadsStopped int;
-	declare	@_ThreadsFailed int;
+	declare	@_ExceptionId int;
 
-	set @_ProgressMessage = @_FunctionName
-	+ ' starting at ' + coalesce(convert(varchar(24), @_SprocStartTime, 120), '') + ' with inputs: '
-	+ char(10) + '    Process Run ID	                   : ' + cast(coalesce(@SubProcessRunID, 0) as varchar(255))
-
-	set @_ProgressLog = @_ProgressMessage;
+	/*===================================================================================================================*/
+	/**/	--! JournalWriter variables
+	/**/	declare	@_SprocStartTime datetime = getdate()
+	/**/	declare	@_StepStartTime datetime
+	/**/	declare	@_StepEndTime datetime
+	/**/	declare	@_ProgressMessage varchar(2000)
+	/**/	declare @_ProgressLog varchar(max);
+	/**/	
+	/**/	set @_ProgressMessage = @_FunctionName
+	/**/		+ ' starting at ' + coalesce(convert(varchar(24), @_SprocStartTime, 120), '') + ' with inputs: '
+	/**/		+ char(10) + '    ICRT SubProcess Name         : ' + coalesce(@SubProcessName, 'NULL')
+	/**/		+ char(10) + '    (BAT_MAN) Process Run I	   : ' + coalesce(cast(@SubProcessRunId as varchar(32)), 'NULL') 
+	/**/
+	/**/	set @_ProgressLog = @_ProgressMessage;
+	/*===================================================================================================================*/
 
 	begin try
 		set @_Step = 'Validate Inputs';
 		set @_StepStartTime = getdate();
 
-		if coalesce(@SubProcessRunID, 0) = 0	raiserror ('@SubProcessRunID can not be null or zero',16,1)
+		if coalesce(@SubProcessRunId, 0) = 0	raiserror ('@SubProcessRunId can not be null or zero',16,1)
 		if coalesce(@SubProcessName, '') = ''	raiserror ('@SubProcessName can not be null or empty',16,1)
 		
 		set @_Step = 'Build output values';
 		set @_StepStartTime = getdate();
 	
 		select
-			@SubProcessRunID	  = [SubProcessRunID]
+			@SubProcessRunId	  = [SubProcessRunID]
 		  , @Outcome			  = [Outcome]
 		  , @Message			  = [Message]
 		  , @ExpectedThreadCount  = [ExpectedThreadCount]
@@ -111,17 +103,21 @@ begin
 		where
 			FunctionName = @_FunctionName ;
 	
-		exec log4.JournalWriter
-			@Task = 'POC'
-		  , @FunctionName = @_FunctionName
-		  , @StepInFunction = @_Step
-		  , @MessageText = @Message
-		  , @ExtraInfo = @_ProgressLog
-		  , @Severity = 1024 ;	-- DEBUG
+		/*===================================================================================================================*/
+		/**/	set @_ProgressMessage = char(10) + char(10)  + 'Outputs: '
+		/**/		+ char(10) + '    Expected Thread Count    : ' + coalesce(cast(@ExpectedThreadCount as varchar(32)), 'NULL')
+		/**/		+ char(10) + '    Actual Thread Count      : ' + coalesce(cast(@ActualThreadCount as varchar(32)), 'NULL')
+		/**/		+ char(10) + '    Threads Succeeded        : ' + coalesce(cast(@ThreadsSucceeded as varchar(32)), 'NULL')
+		/**/		+ char(10) + '    Threads Skipped          : ' + coalesce(cast(@ThreadsSkipped as varchar(32)), 'NULL')
+		/**/		+ char(10) + '    Threads Stopped          : ' + coalesce(cast(@ThreadsStopped as varchar(32)), 'NULL')
+		/**/		+ char(10) + '    Threads Failed           : ' + coalesce(cast(@ThreadsFailed as varchar(32)), 'NULL')
+		/**/
+		/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + @_ProgressMessage ;
+		/*===================================================================================================================*/
 
 		--! Return the results as a result set
 		select
-			@SubProcessRunID	  as [SubProcessRunId]
+			@SubProcessRunId	  as [SubProcessRunId]
 		  , @Outcome			  as [Outcome]
 		  , @Message			  as [Message]
 		  , @ExpectedThreadCount  as [ExpectedThreadCount]
@@ -130,8 +126,13 @@ begin
 		  , @ThreadsSkipped	      as [ThreadsSkipped]
 		  , @ThreadsStopped	      as [ThreadsStopped]
 		  , @ThreadsFailed		  as [ThreadsFailed] ;
+
+		/*===================================================================================================================*/
+		/**/	set @_Message = 'Successfully retrurned thread counts for Sub-Process Name: ' + coalesce('"' + @SubProcessName + '"', 'NULL')
+		/**/		+ ' and Sub-process Run Id: ' + coalesce(cast(@SubProcessRunId as varchar(32)), 'NULL') 
+		/*===================================================================================================================*/
 		
-		end try
+	end try
 	
 	begin catch
 		set @_ErrorContext = 'Failed to start new batch run at step: ' + coalesce('[' + @_Step + ']', 'NULL')
@@ -149,6 +150,16 @@ begin
 EndEx:
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/*===================================================================================================================*/
+	/**/	exec log4.JournalWriter
+	/**/		  @Task = 'POC'
+	/**/		, @FunctionName = @_FunctionName
+	/**/		, @StepInFunction = @_Step
+	/**/		, @MessageText = @_Message
+	/**/		, @ExtraInfo = @_ProgressLog
+	/**/		, @Severity = 1024 -- DEBUG
+	/*===================================================================================================================*/
+
 	--! Finally, throw an exception that will be detected by the caller
 	if @_Error > 0 raiserror(@_Message, 16, 99);
 	set nocount off;
@@ -156,5 +167,5 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
+go
 
-GO

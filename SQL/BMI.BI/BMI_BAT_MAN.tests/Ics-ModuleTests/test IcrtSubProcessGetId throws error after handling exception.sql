@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test IcrtSubProcessGetId throws error after handling exception]
+﻿CREATE   procedure [Ics-ModuleTests].[test IcrtSubProcessGetId throws error after handling exception]
 as
 begin
 	--! Assemble
@@ -8,5 +8,5 @@ begin
 	exec tSQLt.ExpectException @ExpectedErrorNumber = 50000 ;
 
 	--! Act
-	exec ics.IcrtSubProcessGetId @IcrtSubProcessName = null, @BatchId = 1
+	exec ics.IcrtSubProcessGetId @IcrtSubProcessName = null, @BatchProcessId = 1
 end;

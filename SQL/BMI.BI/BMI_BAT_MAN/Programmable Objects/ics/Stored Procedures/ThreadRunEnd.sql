@@ -1,12 +1,11 @@
-﻿IF OBJECT_ID('[ics].[ThreadRunEnd]') IS NOT NULL
-	DROP PROCEDURE [ics].[ThreadRunEnd];
-
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-create   proc [ics].[ThreadRunEnd]
+﻿if object_id('[ics].[ThreadRunEnd]') is not null
+	drop procedure [ics].[ThreadRunEnd];
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
+create proc [ics].[ThreadRunEnd]
 (
   @MappingConfigTaskName varchar(100)
 , @MappingName varchar(100)
@@ -61,7 +60,7 @@ begin
 	declare	@_ExceptionId int;
 
 	begin try
-		set @_step = 'Record POC' ;
+		set @_Step = 'Record POC' ;
 
 		/*===============================================================================================*/
 		/**/	set @_Message = 'Record end of Thread run - Not Yet Implemented'
@@ -110,4 +109,4 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end ;
-GO
+go

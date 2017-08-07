@@ -1,4 +1,4 @@
-﻿create   procedure [StaticDataTests].[test privy.RunStateFlag static data]
+﻿create procedure [StaticDataTests].[test batch.RunStateFlag static data]
 as
 begin
 	--! Assemble
@@ -17,5 +17,5 @@ begin
 	select * into #expected from sourceCte where FlagBit >= 0
 
 	--! Assert
-	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = 'privy.RunStateFlag';
+	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = 'batch.RunStateFlag';
 end

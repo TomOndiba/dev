@@ -1,4 +1,4 @@
-﻿CREATE procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on insert]
+﻿create        procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates null datetime columns on update]
 as
 	begin
 
@@ -20,7 +20,7 @@ as
 		  , IsDeleted		 char(1)
 		  , IsIncomplete	 char(1)
 		  , pk				 int
-		  , col1			 int
+		  , col1			 datetime
 		) ;
 
 
@@ -33,10 +33,10 @@ as
 		  , [EtlCreatedBy]
 		  , [EtlSourceTable]
 		  , [DataSourceKey]
-		  , [EtlUpdatedOn]
-		  , [EtlUpdatedBy]
-		  , [EtlDeletedOn]
-		  , [EtlDeletedBy]
+			, [EtlUpdatedOn]
+			, [EtlUpdatedBy]
+		  --, [EtlDeletedOn]
+		  --, [EtlDeletedBy]
 		  , IsDeleted
 		  , IsIncomplete
 		  , pk
@@ -50,14 +50,14 @@ as
 		  , 'Razia'
 		  , 'Dummy'
 		  , 1
-		  , @_now
-		  , 'Razia'
-		  , null
-		  , null
-		  , null
+		,@_now
+				, 'Razia'
+		  --, @_now
+		  --, 'Razia'
+		  , null 	---when deleted
 		  , null
 		  , 1
-		  , 1 ;
+		  ,  @_now  ;
 
 
 		exec (N'create schema test_tsa;') ;
@@ -73,7 +73,7 @@ as
 		  , [EtlSourceTable] varchar(50)
 		  , [DataSourceKey]	 int
 		  , pk				 int		primary key
-		  , col1			 int
+		  , col1			 datetime
 		) ;
 
 		create table test_psa.ICS_STG_Dummy
@@ -92,20 +92,36 @@ as
 		  , [IsDeleted]		 char(1)
 		  , IsIncomplete	 char(1)
 		  , pk				 int		primary key
-		  , col1			 int
+		  , col1			 datetime
 		) ;
 
 
-		insert into test_tsa.ICS_LAND_Dummy
-		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1 ;
+		insert into test_tsa.ICS_LAND_Dummy ([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], pk, col1)
+		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, @_now  ;
+
+		insert into test_psa.ICS_STG_Dummy
+		(
+			[EtlBatchRunId]
+		  , [EtlStepRunId]
+		  , [EtlThreadRunId]
+		  , [EtlCreatedOn]
+		  , [EtlCreatedBy]
+		  , [EtlSourceTable]
+		  , [DataSourceKey]
+		  , pk
+		  , col1
+		)
+		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, null ;
+
 
 		exec privy.BuildAndRunMerge
-			@Runtype = 'Delta'
+			@Runtype = 'Full'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'
 		  , @TargetTableName = 'ICS_STG_Dummy'
 		  , @TargetSchemaName = 'test_psa'
 		  , @LoadDateTime = @_now ;
+
 
 		exec tSQLt.AssertEqualsTable
 			@Expected = '[tsa-to-psa-tests].Expected'

@@ -1,4 +1,4 @@
-﻿CREATE   procedure [tsa-to-psa-tests].[test source columns match target]
+﻿create procedure StagingSchemaTests.[test source columns match target]
 as
 begin
 	select

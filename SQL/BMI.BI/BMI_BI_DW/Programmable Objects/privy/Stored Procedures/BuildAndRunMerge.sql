@@ -7,7 +7,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
-create   procedure [privy].[BuildAndRunMerge]
+CREATE   procedure [privy].[BuildAndRunMerge]
 (
 	@Runtype		  varchar(10)
   , @SourceTableName  varchar(200)
@@ -66,7 +66,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_LoadDateTime varchar(50) = isnull(@LoadDateTime, getdate()) ;
 	    declare @maxid int=null;
 		select
-			COLUMN_NAME ColumnName
+			COLUMN_NAME ColumnName, DATA_TYPE ColumnDataType 
 		into
 			TableStructure
 		from
@@ -84,6 +84,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @updatesetcolumnstring nvarchar(max) = '' ; --prepares set list of columns for update statement
 		declare @pkcolumns varchar(500) = '' ;
 		declare @pkcolumnsTemp varchar(500) = '' ;
+		declare @columndatatype varchar(500) = '' ;
 
 		select
 			col_name(ic.object_id, ic.column_id) as PK
@@ -116,7 +117,11 @@ Version	ChangeDate		Author	BugRef	Narrative
 			begin
 			set @pkcolumns= ' and '+'s.'+@pkcolumnsTemp + '=t.'+@pkcolumnsTemp + @pkcolumns
 			end
-			
+			if (@maxid=1)
+
+			begin
+			set @pkcolumns= ' and '+'s.'+@pkcolumnsTemp + '=t.'+@pkcolumnsTemp
+			end
 			set @i=@i+1;
 		end
 
@@ -128,18 +133,35 @@ Version	ChangeDate		Author	BugRef	Narrative
 			begin
 
 				set @columnname =(select ColumnName from TableStructure where id = @i) ;
+				set @columndatatype=(select ColumnDatatype from TableStructure where id = @i) ;
 								
 				if (@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'))
 					set @insertcolumnstring = @insertcolumnstring + ',' + @columnname ;
 															
-				if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	) )
-					set @updatecolumnstring = @updatecolumnstring + ' or ' + 's.' + @columnname + '<>' + 't.' + @columnname ;
-
 				if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted') )
 					set @updatesetcolumnstring = @updatesetcolumnstring + ' , ' + 't.' + @columnname + '=' + 's.' + @columnname ;
 
+
+				if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	) )
+				begin 
+
+				if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
+							set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ', '''')<>' + 'isnull(t.' + @columnname +','''')';
+				
+				if (@columndatatype in ('int','float','real','bigint','tinyint','decimal','smallint','numeric','bit','money','smallmoney'))
+			set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ',1) <>' + 'isnull(t.' + @columnname+',1)' ;
+
+
+				--if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
+				--			set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ', ''00:00:00.0000000'')<>' + 'isnull(t.' + @columnname +',''00:00:00.0000000'')';
+						
+
+			
+					end 
+					
 				set @i = @i + 1 ;
 			end ;
+
 
 
 		set @insertcolumnstring = substring(@insertcolumnstring, 2, len(@insertcolumnstring)) ;

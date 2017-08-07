@@ -1,4 +1,4 @@
-﻿create   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on update]
+﻿create      procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates null varchar columns on update]
 as
 	begin
 
@@ -20,7 +20,7 @@ as
 		  , IsDeleted		 char(1)
 		  , IsIncomplete	 char(1)
 		  , pk				 int
-		  , col1			 int
+		  , col1			 varchar(10)
 		) ;
 
 
@@ -57,7 +57,7 @@ as
 		  , null 	---when deleted
 		  , null
 		  , 1
-		  , 2 ;
+		  , 'varchar' ;
 
 
 		exec (N'create schema test_tsa;') ;
@@ -73,7 +73,7 @@ as
 		  , [EtlSourceTable] varchar(50)
 		  , [DataSourceKey]	 int
 		  , pk				 int		primary key
-		  , col1			 int
+		  , col1			 varchar(10)
 		) ;
 
 		create table test_psa.ICS_STG_Dummy
@@ -92,12 +92,12 @@ as
 		  , [IsDeleted]		 char(1)
 		  , IsIncomplete	 char(1)
 		  , pk				 int		primary key
-		  , col1			 int
+		  , col1			 varchar(10)
 		) ;
 
 
 		insert into test_tsa.ICS_LAND_Dummy ([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], pk, col1)
-		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 2 ;
+		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 'varchar' ;
 
 		insert into test_psa.ICS_STG_Dummy
 		(
@@ -111,7 +111,7 @@ as
 		  , pk
 		  , col1
 		)
-		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1 ;
+		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, null ;
 
 
 		exec privy.BuildAndRunMerge

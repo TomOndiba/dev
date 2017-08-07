@@ -1,4 +1,4 @@
-﻿create   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on delete]
+﻿create    procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on update for single key]
 as
 	begin
 
@@ -33,10 +33,10 @@ as
 		  , [EtlCreatedBy]
 		  , [EtlSourceTable]
 		  , [DataSourceKey]
-			--, [EtlUpdatedOn]
-			--, [EtlUpdatedBy]
-		  , [EtlDeletedOn]
-		  , [EtlDeletedBy]
+			, [EtlUpdatedOn]
+			, [EtlUpdatedBy]
+		  --, [EtlDeletedOn]
+		  --, [EtlDeletedBy]
 		  , IsDeleted
 		  , IsIncomplete
 		  , pk
@@ -50,14 +50,14 @@ as
 		  , 'Razia'
 		  , 'Dummy'
 		  , 1
-				--, @_now
-				--, 'Razia'
-		  , @_now
-		  , 'Razia'
-		  , 1	---when deleted
+		,@_now
+				, 'Razia'
+		  --, @_now
+		  --, 'Razia'
+		  , null 	---when deleted
 		  , null
-		  , 2
-		  , 1 ;
+		  , 1
+		  , 2 ;
 
 
 		exec (N'create schema test_tsa;') ;
@@ -96,8 +96,8 @@ as
 		) ;
 
 
-		--insert into test_tsa.ICS_LAND_Dummy ([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], pk, col1)
-		--select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1 ;
+		insert into test_tsa.ICS_LAND_Dummy ([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], pk, col1)
+		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 2 ;
 
 		insert into test_psa.ICS_STG_Dummy
 		(
@@ -111,7 +111,7 @@ as
 		  , pk
 		  , col1
 		)
-		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 2, 1 ;
+		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1 ;
 
 
 		exec privy.BuildAndRunMerge

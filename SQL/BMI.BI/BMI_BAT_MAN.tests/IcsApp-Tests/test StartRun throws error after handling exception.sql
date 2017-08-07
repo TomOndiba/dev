@@ -1,7 +1,6 @@
 ﻿create   procedure [IcsApp-Tests].[test StartRun throws error after handling exception]
 as
 begin
-	--! Assemble
 	--! Mock all the calls that might be made by this wrapper sproc
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.ProcessRunStart' ;
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.SubProcessRunStart' ;

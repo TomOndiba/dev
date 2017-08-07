@@ -106,60 +106,27 @@ begin
 
 	begin try
 		set @_Step = 'Validate Inputs';
-		set @_StepStartTime = getdate();
 
-		--! ICRT Process name and internal Process Id are required on all calls
-		if coalesce(@ProcessName, '') = '' raiserror ('ICRT Process Name input must not be null or empty',16,1)
-		if coalesce(@IcrtProcessId, 0) !> 0 raiserror ('ICRT Process Id must not be null, negative or zero',16,1)
-		
-		--! If the ICS Mapping Config Task name is populated then we are starting a new thread run
-		--! and the (BAT_MAN) Sub-Process Run Id becomes mandatory
-		--! (NB: We test thread inputs before sub-process to ensure the correct error is thrown regardless of whhich sub-process values are provided)
-		if len(@MappingConfigTaskName) > 0 and coalesce(@SubProcessRunId, 0) !> 0
-			raiserror('(BatMan) Sub-process Run Id can not be null, negative or zero when starting a new thread: "%s"', 16, 1, @MappingConfigTaskName);
+		--! ICRT Process name and ICRT Process Id are required on all calls
+		if isnull(@ProcessName, '') = '' raiserror ('ICRT Process Name input must not be null or empty',16,1)
+		if isnull(@IcrtProcessId, 0) !> 0 raiserror ('ICRT Process Id must not be null, negative or zero',16,1)
 
-		--! If the ICRT Sub-process Name is populated, then we are starting a new sub-process run
-		--! and the (BAT_MAN) Process Run Id becomes mandatory
-		if len(@SubProcessName) > 0 and coalesce(@ProcessRunId, 0) !> 0
-			raiserror('(BatMan) Process Run Id can not be null, negative or zero when starting a new sub process: "%s"', 16, 1, @SubProcessName);
-
-		if len(@ProcessName) > 0 and @IcrtProcessId > 0 and coalesce(@SubProcessName, '') = '' and coalesce(@MappingConfigTaskName, '') = '' and coalesce(@MappingName, '') = ''
+		--! (NB: We test thread inputs before sub-process to ensure the correct error is thrown regardless of which sub-process values are provided)
+		if len(@MappingConfigTaskName) > 0
 			begin
-				/*===================================================================================================================*/
-				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ProcessRunStart...' ;
-				/*===================================================================================================================*/
-				
-				exec ics.ProcessRunStart
-					@ProcessName = @ProcessName
-				  , @IcrtProcessId = @IcrtProcessId
-				  , @ProcessRunId = @ProcessRunId out
-				  , @RunType = @RunType out
-				  , @Instruction = @Instruction out
-				  , @Message = @Message out
-			end
+				--! If the ICS Mapping Config Task name is populated then we are starting a new thread run
+				--! and the (BAT_MAN) Sub-Process Run Id becomes mandatory
+				if coalesce(@SubProcessRunId, 0) !> 0
+					raiserror('(BatMan) Sub-process Run Id can not be null, negative or zero when starting a new thread: "%s"', 16, 1, @MappingConfigTaskName);
 
-		if len(@SubProcessName) > 0 and @ProcessRunId > 0  and coalesce(@MappingConfigTaskName, '') = '' and coalesce(@MappingName, '') = ''
-			begin
-				/*===================================================================================================================*/
-				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.SubProcessRunStart...' ;
-				/*===================================================================================================================*/
-				
-				exec ics.SubProcessRunStart
-					@ProcessName = @ProcessName
-				  , @SubProcessName = @SubProcessName
-				  , @ProcessRunId = @ProcessRunId
-				  , @SubProcessRunId = @SubProcessRunId out
-				  , @RunType = @RunType out
-				  , @Instruction = @Instruction out
-				  , @Message = @Message out
-			end
+				if isnull(@MappingName, '') = '' raiserror ('Mapping Name input can not be null or empty when starting a new thread: "%s"', 16, 1, @MappingConfigTaskName);
 
-		if @SubProcessRunId > 0 and len(@MappingConfigTaskName) > 0
-			begin
 				/*===================================================================================================================*/
 				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ThreadRunStart...' ;
 				/*===================================================================================================================*/
 				
+				set @_Step = 'Start Thread';
+
 				exec ics.ThreadRunStart
 					  @MappingConfigTaskName = @MappingConfigTaskName
 					, @MappingName = @MappingName
@@ -170,7 +137,47 @@ begin
 					, @Message = @Message out
 					, @StartCapturePoint = @StartCapturePoint out
 					, @EndCapturePoint = @EndCapturePoint out
+			end
+		else if len(@SubProcessName) > 0
+			begin
+				--! If the ICRT Sub-process Name is populated, then we are starting a new sub-process run
+				--! and the (BAT_MAN) Process Run Id becomes mandatory
+				if coalesce(@ProcessRunId, 0) !> 0
+					raiserror('(BatMan) Process Run Id can not be null, negative or zero when starting a new sub process: "%s"', 16, 1, @SubProcessName);
+
+				/*===================================================================================================================*/
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.SubProcessRunStart...' ;
+				/*===================================================================================================================*/
 				
+				set @_Step = 'Start Sub-process';
+
+				exec ics.SubProcessRunStart
+					@ProcessName = @ProcessName
+				  , @SubProcessName = @SubProcessName
+				  , @ProcessRunId = @ProcessRunId
+				  , @SubProcessRunId = @SubProcessRunId out
+				  , @RunType = @RunType out
+				  , @Instruction = @Instruction out
+				  , @Message = @Message out
+			end
+		else
+			begin
+				--! If the ICRT Sub-process Name and MCT name are both null/empty, then we must be starting
+				--! a new (master) process run and the (BAT_MAN) Process Run Id becomes mandatory
+
+				/*===================================================================================================================*/
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ProcessRunStart...' ;
+				/*===================================================================================================================*/
+				
+				set @_Step = 'Start Process';
+
+				exec ics.ProcessRunStart
+					@ProcessName = @ProcessName
+				  , @IcrtProcessId = @IcrtProcessId
+				  , @ProcessRunId = @ProcessRunId out
+				  , @RunType = @RunType out
+				  , @Instruction = @Instruction out
+				  , @Message = @Message out
 			end
 
 		/*===================================================================================================================*/
@@ -193,7 +200,7 @@ begin
 	end try
 	
 	begin catch
-		set @_ErrorContext = 'Failed to start run for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
+		set @_ErrorContext = 'Failed to record start of run for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
 			+ ', ICRT Sub-Process: ' + coalesce('"' + @SubProcessName + '"', 'NULL')
 			+ ' and MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
 			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')

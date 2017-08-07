@@ -104,51 +104,42 @@ begin
 
 	begin try
 		set @_Step = 'Validate Inputs';
-		set @_StepStartTime = getdate();
 
-		--! ICRT Process name and internal Process Id are required on all calls
+		--! ICRT Process name, ICRT Process Id and End State are required on all calls
 		if isnull(@ProcessName, '') = '' raiserror ('ICRT Process Name input must not be null or empty',16,1)
 		if isnull(@IcrtProcessId, 0) !> 0 raiserror ('ICRT Process Id must not be null, negative or zero',16,1)
-		
 		if isnull(@EndState, '') not in ('SUCCEEDED', 'FAILED', 'SKIPPED', 'STOPPED')
 			raiserror('End State value can only be "SUCCEEDED", "FAILED", "SKIPPED", "STOPPED"', 16, 1) ;
-
-		--! If the ICRT Sub-process Name and MCT name are both null/empty, then we must be closing
-		--! an open (master) process run and the (BAT_MAN) Process Run Id becomes mandatory
-		if isnull(@SubProcessName, '') = '' and isnull(@MappingConfigTaskName, '') = '' and isnull(@ProcessRunId, 0) !> 0
-			raiserror('(BatMan) Process Run Id can not be null, negative or zero when ending an open process: "%s"', 16, 1, @ProcessName);
-
-		--! If the ICRT Sub-process Name is populated and the MCT name is null/empty, then we must be closing
-		--! an open sub-process run and the (BAT_MAN) Sub-rocess Run Id becomes mandatory
-		if isnull(@MappingConfigTaskName, '') = '' and len(@SubProcessName) > 0 and isnull(@SubProcessRunId, 0) !> 0
-			raiserror('(BatMan) Sub-process Run Id can not be null, negative or zero when ending an open sub-process: "%s"', 16, 1, @SubProcessName);
-
-		--! If the ICS Mapping Config Task name is populated then we are ending an open thread run (BAT_MAN) Thread Run Id becomes mandatory
-		if len(@MappingConfigTaskName) > 0 and isnull(@ThreadRunId, 0) !> 0
-			raiserror('(BatMan) Thread Run Id can not be null, negative or zero when ending an open thread for MCT: "%s"', 16, 1, @MappingConfigTaskName);
-
-		--! Similarly, if we are closing a thread, the source and target row counts are also mandatory (although can be zero)
-		if len(@MappingConfigTaskName) > 0 and not (isnull(@SuccessSourceRows, -1) >= 0)
-			raiserror('Source Success row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @SuccessSourceRows);
-
-		if len(@MappingConfigTaskName) > 0 and not (isnull(@FailedSourceRows, -1) >= 0)
-			raiserror('Failed Source row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @FailedSourceRows);
-
-		if len(@MappingConfigTaskName) > 0 and not (isnull(@SuccessTargetRows, -1) >= 0)
-			raiserror('Target Success row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @SuccessTargetRows);
-
-		if len(@MappingConfigTaskName) > 0 and not (isnull(@FailedTargetRows, -1) >= 0)
-			raiserror('Failed Target row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @FailedTargetRows);
 
 		--! Define default values for any remaining inputs
 		set @EndMessage = coalesce(@EndMessage, '')
 
-		if @ThreadRunId > 0
+		--! (NB: We test thread inputs before sub-process to ensure the correct error is thrown regardless of which sub-process values are provided)
+		if len(@MappingConfigTaskName) > 0
 			begin
+				--! If the ICS Mapping Config Task name is populated then we are ending an open thread run (BAT_MAN) Thread Run Id becomes mandatory
+				if isnull(@ThreadRunId, 0) !> 0
+					raiserror('(BatMan) Thread Run Id can not be null, negative or zero when ending an open thread for MCT: "%s"', 16, 1, @MappingConfigTaskName);
+
+				--! Similarly, if we are closing a thread, the source and target row counts are also mandatory (although can be zero)
+				if len(@MappingConfigTaskName) > 0 and not (isnull(@SuccessSourceRows, -1) >= 0)
+					raiserror('Source Success row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @SuccessSourceRows);
+
+				if len(@MappingConfigTaskName) > 0 and not (isnull(@FailedSourceRows, -1) >= 0)
+					raiserror('Failed Source row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @FailedSourceRows);
+
+				if len(@MappingConfigTaskName) > 0 and not (isnull(@SuccessTargetRows, -1) >= 0)
+					raiserror('Target Success row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @SuccessTargetRows);
+
+				if len(@MappingConfigTaskName) > 0 and not (isnull(@FailedTargetRows, -1) >= 0)
+					raiserror('Failed Target row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @FailedTargetRows);
+
 				/*===================================================================================================================*/
 				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.SubProcessRunEnd...' ;
 				/*===================================================================================================================*/
 				
+				set @_Step = 'End Thread';
+
 				exec ics.ThreadRunEnd
 					  @MappingConfigTaskName = @MappingConfigTaskName
 					, @MappingName = @MappingName
@@ -160,12 +151,20 @@ begin
 					, @SuccessTargetRows = @SuccessTargetRows
 					, @FailedTargetRows = @FailedTargetRows
 			end
-		else if @SubProcessRunId > 0
+		else if len(@SubProcessName) > 0
 			begin
+				--! If the ICRT Sub-process Name is populated and the MCT name is null/empty, then we must be
+				--! closing an open sub-process run and the (BAT_MAN) Sub-rocess Run Id becomes mandatory
+
+				if isnull(@SubProcessRunId, 0) !> 0
+					raiserror('(BatMan) Sub-process Run Id can not be null, negative or zero when ending an open sub-process: "%s"', 16, 1, @SubProcessName);
+
 				/*===================================================================================================================*/
 				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.SubProcessRunEnd...' ;
 				/*===================================================================================================================*/
 				
+				set @_Step = 'End Sub-process';
+
 				exec ics.SubProcessRunEnd
 					  @ProcessName = @ProcessName
 					, @SubProcessName = @SubProcessName
@@ -173,12 +172,19 @@ begin
 					, @EndState = @EndState
 					, @EndMessage = @EndMessage
 			end
-		else if @ProcessRunId > 0
+		else
 			begin
+				--! If the ICRT Sub-process Name and MCT name are both null/empty, then we must be closing
+				--! an open (master) process run and the (BAT_MAN) Process Run Id becomes mandatory
+				if isnull(@ProcessRunId, 0) !> 0
+					raiserror('(BatMan) Process Run Id can not be null, negative or zero when ending an open process: "%s"', 16, 1, @ProcessName);
+
 				/*===================================================================================================================*/
 				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ProcessRunEnd...' ;
 				/*===================================================================================================================*/
 				
+				set @_Step = 'End Process';
+
 				exec ics.ProcessRunEnd
 					  @ProcessName = @ProcessName
 					, @ProcessRunId = @ProcessRunId
@@ -186,14 +192,16 @@ begin
 					, @EndMessage = @EndMessage
 			end
 
-		set @_Message = 'Successfully recorded end of run for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
-			+ ', ICRT Sub-Process: ' + coalesce('"' + @SubProcessName + '"', 'NULL')
-			+ ' and MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
-			+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
+		/*===================================================================================================================*/
+		/**/	set @_Message = 'Successfully recorded end of run for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
+		/**/		+ ', ICRT Sub-Process: ' + coalesce('"' + @SubProcessName + '"', 'NULL')
+		/**/		+ ' and MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
+		/**/		+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
+		/*===================================================================================================================*/
 	end try
 	
 	begin catch
-		set @_ErrorContext = 'Failed to start run for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
+		set @_ErrorContext = 'Failed to record end of run for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
 			+ ', ICRT Sub-Process: ' + coalesce('"' + @SubProcessName + '"', 'NULL')
 			+ ' and MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
 			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')

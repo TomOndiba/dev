@@ -8,7 +8,7 @@ begin
 
 	declare @_ProcessName varchar(100) = 'A', @_IcrtProcessId int = 99 ;
 	declare @_SubProcessName varchar(100) = 'B', @_ProcessRunId int = 11 ;
-	declare @_MappingConfigTaskName varchar(100) = 'C', @_MappingName varchar(100) = '', @_SubProcessRunId int = 22 ;
+	declare @_MappingConfigTaskName varchar(100) = 'C', @_MappingName varchar(100) = 'D', @_SubProcessRunId int = 22 ;
 
 	select @_MappingConfigTaskName as [MappingConfigTaskName], @_MappingName as [MappingName], @_SubProcessRunId as [SubProcessRunId] into #expected ;
 

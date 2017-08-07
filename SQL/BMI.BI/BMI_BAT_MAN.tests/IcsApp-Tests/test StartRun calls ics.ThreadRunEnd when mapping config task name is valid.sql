@@ -1,4 +1,4 @@
-﻿create   procedure [IcsApp-Tests].[test StopRun throws error on @SuccessSourceRows negative when ending a thread]
+﻿create   procedure [IcsApp-Tests].[test StartRun calls ics.ThreadRunEnd when mapping config task name is valid]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -6,17 +6,22 @@ begin
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.SubProcessRunEnd' ;
 	exec tSQLt.SpyProcedure @ProcedureName = N'ics.ThreadRunEnd' ;
 
-	exec tSQLt.ExpectException @ExpectedMessagePattern = '%Source Success row count can not be null or negative when closing an open thread for MCT: "C" <<-1>>%'
-
 	exec IcsApp.StopRun
 		  @ProcessName = 'A'
 		, @IcrtProcessId = 99
 		, @EndState = 'SUCCEEDED'
+		, @EndMessage = ''
+		, @ProcessRunId = 11
+		, @SubProcessName = 'B'
+		, @SubProcessRunId = 22
 		, @MappingConfigTaskName = 'C'
 		, @MappingName = 'D'
 		, @ThreadRunId = 33
-		, @SuccessSourceRows = -1
+		, @SuccessSourceRows = 10
 		, @FailedSourceRows = 1
 		, @SuccessTargetRows = 8
 		, @FailedTargetRows = 2
+	
+	exec tSQLt.AssertEmptyTable 'ics.ProcessRunEnd_SpyProcedureLog' ;
+	exec tSQLt.AssertEmptyTable 'ics.SubProcessRunEnd_SpyProcedureLog' ;
 end;

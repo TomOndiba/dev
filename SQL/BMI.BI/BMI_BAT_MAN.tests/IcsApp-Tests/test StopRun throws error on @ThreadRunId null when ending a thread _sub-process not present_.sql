@@ -12,10 +12,6 @@ begin
 		  @ProcessName = 'A'
 		, @IcrtProcessId = 99
 		, @EndState = 'SUCCEEDED'
-		, @EndMessage = ''
-		, @ProcessRunId = null
-		, @SubProcessName = 'B'
-		, @SubProcessRunId = null
 		, @MappingConfigTaskName = 'C'
 		, @MappingName = 'D'
 		, @ThreadRunId = null

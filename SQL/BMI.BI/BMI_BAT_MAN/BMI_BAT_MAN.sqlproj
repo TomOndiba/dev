@@ -419,6 +419,13 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.0\012_Add_UniqueFilteredIndexToBatchStep.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\013_Remove_dbo_RunEnd_procedures.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\SubProcessCheckThreads.sql" />
+    <None Include="Migrations\1.0.0\014_Drop_dbo_SubProcessCheckThreads.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

@@ -48,14 +48,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 		set nocount on;
 
-
-
-
 		if object_id(N'TableStructure') is not null drop table TableStructure ;
 
 		if object_id(N'PkeyTable') is not null drop table PkeyTable ;
-
-
 
 		--declare
 		--	@Runtype		  varchar(10)  = 'full'
@@ -65,11 +60,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--  , @TargetSchemaName varchar(200) = 'psa'
 		--  , @LoadDateTime	  datetime	   = null 
 	
-
-
-
-
-
 		declare @STableName nvarchar(200) = @SourceSchemaName + '.' + @SourceTableName ;
 		declare @TTableName nvarchar(200) = @TargetSchemaName + '.' + @TargetTableName ;
 		declare @sql nvarchar(max) = '' ;
@@ -114,14 +104,13 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 		set @maxid  = (select max(id) from PkeyTable) ;
 		
-
-
+	
 			while (@i <=@maxid )
 			begin
 
 			set @pkcolumnsTemp =(select PK from dbo.PkeyTable where id=@i );
 	
-			select @pkcolumnsTemp
+			
 			if (@maxid>1)
 
 			begin
@@ -132,18 +121,13 @@ Version	ChangeDate		Author	BugRef	Narrative
 		end
 
 		set @pkcolumns= substring(@pkcolumns,5,len(@pkcolumns))
-		select @pkcolumns, @pkcolumnsTemp
-
-	
-				
-
-				
-
+			
+        set @i=1;
 		set @maxid  = (select max(id) from TableStructure) ;
 		while (@i <= @maxid)
 			begin
 
-				set @columnname =(select	ColumnName from TableStructure where id = @i) ;
+				set @columnname =(select ColumnName from TableStructure where id = @i) ;
 								
 				if (@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'))
 					set @insertcolumnstring = @insertcolumnstring + ',' + @columnname ;
@@ -163,7 +147,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		set @updatecolumnstring = substring(@updatecolumnstring, 4, len(@updatecolumnstring)) ;
 		set @updatecolumnstring = '( ' + @updatecolumnstring + ' )' ;
 
-
+		
 		if @Runtype = 'Delta'
 			begin
 
@@ -172,7 +156,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 						   + @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + 'when matched and ' + @updatecolumnstring
 						   + ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
 						   + ', t.EtlUpDatedBy=s.EtlCreatedBy' + ';' ;
-
 			end ;
 
 
@@ -185,13 +168,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 						   + ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
 						   + ', t.EtlUpDatedBy=s.EtlCreatedBy' + ' when not matched by source then update set  t.EtlDeletedOn=' + '''' + @_LoadDateTime + ''''
 						   + ', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted=1' + ';' ;
-
 			end ;
 
-
 		select	@sql ;
-
-
 
 		execute sp_executesql @sql ;
 

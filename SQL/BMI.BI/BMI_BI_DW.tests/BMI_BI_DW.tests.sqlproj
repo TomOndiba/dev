@@ -110,6 +110,8 @@
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on insert.sql" />
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on delete.sql" />
     <Build Include="tsa-to-psa-tests\tsa-to-psa-tests.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on update for composite key.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on insert for composite key.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

@@ -6,9 +6,11 @@ CREATE TABLE [dbo].[psaTotsaLoadControlTable]
 [SourceDB] [nvarchar] (128) NULL,
 [SourceSchema] [sys].[sysname] NULL,
 [SourceTable] [sys].[sysname] NOT NULL,
+[SourcePK] [varchar] (max) NULL,
 [TargetDB] [nvarchar] (128) NULL,
 [TargetSchema] [sys].[sysname] NULL,
 [TargetTable] [sys].[sysname] NULL,
+[TargetPK] [varchar] (max) NULL,
 [LoadMode] [varchar] (10) NOT NULL,
 [DataSourceKey] [int] NOT NULL
 )

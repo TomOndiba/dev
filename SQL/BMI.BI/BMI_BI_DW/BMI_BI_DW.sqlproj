@@ -69,6 +69,11 @@ Table=[tsa].[Customer];
 Table=[psa].[Customer];
 Table=[dbo].[TableStructure];
 Table=[dbo].[PkeyTable];
+Table=[tsa].[ICS_LAND_test];
+Table=[psa].[ICS_STG_test];
+Table=[tsa].[Customer1];
+Table=[psa].[Customer1];
+Table=[dbo].[PKTable];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -848,6 +853,9 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\privy\Stored Procedures\BuildAndRunMerge.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\005_20170808-1556_ukrna.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

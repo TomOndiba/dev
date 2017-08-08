@@ -45,13 +45,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 **********************************************************************************************************************/
 		--</CommentHeader>
-
-		set nocount on;
-
-		if object_id(N'TableStructure') is not null drop table TableStructure ;
-
-		if object_id(N'PkeyTable') is not null drop table PkeyTable ;
-
 		--declare
 		--	@Runtype		  varchar(10)  = 'full'
 		--  , @SourceTableName  varchar(200) = 'customer'
@@ -59,12 +52,30 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--  , @TargetTableName  varchar(200) = 'customer'
 		--  , @TargetSchemaName varchar(200) = 'psa'
 		--  , @LoadDateTime	  datetime	   = null 
-	
+		set nocount on;
+
+		begin try
+
+
+		if object_id(N'TableStructure') is not null drop table TableStructure ;
+
+		if object_id(N'PkeyTable') is not null drop table PkeyTable ;
+			
 		declare @STableName nvarchar(200) = @SourceSchemaName + '.' + @SourceTableName ;
 		declare @TTableName nvarchar(200) = @TargetSchemaName + '.' + @TargetTableName ;
 		declare @sql nvarchar(max) = '' ;
 		declare @_LoadDateTime varchar(50) = isnull(@LoadDateTime, getdate()) ;
 	    declare @maxid int=null;
+		declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid)) ;
+		declare @_Error int = 0 ;
+		declare @_ReturnValue int ;
+		declare @_Message nvarchar(512) ;
+		declare @_ErrorContext nvarchar(512) ;
+		declare @_Step varchar(255) ;
+
+		set @_Step = 'Prepare data for merge dynamic statement' ;
+
+		
 		select
 			COLUMN_NAME ColumnName, DATA_TYPE ColumnDataType 
 		into
@@ -102,27 +113,26 @@ Version	ChangeDate		Author	BugRef	Narrative
 						
 		alter table PkeyTable add id int identity(1, 1) ;
 
-
 		set @maxid  = (select max(id) from PkeyTable) ;
 		
 	
-			while (@i <=@maxid )
+		while (@i <=@maxid )
 			begin
 
-			set @pkcolumnsTemp =(select PK from dbo.PkeyTable where id=@i );
-	
+				set @pkcolumnsTemp =(select PK from dbo.PkeyTable where id=@i );
+				
+				if (@maxid>1)
+
+					begin
+						set @pkcolumns= ' and '+'s.'+@pkcolumnsTemp + '=t.'+@pkcolumnsTemp + @pkcolumns
+					end
 			
-			if (@maxid>1)
+				if (@maxid=1)
+					begin
+						set @pkcolumns= ' and '+'s.'+@pkcolumnsTemp + '=t.'+@pkcolumnsTemp
+					end
 
-			begin
-			set @pkcolumns= ' and '+'s.'+@pkcolumnsTemp + '=t.'+@pkcolumnsTemp + @pkcolumns
-			end
-			if (@maxid=1)
-
-			begin
-			set @pkcolumns= ' and '+'s.'+@pkcolumnsTemp + '=t.'+@pkcolumnsTemp
-			end
-			set @i=@i+1;
+				set @i=@i+1;
 		end
 
 		set @pkcolumns= substring(@pkcolumns,5,len(@pkcolumns))
@@ -141,35 +151,27 @@ Version	ChangeDate		Author	BugRef	Narrative
 				if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted') )
 					set @updatesetcolumnstring = @updatesetcolumnstring + ' , ' + 't.' + @columnname + '=' + 's.' + @columnname ;
 
-
 				if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	) )
-				begin 
+					begin 
 
-				if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
+						if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
 							set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ', '''')<>' + 'isnull(t.' + @columnname +','''')';
 				
-				if (@columndatatype in ('int','float','real','bigint','tinyint','decimal','smallint','numeric','bit','money','smallmoney'))
-			set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ',1) <>' + 'isnull(t.' + @columnname+',1)' ;
+						if (@columndatatype in ('int','float','real','bigint','tinyint','decimal','smallint','numeric','bit','money','smallmoney'))
+							set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ',1) <>' + 'isnull(t.' + @columnname+',1)' ;
 
-
-				--if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
-				--			set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ', ''00:00:00.0000000'')<>' + 'isnull(t.' + @columnname +',''00:00:00.0000000'')';
-						
-
-			
-					end 
+						end 
 					
 				set @i = @i + 1 ;
 			end ;
-
-
 
 		set @insertcolumnstring = substring(@insertcolumnstring, 2, len(@insertcolumnstring)) ;
 		set @updatesetcolumnstring = substring(@updatesetcolumnstring, 3, len(@updatesetcolumnstring)) ;
 		set @updatecolumnstring = substring(@updatecolumnstring, 4, len(@updatecolumnstring)) ;
 		set @updatecolumnstring = '( ' + @updatecolumnstring + ' )' ;
 
-		
+		set @_Step = 'Merge statement for Delta ' ;
+									
 		if @Runtype = 'Delta'
 			begin
 
@@ -179,8 +181,10 @@ Version	ChangeDate		Author	BugRef	Narrative
 						   + ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
 						   + ', t.EtlUpDatedBy=s.EtlCreatedBy' + ';' ;
 			end ;
-
-
+			
+			
+		set @_Step = 'Merge statement for Full ' ;
+		
 		if @Runtype = 'Full' ---soft delete
 			begin
 
@@ -194,8 +198,34 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 		select	@sql ;
 
+		set @_Step = 'Execute Merge statement ' ;
 		execute sp_executesql @sql ;
 
+		end try
+		begin catch
+
+			set @_ErrorContext = 'Merge statement preparation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
+
+
+			exec log4.ExceptionHandler
+				@ErrorContext = @_ErrorContext
+			  , @ErrorProcedure = @_FunctionName
+			  , @ErrorNumber = @_Error out
+			  , @ReturnMessage = @_Message out ;
+		end catch ;
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////
+		EndProc:
+--/////////////////////////////////////////////////////////////////////////////////////////////////
+
+		--! Finally, throw an exception that will be detected by the caller
+		if @_Error > 0 raiserror(@_Message, 16, 99) ;
+
+		set nocount off ;
+
+		--! Return the value of @@ERROR (which will be zero on success)
+		return (@_Error) ;
+		
 	end ;
 
 GO

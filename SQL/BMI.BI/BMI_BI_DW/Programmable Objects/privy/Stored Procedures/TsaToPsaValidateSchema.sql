@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[privy].[TsaToPsaValidateSchema]') IS NOT NULL
+IF OBJECT_ID('[privy].[TsaToPsaValidateSchema]') IS NOT NULL
 	DROP PROCEDURE [privy].[TsaToPsaValidateSchema];
 
 GO
@@ -7,7 +7,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
-CREATE   procedure [privy].[TsaToPsaValidateSchema]
+CREATE   procedure [privy].[TsaToPsaValidateSchema] ---1
 (
 	@DataSourceKey bigint
 )
@@ -136,7 +136,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								dbo.psaTotsaLoadControlTable a
 						)
 			)
-				raiserror('missing colum(s) error', 16, 1) ;
+				raiserror('missing colum(s) error psa', 16, 1) ;
 			--!
 			--!
 
@@ -185,7 +185,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								dbo.psaTotsaLoadControlTable a
 						)
 			)
-				raiserror('mis-matched colum(s) dataype error', 16, 1) ;
+				raiserror('mis-matched colum(s) dataype error psa', 16, 1) ;
 
 /********************************************************Missing length in psa**************************************************************/
 			set @_Step = 'check for tsa mis-matched column length from psa' ;
@@ -231,7 +231,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								dbo.psaTotsaLoadControlTable a
 						)
 			)
-				raiserror('mis-matched colum(s) length error', 16, 1) ;
+				raiserror('mis-matched colum(s) length error from psa', 16, 1) ;
 
 /********************************************************Missing Nullable in Psa**************************************************************/
 			set @_Step = 'check for tsa mis-matched null column from psa' ;
@@ -279,7 +279,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 						)
 					and IS_NULLABLE = 'YES'
 			)
-				raiserror('mis-matched colum(s) length error', 16, 1) ;
+				raiserror('mis-matched colum(s) length error from psa', 16, 1) ;
 
 /********************************************************Missing Nullable in tsa**************************************************************/
 			set @_Step = 'check for tsa mis-matched null column from tsa' ;
@@ -327,15 +327,98 @@ Version	ChangeDate		Author	BugRef	Narrative
 						)
 					and IS_NULLABLE = 'NO'
 			)
-				raiserror('mis-matched colum(s) length error', 16, 1) ;
+				raiserror('mis-matched colum(s) length error from tsa', 16, 1) ;
+
+
+
+/***********************************************Mis-matched pks from psa table ****************************************************************/
+				set @_Step = 'Mis-matched pk from the psa schema' ;
+				if exists
+				(
+					select
+						'Mis-matched pk from the psa schema'   Message
+					  , col_name(ic.object_id, ic.column_id)   PK
+					  , replace(t.SourceTable, 'ICS_LAND', '') TableName
+					from
+						dbo.psaTotsaLoadControlTable t
+					inner join sys.indexes			 as i
+						on i.object_id = object_id(t.SourceSchema + '.' + t.SourceTable)
+					inner join sys.index_columns	 as ic
+						on i.object_id = ic.object_id
+							and i.index_id = ic.index_id
+					where
+						1 = 1
+						and i.is_primary_key = 1
+					except
+					select
+						'Mis-matched pk from the psa schema'  Message
+					  , col_name(ic.object_id, ic.column_id)  PK
+					  , replace(t.TargetTable, 'ICS_STG', '') TableName
+					from
+						dbo.psaTotsaLoadControlTable t
+					inner join sys.indexes			 as i
+						on i.object_id = object_id(t.TargetSchema + '.' + t.TargetTable)
+					inner join sys.index_columns	 as ic
+						on i.object_id = ic.object_id
+							and i.index_id = ic.index_id
+					where
+						1 = 1
+						and i.is_primary_key = 1
+				)
+					raiserror('Mis-matched pk from the psa schema', 16, 1) ;
+
+
+/***********************************************Mis-matched pks from tsa table ****************************************************************/
+				set @_Step = 'Mis-matched pk from the tsa schema' ;
+				if exists
+				(
+						select
+						'Mis-matched pk from the tsa schema'  Message
+					  , col_name(ic.object_id, ic.column_id)  PK
+					  , replace(t.TargetTable, 'ICS_STG', '') TableName
+					from
+						dbo.psaTotsaLoadControlTable t
+					inner join sys.indexes			 as i
+						on i.object_id = object_id(t.TargetSchema + '.' + t.TargetTable)
+					inner join sys.index_columns	 as ic
+						on i.object_id = ic.object_id
+							and i.index_id = ic.index_id
+					where
+						1 = 1
+						and i.is_primary_key = 1
+						
+						except	
+
+						select
+						'Mis-matched pk from the tsa schema'   Message
+					  , col_name(ic.object_id, ic.column_id)   PK
+					  , replace(t.SourceTable, 'ICS_LAND', '') TableName
+					from
+						dbo.psaTotsaLoadControlTable t
+					inner join sys.indexes			 as i
+						on i.object_id = object_id(t.SourceSchema + '.' + t.SourceTable)
+					inner join sys.index_columns	 as ic
+						on i.object_id = ic.object_id
+							and i.index_id = ic.index_id
+					where
+						1 = 1
+						and i.is_primary_key = 1
+				
+				
+				)
+					raiserror('Mis-matched pk from the psa schema', 16, 1) ;
+
+
+
 
 
 		end try
 		begin catch
+		--select 'im here ', @_Step
 
 			set @_ErrorContext = 'schema validation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
 
-
+			--select @_ErrorContext
 			exec log4.ExceptionHandler
 				@ErrorContext = @_ErrorContext
 			  , @ErrorProcedure = @_FunctionName

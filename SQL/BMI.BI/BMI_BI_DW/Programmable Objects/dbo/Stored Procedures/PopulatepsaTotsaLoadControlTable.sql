@@ -11,7 +11,7 @@ CREATE procedure [dbo].[PopulatepsaTotsaLoadControlTable]
 as
 
 	--<CommentHeader>
-	/**********************************************************************************************************************
+/**********************************************************************************************************************
 
 Properties
 ==========
@@ -144,9 +144,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 
 			alter table dbo.PKTable add id int identity(1, 1) ;
-
-
-
+			
 			declare
 				@max int		  = (
 										select		max(id) from PKTable
@@ -168,9 +166,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 						select	PK from dbo.PKTable where	id = @i
 					) ;
 
-
-
-
 					update
 						t
 					set
@@ -190,15 +185,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 					where
 						t.SourceSchema + '.' + t.SourceTable = @tn ;
 
-
-
 					set @i = @i + 1 ;
 
-
 				end ;
-
-
-
 
 			update
 				t

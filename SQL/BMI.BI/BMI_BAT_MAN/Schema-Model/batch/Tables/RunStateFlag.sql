@@ -10,3 +10,9 @@ ALTER TABLE [batch].[RunStateFlag] ADD CONSTRAINT [PK_RunStateFlag] PRIMARY KEY 
 GO
 ALTER TABLE [batch].[RunStateFlag] ADD CONSTRAINT [AK_RunStateFlag_Name] UNIQUE NONCLUSTERED  ([FlagName])
 GO
+EXEC sp_addextendedproperty N'MS_Description', N'Bit-wise run state indicator used when evaluating run time precendence for SSIS Steps/Packages e.g. 1 = Started; 2 = In Progress; 4 = Succeeded, etc.', 'SCHEMA', N'batch', 'TABLE', N'RunStateFlag', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Database-specific unique flag for a specific run state flag/bit', 'SCHEMA', N'batch', 'TABLE', N'RunStateFlag', 'COLUMN', N'FlagBit'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Unique, user-freindly name for a specific run state flag/bit', 'SCHEMA', N'batch', 'TABLE', N'RunStateFlag', 'COLUMN', N'FlagName'
+GO

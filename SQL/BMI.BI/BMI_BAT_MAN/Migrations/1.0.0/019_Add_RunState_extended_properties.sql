@@ -1,19 +1,13 @@
-CREATE TABLE [batch].[RunState]
-(
-[RunStateId] [int] NOT NULL,
-[RunStateName] [varchar] (50) NOT NULL,
-[IsEtlClosingState] [char] (1) NOT NULL CONSTRAINT [DF_RunState_IsEtlClosingState] DEFAULT ('N'),
-[Narrative] [varchar] (500) NOT NULL,
-[FlagBit] [int] NOT NULL CONSTRAINT [DF_RunState_FlagBit] DEFAULT ((0))
-)
+﻿-- <Migration ID="029902c1-87d1-4aec-96f7-3eda561d2123" />
 GO
-ALTER TABLE [batch].[RunState] ADD CONSTRAINT [CK_RunState_IsEtlClosingState] CHECK (([IsEtlClosingState]='Y' OR [IsEtlClosingState]='N'))
+
+PRINT N'Creating extended properties'
 GO
-ALTER TABLE [batch].[RunState] ADD CONSTRAINT [PK_RunState] PRIMARY KEY CLUSTERED  ([RunStateId])
+EXEC sp_addextendedproperty N'MS_Description', N'Bit-wise run state indicator used when evaluating run time precendence for SSIS Steps/Packages e.g. 1 = Started; 2 = In Progress; 4 = Succeeded, etc.', 'SCHEMA', N'batch', 'TABLE', N'RunStateFlag', NULL, NULL
 GO
-ALTER TABLE [batch].[RunState] ADD CONSTRAINT [AK_RunState_RunStateName] UNIQUE NONCLUSTERED  ([RunStateName])
+EXEC sp_addextendedproperty N'MS_Description', N'Database-specific unique flag for a specific run state flag/bit', 'SCHEMA', N'batch', 'TABLE', N'RunStateFlag', 'COLUMN', N'FlagBit'
 GO
-ALTER TABLE [batch].[RunState] ADD CONSTRAINT [FK_batch_RunState_batch_RunStateFlag] FOREIGN KEY ([FlagBit]) REFERENCES [batch].[RunStateFlag] ([FlagBit])
+EXEC sp_addextendedproperty N'MS_Description', N'Unique, user-freindly name for a specific run state flag/bit', 'SCHEMA', N'batch', 'TABLE', N'RunStateFlag', 'COLUMN', N'FlagName'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'A generic run state for an ETL batch run e.g. Started, Landing, Cleansing, Loading, Complete etc.', 'SCHEMA', N'batch', 'TABLE', N'RunState', NULL, NULL
 GO

@@ -1,4 +1,4 @@
-﻿if object_id('[ics].[ThreadRunEnd]') is not null
+if object_id('[ics].[ThreadRunEnd]') is not null
 	drop procedure [ics].[ThreadRunEnd];
 go
 set quoted_identifier on
@@ -109,4 +109,25 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end ;
-go
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Records the end state of the indicated thread run.  ICS Note:  This call is not required if the output from the initiating call from this MCT to ThreadRunStart was “SKIP”, “STOP” or “ERROR”', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Optional, a message provided by the caller to provide any detail around the reason for success, failure or other stoppage', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@EndMessage'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, an indicator of the final run state for this thread run, choose from “SUCCEEDED” or “FAILED”', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@EndState'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The number of source rows rejected or failed by this thread', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@FailedSourceRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the number of records failed by this thread during “write to target”, represents the total number of source rows that were not processed into the target table at all.', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@FailedTargetRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICS mapping configuration task from which this call originates', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@MappingConfigTaskName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICS mapping from which this call originates', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@MappingName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The number of source rows successfully read by this thread', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@SuccessSourceRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the total number of records written to the target table by this thread, typically the total number of inserts, updates and soft-deletes on a single target table.  This is required so that table level quality gates and execution dependencies can be implemented as needed.', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@SuccessTargetRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the Id of the Thread run context that should be marked as succeeded, failed or otherwise stopped', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', 'PARAMETER', N'@ThreadRunId'
+GO

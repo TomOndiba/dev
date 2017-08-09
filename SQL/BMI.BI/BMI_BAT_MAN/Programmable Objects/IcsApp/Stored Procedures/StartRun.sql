@@ -1,11 +1,10 @@
-IF OBJECT_ID('[IcsApp].[StartRun]') IS NOT NULL
-	DROP PROCEDURE [IcsApp].[StartRun];
-
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
+if object_id('[IcsApp].[StartRun]') is not null
+	drop procedure [IcsApp].[StartRun];
+go
+set quoted_identifier on
+go
+set ansi_nulls on
+go
 create procedure [IcsApp].[StartRun]
 (
 --! ICRT master Process level inputs
@@ -36,7 +35,7 @@ as
 Properties
 ==========
 PROCEDURE NAME:		IcsApp.StartRun
-DESCRIPTION:		ICRT interface/wrapper for ics.ProcessRunStart/SubProcessRunStart/ThreadRunStart
+DESCRIPTION:		ICRT interface/wrapper for ics.ProcessRunStart/SubProcessRunStart/ThreadRunStart procedures
 ORIGIN DATE:		04-AUG-2017
 ORIGINAL AUTHOR:	Greg M. Lucas
 
@@ -236,4 +235,36 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
-GO
+
+go
+exec sp_addextendedproperty N'MS_Description', N'ICRT interface/wrapper for the ics.ProcessRunStart, SubProcessRunStart or ThreadRunStart procedures.  Validates inputs and then, depending on the supplied values calls one and only one of the above procedures.
+1) If @MappingConfigTaskName is populated, and if @SubProcessRunId & @MappingName are valid,  then ics.ThreadRunStart will be called to record the start of a new thread run instance (which equates to the execution of a Mapping Config Task in ICS)
+2) If @MappingConfigTaskName is null or empty, and if @SubProcessName is populated, and if @ProcessRunId is valid, then ics.SubProcessRunStart will be called to record the start of a new sub-process/step run (which equates to the execution of a subject area-specific ICRT sub-process)
+3) If @MappingConfigTaskName and @SubProcessName are both null or empty, and if @ProcessName is populated and @IcrtProcessId is valid, then ics.ProcessRunStart will be called to record the start of a new (master) data load process run (which equates to an execution instance of an overall ICRT process).  NB: In the MVP version of BAT_MAN this step will also include a check to ensure that there is not already a running instance of the specified process - which would result in an @Instruction of “STOP” being output)', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', null, null
+go
+exec sp_addextendedproperty N'MS_Description', N'Optional, output only for MCT/Thread runs. The point in time at source up to and including which to capture any changes, may be NULL if delta/CDC loads are not implemented for this table.  ICS Note: Source Query Predicate will be: “<= EndCapturePoint”', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@EndCapturePoint'
+go
+exec sp_addextendedproperty N'MS_Description', N'Mandatory at all times.  The Execution Instance ID of the ICRT process that initiated this batch process run', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@IcrtProcessId'
+go
+exec sp_addextendedproperty N'MS_Description', N'Output, indicates what action the caller should take in relation to this run attempt, always populated.  Will be one of the following four values: "RUN", "SKIP", "STOP" or "ERROR"', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@Instruction'
+go
+exec sp_addextendedproperty N'MS_Description', N'Mandatory if the intention is to record the start of a table-specific data movement task in ICS, otherwise optional/ignore.  The name of the mapping configuration task within ICS responsible for loading or transforming the data for one table (from which the Thread Id may be derived)', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@MappingConfigTaskName'
+go
+exec sp_addextendedproperty N'MS_Description', N'Mandatory only if recording the start of a table-specific data movement task i.e. when @MappingConfigTaskName is also populated, otherwise optional/ignore', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@MappingName'
+go
+exec sp_addextendedproperty N'MS_Description', N'A user-friendly message relating to any reason behind the Instruction output – especially if the result is anything other than “RUN”', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@Message'
+go
+exec sp_addextendedproperty N'MS_Description', N'Mandatory at all times.  The name of the ICRT/ICS process responsible for running the end-to-end data load for a source (and from which the Batch Process Id can be derived)', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@ProcessName'
+go
+exec sp_addextendedproperty N'MS_Description', N'Mandatory input if recording the start of a sub-process run i.e. when @SubProcessName is populated; the (BAT_MAN) Process Run context within which a new sub-process is to be executed.  Otherwise optional/output if recording the start of an ICRT (master) process i.e. when @SubProcessName and @MappingConfigTaskName are both null or empty.  The unique Id for the new process run context initiated by this ics.ProcessRunStart, always populated on success.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@ProcessRunId'
+go
+exec sp_addextendedproperty N'MS_Description', N'Output, indicates whether this is a “FULL” or “DELTA” load (and allows the caller to choose the appropriate code path according to expected data quantities.  Always populated.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@RunType'
+go
+exec sp_addextendedproperty N'MS_Description', N'Optional, output only for MCT/Thread runs. The point in time at source from which to capture any changes, may be NULL if delta/CDC loads are not implemented for this table.  ICS Note: Source Query Predicate will be: “ > StartCapturePoint”', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@StartCapturePoint'
+go
+exec sp_addextendedproperty N'MS_Description', N'Mandatory if the intention is to record the start of a subject area-specific sub-process/step run, otherwise optional/ignore.  The name of the ICRT sub-process responsible for running this step within the overall end-to-end data load for a source (from which the Step Id may be derived)', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@SubProcessName'
+go
+exec sp_addextendedproperty N'MS_Description', N'Mandatory only if recording the start of a table-specific data movement task i.e when @MappingConfigTaskName is populated; the (BAT_MAN) Sub-process/step run context within which a new MCT Thread is to be executed.  Otherwise optional/output if recording the start of an ICRT sub-process i.e. when @SubProcessName is populated and @MappingConfigTaskName is null or empty.  The unique Id for the new sub-process run context initiated by this procedure, always populated on success for new sub-process and thread runs.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@SubProcessRunId'
+go
+exec sp_addextendedproperty N'MS_Description', N'Optional, output only if recording the start of an ICS MCT run i.e. when @MappingConfigTaskName is populated on success.  The unique Id for the new thread run context initiated for this MCT execution context.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StartRun', 'PARAMETER', N'@ThreadRunId'
+go

@@ -21,7 +21,8 @@ as
 Properties
 ==========
 PROCEDURE NAME:		ics.ProcessRunStart
-DESCRIPTION:		POC stub procedure
+DESCRIPTION:		Checks that the requested process is runnable and if so, initiates a new process run instance
+					(adding a row to the table: batch.ProcessRun)
 ORIGIN DATE:		24-JUL-2017
 ORIGINAL AUTHOR:	Razia Nazir
 
@@ -97,4 +98,19 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end
-go
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Checks that the requested process is runnable and if so, initiates a new process run instance (adding a row to the table: batch.ProcessRun)', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunStart', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the ID of the ICRT execution instance/process that initiated this batch run', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunStart', 'PARAMETER', N'@IcrtProcessId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Output, indicates what action the caller should take in relation to this run attempt, always populated.  Will be one of the following four values: "RUN", "SKIP", "STOP" or "ERROR"', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunStart', 'PARAMETER', N'@Instruction'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'A user-friendly message relating to any reason behind the Instruction output – especially if the result is anything other than “RUN”', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunStart', 'PARAMETER', N'@Message'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICRT/ICS process responsible for running the end-to-end data load for a source (from which the Batch Process Id can be derived)', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunStart', 'PARAMETER', N'@ProcessName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The unique Id for the new process run context initiated by this procedure.', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunStart', 'PARAMETER', N'@ProcessRunId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Output, indicates whether this is a “FULL” or “DELTA” load (and allows the caller to choose the appropriate code path according to expected data quantities.  Always populated.', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunStart', 'PARAMETER', N'@RunType'
+GO

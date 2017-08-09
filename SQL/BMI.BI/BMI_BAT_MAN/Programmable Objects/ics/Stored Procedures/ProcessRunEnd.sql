@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[ics].[ProcessRunEnd]') IS NOT NULL
+IF OBJECT_ID('[ics].[ProcessRunEnd]') IS NOT NULL
 	DROP PROCEDURE [ics].[ProcessRunEnd];
 
 GO
@@ -102,4 +102,15 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end ;
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Records the end state of the indicated process run.  ICS Note:  This call is not required if the output from the initiating call from this process to ProcessRunStart was “SKIP”, “STOP” or “ERROR”', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunEnd', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Optional, a message provided by the caller to provide any detail around the reason for success, failure or other stoppage', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunEnd', 'PARAMETER', N'@EndMessage'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, an indicator of the final run state for this process run, choose from “SUCCEEDED”, “STOPPED”, “SKIPPED” or “FAILED”', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunEnd', 'PARAMETER', N'@EndState'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICS process responsible for running the end-to-end data load for a source', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunEnd', 'PARAMETER', N'@ProcessName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the Id of the process run context that should be marked as succeeded, failed or otherwise stopped', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunEnd', 'PARAMETER', N'@ProcessRunId'
 GO

@@ -122,16 +122,16 @@ begin
 					raiserror('(BatMan) Thread Run Id can not be null, negative or zero when ending an open thread for MCT: "%s"', 16, 1, @MappingConfigTaskName);
 
 				--! Similarly, if we are closing a thread, the source and target row counts are also mandatory (although can be zero)
-				if len(@MappingConfigTaskName) > 0 and not (isnull(@SuccessSourceRows, -1) >= 0)
+				if not (isnull(@SuccessSourceRows, -1) >= 0)
 					raiserror('Source Success row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @SuccessSourceRows);
 
-				if len(@MappingConfigTaskName) > 0 and not (isnull(@FailedSourceRows, -1) >= 0)
+				if not (isnull(@FailedSourceRows, -1) >= 0)
 					raiserror('Failed Source row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @FailedSourceRows);
 
-				if len(@MappingConfigTaskName) > 0 and not (isnull(@SuccessTargetRows, -1) >= 0)
+				if not (isnull(@SuccessTargetRows, -1) >= 0)
 					raiserror('Target Success row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @SuccessTargetRows);
 
-				if len(@MappingConfigTaskName) > 0 and not (isnull(@FailedTargetRows, -1) >= 0)
+				if not (isnull(@FailedTargetRows, -1) >= 0)
 					raiserror('Failed Target row count can not be null or negative when closing an open thread for MCT: "%s" <<%i>>', 16, 1, @MappingConfigTaskName, @FailedTargetRows);
 
 				/*===================================================================================================================*/
@@ -238,4 +238,38 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'ICRT interface/wrapper for the ics ProcessRunEnd, SubProcessRunEnd or ThreadRunEnd procedures.  Validates inputs and then, depending on the supplied values calls one and only one of the above procedures based on the following rules:
+1) If @MappingConfigTaskName is populated, and if @ThreadRunId & the souirce/target row count inputs are all valid,  then ics.ThreadRunEnd will be called to record the end state of the specified thread run instance (which equates to the execution of a Mapping Config Task in ICS)
+2) If @MappingConfigTaskName is null or empty, and if @SubProcessName is populated and @SubProcessRunId is valid, then ics.SubProcessRunEnd will be called to record the end state of the indicated sub-process/step run (which equates to the execution of a subject area-specific ICRT sub-process)
+3) If @MappingConfigTaskName and @SubProcessName are both null or empty, and if @ProcessName is populated and @ProcessRunId is valid, then ics.ProcessRunEnd will be called to record the end state of the indicated (master) data load process run (which equates to an execution instance of an overall ICRT process).', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Optional, a message provided by the caller to provide any detail around the reason for success, failure or other stoppage', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@EndMessage'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, an indicator of the final run state for this run, choose from “SUCCEEDED”, “STOPPED”, “SKIPPED” or “FAILED”', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@EndState'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The number of source rows rejected or failed by this thread', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@FailedSourceRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the number of records failed by this thread during “write to target”, represents the total number of source rows that were not processed into the target table at all.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@FailedTargetRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory at all times.  The Execution Instance ID of the ICRT process that initiated this batch process run', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@IcrtProcessId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory only if recording the end state of an table-specific data movement task in ICS, otherwise optional/ignore.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@MappingConfigTaskName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory only if recording the end state of a table-specific data movement task in ICS i.e. when @MappingConfigTaskName is populated, otherwise optional/ignore.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@MappingName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory at all times.  The name of the ICRT/ICS process responsible for running the end-to-end data load for a source (and from which the Batch Process Id can be derived)', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@ProcessName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory if recording the end state of an ICRT (master) process run i.e. when @MappingConfigTaskName and @SubProcessName are both null or empty.  The Id of the process run context that should be marked as succeeded, failed or otherwise stopped.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@ProcessRunId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory if recording the end state of an ICRT sub-process run i.e. when @MappingConfigTaskName is null or empty, otherwise optional/ignore', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@SubProcessName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory only if recording the end state of an ICRT sub-process run i.e. when @SubProcessName is populated and @MappingConfigTaskName is null or empty, otherwise optional/ignore.   The Id of the sub-process run context that should be marked as succeeded, failed or otherwise stopped.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@SubProcessRunId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The number of source rows successfully read by this thread', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@SuccessSourceRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the total number of records written to the target table by this thread, typically the total number of inserts, updates and soft-deletes on a single target table.  This is required so that table level quality gates and execution dependencies can be implemented as needed.', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@SuccessTargetRows'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory only if recording the end state of a table-specific data movement task in ICS i.e. when @MappingConfigTaskName is populated, otherwise optional/ignore.  The Id of the Thread run context that should be marked as succeeded, failed or otherwise stopped', 'SCHEMA', N'IcsApp', 'PROCEDURE', N'StopRun', 'PARAMETER', N'@ThreadRunId'
 GO

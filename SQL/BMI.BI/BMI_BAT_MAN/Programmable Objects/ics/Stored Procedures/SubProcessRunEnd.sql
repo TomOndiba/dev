@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[ics].[SubProcessRunEnd]') IS NOT NULL
+IF OBJECT_ID('[ics].[SubProcessRunEnd]') IS NOT NULL
 	DROP PROCEDURE [ics].[SubProcessRunEnd];
 
 GO
@@ -105,4 +105,17 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end ;
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Records the end state of the indicated sub-process run.  ICS Note:  This call is not required if the output from the initiating call from this sub-process to SubProcessRunStart was “SKIP”, “STOP” or “ERROR”', 'SCHEMA', N'ics', 'PROCEDURE', N'SubProcessRunEnd', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Optional, a message provided by the caller to provide any detail around the reason for success, failure or other stoppage', 'SCHEMA', N'ics', 'PROCEDURE', N'SubProcessRunEnd', 'PARAMETER', N'@EndMessage'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, an indicator of the final run state for this sub-process run, choose from “SUCCEEDED”, “STOPPED”, “SKIPPED” or “FAILED”', 'SCHEMA', N'ics', 'PROCEDURE', N'SubProcessRunEnd', 'PARAMETER', N'@EndState'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICS process responsible for running the end-to-end data load for a source', 'SCHEMA', N'ics', 'PROCEDURE', N'SubProcessRunEnd', 'PARAMETER', N'@ProcessName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICRT sub-process responsible for running this subject area step', 'SCHEMA', N'ics', 'PROCEDURE', N'SubProcessRunEnd', 'PARAMETER', N'@SubProcessName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the Id of the sub-process run context that should be marked as succeeded, failed or otherwise stopped', 'SCHEMA', N'ics', 'PROCEDURE', N'SubProcessRunEnd', 'PARAMETER', N'@SubProcessRunId'
 GO

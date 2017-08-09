@@ -102,4 +102,21 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end
-go
+
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Checks that the requested thread is runnable at this time and if so, initiates a new thread run instance within the context of the current sub-process run (adding a row to the table: batch.ThreadRun)', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', NULL, NULL
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Output, indicates what action the caller should take in relation to this run attempt, always populated.  Will be one of the following four values: "RUN", "SKIP", "STOP" or "ERROR"', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', 'PARAMETER', N'@Instruction'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICS mapping configuration task from which this call originates', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', 'PARAMETER', N'@MappingConfigTaskName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the name of the ICS mapping from which this call originates', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', 'PARAMETER', N'@MappingName'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'A user-friendly message relating to any reason behind the Instruction output – especially if the result is anything other than “RUN”', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', 'PARAMETER', N'@Message'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Output, indicates whether this is a “FULL” or “DELTA” load (and allows the caller to choose the appropriate code path according to expected data quantities.  Always populated.', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', 'PARAMETER', N'@RunType'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory, the sub-process run context in which this thread is to be executed', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', 'PARAMETER', N'@SubProcessRunId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The unique Id for the new thread run context initiated by this procedure, always populated', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', 'PARAMETER', N'@ThreadRunId'
+GO

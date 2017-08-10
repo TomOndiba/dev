@@ -25,7 +25,7 @@ create procedure [IcsApp].[StartRun]
 , @EndCapturePoint  datetime = null out
 --! ICRT/ICS common outputs
 , @RunType varchar(8) = null out
-, @Instruction varchar(255) = null out
+, @Instruction varchar(16) = null out
 , @Message varchar(500) = null out
 )
 as

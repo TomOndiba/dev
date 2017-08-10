@@ -12,7 +12,7 @@ create procedure [ics].[ThreadRunStart]
 , @SubProcessRunId int
 , @ThreadRunId int = null output
 , @RunType varchar(8) = null output
-, @Instruction varchar(255) = null output
+, @Instruction varchar(16) = null output
 , @Message varchar(500) = null output
 , @StartCapturePoint datetime = null output
 , @EndCapturePoint datetime = null output

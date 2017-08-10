@@ -7,9 +7,9 @@ set ansi_nulls on
 go
 create procedure [IcsApp].[SubProcessCheckThreads]
 (	
-  @SubProcessName	   varchar(200) 
-, @SubProcessRunId	   int output
-, @Outcome			   varchar(255) = null output
+  @SubProcessName	   varchar(100) 
+, @SubProcessRunId	   int
+, @Outcome			   varchar(16) = null output
 , @Message			   varchar(500) = null output 
 , @ExpectedThreadCount int =null output 
 , @ActualThreadCount   int =null output 

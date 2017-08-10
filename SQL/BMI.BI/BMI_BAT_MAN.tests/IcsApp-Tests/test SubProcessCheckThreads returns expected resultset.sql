@@ -4,7 +4,7 @@ begin
 	create table [IcsApp-Tests].expected
 	(
 	  SubProcessRunId int null
-	, Outcome varchar(255)
+	, Outcome varchar(16)
 	, [Message] varchar(500)
 	, ExpectedThreadCount int
 	, ActualThreadCount int

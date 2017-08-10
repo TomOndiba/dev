@@ -67,11 +67,14 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and TABLE_TYPE = 'BASE TABLE'
 					and TABLE_NAME in
 						(
 							select	SourceTable from dbo.psaTotsaLoadControlTable
+							where DataSourceKey=@DataSourceKey
+
 						)
 				except
 				select
@@ -84,11 +87,13 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and TABLE_TYPE = 'BASE TABLE'
 					and TABLE_NAME in
 						(
 							select	TargetTable from dbo.psaTotsaLoadControlTable
+							where DataSourceKey=@DataSourceKey
 						)
 			)
 				raiserror('missing table(s) error', 16, 1) ;
@@ -110,10 +115,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_LAND', '') in
 						(
 							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							where DataSourceKey=@DataSourceKey
 						)
 				except
 				select
@@ -127,6 +134,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_STG', '') in
 						(
@@ -134,6 +142,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								replace(a.SourceTable, 'ICS_LAND', '')
 							from
 								dbo.psaTotsaLoadControlTable a
+							where DataSourceKey=@DataSourceKey
 						)
 			)
 				raiserror('missing colum(s) error psa', 16, 1) ;
@@ -157,10 +166,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_LAND', '') in
 						(
 							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							where DataSourceKey=@DataSourceKey
 						)
 				except
 				select
@@ -175,6 +186,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					--and TABLE_TYPE='BASE TABLE'
 					and replace(TABLE_NAME, 'ICS_STG', '') in
@@ -183,6 +195,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								replace(a.SourceTable, 'ICS_LAND', '')
 							from
 								dbo.psaTotsaLoadControlTable a
+							where DataSourceKey=@DataSourceKey
 						)
 			)
 				raiserror('mis-matched colum(s) dataype error psa', 16, 1) ;
@@ -204,10 +217,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_LAND', '') in
 						(
 							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							where DataSourceKey=@DataSourceKey
 						)
 				except
 				select
@@ -222,6 +237,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_STG', '') in
 						(
@@ -229,6 +245,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								replace(a.SourceTable, 'ICS_LAND', '')
 							from
 								dbo.psaTotsaLoadControlTable a
+							where DataSourceKey=@DataSourceKey
 						)
 			)
 				raiserror('mis-matched colum(s) length error from psa', 16, 1) ;
@@ -250,10 +267,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_LAND', '') in
 						(
 							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'YES'
 				except
@@ -269,6 +288,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_STG', '') in
 						(
@@ -276,6 +296,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								replace(a.SourceTable, 'ICS_LAND', '')
 							from
 								dbo.psaTotsaLoadControlTable a
+							where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'YES'
 			)
@@ -298,10 +319,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_LAND', '') in
 						(
 							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'NO'
 				except
@@ -317,6 +340,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ICS_STG', '') in
 						(
@@ -324,6 +348,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 								replace(a.SourceTable, 'ICS_LAND', '')
 							from
 								dbo.psaTotsaLoadControlTable a
+
+							where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'NO'
 			)
@@ -349,6 +375,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					where
 						1 = 1
 						and i.is_primary_key = 1
+						and  DataSourceKey=@DataSourceKey
 					except
 					select
 						'Mis-matched pk from the psa schema'  Message
@@ -364,6 +391,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					where
 						1 = 1
 						and i.is_primary_key = 1
+						and  DataSourceKey=@DataSourceKey
 				)
 					raiserror('Mis-matched pk from the psa schema', 16, 1) ;
 
@@ -386,6 +414,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					where
 						1 = 1
 						and i.is_primary_key = 1
+						and DataSourceKey=@DataSourceKey
 						
 						except	
 
@@ -403,6 +432,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					where
 						1 = 1
 						and i.is_primary_key = 1
+						and DataSourceKey=@DataSourceKey
 				
 				
 				)

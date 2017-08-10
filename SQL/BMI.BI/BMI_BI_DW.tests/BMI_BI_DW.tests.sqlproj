@@ -66,6 +66,7 @@
     <Folder Include="sqlcop\" />
     <Folder Include="tsa-to-psa-tests\" />
     <Folder Include="StagingSchemaTests\" />
+    <Folder Include="IcsApp-Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Permissions.sql" />
@@ -119,10 +120,16 @@
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on insert for single key.sql" />
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on delete for single key.sql" />
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on delete for composite key.sql" />
-    <Build Include="StagingSchemaTests\test source columns match target.sql" />
     <Build Include="StagingSchemaTests.sql" />
     <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on null mis-matched primarykeys from tsa.sql" />
     <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on null mis-matched primarykeys from psa.sql" />
+    <Build Include="StagingSchemaTests\test source tables on tsa schema match target tables on psa schema.sql" />
+    <Build Include="StagingSchemaTests\test source columns match target columns.sql" />
+    <Build Include="StagingSchemaTests\test correct etl columns on tsa schema.sql" />
+    <Build Include="StagingSchemaTests\test correct etl columns on psa schema.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey zero.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey null.sql" />
+    <Build Include="IcsApp-Tests.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

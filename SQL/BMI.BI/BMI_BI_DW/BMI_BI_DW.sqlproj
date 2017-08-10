@@ -318,8 +318,6 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <Folder Include="Programmable Objects\log4Utils\Stored Procedures\" />
     <Folder Include="Programmable Objects\pbi\" />
     <Folder Include="Programmable Objects\pbi\Views\" />
-    <Folder Include="Programmable Objects\utils\" />
-    <Folder Include="Programmable Objects\utils\Stored Procedures\" />
     <Folder Include="Migrations\1.0.0\" />
     <Folder Include="Static Data" />
     <Folder Include="Schema-Model\psa\" />
@@ -332,6 +330,10 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <Folder Include="Programmable Objects\dbo\Stored Procedures\" />
     <Folder Include="Programmable Objects\privy\" />
     <Folder Include="Programmable Objects\privy\Stored Procedures\" />
+    <Folder Include="Schema-Model\utils" />
+    <Folder Include="Schema-Model\utils\Stored Procedures" />
+    <Folder Include="Programmable Objects\IcsApp\" />
+    <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -464,7 +466,6 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <None Include="Programmable Objects\pbi\Views\factOrderBacklog.sql" />
     <None Include="Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql" />
     <None Include="Programmable Objects\pbi\Views\factSaleForecastTotal.sql" />
-    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
     <None Include="Migrations\1.0.0\001_InitialProductionRelease_20170705.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -856,6 +857,16 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.3\005_Add_Columns_To_psaTotsaLoadControlTable.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\utils\Stored Procedures\LoadCalendarDimension.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Security\Schemas\IcsApp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql" />
+    <None Include="Migrations\1.0.3\006_20170810-1647_ukrna.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

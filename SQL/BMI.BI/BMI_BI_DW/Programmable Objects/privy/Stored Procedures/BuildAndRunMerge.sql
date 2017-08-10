@@ -158,7 +158,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 							set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ', '''')<>' + 'isnull(t.' + @columnname +','''')';
 				
 						if (@columndatatype in ('int','float','real','bigint','tinyint','decimal','smallint','numeric','bit','money','smallmoney'))
-							set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ',1) <>' + 'isnull(t.' + @columnname+',1)' ;
+							set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ',-999) <>' + 'isnull(t.' + @columnname+',-999)' ;
 
 						end 
 					

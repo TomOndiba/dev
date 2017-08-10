@@ -1,17 +1,17 @@
-﻿create procedure StagingSchemaTests.[test source columns match target]
+﻿create   procedure [StagingSchemaTests].[test source tables on tsa schema match target tables on psa schema]
 as
 begin
 	select
 		replace(c.TABLE_NAME, 'ICS_LAND_', '') as [TABLE_NAME]
-	  , c.COLUMN_NAME
-	  , c.COLUMN_DEFAULT
-	  , c.IS_NULLABLE
-	  , c.DATA_TYPE
-	  , c.CHARACTER_MAXIMUM_LENGTH
-	  , c.NUMERIC_PRECISION
-	  , c.NUMERIC_SCALE
-	  , c.DATETIME_PRECISION
-	  , c.COLLATION_NAME
+	  --, c.COLUMN_NAME
+	  --, c.COLUMN_DEFAULT
+	  --, c.IS_NULLABLE
+	  --, c.DATA_TYPE
+	  --, c.CHARACTER_MAXIMUM_LENGTH
+	  --, c.NUMERIC_PRECISION
+	  --, c.NUMERIC_SCALE
+	  --, c.DATETIME_PRECISION
+	  --, c.COLLATION_NAME
 	into
 		#expected
 	from
@@ -22,15 +22,15 @@ begin
 
 	select
 		replace(c.TABLE_NAME, 'ICS_STG_', '') as [TABLE_NAME]
-	  , c.COLUMN_NAME
-	  , c.COLUMN_DEFAULT
-	  , c.IS_NULLABLE
-	  , c.DATA_TYPE
-	  , c.CHARACTER_MAXIMUM_LENGTH
-	  , c.NUMERIC_PRECISION
-	  , c.NUMERIC_SCALE
-	  , c.DATETIME_PRECISION
-	  , c.COLLATION_NAME
+	  --, c.COLUMN_NAME
+	  --, c.COLUMN_DEFAULT
+	  --, c.IS_NULLABLE
+	  --, c.DATA_TYPE
+	  --, c.CHARACTER_MAXIMUM_LENGTH
+	  --, c.NUMERIC_PRECISION
+	  --, c.NUMERIC_SCALE
+	  --, c.DATETIME_PRECISION
+	  --, c.COLLATION_NAME
 	into
 		#actual
 	from

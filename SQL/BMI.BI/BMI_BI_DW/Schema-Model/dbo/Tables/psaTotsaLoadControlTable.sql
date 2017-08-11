@@ -12,7 +12,8 @@ CREATE TABLE [dbo].[psaTotsaLoadControlTable]
 [TargetTable] [sys].[sysname] NULL,
 [TargetPK] [varchar] (max) NULL,
 [LoadMode] [varchar] (10) NOT NULL,
-[DataSourceKey] [int] NOT NULL
+[DataSourceKey] [int] NOT NULL,
+[Done] [smallint] NULL CONSTRAINT [DF__psaTotsaLo__Done__7B3CED68] DEFAULT ((0))
 )
 GO
 ALTER TABLE [dbo].[psaTotsaLoadControlTable] ADD CONSTRAINT [PK_psaTotsaLoadControlTable] PRIMARY KEY CLUSTERED  ([ID])

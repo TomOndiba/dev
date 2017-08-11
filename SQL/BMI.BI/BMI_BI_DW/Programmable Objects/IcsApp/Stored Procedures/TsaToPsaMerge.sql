@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[IcsApp].[TsaToPsaMerge]') IS NOT NULL
+IF OBJECT_ID('[IcsApp].[TsaToPsaMerge]') IS NOT NULL
 	DROP PROCEDURE [IcsApp].[TsaToPsaMerge];
 
 GO
@@ -9,12 +9,11 @@ GO
 create   procedure [IcsApp].[TsaToPsaMerge]
 (
 	@DataSourceKey int
+  , @RunType	   varchar(50)
 )
 as
 	begin
-
-
-		--<CommentHeader>
+--<CommentHeader>
 /**********************************************************************************************************************
 
 Properties
@@ -40,7 +39,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 **********************************************************************************************************************/
 		--</CommentHeader>
-		set nocount on ;
+		-- declare @DataSourceKey int=1, 
+		-- @RunType varchar(50)='full'
+		--set nocount on ;
 
 		--! Standard/ExceptionHandler variables
 		declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid)) ;
@@ -49,44 +50,59 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_ErrorContext nvarchar(512) ;
 		declare @_step varchar(128) ;
 		declare @_ExceptionId int ;
+		declare
+			@max int = 1
+		  , @id	 int = 0
+		  , @i	 int = 0 ;
+		declare
+			@sourceTableName  varchar(255) = ''
+		  , @sourceschemaName varchar(255) = ''
+		  , @targetTableName  varchar(255) = ''
+		  , @TargetSchemaName varchar(255) = '' ;
+
 
 		begin try
 			set @_step = 'Validate Inputs' ;
 
-
 			if coalesce(@DataSourceKey, 0) = 0
-				raiserror('@DataSourceKey can not be null or zero', 16, 1);
-
-
-				----exec 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				raiserror('@DataSourceKey can not be null or zero', 16, 1) ;
 			
-		
-		
-		
+			if coalesce(@RunType, '') = ''
+				raiserror('@RunType can not be null or empty', 16, 1) ;
+				
+			set @_step = 'Run [privy].[TsaToPsaValidateSchema]' ;
+
+			exec [privy].[TsaToPsaValidateSchema] @DataSourceKey ;
+
+			set @_step = 'Run [privy].[BuildAndRunMerge]' ;
+
+			update	dbo.psaTotsaLoadControlTable set Done = 0 ;
+
+			set @max =(select	count(*) from dbo.psaTotsaLoadControlTable	where DataSourceKey = @DataSourceKey group by DataSourceKey) ;
+			--select @max
+
+			while (@i <= @max)
+				begin
+					set @id =(select top 1 ID	from dbo.psaTotsaLoadControlTable where DataSourceKey = @DataSourceKey and Done = 0) ;
+
+					--select	@id ;
+					set @sourceTableName =	(select	SourceTable from dbo.psaTotsaLoadControlTable where ID = @id) ;
+					set @sourceschemaName =	(select	SourceSchema from	dbo.psaTotsaLoadControlTable where	ID = @id) ;
+					set @targetTableName =	(select	TargetTable from dbo.psaTotsaLoadControlTable where ID = @id) ;
+					set @TargetSchemaName =	(select	TargetSchema from	dbo.psaTotsaLoadControlTable where	ID = @id) ;
+
+					--select @sourceTableName,@sourceschemaName, @targetTableName,@TargetSchemaName;
+					exec [privy].[BuildAndRunMerge]
+						@Runtype = @RunType
+					  , @SourceTableName = @sourceTableName
+					  , @SourceSchemaName = @sourceschemaName
+					  , @TargetTableName = @targetTableName
+					  , @TargetSchemaName = @TargetSchemaName
+					  , @LoadDateTime = null ;
+
+					update	psaTotsaLoadControlTable set Done = 1 where ID = @id ;
+					set @i = @i + 1 ;
+				end ;
 		end try
 		begin catch
 			set @_ErrorContext = 'Failed to start new batch run at Step: ' + coalesce('[' + @_step + ']', 'NULL') ;
@@ -99,7 +115,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , @ExceptionId = @_ExceptionId out ;
 		end catch ;
 
-		--/////////////////////////////////////////////////////////////////////////////////////////////////
+		---/////////////////////////////////////////////////////////////////////////////////////////////////
 		EndEx:
 		--/////////////////////////////////////////////////////////////////////////////////////////////////
 

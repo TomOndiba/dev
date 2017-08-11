@@ -866,7 +866,10 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql" />
-    <None Include="Migrations\1.0.3\006_20170810-1647_ukrna.sql" />
+    <None Include="Migrations\1.0.3\006_Create_schema_IcsApp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\007_Modify_psaTotsaLoadControlTable.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

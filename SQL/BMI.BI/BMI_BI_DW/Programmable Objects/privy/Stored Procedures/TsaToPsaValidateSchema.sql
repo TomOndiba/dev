@@ -438,8 +438,21 @@ Version	ChangeDate		Author	BugRef	Narrative
 				)
 					raiserror('Mis-matched pk from the psa schema', 16, 1) ;
 
+					
+/***********************************************Missing PKs from the table(s)****************************************************************/
 
-
+					set @_Step = 'PK does not exist' ;
+					if exists
+					(
+						select
+							count(*)
+						from
+							dbo.psaTotsaLoadControlTable t
+						where
+							t.SourcePK is null
+							or	t.TargetPK is null
+					)
+						raiserror('PK does not exist', 16, 1) ;
 
 
 		end try
@@ -448,7 +461,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 			set @_ErrorContext = 'schema validation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
 
-			--select @_ErrorContext
+			select @_ErrorContext
 			exec log4.ExceptionHandler
 				@ErrorContext = @_ErrorContext
 			  , @ErrorProcedure = @_FunctionName

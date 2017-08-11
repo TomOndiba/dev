@@ -1,0 +1,13 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:ns1="http://www.example.org/ProcedureAgent/"
+                  xmlns:tns="http://ProcedureAgent/procedureagent/public"
+                  name="ProcedureAgent.public"
+                  targetNamespace="http://ProcedureAgent/procedureagent/public">
+   <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="ProcedureAgentPLT">
+      <plnk:role name="Provider" portType="ns1:ProcedureAgent"/>
+   </plnk:partnerLinkType>  
+   <wsdl:import location="../../../ProcedureAgent/wsdl/ProcedureAgent.wsdl"
+                namespace="http://www.example.org/ProcedureAgent/">
+    </wsdl:import>
+</wsdl:definitions>

@@ -1,0 +1,12 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:ns1="http://www.example.org/spRunStart_Agent/"
+                  name="spRunStart_Agent.public"
+                  targetNamespace="http://spRunStart_Agent/spRunStart_Agent/public">
+   <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="ProcedureAgentPLT">
+      <plnk:role name="Provider" portType="ns1:spRunStart_Agent"/>
+   </plnk:partnerLinkType>  
+   <wsdl:import location="../spRunStart_Agent.wsdl"
+                namespace="http://www.example.org/spRunStart_Agent/">
+    </wsdl:import>
+</wsdl:definitions>

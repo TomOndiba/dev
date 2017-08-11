@@ -1,0 +1,12 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:ns1="http://www.example.org/StartRun_Agent/"
+                  name="StartRun_Agent.public"
+                  targetNamespace="http://StartRun_Agent/startrun_agent/public">
+   <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                         name="StartRun_AgentPLT">
+      <plnk:role name="Provider" portType="ns1:StartRun_Agent"/>
+   </plnk:partnerLinkType>  
+   <wsdl:import location="../StartRun_Agent.wsdl"
+                namespace="http://www.example.org/StartRun_Agent/">
+    </wsdl:import>
+</wsdl:definitions>

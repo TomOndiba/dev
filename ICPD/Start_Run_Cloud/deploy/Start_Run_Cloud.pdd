@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pdd:process xmlns:bpelns="http://Start_Run_Cloud" xmlns:pdd="http://schemas.active-endpoints.com/pdd/2006/08/pdd.xsd" location="bpel/Start_Run_Cloud/bpel/Start_Run_Cloud.bpel" name="bpelns:Start_Run_Cloud" platform="enterprise">
+  <pdd:partnerLinks>
+    <pdd:partnerLink name="Process_Consumer">
+      <pdd:myRole allowedRoles="" binding="EXTERNAL" service="AutomatedStepOperations"/>
+    </pdd:partnerLink>
+    <pdd:partnerLink name="Provider">
+      <pdd:partnerRole endpointReference="static" invokeHandler="default:Address">
+        <wsa:EndpointReference xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns5="FILL_IN_WSDL_NAMESPACE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <wsa:Address>FILL_IN_ADDRESS_URI</wsa:Address>
+   <wsa:Metadata>
+      <wsa:ServiceName PortName="FILL_IN_SERVICE_PORT">ns5:FILL_IN_WSDL_SERVICE_NAME</wsa:ServiceName>
+   </wsa:Metadata>
+</wsa:EndpointReference>
+      </pdd:partnerRole>
+    </pdd:partnerLink>
+  </pdd:partnerLinks>
+  <pdd:references>
+    <pdd:wsdl location="project:/com.activevos.socrates.repository.services/wsdl/avosAutomatedStep.wsdl" namespace="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosAutomatedStep.wsdl"/>
+    <pdd:wsdl location="project:/Start_Run_Agent/wsdl/Start_Run_Agent.wsdl" namespace="http://www.example.org/Start_Run_Cloud/"/>
+    <pdd:wsdl location="project:/Start_Run_Agent/wsdl/bpel/Start_Run_Agent.public.wsdl" namespace="http://Start_Run_Agent/Start_Run_Cloud/public"/>
+  </pdd:references>
+</pdd:process>

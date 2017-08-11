@@ -7,7 +7,7 @@
     <pdd:partnerLink name="Provider">
       <pdd:partnerRole endpointReference="static" invokeHandler="process">
         <wsa:EndpointReference xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-   <wsa:Address>agent:Prakash:ProcedureAgent</wsa:Address>
+   <wsa:Address>agent:Prakash:spRunEnd_Cloud</wsa:Address>
 </wsa:EndpointReference>
       </pdd:partnerRole>
     </pdd:partnerLink>

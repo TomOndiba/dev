@@ -3,5 +3,6 @@
 	<section name="com.activee.coreep.registry.wizard.sampledata.AevSampleDataWizard">
 	</section>
 	<section name="com.activee.coreep.webreference.wizard.AevImportWebReferenceWizard">
+		<item value="false" key="com.activee.coreep.webreference.wizard.AevImportWebReferencePage_FormatOnImport"/>
 	</section>
 </section>

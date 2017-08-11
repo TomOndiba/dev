@@ -4,7 +4,7 @@ CREATE TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]
 [EtlBatchRunId] [int] NOT NULL,
 [EtlStepRunId] [int] NOT NULL,
 [EtlThreadRunId] [int] NOT NULL,
-[IsProcessed] [char] (1) NOT NULL CONSTRAINT [DF_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsProcessed] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsIncomplete] DEFAULT ('N'),
 [DataSourceKey] [int] NOT NULL,
 [EtlSampleTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]
 GO
 ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] ADD CONSTRAINT [CK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsDeleted] CHECK (([IsDeleted]='Y' OR [IsDeleted]='N'))
 GO
-ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] ADD CONSTRAINT [CK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsProcessed] CHECK (([IsProcessed]='Y' OR [IsProcessed]='N'))
+ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] ADD CONSTRAINT [CK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsIncomplete] CHECK (([IsIncomplete]='Y' OR [IsIncomplete]='N'))
 GO
 ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] ADD CONSTRAINT [PK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] PRIMARY KEY CLUSTERED  ([EtlRecordId])
 GO

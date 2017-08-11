@@ -9,7 +9,7 @@ GO
 create procedure [ics].[IcrtSubProcessGetId]
 (
   @IcrtSubProcessName varchar(100)
-, @BatchId int
+, @BatchProcessId int
 , @IcrtSubProcessId int = null out
 )
 as
@@ -53,7 +53,7 @@ begin
 	begin try
 		set @_Step = 'Validate Inputs';
 		if coalesce(@IcrtSubProcessName, '') = '' raiserror('ICRT Sub-process Name input must not be null or empty', 16, 1);
-		if coalesce(@BatchId, 0) !> 0 raiserror('Batch Id (derived from ICRT process name) must be greater than zero', 16, 1);
+		if coalesce(@BatchProcessId, 0) !> 0 raiserror('Batch Process Id (derived from ICRT process name) must be greater than zero', 16, 1);
 
 		--! As we have multiple steps, if there no outer transaction,
 		--! use an explicit transaction from this point forward 
@@ -68,7 +68,7 @@ begin
 
 				set @IcrtSubProcessId = coalesce((select max(IcrtSubProcessId) from ics.IcrtSubProcess) + 1, 1) ;
 				
-				insert ics.IcrtSubProcess(IcrtSubProcessId, IcrtSubProcessName, BatchId) values (@IcrtSubProcessId, @IcrtSubProcessName, @BatchId);
+				insert ics.IcrtSubProcess(IcrtSubProcessId, IcrtSubProcessName, BatchProcessId) values (@IcrtSubProcessId, @IcrtSubProcessName, @BatchProcessId);
 			end
 
 		--!
@@ -78,7 +78,7 @@ begin
 	end try
 	begin catch
 		set @_ErrorContext = 'Failed to get Id for IcrtSubProcess: ' + coalesce('"' + @IcrtSubProcessName + '"', 'NULL')
-				+ ' and Batch Id: ' + coalesce(cast(@BatchId as varchar(16)), 'NULL')
+				+ ' and Batch Process Id: ' + coalesce(cast(@BatchProcessId as varchar(16)), 'NULL')
 				+ ' at step: [' + coalesce(@_Step, 'NULL') + ']'
 				+ ' (IcrtSubProcess Id: ' + coalesce(cast(@IcrtSubProcessId as varchar(16)), 'NULL') + ')' ;
 
@@ -112,11 +112,10 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
-
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Database-specific unique identifier for the batch process that is associated with the (master) process of this sub-process', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', 'PARAMETER', N'@BatchProcessId'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Creates an entry for the specified ICRT sub-process if not already present then outputs the Id', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', NULL, NULL
-GO
-EXEC sp_addextendedproperty N'MS_Description', N'Database-specific unique identifier for the batch that is associated with the (master) process of this sub-process', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', 'PARAMETER', N'@BatchId'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Database-specific unique identifier for an ICRT sub-process', 'SCHEMA', N'ics', 'PROCEDURE', N'IcrtSubProcessGetId', 'PARAMETER', N'@IcrtSubProcessId'
 GO

@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateDatabaseScripts", "Cr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateLoginScripts", "CreateLoginScripts", "{E09ED1C5-6287-4341-943E-8D1F717FAA2E}"
 	ProjectSection(SolutionItems) = preProject
+		CreateLoginScripts\Azure AD Admins.BMI_BAT_MAN_DEV.sql = CreateLoginScripts\Azure AD Admins.BMI_BAT_MAN_DEV.sql
+		CreateLoginScripts\Azure AD Admins.BMI_BAT_MAN_PROD.sql = CreateLoginScripts\Azure AD Admins.BMI_BAT_MAN_PROD.sql
 		CreateLoginScripts\Azure AD Admins.BMI_BI_DW_DEV.sql = CreateLoginScripts\Azure AD Admins.BMI_BI_DW_DEV.sql
 		CreateLoginScripts\Azure AD Admins.BMI_BI_DW_PROD.sql = CreateLoginScripts\Azure AD Admins.BMI_BI_DW_PROD.sql
 		CreateLoginScripts\Azure AD Admins.BMI_BI_MART_DEV.sql = CreateLoginScripts\Azure AD Admins.BMI_BI_MART_DEV.sql
@@ -97,6 +99,11 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BAT_MAN", "BMI_BAT_MAN\BMI_BAT_MAN.sqlproj", "{356F3988-D140-4D3F-A860-D71D990EB793}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39BD6BC0-FC97-4B59-86B9-3D697FAC06EC}"
+	ProjectSection(SolutionItems) = preProject
+		BMI_BAT_MAN.Tests.sandbox.runsettings = BMI_BAT_MAN.Tests.sandbox.runsettings
+		BMI_BI_DW.Tests.sandbox.runsettings = BMI_BI_DW.Tests.sandbox.runsettings
+		profBIS_View.Tests.sandbox.runsettings = profBIS_View.Tests.sandbox.runsettings
+	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BAT_MAN.tests", "BMI_BAT_MAN.tests\BMI_BAT_MAN.tests.sqlproj", "{ABED7343-2A54-461D-8238-513E052B2966}"
 EndProject

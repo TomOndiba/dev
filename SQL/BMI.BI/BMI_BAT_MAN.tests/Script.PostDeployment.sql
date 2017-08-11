@@ -15,8 +15,8 @@ Post-Deployment Script Template
 :r "..\BMI_BAT_MAN\Static Data\log4Private.JournalControl.data.sql"
 :r "..\BMI_BAT_MAN\Static Data\log4Private.Severity.data.sql"
 
-:r "..\BMI_BAT_MAN\Static Data\privy.RunStateFlag.data.sql"
-:r "..\BMI_BAT_MAN\Static Data\privy.RunState.data.sql"
+:r "..\BMI_BAT_MAN\Static Data\batch.RunStateFlag.data.sql"
+:r "..\BMI_BAT_MAN\Static Data\batch.RunState.data.sql"
 
 
 --!

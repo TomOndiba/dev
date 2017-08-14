@@ -4,11 +4,11 @@
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Informatica\ICPD\spRunEnd_Cloud\deploy"/>
 			<item value="C:\Sources\Call a Procedure\ProcedureAgent"/>
 			<item value="C:\Sources\Call a Procedure\ProcedureCloud"/>
 			<item value="C:\Sources\Call a Procedure"/>
 			<item value="C:\Sources\ICPD-Source-HelloAgentCloud\SimpleDASAutomatedStepExamples\HelloAgent"/>
-			<item value="C:\Sources\ICPD-Source-HelloAgentCloud\SimpleDASAutomatedStepExamples\HelloCloud"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">

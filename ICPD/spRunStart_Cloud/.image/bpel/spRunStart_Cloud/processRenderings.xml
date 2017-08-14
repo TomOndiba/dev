@@ -1,0 +1,116 @@
+<processRenderings modified="1501786178613">
+   <layout-segments>
+      <segment height="317" id="process_0" tiled="false" width="389">
+         <image height="317" name="process_0_R1C1.jpg" width="389"/>
+      </segment>
+   </layout-segments>
+   <process>
+      <bpel locationId="1"
+            name="spRunStart_Cloud"
+            path="/process"
+            segment="process_0"
+            sheight="317"
+            swidth="389"
+            sx="0"
+            sy="0"
+            type="process">
+         <bpel locationId="11" path="/process/partnerLinks" type="partnerLinks">
+            <bpel locationId="12"
+                  name="Process_Consumer"
+                  path="/process/partnerLinks/partnerLink[@name='Process_Consumer']"
+                  type="partnerLink"/>
+            <bpel locationId="13"
+                  name="Provider"
+                  path="/process/partnerLinks/partnerLink[@name='Provider']"
+                  type="partnerLink"/>
+         </bpel>
+         <bpel locationId="15" path="/process/variables" type="variables">
+            <bpel locationId="16"
+                  name="automatedStepRequest"
+                  path="/process/variables/variable[@name='automatedStepRequest']"
+                  type="variable"/>
+            <bpel locationId="17"
+                  name="NewOperationResponse"
+                  path="/process/variables/variable[@name='NewOperationResponse']"
+                  type="variable"/>
+         </bpel>
+         <bpel height="10"
+               locationId="18"
+               name=""
+               path="/process/sequence"
+               type="sequence"
+               width="1"
+               x="252"
+               y="10">
+            <bpel height="60"
+                  locationId="19"
+                  name="automatedStep"
+                  path="/process/sequence/receive[@name='automatedStep']"
+                  type="receive"
+                  width="70"
+                  x="217"
+                  y="20"/>
+            <bpel locationId="20"
+                  name="NewOperation"
+                  path="/process/sequence/scope[@name='NewOperation']"
+                  type="scope">
+               <bpel locationId="21"
+                     path="/process/sequence/scope[@name='NewOperation']/variables"
+                     type="variables">
+                  <bpel locationId="22"
+                        name="parameters"
+                        path="/process/sequence/scope[@name='NewOperation']/variables/variable[@name='parameters']"
+                        type="variable"/>
+               </bpel>
+               <bpel locationId="23"
+                     name=""
+                     path="/process/sequence/scope[@name='NewOperation']/sequence"
+                     type="sequence">
+                  <bpel locationId="24"
+                        name=""
+                        path="/process/sequence/scope[@name='NewOperation']/sequence/assign"
+                        type="assign"/>
+                  <bpel height="53"
+                        locationId="33"
+                        name="NewOperation"
+                        path="/process/sequence/scope[@name='NewOperation']/sequence/invoke[@name='NewOperation']"
+                        type="invoke"
+                        width="125"
+                        x="190"
+                        y="105"/>
+               </bpel>
+            </bpel>
+            <bpel height="60"
+                  locationId="34"
+                  name="automatedStep-Reply"
+                  path="/process/sequence/scope[@name='automatedStep-Reply']"
+                  type="scope"
+                  width="70"
+                  x="217"
+                  y="183">
+               <bpel locationId="35"
+                     path="/process/sequence/scope[@name='automatedStep-Reply']/variables"
+                     type="variables">
+                  <bpel locationId="36"
+                        name="parameters"
+                        path="/process/sequence/scope[@name='automatedStep-Reply']/variables/variable[@name='parameters']"
+                        type="variable"/>
+               </bpel>
+               <bpel locationId="37"
+                     name=""
+                     path="/process/sequence/scope[@name='automatedStep-Reply']/sequence"
+                     type="sequence">
+                  <bpel locationId="38"
+                        name=""
+                        path="/process/sequence/scope[@name='automatedStep-Reply']/sequence/assign"
+                        type="assign"/>
+                  <bpel locationId="42"
+                        name="automatedStep-Reply"
+                        path="/process/sequence/scope[@name='automatedStep-Reply']/sequence/reply[@name='automatedStep-Reply']"
+                        type="reply"/>
+               </bpel>
+            </bpel>
+         </bpel>
+      </bpel>
+   </process>
+</processRenderings>

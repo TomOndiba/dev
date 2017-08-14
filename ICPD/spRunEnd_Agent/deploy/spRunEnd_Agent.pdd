@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pdd:process xmlns:bpelns="http://spRunEnd_Agent" xmlns:pdd="http://schemas.active-endpoints.com/pdd/2006/08/pdd.xsd" location="bpel/spRunEnd_Agent/bpel/spRunEnd_Agent.bpel" name="bpelns:spRunEnd_Agent" platform="enterprise">
+  <pdd:partnerLinks>
+    <pdd:partnerLink name="Process_Consumer">
+      <pdd:myRole allowedRoles="" binding="MSG" service="spRunEnd_Agent"/>
+    </pdd:partnerLink>
+    <pdd:partnerLink name="Provider">
+      <pdd:partnerRole endpointReference="dynamic" invokeHandler="system:JNDI/OracleJDBC"/>
+    </pdd:partnerLink>
+  </pdd:partnerLinks>
+  <pdd:references>
+    <pdd:wsdl location="project:/spRunEnd_Agent/wsdl/bpel/spRunEnd_Agent.public.wsdl" namespace="http://spRunEnd_Agent/spRunEnd_Agent/public"/>
+    <pdd:wsdl location="project:/spRunEnd_Agent/wsdl/spRunEnd_Agent.wsdl" namespace="http://www.example.org/spRunEnd_Agent/"/>
+    <pdd:wsdl location="project:/com.activee.rt.data.access.services/wsdl/data-access.wsdl" namespace="http://docs.active-endpoints/wsdl/data-access/2010/04/data-access.wsdl"/>
+  </pdd:references>
+</pdd:process>

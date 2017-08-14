@@ -1,4 +1,4 @@
-﻿create   procedure [StagingSchemaTests].[test source columns match target columns]
+﻿create   procedure [StagingSchemaTests].[test source columns and target columns match]
 as
 begin
 	select

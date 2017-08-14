@@ -1,4 +1,4 @@
-﻿create   procedure [StagingSchemaTests].[test source tables on tsa schema match target tables on psa schema]
+﻿create   procedure [StagingSchemaTests].[test source tables and target tables match ]
 as
 begin
 	select

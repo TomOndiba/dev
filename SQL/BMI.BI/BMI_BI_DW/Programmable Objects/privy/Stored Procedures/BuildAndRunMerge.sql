@@ -29,7 +29,7 @@ DESCRIPTION:		run merge statement dynamically for loading data from tsa to psa
 ORIGIN DATE:		03-Aug-2017
 ORIGINAL AUTHOR:	Razia Nazir
 
-Returns
+--Returns
 =======
 @@Error - always zero on success
 
@@ -55,7 +55,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 		set nocount on;
 
 		begin try
-
 
 		if object_id(N'TableStructure') is not null drop table TableStructure ;
 
@@ -171,7 +170,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		set @updatecolumnstring = '( ' + @updatecolumnstring + ' )' ;
 
 		set @_Step = 'Merge statement for Delta ' ;
-									
+			
 		if @Runtype = 'Delta'
 			begin
 
@@ -196,7 +195,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 						   + ', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted=1' + ';' ;
 			end ;
 
-		select	@sql ;
+		--select	@sql ;
 
 		set @_Step = 'Execute Merge statement ' ;
 		execute sp_executesql @sql ;
@@ -205,8 +204,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		begin catch
 
 			set @_ErrorContext = 'Merge statement preparation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
-
-
+			
 			exec log4.ExceptionHandler
 				@ErrorContext = @_ErrorContext
 			  , @ErrorProcedure = @_FunctionName

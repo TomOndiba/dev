@@ -123,13 +123,19 @@
     <Build Include="StagingSchemaTests.sql" />
     <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on null mis-matched primarykeys from tsa.sql" />
     <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on null mis-matched primarykeys from psa.sql" />
-    <Build Include="StagingSchemaTests\test source tables on tsa schema match target tables on psa schema.sql" />
-    <Build Include="StagingSchemaTests\test source columns match target columns.sql" />
     <Build Include="StagingSchemaTests\test correct etl columns on tsa schema.sql" />
     <Build Include="StagingSchemaTests\test correct etl columns on psa schema.sql" />
     <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey zero.sql" />
     <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey null.sql" />
     <Build Include="IcsApp-Tests.sql" />
+    <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on no pk.sql" />
+    <Build Include="StagingSchemaTests\test source tables and target tables match .sql" />
+    <Build Include="StagingSchemaTests\test source columns and target columns match.sql" />
+    <Build Include="StagingSchemaTests\test pk on the target and source tables.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40RunType null.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40RunType empty.sql" />
+    <Build Include="IcsApp-Tests\test privy.TsaToPsaValidateSchema is executed.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for multiple tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

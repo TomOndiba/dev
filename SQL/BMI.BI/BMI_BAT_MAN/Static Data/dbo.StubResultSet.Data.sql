@@ -2,33 +2,34 @@
 --Originally by Vyas (http://vyaskn.tripod.com): sp_generate_inserts (build 22)
 --Adapted for SQL Server 2008/2012 by Daniel Nolan (http://danere.com)
 
-SET NOCOUNT ON
+set nocount on
 
-MERGE INTO [dbo].[StubResultSet] AS Target
-USING (VALUES
-  ('[ics].[ProcessRunStart]',-999,NULL,NULL,'RUN','FULL','Process Message',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
- ,('[ics].[SubProcessRunStart]',NULL,-888,NULL,'RUN','FULL','Sub-Process Message',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)
- ,('[ics].[ThreadRunStart]',NULL,NULL,-777,'RUN','FULL','Thread Message','2017-07-25T00:00:00','2017-07-25T00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL)
- ,('[IcsApp].[SubProcessCheckThreads]',NULL,-888,NULL,NULL,NULL,NULL,NULL,NULL,'SUCCEEDED',1,1,1,0,0,0)
-) AS Source ([FunctionName],[ProcessRunID],[SubProcessRunID],[ThreadRunID],[Instruction],[RunType],[Message],[StartCapturePoint],[EndCapturePoint],[Outcome],[ExpectedThreadCount],[ActualThreadCount],[ThreadsSucceeded],[ThreadsSkipped],[ThreadsStopped],[ThreadsFailed])
-ON (Target.[FunctionName] = Source.[FunctionName])
-WHEN MATCHED AND (
-	NULLIF(Source.[ProcessRunID], Target.[ProcessRunID]) IS NOT NULL OR NULLIF(Target.[ProcessRunID], Source.[ProcessRunID]) IS NOT NULL OR 
-	NULLIF(Source.[SubProcessRunID], Target.[SubProcessRunID]) IS NOT NULL OR NULLIF(Target.[SubProcessRunID], Source.[SubProcessRunID]) IS NOT NULL OR 
-	NULLIF(Source.[ThreadRunID], Target.[ThreadRunID]) IS NOT NULL OR NULLIF(Target.[ThreadRunID], Source.[ThreadRunID]) IS NOT NULL OR 
-	NULLIF(Source.[Instruction], Target.[Instruction]) IS NOT NULL OR NULLIF(Target.[Instruction], Source.[Instruction]) IS NOT NULL OR 
-	NULLIF(Source.[RunType], Target.[RunType]) IS NOT NULL OR NULLIF(Target.[RunType], Source.[RunType]) IS NOT NULL OR 
-	NULLIF(Source.[Message], Target.[Message]) IS NOT NULL OR NULLIF(Target.[Message], Source.[Message]) IS NOT NULL OR 
-	NULLIF(Source.[StartCapturePoint], Target.[StartCapturePoint]) IS NOT NULL OR NULLIF(Target.[StartCapturePoint], Source.[StartCapturePoint]) IS NOT NULL OR 
-	NULLIF(Source.[EndCapturePoint], Target.[EndCapturePoint]) IS NOT NULL OR NULLIF(Target.[EndCapturePoint], Source.[EndCapturePoint]) IS NOT NULL OR 
-	NULLIF(Source.[Outcome], Target.[Outcome]) IS NOT NULL OR NULLIF(Target.[Outcome], Source.[Outcome]) IS NOT NULL OR 
-	NULLIF(Source.[ExpectedThreadCount], Target.[ExpectedThreadCount]) IS NOT NULL OR NULLIF(Target.[ExpectedThreadCount], Source.[ExpectedThreadCount]) IS NOT NULL OR 
-	NULLIF(Source.[ActualThreadCount], Target.[ActualThreadCount]) IS NOT NULL OR NULLIF(Target.[ActualThreadCount], Source.[ActualThreadCount]) IS NOT NULL OR 
-	NULLIF(Source.[ThreadsSucceeded], Target.[ThreadsSucceeded]) IS NOT NULL OR NULLIF(Target.[ThreadsSucceeded], Source.[ThreadsSucceeded]) IS NOT NULL OR 
-	NULLIF(Source.[ThreadsSkipped], Target.[ThreadsSkipped]) IS NOT NULL OR NULLIF(Target.[ThreadsSkipped], Source.[ThreadsSkipped]) IS NOT NULL OR 
-	NULLIF(Source.[ThreadsStopped], Target.[ThreadsStopped]) IS NOT NULL OR NULLIF(Target.[ThreadsStopped], Source.[ThreadsStopped]) IS NOT NULL OR 
-	NULLIF(Source.[ThreadsFailed], Target.[ThreadsFailed]) IS NOT NULL OR NULLIF(Target.[ThreadsFailed], Source.[ThreadsFailed]) IS NOT NULL) THEN
- UPDATE SET
+merge into [dbo].[StubResultSet] as Target
+using (values
+  ('[ics].[ProcessRunStart]',999,null,null,'RUN','FULL','Process Message',null,null,null,null,null,null,null,null,null)
+ ,('[ics].[SubProcessRunStart]',null,888,null,'RUN','FULL','Sub-Process Message',null,null,null,null,null,null,null,null,null)
+ ,('[ics].[ThreadRunStart]',null,null,777,'RUN','FULL','Thread Message','2017-07-25T00:00:00','2017-07-25T00:00:00',null,null,null,null,null,null,null)
+ ,('[IcsApp].[MappingConfigTaskGetCurrentRunIds]',999,888,777,null,null,null,null,null,null,null,null,null,null,null,null)
+ ,('[IcsApp].[SubProcessCheckThreads]',null,888,null,null,null,null,null,null,'SUCCEEDED',1,1,1,0,0,0)
+) as Source ([FunctionName],[ProcessRunID],[SubProcessRunID],[ThreadRunID],[Instruction],[RunType],[Message],[StartCapturePoint],[EndCapturePoint],[Outcome],[ExpectedThreadCount],[ActualThreadCount],[ThreadsSucceeded],[ThreadsSkipped],[ThreadsStopped],[ThreadsFailed])
+on (Target.[FunctionName] = Source.[FunctionName])
+when matched and (
+	nullif(Source.[ProcessRunID], Target.[ProcessRunID]) is not null or nullif(Target.[ProcessRunID], Source.[ProcessRunID]) is not null or 
+	nullif(Source.[SubProcessRunID], Target.[SubProcessRunID]) is not null or nullif(Target.[SubProcessRunID], Source.[SubProcessRunID]) is not null or 
+	nullif(Source.[ThreadRunID], Target.[ThreadRunID]) is not null or nullif(Target.[ThreadRunID], Source.[ThreadRunID]) is not null or 
+	nullif(Source.[Instruction], Target.[Instruction]) is not null or nullif(Target.[Instruction], Source.[Instruction]) is not null or 
+	nullif(Source.[RunType], Target.[RunType]) is not null or nullif(Target.[RunType], Source.[RunType]) is not null or 
+	nullif(Source.[Message], Target.[Message]) is not null or nullif(Target.[Message], Source.[Message]) is not null or 
+	nullif(Source.[StartCapturePoint], Target.[StartCapturePoint]) is not null or nullif(Target.[StartCapturePoint], Source.[StartCapturePoint]) is not null or 
+	nullif(Source.[EndCapturePoint], Target.[EndCapturePoint]) is not null or nullif(Target.[EndCapturePoint], Source.[EndCapturePoint]) is not null or 
+	nullif(Source.[Outcome], Target.[Outcome]) is not null or nullif(Target.[Outcome], Source.[Outcome]) is not null or 
+	nullif(Source.[ExpectedThreadCount], Target.[ExpectedThreadCount]) is not null or nullif(Target.[ExpectedThreadCount], Source.[ExpectedThreadCount]) is not null or 
+	nullif(Source.[ActualThreadCount], Target.[ActualThreadCount]) is not null or nullif(Target.[ActualThreadCount], Source.[ActualThreadCount]) is not null or 
+	nullif(Source.[ThreadsSucceeded], Target.[ThreadsSucceeded]) is not null or nullif(Target.[ThreadsSucceeded], Source.[ThreadsSucceeded]) is not null or 
+	nullif(Source.[ThreadsSkipped], Target.[ThreadsSkipped]) is not null or nullif(Target.[ThreadsSkipped], Source.[ThreadsSkipped]) is not null or 
+	nullif(Source.[ThreadsStopped], Target.[ThreadsStopped]) is not null or nullif(Target.[ThreadsStopped], Source.[ThreadsStopped]) is not null or 
+	nullif(Source.[ThreadsFailed], Target.[ThreadsFailed]) is not null or nullif(Target.[ThreadsFailed], Source.[ThreadsFailed]) is not null) then
+ update set
   [ProcessRunID] = Source.[ProcessRunID], 
   [SubProcessRunID] = Source.[SubProcessRunID], 
   [ThreadRunID] = Source.[ThreadRunID], 
@@ -44,22 +45,25 @@ WHEN MATCHED AND (
   [ThreadsSkipped] = Source.[ThreadsSkipped], 
   [ThreadsStopped] = Source.[ThreadsStopped], 
   [ThreadsFailed] = Source.[ThreadsFailed]
-WHEN NOT MATCHED BY TARGET THEN
- INSERT([FunctionName],[ProcessRunID],[SubProcessRunID],[ThreadRunID],[Instruction],[RunType],[Message],[StartCapturePoint],[EndCapturePoint],[Outcome],[ExpectedThreadCount],[ActualThreadCount],[ThreadsSucceeded],[ThreadsSkipped],[ThreadsStopped],[ThreadsFailed])
- VALUES(Source.[FunctionName],Source.[ProcessRunID],Source.[SubProcessRunID],Source.[ThreadRunID],Source.[Instruction],Source.[RunType],Source.[Message],Source.[StartCapturePoint],Source.[EndCapturePoint],Source.[Outcome],Source.[ExpectedThreadCount],Source.[ActualThreadCount],Source.[ThreadsSucceeded],Source.[ThreadsSkipped],Source.[ThreadsStopped],Source.[ThreadsFailed])
-WHEN NOT MATCHED BY SOURCE THEN 
- DELETE
+when not matched by target then
+ insert([FunctionName],[ProcessRunID],[SubProcessRunID],[ThreadRunID],[Instruction],[RunType],[Message],[StartCapturePoint],[EndCapturePoint],[Outcome],[ExpectedThreadCount],[ActualThreadCount],[ThreadsSucceeded],[ThreadsSkipped],[ThreadsStopped],[ThreadsFailed])
+ values(Source.[FunctionName],Source.[ProcessRunID],Source.[SubProcessRunID],Source.[ThreadRunID],Source.[Instruction],Source.[RunType],Source.[Message],Source.[StartCapturePoint],Source.[EndCapturePoint],Source.[Outcome],Source.[ExpectedThreadCount],Source.[ActualThreadCount],Source.[ThreadsSucceeded],Source.[ThreadsSkipped],Source.[ThreadsStopped],Source.[ThreadsFailed])
+when not matched by source then 
+ delete
 ;
-GO
-DECLARE @mergeError int
+go
+declare @mergeError int
  , @mergeCount int
-SELECT @mergeError = @@ERROR, @mergeCount = @@ROWCOUNT
-IF @mergeError != 0
- BEGIN
- PRINT 'ERROR OCCURRED IN MERGE FOR [dbo].[StubResultSet]. Rows affected: ' + CAST(@mergeCount AS VARCHAR(100)); -- SQL should always return zero rows affected
- END
-ELSE
- BEGIN
- PRINT '[dbo].[StubResultSet] rows affected by MERGE: ' + CAST(@mergeCount AS VARCHAR(100));
- END
-GO
+select @mergeError = @@error, @mergeCount = @@rowcount
+if @mergeError != 0
+ begin
+ print 'ERROR OCCURRED IN MERGE FOR [dbo].[StubResultSet]. Rows affected: ' + cast(@mergeCount as varchar(100)); -- SQL should always return zero rows affected
+ end
+else
+ begin
+ print '[dbo].[StubResultSet] rows affected by MERGE: ' + cast(@mergeCount as varchar(100));
+ end
+go
+
+set nocount off
+go

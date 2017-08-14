@@ -212,6 +212,11 @@
     <Build Include="batch-ModuleTests\test ProcessGetIdFromIcrtProcessName throws error after handling exception.sql" />
     <Build Include="batch-ModuleTests\test ProcessGetIdFromIcrtProcessName throws exception on %40IcrtProcessName empty.sql" />
     <Build Include="batch-ModuleTests\test ProcessGetIdFromIcrtProcessName throws exception on %40IcrtProcessName null.sql" />
+    <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds throws error on %40MappingConfigTaskName null.sql" />
+    <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds throws error on %40MappingConfigTaskName empty.sql" />
+    <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds throws error after handling exception.sql" />
+    <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values.sql" />
+    <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

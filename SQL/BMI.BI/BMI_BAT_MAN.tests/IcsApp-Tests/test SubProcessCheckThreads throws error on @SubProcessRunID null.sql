@@ -6,5 +6,5 @@ begin
 
 	exec tSQLt.ExpectException @ExpectedErrorNumber = 50000 ;
 
-	exec IcsApp.SubProcessCheckThreads @SubProcessName = 'spn', @SubProcessRunID = null ;
+	exec IcsApp.SubProcessCheckThreads @SubProcessName = 'spn', @SubProcessRunId = null ;
 end ;

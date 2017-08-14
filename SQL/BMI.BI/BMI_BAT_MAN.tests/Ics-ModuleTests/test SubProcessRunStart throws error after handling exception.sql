@@ -15,5 +15,5 @@ begin
 	exec ics.SubProcessRunStart
 		@ProcessName = 'A'
 	  , @SubProcessName = 'B'
-	  , @ProcessRunID = 11
+	  , @ProcessRunId = 11
 end;

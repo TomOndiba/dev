@@ -79,19 +79,18 @@ Version	ChangeDate		Author	BugRef	Narrative
 			update	dbo.psaTotsaLoadControlTable set Done = 0 ;
 
 			set @max =(select	count(*) from dbo.psaTotsaLoadControlTable	where DataSourceKey = @DataSourceKey group by DataSourceKey) ;
-			--select @max
+		
 
-			while (@i <= @max)
+			while (@i < @max)
 				begin
 					set @id =(select top 1 ID	from dbo.psaTotsaLoadControlTable where DataSourceKey = @DataSourceKey and Done = 0) ;
 
-					--select	@id ;
+				
 					set @sourceTableName =	(select	SourceTable from dbo.psaTotsaLoadControlTable where ID = @id) ;
 					set @sourceschemaName =	(select	SourceSchema from	dbo.psaTotsaLoadControlTable where	ID = @id) ;
 					set @targetTableName =	(select	TargetTable from dbo.psaTotsaLoadControlTable where ID = @id) ;
 					set @TargetSchemaName =	(select	TargetSchema from	dbo.psaTotsaLoadControlTable where	ID = @id) ;
 
-					--select @sourceTableName,@sourceschemaName, @targetTableName,@TargetSchemaName;
 					exec [privy].[BuildAndRunMerge]
 						@Runtype = @RunType
 					  , @SourceTableName = @sourceTableName

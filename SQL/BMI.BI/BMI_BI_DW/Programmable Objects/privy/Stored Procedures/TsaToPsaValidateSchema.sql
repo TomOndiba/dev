@@ -457,11 +457,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 		end try
 		begin catch
-		--select 'im here ', @_Step
-
+		
 			set @_ErrorContext = 'schema validation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
-
-			select @_ErrorContext
 			exec log4.ExceptionHandler
 				@ErrorContext = @_ErrorContext
 			  , @ErrorProcedure = @_FunctionName

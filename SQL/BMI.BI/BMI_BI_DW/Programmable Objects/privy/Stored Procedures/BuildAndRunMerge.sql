@@ -108,7 +108,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		where
 			1 = 1
 			and i.is_primary_key = 1
-			and ic.object_id = object_id(@STableName) ;
+			and ic.object_id = object_id(@TTableName) ;
 						
 		alter table PkeyTable add id int identity(1, 1) ;
 

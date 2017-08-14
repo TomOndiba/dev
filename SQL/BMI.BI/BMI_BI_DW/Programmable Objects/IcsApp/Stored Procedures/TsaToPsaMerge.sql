@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create   procedure [IcsApp].[TsaToPsaMerge]
+CREATE   procedure [IcsApp].[TsaToPsaMerge]
 (
 	@DataSourceKey int
   , @RunType	   varchar(50)
@@ -70,11 +70,11 @@ Version	ChangeDate		Author	BugRef	Narrative
 			if coalesce(@RunType, '') = ''
 				raiserror('@RunType can not be null or empty', 16, 1) ;
 				
-			set @_step = 'Run [privy].[TsaToPsaValidateSchema]' ;
+			set @_step = 'Run privy.TsaToPsaValidateSchema' ;
 
 			exec [privy].[TsaToPsaValidateSchema] @DataSourceKey ;
 
-			set @_step = 'Run [privy].[BuildAndRunMerge]' ;
+			set @_step = 'Run privy.BuildAndRunMerge' ;
 
 			update	dbo.psaTotsaLoadControlTable set Done = 0 ;
 
@@ -104,7 +104,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 				end ;
 		end try
 		begin catch
-			set @_ErrorContext = 'Failed to start new batch run at Step: ' + coalesce('[' + @_step + ']', 'NULL') ;
+			set @_ErrorContext = 'Failed to merge to tsa to psa at Step: ' + coalesce('[' + @_step + ']', 'NULL') ;
 
 			exec log4.ExceptionHandler
 				@ErrorContext = @_ErrorContext
@@ -112,6 +112,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , @ErrorNumber = @_Error out
 			  , @ReturnMessage = @_Message out
 			  , @ExceptionId = @_ExceptionId out ;
+
+
+
 		end catch ;
 
 		---/////////////////////////////////////////////////////////////////////////////////////////////////

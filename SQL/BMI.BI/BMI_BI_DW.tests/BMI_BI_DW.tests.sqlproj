@@ -131,11 +131,14 @@
     <Build Include="tsa-to-psa-tests\test TsaToPsaValidateSchema throws error on no pk.sql" />
     <Build Include="StagingSchemaTests\test source tables and target tables match .sql" />
     <Build Include="StagingSchemaTests\test source columns and target columns match.sql" />
-    <Build Include="StagingSchemaTests\test pk on the target and source tables.sql" />
     <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40RunType null.sql" />
     <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40RunType empty.sql" />
-    <Build Include="IcsApp-Tests\test privy.TsaToPsaValidateSchema is executed.sql" />
     <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for multiple tables.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge throws error after handling exception.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.TsaToPsaValidateSchema.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for single table.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls ExceptionHandler on privy.TsaToPsaValidateSchema error.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls ExceptionHandler on privy.BuildAndRunMerge error.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

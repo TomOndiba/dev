@@ -12,8 +12,8 @@
   DTS:ObjectName="Import_Product_Data"
   DTS:PackageType="5"
   DTS:ProtectionLevel="2"
-  DTS:VersionBuild="21"
-  DTS:VersionGUID="{B0498388-270C-42A6-A31A-5409855FD3DE}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{E85761B5-C1BB-4CDB-8239-2EC9A3DEECD5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -37,12 +37,12 @@
           DTS:ConnectionString="Data Source=bmibidwh.database.windows.net;User ID=BmiBiDwFeedDev;Initial Catalog=BMI_BI_DW_DEV;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
           <EncryptedData
             Type="http://www.w3.org/2001/04/xmlenc#Element"
-            Salt="0/ZO+wl6G8M="
-            IV="R0RjgzIlRb3jkjtujDtMvA==" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            Salt="Wne4l0Knys0="
+            IV="/yo0wcX7Ewi5DKwwWnq33Q==" xmlns="http://www.w3.org/2001/04/xmlenc#">
             <EncryptionMethod
               Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" />
             <CipherData>
-              <CipherValue>R0RjgzIlRb3jkjtujDtMvJiyC07uIpvHbNtTSvbLTMRNElf3/KDutTT79R8e1z6S2+FcqEUtlSpFOhtTwfSRqm+LTUvvkk4rONBwagVoksl4O7S9zHS5wU8UuUDvrFKO9J3hFflOvzXWWg8rDlJXA4mgbfJzRrSuWxPdf2hq4pDnHjjwZbsJ6e9El5KiIjS8</CipherValue>
+              <CipherValue>/yo0wcX7Ewi5DKwwWnq33QePDwnANhuUbAacNz/rTmhOYxMralw66rLb8xbcfH4/DQ/OV3glJC/0byiRivVt8cFsdekVHnsM/jcB/zZbx/CmCM04S2T+dS04ndZ++VXUNSpPYyjZ/3+v/B+vNGdMoikPA/z4qCXYzumH2GtvrBdWBl7BtkUAtHzxz8xu3wPa</CipherValue>
             </CipherData>
           </EncryptedData>
         </DTS:ConnectionManager>
@@ -171,31 +171,6 @@
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\DFT_Land_SAP_MAKT\DER_AddEtlAuditInfo.Inputs[Derived Column Input].Columns[EtlSampleTable]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="200"
-                      cachedName="EtlSampleTable"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]"
-                      truncationRowDisposition="FailComponent"
-                      usageType="readWrite">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_STR,200,1252)"MAKT"</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_STR,200,1252)"MAKT"</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
                       refId="Package\DFT_Land_SAP_MAKT\DER_AddEtlAuditInfo.Inputs[Derived Column Input].Columns[EtlCreatedOn]"
                       cachedDataType="dbTimeStamp"
                       cachedName="EtlCreatedOn"
@@ -241,6 +216,31 @@
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
                           name="FriendlyExpression">(DT_STR,200,1252)@[System::PackageName]</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Land_SAP_MAKT\DER_AddEtlAuditInfo.Inputs[Derived Column Input].Columns[EtlSourceTable]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="EtlSourceTable"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,200,1252)"MAKT"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,200,1252)"MAKT"</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -387,17 +387,6 @@ where
                       name="DataSourceKey"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSampleTable]"
-                      length="200"
-                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]"
-                      name="EtlSampleTable"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlCreatedOn]"
                       dataType="dbTimeStamp"
                       errorOrTruncationOperation="Conversion"
@@ -467,6 +456,17 @@ where
                       lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[MAKTG]"
                       name="MAKTG"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSourceTable]"
+                      length="200"
+                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]"
+                      name="EtlSourceTable"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -486,12 +486,6 @@ where
                       refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[DataSourceKey]"
                       dataType="i4"
                       name="DataSourceKey" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSampleTable]"
-                      codePage="1252"
-                      dataType="str"
-                      length="200"
-                      name="EtlSampleTable" />
                     <externalMetadataColumn
                       refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlCreatedOn]"
                       dataType="dbTimeStamp"
@@ -527,6 +521,12 @@ where
                       dataType="wstr"
                       length="40"
                       name="MAKTG" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSourceTable]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="EtlSourceTable" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -555,12 +555,12 @@ where
                       lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[DataSourceKey]"
                       name="DataSourceKey" />
                     <outputColumn
-                      refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSampleTable]"
+                      refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSourceTable]"
                       codePage="1252"
                       dataType="str"
                       length="200"
-                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSampleTable]"
-                      name="EtlSampleTable" />
+                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSourceTable]"
+                      name="EtlSourceTable" />
                     <outputColumn
                       refId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlCreatedOn]"
                       dataType="dbTimeStamp"
@@ -766,13 +766,13 @@ where
                       externalMetadataColumnId="Package\DFT_Land_SAP_MAKT\TGT_Local_SAP_MAKT.Inputs[OLE DB Destination Input].ExternalColumns[MAKTG]"
                       lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[MAKTG]" />
                     <inputColumn
-                      refId="Package\DFT_Land_SAP_MAKT\TGT_Local_SAP_MAKT.Inputs[OLE DB Destination Input].Columns[EtlSampleTable]"
+                      refId="Package\DFT_Land_SAP_MAKT\TGT_Local_SAP_MAKT.Inputs[OLE DB Destination Input].Columns[EtlSourceTable]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="200"
-                      cachedName="EtlSampleTable"
+                      cachedName="EtlSourceTable"
                       externalMetadataColumnId="Package\DFT_Land_SAP_MAKT\TGT_Local_SAP_MAKT.Inputs[OLE DB Destination Input].ExternalColumns[EtlSourceTable]"
-                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]" />
+                      lineageId="Package\DFT_Land_SAP_MAKT\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -997,31 +997,6 @@ where
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\DFT_Land_SAP_MARA\DER_AddEtlAuditInfo.Inputs[Derived Column Input].Columns[EtlSampleTable]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="200"
-                      cachedName="EtlSampleTable"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]"
-                      truncationRowDisposition="FailComponent"
-                      usageType="readWrite">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_STR,200,1252)"MARA"</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_STR,200,1252)"MARA"</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
                       refId="Package\DFT_Land_SAP_MARA\DER_AddEtlAuditInfo.Inputs[Derived Column Input].Columns[EtlCreatedOn]"
                       cachedDataType="dbTimeStamp"
                       cachedName="EtlCreatedOn"
@@ -1067,6 +1042,31 @@ where
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
                           name="FriendlyExpression">(DT_STR,200,1252)@[System::PackageName]</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_Land_SAP_MARA\DER_AddEtlAuditInfo.Inputs[Derived Column Input].Columns[EtlSourceTable]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="EtlSourceTable"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,200,1252)"MARA"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,200,1252)"MARA"</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -1219,17 +1219,6 @@ where
                       externalMetadataColumnId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[DataSourceKey]"
                       lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[DataSourceKey]"
                       name="DataSourceKey"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSampleTable]"
-                      length="200"
-                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]"
-                      name="EtlSampleTable"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlCreatedOn]"
@@ -3417,6 +3406,17 @@ where
                       lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[FASHGRD]"
                       name="FASHGRD"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSourceTable]"
+                      length="200"
+                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]"
+                      name="EtlSourceTable"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3436,12 +3436,6 @@ where
                       refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[DataSourceKey]"
                       dataType="i4"
                       name="DataSourceKey" />
-                    <externalMetadataColumn
-                      refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSampleTable]"
-                      codePage="1252"
-                      dataType="str"
-                      length="200"
-                      name="EtlSampleTable" />
                     <externalMetadataColumn
                       refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlCreatedOn]"
                       dataType="dbTimeStamp"
@@ -4543,6 +4537,12 @@ where
                       dataType="wstr"
                       length="4"
                       name="FASHGRD" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].ExternalColumns[EtlSourceTable]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="EtlSourceTable" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -4571,12 +4571,12 @@ where
                       lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[DataSourceKey]"
                       name="DataSourceKey" />
                     <outputColumn
-                      refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSampleTable]"
+                      refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSourceTable]"
                       codePage="1252"
                       dataType="str"
                       length="200"
-                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSampleTable]"
-                      name="EtlSampleTable" />
+                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlSourceTable]"
+                      name="EtlSourceTable" />
                     <outputColumn
                       refId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Error Output].Columns[EtlCreatedOn]"
                       dataType="dbTimeStamp"
@@ -7544,13 +7544,13 @@ where
                       externalMetadataColumnId="Package\DFT_Land_SAP_MARA\TGT_Local_SAP_MARA.Inputs[OLE DB Destination Input].ExternalColumns[FASHGRD]"
                       lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[FASHGRD]" />
                     <inputColumn
-                      refId="Package\DFT_Land_SAP_MARA\TGT_Local_SAP_MARA.Inputs[OLE DB Destination Input].Columns[EtlSampleTable]"
+                      refId="Package\DFT_Land_SAP_MARA\TGT_Local_SAP_MARA.Inputs[OLE DB Destination Input].Columns[EtlSourceTable]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="200"
-                      cachedName="EtlSampleTable"
+                      cachedName="EtlSourceTable"
                       externalMetadataColumnId="Package\DFT_Land_SAP_MARA\TGT_Local_SAP_MARA.Inputs[OLE DB Destination Input].ExternalColumns[EtlSourceTable]"
-                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSampleTable]" />
+                      lineageId="Package\DFT_Land_SAP_MARA\SRC_Azure_Dev.Outputs[OLE DB Source Output].Columns[EtlSourceTable]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -9060,7 +9060,7 @@ where
     design-time-name="Package\DFT_Land_SAP_MAKT">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="185,42"
           Id="Package\DFT_Land_SAP_MAKT\TGT_Local_SAP_MAKT"
@@ -9104,9 +9104,7 @@ where
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -9128,9 +9126,7 @@ where
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -9161,7 +9157,7 @@ where
     design-time-name="Package\DFT_Land_SAP_MARA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="186,42"
           Id="Package\DFT_Land_SAP_MARA\TGT_Local_SAP_MARA"
@@ -9205,9 +9201,7 @@ where
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -9241,9 +9235,7 @@ where
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

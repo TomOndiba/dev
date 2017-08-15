@@ -1,5 +1,6 @@
-﻿create   procedure [tsa-to-psa-tests].[test TsaToPsaValidateSchema throws error on null mis-matched psa column]
+﻿create   procedure [tsa-to-psa-tests].[test privy.TsaToPsaValidateSchema throws error on missing psa tables]
 as
+
 begin
 		create table [tsa-to-psa-tests].Expected
 		(
@@ -14,7 +15,7 @@ begin
 		)
 		values
 		(
-			'schema validation failed at step: [check for tsa mis-matched null column from psa]', '[privy].[TsaToPsaValidateSchema]'
+			'schema validation failed at step: [check for tsa tables missing from psa]', '[privy].[TsaToPsaValidateSchema]'
 		) ;
 
 		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
@@ -34,7 +35,7 @@ begin
 
 		     N'test_tsa'			
 		  , 'ICS_LAND_Dummy'		
-		  , N'test_psa'		
+		  , 'test_psa'		
 		  , 'ICS_STG_Dummy'			
 		  , 1
 		) 
@@ -42,19 +43,12 @@ begin
 exec (N'create schema test_tsa;')
 exec (N'create schema test_psa;')
 
-
 create table test_tsa.ICS_LAND_Dummy
-(col1 int null)
-
-create table test_psa.ICS_STG_Dummy
-(col1 int not null)
+(col1 int)
 
 execute [privy].[TsaToPsaValidateSchema] 1
-
 
 exec tSQLt.AssertEqualsTable
 @Expected = '[tsa-to-psa-tests].Expected'
 , @Actual = N'log4.ExceptionHandler_spyprocedureLog' ;
-
-	
 end

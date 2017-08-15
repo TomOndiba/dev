@@ -144,13 +144,13 @@ Version	ChangeDate		Author	BugRef	Narrative
 				set @columnname =(select ColumnName from TableStructure where id = @i) ;
 				set @columndatatype=(select ColumnDatatype from TableStructure where id = @i) ;
 								
-				if (@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'))
+				if (@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted','ExcludeFromMerge','DuplicateLogicalPK'))
 					set @insertcolumnstring = @insertcolumnstring + ',' + @columnname ;
 															
-				if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted') )
+				if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted','ExcludeFromMerge','DuplicateLogicalPK') )
 					set @updatesetcolumnstring = @updatesetcolumnstring + ' , ' + 't.' + @columnname + '=' + 's.' + @columnname ;
 
-				if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	) )
+				if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	,'ExcludeFromMerge','DuplicateLogicalPK') )
 					begin 
 
 						if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
@@ -175,8 +175,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 			begin
 
 				set @sql = 'merge ' + @TTableName + ' t using ' + @STableName + ' s on ' + @pkcolumns 
-						   + ' when not matched by target then 	insert ('	+ @insertcolumnstring + ',EtlUpdatedBy,EtlUpdatedOn' + ') values('
-						   + @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + 'when matched and ' + @updatecolumnstring
+						   + ' when not matched by target and ExcludeFromMerge =0 then 	insert ('	+ @insertcolumnstring + ',EtlUpdatedBy,EtlUpdatedOn' + ') values('
+						   + @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + 'when matched and ExcludeFromMerge =0 and ' + @updatecolumnstring
 						   + ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
 						   + ', t.EtlUpDatedBy=s.EtlCreatedBy' + ';' ;
 			end ;
@@ -188,17 +188,21 @@ Version	ChangeDate		Author	BugRef	Narrative
 			begin
 
 				set @sql = 'merge ' + @TTableName + ' t using ' + @STableName + ' s on ' + @pkcolumns 
-						   + ' when not matched by target then 	insert ('	+ @insertcolumnstring + ',EtlUpdatedBy,EtlUpdatedOn' + ') values('
-						   + @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + 'when matched and ' + @updatecolumnstring
+						   + ' when not matched by target and ExcludeFromMerge =0
+						   then 	insert ('	+ @insertcolumnstring + ',EtlUpdatedBy,EtlUpdatedOn' + ') values('
+						   + @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + ' when matched  and ExcludeFromMerge =0 and ' + @updatecolumnstring
 						   + ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
 						   + ', t.EtlUpDatedBy=s.EtlCreatedBy' + ' when not matched by source then update set  t.EtlDeletedOn=' + '''' + @_LoadDateTime + ''''
 						   + ', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted=1' + ';' ;
 			end ;
 
-		--select	@sql ;
-
 		set @_Step = 'Execute Merge statement ' ;
+
 		execute sp_executesql @sql ;
+						
+		if object_id(N'TableStructure') is not null drop table TableStructure ;
+
+		if object_id(N'PkeyTable') is not null drop table PkeyTable ;
 
 		end try
 		begin catch

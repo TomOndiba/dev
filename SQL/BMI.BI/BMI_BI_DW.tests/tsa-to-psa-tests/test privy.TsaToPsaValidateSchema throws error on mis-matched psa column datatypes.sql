@@ -1,6 +1,5 @@
-﻿create   procedure [tsa-to-psa-tests].[test TsaToPsaValidateSchema throws error on missing psa columns]
+﻿create   procedure [tsa-to-psa-tests].[test privy.TsaToPsaValidateSchema throws error on mis-matched psa column datatypes]
 as
-
 begin
 		create table [tsa-to-psa-tests].Expected
 		(
@@ -15,7 +14,7 @@ begin
 		)
 		values
 		(
-			'schema validation failed at step: [check for tsa columns missing from psa]', '[privy].[TsaToPsaValidateSchema]'
+			'schema validation failed at step: [check for tsa mis-matched column datatype from psa]', '[privy].[TsaToPsaValidateSchema]'
 		) ;
 
 		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
@@ -48,14 +47,13 @@ create table test_tsa.ICS_LAND_Dummy
 (col1 int, col2 int)
 
 create table test_psa.ICS_STG_Dummy
-(col1 int)
+(col1 int, col2 varchar(2))
 
 execute [privy].[TsaToPsaValidateSchema] 1
 
 exec tSQLt.AssertEqualsTable
 @Expected = '[tsa-to-psa-tests].Expected'
 , @Actual = N'log4.ExceptionHandler_spyprocedureLog' ;
-
 
 	
 end

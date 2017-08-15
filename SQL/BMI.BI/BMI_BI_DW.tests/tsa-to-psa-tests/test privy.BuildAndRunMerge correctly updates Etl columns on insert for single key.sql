@@ -1,4 +1,4 @@
-﻿create   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on insert for single key]
+﻿CREATE   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on insert for single key]
 as
 	begin
 
@@ -21,6 +21,7 @@ as
 		  , IsIncomplete	 char(1)
 		  , pk				 int
 		  , col1			 int
+	
 		) ;
 
 
@@ -74,6 +75,7 @@ as
 		  , [DataSourceKey]	 int
 		  , pk				 int		primary key
 		  , col1			 int
+		  ,ExcludeFromMerge smallint default 0
 		) ;
 
 		create table test_psa.ICS_STG_Dummy
@@ -93,11 +95,12 @@ as
 		  , IsIncomplete	 char(1)
 		  , pk				 int		primary key
 		  , col1			 int
+		
 		) ;
 
 
 		insert into test_tsa.ICS_LAND_Dummy
-		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1 ;
+		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1,0 ;
 
 		exec privy.BuildAndRunMerge
 			@Runtype = 'Delta'
@@ -110,6 +113,6 @@ as
 		exec tSQLt.AssertEqualsTable
 			@Expected = '[tsa-to-psa-tests].Expected'
 		  , @Actual = N'test_psa.ICS_STG_Dummy' ;
-
+		  
 
 	end ;

@@ -1,9 +1,10 @@
-﻿create   proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for multiple tables]
+﻿CREATE     proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for multiple tables]
 as
 	begin
 		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema' ;
 		exec tSQLt.SpyProcedure 'privy.BuildAndRunMerge' ;
+		exec tSQLt.SpyProcedure 'privy.DeDupe' ;
 
 		create table #expected
 		(

@@ -1,4 +1,4 @@
-﻿create      procedure [tsa-to-psa-tests].[test TsaToPsaValidateSchema throws error on null mis-matched primarykeys from tsa]
+﻿create   procedure [tsa-to-psa-tests].[test privy.TsaToPsaValidateSchema throws error on mis-matched psa datatypes]
 as
 begin
 		create table [tsa-to-psa-tests].Expected
@@ -14,7 +14,7 @@ begin
 		)
 		values
 		(
-			'schema validation failed at step: [Mis-matched pk from the tsa schema]', '[privy].[TsaToPsaValidateSchema]'
+			'schema validation failed at step: [check for tsa columns missing from psa]', '[privy].[TsaToPsaValidateSchema]'
 		) ;
 
 		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
@@ -26,32 +26,30 @@ begin
 		  , SourceTable
 		  , TargetSchema
 		  , TargetTable
-		   ,DataSourceKey
+		  ,DataSourceKey
 
 		)
 		values
 		(
 
 		     N'test_tsa'			
-		  , 'ICS_LAND_Dummy'
-		   , N'test_psa'		
+		  , 'ICS_LAND_Dummy'		
+		  , N'test_psa'		
 		  , 'ICS_STG_Dummy'			
-		   , 1
+		  , 1
 		) 
 
 exec (N'create schema test_tsa;')
 exec (N'create schema test_psa;')
 
 
-create table test_psa.ICS_STG_Dummy
-(col1 int not null , col2 char(1) not null, col3 int not null, primary key (col3,col2) )
-
 create table test_tsa.ICS_LAND_Dummy
-(col1 int not null , col2 char(1) not null, col3 int not null, primary key (col2) )
+(col1 int, col2 int)
 
+create table test_psa.ICS_STG_Dummy
+(col1 int)
 
 execute [privy].[TsaToPsaValidateSchema] 1
-
 
 exec tSQLt.AssertEqualsTable
 @Expected = '[tsa-to-psa-tests].Expected'

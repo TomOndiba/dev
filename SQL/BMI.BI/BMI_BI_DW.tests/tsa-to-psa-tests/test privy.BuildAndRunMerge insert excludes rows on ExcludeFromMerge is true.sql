@@ -1,4 +1,4 @@
-﻿CREATE    procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on update for single key]
+﻿create   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge insert excludes rows on ExcludeFromMerge is true]
 as
 	begin
 
@@ -19,8 +19,10 @@ as
 		  , [EtlDeletedBy]	 varchar(200)
 		  , IsDeleted		 char(1)
 		  , IsIncomplete	 char(1)
-		  , pk				 int
+		  , pk1				 int
+		  , pk2				 int
 		  , col1			 int
+		  , col2			 varchar(50)
 	
 		) ;
 
@@ -34,32 +36,20 @@ as
 		  , [EtlCreatedBy]
 		  , [EtlSourceTable]
 		  , [DataSourceKey]
-			, [EtlUpdatedOn]
-			, [EtlUpdatedBy]
-		  --, [EtlDeletedOn]
-		  --, [EtlDeletedBy]
+		  , [EtlUpdatedOn]
+		  , [EtlUpdatedBy]
+		  , [EtlDeletedOn] 
+		  , [EtlDeletedBy]
 		  , IsDeleted
 		  , IsIncomplete
-		  , pk
+		  , pk1
+		  , pk2
 		  , col1
+		  , col2
 		)
-		select
-			1
-		  , 1
-		  , 1
-		  , @_now
-		  , 'Razia'
-		  , 'Dummy'
-		  , 1
-		,@_now
-				, 'Razia'
-		  --, @_now
-		  --, 'Razia'
-		  , null 	---when deleted
-		  , null
-		  , 1
-		  , 2 ;
-
+		select	1	, 1		  , 1		  , @_now		  , 'Razia'	, 'Dummy'		  , 1		  , @_now		  , 'Razia'		  , null		  , null		  , null		  , null		  , 1		  , 2 		  , 1		  , 'col3'
+		union
+		select	1	, 1		  , 1		  , @_now		  , 'Razia'	, 'Dummy'		  , 1		   , @_now		  , 'Razia'		  , null		  , null		  , null		  , null		  , 3		  , 1 		  , 1		  , 'col4';	  		 
 
 		exec (N'create schema test_tsa;') ;
 		exec (N'create schema test_psa;') ;
@@ -73,10 +63,14 @@ as
 		  , [EtlCreatedBy]	 varchar(50)
 		  , [EtlSourceTable] varchar(50)
 		  , [DataSourceKey]	 int
-		  , pk				 int		primary key
+		  , pk1				 int		
+		  , pk2				 int
 		  , col1			 int
+		  , col2			 varchar(50)
 		  ,ExcludeFromMerge smallint default 0
+		  ,primary key (pk1,pk2)
 		) ;
+		
 
 		create table test_psa.ICS_STG_Dummy
 		(
@@ -93,32 +87,29 @@ as
 		  , [EtlDeletedBy]	 varchar(50)
 		  , [IsDeleted]		 char(1)
 		  , IsIncomplete	 char(1)
-		  , pk				 int		primary key
+		  , pk1				 int		
+		  , pk2			     int		
 		  , col1			 int
-	
+		  , col2			 varchar(50)
+		
+		    ,primary key (pk1,pk2)
 		) ;
 
+		insert into test_tsa.ICS_LAND_Dummy([EtlBatchRunId] , [EtlStepRunId], [EtlThreadRunId] ,[EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable] ,ExcludeFromMerge
+		, [DataSourceKey], pk1, pk2, col1	, col2	)		
+			select	1, 1, 1, @_now, 'Razia', 'Dummy', 1,1, 1, 1,1,'col2' ;
 
-		insert into test_tsa.ICS_LAND_Dummy ([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], pk, col1)
-		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 2 ;
+		insert into test_tsa.ICS_LAND_Dummy([EtlBatchRunId] , [EtlStepRunId], [EtlThreadRunId] ,[EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable] ,ExcludeFromMerge
+		, [DataSourceKey], pk1, pk2, col1	, col2	)		
+			select	1, 1, 1, @_now, 'Razia', 'Dummy',0, 1, 1, 2,1,'col3' ;
+		insert into test_tsa.ICS_LAND_Dummy([EtlBatchRunId] , [EtlStepRunId], [EtlThreadRunId] ,[EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable] ,ExcludeFromMerge
+		, [DataSourceKey], pk1, pk2, col1	, col2	)		
+			select	1, 1, 1, @_now, 'Razia', 'Dummy',0 ,1, 3, 1,1,'col4' ;
 
-		insert into test_psa.ICS_STG_Dummy
-		(
-			[EtlBatchRunId]
-		  , [EtlStepRunId]
-		  , [EtlThreadRunId]
-		  , [EtlCreatedOn]
-		  , [EtlCreatedBy]
-		  , [EtlSourceTable]
-		  , [DataSourceKey]
-		  , pk
-		  , col1
-		)
-		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1 ;
 
 
 		exec privy.BuildAndRunMerge
-			@Runtype = 'Full'
+			@Runtype = 'Delta'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'
 		  , @TargetTableName = 'ICS_STG_Dummy'
@@ -128,6 +119,5 @@ as
 		exec tSQLt.AssertEqualsTable
 			@Expected = '[tsa-to-psa-tests].Expected'
 		  , @Actual = N'test_psa.ICS_STG_Dummy' ;
-
 
 	end ;

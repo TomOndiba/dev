@@ -1,5 +1,5 @@
 ﻿
-create   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on delete for composite key]
+CREATE   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on delete for composite key]
 as
 	begin
 
@@ -25,6 +25,7 @@ as
 		  , pk3              int
 		  , col1			 int
 		  , col2			 varchar(50)
+		 
 		  , primary key (pk1,pk2,pk3)
 		) ;
 
@@ -102,6 +103,7 @@ as
 		  , pk3				 int
 		  , col1			 int
 		  , col2			 varchar(50)
+		  ,ExcludeFromMerge smallint
 		  ,primary key (pk1,pk2,pk3)
 		) ;
 		

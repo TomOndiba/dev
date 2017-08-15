@@ -198,7 +198,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 				dbo.psaTotsaLoadControlTable t ;
 
 /*************************************************************************************************************************************/
-
+		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;
 		end try
 		begin catch
 

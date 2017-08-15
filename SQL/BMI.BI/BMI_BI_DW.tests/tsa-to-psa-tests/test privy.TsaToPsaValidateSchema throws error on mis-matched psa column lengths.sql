@@ -1,4 +1,4 @@
-﻿create   procedure [tsa-to-psa-tests].[test TsaToPsaValidateSchema throws error on null mis-matched tsa column]
+﻿create   procedure [tsa-to-psa-tests].[test privy.TsaToPsaValidateSchema throws error on mis-matched psa column lengths]
 as
 begin
 		create table [tsa-to-psa-tests].Expected
@@ -14,7 +14,7 @@ begin
 		)
 		values
 		(
-			'schema validation failed at step: [check for tsa mis-matched null column from tsa]', '[privy].[TsaToPsaValidateSchema]'
+			'schema validation failed at step: [check for tsa mis-matched column length from psa]', '[privy].[TsaToPsaValidateSchema]'
 		) ;
 
 		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
@@ -44,12 +44,14 @@ exec (N'create schema test_psa;')
 
 
 create table test_tsa.ICS_LAND_Dummy
-(col1 int not null)
+(col1 int, col2 varchar(2))
 
 create table test_psa.ICS_STG_Dummy
-(col1 int null)
+(col1 int, col2 varchar(3))
 
 execute [privy].[TsaToPsaValidateSchema] 1
+
+
 
 
 exec tSQLt.AssertEqualsTable

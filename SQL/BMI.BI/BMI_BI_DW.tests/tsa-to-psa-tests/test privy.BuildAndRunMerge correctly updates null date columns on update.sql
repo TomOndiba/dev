@@ -21,6 +21,7 @@ as
 		  , IsIncomplete	 char(1)
 		  , pk				 int
 		  , col1			 date
+
 		) ;
 
 
@@ -74,6 +75,7 @@ as
 		  , [DataSourceKey]	 int
 		  , pk				 int		primary key
 		  , col1			 date
+		  ,ExcludeFromMerge smallint default 0
 		) ;
 
 		create table test_psa.ICS_STG_Dummy
@@ -93,6 +95,7 @@ as
 		  , IsIncomplete	 char(1)
 		  , pk				 int		primary key
 		  , col1			 date
+
 		) ;
 
 

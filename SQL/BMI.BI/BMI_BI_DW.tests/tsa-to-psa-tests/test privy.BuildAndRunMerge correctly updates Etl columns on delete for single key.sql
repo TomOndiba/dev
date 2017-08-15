@@ -1,4 +1,4 @@
-﻿create    procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on delete for single key]
+﻿CREATE    procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge correctly updates Etl columns on delete for single key]
 as
 	begin
 
@@ -21,6 +21,7 @@ as
 		  , IsIncomplete	 char(1)
 		  , pk				 int
 		  , col1			 int
+		
 		) ;
 
 
@@ -74,6 +75,7 @@ as
 		  , [DataSourceKey]	 int
 		  , pk				 int		primary key
 		  , col1			 int
+		  ,ExcludeFromMerge smallint
 		) ;
 
 		create table test_psa.ICS_STG_Dummy
@@ -93,6 +95,7 @@ as
 		  , IsIncomplete	 char(1)
 		  , pk				 int		primary key
 		  , col1			 int
+	
 		) ;
 
 

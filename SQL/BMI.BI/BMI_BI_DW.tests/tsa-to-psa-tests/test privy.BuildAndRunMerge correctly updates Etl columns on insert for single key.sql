@@ -102,7 +102,7 @@ as
 		insert into test_tsa.ICS_LAND_Dummy
 		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1,0 ;
 
-		exec privy.BuildAndRunMerge
+		exec privy.TsaToPsaBuildAndRunMerge
 			@Runtype = 'Delta'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'

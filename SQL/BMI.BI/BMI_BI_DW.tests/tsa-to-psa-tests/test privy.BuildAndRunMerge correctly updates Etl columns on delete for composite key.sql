@@ -30,7 +30,7 @@ as
 		) ;
 
 
-		Insert into [tsa-to-psa-tests].Expected([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], [EtlUpdatedOn],[EtlUpdatedBy],
+		insert into [tsa-to-psa-tests].Expected([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], [EtlUpdatedOn],[EtlUpdatedBy],
 		[EtlDeletedOn], [EtlDeletedBy], IsDeleted,IsIncomplete, pk1, pk2, pk3, col1, col2)
 		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,1	,1 ,12	,'col'
 		union
@@ -186,7 +186,7 @@ as
 		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 2, 1, 14, 'col' ;
 
 			
-		exec privy.BuildAndRunMerge
+		exec privy.TsaToPsaBuildAndRunMerge
 			@Runtype = 'Full'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'

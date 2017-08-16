@@ -1,9 +1,10 @@
-﻿CREATE   proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.TsaToPsaValidateSchema]
+﻿
+CREATE   proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.TsaToPsaValidateSchema]
 as
 	begin
 		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema' ;
-		exec tSQLt.SpyProcedure 'privy.BuildAndRunMerge' ;
+		exec tSQLt.SpyProcedure 'privy.TsaToPsaBuildAndRunMerge' ;
 
 		select cast(1 as int) as DataSourceKey into #expected;
 

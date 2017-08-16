@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-CREATE   procedure [IcsApp].[TsaToPsaMerge]
+CREATE procedure [IcsApp].[TsaToPsaMerge]
 (
 	@DataSourceKey int
   , @RunType	   varchar(50)
@@ -89,11 +89,11 @@ Version	ChangeDate		Author	BugRef	Narrative
 					set @TargetSchemaName =	(select	TargetSchema from	dbo.psaTotsaLoadControlTable where	ID = @id) ;
 
 					set @_step = 'Run privy.DeDup' ;
-					execute privy.Dedupe	 @sourceschemaName,@sourceTableName
+					execute privy.TsaToPsaDeDupe	 @sourceschemaName,@sourceTableName
 			
 					set @_step = 'Run privy.BuildAndRunMerge' ;
 
-					exec [privy].[BuildAndRunMerge]
+					exec privy.TsaToPsaBuildAndRunMerge
 						@Runtype = @RunType
 					  , @SourceTableName = @sourceTableName
 					  , @SourceSchemaName = @sourceschemaName
@@ -131,14 +131,4 @@ Version	ChangeDate		Author	BugRef	Narrative
 		return (@_Error) ;
 
 	end ;
-
-
-
-
-
-
-
-
-
-
 GO

@@ -3,8 +3,8 @@ as
 	begin
 		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema' ;
-		exec tSQLt.SpyProcedure 'privy.BuildAndRunMerge' ;
-		exec tSQLt.SpyProcedure 'privy.DeDupe' ;
+		exec tSQLt.SpyProcedure 'privy.TsaToPsaBuildAndRunMerge' ;
+		exec tSQLt.SpyProcedure 'privy.TsaToPsaDeDupe' ;
 
 		create table #expected
 		(
@@ -57,6 +57,6 @@ as
 
 		exec tSQLt.AssertEqualsTable
 			'#expected'
-		  , 'privy.BuildAndRunMerge_SpyProcedureLog' ;
+		  , 'privy.TsaToPsaBuildAndRunMerge_SpyProcedureLog' ;
 
 	end ;

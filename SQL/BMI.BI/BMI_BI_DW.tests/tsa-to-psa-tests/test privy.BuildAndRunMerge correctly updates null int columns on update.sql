@@ -116,7 +116,7 @@ as
 		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, null ;
 
 
-		exec privy.BuildAndRunMerge
+		exec privy.TsaToPsaBuildAndRunMerge
 			@Runtype = 'Full'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'

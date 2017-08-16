@@ -1,10 +1,11 @@
-﻿CREATE    proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.Dedupe]
+﻿
+CREATE    proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.Dedupe]
 as
 	begin
 		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema' ;
-		exec tSQLt.SpyProcedure 'privy.Dedupe' ;
-		exec tSQLt.SpyProcedure 'privy.BuildAndRunMerge' ;
+		exec tSQLt.SpyProcedure 'privy.TsaToPsaDeDupe' ;
+		exec tSQLt.SpyProcedure 'privy.TsaToPsaBuildAndRunMerge' ;
 
 		create table #expected
 		(
@@ -38,6 +39,6 @@ as
 
 		exec tSQLt.AssertEqualsTable
 			'#expected'
-		  , 'privy.Dedupe_SpyProcedureLog' ;
+		  , 'privy.TsaToPsaDeDupe_SpyProcedureLog' ;
 
 	end ;

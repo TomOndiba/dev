@@ -369,7 +369,7 @@ as
 			select	1, 1, 1, @_now, 'Razia', 'Dummy', 1,1	,2  ,1 ,14	,'col4'
 
 			
-		exec privy.BuildAndRunMerge
+		exec privy.TsaToPsaBuildAndRunMerge
 			@Runtype = 'Delta'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'

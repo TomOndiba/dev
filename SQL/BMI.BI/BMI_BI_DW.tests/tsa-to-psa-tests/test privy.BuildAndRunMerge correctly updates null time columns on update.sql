@@ -76,7 +76,7 @@ as
 		  , [DataSourceKey]	 int
 		  , pk				 int		primary key
 		  , col1			 time
-		  ,ExcludeFromMerge smallint default 0
+		  ,ExcludeFromMerge bit default 0
 		) ;
 
 		create table test_psa.ICS_STG_Dummy

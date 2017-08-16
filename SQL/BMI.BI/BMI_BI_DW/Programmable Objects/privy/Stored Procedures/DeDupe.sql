@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[privy].[DeDupe]') IS NOT NULL
+IF OBJECT_ID('[privy].[DeDupe]') IS NOT NULL
 	DROP PROCEDURE [privy].[DeDupe];
 
 GO
@@ -65,7 +65,7 @@ set nocount on ;
 					;with cte as (
 					select  dense_rank() over ( order by ' + @pk
 					   + ' )rn,* from '+ @SourceSchemaName+'.'+@SourceTableName+' )
-							update  cte set cte.ExcludeFromMerge=1, cte.DuplicateLogicalPK=1
+							update  cte set cte.ExcludeFromMerge=1, cte.IsDuplicate=1
 							where rn in (select rn from cte group by rn having count(*)>1)'
 
 

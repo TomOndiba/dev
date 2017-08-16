@@ -12,8 +12,8 @@ as
 		  , ck1				   int
 		  , ck2				   int
 		  , ck3				   int
-		  , ExcludeFromMerge   smallint		default 0
-		  , DuplicateLogicalPK smallint		default 0
+		  , ExcludeFromMerge   bit		default 0
+		  , IsDuplicate		   bit		default 0
 		) ;
 
 		insert into expected
@@ -25,7 +25,7 @@ as
 		  , ck2
 		  , ck3
 		  , ExcludeFromMerge
-		  , DuplicateLogicalPK
+		  , IsDuplicate
 		)
 		select	'col1', 'col2', 'col3', 1, 1, 1, 1, 1
 		union all
@@ -62,7 +62,7 @@ as
 		  , ck2				   int
 		  , ck3				   int
 		  , ExcludeFromMerge   smallint		default 0
-		  , DuplicateLogicalPK smallint		default 0
+		  , IsDuplicate smallint		default 0
 		) ;
 
 		insert into tsa.STable

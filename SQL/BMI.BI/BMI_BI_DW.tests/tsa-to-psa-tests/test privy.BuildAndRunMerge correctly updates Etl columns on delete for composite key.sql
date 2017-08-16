@@ -103,7 +103,7 @@ as
 		  , pk3				 int
 		  , col1			 int
 		  , col2			 varchar(50)
-		  ,ExcludeFromMerge smallint
+		  ,ExcludeFromMerge  bit
 		  ,primary key (pk1,pk2,pk3)
 		) ;
 		

@@ -1,4 +1,4 @@
-﻿create   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge insert excludes rows on ExcludeFromMerge is true]
+﻿CREATE   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge insert excludes rows on ExcludeFromMerge is true]
 as
 	begin
 
@@ -67,7 +67,7 @@ as
 		  , pk2				 int
 		  , col1			 int
 		  , col2			 varchar(50)
-		  ,ExcludeFromMerge smallint default 0
+		  ,ExcludeFromMerge bit default 0
 		  ,primary key (pk1,pk2)
 		) ;
 		

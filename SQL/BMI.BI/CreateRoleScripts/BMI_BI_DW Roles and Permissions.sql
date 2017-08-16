@@ -200,6 +200,8 @@ if schema_id('tsa') is not null exec (N'grant alter on schema :: tsa to [EtlDeve
 if schema_id('tsa') is not null exec (N'grant execute, select, insert, update, delete on schema :: [tsa] to [EtlDevelopersDEV];');
 if schema_id('psa') is not null exec (N'grant execute, select, insert, update, delete on schema :: [psa] to [EtlDevelopersDEV];');
 if schema_id('etl') is not null exec (N'grant execute, select, insert, update, delete on schema :: [etl] to [EtlDevelopersDEV];');
+if schema_id('idq') is not null exec (N'grant alter on schema :: idq to [EtlDevelopersDEV];');
+if schema_id('idq') is not null exec (N'grant select, insert, update, delete on schema :: [idq] to [EtlDevelopersDEV];');
 go
 
 grant view definition to [EtlDevelopersDEV];
@@ -213,6 +215,7 @@ if schema_id('qvstg') is not null exec (N'grant select, insert, update, delete o
 if schema_id('stg') is not null exec (N'grant select, insert, update, delete on schema :: [stg] to [EtlDevelopersTEST];');
 if schema_id('tsa') is not null exec (N'grant select, insert, update, delete on schema :: [tsa] to [EtlDevelopersTEST];');
 if schema_id('psa') is not null exec (N'grant select, insert, update, delete on schema :: [psa] to [EtlDevelopersTEST];');
+if schema_id('idq') is not null exec (N'grant select, insert, update, delete on schema :: [idq] to [EtlDevelopersTEST];');
 go
 
 grant view definition to [EtlDevelopersPROD];
@@ -222,6 +225,7 @@ if schema_id('qvstg') is not null exec (N'grant select on schema :: [qvstg] to [
 if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [EtlDevelopersPROD];');
 if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [EtlDevelopersPROD];');
 if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [EtlDevelopersPROD];');
+if schema_id('idq') is not null exec (N'grant select on schema :: [idq] to [EtlDevelopersPROD];');
 go
 
 --!
@@ -291,5 +295,6 @@ if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [Busi
 if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [BusinessAnalystsPROD];');
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [BusinessAnalystsPROD];');
 if schema_id('pbi') is not null exec (N'grant select on schema :: [pbi] to [BusinessAnalystsPROD];');
+if schema_id('idq') is not null exec (N'grant select on schema :: [idq] to [BusinessAnalystsPROD];');
 go
 

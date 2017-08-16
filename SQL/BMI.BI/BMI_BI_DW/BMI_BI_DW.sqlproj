@@ -75,6 +75,7 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 </ExcludeObjectsFromSync>
+    <IncludeObjectsInDataSync />
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
 ff6c22f0-34e6-51d1-9b8a-1e9e18d39e88|Static Data\log4Private.JournalControl.data.sql;
@@ -125,7 +126,9 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
 1c8c4dc5-8292-5543-a1fb-f2b75fa1e109|Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql;
 131969b2-c406-5950-a8d9-e7a552a86a97|Programmable Objects\pbi\Views\factSaleForecastTotal.sql;
 </DeployChangesExecutionOrder>
-    <IncludeObjectsInDataSync />
+    <AdditionalScriptFolders>
+Static Data;
+</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
@@ -272,7 +275,7 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
+    <TreatTSqlWarningsAsErrors>True</TreatTSqlWarningsAsErrors>
   </PropertyGroup>
   <!--Import the settings-->
   <PropertyGroup>
@@ -318,6 +321,8 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <Folder Include="Programmable Objects\log4Utils\Stored Procedures\" />
     <Folder Include="Programmable Objects\pbi\" />
     <Folder Include="Programmable Objects\pbi\Views\" />
+    <Folder Include="Programmable Objects\utils\" />
+    <Folder Include="Programmable Objects\utils\Stored Procedures\" />
     <Folder Include="Migrations\1.0.0\" />
     <Folder Include="Static Data" />
     <Folder Include="Schema-Model\psa\" />
@@ -466,6 +471,7 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <None Include="Programmable Objects\pbi\Views\factOrderBacklog.sql" />
     <None Include="Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql" />
     <None Include="Programmable Objects\pbi\Views\factSaleForecastTotal.sql" />
+    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
     <None Include="Migrations\1.0.0\001_InitialProductionRelease_20170705.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -544,6 +550,7 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <None Include="Migrations\1.0.3\003_Rename_EtlSampleTable_column.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Schema-Model\Security\Schemas\idq.sql" />
     <None Include="Schema-Model\dbo\Tables\psaTotsaLoadControlTable.sql" />
     <None Include="Schema-Model\psa\Tables\ICS_STG_audit.sql" />
     <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_CCURRA.sql" />

@@ -113,12 +113,10 @@
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on insert for single key.sql" />
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on delete for single key.sql" />
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on delete for composite key.sql" />
-    <Build Include="StagingSchemaTests.sql" />
     <Build Include="StagingSchemaTests\test correct etl columns on tsa schema.sql" />
     <Build Include="StagingSchemaTests\test correct etl columns on psa schema.sql" />
     <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey zero.sql" />
     <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey null.sql" />
-    <Build Include="IcsApp-Tests.sql" />
     <Build Include="StagingSchemaTests\test source tables and target tables match .sql" />
     <Build Include="StagingSchemaTests\test source columns and target columns match.sql" />
     <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40RunType null.sql" />
@@ -147,6 +145,8 @@
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge update excludes rows on ExcludeFromMerge is true.sql" />
     <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge insert excludes rows on ExcludeFromMerge is true.sql" />
     <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.Dedupe.sql" />
+    <Build Include="Test Classes\StagingSchemaTests.sql" />
+    <Build Include="Test Classes\IcsApp-Tests.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

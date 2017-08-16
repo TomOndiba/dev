@@ -6,7 +6,7 @@ as
 		into
 			#expected
 		from
-			INFORMATION_SCHEMA.tables s
+			INFORMATION_SCHEMA.TABLES s
 		where
 			s.TABLE_SCHEMA = 'tsa'
 			and s.TABLE_NAME not in

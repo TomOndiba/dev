@@ -49,7 +49,6 @@ as
 	union all select 100141 , 'Villas-POL-M3'	, 'Villas Poland - M3'						, ''		, ''	, ''										, 41	, 'Y' , ''		
 	union all select 100142 , 'Baan-NLD'		, 'NL ?? - Baan'							, ''		, ''	, ''										, 42	, 'Y' , ''		
 	union all select 100143 , 'Wijo-SWE'		, 'Wijo - Sweden'							, ''		, ''	, ''										, 43	, 'Y' , ''		
-	union all select 100143 , 'Wijo-SWE'		, 'Wijo - Sweden'							, ''		, ''	, ''										, 43	, 'Y' , ''		
 	union all select 100144 , 'M3'				, 'M3 (DNK/SWE/BEL/SVK)'					, ''		, 'DNK'	, 'Denmark, Sweden, Belgium and Slovakia'	, null	, 'Y' , ''		
 	union all select 100145 , 'M3-v7'			, 'M3 v7 (FRA/ESP)'							, ''		, 'FRA'	, 'France and Spain'						, null	, 'Y' , ''		
 	union all select 100146 , 'Movex'			, 'Movex (DNK/SWE/BEL/SVK)'					, ''		, 'DNK'	, 'Denmark, Sweden, Belgium and Slovakia'	, null	, 'Y' , ''		

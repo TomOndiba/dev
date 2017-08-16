@@ -19,7 +19,7 @@ begin
 
 		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
 
-		exec tsqlt.faketable 'dbo.psaTotsaLoadControlTable'
+		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
 		insert into dbo.psaTotsaLoadControlTable
 		(
 		   SourceSchema

@@ -471,7 +471,6 @@ Static Data;
     <None Include="Programmable Objects\pbi\Views\factOrderBacklog.sql" />
     <None Include="Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql" />
     <None Include="Programmable Objects\pbi\Views\factSaleForecastTotal.sql" />
-    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
     <None Include="Migrations\1.0.0\001_InitialProductionRelease_20170705.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -857,7 +856,7 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\dbo\Stored Procedures\PopulatepsaTotsaLoadControlTable.sql" />
     <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaValidateSchema.sql" />
-    <None Include="Migrations\1.0.3\004_Create_Tables.sql" />
+    <None Include="Migrations\1.0.3\004_Create_psa_and_tsa_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\privy\Stored Procedures\BuildAndRunMerge.sql" />
@@ -880,6 +879,12 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\privy\Stored Procedures\DeDupe.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\008_Add_IDQ_schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -86,7 +86,7 @@ as
 		union all
 		select	'col1', 'col2', 'col3', 1, 3, 2 ;
 
-		exec privy.Dedupe @sourceschemaName = 'tsa', @sourceTableName = 'STable' ;
+		exec privy.DeDupe @sourceschemaName = 'tsa', @sourceTableName = 'STable' ;
 		exec tSQLt.AssertEqualsTable @Expected = 'expected', @Actual = 'tsa.STable' ;
 
 end ;

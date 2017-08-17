@@ -894,6 +894,46 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.3\010_drop_all_old_psa_tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\011_add_new_psa_movex_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\012_add_new_tsa_movex_tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

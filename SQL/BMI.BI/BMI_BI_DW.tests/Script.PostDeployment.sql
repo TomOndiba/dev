@@ -31,7 +31,10 @@ go
 --!
 --! We need to fool ReadyRoll into thinking that all migrations have already been applied
 --! in BMI_BI_DW.tests (since it is derived from the BMI_BI_DW_ukglu_SHADOW dacpac which
---! is the latest version of the ReadyRoll project anyway)
+--! is the latest version of the ReadyRoll project anyway).  We need to do this because
+--! sometimes, if we have done a lot of application development in the tests database,
+--! we temporarily reditect the BMI_BI_DW ReadyRoll project to BMI_BI_DW.tests so we can
+--! ensure we capture all completed and tests application code changes.
 --!
 truncate table dbo.__MigrationLog;
 go

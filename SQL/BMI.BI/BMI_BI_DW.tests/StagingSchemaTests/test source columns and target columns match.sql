@@ -1,45 +1,74 @@
-﻿CREATE   procedure [StagingSchemaTests].[test source columns and target columns match]
+﻿create   procedure [StagingSchemaTests].[test source columns and target columns match]
 as
 begin
-	select
-		replace(c.TABLE_NAME, 'ICS_LAND_', '') as [TABLE_NAME]
-	  , c.COLUMN_NAME
-	  , c.COLUMN_DEFAULT
-	  , c.IS_NULLABLE
-	  , c.DATA_TYPE
-	  , c.CHARACTER_MAXIMUM_LENGTH
-	  , c.NUMERIC_PRECISION
-	  , c.NUMERIC_SCALE
-	  , c.DATETIME_PRECISION
-	  , c.COLLATION_NAME
+	; with sourceCte
+	as
+	(
+			select
+				replace(c.TABLE_NAME, 'ICS_LAND_', '') as [TABLE_NAME]
+			  , c.COLUMN_NAME
+			  , c.COLUMN_DEFAULT
+			  , c.IS_NULLABLE
+			  , c.DATA_TYPE
+			  , c.CHARACTER_MAXIMUM_LENGTH
+			  , c.NUMERIC_PRECISION
+			  , c.NUMERIC_SCALE
+			  , c.DATETIME_PRECISION
+			  , c.COLLATION_NAME
+			from
+				INFORMATION_SCHEMA.COLUMNS as c
+			where
+					c.TABLE_SCHEMA = 'tsa'
+				and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
+				and COLUMN_NAME not in ('ExcludeFromMerge', 'IsDuplicate')
+		except
+			select
+				replace(c.TABLE_NAME, 'ICS_STG_', '') as [TABLE_NAME]
+				, c.COLUMN_NAME
+				, c.COLUMN_DEFAULT
+				, c.IS_NULLABLE
+				, c.DATA_TYPE
+				, c.CHARACTER_MAXIMUM_LENGTH
+				, c.NUMERIC_PRECISION
+				, c.NUMERIC_SCALE
+				, c.DATETIME_PRECISION
+				, c.COLLATION_NAME
+			from
+				INFORMATION_SCHEMA.COLUMNS as c
+			where
+					c.TABLE_SCHEMA = 'psa'	
+				and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
+				and c.COLUMN_NAME not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted')
+				--! We're only interested in validating columns for tables that exist in both TSA and PSA schemas, we already have
+				--! a test for mismatched tables
+				and upper(replace(c.TABLE_NAME, 'ICS_STG_', '')) in
+					(select upper(replace(t.TABLE_NAME, 'ICS_LAND_', '')) from INFORMATION_SCHEMA.TABLES as t where t.TABLE_SCHEMA = 'tsa')
+	)
+	--!
+	--! If there is as little as one failure, this can still take a long time to complete
+	--! because it still prints out all the passing columns so just report on the first
+	--! for mismatched columns
+	--!
+	select top 50
+		ctx.TABLE_NAME
+	  , ctx.COLUMN_NAME
+	  , ctx.COLUMN_DEFAULT
+	  , ctx.IS_NULLABLE
+	  , ctx.DATA_TYPE
+	  , ctx.CHARACTER_MAXIMUM_LENGTH
+	  , ctx.NUMERIC_PRECISION
+	  , ctx.NUMERIC_SCALE
+	  , ctx.DATETIME_PRECISION
+	  , ctx.COLLATION_NAME
 	into
-		#expected
+		#results
 	from
-		INFORMATION_SCHEMA.COLUMNS as c
-	where
-			c.TABLE_SCHEMA = 'tsa'
-		and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
-		and COLUMN_NAME not in ('ExcludeFromMerge', 'IsDuplicate')
+		sourceCte as ctx
+	order by
+		ctx.TABLE_NAME
+	  , ctx.COLUMN_NAME
 
-	select
-		replace(c.TABLE_NAME, 'ICS_STG_', '') as [TABLE_NAME]
-	  , c.COLUMN_NAME
-	  , c.COLUMN_DEFAULT
-	  , c.IS_NULLABLE
-	  , c.DATA_TYPE
-	  , c.CHARACTER_MAXIMUM_LENGTH
-	  , c.NUMERIC_PRECISION
-	  , c.NUMERIC_SCALE
-	  , c.DATETIME_PRECISION
-	  , c.COLLATION_NAME
-	into
-		#actual
-	from
-		INFORMATION_SCHEMA.COLUMNS as c
-	where
-			c.TABLE_SCHEMA = 'psa'	
-		and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
-		and COLUMN_NAME not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted')
-
-	exec tSQLt.AssertEqualsTable '#expected', '#actual' ;
+	--! Add a CR/LF to the end of the message so any failure output is better formatted
+	declare @_FailMsg nvarchar(500) = 'PSA and TSA columns do not match on one or more tables - showing the first 50 failing columns (ordered by table name then column name).' + char(13) + char(10) ;
+	exec tSQLt.AssertEmptyTable N'#results', @_FailMsg ;
 end

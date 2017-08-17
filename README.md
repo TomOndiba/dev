@@ -1,2 +1,2 @@
 # bmi-analytics
-BMI Group Business Intellegance and Analytics
+BMI Group Business Intelligence and Analytics

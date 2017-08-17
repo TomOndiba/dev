@@ -945,6 +945,51 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.3\014_Add_movex_MITPOP_tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\001_drop_country_M3_tsa_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITPOP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\002_add_new_tsa_M3_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITPOP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\003_add_new_psa_M3_tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

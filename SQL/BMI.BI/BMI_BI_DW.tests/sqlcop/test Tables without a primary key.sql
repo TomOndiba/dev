@@ -1,4 +1,4 @@
-﻿create procedure [sqlcop].[test Tables without a primary key]
+﻿CREATE procedure [sqlcop].[test Tables without a primary key]
 as
 begin
 	-- Written by George Mastros
@@ -20,11 +20,13 @@ begin
 		on t.object_id = k.parent_object_id
 	where
 			k.parent_object_id is null
-		and s.name not in ('tSQLt', 'TestHelpers')
+		and s.name not in ('tSQLt', 'TestHelpers','tsa','psa')
 		and not (s.name = 'stg' and t.name like '%LAND%')
 		and not (s.name = 'tsa' and t.name like 'ics_sql%')
 	order by
 		s.name, t.name
+
+	raiserror('WARNING!! PK validation on tsa and psa schemas temporarily disabled',0,1) with nowait;
 
 	if @Output > ''
 		begin

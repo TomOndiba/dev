@@ -64,6 +64,9 @@
     <Folder Include="Test Classes" />
     <Folder Include="utils-tests\" />
     <Folder Include="sqlcop\" />
+    <Folder Include="tsa-to-psa-tests\" />
+    <Folder Include="StagingSchemaTests\" />
+    <Folder Include="IcsApp-Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Permissions.sql" />
@@ -97,6 +100,53 @@
     <Build Include="sqlcop\test Decimal Size Problem.sql" />
     <Build Include="Test Classes\sqlcop.sql" />
     <Build Include="Test Classes\utils-tests.sql" />
+    <Build Include="tsa-to-psa-tests\tsa-to-psa-tests.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on update for composite key.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on insert for composite key.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates null varchar columns on update.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates null time columns on update.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates null int columns on update.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates null float columns on update.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates null datetime columns on update.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates null date columns on update.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on update for single key.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on insert for single key.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on delete for single key.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge correctly updates Etl columns on delete for composite key.sql" />
+    <Build Include="StagingSchemaTests\test correct etl columns on tsa schema.sql" />
+    <Build Include="StagingSchemaTests\test correct etl columns on psa schema.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey zero.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40DataSourceKey null.sql" />
+    <Build Include="StagingSchemaTests\test source tables and target tables match .sql" />
+    <Build Include="StagingSchemaTests\test source columns and target columns match.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40RunType null.sql" />
+    <Build Include="IcsApp-Tests\test TsaToPsaMerge throws error on %40RunType empty.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for multiple tables.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge throws error after handling exception.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.TsaToPsaValidateSchema.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for single table.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls ExceptionHandler on privy.TsaToPsaValidateSchema error.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls ExceptionHandler on privy.BuildAndRunMerge error.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched tsa column.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched psa column.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched primarykeys from tsa.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched primarykeys from psa.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on no pk.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on missing psa tables.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on missing psa columns.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on mis-matched psa datatypes.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on mis-matched psa column lengths.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on mis-matched psa column datatypes.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.Dedupe throws error on %40SourceTableName null.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.Dedupe throws error on %40SourceTableName empty.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.Dedupe throws error on %40sourceschemaName null.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.Dedupe throws error on %40sourceschemaName empty.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.Dedupe flags duplicate rows.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge update excludes rows on ExcludeFromMerge is true.sql" />
+    <Build Include="tsa-to-psa-tests\test privy.BuildAndRunMerge insert excludes rows on ExcludeFromMerge is true.sql" />
+    <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.Dedupe.sql" />
+    <Build Include="Test Classes\StagingSchemaTests.sql" />
+    <Build Include="Test Classes\IcsApp-Tests.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

@@ -1,4 +1,4 @@
-﻿create procedure [sqlcop].[test Varchar Size Problem]
+﻿CREATE procedure [sqlcop].[test Varchar Size Problem]
 as
 begin
 	-- Written by George Mastros
@@ -24,6 +24,8 @@ begin
 					and objectproperty(sc.id, N'IsMSSHIPPED') = 0
 					and su.schema_id <> schema_id('tSQLt')
 					and su.schema_id <> schema_id('SQLCop')
+					and su.schema_id <> schema_id('privy')
+					
 			--! Never check this for any unit tests
 			and not exists
 				(

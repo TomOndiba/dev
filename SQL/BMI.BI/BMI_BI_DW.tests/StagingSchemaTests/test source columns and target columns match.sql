@@ -46,8 +46,8 @@ begin
 	)
 	--!
 	--! If there is as little as one failure, this can still take a long time to complete
-	--! because it still prints out all the passing columns so just report on the first
-	--! for mismatched columns
+	--! because tSQLt still prints out all the passing columns so just report on the first
+	--! 50 mismatched columns
 	--!
 	select top 50
 		ctx.TABLE_NAME

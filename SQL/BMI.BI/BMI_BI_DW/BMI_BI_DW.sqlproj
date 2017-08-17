@@ -934,6 +934,9 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.3\012_add_new_tsa_movex_tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\013_Remove_ICS_POC_tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

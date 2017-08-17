@@ -22,6 +22,7 @@ begin
 			k.parent_object_id is null
 		and s.name not in ('tSQLt', 'TestHelpers')
 		and not (s.name = 'stg' and t.name like '%LAND%')
+		and not (s.name = 'tsa' and t.name like 'ics_sql%')
 	order by
 		s.name, t.name
 

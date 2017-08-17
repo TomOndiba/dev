@@ -122,8 +122,8 @@ begin
 		if @_DataCaptureStart is null
 			raiserror('Load Parameter: Data Capture Start cannot be null', 16, 1);
 
-		if @_DataCaptureStart is null
-			raiserror('Load Parameter: Data Capture Start cannot be null', 16, 1);
+		if @_DataCaptureEnd is null
+			raiserror('Load Parameter: Data Capture End cannot be null', 16, 1);
 
 		--!
 		--!

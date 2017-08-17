@@ -1,7 +1,7 @@
 ﻿/*
 	Target database:	BMI_BI_DW (configurable)
 	Target instance:	(any)
-	Generated date:		17/08/2017 10:49:26
+	Generated date:		17/08/2017 11:29:02
 	Generated on:		UKX260-003
 	Package version:	1.0.3
 	Migration version:	1.0.3
@@ -44655,6 +44655,134 @@ GO
 IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('0c0ce9b8-63b4-41d5-b9db-7bd0db068815' AS UNIQUEIDENTIFIER))
   INSERT [$(DatabaseName)].[dbo].[__MigrationLog] ([migration_id], [script_checksum], [script_filename], [complete_dt], [applied_by], [deployed], [version], [package_version], [release_version])
   VALUES                                         (CAST ('0c0ce9b8-63b4-41d5-b9db-7bd0db068815' AS UNIQUEIDENTIFIER), 'AA74E3D897DEAA11D2D969BC509699042892E2E7B358F027CA0547FBBF571909', 'Migrations\1.0.3\013_Remove_ICS_POC_tables.sql', SYSDATETIME(), SYSTEM_USER, 1, '1.0.3', '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
+
+GO
+SET IMPLICIT_TRANSACTIONS, NUMERIC_ROUNDABORT OFF;
+
+SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL, NOCOUNT, QUOTED_IDENTIFIER ON;
+
+GO
+IF DB_NAME() != '$(DatabaseName)'
+  RAISERROR ('Incorrect database context. Please check the connection details to ensure that this deployment package matches the target database. Also ensure that your project scripts do not contain any "USE [OtherDbName]" statements. To force deployment, override the DatabaseName variable.', 16, 127);
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER))
+  PRINT '
+
+***** EXECUTING MIGRATION "Migrations\1.0.3\014_Add_movex_MITPOP_tables.sql", ID: {2316e66f-2421-4df6-a52b-8d12a0a81a4b} *****';
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER))
+  EXECUTE ('
+if objectpropertyex(object_id(N''[tsa].[ics_land_movex_MITPOP]''), N''IsUserTable'') is not null
+	drop table [tsa].[ics_land_movex_MITPOP] ;
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER))
+  EXECUTE ('
+if objectpropertyex(object_id(N''[psa].[ics_stg_movex_MITPOP]''), N''IsUserTable'') is not null
+	drop table [psa].[ics_stg_movex_MITPOP] ;
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER))
+  EXECUTE ('
+create table [tsa].[ics_land_movex_MITPOP]
+(
+  EtlBatchRunId int not null
+, EtlStepRunId int not null
+, EtlThreadRunId int not null
+, DataSourceKey int not null
+, EtlSourceTable varchar(200) not null
+, EtlCreatedOn datetime not null
+, EtlCreatedBy varchar(200) not null
+, ExcludeFromMerge bit not null constraint DF_tsa_ics_land_movex_MITPOP_ExcludeFromMerge default (0)
+, IsDuplicate bit not null constraint DF_tsa_ics_land_movex_MITPOP_IsDuplicate default (0)
+
+, MPCONO decimal(3, 0) null
+, MPALWT decimal(2, 0) null
+, MPALWQ nvarchar(255) null
+, MPITNO nvarchar(255) null
+, MPPOPN nvarchar(255) null
+, MPE0PA nvarchar(255) null
+, MPVFDT decimal(8, 0) null
+, MPLVDT decimal(8, 0) null
+, MPCNQT decimal(15, 6) null
+, MPALUN nvarchar(255) null
+, MPORCO nvarchar(255) null
+, MPSEQN decimal(7, 0) null
+, MPREMK nvarchar(255) null
+, MPCFIN decimal(10, 0) null
+, MPTXID decimal(13, 0) null
+, MPSEA1 nvarchar(255) null
+, MPATPE nvarchar(255) null
+, MPATNR decimal(17, 0) null
+, MPRGDT decimal(8, 0) null
+, MPRGTM decimal(6, 0) null
+, MPLMDT decimal(8, 0) null
+, MPCHNO decimal(3, 0) null
+, MPCHID nvarchar(255) null
+, MPLMTS decimal(18, 0) null
+) ;
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER))
+  EXECUTE ('
+create table [psa].[ics_stg_movex_MITPOP]
+(
+  EtlRecordId bigint not null identity(1,1)
+, EtlBatchRunId int not null
+, EtlStepRunId int not null
+, EtlThreadRunId int not null
+, DataSourceKey int not null
+, EtlSourceTable varchar(200) not null
+, EtlCreatedOn datetime not null
+, EtlCreatedBy varchar(200) not null
+, EtlUpdatedOn datetime not null
+, EtlUpdatedBy varchar(200) not null
+, EtlDeletedOn datetime null
+, EtlDeletedBy varchar(200) null
+, IsDeleted char(1) not null constraint DF_psa_ics_stg_movex_MITPOP_IsDeleted default (''N'')
+, IsIncomplete char(1) not null constraint DF_psa_ics_stg_movex_MITPOP_IsIncomplete default (''N'')
+
+, MPCONO decimal(3, 0) null
+, MPALWT decimal(2, 0) null
+, MPALWQ nvarchar(255) null
+, MPITNO nvarchar(255) null
+, MPPOPN nvarchar(255) null
+, MPE0PA nvarchar(255) null
+, MPVFDT decimal(8, 0) null
+, MPLVDT decimal(8, 0) null
+, MPCNQT decimal(15, 6) null
+, MPALUN nvarchar(255) null
+, MPORCO nvarchar(255) null
+, MPSEQN decimal(7, 0) null
+, MPREMK nvarchar(255) null
+, MPCFIN decimal(10, 0) null
+, MPTXID decimal(13, 0) null
+, MPSEA1 nvarchar(255) null
+, MPATPE nvarchar(255) null
+, MPATNR decimal(17, 0) null
+, MPRGDT decimal(8, 0) null
+, MPRGTM decimal(6, 0) null
+, MPLMDT decimal(8, 0) null
+, MPCHNO decimal(3, 0) null
+, MPCHID nvarchar(255) null
+, MPLMTS decimal(18, 0) null
+) ;
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER))
+  PRINT '***** FINISHED EXECUTING MIGRATION "Migrations\1.0.3\014_Add_movex_MITPOP_tables.sql", ID: {2316e66f-2421-4df6-a52b-8d12a0a81a4b} *****
+';
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER))
+  INSERT [$(DatabaseName)].[dbo].[__MigrationLog] ([migration_id], [script_checksum], [script_filename], [complete_dt], [applied_by], [deployed], [version], [package_version], [release_version])
+  VALUES                                         (CAST ('2316e66f-2421-4df6-a52b-8d12a0a81a4b' AS UNIQUEIDENTIFIER), '1E97CEAC4B887E45EBB558F618908E33F97AA0EE7EB9A8E8B5FEEA4DBF2920DF', 'Migrations\1.0.3\014_Add_movex_MITPOP_tables.sql', SYSDATETIME(), SYSTEM_USER, 1, '1.0.3', '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
 
 GO
 SET IMPLICIT_TRANSACTIONS, NUMERIC_ROUNDABORT OFF;

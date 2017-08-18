@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[pbi].[factInvoice]') IS NOT NULL
+IF OBJECT_ID('[pbi].[factInvoice]') IS NOT NULL
 	DROP VIEW [pbi].[factInvoice];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create view [pbi].[factInvoice]
+create   view [pbi].[factInvoice]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -64,8 +64,14 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, i.PaymentTermKey
 		, i.LocalPaymentTerm
 		, i.LocalPaymentTermText
-		, coalesce(i.InvoiceQuantityConformed, i.InvoiceQuantityValue) as [InvoiceQuantityValue]
-		, coalesce(i.InvoiceQuantityUnitOfMeasureConformed, i.InvoiceQuantityUnitOfMeasure) as [InvoiceQuantityUnitOfMeasure]
+		-----------------------------------------------------------
+		, case
+			when len(i.InvoiceQuantityUnitOfMeasureConformed) > 0
+				then i.InvoiceQuantityConformed
+			else i.InvoiceQuantityValue
+		  end as [InvoiceQuantityValue]
+		-----------------------------------------------------------
+		, coalesce(nullif(i.InvoiceQuantityUnitOfMeasureConformed, ''), i.InvoiceQuantityUnitOfMeasure) as [InvoiceQuantityUnitOfMeasure]
 		, i.StatisticQuantityValue
 		, i.StatisticQuantityUnitOfMeasure
 		, i.Quantity

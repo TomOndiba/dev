@@ -217,6 +217,7 @@ values ('', '')
 
 	--! Other Roles
 	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
+	, ('BmiBiDwFeedDev'							, 'EtlDevelopers')
 
 	, ('InfaDev'								, 'DataFeedWriters')
 	, ('InfaProd'								, 'DataFeedWriters')

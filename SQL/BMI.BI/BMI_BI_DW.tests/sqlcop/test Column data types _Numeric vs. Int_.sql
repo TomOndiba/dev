@@ -1,4 +1,4 @@
-﻿create procedure [sqlcop].[test Column data types (Numeric vs. Int)]
+﻿CREATE procedure [sqlcop].[test Column data types (Numeric vs. Int)]
 as
 begin
 	-- Written by George Mastros
@@ -18,7 +18,7 @@ begin
             where	C.DATA_TYPE in ('numeric','decimal') 
 					and NUMERIC_SCALE = 0 
 					and NUMERIC_PRECISION <= 18
-					and TABLE_SCHEMA <> 'tSQLt'
+					and TABLE_SCHEMA  not in ('tsa','psa', 'tSQLt','stg')
 			) as Problems
 	order by ProblemItem
 

@@ -1,5 +1,4 @@
-﻿
-CREATE     proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for single table]
+﻿create proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for single table]
  as
 	begin
 		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
@@ -9,20 +8,20 @@ CREATE     proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRu
 
 		create table #expected
 		(
-			RunType			 varchar(25)  collate Latin1_General_CI_AS
-		  , sourceTableName	 varchar(255) collate Latin1_General_CI_AS
-		  , sourceschemaName varchar(55)  collate Latin1_General_CI_AS
-		  , targetTableName	 varchar(255) collate Latin1_General_CI_AS
-		  , TargetSchemaName varchar(255) collate Latin1_General_CI_AS
+			RunType			 varchar(25)  collate Latin1_General_BIN
+		  , SourceTableName	 varchar(255) collate Latin1_General_BIN
+		  , SourceSchemaName varchar(55)  collate Latin1_General_BIN
+		  , TargetTableName	 varchar(255) collate Latin1_General_BIN
+		  , TargetSchemaName varchar(255) collate Latin1_General_BIN
 		  , LoadDateTime	 smalldatetime
 		) ;
 
 		insert into #expected
 		(
 			RunType
-		  , sourceTableName
-		  , sourceschemaName
-		  , targetTableName
+		  , SourceTableName
+		  , SourceSchemaName
+		  , TargetTableName
 		  , TargetSchemaName
 		  , LoadDateTime
 		)

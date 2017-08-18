@@ -1,4 +1,4 @@
-﻿CREATE   procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge insert excludes rows on ExcludeFromMerge is true]
+﻿create procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge insert excludes rows on ExcludeFromMerge is true]
 as
 	begin
 
@@ -109,7 +109,7 @@ as
 
 
 		exec privy.TsaToPsaBuildAndRunMerge
-			@Runtype = 'Delta'
+			@RunType = 'Delta'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'
 		  , @TargetTableName = 'ICS_STG_Dummy'

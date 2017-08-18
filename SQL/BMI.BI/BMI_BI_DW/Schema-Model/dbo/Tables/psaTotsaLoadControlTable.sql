@@ -4,16 +4,16 @@ CREATE TABLE [dbo].[psaTotsaLoadControlTable]
 [CreatedDate] [datetime] NOT NULL,
 [CreatedBy] [nvarchar] (128) NULL,
 [SourceDB] [nvarchar] (128) NULL,
-[SourceSchema] [sys].[sysname] NULL,
-[SourceTable] [sys].[sysname] NOT NULL,
-[SourcePK] [varchar] (max) NULL,
+[SourceSchema] [nvarchar] (100) NOT NULL,
+[SourceTable] [nvarchar] (200) NOT NULL,
 [TargetDB] [nvarchar] (128) NULL,
-[TargetSchema] [sys].[sysname] NULL,
-[TargetTable] [sys].[sysname] NULL,
-[TargetPK] [varchar] (max) NULL,
+[TargetSchema] [nvarchar] (100) NOT NULL,
+[TargetTable] [nvarchar] (200) NOT NULL,
 [LoadMode] [varchar] (10) NOT NULL,
 [DataSourceKey] [int] NOT NULL,
-[Done] [smallint] NULL CONSTRAINT [DF__psaTotsaLo__Done__7B3CED68] DEFAULT ((0))
+[SourcePK] [varchar] (max) NULL,
+[TargetPK] [varchar] (max) NULL,
+[Done] [smallint] NULL CONSTRAINT [DF_psaTotsaLoadControlTable_Done] DEFAULT ((0))
 )
 GO
 ALTER TABLE [dbo].[psaTotsaLoadControlTable] ADD CONSTRAINT [PK_psaTotsaLoadControlTable] PRIMARY KEY CLUSTERED  ([ID])

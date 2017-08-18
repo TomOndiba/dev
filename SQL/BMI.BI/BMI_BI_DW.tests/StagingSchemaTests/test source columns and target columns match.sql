@@ -1,11 +1,11 @@
-﻿create   procedure [StagingSchemaTests].[test source columns and target columns match]
+﻿create procedure [StagingSchemaTests].[test source columns and target columns match]
 as
 begin
 	; with sourceCte
 	as
 	(
 			select
-				replace(c.TABLE_NAME, 'ICS_LAND_', '') as [TABLE_NAME]
+				replace(c.TABLE_NAME, 'ics_land_', '') as [TABLE_NAME]
 			  , c.COLUMN_NAME
 			  , c.COLUMN_DEFAULT
 			  , c.IS_NULLABLE
@@ -23,7 +23,7 @@ begin
 				and COLUMN_NAME not in ('ExcludeFromMerge', 'IsDuplicate')
 		except
 			select
-				replace(c.TABLE_NAME, 'ICS_STG_', '') as [TABLE_NAME]
+				replace(c.TABLE_NAME, 'ics_stg_', '') as [TABLE_NAME]
 				, c.COLUMN_NAME
 				, c.COLUMN_DEFAULT
 				, c.IS_NULLABLE
@@ -41,8 +41,8 @@ begin
 				and c.COLUMN_NAME not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted')
 				--! We're only interested in validating columns for tables that exist in both TSA and PSA schemas, we already have
 				--! a test for mismatched tables
-				and upper(replace(c.TABLE_NAME, 'ICS_STG_', '')) in
-					(select upper(replace(t.TABLE_NAME, 'ICS_LAND_', '')) from INFORMATION_SCHEMA.TABLES as t where t.TABLE_SCHEMA = 'tsa')
+				and replace(c.TABLE_NAME, 'ics_stg_', '') in
+					(select replace(t.TABLE_NAME, 'ics_land_', '') from INFORMATION_SCHEMA.TABLES as t where t.TABLE_SCHEMA = 'tsa')
 	)
 	--!
 	--! If there is as little as one failure, this can still take a long time to complete

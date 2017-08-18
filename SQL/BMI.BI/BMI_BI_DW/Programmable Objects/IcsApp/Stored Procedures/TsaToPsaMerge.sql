@@ -94,7 +94,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					set @_step = 'Run privy.BuildAndRunMerge' ;
 
 					exec privy.TsaToPsaBuildAndRunMerge
-						@Runtype = @RunType
+						@RunType = @RunType
 					  , @SourceTableName = @sourceTableName
 					  , @SourceSchemaName = @sourceschemaName
 					  , @TargetTableName = @targetTableName

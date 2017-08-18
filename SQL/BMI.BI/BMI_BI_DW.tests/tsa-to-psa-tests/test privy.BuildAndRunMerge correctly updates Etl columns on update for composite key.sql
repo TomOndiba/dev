@@ -370,7 +370,7 @@ as
 
 			
 		exec privy.TsaToPsaBuildAndRunMerge
-			@Runtype = 'Delta'
+			@RunType = 'Delta'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'
 		  , @TargetTableName = 'ICS_STG_Dummy'

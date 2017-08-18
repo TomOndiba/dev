@@ -54,7 +54,7 @@ execute [privy].[TsaToPsaValidateSchema] 1
 
 exec tSQLt.AssertEqualsTable
 @Expected = '[tsa-to-psa-tests].Expected'
-, @Actual = N'log4.ExceptionHandler_spyprocedureLog' ;
+, @Actual = N'log4.ExceptionHandler_SpyProcedureLog' ;
 
 
 	

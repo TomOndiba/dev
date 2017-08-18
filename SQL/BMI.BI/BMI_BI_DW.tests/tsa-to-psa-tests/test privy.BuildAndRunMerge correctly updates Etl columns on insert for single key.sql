@@ -103,7 +103,7 @@ as
 		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1,0 ;
 
 		exec privy.TsaToPsaBuildAndRunMerge
-			@Runtype = 'Delta'
+			@RunType = 'Delta'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'
 		  , @TargetTableName = 'ICS_STG_Dummy'

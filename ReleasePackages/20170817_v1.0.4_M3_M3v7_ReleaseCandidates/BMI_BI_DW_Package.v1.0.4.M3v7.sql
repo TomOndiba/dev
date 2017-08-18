@@ -1,7 +1,7 @@
 ﻿/*
 	Target database:	BMI_BI_DW (configurable)
 	Target instance:	(any)
-	Generated date:		17/08/2017 13:52:42
+	Generated date:		18/08/2017 14:33:59
 	Generated on:		UKX260-003
 	Package version:	1.0.4
 	Migration version:	1.0.4
@@ -32,7 +32,7 @@
 ---- This script is designed to be called by SQLCMD.EXE with variables specified on the command line.
 ---- However you can also run it in SQL Management Studio by uncommenting this section (CTRL+K, CTRL+U).
 :setvar DatabaseName "BMI_BI_DW_DEV"
-:setvar ReleaseVersion "v1.0.4"
+:setvar ReleaseVersion "1.0.4"
 :setvar ForceDeployWithoutBaseline "False"
 --:setvar DeployPath ""
 --:setvar DefaultFilePrefix "BMI_BI_DW"
@@ -53559,6 +53559,142 @@ IF DB_NAME() != '$(DatabaseName)'
   RAISERROR ('Incorrect database context. Please check the connection details to ensure that this deployment package matches the target database. Also ensure that your project scripts do not contain any "USE [OtherDbName]" statements. To force deployment, override the DatabaseName variable.', 16, 127);
 
 GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  PRINT '
+
+***** EXECUTING MIGRATION "Migrations\1.0.4\007_Remove_sysname_from_psaToTsaLoadControlTable.sql", ID: {430c3664-061b-40e7-a63b-cf32807d2e25} *****';
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('
+PRINT N''Dropping constraints from [dbo].[psaTotsaLoadControlTable]''
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('ALTER TABLE [dbo].[psaTotsaLoadControlTable] DROP CONSTRAINT [PK_psaTotsaLoadControlTable]
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('PRINT N''Dropping constraints from [dbo].[psaTotsaLoadControlTable]''
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('ALTER TABLE [dbo].[psaTotsaLoadControlTable] DROP CONSTRAINT [DF__psaTotsaLo__Done__7B3CED68]
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('PRINT N''Rebuilding [dbo].[psaTotsaLoadControlTable]''
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('CREATE TABLE [dbo].[RG_Recovery_1_psaTotsaLoadControlTable]
+(
+[ID] [int] NOT NULL IDENTITY(1, 1),
+[CreatedDate] [datetime] NOT NULL,
+[CreatedBy] [nvarchar] (128) NULL,
+[SourceDB] [nvarchar] (128) NULL,
+[SourceSchema] [nvarchar] (100) NOT NULL,
+[SourceTable] [nvarchar] (200) NOT NULL,
+[TargetDB] [nvarchar] (128) NULL,
+[TargetSchema] [nvarchar] (100) NOT NULL,
+[TargetTable] [nvarchar] (200) NOT NULL,
+[LoadMode] [varchar] (10) NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[SourcePK] [varchar] (max) NULL,
+[TargetPK] [varchar] (max) NULL,
+[Done] [smallint] NULL CONSTRAINT [DF_psaTotsaLoadControlTable_Done] DEFAULT ((0))
+)
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('insert into [dbo].[RG_Recovery_1_psaTotsaLoadControlTable]
+(
+	[CreatedDate]
+  , [CreatedBy]
+  , [SourceDB]
+  , [SourceSchema]
+  , [SourceTable]
+  , [TargetDB]
+  , [TargetSchema]
+  , [TargetTable]
+  , [LoadMode]
+  , [DataSourceKey]
+  , [SourcePK]
+  , [TargetPK]
+  , [Done]
+)
+select
+	[CreatedDate]
+  , [CreatedBy]
+  , [SourceDB]
+  , [SourceSchema]
+  , [SourceTable]
+  , [TargetDB]
+  , [TargetSchema]
+  , [TargetTable]
+  , [LoadMode]
+  , [DataSourceKey]
+  , [SourcePK]
+  , [TargetPK]
+  , [Done]
+from
+	[dbo].[psaTotsaLoadControlTable] ;
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('DECLARE @idVal BIGINT
+SELECT @idVal = IDENT_CURRENT(N''[dbo].[psaTotsaLoadControlTable]'')
+IF @idVal IS NOT NULL
+    DBCC CHECKIDENT(N''[dbo].[RG_Recovery_1_psaTotsaLoadControlTable]'', RESEED, @idVal)
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('DROP TABLE [dbo].[psaTotsaLoadControlTable]
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('EXEC sp_rename N''[dbo].[RG_Recovery_1_psaTotsaLoadControlTable]'', N''psaTotsaLoadControlTable'', N''OBJECT''
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('PRINT N''Creating primary key [PK_psaTotsaLoadControlTable] on [dbo].[psaTotsaLoadControlTable]''
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  EXECUTE ('ALTER TABLE [dbo].[psaTotsaLoadControlTable] ADD CONSTRAINT [PK_psaTotsaLoadControlTable] PRIMARY KEY CLUSTERED  ([ID])
+');
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  PRINT '***** FINISHED EXECUTING MIGRATION "Migrations\1.0.4\007_Remove_sysname_from_psaToTsaLoadControlTable.sql", ID: {430c3664-061b-40e7-a63b-cf32807d2e25} *****
+';
+
+GO
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER))
+  INSERT [$(DatabaseName)].[dbo].[__MigrationLog] ([migration_id], [script_checksum], [script_filename], [complete_dt], [applied_by], [deployed], [version], [package_version], [release_version])
+  VALUES                                         (CAST ('430c3664-061b-40e7-a63b-cf32807d2e25' AS UNIQUEIDENTIFIER), 'FC6C17A82BA1FAFDB4C2787B4417563EA942A173E020D4D7689DB537DB331B50', 'Migrations\1.0.4\007_Remove_sysname_from_psaToTsaLoadControlTable.sql', SYSDATETIME(), SYSTEM_USER, 1, '1.0.4', '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
+
+GO
+SET IMPLICIT_TRANSACTIONS, NUMERIC_ROUNDABORT OFF;
+
+SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL, NOCOUNT, QUOTED_IDENTIFIER ON;
+
+GO
+IF DB_NAME() != '$(DatabaseName)'
+  RAISERROR ('Incorrect database context. Please check the connection details to ensure that this deployment package matches the target database. Also ensure that your project scripts do not contain any "USE [OtherDbName]" statements. To force deployment, override the DatabaseName variable.', 16, 127);
+
+GO
 IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('ff6c22f0-34e6-51d1-9b8a-1e9e18d39e88' AS UNIQUEIDENTIFIER) AND [script_checksum] = '23C5BBB432C905255FAC41314717ABD387D25015848D67B33135DBA6731CBD42')
   PRINT '
 
@@ -61058,13 +61194,13 @@ IF DB_NAME() != '$(DatabaseName)'
   RAISERROR ('Incorrect database context. Please check the connection details to ensure that this deployment package matches the target database. Also ensure that your project scripts do not contain any "USE [OtherDbName]" statements. To force deployment, override the DatabaseName variable.', 16, 127);
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B049EA63CF46F71C8BAAEF552516922C3A06F5B0FFE6B9358AD47358A779E26')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B8D3C4990D72C8DB0963E0B6F789E20C74D859D06E2BBBE43C08D28257E70F8')
   PRINT '
 
 ***** EXECUTING MIGRATION "Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql", ID: {bd96afdd-c5f6-50aa-8590-116366b9ddf7} *****';
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B049EA63CF46F71C8BAAEF552516922C3A06F5B0FFE6B9358AD47358A779E26')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B8D3C4990D72C8DB0963E0B6F789E20C74D859D06E2BBBE43C08D28257E70F8')
   EXECUTE ('IF OBJECT_ID(''[IcsApp].[TsaToPsaMerge]'') IS NOT NULL
 	DROP PROCEDURE [IcsApp].[TsaToPsaMerge];
 
@@ -61077,7 +61213,7 @@ GO
 SET ANSI_NULLS ON;
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B049EA63CF46F71C8BAAEF552516922C3A06F5B0FFE6B9358AD47358A779E26')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B8D3C4990D72C8DB0963E0B6F789E20C74D859D06E2BBBE43C08D28257E70F8')
   EXECUTE ('CREATE procedure [IcsApp].[TsaToPsaMerge]
 (
 	@DataSourceKey int
@@ -61166,7 +61302,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					set @_step = ''Run privy.BuildAndRunMerge'' ;
 
 					exec privy.TsaToPsaBuildAndRunMerge
-						@Runtype = @RunType
+						@RunType = @RunType
 					  , @SourceTableName = @sourceTableName
 					  , @SourceSchemaName = @sourceschemaName
 					  , @TargetTableName = @targetTableName
@@ -61206,14 +61342,14 @@ Version	ChangeDate		Author	BugRef	Narrative
 ');
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B049EA63CF46F71C8BAAEF552516922C3A06F5B0FFE6B9358AD47358A779E26')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B8D3C4990D72C8DB0963E0B6F789E20C74D859D06E2BBBE43C08D28257E70F8')
   PRINT '***** FINISHED EXECUTING MIGRATION "Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql", ID: {bd96afdd-c5f6-50aa-8590-116366b9ddf7} *****
 ';
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B049EA63CF46F71C8BAAEF552516922C3A06F5B0FFE6B9358AD47358A779E26')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER) AND [script_checksum] = '9B8D3C4990D72C8DB0963E0B6F789E20C74D859D06E2BBBE43C08D28257E70F8')
   INSERT [$(DatabaseName)].[dbo].[__MigrationLog] ([migration_id], [script_checksum], [script_filename], [complete_dt], [applied_by], [deployed], [version], [package_version], [release_version])
-  VALUES                                         (CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER), '9B049EA63CF46F71C8BAAEF552516922C3A06F5B0FFE6B9358AD47358A779E26', 'Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql', SYSDATETIME(), SYSTEM_USER, 1, NULL, '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
+  VALUES                                         (CAST ('bd96afdd-c5f6-50aa-8590-116366b9ddf7' AS UNIQUEIDENTIFIER), '9B8D3C4990D72C8DB0963E0B6F789E20C74D859D06E2BBBE43C08D28257E70F8', 'Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql', SYSDATETIME(), SYSTEM_USER, 1, NULL, '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
 
 GO
 SET IMPLICIT_TRANSACTIONS, NUMERIC_ROUNDABORT OFF;
@@ -61393,16 +61529,15 @@ IF DB_NAME() != '$(DatabaseName)'
   RAISERROR ('Incorrect database context. Please check the connection details to ensure that this deployment package matches the target database. Also ensure that your project scripts do not contain any "USE [OtherDbName]" statements. To force deployment, override the DatabaseName variable.', 16, 127);
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = 'B767A50CB3A3595B54F1CFA85393FD19CA1919E0A34D9C602027A0105208FBBF')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = '324423ADF1C69DE5017CD21E3D5A06EC0ADC592546DE5429DAE1C06F2C8A73BA')
   PRINT '
 
 ***** EXECUTING MIGRATION "Programmable Objects\privy\Stored Procedures\TsaToPsaBuildAndRunMerge.sql", ID: {e11766de-db3c-53a7-9c94-79678367d136} *****';
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = 'B767A50CB3A3595B54F1CFA85393FD19CA1919E0A34D9C602027A0105208FBBF')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = '324423ADF1C69DE5017CD21E3D5A06EC0ADC592546DE5429DAE1C06F2C8A73BA')
   EXECUTE ('IF OBJECT_ID(''[privy].[TsaToPsaBuildAndRunMerge]'') IS NOT NULL
 	DROP PROCEDURE [privy].[TsaToPsaBuildAndRunMerge];
-
 ');
 
 GO
@@ -61412,11 +61547,10 @@ GO
 SET ANSI_NULLS ON;
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = 'B767A50CB3A3595B54F1CFA85393FD19CA1919E0A34D9C602027A0105208FBBF')
-  EXECUTE ('
-create procedure [privy].[TsaToPsaBuildAndRunMerge]
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = '324423ADF1C69DE5017CD21E3D5A06EC0ADC592546DE5429DAE1C06F2C8A73BA')
+  EXECUTE ('create procedure [privy].[TsaToPsaBuildAndRunMerge]
 (
-	@Runtype		  varchar(10)
+	@RunType		  varchar(10)
   , @SourceTableName  varchar(200)
   , @SourceSchemaName varchar(200)
   , @TargetTableName  varchar(200)
@@ -61424,9 +61558,7 @@ create procedure [privy].[TsaToPsaBuildAndRunMerge]
   , @LoadDateTime	  varchar(50) = null
 )
 as
-	begin
-
-		--<CommentHeader>
+--<CommentHeader>
 /**********************************************************************************************************************
 
 Properties
@@ -61451,202 +61583,196 @@ Version	ChangeDate		Author	BugRef	Narrative
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
-		--</CommentHeader>
-		--declare
-		--	@Runtype		  varchar(10)  = ''full''
-		--  , @SourceTableName  varchar(200) = ''customer''
-		--  , @SourceSchemaName varchar(200) = ''tsa''
-		--  , @TargetTableName  varchar(200) = ''customer''
-		--  , @TargetSchemaName varchar(200) = ''psa''
-		--  , @LoadDateTime	  datetime	   = null 
-		set nocount on;
+--</CommentHeader>
+begin
+	set nocount on;
 
-		begin try
+	begin try
 
-		if object_id(N''TableStructure'') is not null drop table TableStructure ;
+	if object_id(N''TableStructure'') is not null drop table TableStructure ;
 
-		if object_id(N''PkeyTable'') is not null drop table PkeyTable ;
+	if object_id(N''PkeyTable'') is not null drop table PkeyTable ;
 			
-		declare @STableName nvarchar(200) = @SourceSchemaName + ''.'' + @SourceTableName ;
-		declare @TTableName nvarchar(200) = @TargetSchemaName + ''.'' + @TargetTableName ;
-		declare @sql nvarchar(max) = '''' ;
-		declare @_LoadDateTime varchar(50) = isnull(@LoadDateTime, getdate()) ;
-	    declare @maxid int=null;
-		declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + ''.'' + quotename(object_name(@@procid)) ;
-		declare @_Error int = 0 ;
-		declare @_ReturnValue int ;
-		declare @_Message nvarchar(512) ;
-		declare @_ErrorContext nvarchar(512) ;
-		declare @_Step varchar(255) ;
+	declare @STableName nvarchar(200) = @SourceSchemaName + ''.'' + @SourceTableName ;
+	declare @TTableName nvarchar(200) = @TargetSchemaName + ''.'' + @TargetTableName ;
+	declare @sql nvarchar(max) = '''' ;
+	declare @_LoadDateTime varchar(50) = isnull(@LoadDateTime, getdate()) ;
+	declare @maxid int=null;
+	declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + ''.'' + quotename(object_name(@@procid)) ;
+	declare @_Error int = 0 ;
+	declare @_ReturnValue int ;
+	declare @_Message nvarchar(512) ;
+	declare @_ErrorContext nvarchar(512) ;
+	declare @_Step varchar(255) ;
 
-		set @_Step = ''Prepare data for merge dynamic statement'' ;
+	set @_Step = ''Prepare data for merge dynamic statement'' ;
 
 		
-		select
-			COLUMN_NAME ColumnName, DATA_TYPE ColumnDataType 
-		into
-			TableStructure
-		from
-			INFORMATION_SCHEMA.COLUMNS
-		where
-			TABLE_SCHEMA + ''.'' + TABLE_NAME = @STableName ;
+	select
+		COLUMN_NAME ColumnName, DATA_TYPE ColumnDataType 
+	into
+		TableStructure
+	from
+		INFORMATION_SCHEMA.COLUMNS
+	where
+		TABLE_SCHEMA + ''.'' + TABLE_NAME = @STableName ;
 
 			
-		alter table TableStructure add id int identity(1, 1) ;
+	alter table TableStructure add id int identity(1, 1) ;
 
-		declare @i int = 1 ;
-		declare @insertcolumnstring nvarchar(max) = '''' ; ---prepares insert list of column
-		declare @updatecolumnstring nvarchar(max) = '''' ; --prepares update list of column
-		declare @columnname nvarchar(255) = '''' ;
-		declare @updatesetcolumnstring nvarchar(max) = '''' ; --prepares set list of columns for update statement
-		declare @pkcolumns varchar(500) = '''' ;
-		declare @pkcolumnsTemp varchar(500) = '''' ;
-		declare @columndatatype varchar(500) = '''' ;
+	declare @i int = 1 ;
+	declare @insertcolumnstring nvarchar(max) = '''' ; ---prepares insert list of column
+	declare @updatecolumnstring nvarchar(max) = '''' ; --prepares update list of column
+	declare @columnname nvarchar(255) = '''' ;
+	declare @updatesetcolumnstring nvarchar(max) = '''' ; --prepares set list of columns for update statement
+	declare @pkcolumns varchar(500) = '''' ;
+	declare @pkcolumnsTemp varchar(500) = '''' ;
+	declare @columndatatype varchar(500) = '''' ;
 
-		select
-			col_name(ic.object_id, ic.column_id) as PK
-		into
-			PkeyTable
-		from
-			sys.indexes				 as i
-		inner join sys.index_columns as ic
-			on i.object_id = ic.object_id
-				and i.index_id = ic.index_id
-		where
-			1 = 1
-			and i.is_primary_key = 1
-			and ic.object_id = object_id(@TTableName) ;
+	select
+		col_name(ic.object_id, ic.column_id) as PK
+	into
+		PkeyTable
+	from
+		sys.indexes				 as i
+	inner join sys.index_columns as ic
+		on i.object_id = ic.object_id
+			and i.index_id = ic.index_id
+	where
+		1 = 1
+		and i.is_primary_key = 1
+		and ic.object_id = object_id(@TTableName) ;
 						
-		alter table PkeyTable add id int identity(1, 1) ;
+	alter table PkeyTable add id int identity(1, 1) ;
 
-		set @maxid  = (select max(id) from PkeyTable) ;
+	set @maxid  = (select max(id) from PkeyTable) ;
 		
 	
-		while (@i <=@maxid )
-			begin
+	while (@i <=@maxid )
+		begin
 
-				set @pkcolumnsTemp =(select PK from dbo.PkeyTable where id=@i );
+			set @pkcolumnsTemp =(select PK from dbo.PkeyTable where id=@i );
 				
-				if (@maxid>1)
+			if (@maxid>1)
 
-					begin
-						set @pkcolumns= '' and ''+''s.''+@pkcolumnsTemp + ''=t.''+@pkcolumnsTemp + @pkcolumns
-					end
+				begin
+					set @pkcolumns= '' and ''+''s.''+@pkcolumnsTemp + ''=t.''+@pkcolumnsTemp + @pkcolumns
+				end
 			
-				if (@maxid=1)
-					begin
-						set @pkcolumns= '' and ''+''s.''+@pkcolumnsTemp + ''=t.''+@pkcolumnsTemp
-					end
+			if (@maxid=1)
+				begin
+					set @pkcolumns= '' and ''+''s.''+@pkcolumnsTemp + ''=t.''+@pkcolumnsTemp
+				end
 
-				set @i=@i+1;
-		end
+			set @i=@i+1;
+	end
 
-		set @pkcolumns= substring(@pkcolumns,5,len(@pkcolumns))
+	set @pkcolumns= substring(@pkcolumns,5,len(@pkcolumns))
 			
-        set @i=1;
-		set @maxid  = (select max(id) from TableStructure) ;
-		while (@i <= @maxid)
-			begin
+    set @i=1;
+	set @maxid  = (select max(id) from TableStructure) ;
+	while (@i <= @maxid)
+		begin
 
-				set @columnname =(select ColumnName from TableStructure where id = @i) ;
-				set @columndatatype=(select ColumnDataType from TableStructure where id = @i) ;
+			set @columnname =(select ColumnName from TableStructure where id = @i) ;
+			set @columndatatype=(select ColumnDataType from TableStructure where id = @i) ;
 								
-				if (@columnname not in (''EtlRecordId'', ''IsIncomplete'', ''EtlUpdatedOn'', ''EtlDeletedOn'', ''EtlDeletedBy'', ''IsDeleted'',''ExcludeFromMerge'',''IsDuplicate''))
-					set @insertcolumnstring = @insertcolumnstring + '','' + @columnname ;
+			if (@columnname not in (''EtlRecordId'', ''IsIncomplete'', ''EtlUpdatedOn'', ''EtlDeletedOn'', ''EtlDeletedBy'', ''IsDeleted'',''ExcludeFromMerge'',''IsDuplicate''))
+				set @insertcolumnstring = @insertcolumnstring + '','' + @columnname ;
 															
-				if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in (''EtlRecordId'', ''IsIncomplete'', ''EtlUpdatedOn'', ''EtlUpdatedBy'', ''EtlDeletedOn'', ''EtlDeletedBy'', ''IsDeleted'',''ExcludeFromMerge'',''IsDuplicate'') )
-					set @updatesetcolumnstring = @updatesetcolumnstring + '' , '' + ''t.'' + @columnname + ''='' + ''s.'' + @columnname ;
+			if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in (''EtlRecordId'', ''IsIncomplete'', ''EtlUpdatedOn'', ''EtlUpdatedBy'', ''EtlDeletedOn'', ''EtlDeletedBy'', ''IsDeleted'',''ExcludeFromMerge'',''IsDuplicate'') )
+				set @updatesetcolumnstring = @updatesetcolumnstring + '' , '' + ''t.'' + @columnname + ''='' + ''s.'' + @columnname ;
 
-				if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	(''EtlBatchRunId'', ''EtlStepRunId'', ''EtlThreadRunId'', ''DataSourceKey'', ''EtlCreatedOn'', ''EtlCreatedBy'', ''EtlSourceTable'', ''EtlRecordId'', ''IsIncomplete'', ''EtlUpdatedOn'', ''EtlUpdatedBy'', ''EtlDeletedOn'', ''EtlDeletedBy'', ''IsDeleted''	,''ExcludeFromMerge'',''IsDuplicate'') )
-					begin 
+			if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	(''EtlBatchRunId'', ''EtlStepRunId'', ''EtlThreadRunId'', ''DataSourceKey'', ''EtlCreatedOn'', ''EtlCreatedBy'', ''EtlSourceTable'', ''EtlRecordId'', ''IsIncomplete'', ''EtlUpdatedOn'', ''EtlUpdatedBy'', ''EtlDeletedOn'', ''EtlDeletedBy'', ''IsDeleted''	,''ExcludeFromMerge'',''IsDuplicate'') )
+				begin 
 
-						if (@columndatatype in (''time'',''datetime'',''varchar'',''date'',''datetime2'',''smalldatetime'',''char'',''nvarchar'',''nchar''))
-							set @updatecolumnstring = @updatecolumnstring + '' or '' + ''isnull(s.'' + @columnname + '', '''''''')<>'' + ''isnull(t.'' + @columnname +'','''''''')'';
+					if (@columndatatype in (''time'',''datetime'',''varchar'',''date'',''datetime2'',''smalldatetime'',''char'',''nvarchar'',''nchar''))
+						set @updatecolumnstring = @updatecolumnstring + '' or '' + ''isnull(s.'' + @columnname + '', '''''''')<>'' + ''isnull(t.'' + @columnname +'','''''''')'';
 				
-						if (@columndatatype in (''int'',''float'',''real'',''bigint'',''tinyint'',''decimal'',''smallint'',''numeric'',''bit'',''money'',''smallmoney''))
-							set @updatecolumnstring = @updatecolumnstring + '' or '' + ''isnull(s.'' + @columnname + '',-999) <>'' + ''isnull(t.'' + @columnname+'',-999)'' ;
+					if (@columndatatype in (''int'',''float'',''real'',''bigint'',''tinyint'',''decimal'',''smallint'',''numeric'',''bit'',''money'',''smallmoney''))
+						set @updatecolumnstring = @updatecolumnstring + '' or '' + ''isnull(s.'' + @columnname + '',-999) <>'' + ''isnull(t.'' + @columnname+'',-999)'' ;
 
-						end 
+					end 
 					
-				set @i = @i + 1 ;
-			end ;
+			set @i = @i + 1 ;
+		end ;
 
-		set @insertcolumnstring = substring(@insertcolumnstring, 2, len(@insertcolumnstring)) ;
-		set @updatesetcolumnstring = substring(@updatesetcolumnstring, 3, len(@updatesetcolumnstring)) ;
-		set @updatecolumnstring = substring(@updatecolumnstring, 4, len(@updatecolumnstring)) ;
-		set @updatecolumnstring = ''( '' + @updatecolumnstring + '' )'' ;
+	set @insertcolumnstring = substring(@insertcolumnstring, 2, len(@insertcolumnstring)) ;
+	set @updatesetcolumnstring = substring(@updatesetcolumnstring, 3, len(@updatesetcolumnstring)) ;
+	set @updatecolumnstring = substring(@updatecolumnstring, 4, len(@updatecolumnstring)) ;
+	set @updatecolumnstring = ''( '' + @updatecolumnstring + '' )'' ;
 
-		set @_Step = ''Merge statement for Delta '' ;
+	set @_Step = ''Merge statement for Delta '' ;
 			
-		if @Runtype = ''Delta''
-			begin
+	if @RunType = ''Delta''
+		begin
 
-				set @sql = ''merge '' + @TTableName + '' t using '' + @STableName + '' s on '' + @pkcolumns 
-						   + '' when not matched by target and ExcludeFromMerge =0 then 	insert (''	+ @insertcolumnstring + '',EtlUpdatedBy,EtlUpdatedOn'' + '') values(''
-						   + @insertcolumnstring + '',EtlCreatedBy,'' + '''''''' + @_LoadDateTime + '''''''' + '')'' + ''when matched and ExcludeFromMerge =0 and '' + @updatecolumnstring
-						   + '' then update set  '' + @updatesetcolumnstring + '', t.EtlUpdatedOn='' + '''''''' + @_LoadDateTime + ''''''''
-						   + '', t.EtlUpDatedBy=s.EtlCreatedBy'' + '';'' ;
-			end ;
+			set @sql = ''merge '' + @TTableName + '' t using '' + @STableName + '' s on '' + @pkcolumns 
+						+ '' when not matched by target and ExcludeFromMerge =0 then 	insert (''	+ @insertcolumnstring + '',EtlUpdatedBy,EtlUpdatedOn'' + '') values(''
+						+ @insertcolumnstring + '',EtlCreatedBy,'' + '''''''' + @_LoadDateTime + '''''''' + '')'' + ''when matched and ExcludeFromMerge =0 and '' + @updatecolumnstring
+						+ '' then update set  '' + @updatesetcolumnstring + '', t.EtlUpdatedOn='' + '''''''' + @_LoadDateTime + ''''''''
+						+ '', t.EtlUpdatedBy=s.EtlCreatedBy'' + '';'' ;
+		end ;
 			
 			
-		set @_Step = ''Merge statement for Full '' ;
+	set @_Step = ''Merge statement for Full '' ;
 		
-		if @Runtype = ''Full'' ---soft delete
-			begin
+	if @RunType = ''Full'' ---soft delete
+		begin
 
-				set @sql = ''merge '' + @TTableName + '' t using '' + @STableName + '' s on '' + @pkcolumns 
-						   + '' when not matched by target and ExcludeFromMerge =0
-						   then 	insert (''	+ @insertcolumnstring + '',EtlUpdatedBy,EtlUpdatedOn'' + '') values(''
-						   + @insertcolumnstring + '',EtlCreatedBy,'' + '''''''' + @_LoadDateTime + '''''''' + '')'' + '' when matched  and ExcludeFromMerge =0 and '' + @updatecolumnstring
-						   + '' then update set  '' + @updatesetcolumnstring + '', t.EtlUpdatedOn='' + '''''''' + @_LoadDateTime + ''''''''
-						   + '', t.EtlUpDatedBy=s.EtlCreatedBy'' + '' when not matched by source then update set  t.EtlDeletedOn='' + '''''''' + @_LoadDateTime + ''''''''
-						   + '', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted=1'' + '';'' ;
-			end ;
+			set @sql = ''merge '' + @TTableName + '' t using '' + @STableName + '' s on '' + @pkcolumns 
+						+ '' when not matched by target and ExcludeFromMerge =0
+						then 	insert (''	+ @insertcolumnstring + '',EtlUpdatedBy,EtlUpdatedOn'' + '') values(''
+						+ @insertcolumnstring + '',EtlCreatedBy,'' + '''''''' + @_LoadDateTime + '''''''' + '')'' + '' when matched  and ExcludeFromMerge =0 and '' + @updatecolumnstring
+						+ '' then update set  '' + @updatesetcolumnstring + '', t.EtlUpdatedOn='' + '''''''' + @_LoadDateTime + ''''''''
+						+ '', t.EtlUpdatedBy=s.EtlCreatedBy'' + '' when not matched by source then update set  t.EtlDeletedOn='' + '''''''' + @_LoadDateTime + ''''''''
+						+ '', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted=1'' + '';'' ;
+		end ;
 
-		set @_Step = ''Execute Merge statement '' ;
+	set @_Step = ''Execute Merge statement '' ;
 
-		execute sp_executesql @sql ;
+	execute sp_executesql @sql ;
 						
-		if object_id(N''TableStructure'') is not null drop table TableStructure ;
+	if object_id(N''TableStructure'') is not null drop table TableStructure ;
 
-		if object_id(N''PkeyTable'') is not null drop table PkeyTable ;
+	if object_id(N''PkeyTable'') is not null drop table PkeyTable ;
 
-		end try
-		begin catch
+	end try
+	begin catch
 
-			set @_ErrorContext = ''Merge statement preparation failed at step: '' + coalesce(''['' + @_Step + '']'', ''NULL'') ;
+		set @_ErrorContext = ''Merge statement preparation failed at step: '' + coalesce(''['' + @_Step + '']'', ''NULL'') ;
 			
-			exec log4.ExceptionHandler
-				@ErrorContext = @_ErrorContext
-			  , @ErrorProcedure = @_FunctionName
-			  , @ErrorNumber = @_Error out
-			  , @ReturnMessage = @_Message out ;
-		end catch ;
+		exec log4.ExceptionHandler
+			@ErrorContext = @_ErrorContext
+			, @ErrorProcedure = @_FunctionName
+			, @ErrorNumber = @_Error out
+			, @ReturnMessage = @_Message out ;
+	end catch ;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
-		EndProc:
+	EndProc:
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 
-		--! Finally, throw an exception that will be detected by the caller
-		if @_Error > 0 raiserror(@_Message, 16, 99) ;
+	--! Finally, throw an exception that will be detected by the caller
+	if @_Error > 0 raiserror(@_Message, 16, 99) ;
 
-		set nocount off ;
+	set nocount off ;
 
-		--! Return the value of @@ERROR (which will be zero on success)
-		return (@_Error) ;
+	--! Return the value of @@ERROR (which will be zero on success)
+	return (@_Error) ;
 		
-	end ;
+end ;
 ');
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = 'B767A50CB3A3595B54F1CFA85393FD19CA1919E0A34D9C602027A0105208FBBF')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = '324423ADF1C69DE5017CD21E3D5A06EC0ADC592546DE5429DAE1C06F2C8A73BA')
   PRINT '***** FINISHED EXECUTING MIGRATION "Programmable Objects\privy\Stored Procedures\TsaToPsaBuildAndRunMerge.sql", ID: {e11766de-db3c-53a7-9c94-79678367d136} *****
 ';
 
 GO
-IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = 'B767A50CB3A3595B54F1CFA85393FD19CA1919E0A34D9C602027A0105208FBBF')
+IF NOT EXISTS (SELECT 1 FROM [$(DatabaseName)].[dbo].[__MigrationLogCurrent] WHERE [migration_id] = CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER) AND [script_checksum] = '324423ADF1C69DE5017CD21E3D5A06EC0ADC592546DE5429DAE1C06F2C8A73BA')
   INSERT [$(DatabaseName)].[dbo].[__MigrationLog] ([migration_id], [script_checksum], [script_filename], [complete_dt], [applied_by], [deployed], [version], [package_version], [release_version])
-  VALUES                                         (CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER), 'B767A50CB3A3595B54F1CFA85393FD19CA1919E0A34D9C602027A0105208FBBF', 'Programmable Objects\privy\Stored Procedures\TsaToPsaBuildAndRunMerge.sql', SYSDATETIME(), SYSTEM_USER, 1, NULL, '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
+  VALUES                                         (CAST ('e11766de-db3c-53a7-9c94-79678367d136' AS UNIQUEIDENTIFIER), '324423ADF1C69DE5017CD21E3D5A06EC0ADC592546DE5429DAE1C06F2C8A73BA', 'Programmable Objects\privy\Stored Procedures\TsaToPsaBuildAndRunMerge.sql', SYSDATETIME(), SYSTEM_USER, 1, NULL, '$(PackageVersion)', CASE '$(ReleaseVersion)' WHEN '' THEN NULL ELSE '$(ReleaseVersion)' END);
 
 GO
 SET IMPLICIT_TRANSACTIONS, NUMERIC_ROUNDABORT OFF;

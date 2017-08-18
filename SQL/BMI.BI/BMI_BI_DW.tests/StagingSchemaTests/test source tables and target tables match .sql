@@ -1,8 +1,8 @@
-﻿CREATE procedure [StagingSchemaTests].[test source tables and target tables match ]
+﻿create procedure [StagingSchemaTests].[test source tables and target tables match ]
 as
 	begin
 		select
-			replace(s.TABLE_NAME, 'ICS_LAND_', '') as [TABLE_NAME]
+			replace(s.TABLE_NAME, 'ics_land_', '') as [TABLE_NAME]
 		into
 			#expected
 		from
@@ -13,7 +13,7 @@ as
 					('ics_sql_dummySource', 'ics_sql_runLog') ;
 
 		select distinct
-			replace(t.TABLE_NAME, 'ICS_STG_', '') as [TABLE_NAME]
+			replace(t.TABLE_NAME, 'ics_stg_', '') as [TABLE_NAME]
 		into
 			#actual
 		from

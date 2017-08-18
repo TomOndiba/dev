@@ -19,7 +19,7 @@ begin
 			  and T.TABLE_TYPE = 'BASE TABLE'
 			inner join systypes S
 				on C.DATA_TYPE = S.name
-	where  c.TABLE_SCHEMA  not in ('tsa','psa', 'tSQLt','stg')
+	where  C.TABLE_SCHEMA  not in ('tsa','psa', 'tSQLt','stg')
 
 	group by C.TABLE_SCHEMA,C.TABLE_NAME
 	having sum(isnull(nullif(convert(bigint,S.length), 8000), 0) + isnull(nullif(C.CHARACTER_MAXIMUM_LENGTH, 2147483647), 0)) > 8060

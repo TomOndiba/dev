@@ -9,14 +9,14 @@ as
 
 		create table #expected
 		(
-			sourceTableName	 varchar(255) collate Latin1_General_CI_AS
-		  , sourceschemaName varchar(55)  collate Latin1_General_CI_AS
+			SourceTableName	 varchar(255) collate Latin1_General_BIN
+		  , SourceSchemaName varchar(55)  collate Latin1_General_BIN
 		) ;
 
 		insert into #expected
 		(
-			sourceTableName
-		  , sourceschemaName
+			SourceTableName
+		  , SourceSchemaName
 		)
 		select	'STable', 'tsa' ;
 

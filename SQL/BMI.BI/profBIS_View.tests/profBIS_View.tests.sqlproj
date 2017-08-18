@@ -223,6 +223,7 @@
   <ItemGroup>
     <None Include="profBIS_View.tests.sandbox.publish.xml" />
     <None Include="CLR\tSQLtCLR.dll" />
+    <None Include="profBIS_View.tests.localdb-ProjectsV13.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="tSQLtCLR">

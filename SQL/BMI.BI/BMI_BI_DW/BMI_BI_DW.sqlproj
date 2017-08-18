@@ -1035,7 +1035,10 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.4\006_add_new_psa_M3V7_tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\007_Remove_sysname_from_psaToTsaLoadControlTable.sql" />
+  </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
+    <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(localdb)\ProjectsV13;Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>
 </Project>

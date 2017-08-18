@@ -1,5 +1,4 @@
-﻿
-CREATE     procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge update excludes rows on ExcludeFromMerge is true]
+﻿CREATE procedure [tsa-to-psa-tests].[test privy.BuildAndRunMerge update excludes rows on ExcludeFromMerge is true]
 as
 	begin
 
@@ -138,7 +137,7 @@ as
 			select	1, 1, 1, @_now, 'Razia', 'Dummy', 1,1	,1	,3 ,14	,'col4'
 						
 		exec privy.TsaToPsaBuildAndRunMerge
-			@Runtype = 'Delta'
+			@RunType = 'Delta'
 		  , @SourceTableName = 'ICS_LAND_Dummy'
 		  , @SourceSchemaName = 'test_tsa'
 		  , @TargetTableName = 'ICS_STG_Dummy'

@@ -340,6 +340,7 @@ Static Data;
     <Folder Include="Programmable Objects\IcsApp\" />
     <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
     <Folder Include="Migrations\1.0.4" />
+    <Folder Include="Migrations\1.0.6" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />

@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>profBIS_View.tests</RootNamespace>
     <AssemblyName>profBIS_View.tests</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1030,CI</ModelCollation>
     <DefaultFileStructure>BySchema</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -24,7 +24,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultCollation>Danish_Norwegian_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

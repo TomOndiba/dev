@@ -1,0 +1,31 @@
+CREATE TABLE [tsa].[ics_land_SAP_GBR_SKA1]
+(
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_SKA1_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_SKA1_IsDuplicate] DEFAULT ((0)),
+[MANDT] [nvarchar] (3) NULL,
+[KTOPL] [nvarchar] (4) NULL,
+[SAKNR] [nvarchar] (10) NULL,
+[XBILK] [nvarchar] (1) NULL,
+[SAKAN] [nvarchar] (10) NULL,
+[BILKT] [nvarchar] (10) NULL,
+[ERDAT] [datetime] NULL,
+[ERNAM] [nvarchar] (12) NULL,
+[GVTYP] [nvarchar] (2) NULL,
+[KTOKS] [nvarchar] (4) NULL,
+[MUSTR] [nvarchar] (10) NULL,
+[VBUND] [nvarchar] (6) NULL,
+[XLOEV] [nvarchar] (1) NULL,
+[XSPEA] [nvarchar] (1) NULL,
+[XSPEB] [nvarchar] (1) NULL,
+[XSPEP] [nvarchar] (1) NULL,
+[MCOD1] [nvarchar] (25) NULL,
+[FUNC_AREA] [nvarchar] (16) NULL
+)
+GO

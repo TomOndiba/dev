@@ -1039,6 +1039,47 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.4\007_Remove_sysname_from_psaToTsaLoadControlTable.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.6\001_Remove_incorrect_case_SAP_GBR_tables_.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_BKPF.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_BSEG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_CEPC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_CSKS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_CSKT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EBAN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EKAN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EKES.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EKET.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_KEKO.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_KEPH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_KNVP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_KNVS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_KNVV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_KOND.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_MKPF.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_MSEG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_RBKP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_RSEG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_SKA1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_SKB1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_STKO.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_STPO.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_T024.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_T156.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_TKA01.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_TKA02.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VBEP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VBUP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VEDA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VTTK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VTTP.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.6\002_Add_new_SAP_GBR_tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

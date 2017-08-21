@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_T006]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_T006]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_T006_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_T006_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [MSEHI] [nvarchar] (3) NULL,
 [KZEX3] [nvarchar] (1) NULL,
@@ -28,7 +31,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_T006]
 [TEMP_UNIT] [nvarchar] (3) NULL,
 [FAMUNIT] [nvarchar] (1) NULL,
 [PRESS_VAL] [float] NULL,
-[PRESS_UNIT] [nvarchar] (3) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[PRESS_UNIT] [nvarchar] (3) NULL
 )
 GO

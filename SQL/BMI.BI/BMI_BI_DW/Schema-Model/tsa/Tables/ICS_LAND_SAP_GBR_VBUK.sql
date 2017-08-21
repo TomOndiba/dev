@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_VBUK]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_VBUK]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_VBUK_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_VBUK_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [VBELN] [nvarchar] (10) NULL,
 [RFSTK] [nvarchar] (1) NULL,
@@ -87,7 +90,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_VBUK]
 [HDALL] [nvarchar] (1) NULL,
 [HDALS] [nvarchar] (1) NULL,
 [CMPS_CM] [nvarchar] (1) NULL,
-[CMPS_TE] [nvarchar] (1) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[CMPS_TE] [nvarchar] (1) NULL
 )
 GO

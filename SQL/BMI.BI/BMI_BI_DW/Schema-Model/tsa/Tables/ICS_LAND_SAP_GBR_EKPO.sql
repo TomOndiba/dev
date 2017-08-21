@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_EKPO]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_EKPO]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_EKPO_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_EKPO_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [EBELN] [nvarchar] (10) NULL,
 [EBELP] [nvarchar] (5) NULL,
@@ -270,7 +273,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_EKPO]
 [SOURCE_KEY] [nvarchar] (32) NULL,
 [PUT_BACK] [nvarchar] (1) NULL,
 [POL_ID] [nvarchar] (10) NULL,
-[CONS_ORDER] [nvarchar] (1) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[CONS_ORDER] [nvarchar] (1) NULL
 )
 GO

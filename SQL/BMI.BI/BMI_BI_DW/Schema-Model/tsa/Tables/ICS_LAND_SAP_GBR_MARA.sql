@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_MARA]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_MARA]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_MARA_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_MARA_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [MATNR] [nvarchar] (18) NULL,
 [ERSDA] [datetime] NULL,
@@ -220,7 +223,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_MARA]
 [FIBER_PART4] [nvarchar] (3) NULL,
 [FIBER_CODE5] [nvarchar] (3) NULL,
 [FIBER_PART5] [nvarchar] (3) NULL,
-[FASHGRD] [nvarchar] (4) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[FASHGRD] [nvarchar] (4) NULL
 )
 GO

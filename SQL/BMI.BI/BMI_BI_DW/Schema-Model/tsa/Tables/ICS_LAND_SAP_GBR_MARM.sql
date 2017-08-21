@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_MARM]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_MARM]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_MARM_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_MARM_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [MATNR] [nvarchar] (18) NULL,
 [MEINH] [nvarchar] (3) NULL,
@@ -34,7 +37,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_MARM]
 [NEST_FTR] [decimal] (3, 0) NULL,
 [MAX_STACK] [smallint] NULL,
 [CAPAUSE] [decimal] (15, 3) NULL,
-[TY2TQ] [nvarchar] (1) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[TY2TQ] [nvarchar] (1) NULL
 )
 GO

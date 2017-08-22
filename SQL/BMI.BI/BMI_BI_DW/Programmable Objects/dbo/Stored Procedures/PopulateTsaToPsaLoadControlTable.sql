@@ -193,7 +193,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 				t
 			set
 				TargetPK = substring(TargetPK, 2, len(TargetPK))
-			  , SourcePK = substring(SourcePK, 2, len(SourcePK))
+			  , SourcePK = substring(TargetPK, 2, len(TargetPK))
 			from
 				dbo.TsaToPsaLoadControlTable t ;
 

@@ -1,7 +1,7 @@
-﻿create proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for single table]
+﻿CREATE proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for single table]
  as
 	begin
-		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
+		exec tSQLt.FakeTable 'dbo.TsaToPsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaBuildAndRunMerge' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaDeDupe' ;
@@ -30,7 +30,7 @@
 	
 
 
-		insert into dbo.psaTotsaLoadControlTable
+		insert into dbo.TsaToPsaLoadControlTable
 		(
 			ID
 		  , SourceTable
@@ -45,9 +45,6 @@
 		union
 		select	3, 'STable3', 'tsa', 'col1', 'TTable3', 'psa', 'col1', 2
 	
-
-		--select * from dbo.psaTotsaLoadControlTable
-
 		execute IcsApp.TsaToPsaMerge 1, 'Full' ;
 
 		exec tSQLt.AssertEqualsTable

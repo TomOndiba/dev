@@ -1,4 +1,4 @@
-﻿create   procedure [tsa-to-psa-tests].[test privy.TsaToPsaValidateSchema throws error on mis-matched psa datatypes]
+﻿CREATE   procedure [tsa-to-psa-tests].[test privy.TsaToPsaValidateSchema throws error on mis-matched psa datatypes]
 as
 begin
 		create table [tsa-to-psa-tests].Expected
@@ -19,8 +19,8 @@ begin
 
 		exec tSQLt.SpyProcedure N'log4.ExceptionHandler' ;
 
-		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable'
-		insert into dbo.psaTotsaLoadControlTable
+		exec tSQLt.FakeTable 'dbo.TsaToPsaLoadControlTable'
+		insert into dbo.TsaToPsaLoadControlTable
 		(
 		   SourceSchema
 		  , SourceTable

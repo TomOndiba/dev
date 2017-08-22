@@ -2,7 +2,7 @@
 CREATE   proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls ExceptionHandler on privy.BuildAndRunMerge error]
 as
 	begin
-		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
+		exec tSQLt.FakeTable 'dbo.TsaToPsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema', 'raiserror(''oops'',16,1)' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaBuildAndRunMerge' ;
 		exec tSQLt.SpyProcedure 'log4.ExceptionHandler' ;

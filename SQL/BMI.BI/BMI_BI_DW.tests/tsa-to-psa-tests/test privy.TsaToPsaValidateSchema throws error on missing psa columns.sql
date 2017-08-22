@@ -34,9 +34,9 @@ begin
 		(
 
 		     N'test_tsa'			
-		  , 'ICS_LAND_Dummy'		
+		  , 'ics_land_Dummy'		
 		  , N'test_psa'		
-		  , 'ICS_STG_Dummy'			
+		  , 'ics_stg_Dummy'			
 		  , 1
 		) 
 
@@ -44,10 +44,10 @@ exec (N'create schema test_tsa;')
 exec (N'create schema test_psa;')
 
 
-create table test_tsa.ICS_LAND_Dummy
+create table test_tsa.ics_land_Dummy
 (col1 int, col2 int)
 
-create table test_psa.ICS_STG_Dummy
+create table test_psa.ics_stg_Dummy
 (col1 int)
 
 execute [privy].[TsaToPsaValidateSchema] 1

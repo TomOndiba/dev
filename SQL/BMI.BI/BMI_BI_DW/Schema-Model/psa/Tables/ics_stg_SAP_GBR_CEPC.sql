@@ -1,5 +1,6 @@
 CREATE TABLE [psa].[ics_stg_SAP_GBR_CEPC]
 (
+[EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
 [EtlStepRunId] [int] NOT NULL,
 [EtlThreadRunId] [int] NOT NULL,
@@ -7,8 +8,12 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_CEPC]
 [EtlSourceTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
 [EtlCreatedBy] [varchar] (200) NOT NULL,
-[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_stg_SAP_GBR_CEPC_ExcludeFromMerge] DEFAULT ((0)),
-[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_stg_SAP_GBR_CEPC_IsDuplicate] DEFAULT ((0)),
+[EtlUpdatedOn] [datetime] NOT NULL,
+[EtlUpdatedBy] [varchar] (200) NOT NULL,
+[EtlDeletedOn] [datetime] NULL,
+[EtlDeletedBy] [varchar] (200) NULL,
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_SAP_GBR_CEPC_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_SAP_GBR_CEPC_IsIncomplete] DEFAULT ('N'),
 [MANDT] [nvarchar] (3) NULL,
 [PRCTR] [nvarchar] (10) NULL,
 [DATBI] [datetime] NULL,
@@ -58,4 +63,6 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_CEPC]
 [PCA_TEMPLATE] [nvarchar] (10) NULL,
 [SEGMENT] [nvarchar] (10) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_SAP_GBR_CEPC] ADD CONSTRAINT [AK_psa_ics_stg_SAP_GBR_CEPC_EtlRecordId] UNIQUE CLUSTERED  ([EtlRecordId])
 GO

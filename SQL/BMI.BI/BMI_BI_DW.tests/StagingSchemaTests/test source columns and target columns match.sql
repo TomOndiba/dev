@@ -20,7 +20,7 @@ begin
 			where
 					c.TABLE_SCHEMA = 'tsa'
 				and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
-				and COLUMN_NAME not in ('ExcludeFromMerge', 'IsDuplicate')
+				and c.COLUMN_NAME not in ('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlSourceTable', 'EtlCreatedOn', 'EtlCreatedBy', 'ExcludeFromMerge', 'IsDuplicate')
 		except
 			select
 				replace(c.TABLE_NAME, 'ics_stg_', '') as [TABLE_NAME]
@@ -38,6 +38,7 @@ begin
 			where
 					c.TABLE_SCHEMA = 'psa'	
 				and c.TABLE_NAME not in ('ics_sql_dummySource','ics_sql_runLog')
+				and c.COLUMN_NAME not in ('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlSourceTable', 'EtlCreatedOn', 'EtlCreatedBy', 'ExcludeFromMerge', 'IsDuplicate')
 				and c.COLUMN_NAME not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted')
 				--! We're only interested in validating columns for tables that exist in both TSA and PSA schemas, we already have
 				--! a test for mismatched tables

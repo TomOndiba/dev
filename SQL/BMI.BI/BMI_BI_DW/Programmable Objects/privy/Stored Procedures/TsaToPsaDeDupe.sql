@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[privy].[TsaToPsaDeDupe]') IS NOT NULL
+IF OBJECT_ID('[privy].[TsaToPsaDeDupe]') IS NOT NULL
 	DROP PROCEDURE [privy].[TsaToPsaDeDupe];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create proc [privy].[TsaToPsaDeDupe]
+CREATE proc [privy].[TsaToPsaDeDupe]
 (
 	@SourceSchemaName varchar(255), 
 	@SourceTableName  varchar(255)
@@ -46,7 +46,7 @@ set nocount on ;
 			declare @_ErrorContext nvarchar(512) ;
 			declare @_step varchar(128) ;
 			declare @_ExceptionId int ;
-			declare	@pk	 varchar(255) = ( select	TargetPK from dbo.psaTotsaLoadControlTable	 where	SourceTable = @SourceTableName	 and  SourceSchema = @SourceSchemaName )
+			declare	@pk	 varchar(255) = ( select	TargetPK from dbo.TsaToPsaLoadControlTable	 where	SourceTable = @SourceTableName	 and  SourceSchema = @SourceSchemaName )
 					, @sql nvarchar(max) = '' ;
 
 					--select @SourceSchemaName,@SourceTableName

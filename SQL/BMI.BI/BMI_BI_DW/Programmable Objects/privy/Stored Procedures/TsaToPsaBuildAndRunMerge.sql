@@ -68,20 +68,12 @@ begin
 	declare @_Severity smallint = @SEVERITY_INFORMATION;
 	declare @_ProgressLog nvarchar(max);
 	declare	@_ProgressMessage varchar(2000)
+	declare	@_StepStartTime datetime
 
 
 
 	set @_Step = 'Prepare data for merge dynamic statement' ;
-	--------------change it 
-
-		set @_ProgressMessage = 'Step: "' +  @_Step + '" processed ' + coalesce(cast('@_RowCount' as varchar(16)), 'NULL') + ' row(s)'
-				+ ' in ' + log4.FormatElapsedTime('@_StepStartTime', null, 3)
-		set @_ProgressLog += coalesce(char(10) + @_ProgressMessage, '');
-
-
-
-
-		
+			
 	select
 		COLUMN_NAME ColumnName, DATA_TYPE ColumnDataType 
 	into
@@ -176,7 +168,9 @@ begin
 	set @updatecolumnstring = substring(@updatecolumnstring, 4, len(@updatecolumnstring)) ;
 	set @updatecolumnstring = '( ' + @updatecolumnstring + ' )' ;
 
+	set @_StepStartTime = getdate();
 	set @_Step = 'Merge statement for Delta ' ;
+	
 			
 	if @RunType = 'Delta'
 		begin
@@ -208,6 +202,10 @@ begin
 	set @_Step = 'Execute Merge statement ' ;
 
 	execute sp_executesql @sql ;
+	
+	set @_ProgressMessage = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@@ROWCOUNT as varchar(16)), 'NULL') + ' row(s)'
+				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)
+	set @_ProgressLog += coalesce(char(10) + @_ProgressMessage, '');
 						
 	if object_id(N'#TableStructure') is not null drop table #TableStructure ;
 
@@ -217,7 +215,11 @@ begin
 	begin catch
 
 		set @_ErrorContext = 'Merge statement preparation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
-			
+
+		set @_ProgressMessage = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@@ROWCOUNT as varchar(16)), 'NULL') + ' row(s)'
+				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)
+
+	set @_ProgressLog += coalesce(char(10) + @_ProgressMessage, '');
 		exec log4.ExceptionHandler
 			@ErrorContext = @_ErrorContext
 			, @ErrorProcedure = @_FunctionName

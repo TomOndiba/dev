@@ -59,40 +59,40 @@ Version	ChangeDate		Author	BugRef	Narrative
 			(
 				select
 					'Missing table from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_LAND', '') TableName
+				  , replace(TABLE_NAME, 'ics_land', '') TableName
 				from
 					INFORMATION_SCHEMA.TABLES
 				where
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
 					and TABLE_TYPE = 'BASE TABLE'
 					and TABLE_NAME in
 						(
-							select	SourceTable from dbo.psaTotsaLoadControlTable
+							select	SourceTable from dbo.TsaToPsaLoadControlTable
 							where DataSourceKey=@DataSourceKey
 
 						)
 				except
 				select
 					'Missing table from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_STG', '') TableName
+				  , replace(TABLE_NAME, 'ics_stg', '') TableName
 				from
 					INFORMATION_SCHEMA.TABLES
 				where
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
 					and TABLE_TYPE = 'BASE TABLE'
 					and TABLE_NAME in
 						(
-							select	TargetTable from dbo.psaTotsaLoadControlTable
+							select	TargetTable from dbo.TsaToPsaLoadControlTable
 							where DataSourceKey=@DataSourceKey
 						)
 			)
@@ -106,7 +106,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			(
 				select
 					'Missing column from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_LAND', '') TableName
+				  , replace(TABLE_NAME, 'ics_land', '') TableName
 				  , COLUMN_NAME
 				from
 					INFORMATION_SCHEMA.COLUMNS
@@ -114,18 +114,18 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_LAND', '') in
+					and replace(TABLE_NAME, 'ics_land', '') in
 						(
-							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							select	replace(TargetTable, 'ics_stg', '') from dbo.TsaToPsaLoadControlTable
 							where DataSourceKey=@DataSourceKey
 						)
 				except
 				select
 					'Missing column from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_STG', '')	TableName
+				  , replace(TABLE_NAME, 'ics_stg', '')	TableName
 				  , COLUMN_NAME
 				from
 					INFORMATION_SCHEMA.COLUMNS
@@ -133,15 +133,15 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_STG', '') in
+					and replace(TABLE_NAME, 'ics_stg', '') in
 						(
 							select
-								replace(a.SourceTable, 'ICS_LAND', '')
+								replace(a.SourceTable, 'ics_land', '')
 							from
-								dbo.psaTotsaLoadControlTable a
+								dbo.TsaToPsaLoadControlTable a
 							where DataSourceKey=@DataSourceKey
 						)
 			)
@@ -156,7 +156,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			(
 				select
 					'Mis-matched  data type from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_LAND', '')			TableName
+				  , replace(TABLE_NAME, 'ics_land', '')			TableName
 				  , COLUMN_NAME
 				  , DATA_TYPE
 				from
@@ -165,18 +165,18 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_LAND', '') in
+					and replace(TABLE_NAME, 'ics_land', '') in
 						(
-							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							select	replace(TargetTable, 'ics_stg', '') from dbo.TsaToPsaLoadControlTable
 							where DataSourceKey=@DataSourceKey
 						)
 				except
 				select
 					'Mis-matched  data type from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_STG', '')			TableName
+				  , replace(TABLE_NAME, 'ics_stg', '')			TableName
 				  , COLUMN_NAME
 				  , DATA_TYPE
 				from
@@ -185,16 +185,16 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
 					--and TABLE_TYPE='BASE TABLE'
-					and replace(TABLE_NAME, 'ICS_STG', '') in
+					and replace(TABLE_NAME, 'ics_stg', '') in
 						(
 							select
-								replace(a.SourceTable, 'ICS_LAND', '')
+								replace(a.SourceTable, 'ics_land', '')
 							from
-								dbo.psaTotsaLoadControlTable a
+								dbo.TsaToPsaLoadControlTable a
 							where DataSourceKey=@DataSourceKey
 						)
 			)
@@ -207,7 +207,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			(
 				select
 					'Mis-matched length from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_LAND', '')		TableName
+				  , replace(TABLE_NAME, 'ics_land', '')		TableName
 				  , COLUMN_NAME
 				  , isnull(CHARACTER_MAXIMUM_LENGTH, -1)
 				from
@@ -216,18 +216,18 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_LAND', '') in
+					and replace(TABLE_NAME, 'ics_land', '') in
 						(
-							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							select	replace(TargetTable, 'ics_stg', '') from dbo.TsaToPsaLoadControlTable
 							where DataSourceKey=@DataSourceKey
 						)
 				except
 				select
 					'Mis-matched length from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_STG', '')		TableName
+				  , replace(TABLE_NAME, 'ics_stg', '')		TableName
 				  , COLUMN_NAME
 				  , isnull(CHARACTER_MAXIMUM_LENGTH, -1)
 				from
@@ -236,15 +236,15 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_STG', '') in
+					and replace(TABLE_NAME, 'ics_stg', '') in
 						(
 							select
-								replace(a.SourceTable, 'ICS_LAND', '')
+								replace(a.SourceTable, 'ics_land', '')
 							from
-								dbo.psaTotsaLoadControlTable a
+								dbo.TsaToPsaLoadControlTable a
 							where DataSourceKey=@DataSourceKey
 						)
 			)
@@ -257,7 +257,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			(
 				select
 					'Mis-matched length from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_LAND', '')		TableName
+				  , replace(TABLE_NAME, 'ics_land', '')		TableName
 				  , COLUMN_NAME
 				  , IS_NULLABLE
 				from
@@ -266,19 +266,19 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_LAND', '') in
+					and replace(TABLE_NAME, 'ics_land', '') in
 						(
-							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							select	replace(TargetTable, 'ics_stg', '') from dbo.TsaToPsaLoadControlTable
 							where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'YES'
 				except
 				select
 					'Mis-matched length from the psa schema' Message
-				  , replace(TABLE_NAME, 'ICS_STG', '')		 TableName
+				  , replace(TABLE_NAME, 'ics_stg', '')		 TableName
 				  , COLUMN_NAME
 				  , IS_NULLABLE
 				from
@@ -287,15 +287,15 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_STG', '') in
+					and replace(TABLE_NAME, 'ics_stg', '') in
 						(
 							select
-								replace(a.SourceTable, 'ICS_LAND', '')
+								replace(a.SourceTable, 'ics_land', '')
 							from
-								dbo.psaTotsaLoadControlTable a
+								dbo.TsaToPsaLoadControlTable a
 							where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'YES'
@@ -309,7 +309,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			(
 				select
 					'Mis-matched length from the psa schema'
-				  , replace(TABLE_NAME, 'ICS_LAND', '')		TableName
+				  , replace(TABLE_NAME, 'ics_land', '')		TableName
 				  , COLUMN_NAME
 				  , IS_NULLABLE
 				from
@@ -318,19 +318,19 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	SourceSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_LAND', '') in
+					and replace(TABLE_NAME, 'ics_land', '') in
 						(
-							select	replace(TargetTable, 'ICS_STG', '') from dbo.psaTotsaLoadControlTable
+							select	replace(TargetTable, 'ics_stg', '') from dbo.TsaToPsaLoadControlTable
 							where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'NO'
 				except
 				select
 					'Mis-matched length from the psa schema' Message
-				  , replace(TABLE_NAME, 'ICS_STG', '')		 TableName
+				  , replace(TABLE_NAME, 'ics_stg', '')		 TableName
 				  , COLUMN_NAME
 				  , IS_NULLABLE
 				from
@@ -339,15 +339,15 @@ Version	ChangeDate		Author	BugRef	Narrative
 					TABLE_CATALOG = db_name()
 					and TABLE_SCHEMA =
 					(
-						select top 1	TargetSchema from  dbo.psaTotsaLoadControlTable
+						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-					and replace(TABLE_NAME, 'ICS_STG', '') in
+					and replace(TABLE_NAME, 'ics_stg', '') in
 						(
 							select
-								replace(a.SourceTable, 'ICS_LAND', '')
+								replace(a.SourceTable, 'ics_land', '')
 							from
-								dbo.psaTotsaLoadControlTable a
+								dbo.TsaToPsaLoadControlTable a
 
 							where DataSourceKey=@DataSourceKey
 						)
@@ -364,9 +364,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 					select
 						'Mis-matched pk from the psa schema'   Message
 					  , col_name(ic.object_id, ic.column_id)   PK
-					  , replace(t.SourceTable, 'ICS_LAND', '') TableName
+					  , replace(t.SourceTable, 'ics_land', '') TableName
 					from
-						dbo.psaTotsaLoadControlTable t
+						dbo.TsaToPsaLoadControlTable t
 					inner join sys.indexes			 as i
 						on i.object_id = object_id(t.SourceSchema + '.' + t.SourceTable)
 					inner join sys.index_columns	 as ic
@@ -380,9 +380,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 					select
 						'Mis-matched pk from the psa schema'  Message
 					  , col_name(ic.object_id, ic.column_id)  PK
-					  , replace(t.TargetTable, 'ICS_STG', '') TableName
+					  , replace(t.TargetTable, 'ics_stg', '') TableName
 					from
-						dbo.psaTotsaLoadControlTable t
+						dbo.TsaToPsaLoadControlTable t
 					inner join sys.indexes			 as i
 						on i.object_id = object_id(t.TargetSchema + '.' + t.TargetTable)
 					inner join sys.index_columns	 as ic
@@ -401,11 +401,11 @@ Version	ChangeDate		Author	BugRef	Narrative
 				if exists
 				(
 						select
-						'Mis-matched pk from the tsa schema'  Message
+						'Mis-matched pk from the tsa schema'  [Message]
 					  , col_name(ic.object_id, ic.column_id)  PK
-					  , replace(t.TargetTable, 'ICS_STG', '') TableName
+					  , replace(t.TargetTable, 'ics_stg', '') TableName
 					from
-						dbo.psaTotsaLoadControlTable t
+						dbo.TsaToPsaLoadControlTable t
 					inner join sys.indexes			 as i
 						on i.object_id = object_id(t.TargetSchema + '.' + t.TargetTable)
 					inner join sys.index_columns	 as ic
@@ -421,9 +421,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 						select
 						'Mis-matched pk from the tsa schema'   Message
 					  , col_name(ic.object_id, ic.column_id)   PK
-					  , replace(t.SourceTable, 'ICS_LAND', '') TableName
+					  , replace(t.SourceTable, 'ics_land', '') TableName
 					from
-						dbo.psaTotsaLoadControlTable t
+						dbo.TsaToPsaLoadControlTable t
 					inner join sys.indexes			 as i
 						on i.object_id = object_id(t.SourceSchema + '.' + t.SourceTable)
 					inner join sys.index_columns	 as ic
@@ -447,7 +447,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 						select
 							count(*)
 						from
-							dbo.psaTotsaLoadControlTable t
+							dbo.TsaToPsaLoadControlTable t
 						where
 							t.SourcePK is null
 							or	t.TargetPK is null

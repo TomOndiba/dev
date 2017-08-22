@@ -1083,6 +1083,13 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.6\003_Add_NotNull_PK_on_Psa_Tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\TsaToPsaLoadControlTable.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Stored Procedures\PopulateTsaToPsaLoadControlTable.sql" />
+    <None Include="Migrations\1.0.6\004_20170822-1313_ukrna.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

@@ -877,6 +877,7 @@ print N'Creating [psa].[ics_stg_SAP_GBR_CEPC]'
 go
 create table [psa].[ics_stg_SAP_GBR_CEPC]
 (
+[EtlRecordId] [bigint] identity(1,1) not null constraint AK_psa_ics_stg_SAP_GBR_CEPC_EtlRecordId unique clustered,
 [EtlBatchRunId] [int] not null,
 [EtlStepRunId] [int] not null,
 [EtlThreadRunId] [int] not null,
@@ -884,8 +885,12 @@ create table [psa].[ics_stg_SAP_GBR_CEPC]
 [EtlSourceTable] [varchar](200) not null,
 [EtlCreatedOn] [datetime] not null,
 [EtlCreatedBy] [varchar](200) not null,
-[ExcludeFromMerge] [bit] not null constraint [DF_tsa_ics_stg_SAP_GBR_CEPC_ExcludeFromMerge]  default (0),
-[IsDuplicate] [bit] not null constraint [DF_tsa_ics_stg_SAP_GBR_CEPC_IsDuplicate]  default (0),
+[EtlUpdatedOn] [datetime] not null,
+[EtlUpdatedBy] [varchar](200) not null,
+[EtlDeletedOn] [datetime] null,
+[EtlDeletedBy] [varchar](200) null,
+[IsDeleted] [char](1) not null constraint [DF_psa_ics_stg_SAP_GBR_CEPC_IsDeleted] default ('N'),
+[IsIncomplete] [char](1) not null constraint [DF_psa_ics_stg_SAP_GBR_CEPC_IsIncomplete] default ('N'),
 
 [MANDT] [nvarchar] (3) null,
 [PRCTR] [nvarchar] (10) null,

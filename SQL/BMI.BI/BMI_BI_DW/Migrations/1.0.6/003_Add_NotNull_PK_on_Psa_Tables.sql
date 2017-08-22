@@ -1,0 +1,331 @@
+﻿-- <Migration ID="ced52fd0-923e-4004-9d54-ed963902f7a1" />
+GO
+
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_ZG01]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_ZG01]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_VBUP]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_VBUP]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_VBUK]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_VBUK]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_VBRK]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_VBRK]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_VBPA]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_VBPA]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_VBFA]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_VBFA]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_VBAP]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_VBAP]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_VBAK]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_VBAK]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_TVKO]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_TVKO]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_TBRCT]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_TBRCT]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_T052U]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_T052U]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_T016T]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_T016T]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_T001]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_T001]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_T001Z]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_T001Z]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_T001W]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_T001W]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_MVKE]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_MVKE]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_MARM]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_MARM]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_MARC]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_MARC]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_MARA]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_MARA]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_MAKT]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_MAKT]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_LIPS]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_LIPS]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_LIKP]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_LIKP]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_KONV]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_KONV]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_KONP]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_KONP]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_KONH]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_KONH]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_KNVK]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_KNVK]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_KNBK]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_KNBK]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_KNB1]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_KNB1]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_KNA1]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_KNA1]
+GO
+PRINT N'Dropping [tsa].[ICS_LAND_SAP_DEU_ADRC]'
+GO
+DROP TABLE [tsa].[ICS_LAND_SAP_DEU_ADRC]
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_CCURRA]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CCURRA] ALTER COLUMN [CUCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CCURRA] ALTER COLUMN [CUDIVI] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CCURRA] ALTER COLUMN [CUCUCD] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CCURRA] ALTER COLUMN [CUCRTP] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CCURRA] ALTER COLUMN [CUCUTD] [decimal] (18, 0) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_CCURRA] on [psa].[ics_stg_m3v7_CCURRA]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CCURRA] ADD CONSTRAINT [PK_stg_m3v7_CCURRA] PRIMARY KEY CLUSTERED  ([CUCONO], [CUCUCD], [CUDIVI], [CUCRTP], [CUCUTD])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_CSYTAB]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CSYTAB] ALTER COLUMN [CTCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CSYTAB] ALTER COLUMN [CTDIVI] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CSYTAB] ALTER COLUMN [CTSTCO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CSYTAB] ALTER COLUMN [CTSTKY] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CSYTAB] ALTER COLUMN [CTLNCD] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_CSYTAB] on [psa].[ics_stg_m3v7_CSYTAB]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_CSYTAB] ADD CONSTRAINT [PK_stg_m3v7_CSYTAB] PRIMARY KEY CLUSTERED  ([CTCONO], [CTSTKY], [CTDIVI], [CTSTCO], [CTLNCD])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_MILOMA]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MILOMA] ALTER COLUMN [LMITNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MILOMA] ALTER COLUMN [LMBANO] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_MILOMA] on [psa].[ics_stg_m3v7_MILOMA]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MILOMA] ADD CONSTRAINT [PK_stg_m3v7_MILOMA] PRIMARY KEY CLUSTERED  ([LMITNO], [LMBANO])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_MITAUN]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITAUN] ALTER COLUMN [MUITNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITAUN] ALTER COLUMN [MUAUTP] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITAUN] ALTER COLUMN [MUALUN] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_MITAUN] on [psa].[ics_stg_m3v7_MITAUN]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITAUN] ADD CONSTRAINT [PK_stg_m3v7_MITAUN] PRIMARY KEY CLUSTERED  ([MUITNO], [MUAUTP], [MUALUN])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_MITBAL]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITBAL] ALTER COLUMN [MBCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITBAL] ALTER COLUMN [MBWHLO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITBAL] ALTER COLUMN [MBITNO] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_MITBAL] on [psa].[ics_stg_m3v7_MITBAL]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITBAL] ADD CONSTRAINT [PK_stg_m3v7_MITBAL] PRIMARY KEY CLUSTERED  ([MBITNO], [MBWHLO], [MBCONO])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_MITFAC]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITFAC] ALTER COLUMN [M9CONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITFAC] ALTER COLUMN [M9FACI] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITFAC] ALTER COLUMN [M9ITNO] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_MITFAC] on [psa].[ics_stg_m3v7_MITFAC]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITFAC] ADD CONSTRAINT [PK_stg_m3v7_MITFAC] PRIMARY KEY CLUSTERED  ([M9CONO], [M9ITNO], [M9FACI])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_MITLOC]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITLOC] ALTER COLUMN [MLCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITLOC] ALTER COLUMN [MLWHLO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITLOC] ALTER COLUMN [MLITNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITLOC] ALTER COLUMN [MLWHSL] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITLOC] ALTER COLUMN [MLBANO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITLOC] ALTER COLUMN [MLREPN] [decimal] (18, 0) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_MITLOC] on [psa].[ics_stg_m3v7_MITLOC]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITLOC] ADD CONSTRAINT [PK_stg_m3v7_MITLOC] PRIMARY KEY CLUSTERED  ([MLREPN], [MLCONO], [MLWHLO], [MLITNO], [MLWHSL], [MLBANO])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_MITMAS]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITMAS] ALTER COLUMN [MMCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITMAS] ALTER COLUMN [MMITNO] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_MITMAS] on [psa].[ics_stg_m3v7_MITMAS]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITMAS] ADD CONSTRAINT [PK_stg_m3v7_MITMAS] PRIMARY KEY CLUSTERED  ([MMCONO], [MMITNO])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_MITPOP]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ALTER COLUMN [MPCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ALTER COLUMN [MPITNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ALTER COLUMN [MPPOPN] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ALTER COLUMN [MPE0PA] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_OCHCUS]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OCHCUS] ALTER COLUMN [OSCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OCHCUS] ALTER COLUMN [OSCUNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OCHCUS] ALTER COLUMN [OSFVDT] [decimal] (18, 0) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_OCHCUS] on [psa].[ics_stg_m3v7_OCHCUS]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OCHCUS] ADD CONSTRAINT [PK_stg_m3v7_OCHCUS] PRIMARY KEY CLUSTERED  ([OSCONO], [OSCUNO], [OSFVDT])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_OCUSMA]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OCUSMA] ALTER COLUMN [OKCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OCUSMA] ALTER COLUMN [OKCUNO] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_OCUSMA] on [psa].[ics_stg_m3v7_OCUSMA]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OCUSMA] ADD CONSTRAINT [PK_stg_m3v7_OCUSMA] PRIMARY KEY CLUSTERED  ([OKCONO], [OKCUNO])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_OINVOH]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOH] ALTER COLUMN [UHCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOH] ALTER COLUMN [UHIVNO] [decimal] (18, 0) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_OINVOH] on [psa].[ics_stg_m3v7_OINVOH]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOH] ADD CONSTRAINT [PK_stg_m3v7_OINVOH] PRIMARY KEY CLUSTERED  ([UHCONO], [UHIVNO])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_OINVOL]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONDIVI] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONIVNO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONYEA4] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONIVSQ] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONIVTP] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONORNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONDLIX] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONWHLO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONIVRF] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ALTER COLUMN [ONINPX] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Creating primary key [PK_stg_m3v7_OINVOL] on [psa].[ics_stg_m3v7_OINVOL]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OINVOL] ADD CONSTRAINT [PK_stg_m3v7_OINVOL] PRIMARY KEY CLUSTERED  ([ONCONO], [ONDIVI], [ONYEA4], [ONIVNO], [ONINPX], [ONIVTP], [ONIVSQ], [ONDLIX], [ONORNO], [ONWHLO], [ONIVRF])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_OOHEAD]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OOHEAD] ALTER COLUMN [OACONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OOHEAD] ALTER COLUMN [OAORNO] [nvarchar] (255) NOT NULL
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_OOLINE]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OOLINE] ALTER COLUMN [OBCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OOLINE] ALTER COLUMN [OBORNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OOLINE] ALTER COLUMN [OBPONR] [decimal] (18, 0) NOT NULL
+GO
+PRINT N'Creating primary key [_stg_m3v7_OOLINE] on [psa].[ics_stg_m3v7_OOLINE]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OOLINE] ADD CONSTRAINT [_stg_m3v7_OOLINE] PRIMARY KEY CLUSTERED  ([OBCONO], [OBORNO], [OBPONR])
+GO
+PRINT N'Altering [psa].[ics_stg_m3v7_OSBSTD]'
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ALTER COLUMN [UCCONO] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ALTER COLUMN [UCDIVI] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ALTER COLUMN [UCORNO] [nvarchar] (255) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ALTER COLUMN [UCDLIX] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ALTER COLUMN [UCPONR] [decimal] (18, 0) NOT NULL
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ALTER COLUMN [UCWHLO] [nvarchar] (255) NOT NULL
+GO

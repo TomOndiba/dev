@@ -45,20 +45,20 @@ GO
 PRINT N'Creating primary key [PK_psaTotsaLoadControlTable] on [dbo].[TsaToPsaLoadControlTable]'
 GO
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'PK_psaTotsaLoadControlTable' AND object_id = OBJECT_ID(N'[dbo].[TsaToPsaLoadControlTable]'))
-ALTER TABLE [dbo].[TsaToPsaLoadControlTable] ADD CONSTRAINT [PK_psaTotsaLoadControlTable] PRIMARY KEY CLUSTERED  ([ID])
+	ALTER TABLE [dbo].[TsaToPsaLoadControlTable] ADD CONSTRAINT [PK_psaTotsaLoadControlTable] PRIMARY KEY CLUSTERED  ([ID])
 GO
 PRINT N'Creating primary key [PK_stg_m3v7_MITPOP] on [psa].[ics_stg_m3v7_MITPOP]'
 GO
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'PK_stg_m3v7_MITPOP' AND object_id = OBJECT_ID(N'[psa].[ics_stg_m3v7_MITPOP]'))
-ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ADD CONSTRAINT [PK_stg_m3v7_MITPOP] PRIMARY KEY CLUSTERED  ([MPCONO], [MPITNO], [MPE0PA], [MPPOPN])
+	ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ADD CONSTRAINT [PK_stg_m3v7_MITPOP] PRIMARY KEY CLUSTERED  ([MPCONO], [MPITNO], [MPE0PA], [MPPOPN])
 GO
 PRINT N'Creating primary key [PK_stg_m3v7_OOHEAD] on [psa].[ics_stg_m3v7_OOHEAD]'
 GO
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'PK_stg_m3v7_OOHEAD' AND object_id = OBJECT_ID(N'[psa].[ics_stg_m3v7_OOHEAD]'))
-ALTER TABLE [psa].[ics_stg_m3v7_OOHEAD] ADD CONSTRAINT [PK_stg_m3v7_OOHEAD] PRIMARY KEY CLUSTERED  ([OACONO], [OAORNO])
+	ALTER TABLE [psa].[ics_stg_m3v7_OOHEAD] ADD CONSTRAINT [PK_stg_m3v7_OOHEAD] PRIMARY KEY CLUSTERED  ([OACONO], [OAORNO])
 GO
 PRINT N'Creating primary key [PK_stg_m3v7_OSBSTD] on [psa].[ics_stg_m3v7_OSBSTD]'
 GO
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'PK_stg_m3v7_OSBSTD' AND object_id = OBJECT_ID(N'[psa].[ics_stg_m3v7_OSBSTD]'))
-ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ADD CONSTRAINT [PK_stg_m3v7_OSBSTD] PRIMARY KEY CLUSTERED  ([UCCONO], [UCORNO], [UCPONR], [UCDIVI], [UCWHLO], [UCDLIX])
+	ALTER TABLE [psa].[ics_stg_m3v7_OSBSTD] ADD CONSTRAINT [PK_stg_m3v7_OSBSTD] PRIMARY KEY CLUSTERED  ([UCCONO], [UCORNO], [UCPONR], [UCDIVI], [UCWHLO], [UCDLIX])
 GO

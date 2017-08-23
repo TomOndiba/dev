@@ -1,6 +1,6 @@
 CREATE ROLE [CodeReviewers]
-AUTHORIZATION [dbo]GRANT VIEW DEFINITION TO [CodeReviewers]
-
+AUTHORIZATION [dbo]
 GO
 EXEC sp_addrolemember N'CodeReviewers', N'EtlDevelopersDEV'
 GO
+GRANT VIEW DEFINITION TO [CodeReviewers]

@@ -129,8 +129,6 @@
     <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls ExceptionHandler on privy.BuildAndRunMerge error.sql" />
     <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched tsa column.sql" />
     <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched psa column.sql" />
-    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched primarykeys from tsa.sql" />
-    <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on null mis-matched primarykeys from psa.sql" />
     <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on no pk.sql" />
     <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on missing psa tables.sql" />
     <Build Include="tsa-to-psa-tests\test privy.TsaToPsaValidateSchema throws error on missing psa columns.sql" />

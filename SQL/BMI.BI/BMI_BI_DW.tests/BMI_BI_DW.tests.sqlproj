@@ -49,6 +49,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <SuppressTSqlWarnings>71502</SuppressTSqlWarnings>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -67,6 +68,7 @@
     <Folder Include="tsa-to-psa-tests\" />
     <Folder Include="StagingSchemaTests\" />
     <Folder Include="IcsApp-Tests\" />
+    <Folder Include="etl-ModuleTests\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Permissions.sql" />
@@ -147,6 +149,25 @@
     <Build Include="IcsApp-Tests\test IcsApp.TsaToPsaMerge calls privy.Dedupe.sql" />
     <Build Include="Test Classes\StagingSchemaTests.sql" />
     <Build Include="Test Classes\IcsApp-Tests.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions throws error on multiple duplicate invoices.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions excludes inactive invoices.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions throws error on single duplicate invoices.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions returns zero on no duplicate invoices.sql" />
+    <Build Include="Test Classes\etl-ModuleTests.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions throws error on single duplicate order SNI.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions throws error on single duplicate order backlog.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions throws error on multiple duplicate order SNI.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions throws error on multiple duplicate order backlog.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions throws error on multiple cross-table duplicates.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions returns zero on no duplicate order SNI.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions returns zero on no duplicate order backlog.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions returns non-zero on multiple cross-table duplicates.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions returns non-zero on duplicate order SNI.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions returns non-zero on duplicate order backlog.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions returns non-zero on duplicate invoices.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions excludes inactive order SNI.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions excludes inactive order backlog.sql" />
+    <Build Include="etl-ModuleTests\test CheckForDuplicateQlikViewTransactions calls log4.JournalWriter on success.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">

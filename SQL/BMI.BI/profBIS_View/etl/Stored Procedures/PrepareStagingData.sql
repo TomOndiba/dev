@@ -28,6 +28,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		09-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+001		24-AUG-2017		GML		BSR-235	Added additional journalling calls
+------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -80,6 +82,14 @@ begin
 	/**/     end
 	/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+	if @_JournalOnOff = 'ON'
+		exec log4.JournalWriter
+				  @Task = @_JobName
+				, @FunctionName = @_FunctionName
+				, @StepInFunction = 'Log Start'
+				, @MessageText = @_ProgressMessage
+				, @ExtraInfo = @_ProgressLog
+				, @Severity = @SEVERITY_DEBUG
 
 	begin try
 		--! If Load Start time hasn't been passed in then set it now
@@ -101,6 +111,15 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
+
 		--!
 		--!
 		--!
@@ -117,6 +136,14 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 		--!
 		--!
@@ -134,6 +161,14 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 		--!
 		--!
@@ -151,6 +186,14 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 		--!
 		--!
@@ -168,6 +211,14 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 		--!
 		--!
@@ -185,6 +236,14 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 		--!
 		--!
@@ -202,6 +261,14 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 		--!
 		--!
@@ -219,6 +286,15 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
+
 		--!
 		--!
 		--!
@@ -234,6 +310,15 @@ begin
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 		--!
 		--!
@@ -251,6 +336,15 @@ begin
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
+
 		--!
 		--!
 		--!
@@ -266,6 +360,15 @@ begin
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 		/**/ if @DebugLevel > 4 raiserror('DEBUG - %s: %s', 0, 1, @_FunctionName, @_ProgressMessage) with nowait;
 		/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+		if @_JournalOnOff = 'ON'
+			exec log4.JournalWriter
+					  @Task = @_JobName
+					, @FunctionName = @_FunctionName
+					, @StepInFunction = @_Step
+					, @MessageText = @_ProgressMessage
+					, @ExtraInfo = @_ProgressLog
+					, @Severity = @SEVERITY_DEBUG
 
 
 		--!

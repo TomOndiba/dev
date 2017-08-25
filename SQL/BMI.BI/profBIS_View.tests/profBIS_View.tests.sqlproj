@@ -219,6 +219,7 @@
     <Build Include="etl-ViewTests\test InvoiceDelta includes duplicates with material changes only.sql" />
     <Build Include="etl-ViewTests\test InvoiceDelta includes rows with only IsDeleted different.sql" />
     <Build Include="etl-ViewTests.sql" />
+    <Build Include="etl-ViewTests\test InvoiceDelta includes inactive duplicate not yet added to control.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="profBIS_View.tests.sandbox.publish.xml" />

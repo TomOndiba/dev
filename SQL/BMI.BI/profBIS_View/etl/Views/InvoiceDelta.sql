@@ -21,9 +21,11 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		13-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-003		25-JUL-2017		GML		BSR-132	Revised filters to better reflect active/inactive duplicates
+002		25-JUL-2017		GML		BSR-132	Revised filters to better reflect active/inactive duplicates
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-
+003		25-AUG-2017		GML		N/A		Revised filters to include recently loaded records that have already been
+										superceded even though their first incarnation hasn't been marked as processed
+------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -132,6 +134,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			(i.Uniqueifier = 1 and ctrl.InvoiceKey is null) --! New Invoices (not yet added to control)
 		or (i.Uniqueifier = 1 and ctrl.PreviousDeltaHash <> i.EtlDeltaHash) --! Existing Invoices that have been updated
 		or (ctrl.IsDeleted <> i.IsDeleted) --! Invoices that have been soft-deleted or (possibly) re-activated
+		or (ctrl.InvoiceKey is null and i.IsDeleted = 'Y') --! Records that have already been superceded even though their first incarnation hasn't been marked as processed (into CTRL tbl)
 go
 execute sp_addextendedproperty @name = N'MS_Description'
 , @value = 'Exposes Invoice changes (new, changed and deleted) in the format best suited to populate the Interim Data Warehouse/Mart'

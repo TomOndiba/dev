@@ -30,4 +30,7 @@ begin
 		union all select cast(3333 as int)
 	)
 	select * into #expected from expectedCte ;
+
+	exec tSQLt.AssertEqualsTable '#expected', 'etl.InvoiceDelta';
 end
+go

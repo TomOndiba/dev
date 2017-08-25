@@ -28,7 +28,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		09-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-001		24-AUG-2017		GML		BSR-235	Added additional journalling calls
+001		24-AUG-2017		GML		BSR-235	Added additional journalling calls to improve real-time monitoring
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
@@ -370,7 +370,6 @@ begin
 					, @ExtraInfo = @_ProgressLog
 					, @Severity = @SEVERITY_DEBUG
 
-
 		--!
 		--! By this point there should be no uncommitted transactions
 		--!
@@ -381,8 +380,6 @@ begin
 		--! If we get here, every step completed successfully so report final state
 		--!
 		set @_Message = 'Completed all staging data preparation steps'
---		set @_Message = 'Completed all active staging data preparation steps (some steps were disabled)'
---		set @_Message = 'WARNING! All steps temporarily disabled to support ICS load testing'
 		set @_Error = 0 ;
 	end try
 	begin catch

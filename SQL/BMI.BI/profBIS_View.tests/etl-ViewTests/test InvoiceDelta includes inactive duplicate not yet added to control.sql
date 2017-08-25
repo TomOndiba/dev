@@ -1,4 +1,4 @@
-﻿CREATE procedure [etl-ViewTests].[test InvoiceDelta includes preferred new duplicate record]
+﻿create procedure [etl-ViewTests].[test InvoiceDelta includes inactive duplicate not yet added to control]
 as
 begin
 	exec tSQLt.FakeTable @TableName = N'stg.Invoice' ;
@@ -6,8 +6,7 @@ begin
 
 	insert stg.InvoiceControl (InvoiceKey, PreviousDeltaHash, IsDeleted, LastTouchedOn)
 	values
-		  (2345, 'DEF', 'Y', '20170724')
-		, (5678, 'GHI', 'Y', '20170724')
+		  (5678, 'GHI', 'Y', '20170724')
 
 	insert stg.Invoice (InvoiceKey, Uniqueifier, EtlDeltaHash, IsDeleted)
 	values
@@ -15,7 +14,13 @@ begin
 		, (2345, 2, 'DEF', 'Y')
 		, (5678, 3, 'GHI', 'Y');
 
-	select cast(1234 as int) as [InvoiceKey] into #expected;
+	;with expectedCte (InvoiceKey)
+	as
+	(
+				  select cast(1234 as int)
+		union all select cast(2345 as int)
+	)
+	select * into #expected from expectedCte ;
 
 	exec tSQLt.AssertEqualsTable '#expected', 'etl.InvoiceDelta';
 end

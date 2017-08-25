@@ -24,8 +24,8 @@ Version:12.3.3.4490-->
     <MigrationsFolderLocation />
     <IntegratedSecurity>True</IntegratedSecurity>
   </DataSource2>
-  <LastCompared>07/26/2017 17:27:13</LastCompared>
-  <Options>DecryptPost2kEncryptedObjects, IgnoreDatabaseAndServerName, IgnoreFileGroups, IgnoreFillFactor, IgnoreUserProperties, IgnoreWhiteSpace, IgnoreWithElementOrder</Options>
+  <LastCompared>08/25/2017 09:14:40</LastCompared>
+  <Options>DecryptPost2kEncryptedObjects, IgnoreCollations, IgnoreDatabaseAndServerName, IgnoreFileGroups, IgnoreFillFactor, IgnoreUserProperties, IgnoreWhiteSpace, IgnoreWithElementOrder</Options>
   <InRecycleBin>False</InRecycleBin>
   <Direction>0</Direction>
   <ProjectFilter version="1" type="DifferenceFilter">
@@ -169,17 +169,19 @@ Version:12.3.3.4490-->
   <UserNote />
   <SelectedSyncObjects version="1" type="SelectedSyncObjects">
     <Schemas type="ListString" version="2">
-      <value type="string">cAByAGkAdgB5AA__</value>
-      <value type="string">ZQB0AGwA</value>
-      <value type="string">ZABiAG8A</value>
       <value type="string">UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA</value>
       <value type="string">bABvAGcANABQAHIAaQB2AGEAdABlAA__</value>
+      <value type="string">cAByAGkAdgB5AA__</value>
+      <value type="string">cwB0AGcA</value>
+      <value type="string">ZQB0AGwA</value>
+      <value type="string">ZABiAG8A</value>
     </Schemas>
-    <cAByAGkAdgB5AA__ />
-    <ZQB0AGwA />
-    <ZABiAG8A />
     <UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>+iV8ix6cmfx/Votn8tqazAgCAP5fdi/G5ZaGWclcOxzgNAEIAgANpw5tnJyIs5oBR3UFhrcBCAIAeBSbRQbBJt41SmjHzf987AgCAJVWxQLi7sWG1THH7tt7WJYIAgDg/RNFTLYlOH2GQdcrWN12CgEAbFWxjPgfD2DXT2eAVC0CtQoBAMOnM41ta/fW7S4nZQ4IIgUKAQC+lkW4BdRi0nFwBwlxrKvdCgEAFVlqAJfZAUQCLwz5S2HBtQoBALRjZQ8g9N+KaVCJDKserHMKAQAdSqDGONUbNShvZT5rhkrtCgEAj3qfBDB1NZmYhp5pyHXYkAoBAAFnpIut2G1UrcsLr4PAdfYKAQCMt+TrSLNRxp/anmnZFQ/QCgEAL89bXxd0BWeVwOCUaIMmyQoBAIvq7WZ5ZveNmqAwrTmssskKAQA/DOO5N+GYqIOXdakR5NrpCgEAkdUfl3px14EzDHrOYTAIaQoBAFDzyDagkUT4wo8qEOyUZx8KAQAICC2iTrrBTIqVJ1AB/zBZCgEAEuhRS1ey8P3oarhMWTJffAoBAA__</UgBlAGQARwBhAHQAZQBfAFMAUQBMAEMAbwBtAHAAYQByAGUAXwBEAGUAZgBhAHUAbAB0AF8AUwBjAGgAZQBtAGEA>
-    <bABvAGcANABQAHIAaQB2AGEAdABlAA__>sNJYxGMVgtaglgJbx2zBmAICABTvEdQzBYAmqM26d4uhBK0CAgCXCQlidWJ/4UfXHOsMOA3MAgIA</bABvAGcANABQAHIAaQB2AGEAdABlAA__>
+    <bABvAGcANABQAHIAaQB2AGEAdABlAA__>lwkJYnVif+FH1xzrDDgNzAICABTvEdQzBYAmqM26d4uhBK0CAgCw0ljEYxWC1qCWAlvHbMGYAgIA</bABvAGcANABQAHIAaQB2AGEAdABlAA__>
+    <cAByAGkAdgB5AA__>Tr89H246+BijbN4X5s03MgMCARQp5YBcDu81o5shH+JyThgDAgHpbwM/x04kBNJnYZsvmspxAwIB</cAByAGkAdgB5AA__>
+    <cwB0AGcA />
+    <ZQB0AGwA>N4b0kn9D0FKsGwQSTIG8+gMCAfH/rZxb3sntn/gGvRfaWgkEAgG5SRc0ZOUEYNWFj8cJNEYABAIBEY1JUpjaPZCLzo08A1tY4AQCAQ__</ZQB0AGwA>
+    <ZABiAG8A>gVRqNMfcTuA/nJrOA6NBggQBAA__</ZABiAG8A>
     <Grouping type="ListByte" version="2">
       <value type="Byte">0</value>
       <value type="Byte">0</value>

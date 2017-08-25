@@ -9,27 +9,27 @@ begin
 	create table #expected
 	(
 	  InvoiceKey int not null
-	, EtlDeltaHash char(32) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlDeltaHash char(32) collate Danish_Norwegian_CI_AS null
 	, EtlCreatedOn datetime null
-	, EtlCreatedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlCreatedBy varchar(200) collate Danish_Norwegian_CI_AS null
 	, EtlUpdatedOn datetime not null
-	, EtlUpdatedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
-	, IsDeleted char(1) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlUpdatedBy varchar(200) collate Danish_Norwegian_CI_AS null
+	, IsDeleted char(1) collate Danish_Norwegian_CI_AS null
 	-----------------------------------------------------------
 	, REC_ID uniqueidentifier null -- QlikView surrogate key
 	-----------------------------------------------------------
 	--! This is effectively the business key that the ETL process will lookup
 	, SYSTEM_ID int null
 	, INVOICE_DATE datetime null
-	, INVOICE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, INVOICE_LINE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, ORDER_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, ORDER_LINE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, INVOICE_LINE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, ORDER_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, ORDER_LINE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, Uniqueifier bigint null
 	-----------------------------------------------------------
-	, INVOICE_TYPE nvarchar(1) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_TYPE nvarchar(1) collate Danish_Norwegian_CI_AS null
 	, SITE_ID int null
-	, ITEM_NO nvarchar(50) collate SQL_Latin1_General_CP1_CI_AS null
+	, ITEM_NO nvarchar(50) collate Danish_Norwegian_CI_AS null
 	, INVOICE_QUANTITY decimal(12, 2) null
 	, INVOICE_AMOUNT decimal(15, 4) null
 	, GROUP_AMOUNT decimal(15, 4) null

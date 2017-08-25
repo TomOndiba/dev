@@ -9,11 +9,11 @@ begin
 	create table #expected
 	(
 	  InvoiceKey int not null
-	, EtlDeltaHash char(32) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlDeltaHash char(32) collate Danish_Norwegian_CI_AS null
 	, EtlCreatedOn datetime null
 	, EtlUpdatedOn datetime null
 	, EtlDeletedOn datetime null
-	, IsDeleted char(1) collate SQL_Latin1_General_CP1_CI_AS null
+	, IsDeleted char(1) collate Danish_Norwegian_CI_AS null
 	, REC_ID uniqueidentifier null -- QlikView surrogate key
 	, Uniqueifier bigint null
 	, GROUP_AMOUNT decimal(15, 4) null

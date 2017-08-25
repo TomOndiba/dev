@@ -12,7 +12,7 @@ You are recommended to back up your database before running this script
 Script created by SQL Compare version 12.3.3.4490 from Red Gate Software Ltd at 25/08/2017 09:16:51
 
 */
-set set noexec off
+set noexec off
 go
 set numeric_roundabort off
 go

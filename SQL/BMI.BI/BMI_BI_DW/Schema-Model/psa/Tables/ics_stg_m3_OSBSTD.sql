@@ -14,12 +14,12 @@ CREATE TABLE [psa].[ics_stg_m3_OSBSTD]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3_OSBSTD_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3_OSBSTD_IsIncomplete] DEFAULT ('N'),
-[UCCONO] [decimal] (3, 0) NULL,
-[UCDIVI] [nvarchar] (255) NULL,
+[UCCONO] [decimal] (18, 0) NOT NULL,
+[UCDIVI] [nvarchar] (255) NOT NULL,
 [UCFACI] [nvarchar] (255) NULL,
-[UCORNO] [nvarchar] (255) NULL,
-[UCDLIX] [decimal] (11, 0) NULL,
-[UCPONR] [decimal] (5, 0) NULL,
+[UCORNO] [nvarchar] (255) NOT NULL,
+[UCDLIX] [decimal] (18, 0) NOT NULL,
+[UCPONR] [decimal] (18, 0) NOT NULL,
 [UCPOSX] [decimal] (3, 0) NULL,
 [UCIVNO] [decimal] (9, 0) NULL,
 [UCORDT] [decimal] (8, 0) NULL,
@@ -50,7 +50,7 @@ CREATE TABLE [psa].[ics_stg_m3_OSBSTD]
 [UCFRE2] [nvarchar] (255) NULL,
 [UCWCON] [nvarchar] (255) NULL,
 [UCBPAT] [nvarchar] (255) NULL,
-[UCWHLO] [nvarchar] (255) NULL,
+[UCWHLO] [nvarchar] (255) NOT NULL,
 [UCITNO] [nvarchar] (255) NULL,
 [UCITGR] [nvarchar] (255) NULL,
 [UCITTY] [nvarchar] (255) NULL,
@@ -83,7 +83,7 @@ CREATE TABLE [psa].[ics_stg_m3_OSBSTD]
 [UCFECN] [nvarchar] (255) NULL,
 [UCAGNO] [nvarchar] (255) NULL,
 [UCDPNR] [nvarchar] (255) NULL,
-[UCORIG] [decimal] (1, 0) NULL,
+[UCORIG] [decimal] (18, 0) NOT NULL,
 [UCIDCD] [decimal] (1, 0) NULL,
 [UCJOBN] [decimal] (3, 0) NULL,
 [UCJBSX] [decimal] (2, 0) NULL,
@@ -244,4 +244,6 @@ CREATE TABLE [psa].[ics_stg_m3_OSBSTD]
 [UCRAGN] [nvarchar] (255) NULL,
 [UCCLAT] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3_OSBSTD] ADD CONSTRAINT [PK_stg_m3_OSBSTD] PRIMARY KEY CLUSTERED  ([UCCONO], [UCDIVI], [UCDLIX], [UCORIG], [UCORNO], [UCPONR], [UCWHLO])
 GO

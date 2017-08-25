@@ -14,10 +14,10 @@ CREATE TABLE [psa].[ics_stg_m3_OINVOH]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3_OINVOH_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3_OINVOH_IsIncomplete] DEFAULT ('N'),
-[UHCONO] [decimal] (3, 0) NULL,
-[UHDIVI] [nvarchar] (255) NULL,
+[UHCONO] [decimal] (18, 0) NOT NULL,
+[UHDIVI] [nvarchar] (255) NOT NULL,
 [UHFACI] [nvarchar] (255) NULL,
-[UHIVNO] [decimal] (9, 0) NULL,
+[UHIVNO] [decimal] (18, 0) NOT NULL,
 [UHYEA4] [decimal] (4, 0) NULL,
 [UHPYNO] [nvarchar] (255) NULL,
 [UHINST] [nvarchar] (255) NULL,
@@ -65,4 +65,6 @@ CREATE TABLE [psa].[ics_stg_m3_OINVOH]
 [UHPDYR] [decimal] (4, 0) NULL,
 [UHPDNO] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3_OINVOH] ADD CONSTRAINT [PK_stg_m3_OINVOH] PRIMARY KEY CLUSTERED  ([UHCONO], [UHIVNO], [UHDIVI])
 GO

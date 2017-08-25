@@ -14,12 +14,12 @@ CREATE TABLE [psa].[ics_stg_m3_CCURRA]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3_CCURRA_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3_CCURRA_IsIncomplete] DEFAULT ('N'),
-[CUCONO] [decimal] (3, 0) NULL,
-[CUDIVI] [nvarchar] (255) NULL,
+[CUCONO] [decimal] (18, 0) NOT NULL,
+[CUDIVI] [nvarchar] (255) NOT NULL,
 [CUGLOC] [nvarchar] (255) NULL,
-[CUCUCD] [nvarchar] (255) NULL,
-[CUCRTP] [decimal] (2, 0) NULL,
-[CUCUTD] [decimal] (8, 0) NULL,
+[CUCUCD] [nvarchar] (255) NOT NULL,
+[CUCRTP] [decimal] (18, 0) NOT NULL,
+[CUCUTD] [decimal] (18, 0) NOT NULL,
 [CUARAT] [decimal] (11, 6) NULL,
 [CUTXID] [decimal] (13, 0) NULL,
 [CULOCD] [nvarchar] (255) NULL,
@@ -32,4 +32,6 @@ CREATE TABLE [psa].[ics_stg_m3_CCURRA]
 [CUCHID] [nvarchar] (255) NULL,
 [CULMTS] [decimal] (18, 0) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3_CCURRA] ADD CONSTRAINT [PK_stg_m3_CCURRA] PRIMARY KEY CLUSTERED  ([CUCONO], [CUCRTP], [CUCUCD], [CUCUTD], [CUDIVI])
 GO

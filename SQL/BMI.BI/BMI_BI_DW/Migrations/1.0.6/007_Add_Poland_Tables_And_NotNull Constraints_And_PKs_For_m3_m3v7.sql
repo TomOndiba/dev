@@ -363,10 +363,6 @@ if object_id('tsa.ics_land_M3V10gen_POL_OSBSTD ', 'U') is not null
 	drop table tsa.ics_land_M3V10gen_POL_OSBSTD ;
 go
 -------------------------------------------------------------------------------------------------------------------------------------
-PRINT N'Dropping constraints from [psa].[ics_stg_m3v7_OOLINE]'
-GO
-ALTER TABLE [psa].[ics_stg_m3v7_OOLINE] DROP CONSTRAINT [_stg_m3v7_OOLINE]
-GO
 PRINT N'Creating [tsa].[ics_land_M3V10ved_POL_MPLINE]'
 GO
 CREATE TABLE [tsa].[ics_land_M3V10ved_POL_MPLINE]
@@ -10256,7 +10252,16 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_OOHEAD]
 [OAYREF] [nvarchar] (30) NULL
 )
 GO
-PRINT N'Creating primary key [PK_stg_m3v7_OOLINE] on [psa].[ics_stg_m3v7_OOLINE]'
-GO
-ALTER TABLE [psa].[ics_stg_m3v7_OOLINE] ADD CONSTRAINT [PK_stg_m3v7_OOLINE] PRIMARY KEY CLUSTERED  ([OBCONO], [OBORNO], [OBPONR])
-GO
+print N'Dropping constraints from [psa].[ics_stg_m3v7_OOLINE]'
+go
+if object_id(N'psa._stg_m3v7_OOLINE') is not null
+	alter table [psa].[ics_stg_m3v7_OOLINE] drop constraint [_stg_m3v7_OOLINE]
+go
+if objectpropertyex(object_id(N'psa.PK_stg_m3v7_OOLINE'), N'IsPrimaryKey') is not null
+	alter table [psa].[ics_stg_m3v7_OOLINE] drop constraint [PK_stg_m3v7_OOLINE]
+go
+print N'Creating primary key [PK_stg_m3v7_OOLINE] on [psa].[ics_stg_m3v7_OOLINE]'
+go
+if objectpropertyex(object_id(N'psa.PK_stg_m3v7_OOLINE'), N'IsPrimaryKey') is null
+	alter table [psa].[ics_stg_m3v7_OOLINE] add constraint [PK_stg_m3v7_OOLINE] primary key clustered  ([OBCONO], [OBORNO], [OBPONR])
+go

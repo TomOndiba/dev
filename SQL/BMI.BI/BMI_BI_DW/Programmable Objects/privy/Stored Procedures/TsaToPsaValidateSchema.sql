@@ -7,8 +7,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
-CREATE   procedure [privy].[TsaToPsaValidateSchema] ---1
-(
+CREATE   procedure [privy].[TsaToPsaValidateSchema] (
 	@DataSourceKey bigint
 )
 as
@@ -267,12 +266,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
-					--where DataSourceKey=@DataSourceKey
+					where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ics_land', '') in
 						(
 							select	replace(TargetTable, 'ics_stg', '') from dbo.TsaToPsaLoadControlTable
-						--where DataSourceKey=@DataSourceKey
+						where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'YES'
 					and c.COLUMN_NAME not in
@@ -302,7 +301,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
-					--where DataSourceKey=@DataSourceKey
+					where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ics_stg', '') in
 						(
@@ -310,7 +309,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 								replace(a.SourceTable, 'ics_land', '')
 							from
 								dbo.TsaToPsaLoadControlTable a
-						--where DataSourceKey=@DataSourceKey
+						where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'YES'
 					and c.COLUMN_NAME not in
@@ -330,7 +329,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			)
 				raiserror('check for tsa mis-matched null column from psa', 16, 1) ;
 
-			/********************************************************Missing Nullable in tsa**************************************************************/
+/********************************************************Missing Nullable in tsa**************************************************************/
 			set @_Step = 'check for tsa mis-matched null column from tsa' ;
 
 			if exists
@@ -347,12 +346,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
-					--where DataSourceKey=@DataSourceKey
+					where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ics_land', '') in
 						(
 							select	replace(TargetTable, 'ics_stg', '') from dbo.TsaToPsaLoadControlTable
-						--where DataSourceKey=@DataSourceKey
+						where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'NO'
 					and c.COLUMN_NAME not in
@@ -382,7 +381,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and TABLE_SCHEMA =
 					(
 						select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
-					--where DataSourceKey=@DataSourceKey
+					where DataSourceKey=@DataSourceKey
 					)
 					and replace(TABLE_NAME, 'ics_stg', '') in
 						(
@@ -391,7 +390,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 							from
 								dbo.TsaToPsaLoadControlTable a
 
-						--where DataSourceKey=@DataSourceKey
+						where DataSourceKey=@DataSourceKey
 						)
 					and IS_NULLABLE = 'NO'
 					and c.COLUMN_NAME not in
@@ -411,90 +410,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 			)
 				raiserror('check for tsa mis-matched null column from tsa', 16, 1) ;
 
-
-
-/***********************************************Mis-matched pks from psa table ****************************************************************/
---				set @_Step = 'Mis-matched pk from the psa schema' ;
---				if exists
---				(
---					select
---						'Mis-matched pk from the psa schema'   Message
---					  , col_name(ic.object_id, ic.column_id)   PK
---					  , replace(t.SourceTable, 'ics_land', '') TableName
---					from
---						dbo.TsaToPsaLoadControlTable t
---					inner join sys.indexes			 as i
---						on i.object_id = object_id(t.SourceSchema + '.' + t.SourceTable)
---					inner join sys.index_columns	 as ic
---						on i.object_id = ic.object_id
---							and i.index_id = ic.index_id
---					where
---						1 = 1
---						and i.is_primary_key = 1
---						and  DataSourceKey=@DataSourceKey
---					except
---					select
---						'Mis-matched pk from the psa schema'  Message
---					  , col_name(ic.object_id, ic.column_id)  PK
---					  , replace(t.TargetTable, 'ics_stg', '') TableName
---					from
---						dbo.TsaToPsaLoadControlTable t
---					inner join sys.indexes			 as i
---						on i.object_id = object_id(t.TargetSchema + '.' + t.TargetTable)
---					inner join sys.index_columns	 as ic
---						on i.object_id = ic.object_id
---							and i.index_id = ic.index_id
---					where
---						1 = 1
---						and i.is_primary_key = 1
---						and  DataSourceKey=@DataSourceKey
---				)
---					raiserror('Mis-matched pk from the psa schema', 16, 1) ;
-
-
---/***********************************************Mis-matched pks from tsa table ****************************************************************/
---				set @_Step = 'Mis-matched pk from the tsa schema' ;
---				if exists
---				(
---						select
---						'Mis-matched pk from the tsa schema'  [Message]
---					  , col_name(ic.object_id, ic.column_id)  PK
---					  , replace(t.TargetTable, 'ics_stg', '') TableName
---					from
---						dbo.TsaToPsaLoadControlTable t
---					inner join sys.indexes			 as i
---						on i.object_id = object_id(t.TargetSchema + '.' + t.TargetTable)
---					inner join sys.index_columns	 as ic
---						on i.object_id = ic.object_id
---							and i.index_id = ic.index_id
---					where
---						1 = 1
---						and i.is_primary_key = 1
---						and DataSourceKey=@DataSourceKey
-						
---						except	
-
---						select
---						'Mis-matched pk from the tsa schema'   Message
---					  , col_name(ic.object_id, ic.column_id)   PK
---					  , replace(t.SourceTable, 'ics_land', '') TableName
---					from
---						dbo.TsaToPsaLoadControlTable t
---					inner join sys.indexes			 as i
---						on i.object_id = object_id(t.SourceSchema + '.' + t.SourceTable)
---					inner join sys.index_columns	 as ic
---						on i.object_id = ic.object_id
---							and i.index_id = ic.index_id
---					where
---						1 = 1
---						and i.is_primary_key = 1
---						and DataSourceKey=@DataSourceKey
-				
-				
---				)
---					raiserror('Mis-matched pk from the psa schema', 16, 1) ;
-
-					
 /***********************************************Missing PKs from the table(s)****************************************************************/
 
 					set @_Step = 'PK does not exist' ;

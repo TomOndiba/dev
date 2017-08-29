@@ -61,3 +61,10 @@ exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\ukrna' ;
 exec sp_addrolemember N'db_owner', N'GROUPICOPAL\ukrna' ;
 go
 
+use [profBIS_View]
+go
+grant showplan to [GROUPICOPAL\ukglu];
+grant showplan to [GROUPICOPAL\ukvmi];
+grant showplan to [GROUPICOPAL\ukjbo];
+grant showplan to [GROUPICOPAL\ukrna];
+go

@@ -14,10 +14,10 @@ CREATE TABLE [psa].[ics_stg_movex_OCUSMA]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_OCUSMA_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_OCUSMA_IsIncomplete] DEFAULT ('N'),
-[OKCONO] [decimal] (3, 0) NULL,
+[OKCONO] [decimal] (18, 0) NOT NULL,
 [OKDIVI] [nvarchar] (255) NULL,
 [OKSTAT] [nvarchar] (255) NULL,
-[OKCUNO] [nvarchar] (255) NULL,
+[OKCUNO] [nvarchar] (255) NOT NULL,
 [OKCUCL] [nvarchar] (255) NULL,
 [OKCUTP] [decimal] (1, 0) NULL,
 [OKALCU] [nvarchar] (255) NULL,
@@ -258,4 +258,6 @@ CREATE TABLE [psa].[ics_stg_movex_OCUSMA]
 [OKSPLE] [nvarchar] (255) NULL,
 [OKRASN] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_OCUSMA] ADD CONSTRAINT [PK_stg_movex_OCUSMA] PRIMARY KEY CLUSTERED  ([OKCONO], [OKCUNO])
 GO

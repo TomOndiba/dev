@@ -14,10 +14,10 @@ CREATE TABLE [psa].[ics_stg_movex_OOLINE]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_OOLINE_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_OOLINE_IsIncomplete] DEFAULT ('N'),
-[OBCONO] [decimal] (3, 0) NULL,
+[OBCONO] [decimal] (18, 0) NOT NULL,
 [OBDIVI] [nvarchar] (255) NULL,
-[OBORNO] [nvarchar] (255) NULL,
-[OBPONR] [decimal] (5, 0) NULL,
+[OBORNO] [nvarchar] (255) NOT NULL,
+[OBPONR] [decimal] (18, 0) NOT NULL,
 [OBPOSX] [decimal] (3, 0) NULL,
 [OBLTYP] [nvarchar] (255) NULL,
 [OBORST] [nvarchar] (255) NULL,
@@ -275,4 +275,6 @@ CREATE TABLE [psa].[ics_stg_movex_OOLINE]
 [OBRASN] [nvarchar] (255) NULL,
 [OBCLAT] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_OOLINE] ADD CONSTRAINT [PK_stg_movex_OOLINE] PRIMARY KEY CLUSTERED  ([OBCONO], [OBORNO], [OBPONR])
 GO

@@ -15,9 +15,9 @@ CREATE TABLE [psa].[ics_stg_movex_MITAUN]
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MITAUN_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MITAUN_IsIncomplete] DEFAULT ('N'),
 [MUCONO] [decimal] (3, 0) NULL,
-[MUITNO] [nvarchar] (255) NULL,
-[MUAUTP] [decimal] (1, 0) NULL,
-[MUALUN] [nvarchar] (255) NULL,
+[MUITNO] [nvarchar] (255) NOT NULL,
+[MUAUTP] [decimal] (18, 0) NOT NULL,
+[MUALUN] [nvarchar] (255) NOT NULL,
 [MUDCCD] [decimal] (1, 0) NULL,
 [MUCOFA] [decimal] (15, 9) NULL,
 [MUDMCF] [decimal] (1, 0) NULL,
@@ -45,4 +45,6 @@ CREATE TABLE [psa].[ics_stg_movex_MITAUN]
 [MUCUEX] [nvarchar] (255) NULL,
 [MULGUN] [decimal] (1, 0) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_MITAUN] ADD CONSTRAINT [PK_stg_movex_MITAUN] PRIMARY KEY CLUSTERED  ([MUALUN], [MUAUTP], [MUITNO])
 GO

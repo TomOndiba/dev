@@ -1,0 +1,43 @@
+CREATE TABLE [psa].[ics_stg_M3V10ved_POL_MITAUN]
+(
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_psa_ics_stg_M3V10ved_POL_MITAUN_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_psa_ics_stg_M3V10ved_POL_MITAUN_IsDuplicate] DEFAULT ((0)),
+[MUALUN] [nchar] (3) NOT NULL,
+[MUAUS1] [numeric] (18, 0) NULL,
+[MUAUS2] [numeric] (18, 0) NULL,
+[MUAUS3] [numeric] (18, 0) NULL,
+[MUAUS4] [numeric] (18, 0) NULL,
+[MUAUS5] [numeric] (18, 0) NULL,
+[MUAUS6] [numeric] (18, 0) NULL,
+[MUAUS9] [numeric] (18, 0) NULL,
+[MUAUSB] [numeric] (18, 0) NULL,
+[MUAUSC] [numeric] (18, 0) NULL,
+[MUAUTP] [numeric] (18, 0) NOT NULL,
+[MUCHID] [nchar] (10) NULL,
+[MUCHNO] [numeric] (18, 0) NULL,
+[MUCOFA] [numeric] (18, 0) NULL,
+[MUCONO] [numeric] (18, 0) NOT NULL,
+[MUDCCD] [numeric] (18, 0) NULL,
+[MUDMCF] [numeric] (18, 0) NULL,
+[MUFMID] [nchar] (5) NULL,
+[MUITNO] [nchar] (15) NOT NULL,
+[MULMDT] [numeric] (18, 0) NULL,
+[MULMTS] [numeric] (18, 0) NULL,
+[MUPACT] [nchar] (6) NULL,
+[MUPCOF] [numeric] (18, 0) NULL,
+[MURESI] [nchar] (5) NULL,
+[MURGDT] [numeric] (18, 0) NULL,
+[MURGTM] [numeric] (18, 0) NULL,
+[MUTXID] [numeric] (18, 0) NULL,
+[MUUNMU] [numeric] (18, 0) NULL
+)
+GO
+ALTER TABLE [psa].[ics_stg_M3V10ved_POL_MITAUN] ADD CONSTRAINT [PK_psa_ics_stg_M3V10ved_POL_MITAUN] PRIMARY KEY CLUSTERED  ([MUALUN], [MUAUTP], [MUCONO], [MUITNO])
+GO

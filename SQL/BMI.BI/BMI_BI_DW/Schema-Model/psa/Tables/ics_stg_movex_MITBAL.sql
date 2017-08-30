@@ -14,9 +14,9 @@ CREATE TABLE [psa].[ics_stg_movex_MITBAL]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MITBAL_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MITBAL_IsIncomplete] DEFAULT ('N'),
-[MBCONO] [decimal] (3, 0) NULL,
-[MBWHLO] [nvarchar] (255) NULL,
-[MBITNO] [nvarchar] (255) NULL,
+[MBCONO] [decimal] (18, 0) NOT NULL,
+[MBWHLO] [nvarchar] (255) NOT NULL,
+[MBITNO] [nvarchar] (255) NOT NULL,
 [MBSTQT] [decimal] (15, 6) NULL,
 [MBQUQT] [decimal] (15, 6) NULL,
 [MBRJQT] [decimal] (15, 6) NULL,
@@ -177,4 +177,6 @@ CREATE TABLE [psa].[ics_stg_movex_MITBAL]
 [MBINSH] [decimal] (1, 0) NULL,
 [MBSSRE] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_MITBAL] ADD CONSTRAINT [PK_stg_movex_MITBAL] PRIMARY KEY CLUSTERED  ([MBCONO], [MBITNO], [MBWHLO])
 GO

@@ -1,6 +1,12 @@
 ﻿CREATE TABLE [dbo].[KPI_REPORT_TYPE] (
     [REPORT_TYPE_ID] [dbo].[D_INT]  NOT NULL,
     [REPORT_NAME]    [dbo].[N_C100] NULL,
+    [CREATE_BY]      [dbo].[N_USER] NULL,
+    [CREATE_DATE]    [dbo].[D_DATE] NULL,
+    [UPDATE_BY]      [dbo].[N_USER] NULL,
+    [UPDATE_DATE]    [dbo].[D_DATE] NULL,
     CONSTRAINT [PK_KPI_REPORT_TYPE] PRIMARY KEY CLUSTERED ([REPORT_TYPE_ID] ASC)
 );
+
+
 

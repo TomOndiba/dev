@@ -214,7 +214,6 @@
     <Build Include="Tables\PU_LINK_ELEMENT.sql" />
     <Build Include="Tables\KPI_SHIFT_ITEMS.sql" />
     <Build Include="Tables\PU_LINK_ITEM.sql" />
-    <Build Include="Tables\KPI_SHIFT_PRODUCTION.sql" />
     <Build Include="Tables\PU_LINK_ITEM_BACKUP.sql" />
     <Build Include="Tables\KPI_SHIFT_PRODUCTION_NEW.sql" />
     <Build Include="Tables\PU_LINK_JOIN.sql" />
@@ -486,6 +485,23 @@
     <Build Include="User Defined Types\Private.sql" />
     <Build Include="User Defined Types\AssertStringTable.sql" />
     <Build Include="Security\tSQLt.sql" />
+    <Build Include="Tables\SA_INVOICE_FRANCE_SPAIN_BACKUP.sql" />
+    <Build Include="Tables\SA_INVOICE_BACKUP.sql" />
+    <Build Include="Tables\MD_ITEMS_BACKUP.sql" />
+    <Build Include="Tables\KPI_SHIFT_REPORT_BACKUP.sql" />
+    <Build Include="Tables\KPI_SHIFT_PRODUCTION_OLD.sql" />
+    <Build Include="Tables\KPI_SHIFT_PRODUCTION_NEW_BACKUP.sql" />
+    <Build Include="Tables\KPI_SHIFT_PRODLINE_ITEM_DATA_BACKUP.sql" />
+    <Build Include="Tables\KPI_SHIFT_PRODLINE_ITEM_DATA.sql" />
+    <Build Include="Tables\KPI_SHIFT_PLANT_ITEMS_BACKUP.sql" />
+    <Build Include="Tables\KPI_SHIFT_PLANT_ITEMS.sql" />
+    <Build Include="Tables\KPI_SHIFT_DATA_BACKUP.sql" />
+    <Build Include="Tables\KPI_REPORT_CATEGORY_FLAT.sql" />
+    <Build Include="Tables\KPI_LOCAL_REASON_BACKUP.sql" />
+    <Build Include="Tables\KPI_LOCAL_REASON.sql" />
+    <Build Include="Tables\KPI_LINK_REASON.sql" />
+    <Build Include="Views\V_SO_CompletedTasks_prod.sql" />
+    <Build Include="Views\V_SCM_ITEMS_20170810.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icopal_profBIS.sandbox.publish.xml" />

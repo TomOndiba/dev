@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[KPI_SHIFT_DATA] (
+﻿CREATE TABLE [dbo].[KPI_SHIFT_DATA_BACKUP] (
     [SHIFTDATA_ID]       [dbo].[D_INT]       NOT NULL,
     [PRODLINE_ID]        [dbo].[D_INT]       NULL,
     [SHIFT_ID]           [dbo].[D_INT]       NULL,
@@ -11,8 +11,6 @@
     [UPDATE_DATE]        [dbo].[D_DATE]      NULL,
     [CREATE_BY]          [dbo].[N_USER]      NULL,
     [CREATE_DATE]        [dbo].[D_DATE]      NULL,
-    CONSTRAINT [PK_KPI_SHIFT_DATA] PRIMARY KEY CLUSTERED ([SHIFTDATA_ID] ASC)
+    CONSTRAINT [PK_KPI_SHIFT_DATA_BACKUP] PRIMARY KEY CLUSTERED ([SHIFTDATA_ID] ASC)
 );
-
-
 

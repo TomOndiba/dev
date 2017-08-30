@@ -55,6 +55,7 @@
     [FILENAME]                     [dbo].[N_MEMO]      NULL,
     [REMARKS]                      [dbo].[N_MEMO]      NULL,
     [ORIGINAL_ITEM_TEXT]           [dbo].[N_C100]      NULL,
+    [SUPPLIER_ITEM_TEXT]           [dbo].[N_C100]      NULL,
     [ADDITIONAL_TEXT1]             [dbo].[N_C50]       NULL,
     [ADDITIONAL_TEXT2]             [dbo].[N_C50]       NULL,
     [ADDITIONAL_TEXT3]             [dbo].[N_C50]       NULL,
@@ -72,6 +73,8 @@
     [UPDATE_BY]                    [dbo].[N_USER]      NULL,
     [PRECISION_REC]                [dbo].[D_INT]       NULL
 );
+
+
 
 
 GO

@@ -75,6 +75,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SchemaComparisons", "Schema
 	ProjectSection(SolutionItems) = preProject
 		SchemaComparisons\BMI_BI_DW.scmp = SchemaComparisons\BMI_BI_DW.scmp
 		SchemaComparisons\BMI_BI_DW.Tests Comparison.scmp = SchemaComparisons\BMI_BI_DW.Tests Comparison.scmp
+		SchemaComparisons\Icopal_profBIS.scmp = SchemaComparisons\Icopal_profBIS.scmp
 		SchemaComparisons\profBIS_View.scmp = SchemaComparisons\profBIS_View.scmp
 		SchemaComparisons\profBIS_View.tests.scmp = SchemaComparisons\profBIS_View.tests.scmp
 	EndProjectSection

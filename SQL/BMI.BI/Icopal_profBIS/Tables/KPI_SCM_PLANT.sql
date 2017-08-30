@@ -13,6 +13,8 @@
     [LTA_CONT_WORK_HOURS] [dbo].[D_DEC12.2]   NULL,
     [LTA_PROD_COUNT]      [dbo].[D_INT]       NULL,
     [LTA_CONT_COUNT]      [dbo].[D_INT]       NULL,
+    [LOST_PROD_WORKDAYS]  [dbo].[D_DEC7.2]    NULL,
+    [LOST_CONT_WORKDAYS]  [dbo].[D_DEC7.2]    NULL,
     [NLTA_PROD_COUNT]     [dbo].[D_INT]       NULL,
     [NLTA_CONT_COUNT]     [dbo].[D_INT]       NULL,
     [NEAR_PROD_COUNT]     [dbo].[D_INT]       NULL,
@@ -29,4 +31,6 @@
     CONSTRAINT [PK_KPI_SCM_PLANT_1] PRIMARY KEY CLUSTERED ([PLANT_ID] ASC, [KPI_YEAR] ASC, [KPI_MONTH] ASC),
     CONSTRAINT [FK_KPI_SCM_PLANT_MD_PLANT] FOREIGN KEY ([PLANT_ID]) REFERENCES [dbo].[MD_PLANT] ([PLANT_ID]) ON DELETE CASCADE
 );
+
+
 

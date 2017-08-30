@@ -1,6 +1,7 @@
 ﻿
 
 
+
 CREATE view [dbo].[V_PU_PURCHASE] as
 -- Faktura og kreditnota 
 select p.SYSTEM_ID, 
@@ -80,6 +81,7 @@ select p.SYSTEM_ID,
 	  ,p.ADDITIONAL_TEXT3
 	  ,p.ADDITIONAL_TEXT4
 	  ,p.ADDITIONAL_TEXT5
+	  ,p.SUPPLIER_ITEM_TEXT
 	  ,idx100.LOCAL_AMOUNT as INDEX100_LOCAL_AMOUNT
 	  ,idx100.GROUP_AMOUNT as INDEX100_GROUP_AMOUNT
 	  ,idx100.QUANTITY     as INDEX100_QUANTITY

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[MD_ITEMS] (
+﻿CREATE TABLE [dbo].[MD_ITEMS_BACKUP] (
     [SYSTEM_ID]          [dbo].[D_INT]  NOT NULL,
     [ITEM_NO]            [dbo].[N_C50]  NOT NULL,
     [LOCAL_ITEM_NO]      [dbo].[N_C50]  NULL,
@@ -20,8 +20,6 @@
     [CREATE_BY]          [dbo].[N_USER] NULL,
     [UPDATE_DATE]        [dbo].[D_DATE] NULL,
     [UPDATE_BY]          [dbo].[N_USER] NULL,
-    CONSTRAINT [PK_MD_ITEMS] PRIMARY KEY CLUSTERED ([SYSTEM_ID] ASC, [ITEM_NO] ASC)
+    CONSTRAINT [PK_MD_ITEMS_BACKUP] PRIMARY KEY CLUSTERED ([SYSTEM_ID] ASC, [ITEM_NO] ASC)
 );
-
-
 

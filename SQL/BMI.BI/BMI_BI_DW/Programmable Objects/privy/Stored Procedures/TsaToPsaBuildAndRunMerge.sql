@@ -197,15 +197,12 @@ begin
 						+ ', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted=1' + ';' ;
 		end ;
 
-	set @_Message=@sql;
-
 	set @_Step = 'Execute Merge statement ' ;
 
 	execute sp_executesql @sql ;
 	
-	set @_ProgressMessage = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@@ROWCOUNT as varchar(16)), 'NULL') + ' row(s)'
+	set @_Message = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@@ROWCOUNT as varchar(16)), 'NULL') + ' row(s)'
 				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)
-	set @_ProgressLog += coalesce(char(10) + @_ProgressMessage, '');
 						
 	if object_id(N'#TableStructure') is not null drop table #TableStructure ;
 
@@ -216,10 +213,6 @@ begin
 
 		set @_ErrorContext = 'Merge statement preparation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
 
-		set @_ProgressMessage = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@@ROWCOUNT as varchar(16)), 'NULL') + ' row(s)'
-				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)
-
-	set @_ProgressLog += coalesce(char(10) + @_ProgressMessage, '');
 		exec log4.ExceptionHandler
 			@ErrorContext = @_ErrorContext
 			, @ErrorProcedure = @_FunctionName
@@ -237,7 +230,7 @@ begin
 				, @FunctionName = @_FunctionName
 				, @StepInFunction = @_Step
 				, @MessageText = @_Message
-				, @ExtraInfo = @_ProgressLog
+				, @ExtraInfo = @sql
 				, @Severity = @_Severity
 				, @ExceptionId = @_ExceptionId
 

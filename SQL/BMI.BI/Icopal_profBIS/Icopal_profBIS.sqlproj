@@ -500,7 +500,6 @@
     <Build Include="Tables\KPI_LOCAL_REASON_BACKUP.sql" />
     <Build Include="Tables\KPI_LOCAL_REASON.sql" />
     <Build Include="Tables\KPI_LINK_REASON.sql" />
-    <Build Include="Views\V_SO_CompletedTasks_prod.sql" />
     <Build Include="Views\V_SCM_ITEMS_20170810.sql" />
   </ItemGroup>
   <ItemGroup>

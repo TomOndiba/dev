@@ -33,8 +33,20 @@ select * from sys.database_principals;
 --go
 --alter role [loginmanager] add member [Greg.Lucas@icopal.com]
 --go
---grant alter any user to [greg.lucas@icopal.com]
+--grant alter any user to [Greg.Lucas@icopal.com]
 --go
+
+if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
+	begin
+		create user [razia.nazir@icopal.com] from external provider;
+	end
+go
+alter role [dbmanager] add member [razia.nazir@icopal.com]
+go
+alter role [loginmanager] add member [razia.nazir@icopal.com]
+go
+grant alter any user to [razia.nazir@icopal.com]
+go
 
 if not exists (select 1 from sys.sysusers where name = 'Vincent.Mitchell@icopal.com')
 	begin

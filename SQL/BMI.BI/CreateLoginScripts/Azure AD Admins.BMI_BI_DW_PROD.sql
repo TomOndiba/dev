@@ -29,5 +29,17 @@ exec sp_addrolemember N'db_accessadmin', N'Greg.Lucas@icopal.com' ;
 go
 exec sp_addrolemember N'db_owner', N'Greg.Lucas@icopal.com' ;
 go
-grant alter any user to [greg.lucas@icopal.com]
+grant alter any user to [Greg.Lucas@icopal.com]
+go
+
+if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
+	begin
+		create user [razia.nazir@icopal.com] from external provider;
+	end
+go
+exec sp_addrolemember N'db_accessadmin', N'razia.nazir@icopal.com' ;
+go
+exec sp_addrolemember N'db_owner', N'razia.nazir@icopal.com' ;
+go
+grant alter any user to [razia.nazir@icopal.com]
 go

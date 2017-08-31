@@ -123,8 +123,8 @@ values (0, '', '', '', 0, 0)
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
 --	, (1	, 'DEV'		, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
 --	, (1	, 'PROD'	, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
-	, (1	, 'DEV'		, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+--	, (1	, 'DEV'		, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+--	, (1	, 'PROD'	, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
 	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
@@ -155,8 +155,8 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'Angus.Beattie@icopal.com'				, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'Anne.DuffyPenny@icopal.com'				, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'Anne.DuffyPenny@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'Patrick.LeBlond@icopal.com'				, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'Patrick.LeBlond@icopal.com'				, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'Redouane.Berksi@icopal.com'				, 'dbo'	, 1	, 1)
@@ -172,6 +172,8 @@ values (0, '', '', '', 0, 0)
 	--! Expired User Accounts
 	, (0	, 'DEV'		, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
 ;
 
 insert #RoleMembers (UserName, RoleName)

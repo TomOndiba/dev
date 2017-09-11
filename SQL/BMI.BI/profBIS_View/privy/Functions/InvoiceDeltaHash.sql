@@ -1,7 +1,6 @@
-﻿create function [privy].[InvoiceDeltaHash]
+﻿CREATE function [privy].[InvoiceDeltaHash]
 (
-  @Uniqueifier bigint
-, @SYSTEM_ID int
+ @SYSTEM_ID int
 , @INVOICE_NUMBER nvarchar(20)
 , @INVOICE_LINE_NUMBER nvarchar(20)
 , @ORDER_NUMBER nvarchar(20)
@@ -78,8 +77,7 @@ begin
 	select
 		@OutputValue = convert(nvarchar(32), hashbytes('MD5'
 						, convert(nvarchar(max)
-							, coalesce(cast(@Uniqueifier as nvarchar(30)), 'Uniqueifier')
-							+ coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
+							, coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
 							+ coalesce(nullif(@INVOICE_NUMBER, ''), 'INVOICE_NUMBER')
 							+ coalesce(nullif(@INVOICE_LINE_NUMBER, ''), 'INVOICE_LINE_NUMBER')
 							+ coalesce(nullif(@ORDER_NUMBER, ''), 'ORDER_NUMBER')

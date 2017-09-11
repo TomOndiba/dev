@@ -1621,8 +1621,20 @@
       <Name>test InvoiceDelta includes rows with only IsDeleted different</Name>
     </SelectedItem>
     <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlProcedure, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>privy</Name>
-      <Name>InvoiceRefresh</Name>
+      <Name>etl-ViewTests</Name>
+      <Name>test InvoiceDelta includes inactive duplicate not yet added to control</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlProcedure, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>privy-InvoiceRefreshTests</Name>
+      <Name>test source does not throw error on duplication</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlProcedure, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>privy-InvoiceRefreshTests</Name>
+      <Name>test source removes correct dupe</Name>
+    </SelectedItem>
+    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlProcedure, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>privy-InvoiceRefreshTests</Name>
+      <Name>test source soft deletes correct rows</Name>
     </SelectedItem>
   </ExcludedSourceElements>
   <ExcludedTargetElements>
@@ -1745,10 +1757,6 @@
       <Name>stg</Name>
       <Name>InvoiceControl</Name>
       <Name>NCI_stg_InvoiceControl_ExtractFilter</Name>
-    </SelectedItem>
-    <SelectedItem Type="Microsoft.Data.Tools.Schema.Sql.SchemaModel.SqlProcedure, Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>privy</Name>
-      <Name>InvoiceRefresh</Name>
     </SelectedItem>
   </ExcludedTargetElements>
 </SchemaComparison>

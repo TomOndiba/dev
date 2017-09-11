@@ -1,9 +1,7 @@
-﻿CREATE procedure [privy-InvoiceRefreshTests].[test source values inserted to correct columns]
+﻿create      procedure [privy-InvoiceRefreshTests].[test source removes correct dupe]
 as
 begin
-	--! NB: Always use the real table for insert tests so we can detect likely failures arising from new NOT NULL columns
-	truncate table stg.Invoice;
-
+	exec tSQLt.FakeTable @TableName = 'stg.Invoice', @Identity = 1, @Defaults = 1 ;
 	exec tSQLt.FakeTable 'privy.StagingLoadParameter' ;
 	insert privy.StagingLoadParameter (ModuleName, DataCaptureStart, DataCaptureEnd)
 	values ('[privy].[InvoiceRefresh]', '20170710 00:00:00', '20170715 23:59:59.997') ;
@@ -71,31 +69,36 @@ begin
 	, STD_FREIGHT decimal(15, 4) null
 	, DuplicateCount int null
 	) ;
-
 	--! What are the values we are going to insert?
 	declare @_SBU varchar(8) = 'XXX'
+		, @_InsertedOn datetime =  getdate()
 		, @_ModifiedOn datetime = getdate()
+		, @_DeletedOn datetime = getdate()
 		, @_ModifiedBy varchar(200) = '[privy].[InvoiceRefresh]'
-		, @_I001A_InvoiceKey int = 100
+		, @_STD_ITEM_CATEGORY_ID int = 46247
+		, @_STD_PAYMENT_TERM_ID int = 152
+	
+
+	declare @_I001A_InvoiceKey int = 100
 		, @_I001A_IsDeleted char(1) = 'N'
 		-- QlikView surrogate key
 		, @_I001A_REC_ID uniqueidentifier = newid()
 		-----------------------------------------------------------
 		--! This is effectively the business key that the ETL process will lookup
 		, @_I001A_SYSTEM_ID int  = 2
-		, @_I001A_INVOICE_DATE datetime = '20170712'
-		, @_I001A_INVOICE_NUMBER nvarchar(20) = 'A001'
+		, @_I001A_INVOICE_NUMBER nvarchar(20) = 'I001A-IN'
 		, @_I001A_INVOICE_LINE_NUMBER nvarchar(20) = 'B02'
-		, @_I001A_ORDER_NUMBER nvarchar(20) = 'C001'
+		, @_I001A_ORDER_NUMBER nvarchar(20) = 'I001A-ON'
 		, @_I001A_ORDER_LINE_NUMBER nvarchar(20)  = 'C01'
 		, @_I001A_Uniqueifier bigint = 1
+		, @_I001A_DeltaHash char(32)
 		-----------------------------------------------------------
+		, @_I001A_INVOICE_DATE datetime = '20170712'
 		, @_I001A_INVOICE_TYPE nvarchar(1) = '9'
 		, @_I001A_InvoiceTypeName nvarchar(29)  = 'TODO: Define Invoice Type (9)'
 		, @_I001A_LOCAL_SITE_SOLD nvarchar(20) = 'G'
 		, @_I001A_SITE_ID int = 3
 		, @_I001A_ITEM_NO nvarchar(50) = 'H'
-		, @_I001A_ITEM_CATEGORY_ID int = 46247
 		, @_I001A_ENV_CATEGORY_ID int = NULL
 		, @_I001A_SOLD_TO_CUSTOMER_NO nvarchar(20) = 'I'
 		, @_I001A_SHIP_TO_CUSTOMER_NO nvarchar(20) = 'J'
@@ -106,7 +109,6 @@ begin
 		, @_I001A_ACTUAL_PAYMENT_DATE datetime  = '20170715'
 		, @_I001A_LOCAL_DELIVERY_TERM nvarchar(20) = 'M'
 		, @_I001A_LOCAL_DELIVERY_TERM_TEXT nvarchar(100) = 'P'
-		, @_I001A_PAYMENT_TERM_ID int = 152
 		, @_I001A_LOCAL_PAYMENT_TERM nvarchar(20) = 'Q'
 		, @_I001A_LOCAL_PAYMENT_TERM_TEXT nvarchar(100) = 'R'
 		, @_I001A_INVOICE_QUANTITY decimal(12, 2) = 1234123412.11
@@ -129,6 +131,25 @@ begin
 		, @_I001A_STD_COST decimal(15, 4) = 12341234123.2233
 		, @_I001A_STD_FREIGHT decimal(15, 4) = 12341234123.2344
 		, @_I001A_DuplicateCount int  = 1
+		declare
+
+		 @_I002A_SYSTEM_ID int  = 2
+
+		, @_I002A_LOCAL_SITE_SOLD nvarchar(20) = 'GA'
+		, @_I002A_SITE_ID int = 13
+
+		, @_I002A_LOCAL_UOM nvarchar(20) = 'UA'
+		, @_I002A_LOCAL_UOM_HARMONIZED nvarchar(20) = 'VA'
+		, @_I002A_LOCAL_UOM_FACTOR decimal(11, 4) = 1234.14
+
+		declare @_I001B_SYSTEM_ID int  = 2
+	
+		, @_I001B_LOCAL_SITE_SOLD nvarchar(20) = 'GB'
+		, @_I001B_SITE_ID int = 14
+	
+		, @_I001B_LOCAL_UOM nvarchar(20) = 'UB'
+		, @_I001B_LOCAL_UOM_HARMONIZED nvarchar(20) = 'VB'
+		, @_I001B_LOCAL_UOM_FACTOR decimal(11, 4) = 2345.14
 
 	--! Fake all the source tables
 	exec Icopal_profBIS.tSQLt.FakeTable 'dbo.FLEXPARAMS' ;
@@ -152,15 +173,38 @@ begin
 	  , ACCESS_DATE
 	)
 	values
-		  ('DWH', 'PAYMENT_UNMAPPED', @_I001A_PAYMENT_TERM_ID, 'BESKRIVELSE', '20170101')
-		, ('DWH', 'SA_UNMAPPED_ITEM', @_I001A_ITEM_CATEGORY_ID, 'BESKRIVELSE', '20170101')
+		  ('DWH', 'PAYMENT_UNMAPPED', @_STD_PAYMENT_TERM_ID, 'BESKRIVELSE', '20170101')
+		, ('DWH', 'SA_UNMAPPED_ITEM', @_STD_ITEM_CATEGORY_ID, 'BESKRIVELSE', '20170101')
 		, ('DWH', 'SALES_NOT_QLIKVIEW', '46377', 'BESKRIVELSE', '20170101')
 		, ('DWH', 'CUSTOMER_NOT_EXPORTED', '146875', 'BESKRIVELSE', '20170101')
 
-	--! Set up the source data
-	insert Icopal_profBIS.dbo.SA_INVOICE
+	--! Initialise the source data for the first pass
+	insert Icopal_profBIS.dbo.PU_LINK_SITE (SITE_ID, SYSTEM_ID, LOCAL_SITE)
+	values
+		  (@_I001A_SITE_ID, @_I001A_SYSTEM_ID, @_I001A_LOCAL_SITE_SOLD)
+		, (@_I002A_SITE_ID, @_I002A_SYSTEM_ID, @_I002A_LOCAL_SITE_SOLD)
+		, (@_I001B_SITE_ID, @_I001B_SYSTEM_ID, @_I001B_LOCAL_SITE_SOLD)
+
+	insert Icopal_profBIS.dbo.MD_SITE (SITE_ID, SBU, SYSTEM_ID)
+	values
+		  (@_I001A_SITE_ID, @_SBU, @_I001A_SYSTEM_ID)
+		, (@_I002A_SITE_ID, @_SBU, @_I002A_SYSTEM_ID)
+		, (@_I001B_SITE_ID, @_SBU, @_I001B_SYSTEM_ID)
+
+	insert Icopal_profBIS.dbo.MD_SBU (SBU, SABIS) values (@_SBU, 'Y') ;
+
+	insert Icopal_profBIS.dbo.PU_LINK_UOM (SYSTEM_ID, LOCAL_UOM, HARMONIZED_UOM, FACTOR)
+	values
+		  (@_I001A_SYSTEM_ID, @_I001A_LOCAL_UOM, @_I001A_LOCAL_UOM_HARMONIZED, 
+		  @_I001A_LOCAL_UOM_FACTOR)
+		, (@_I002A_SYSTEM_ID, @_I002A_LOCAL_UOM, @_I002A_LOCAL_UOM_HARMONIZED, 
+		@_I002A_LOCAL_UOM_FACTOR)
+		, (@_I001B_SYSTEM_ID, @_I001B_LOCAL_UOM, @_I001B_LOCAL_UOM_HARMONIZED,
+		 @_I001B_LOCAL_UOM_FACTOR)
+		insert Icopal_profBIS.dbo.SA_INVOICE
 	(
-	  REC_ID
+	ETL_CREATED_ON
+	,  REC_ID
 	, SYSTEM_ID, SITE_SOLD
 	, INVOICE_NUMBER, INVOICE_LINE_NUMBER
 	, INVOICE_DATE, INVOICE_TYPE
@@ -177,162 +221,121 @@ begin
 	)
 	values
 	(
-	  @_I001A_REC_ID
+	@_InsertedOn
+	,  @_I001A_REC_ID
 	, @_I001A_SYSTEM_ID, @_I001A_LOCAL_SITE_SOLD
 	, @_I001A_INVOICE_NUMBER, @_I001A_INVOICE_LINE_NUMBER
 	, @_I001A_INVOICE_DATE, @_I001A_INVOICE_TYPE
 	, @_I001A_ORDER_NUMBER, @_I001A_ORDER_LINE_NUMBER
 	, @_I001A_ITEM_NO, @_I001A_SOLD_TO_CUSTOMER_NO, @_I001A_SHIP_TO_CUSTOMER_NO
-	, @_I001A_INVOICE_QUANTITY, @_I001A_INVOICE_UOM, @_I001A_STATISTIC_QUANTITY, @_I001A_STATISTIC_UOM, @_I001A_QUANTITY, @_I001A_LOCAL_UOM
+	, @_I001A_INVOICE_QUANTITY, @_I001A_INVOICE_UOM, @_I001A_STATISTIC_QUANTITY,
+	 @_I001A_STATISTIC_UOM, @_I001A_QUANTITY, @_I001A_LOCAL_UOM
 	, @_I001A_INVOICE_AMOUNT, @_I001A_LOCAL_AMOUNT, @_I001A_GROUP_AMOUNT
 	, @_I001A_INVOICE_CURRENCY, @_I001A_LOCAL_CURRENCY
-	, @_I001A_LINE_DISCOUNT_AMOUNT, @_I001A_INVOICE_DISCOUNT_AMOUNT, @_I001A_LINE_BONUS_AMOUNT, @_I001A_BONUS_SHARE_AMOUNT
+	, @_I001A_LINE_DISCOUNT_AMOUNT, @_I001A_INVOICE_DISCOUNT_AMOUNT, @_I001A_LINE_BONUS_AMOUNT
+	, @_I001A_BONUS_SHARE_AMOUNT
 	, @_I001A_STD_COST, @_I001A_STD_FREIGHT
 	, @_I001A_SALESPERSON_ID, @_I001A_SALESPERSON_NAME
 	, @_I001A_DELIVERY_DATE, @_I001A_EXPECTED_PAYMENT_DATE, @_I001A_ACTUAL_PAYMENT_DATE
-	, @_I001A_LOCAL_DELIVERY_TERM, @_I001A_LOCAL_DELIVERY_TERM_TEXT, @_I001A_LOCAL_PAYMENT_TERM, @_I001A_LOCAL_PAYMENT_TERM_TEXT
-	) ;
-
-	insert Icopal_profBIS.dbo.PU_LINK_SITE (SITE_ID, SYSTEM_ID, LOCAL_SITE)
-	values (@_I001A_SITE_ID, @_I001A_SYSTEM_ID, @_I001A_LOCAL_SITE_SOLD)
-
-	insert Icopal_profBIS.dbo.MD_SITE (SITE_ID, SBU, SYSTEM_ID)
-	values (@_I001A_SITE_ID, @_SBU, @_I001A_SYSTEM_ID) ;
-
-	insert Icopal_profBIS.dbo.MD_SBU (SBU, SABIS) values (@_SBU, 'Y') ;
-
-	insert Icopal_profBIS.dbo.PU_LINK_UOM (SYSTEM_ID, LOCAL_UOM, HARMONIZED_UOM, FACTOR)
-	values (@_I001A_SYSTEM_ID, @_I001A_LOCAL_UOM, @_I001A_LOCAL_UOM_HARMONIZED, @_I001A_LOCAL_UOM_FACTOR) ;
-
-
-	--! Act
-	exec privy.InvoiceRefresh @LoadStart = @_ModifiedOn, @DebugLevel = 0 ;
-	
-	--! Assert
-	declare @_I001A_DeltaHash char(32) -- = (select EtlDeltaHash from stg.Invoice where InvoiceKey = @_I001A_InvoiceKey);
-
-	set @_I001A_DeltaHash
-		= privy.InvoiceDeltaHash
-			(
-			  
-			   @_I001A_SYSTEM_ID
-			, @_I001A_INVOICE_NUMBER
-			, @_I001A_ORDER_NUMBER
-			, @_I001A_INVOICE_LINE_NUMBER
-			, @_I001A_ORDER_LINE_NUMBER
-			, @_I001A_INVOICE_DATE
-			, @_I001A_INVOICE_TYPE
-			, @_I001A_InvoiceTypeName
-			, @_I001A_LOCAL_SITE_SOLD
-			, @_I001A_SITE_ID
-			, @_I001A_ITEM_NO
-			, @_I001A_ITEM_CATEGORY_ID
-			, @_I001A_ENV_CATEGORY_ID
-			, @_I001A_SOLD_TO_CUSTOMER_NO
-			, @_I001A_SHIP_TO_CUSTOMER_NO
-			, @_I001A_SALESPERSON_ID
-			, @_I001A_SALESPERSON_NAME
-			, @_I001A_DELIVERY_DATE
-			, @_I001A_EXPECTED_PAYMENT_DATE
-			, @_I001A_ACTUAL_PAYMENT_DATE
-			, @_I001A_LOCAL_DELIVERY_TERM
-			, @_I001A_LOCAL_DELIVERY_TERM_TEXT
-			, @_I001A_PAYMENT_TERM_ID
-			, @_I001A_LOCAL_PAYMENT_TERM
-			, @_I001A_LOCAL_PAYMENT_TERM_TEXT
-			, @_I001A_INVOICE_QUANTITY
-			, @_I001A_INVOICE_UOM
-			, @_I001A_STATISTIC_QUANTITY
-			, @_I001A_STATISTIC_UOM
-			, @_I001A_QUANTITY
-			, @_I001A_LOCAL_UOM
-			, @_I001A_LOCAL_UOM_HARMONIZED
-			, @_I001A_LOCAL_UOM_FACTOR
-			, @_I001A_INVOICE_AMOUNT
-			, @_I001A_LOCAL_AMOUNT
-			, @_I001A_GROUP_AMOUNT
-			, @_I001A_INVOICE_CURRENCY
-			, @_I001A_LOCAL_CURRENCY
-			, @_I001A_LINE_DISCOUNT_AMOUNT
-			, @_I001A_INVOICE_DISCOUNT_AMOUNT
-			, @_I001A_LINE_BONUS_AMOUNT
-			, @_I001A_BONUS_SHARE_AMOUNT
-			, @_I001A_STD_COST
-			, @_I001A_STD_FREIGHT
-			);
-
-	--! What do we expect to see?
-	insert #expected
-	(
-	  InvoiceKey
-	, EtlDeltaHash
-	, EtlCreatedOn
-	, EtlCreatedBy
-	, EtlUpdatedOn
-	, EtlUpdatedBy
-	, EtlDeletedOn
-	, EtlDeletedBy
-	, IsDeleted
-	, REC_ID
-	, SYSTEM_ID
-	, INVOICE_DATE
-	, INVOICE_NUMBER
-	, INVOICE_LINE_NUMBER
-	, ORDER_NUMBER
-	, ORDER_LINE_NUMBER
-	, Uniqueifier
-	, INVOICE_TYPE
-	, InvoiceTypeName
-	, LOCAL_SITE_SOLD
-	, SITE_ID
-	, ITEM_NO
-	, ITEM_CATEGORY_ID
-	, ENV_CATEGORY_ID
-	, SOLD_TO_CUSTOMER_NO
-	, SHIP_TO_CUSTOMER_NO
-	, SALESPERSON_ID
-	, SALESPERSON_NAME
-	, DELIVERY_DATE
-	, EXPECTED_PAYMENT_DATE
-	, ACTUAL_PAYMENT_DATE
-	, LOCAL_DELIVERY_TERM
-	, LOCAL_DELIVERY_TERM_TEXT
-	, PAYMENT_TERM_ID
-	, LOCAL_PAYMENT_TERM
-	, LOCAL_PAYMENT_TERM_TEXT
-	, INVOICE_QUANTITY
-	, INVOICE_UOM
-	, STATISTIC_QUANTITY
-	, STATISTIC_UOM
-	, QUANTITY
-	, LOCAL_UOM
-	, LOCAL_UOM_HARMONIZED
-	, LOCAL_UOM_FACTOR
-	, INVOICE_AMOUNT
-	, LOCAL_AMOUNT
-	, GROUP_AMOUNT
-	, INVOICE_CURRENCY
-	, LOCAL_CURRENCY
-	, LINE_DISCOUNT_AMOUNT
-	, INVOICE_DISCOUNT_AMOUNT
-	, LINE_BONUS_AMOUNT
-	, BONUS_SHARE_AMOUNT
-	, STD_COST
-	, STD_FREIGHT
-	, DuplicateCount
+	, @_I001A_LOCAL_DELIVERY_TERM, @_I001A_LOCAL_DELIVERY_TERM_TEXT, @_I001A_LOCAL_PAYMENT_TERM
+	, 'R'
 	)
-	values
+	,
 	(
-	  @_I001A_InvoiceKey
-	, @_I001A_DeltaHash
-	, @_ModifiedOn
-	, @_ModifiedBy
-	, @_ModifiedOn
-	, @_ModifiedBy
-	, null -- EtlDeletedOn
-	, null -- EtlDeletedBy
-	, @_I001A_IsDeleted
-	, @_I001A_REC_ID
+	@_InsertedOn-1
+	,  @_I001A_REC_ID
+	, @_I001A_SYSTEM_ID, @_I001A_LOCAL_SITE_SOLD
+	, @_I001A_INVOICE_NUMBER, @_I001A_INVOICE_LINE_NUMBER
+	, @_I001A_INVOICE_DATE, @_I001A_INVOICE_TYPE
+	, @_I001A_ORDER_NUMBER, @_I001A_ORDER_LINE_NUMBER
+	, @_I001A_ITEM_NO, @_I001A_SOLD_TO_CUSTOMER_NO, @_I001A_SHIP_TO_CUSTOMER_NO
+	, @_I001A_INVOICE_QUANTITY, @_I001A_INVOICE_UOM, @_I001A_STATISTIC_QUANTITY,
+	 @_I001A_STATISTIC_UOM, @_I001A_QUANTITY, @_I001A_LOCAL_UOM
+	, @_I001A_INVOICE_AMOUNT, @_I001A_LOCAL_AMOUNT, @_I001A_GROUP_AMOUNT
+	, @_I001A_INVOICE_CURRENCY, @_I001A_LOCAL_CURRENCY
+	, @_I001A_LINE_DISCOUNT_AMOUNT, @_I001A_INVOICE_DISCOUNT_AMOUNT, @_I001A_LINE_BONUS_AMOUNT
+	, @_I001A_BONUS_SHARE_AMOUNT
+	, @_I001A_STD_COST, @_I001A_STD_FREIGHT
+	, @_I001A_SALESPERSON_ID, @_I001A_SALESPERSON_NAME
+	, @_I001A_DELIVERY_DATE, @_I001A_EXPECTED_PAYMENT_DATE, @_I001A_ACTUAL_PAYMENT_DATE
+	, @_I001A_LOCAL_DELIVERY_TERM, @_I001A_LOCAL_DELIVERY_TERM_TEXT, @_I001A_LOCAL_PAYMENT_TERM
+	, 'R'
+	);
+	exec privy.InvoiceRefresh @LoadStart = @_InsertedOn, @DebugLevel = 0 ;
+	select @_I001A_DeltaHash = EtlDeltaHash from stg.Invoice where InvoiceKey = @_I001A_InvoiceKey;
+
+	insert	#expected
+	(
+	InvoiceKey
+  , EtlDeltaHash
+  , EtlCreatedOn
+  , EtlCreatedBy
+  , EtlUpdatedOn
+  , EtlUpdatedBy
+  , EtlDeletedOn
+  , EtlDeletedBy
+  , IsDeleted
+  , REC_ID
+  , SYSTEM_ID
+  , INVOICE_DATE
+  , INVOICE_NUMBER
+  , INVOICE_LINE_NUMBER
+  , ORDER_NUMBER
+  , ORDER_LINE_NUMBER
+  , Uniqueifier
+  , INVOICE_TYPE
+  , InvoiceTypeName
+  , LOCAL_SITE_SOLD
+  , SITE_ID
+  , ITEM_NO
+  , ITEM_CATEGORY_ID
+  , ENV_CATEGORY_ID
+  , SOLD_TO_CUSTOMER_NO
+  , SHIP_TO_CUSTOMER_NO
+  , SALESPERSON_ID
+  , SALESPERSON_NAME
+  , DELIVERY_DATE
+  , EXPECTED_PAYMENT_DATE
+  , ACTUAL_PAYMENT_DATE
+  , LOCAL_DELIVERY_TERM
+  , LOCAL_DELIVERY_TERM_TEXT
+  , PAYMENT_TERM_ID
+  , LOCAL_PAYMENT_TERM
+  , LOCAL_PAYMENT_TERM_TEXT
+  , INVOICE_QUANTITY
+  , INVOICE_UOM
+  , STATISTIC_QUANTITY
+  , STATISTIC_UOM
+  , QUANTITY
+  , LOCAL_UOM
+  , LOCAL_UOM_HARMONIZED
+  , LOCAL_UOM_FACTOR
+  , INVOICE_AMOUNT
+  , LOCAL_AMOUNT
+  , GROUP_AMOUNT
+  , INVOICE_CURRENCY
+  , LOCAL_CURRENCY
+  , LINE_DISCOUNT_AMOUNT
+  , INVOICE_DISCOUNT_AMOUNT
+  , LINE_BONUS_AMOUNT
+  , BONUS_SHARE_AMOUNT
+  , STD_COST
+  , STD_FREIGHT
+  , DuplicateCount
+)
+
+values
+(
+	100
+  , @_I001A_DeltaHash
+  , @_InsertedOn
+  , @_ModifiedBy
+  , @_InsertedOn
+  , @_ModifiedBy
+  , null--,@_DeletedOn
+  , null--@_ModifiedBy
+  , 'N'
+  ,@_I001A_REC_ID
 	, @_I001A_SYSTEM_ID
 	, @_I001A_INVOICE_DATE
 	, @_I001A_INVOICE_NUMBER
@@ -345,7 +348,7 @@ begin
 	, @_I001A_LOCAL_SITE_SOLD
 	, @_I001A_SITE_ID
 	, @_I001A_ITEM_NO
-	, @_I001A_ITEM_CATEGORY_ID
+	, @_STD_ITEM_CATEGORY_ID
 	, @_I001A_ENV_CATEGORY_ID
 	, @_I001A_SOLD_TO_CUSTOMER_NO
 	, @_I001A_SHIP_TO_CUSTOMER_NO
@@ -356,7 +359,7 @@ begin
 	, @_I001A_ACTUAL_PAYMENT_DATE
 	, @_I001A_LOCAL_DELIVERY_TERM
 	, @_I001A_LOCAL_DELIVERY_TERM_TEXT
-	, @_I001A_PAYMENT_TERM_ID
+	, @_STD_PAYMENT_TERM_ID
 	, @_I001A_LOCAL_PAYMENT_TERM
 	, @_I001A_LOCAL_PAYMENT_TERM_TEXT
 	, @_I001A_INVOICE_QUANTITY
@@ -379,7 +382,6 @@ begin
 	, @_I001A_STD_COST
 	, @_I001A_STD_FREIGHT
 	, @_I001A_DuplicateCount
-	)
-		
-	exec tSQLt.AssertEqualsTable '#expected', 'stg.Invoice'
+) 
+exec tSQLt.AssertEqualsTable '#expected', 'stg.Invoice'
 end

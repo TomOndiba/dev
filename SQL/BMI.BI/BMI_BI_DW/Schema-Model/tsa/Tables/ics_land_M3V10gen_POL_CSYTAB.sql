@@ -26,3 +26,5 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_CSYTAB]
 [CTTXID] [numeric] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_CSYTAB_1] ON [tsa].[ics_land_M3V10gen_POL_CSYTAB] ([CTCONO], [CTDIVI], [CTLNCD], [CTSTCO], [CTSTKY])
+GO

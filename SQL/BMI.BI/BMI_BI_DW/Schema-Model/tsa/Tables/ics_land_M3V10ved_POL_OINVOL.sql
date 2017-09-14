@@ -45,3 +45,5 @@ CREATE TABLE [tsa].[ics_land_M3V10ved_POL_OINVOL]
 [ONYEA4] [numeric] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10ved_POL_OINVOL_1] ON [tsa].[ics_land_M3V10ved_POL_OINVOL] ([ONCONO], [ONDIVI], [ONDLIX], [ONINPX], [ONIVNO], [ONIVRF], [ONIVTP], [ONORNO], [ONWHLO], [ONYEA4])
+GO

@@ -33,3 +33,5 @@ CREATE TABLE [tsa].[ics_land_M3V10vil_POL_MPPOEX]
 [PEWHLO] [nchar] (3) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10vil_POL_MPPOEX_1] ON [tsa].[ics_land_M3V10vil_POL_MPPOEX] ([PECONO], [PEFUDX], [PEPNLI], [PEPNLS], [PEPUNO])
+GO

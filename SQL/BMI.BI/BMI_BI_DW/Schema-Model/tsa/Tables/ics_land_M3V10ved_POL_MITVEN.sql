@@ -68,3 +68,5 @@ CREATE TABLE [tsa].[ics_land_M3V10ved_POL_MITVEN]
 [IFWHLO] [nchar] (3) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10ved_POL_MITVEN_1] ON [tsa].[ics_land_M3V10ved_POL_MITVEN] ([IFCONO], [IFITNO], [IFPRCS], [IFSUFI], [IFSUNO])
+GO

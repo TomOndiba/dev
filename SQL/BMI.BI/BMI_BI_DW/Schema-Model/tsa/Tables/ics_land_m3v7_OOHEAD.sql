@@ -126,3 +126,5 @@ CREATE TABLE [tsa].[ics_land_m3v7_OOHEAD]
 [OACHID] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3v7_OOHEAD_1] ON [tsa].[ics_land_m3v7_OOHEAD] ([OACONO], [OAORNO])
+GO

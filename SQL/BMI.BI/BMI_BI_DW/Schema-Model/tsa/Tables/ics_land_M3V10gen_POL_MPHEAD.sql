@@ -99,3 +99,5 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_MPHEAD]
 [IAYRE1] [nvarchar] (36) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_MPHEAD_1] ON [tsa].[ics_land_M3V10gen_POL_MPHEAD] ([IACONO], [IAPUNO])
+GO

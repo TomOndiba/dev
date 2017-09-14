@@ -82,3 +82,5 @@ CREATE TABLE [tsa].[ics_land_M3V10vil_POL_CIDVEN]
 [IIWIPR] [numeric] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10vil_POL_CIDVEN_1] ON [tsa].[ics_land_M3V10vil_POL_CIDVEN] ([IICONO], [IISUNO])
+GO

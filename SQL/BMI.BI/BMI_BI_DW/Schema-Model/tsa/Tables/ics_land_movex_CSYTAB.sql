@@ -26,3 +26,5 @@ CREATE TABLE [tsa].[ics_land_movex_CSYTAB]
 [CTLMTS] [decimal] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_movex_CSYTAB_1] ON [tsa].[ics_land_movex_CSYTAB] ([CTCONO], [CTDIVI], [CTLNCD], [CTSTCO], [CTSTKY])
+GO

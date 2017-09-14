@@ -38,3 +38,5 @@ CREATE TABLE [tsa].[ics_land_M3V10ved_POL_OPAYMH]
 [UJVSER] [nchar] (3) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10ved_POL_OPAYMH_1] ON [tsa].[ics_land_M3V10ved_POL_OPAYMH] ([UJCONO], [UJPLNB], [UJPMNB])
+GO

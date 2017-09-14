@@ -35,3 +35,5 @@ CREATE TABLE [tsa].[ics_land_m3v7_MITPOP]
 [MPLMTS] [decimal] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3v7_MITPOP_1] ON [tsa].[ics_land_m3v7_MITPOP] ([MPCONO], [MPE0PA], [MPITNO], [MPPOPN])
+GO

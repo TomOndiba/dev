@@ -71,3 +71,5 @@ CREATE TABLE [tsa].[ics_land_M3V10vil_POL_MITLOC]
 [MLWHSL] [nchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10vil_POL_MITLOC_1] ON [tsa].[ics_land_M3V10vil_POL_MITLOC] ([MLBANO], [MLCAMU], [MLCONO], [MLITNO], [MLREPN], [MLWHLO], [MLWHSL])
+GO

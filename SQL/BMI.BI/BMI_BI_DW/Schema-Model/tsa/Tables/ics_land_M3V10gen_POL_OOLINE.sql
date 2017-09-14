@@ -249,3 +249,5 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_OOLINE]
 [OBWHSL] [nchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_OOLINE_1] ON [tsa].[ics_land_M3V10gen_POL_OOLINE] ([OBCONO], [OBORNO], [OBPONR], [OBPOSX])
+GO

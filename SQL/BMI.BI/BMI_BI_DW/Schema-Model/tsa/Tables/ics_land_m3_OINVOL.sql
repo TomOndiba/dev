@@ -47,3 +47,5 @@ CREATE TABLE [tsa].[ics_land_m3_OINVOL]
 [ONCVDT] [decimal] (8, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_OINVOL_1] ON [tsa].[ics_land_m3_OINVOL] ([ONCONO], [ONDIVI], [ONDLIX], [ONINPX], [ONIVNO], [ONIVRF], [ONIVSQ], [ONIVTP], [ONORNO], [ONWHLO], [ONYEA4])
+GO

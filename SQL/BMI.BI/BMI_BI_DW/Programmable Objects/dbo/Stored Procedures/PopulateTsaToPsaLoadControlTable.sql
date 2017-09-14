@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[dbo].[PopulateTsaToPsaLoadControlTable]') IS NOT NULL
+IF OBJECT_ID('[dbo].[PopulateTsaToPsaLoadControlTable]') IS NOT NULL
 	DROP PROCEDURE [dbo].[PopulateTsaToPsaLoadControlTable];
 
 GO
@@ -123,20 +123,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					where
 						1 = 1
 						and i.is_primary_key = 1
-					--union
-					--select
-					--	col_name(ic.object_id, ic.column_id) PK
-					--  , t.SourceSchema + '.' + t.SourceTable as TableName
-					--from
-					--	dbo.TsaToPsaLoadControlTable t
-					--inner join sys.indexes			 as i
-					--	on i.object_id = object_id(t.SourceSchema + '.' + t.SourceTable)
-					--inner join sys.index_columns	 as ic
-					--	on i.object_id = ic.object_id
-					--		and i.index_id = ic.index_id
-					--where
-					--	1 = 1
-					--	and i.is_primary_key = 1
+				
 				) t
 			order by
 				TableName
@@ -197,6 +184,54 @@ Version	ChangeDate		Author	BugRef	Narrative
 			from
 				dbo.TsaToPsaLoadControlTable t ;
 
+				
+
+/******************************************set DataSource Key**********************************/
+set @_Step = 'Prepare PK for source and target tables in TsaToPsaLoadControlTable' ;
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100144
+where
+	SourceTable like '%[_]m3[_]%' ;
+
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100147
+where
+	SourceTable like '%[_]M3V10gen[_]%' ;
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100140
+where
+	SourceTable like '%[_]M3V10ved[_]%' ;
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100141
+where
+	SourceTable like '%[_]M3V10vil[_]%' ;
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100145
+where
+	SourceTable like '%[_]m3v7[_]%' ;
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100146
+where
+	SourceTable like '%[_]movex[_]%' ;
+
+
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;
 		end try
@@ -225,8 +260,4 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--! Return the value of @@ERROR (which will be zero on success)
 		return (@_Error) ;
 	end ;
-
-
-
-
 GO

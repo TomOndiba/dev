@@ -216,3 +216,5 @@ CREATE TABLE [tsa].[ics_land_M3V10ved_POL_MITMAS]
 [MMWSCA] [nchar] (6) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10ved_POL_MITMAS_1] ON [tsa].[ics_land_M3V10ved_POL_MITMAS] ([MMCONO], [MMITNO])
+GO

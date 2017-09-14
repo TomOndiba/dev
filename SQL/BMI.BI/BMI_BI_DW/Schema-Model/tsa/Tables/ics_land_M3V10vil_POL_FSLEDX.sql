@@ -26,3 +26,5 @@ CREATE TABLE [tsa].[ics_land_M3V10vil_POL_FSLEDX]
 [ESYEA4] [numeric] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10vil_POL_FSLEDX_1] ON [tsa].[ics_land_M3V10vil_POL_FSLEDX] ([ESCONO], [ESDIVI], [ESJRNO], [ESJSNO], [ESSEXI], [ESSEXN], [ESSEXS], [ESYEA4])
+GO

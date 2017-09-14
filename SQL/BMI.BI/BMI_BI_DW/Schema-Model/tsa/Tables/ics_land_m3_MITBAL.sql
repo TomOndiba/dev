@@ -173,3 +173,5 @@ CREATE TABLE [tsa].[ics_land_m3_MITBAL]
 [MBSSRE] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_MITBAL_1] ON [tsa].[ics_land_m3_MITBAL] ([MBCONO], [MBITNO], [MBWHLO])
+GO

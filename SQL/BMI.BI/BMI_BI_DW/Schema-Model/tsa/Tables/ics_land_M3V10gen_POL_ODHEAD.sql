@@ -79,3 +79,5 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_ODHEAD]
 [UAYEA4] [numeric] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_ODHEAD_1] ON [tsa].[ics_land_M3V10gen_POL_ODHEAD] ([UACONO], [UADLIX], [UAORNO], [UAWHLO])
+GO

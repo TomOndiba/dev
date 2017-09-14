@@ -27,3 +27,5 @@ CREATE TABLE [tsa].[ics_land_M3V10vil_POL_MSYTXH]
 [THTXVR] [nchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10vil_POL_MSYTXH_1] ON [tsa].[ics_land_M3V10vil_POL_MSYTXH] ([THCONO], [THDIVI], [THLNCD], [THTXID], [THTXVR])
+GO

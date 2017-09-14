@@ -155,3 +155,5 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_MPLINE]
 [IBWHLO] [nchar] (3) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_MPLINE_1] ON [tsa].[ics_land_M3V10gen_POL_MPLINE] ([IBCONO], [IBPNLI], [IBPNLS], [IBPUNO])
+GO

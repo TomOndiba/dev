@@ -51,3 +51,5 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_CIDMAS]
 [IDVRNO] [nchar] (16) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_CIDMAS_1] ON [tsa].[ics_land_M3V10gen_POL_CIDMAS] ([IDCONO], [IDSUNO])
+GO

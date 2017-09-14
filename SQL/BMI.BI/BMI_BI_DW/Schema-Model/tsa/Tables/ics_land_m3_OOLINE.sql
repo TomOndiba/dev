@@ -271,3 +271,5 @@ CREATE TABLE [tsa].[ics_land_m3_OOLINE]
 [OBCLAT] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_OOLINE_1] ON [tsa].[ics_land_m3_OOLINE] ([OBCONO], [OBORNO], [OBPONR])
+GO

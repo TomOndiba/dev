@@ -39,3 +39,5 @@ CREATE TABLE [tsa].[ics_land_M3V10vil_POL_MITAUN]
 [MUUNMU] [numeric] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10vil_POL_MITAUN_1] ON [tsa].[ics_land_M3V10vil_POL_MITAUN] ([MUALUN], [MUAUTP], [MUCONO], [MUITNO])
+GO

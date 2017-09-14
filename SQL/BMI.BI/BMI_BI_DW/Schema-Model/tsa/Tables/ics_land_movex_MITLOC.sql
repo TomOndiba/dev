@@ -77,3 +77,5 @@ CREATE TABLE [tsa].[ics_land_movex_MITLOC]
 [MLQRID] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_movex_MITLOC_1] ON [tsa].[ics_land_movex_MITLOC] ([MLBANO], [MLCAMU], [MLCONO], [MLITNO], [MLREPN], [MLWHLO], [MLWHSL])
+GO

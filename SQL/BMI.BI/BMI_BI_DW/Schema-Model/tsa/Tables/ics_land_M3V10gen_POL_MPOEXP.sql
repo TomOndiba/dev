@@ -35,3 +35,5 @@ CREATE TABLE [tsa].[ics_land_M3V10gen_POL_MPOEXP]
 [IVWSOP] [nchar] (2) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_MPOEXP_1] ON [tsa].[ics_land_M3V10gen_POL_MPOEXP] ([IVBANO], [IVCDSE], [IVCEID], [IVCONO], [IVEXTY], [IVPNLI], [IVPNLS], [IVPUNO], [IVREPN])
+GO

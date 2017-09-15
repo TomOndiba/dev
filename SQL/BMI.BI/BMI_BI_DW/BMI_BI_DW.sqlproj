@@ -32,7 +32,7 @@
     <PostDeploymentSubFolder>Post-Deployment</PostDeploymentSubFolder>
     <GenerateSqlPackage>True</GenerateSqlPackage>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
+    <DeployChangesForProgrammableObjects>False</DeployChangesForProgrammableObjects>
     <DeployOnceUseSemver>True</DeployOnceUseSemver>
     <SemverInitialBaseline>True</SemverInitialBaseline>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
@@ -57,7 +57,6 @@ StoredProcedure=[log4Utils].[ExceptionReader];
 StoredProcedure=[log4Private].[SessionInfoOutput];
 Table=[dbo].[IcopalCalendar];
 </ExcludeObjectsFromSync>
-    <IncludeObjectsInDataSync />
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
 ff6c22f0-34e6-51d1-9b8a-1e9e18d39e88|Static Data\log4Private.JournalControl.data.sql;
@@ -108,13 +107,10 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
 1c8c4dc5-8292-5543-a1fb-f2b75fa1e109|Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql;
 131969b2-c406-5950-a8d9-e7a552a86a97|Programmable Objects\pbi\Views\factSaleForecastTotal.sql;
 </DeployChangesExecutionOrder>
-    <AdditionalScriptFolders>
-Static Data;
-</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>

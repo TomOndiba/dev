@@ -32,7 +32,7 @@
     <PostDeploymentSubFolder>Post-Deployment</PostDeploymentSubFolder>
     <GenerateSqlPackage>True</GenerateSqlPackage>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
+    <DeployChangesForProgrammableObjects>False</DeployChangesForProgrammableObjects>
     <DeployOnceUseSemver>True</DeployOnceUseSemver>
     <ExcludeObjectsFromSync>
 Schema=[dbo].[log4];
@@ -60,7 +60,6 @@ Role=[dbo].[db_owner];
 Schema=[dbo].[log4Private];
 StoredProcedure=[log4].[JournalWriter];
 </ExcludeObjectsFromSync>
-    <IncludeObjectsInDataSync />
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
 15a0517b-b658-5cbc-bd7b-cbc0ce53aeb8|Programmable Objects\log4Private\Stored Procedures\SessionInfoOutput.sql;
@@ -100,13 +99,10 @@ d97c8bf2-6979-5773-9063-b5bc29f01103|Programmable Objects\ics\Stored Procedures\
 fefeebd1-8d51-528c-8869-49475887df83|Static Data\batch.RunState.data.sql;
 </DeployChangesExecutionOrder>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
-    <AdditionalScriptFolders>
-Static Data;
-</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
@@ -126,7 +122,7 @@ Static Data;
   <PropertyGroup>
     <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
-    <SyncOptionIgnoreColumnsOrder>False</SyncOptionIgnoreColumnsOrder>
+    <SyncOptionIgnoreColumnsOrder>True</SyncOptionIgnoreColumnsOrder>
     <!-- These properties might be set by the Developer -->
     <!--
     <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>

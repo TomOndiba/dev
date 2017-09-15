@@ -96,7 +96,7 @@ from
 where
 		indid in (0, 1, 255)
 	and id > 100
-	and cast(object_name(id) as varchar(50)) is not null
+	and cast(object_name(id) as varchar(50)) like 'ics_land_M3\_%' escape '\'
 group by id with rollup
 order by
 	case when @sortbyrows = 1
@@ -106,4 +106,3 @@ order by
 go
 
 
-select (32138416 / 1024) / 1024.0

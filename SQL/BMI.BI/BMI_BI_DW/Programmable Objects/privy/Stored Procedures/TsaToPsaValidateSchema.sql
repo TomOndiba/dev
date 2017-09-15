@@ -112,14 +112,14 @@ begin
 				and TABLE_SCHEMA =
 				(
 					select top 1	SourceSchema from  dbo.TsaToPsaLoadControlTable
-					where DataSourceKey=100144--@DataSourceKey
+					where DataSourceKey=@DataSourceKey
 				) collate Latin1_General_BIN
 				and replace(TABLE_NAME, 'ics_land', '') in
 					(
 						select	replace(TargetTable, 'ics_stg', '') collate Latin1_General_BIN from dbo.TsaToPsaLoadControlTable
-						where DataSourceKey=100144--@DataSourceKey
+						where DataSourceKey=@DataSourceKey
 					)
-				and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+				and COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 			except
 			select
 				'Missing column from the psa schema'
@@ -132,7 +132,7 @@ begin
 				and TABLE_SCHEMA =
 				(
 					select top 1	TargetSchema from  dbo.TsaToPsaLoadControlTable
-					where DataSourceKey=100144--@DataSourceKey
+					where DataSourceKey=@DataSourceKey
 				) collate Latin1_General_BIN
 				and replace(TABLE_NAME, 'ics_stg', '') in
 					(
@@ -140,9 +140,9 @@ begin
 							replace(a.SourceTable, 'ics_land', '') collate Latin1_General_BIN
 						from
 							dbo.TsaToPsaLoadControlTable a
-						where DataSourceKey=100144--@DataSourceKey
+						where DataSourceKey=@DataSourceKey
 					)
-					and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+					and COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 		)
 			raiserror('missing column(s) error psa', 16, 1) ;
 		--!
@@ -172,7 +172,7 @@ begin
 						select	replace(TargetTable, 'ics_stg', '') collate Latin1_General_BIN from dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-				and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+				and COLUMN_NAME not in ('EtlBatchRunId', 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 			except
 			select
 				'Mis-matched  data type from the psa schema'
@@ -197,7 +197,7 @@ begin
 							dbo.TsaToPsaLoadControlTable a
 						where DataSourceKey=@DataSourceKey
 					)
-					and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete'	,'ExcludeFromMerge'	,'IsDuplicate')
+					and COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete'	,'ExcludeFromMerge'	,'IsDuplicate')
 		)
 			raiserror('mis-matched column(s) dataype error psa', 16, 1) ;
 
@@ -225,7 +225,7 @@ begin
 						select	replace(TargetTable, 'ics_stg', '') collate Latin1_General_BIN from dbo.TsaToPsaLoadControlTable
 						where DataSourceKey=@DataSourceKey
 					)
-				and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+				and COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 			except
 			select
 				'Mis-matched length from the psa schema'
@@ -249,7 +249,7 @@ begin
 							dbo.TsaToPsaLoadControlTable a
 						where DataSourceKey=@DataSourceKey
 					)
-					and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+					and COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 		)
 			raiserror('mis-matched column(s) length error from psa', 16, 1) ;
 
@@ -292,7 +292,7 @@ begin
 							and i.is_primary_key = 1
 							and ic.object_id = object_id('psa.' + replace(c.TABLE_NAME, 'ics_land_', 'ics_stg_'))
 					)
-				and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+				and COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 			except
 			select
 				'Mis-matched null column from the psa schema' Message
@@ -331,7 +331,7 @@ begin
 							and i.is_primary_key = 1
 							and ic.object_id = object_id('psa.' + replace(c.TABLE_NAME, 'ics_land_', 'ics_stg_'))
 					)
-					and c.COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+					and c.COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 		)
 			raiserror('check for tsa mis-matched null column from psa', 16, 1) ;
 
@@ -374,7 +374,7 @@ begin
 							and i.is_primary_key = 1
 							and ic.object_id = object_id('psa.' + replace(c.TABLE_NAME, 'ics_land_', 'ics_stg_'))
 					)
-				and COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+				and COLUMN_NAME not in ('EtlBatchRunId', 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted', 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 			except
 			select
 				'Mis-matched null column the tsa schema' Message
@@ -414,7 +414,7 @@ begin
 							and i.is_primary_key = 1
 							and ic.object_id = object_id('psa.' + replace(c.TABLE_NAME, 'ics_land_', 'ics_stg_'))
 					)
-					and c.COLUMN_NAME not in ( 'EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
+					and c.COLUMN_NAME not in ( 'EtlBatchRunId','EtlUpdatedOn'	 , 'EtlUpdatedBy' , 'EtlDeletedOn'	  , 'EtlDeletedBy'	   , 'IsDeleted'		   , 'IsIncomplete','ExcludeFromMerge'	,'IsDuplicate')
 		)
 			raiserror('check for tsa mis-matched null column from tsa', 16, 1) ;
 

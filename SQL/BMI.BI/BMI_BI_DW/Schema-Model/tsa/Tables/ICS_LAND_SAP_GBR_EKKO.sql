@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_EKKO]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_EKKO]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_EKKO_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_EKKO_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [EBELN] [nvarchar] (10) NULL,
 [BUKRS] [nvarchar] (4) NULL,
@@ -128,7 +131,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_EKKO]
 [CHECK_TYPE] [nvarchar] (1) NULL,
 [CON_OTB_REQ] [nvarchar] (1) NULL,
 [CON_PREBOOK_LEV] [nvarchar] (1) NULL,
-[CON_DISTR_LEV] [nvarchar] (1) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[CON_DISTR_LEV] [nvarchar] (1) NULL
 )
 GO

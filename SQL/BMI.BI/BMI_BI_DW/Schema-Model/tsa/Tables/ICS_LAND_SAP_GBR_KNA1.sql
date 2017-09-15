@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_KNA1]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_KNA1]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_KNA1_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_KNA1_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [KUNNR] [nvarchar] (10) NULL,
 [LAND1] [nvarchar] (3) NULL,
@@ -187,7 +190,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_KNA1]
 [PSOO2] [nvarchar] (50) NULL,
 [PSOO3] [nvarchar] (50) NULL,
 [PSOO4] [nvarchar] (50) NULL,
-[PSOO5] [nvarchar] (50) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[PSOO5] [nvarchar] (50) NULL
 )
 GO

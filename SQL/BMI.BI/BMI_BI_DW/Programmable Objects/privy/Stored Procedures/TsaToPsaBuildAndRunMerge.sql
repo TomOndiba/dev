@@ -1,11 +1,11 @@
-﻿IF OBJECT_ID('[privy].[TsaToPsaBuildAndRunMerge]') IS NOT NULL
+IF OBJECT_ID('[privy].[TsaToPsaBuildAndRunMerge]') IS NOT NULL
 	DROP PROCEDURE [privy].[TsaToPsaBuildAndRunMerge];
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create procedure [privy].[TsaToPsaBuildAndRunMerge]
+CREATE procedure [privy].[TsaToPsaBuildAndRunMerge]
 (
 	@RunType		  varchar(10)
   , @SourceTableName  varchar(200)
@@ -46,9 +46,9 @@ begin
 
 	begin try
 
-	if object_id(N'TableStructure') is not null drop table TableStructure ;
+	if object_id(N'#TableStructure') is not null drop table #TableStructure ;
 
-	if object_id(N'PkeyTable') is not null drop table PkeyTable ;
+	if object_id(N'#PkeyTable') is not null drop table #PkeyTable ;
 			
 	declare @STableName nvarchar(200) = @SourceSchemaName + '.' + @SourceTableName ;
 	declare @TTableName nvarchar(200) = @TargetSchemaName + '.' + @TargetTableName ;
@@ -62,20 +62,29 @@ begin
 	declare @_ErrorContext nvarchar(512) ;
 	declare @_Step varchar(255) ;
 
-	set @_Step = 'Prepare data for merge dynamic statement' ;
+	declare @SEVERITY_INFORMATION int = 256;
+	declare @_JobName nvarchar(128) = 'privy.BuildAndRunMerge SP' ;
+	declare	@_ExceptionId int
+	declare @_Severity smallint = @SEVERITY_INFORMATION;
+	declare @_ProgressLog nvarchar(max);
+	declare	@_ProgressMessage varchar(2000)
+	declare	@_StepStartTime datetime
 
-		
+
+
+	set @_Step = 'Prepare data for merge dynamic statement' ;
+			
 	select
 		COLUMN_NAME ColumnName, DATA_TYPE ColumnDataType 
 	into
-		TableStructure
+		#TableStructure
 	from
 		INFORMATION_SCHEMA.COLUMNS
 	where
 		TABLE_SCHEMA + '.' + TABLE_NAME = @STableName ;
 
 			
-	alter table TableStructure add id int identity(1, 1) ;
+	alter table #TableStructure add id int identity(1, 1) ;
 
 	declare @i int = 1 ;
 	declare @insertcolumnstring nvarchar(max) = '' ; ---prepares insert list of column
@@ -89,7 +98,7 @@ begin
 	select
 		col_name(ic.object_id, ic.column_id) as PK
 	into
-		PkeyTable
+		#PkeyTable
 	from
 		sys.indexes				 as i
 	inner join sys.index_columns as ic
@@ -100,15 +109,15 @@ begin
 		and i.is_primary_key = 1
 		and ic.object_id = object_id(@TTableName) ;
 						
-	alter table PkeyTable add id int identity(1, 1) ;
+	alter table #PkeyTable add id int identity(1, 1) ;
 
-	set @maxid  = (select max(id) from PkeyTable) ;
+	set @maxid  = (select max(id) from #PkeyTable) ;
 		
 	
 	while (@i <=@maxid )
 		begin
 
-			set @pkcolumnsTemp =(select PK from dbo.PkeyTable where id=@i );
+			set @pkcolumnsTemp =(select PK from dbo.#PkeyTable where id=@i );
 				
 			if (@maxid>1)
 
@@ -127,20 +136,20 @@ begin
 	set @pkcolumns= substring(@pkcolumns,5,len(@pkcolumns))
 			
     set @i=1;
-	set @maxid  = (select max(id) from TableStructure) ;
+	set @maxid  = (select max(id) from #TableStructure) ;
 	while (@i <= @maxid)
 		begin
 
-			set @columnname =(select ColumnName from TableStructure where id = @i) ;
-			set @columndatatype=(select ColumnDataType from TableStructure where id = @i) ;
+			set @columnname =(select ColumnName from #TableStructure where id = @i) ;
+			set @columndatatype=(select ColumnDataType from #TableStructure where id = @i) ;
 								
 			if (@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted','ExcludeFromMerge','IsDuplicate'))
 				set @insertcolumnstring = @insertcolumnstring + ',' + @columnname ;
 															
-			if ( @columnname not in  ( select	PK from PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted','ExcludeFromMerge','IsDuplicate') )
+			if ( @columnname not in  ( select	PK from #PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted','ExcludeFromMerge','IsDuplicate') )
 				set @updatesetcolumnstring = @updatesetcolumnstring + ' , ' + 't.' + @columnname + '=' + 's.' + @columnname ;
 
-			if (@columnname not in   (  select	PK from PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	,'ExcludeFromMerge','IsDuplicate') )
+			if (@columnname not in   (  select	PK from #PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	,'ExcludeFromMerge','IsDuplicate') )
 				begin 
 
 					if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
@@ -159,7 +168,9 @@ begin
 	set @updatecolumnstring = substring(@updatecolumnstring, 4, len(@updatecolumnstring)) ;
 	set @updatecolumnstring = '( ' + @updatecolumnstring + ' )' ;
 
+	set @_StepStartTime = getdate();
 	set @_Step = 'Merge statement for Delta ' ;
+	
 			
 	if @RunType = 'Delta'
 		begin
@@ -189,26 +200,41 @@ begin
 	set @_Step = 'Execute Merge statement ' ;
 
 	execute sp_executesql @sql ;
+	
+	set @_Message = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@@ROWCOUNT as varchar(16)), 'NULL') + ' row(s)'
+				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)
 						
-	if object_id(N'TableStructure') is not null drop table TableStructure ;
+	if object_id(N'#TableStructure') is not null drop table #TableStructure ;
 
-	if object_id(N'PkeyTable') is not null drop table PkeyTable ;
+	if object_id(N'#PkeyTable') is not null drop table #PkeyTable ;
 
-	end try
+	end try               
 	begin catch
 
 		set @_ErrorContext = 'Merge statement preparation failed at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
-			
+
 		exec log4.ExceptionHandler
 			@ErrorContext = @_ErrorContext
 			, @ErrorProcedure = @_FunctionName
 			, @ErrorNumber = @_Error out
-			, @ReturnMessage = @_Message out ;
+			, @ReturnMessage = @_Message out
+			, @ExceptionId    = @_ExceptionId out;
 	end catch ;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////
 	EndProc:
 --/////////////////////////////////////////////////////////////////////////////////////////////////
+
+		exec log4.JournalWriter
+				  @Task = @_JobName
+				, @FunctionName = @_FunctionName
+				, @StepInFunction = @_Step
+				, @MessageText = @_Message
+				, @ExtraInfo = @sql
+				, @Severity = @_Severity
+				, @ExceptionId = @_ExceptionId
+
+
 
 	--! Finally, throw an exception that will be detected by the caller
 	if @_Error > 0 raiserror(@_Message, 16, 99) ;
@@ -219,5 +245,4 @@ begin
 	return (@_Error) ;
 		
 end ;
-go
-
+GO

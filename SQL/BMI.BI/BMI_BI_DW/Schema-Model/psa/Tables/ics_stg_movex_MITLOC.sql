@@ -14,12 +14,12 @@ CREATE TABLE [psa].[ics_stg_movex_MITLOC]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MITLOC_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MITLOC_IsIncomplete] DEFAULT ('N'),
-[MLCONO] [decimal] (3, 0) NULL,
-[MLWHLO] [nvarchar] (255) NULL,
-[MLITNO] [nvarchar] (255) NULL,
-[MLWHSL] [nvarchar] (255) NULL,
-[MLBANO] [nvarchar] (255) NULL,
-[MLCAMU] [nvarchar] (255) NULL,
+[MLCONO] [decimal] (18, 0) NOT NULL,
+[MLWHLO] [nvarchar] (255) NOT NULL,
+[MLITNO] [nvarchar] (255) NOT NULL,
+[MLWHSL] [nvarchar] (255) NOT NULL,
+[MLBANO] [nvarchar] (255) NOT NULL,
+[MLCAMU] [nvarchar] (255) NOT NULL,
 [MLFACI] [nvarchar] (255) NULL,
 [MLWHLT] [nvarchar] (255) NULL,
 [MLSTQT] [decimal] (15, 6) NULL,
@@ -31,7 +31,7 @@ CREATE TABLE [psa].[ics_stg_movex_MITLOC]
 [MLSTAS] [nvarchar] (255) NULL,
 [MLPPRI] [nvarchar] (255) NULL,
 [MLPRDT] [decimal] (8, 0) NULL,
-[MLREPN] [decimal] (10, 0) NULL,
+[MLREPN] [decimal] (18, 0) NOT NULL,
 [MLIDDT] [decimal] (8, 0) NULL,
 [MLODDT] [decimal] (8, 0) NULL,
 [MLINDT] [decimal] (8, 0) NULL,
@@ -81,4 +81,6 @@ CREATE TABLE [psa].[ics_stg_movex_MITLOC]
 [MLTIHM] [decimal] (4, 0) NULL,
 [MLQRID] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_MITLOC] ADD CONSTRAINT [PK_stg_movex_MITLOC] PRIMARY KEY CLUSTERED  ([MLBANO], [MLCAMU], [MLCONO], [MLITNO], [MLREPN], [MLWHLO], [MLWHSL])
 GO

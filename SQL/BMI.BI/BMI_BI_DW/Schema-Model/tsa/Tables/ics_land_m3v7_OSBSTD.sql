@@ -201,3 +201,5 @@ CREATE TABLE [tsa].[ics_land_m3v7_OSBSTD]
 [UCCHID] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3v7_OSBSTD_1] ON [tsa].[ics_land_m3v7_OSBSTD] ([UCCONO], [UCDIVI], [UCDLIX], [UCORNO], [UCPONR], [UCWHLO])
+GO

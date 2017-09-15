@@ -1,0 +1,43 @@
+CREATE TABLE [tsa].[ics_land_M3V10vil_POL_MITAUN]
+(
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF__ics_land___Exclu__33F57C80] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF__ics_land___IsDup__34E9A0B9] DEFAULT ((0)),
+[MUALUN] [nchar] (3) NULL,
+[MUAUS1] [numeric] (18, 0) NULL,
+[MUAUS2] [numeric] (18, 0) NULL,
+[MUAUS3] [numeric] (18, 0) NULL,
+[MUAUS4] [numeric] (18, 0) NULL,
+[MUAUS5] [numeric] (18, 0) NULL,
+[MUAUS6] [numeric] (18, 0) NULL,
+[MUAUS9] [numeric] (18, 0) NULL,
+[MUAUSB] [numeric] (18, 0) NULL,
+[MUAUSC] [numeric] (18, 0) NULL,
+[MUAUTP] [numeric] (18, 0) NULL,
+[MUCHID] [nchar] (10) NULL,
+[MUCHNO] [numeric] (18, 0) NULL,
+[MUCOFA] [numeric] (18, 0) NULL,
+[MUCONO] [numeric] (18, 0) NULL,
+[MUDCCD] [numeric] (18, 0) NULL,
+[MUDMCF] [numeric] (18, 0) NULL,
+[MUFMID] [nchar] (5) NULL,
+[MUITNO] [nchar] (15) NULL,
+[MULMDT] [numeric] (18, 0) NULL,
+[MULMTS] [numeric] (18, 0) NULL,
+[MUPACT] [nchar] (6) NULL,
+[MUPCOF] [numeric] (18, 0) NULL,
+[MURESI] [nchar] (5) NULL,
+[MURGDT] [numeric] (18, 0) NULL,
+[MURGTM] [numeric] (18, 0) NULL,
+[MUTXID] [numeric] (18, 0) NULL,
+[MUUNMU] [numeric] (18, 0) NULL
+)
+GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10vil_POL_MITAUN_1] ON [tsa].[ics_land_M3V10vil_POL_MITAUN] ([MUALUN], [MUAUTP], [MUCONO], [MUITNO])
+GO

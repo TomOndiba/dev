@@ -14,14 +14,14 @@ CREATE TABLE [psa].[ics_stg_movex_OCHCUS]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_OCHCUS_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_OCHCUS_IsIncomplete] DEFAULT ('N'),
-[OSCONO] [decimal] (3, 0) NULL,
-[OSCUNO] [nvarchar] (255) NULL,
-[OSCHCT] [nvarchar] (255) NULL,
+[OSCONO] [decimal] (18, 0) NOT NULL,
+[OSCUNO] [nvarchar] (255) NOT NULL,
+[OSCHCT] [nvarchar] (255) NOT NULL,
 [OSCHL1] [nvarchar] (255) NULL,
 [OSCHL2] [nvarchar] (255) NULL,
 [OSCHL3] [nvarchar] (255) NULL,
 [OSCHL4] [nvarchar] (255) NULL,
-[OSFVDT] [decimal] (8, 0) NULL,
+[OSFVDT] [decimal] (18, 0) NOT NULL,
 [OSLVDT] [decimal] (8, 0) NULL,
 [OSCHMB] [nvarchar] (255) NULL,
 [OSMBST] [decimal] (1, 0) NULL,
@@ -32,4 +32,6 @@ CREATE TABLE [psa].[ics_stg_movex_OCHCUS]
 [OSCHNO] [decimal] (3, 0) NULL,
 [OSCHID] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_OCHCUS] ADD CONSTRAINT [PK_stg_movex_OCHCUS] PRIMARY KEY CLUSTERED  ([OSCHCT], [OSCONO], [OSCUNO], [OSFVDT])
 GO

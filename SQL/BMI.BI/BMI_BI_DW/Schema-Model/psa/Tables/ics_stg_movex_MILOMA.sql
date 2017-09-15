@@ -15,8 +15,8 @@ CREATE TABLE [psa].[ics_stg_movex_MILOMA]
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MILOMA_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_movex_MILOMA_IsIncomplete] DEFAULT ('N'),
 [LMCONO] [decimal] (3, 0) NULL,
-[LMITNO] [nvarchar] (255) NULL,
-[LMBANO] [nvarchar] (255) NULL,
+[LMITNO] [nvarchar] (255) NOT NULL,
+[LMBANO] [nvarchar] (255) NOT NULL,
 [LMLOTY] [decimal] (1, 0) NULL,
 [LMINRE] [decimal] (1, 0) NULL,
 [LMALOC] [decimal] (1, 0) NULL,
@@ -67,4 +67,6 @@ CREATE TABLE [psa].[ics_stg_movex_MILOMA]
 [LMTIHM] [decimal] (4, 0) NULL,
 [LMCUEX] [nvarchar] (2000) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_MILOMA] ADD CONSTRAINT [PK_stg_movex_MILOMA] PRIMARY KEY CLUSTERED  ([LMBANO], [LMITNO])
 GO

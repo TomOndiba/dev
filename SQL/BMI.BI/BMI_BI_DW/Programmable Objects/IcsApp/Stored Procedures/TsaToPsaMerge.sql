@@ -74,19 +74,19 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 			exec [privy].[TsaToPsaValidateSchema] @DataSourceKey ;
 
-			update	dbo.psaTotsaLoadControlTable set Done = 0 ;
+			update	dbo.TsaToPsaLoadControlTable set Done = 0 ;
 
-			set @max =(select	count(*) from dbo.psaTotsaLoadControlTable	where DataSourceKey = @DataSourceKey group by DataSourceKey) ;
+			set @max =(select	count(*) from dbo.TsaToPsaLoadControlTable	where DataSourceKey = @DataSourceKey group by DataSourceKey) ;
 		
 			while (@i < @max)
 				begin
-					set @id =(select top 1 ID	from dbo.psaTotsaLoadControlTable where DataSourceKey = @DataSourceKey and Done = 0) ;
+					set @id =(select top 1 ID	from dbo.TsaToPsaLoadControlTable where DataSourceKey = @DataSourceKey and Done = 0) ;
 
 				
-					set @sourceTableName =	(select	SourceTable from dbo.psaTotsaLoadControlTable where ID = @id) ;
-					set @sourceschemaName =	(select	SourceSchema from	dbo.psaTotsaLoadControlTable where	ID = @id) ;
-					set @targetTableName =	(select	TargetTable from dbo.psaTotsaLoadControlTable where ID = @id) ;
-					set @TargetSchemaName =	(select	TargetSchema from	dbo.psaTotsaLoadControlTable where	ID = @id) ;
+					set @sourceTableName =	(select	SourceTable from dbo.TsaToPsaLoadControlTable where ID = @id) ;
+					set @sourceschemaName =	(select	SourceSchema from	dbo.TsaToPsaLoadControlTable where	ID = @id) ;
+					set @targetTableName =	(select	TargetTable from dbo.TsaToPsaLoadControlTable where ID = @id) ;
+					set @TargetSchemaName =	(select	TargetSchema from	dbo.TsaToPsaLoadControlTable where	ID = @id) ;
 
 					set @_step = 'Run privy.DeDup' ;
 					execute privy.TsaToPsaDeDupe	 @sourceschemaName,@sourceTableName
@@ -101,7 +101,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					  , @TargetSchemaName = @TargetSchemaName
 					  , @LoadDateTime = null ;
 
-					update	psaTotsaLoadControlTable set Done = 1 where ID = @id ;
+					update	TsaToPsaLoadControlTable set Done = 1 where ID = @id ;
 					set @i = @i + 1 ;
 				end ;
 		end try

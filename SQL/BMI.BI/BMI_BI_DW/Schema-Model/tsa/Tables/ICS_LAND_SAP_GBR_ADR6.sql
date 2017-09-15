@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_ADR6]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_ADR6]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_ADR6_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_ADR6_IsDuplicate] DEFAULT ((0)),
 [CLIENT] [nvarchar] (3) NULL,
 [ADDRNUMBER] [nvarchar] (10) NULL,
 [PERSNUMBER] [nvarchar] (10) NULL,
@@ -21,7 +24,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_ADR6]
 [ENCODE] [nvarchar] (1) NULL,
 [TNEF] [nvarchar] (1) NULL,
 [VALID_FROM] [nvarchar] (14) NULL,
-[VALID_TO] [nvarchar] (14) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[VALID_TO] [nvarchar] (14) NULL
 )
 GO

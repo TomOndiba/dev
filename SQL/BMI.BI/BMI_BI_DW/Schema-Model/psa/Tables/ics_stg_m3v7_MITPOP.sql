@@ -14,12 +14,12 @@ CREATE TABLE [psa].[ics_stg_m3v7_MITPOP]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3v7_MITPOP_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3v7_MITPOP_IsIncomplete] DEFAULT ('N'),
-[MPCONO] [decimal] (3, 0) NULL,
+[MPCONO] [decimal] (18, 0) NOT NULL,
 [MPALWT] [decimal] (2, 0) NULL,
 [MPALWQ] [nvarchar] (255) NULL,
-[MPITNO] [nvarchar] (255) NULL,
-[MPPOPN] [nvarchar] (255) NULL,
-[MPE0PA] [nvarchar] (255) NULL,
+[MPITNO] [nvarchar] (255) NOT NULL,
+[MPPOPN] [nvarchar] (255) NOT NULL,
+[MPE0PA] [nvarchar] (255) NOT NULL,
 [MPVFDT] [decimal] (8, 0) NULL,
 [MPLVDT] [decimal] (8, 0) NULL,
 [MPCNQT] [decimal] (15, 6) NULL,
@@ -39,4 +39,6 @@ CREATE TABLE [psa].[ics_stg_m3v7_MITPOP]
 [MPCHID] [nvarchar] (255) NULL,
 [MPLMTS] [decimal] (18, 0) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ADD CONSTRAINT [PK_stg_m3v7_MITPOP] PRIMARY KEY CLUSTERED  ([MPCONO], [MPITNO], [MPE0PA], [MPPOPN])
 GO

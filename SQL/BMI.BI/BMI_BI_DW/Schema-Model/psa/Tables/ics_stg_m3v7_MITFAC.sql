@@ -14,9 +14,9 @@ CREATE TABLE [psa].[ics_stg_m3v7_MITFAC]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3v7_MITFAC_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3v7_MITFAC_IsIncomplete] DEFAULT ('N'),
-[M9CONO] [decimal] (3, 0) NULL,
-[M9FACI] [nvarchar] (255) NULL,
-[M9ITNO] [nvarchar] (255) NULL,
+[M9CONO] [decimal] (18, 0) NOT NULL,
+[M9FACI] [nvarchar] (255) NOT NULL,
+[M9ITNO] [nvarchar] (255) NOT NULL,
 [M9LEA4] [decimal] (3, 0) NULL,
 [M9CSNO] [nvarchar] (255) NULL,
 [M9SPFA] [decimal] (15, 9) NULL,
@@ -88,4 +88,6 @@ CREATE TABLE [psa].[ics_stg_m3v7_MITFAC]
 [M9COFA] [decimal] (15, 9) NULL,
 [M9CUEX] [nvarchar] (2000) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MITFAC] ADD CONSTRAINT [PK_stg_m3v7_MITFAC] PRIMARY KEY CLUSTERED  ([M9CONO], [M9ITNO], [M9FACI])
 GO

@@ -239,3 +239,5 @@ CREATE TABLE [tsa].[ics_land_movex_MITMAS]
 [MMCPGR] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_movex_MITMAS_1] ON [tsa].[ics_land_movex_MITMAS] ([MMCONO], [MMITNO])
+GO

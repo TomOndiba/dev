@@ -2,7 +2,7 @@
 as
 	begin
 
-		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
+		exec tSQLt.FakeTable 'dbo.TsaToPsaLoadControlTable' ;
 
 		create table expected
 		(
@@ -40,7 +40,7 @@ as
 		select	'col1', 'col2', 'col3', 1, 3, 2, 0, 0 ;
 		 ;
 		
-		insert into dbo.psaTotsaLoadControlTable
+		insert into dbo.TsaToPsaLoadControlTable
 		(
 			ID
 		  , SourceTable

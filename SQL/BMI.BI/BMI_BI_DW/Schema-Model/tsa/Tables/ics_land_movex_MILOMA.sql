@@ -63,3 +63,5 @@ CREATE TABLE [tsa].[ics_land_movex_MILOMA]
 [LMCUEX] [nvarchar] (2000) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_movex_MILOMA_1] ON [tsa].[ics_land_movex_MILOMA] ([LMBANO], [LMITNO])
+GO

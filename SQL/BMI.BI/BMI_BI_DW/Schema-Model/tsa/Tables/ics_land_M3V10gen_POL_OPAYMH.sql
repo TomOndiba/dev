@@ -1,0 +1,42 @@
+CREATE TABLE [tsa].[ics_land_M3V10gen_POL_OPAYMH]
+(
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF__ics_land___Exclu__062EB1D0] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF__ics_land___IsDup__0722D609] DEFAULT ((0)),
+[UJACDT] [numeric] (18, 0) NULL,
+[UJBKID] [nchar] (5) NULL,
+[UJCDTT] [numeric] (18, 0) NULL,
+[UJCHID] [nchar] (10) NULL,
+[UJCHNO] [numeric] (18, 0) NULL,
+[UJCKNO] [nchar] (15) NULL,
+[UJCONO] [numeric] (18, 0) NULL,
+[UJCRTP] [numeric] (18, 0) NULL,
+[UJCSHD] [nchar] (5) NULL,
+[UJCUCD] [nchar] (3) NULL,
+[UJCUNM] [nvarchar] (36) NULL,
+[UJDIVI] [nchar] (3) NULL,
+[UJFACI] [nchar] (3) NULL,
+[UJLMDT] [numeric] (18, 0) NULL,
+[UJPLNB] [numeric] (18, 0) NULL,
+[UJPMAM] [numeric] (18, 0) NULL,
+[UJPMLA] [numeric] (18, 0) NULL,
+[UJPMNB] [numeric] (18, 0) NULL,
+[UJPTST] [nchar] (2) NULL,
+[UJPYCD] [nchar] (3) NULL,
+[UJPYDT] [numeric] (18, 0) NULL,
+[UJPYNO] [nchar] (10) NULL,
+[UJRAPM] [numeric] (18, 0) NULL,
+[UJRGDT] [numeric] (18, 0) NULL,
+[UJRGTM] [numeric] (18, 0) NULL,
+[UJVONO] [numeric] (18, 0) NULL,
+[UJVSER] [nchar] (3) NULL
+)
+GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_OPAYMH_1] ON [tsa].[ics_land_M3V10gen_POL_OPAYMH] ([UJCONO], [UJPLNB], [UJPMNB])
+GO

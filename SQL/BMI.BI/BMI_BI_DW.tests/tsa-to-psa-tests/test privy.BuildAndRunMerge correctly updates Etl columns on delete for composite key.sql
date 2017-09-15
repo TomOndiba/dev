@@ -89,7 +89,7 @@ as
 		exec (N'create schema test_tsa;') ;
 		exec (N'create schema test_psa;') ;
 
-		create table test_tsa.ICS_LAND_Dummy
+		create table test_tsa.ics_land_Dummy
 		(
 			[EtlBatchRunId]	 int
 		  , [EtlStepRunId]	 int
@@ -107,7 +107,7 @@ as
 		  ,primary key (pk1,pk2,pk3)
 		) ;
 		
-		create table test_psa.ICS_STG_Dummy
+		create table test_psa.ics_stg_Dummy
 		(
 			[EtlBatchRunId]	 int
 		  , [EtlStepRunId]	 int
@@ -130,7 +130,7 @@ as
 		    ,primary key (pk1,pk2,pk3)
 		) ;	
 ---------------------------------stg
-		insert into test_psa.ICS_STG_Dummy([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy],[EtlSourceTable], [DataSourceKey], pk1 , pk2 , pk3 , col1 , col2)
+		insert into test_psa.ics_stg_Dummy([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy],[EtlSourceTable], [DataSourceKey], pk1 , pk2 , pk3 , col1 , col2)
 		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1, 1, 12, 'col'
 		union
 		select	1, 1, 1, @_now, 'Razia', 'Dummy', 1, 1, 1, 2, 13, 'col'
@@ -188,14 +188,14 @@ as
 			
 		exec privy.TsaToPsaBuildAndRunMerge
 			@RunType = 'Full'
-		  , @SourceTableName = 'ICS_LAND_Dummy'
+		  , @SourceTableName = 'ics_land_Dummy'
 		  , @SourceSchemaName = 'test_tsa'
-		  , @TargetTableName = 'ICS_STG_Dummy'
+		  , @TargetTableName = 'ics_stg_Dummy'
 		  , @TargetSchemaName = 'test_psa'
 		  , @LoadDateTime = @_now ;
 		  
 		exec tSQLt.AssertEqualsTable
 			@Expected = '[tsa-to-psa-tests].Expected'
-		  , @Actual = N'test_psa.ICS_STG_Dummy' ;
+		  , @Actual = N'test_psa.ics_stg_Dummy' ;
 
 	end ;

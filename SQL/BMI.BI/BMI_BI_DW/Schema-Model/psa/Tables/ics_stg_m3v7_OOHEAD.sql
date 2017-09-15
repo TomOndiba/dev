@@ -14,9 +14,9 @@ CREATE TABLE [psa].[ics_stg_m3v7_OOHEAD]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3v7_OOHEAD_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_m3v7_OOHEAD_IsIncomplete] DEFAULT ('N'),
-[OACONO] [decimal] (3, 0) NULL,
+[OACONO] [decimal] (18, 0) NOT NULL,
 [OADIVI] [nvarchar] (255) NULL,
-[OAORNO] [nvarchar] (255) NULL,
+[OAORNO] [nvarchar] (255) NOT NULL,
 [OAORTP] [nvarchar] (255) NULL,
 [OAFACI] [nvarchar] (255) NULL,
 [OAWHLO] [nvarchar] (255) NULL,
@@ -130,4 +130,6 @@ CREATE TABLE [psa].[ics_stg_m3v7_OOHEAD]
 [OACHNO] [decimal] (3, 0) NULL,
 [OACHID] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_OOHEAD] ADD CONSTRAINT [PK_stg_m3v7_OOHEAD] PRIMARY KEY CLUSTERED  ([OACONO], [OAORNO])
 GO

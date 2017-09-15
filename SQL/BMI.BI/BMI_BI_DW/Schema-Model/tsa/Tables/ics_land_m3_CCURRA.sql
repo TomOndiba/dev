@@ -28,3 +28,5 @@ CREATE TABLE [tsa].[ics_land_m3_CCURRA]
 [CULMTS] [decimal] (18, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_CCURRA_1] ON [tsa].[ics_land_m3_CCURRA] ([CUCONO], [CUCRTP], [CUCUCD], [CUCUTD], [CUDIVI])
+GO

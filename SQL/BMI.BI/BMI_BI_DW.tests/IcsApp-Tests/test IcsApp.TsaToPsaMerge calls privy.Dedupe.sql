@@ -2,7 +2,7 @@
 CREATE    proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.Dedupe]
 as
 	begin
-		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
+		exec tSQLt.FakeTable 'dbo.TsaToPsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaDeDupe' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaBuildAndRunMerge' ;
@@ -22,7 +22,7 @@ as
 
 
 
-		insert into dbo.psaTotsaLoadControlTable
+		insert into dbo.TsaToPsaLoadControlTable
 		(
 			ID
 		  , SourceTable

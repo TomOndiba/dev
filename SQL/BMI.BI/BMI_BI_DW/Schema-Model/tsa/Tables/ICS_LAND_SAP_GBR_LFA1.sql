@@ -1,11 +1,14 @@
-CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_LFA1]
+CREATE TABLE [tsa].[ics_land_SAP_GBR_LFA1]
 (
-[EtlBatchRunId] [int] NULL,
-[EtlStepRunId] [int] NULL,
-[EtlThreadRunId] [int] NULL,
-[DataSourceKey] [int] NULL,
-[EtlCreatedOn] [datetime] NULL,
-[EtlCreatedBy] [varchar] (200) NULL,
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_LFA1_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_LFA1_IsDuplicate] DEFAULT ((0)),
 [MANDT] [nvarchar] (3) NULL,
 [LIFNR] [nvarchar] (10) NULL,
 [LAND1] [nvarchar] (3) NULL,
@@ -142,7 +145,6 @@ CREATE TABLE [tsa].[ICS_LAND_SAP_GBR_LFA1]
 [TRANSPORT_CHAIN] [nvarchar] (10) NULL,
 [STAGING_TIME] [decimal] (3, 0) NULL,
 [SCHEDULING_TYPE] [nvarchar] (1) NULL,
-[SUBMI_RELEVANT] [nvarchar] (1) NULL,
-[EtlSourceTable] [varchar] (200) NOT NULL
+[SUBMI_RELEVANT] [nvarchar] (1) NULL
 )
 GO

@@ -61,3 +61,5 @@ CREATE TABLE [tsa].[ics_land_m3v7_OINVOH]
 [UHPDNO] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3v7_OINVOH_1] ON [tsa].[ics_land_m3v7_OINVOH] ([UHCONO], [UHIVNO])
+GO

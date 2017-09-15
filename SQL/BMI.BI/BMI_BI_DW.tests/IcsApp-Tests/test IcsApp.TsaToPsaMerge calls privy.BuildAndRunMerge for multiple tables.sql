@@ -1,7 +1,7 @@
-﻿create proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for multiple tables]
+﻿CREATE proc [IcsApp-Tests].[test IcsApp.TsaToPsaMerge calls privy.BuildAndRunMerge for multiple tables]
 as
 	begin
-		exec tSQLt.FakeTable 'dbo.psaTotsaLoadControlTable' ;
+		exec tSQLt.FakeTable 'dbo.TsaToPsaLoadControlTable' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaValidateSchema' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaBuildAndRunMerge' ;
 		exec tSQLt.SpyProcedure 'privy.TsaToPsaDeDupe' ;
@@ -32,7 +32,7 @@ as
 		select	'Full', 'STable2', 'tsa', 'TTable2', 'psa', null ;
 
 
-		insert into dbo.psaTotsaLoadControlTable
+		insert into dbo.TsaToPsaLoadControlTable
 		(
 			ID
 		  , SourceTable
@@ -50,8 +50,6 @@ as
 		select	3, 'STable3', 'tsa', 'col1', 'TTable3', 'psa', 'col1', 2
 		union
 		select	4, 'STable2', 'tsa', 'col1', 'TTable2', 'psa', 'col1', 1 ;
-
-		--select * from dbo.psaTotsaLoadControlTable
 
 		execute IcsApp.TsaToPsaMerge 1, 'Full' ;
 

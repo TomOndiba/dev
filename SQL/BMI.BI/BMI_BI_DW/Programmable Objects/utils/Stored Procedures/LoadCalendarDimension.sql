@@ -13,25 +13,20 @@ create procedure [utils].[LoadCalendarDimension]
 )
 as --<CommentHeader>
 /**********************************************************************************************************************
-
 Properties
 ==========
 FUNCTION NAME:  utils.LoadCalendarDimension
 DESCRIPTION:    Loads dbo.Calendar table with dates within provided date range
 AUTHOR:         Greg M Lucas
 ORIGIN DATE:    09-Jun-2017
-
 Additional Notes
 ================
-
 REVISION HISTORY
 =====================================================================================================================
 Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		09-Jun-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-
-
 **********************************************************************************************************************/
 --</CommentHeader>
 begin

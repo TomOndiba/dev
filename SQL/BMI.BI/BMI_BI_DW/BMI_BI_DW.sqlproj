@@ -56,6 +56,24 @@ StoredProcedure=[log4Utils].[JournalPrinter];
 StoredProcedure=[log4Utils].[ExceptionReader];
 StoredProcedure=[log4Private].[SessionInfoOutput];
 Table=[dbo].[IcopalCalendar];
+Function=[dbo].[Numbers];
+Role=[dbo].[db_ddladmin];
+Role=[dbo].[DataFeedWriters];
+Role=[dbo].[DataFeedReaders];
+Role=[dbo].[DeploymentManagers];
+Role=[dbo].[DataFeeds];
+Role=[dbo].[EtlDevelopersDEV];
+Role=[dbo].[EtlDevelopersPROD];
+StoredProcedure=[utils].[LoadCalendarDimension];
+Table=[tsa].[Customer];
+Table=[psa].[Customer];
+Table=[dbo].[TableStructure];
+Table=[dbo].[PkeyTable];
+Table=[tsa].[ICS_LAND_test];
+Table=[psa].[ICS_STG_test];
+Table=[tsa].[Customer1];
+Table=[psa].[Customer1];
+Table=[dbo].[PKTable];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -310,6 +328,14 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <Folder Include="Migrations\1.0.1" />
     <Folder Include="Migrations\1.0.2" />
     <Folder Include="Migrations\1.0.3" />
+    <Folder Include="Programmable Objects\dbo\Stored Procedures\" />
+    <Folder Include="Programmable Objects\privy\" />
+    <Folder Include="Programmable Objects\privy\Stored Procedures\" />
+    <Folder Include="Schema-Model\utils" />
+    <Folder Include="Schema-Model\utils\Stored Procedures" />
+    <Folder Include="Programmable Objects\IcsApp\" />
+    <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
+    <Folder Include="Migrations\1.0.4" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -442,7 +468,6 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <None Include="Programmable Objects\pbi\Views\factOrderBacklog.sql" />
     <None Include="Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql" />
     <None Include="Programmable Objects\pbi\Views\factSaleForecastTotal.sql" />
-    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
     <None Include="Migrations\1.0.0\001_InitialProductionRelease_20170705.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -509,6 +534,505 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.3\001_Rename_psa_IsProcessedToIsIncomplete.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\002_Add_ICS_sproc_dummy_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_sql_dummySource.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_sql_runLog.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\003_Rename_EtlSampleTable_column.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Security\Schemas\idq.sql" />
+    <None Include="Schema-Model\dbo\Tables\psaTotsaLoadControlTable.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_audit.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_DNK_OSBSTD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_ccurra.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_csytab.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_FRA_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_mitaun.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_FRA_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_FRA_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_mitmas.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_ochcus.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_ocusma.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_oinvoh.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_oinvol.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_oohead.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_ooline.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3v7_fra_osbstd.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_BEL_OSBSTD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_ESP_OSBSTD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_m3_SWE_OSBSTD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_ADRC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_KNA1.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_KNB1.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_KNBK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_KNVK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_KONH.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_KONP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_KONV.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_LIKP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_LIPS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_MAKT.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_MARA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_MARC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_MARM.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_MVKE.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_T001.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_T001W.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_T001Z.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_T016T.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_T052U.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_TBRCT.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_TVKO.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_VBAK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_VBAP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_VBFA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_VBPA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_VBRK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_VBUK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_VBUP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_DEU_ZG01.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_ADR6.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_ADRC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_EKKO.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_EKPO.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_KNA1.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_KNB1.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_KNVH.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_KNVK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_KONH.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_KONP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_KONV.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_LFA1.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_LFB1.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_LFBK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_LIKP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_LIPS.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MACT.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MAKT.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MARA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MARC.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MARD.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MARM.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MBEW.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_MVKE.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T001.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T001W.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T006.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T006A.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T016T.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T023T.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T052.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T151T.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T25B2.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_T52U.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_TBRCT.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_TVK0.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_VBAK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_VBAP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_VBFA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_VBPA.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_VBRK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_VBRP.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_VBUK.sql" />
+    <None Include="Schema-Model\psa\Tables\ICS_STG_SAP_GBR_ZTERMS.sql" />
+    <None Include="Schema-Model\Security\Schemas\privy.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_audit.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_DNK_OSBSTD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_ccurra.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_csytab.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_FRA_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_mitaun.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_FRA_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_FRA_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_mitmas.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_ochcus.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_ocusma.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_oinvoh.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_oinvol.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_oohead.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_ooline.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3v7_fra_osbstd.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_BEL_OSBSTD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_ESP_OSBSTD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_m3_SWE_OSBSTD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_ADRC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_KNA1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_KNB1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_KNBK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_KNVK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_KONH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_KONP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_KONV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_LIKP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_LIPS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_MAKT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_MARA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_MARC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_MARM.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_MVKE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_T001.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_T001W.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_T001Z.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_T016T.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_T052U.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_TBRCT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_TVKO.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_VBAK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_VBAP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_VBFA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_VBPA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_VBRK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_VBUK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_VBUP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_DEU_ZG01.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_ADR6.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_ADRC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_EKKO.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_EKPO.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_KNA1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_KNB1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_KNVH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_KNVK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_KONH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_KONP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_KONV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_LFA1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_LFB1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_LFBK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_LIKP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_LIPS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MACT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MAKT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MARA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MARC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MARD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MARM.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MBEW.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_MVKE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T001.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T001W.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T006.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T006A.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T016T.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T023T.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T052.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T151T.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T25B2.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_T52U.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_TBRCT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_TVK0.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_VBAK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_VBAP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_VBFA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_VBPA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_VBRK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_VBRP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_VBUK.sql" />
+    <None Include="Schema-Model\tsa\Tables\ICS_LAND_SAP_GBR_ZTERMS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Stored Procedures\PopulatepsaTotsaLoadControlTable.sql" />
+    <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaValidateSchema.sql" />
+    <None Include="Migrations\1.0.3\004_Create_psa_and_tsa_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\privy\Stored Procedures\BuildAndRunMerge.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\005_Add_Columns_To_psaTotsaLoadControlTable.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\utils\Stored Procedures\LoadCalendarDimension.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Security\Schemas\IcsApp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql" />
+    <None Include="Migrations\1.0.3\006_Create_schema_IcsApp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\007_Modify_psaTotsaLoadControlTable.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\privy\Stored Procedures\DeDupe.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\008_Add_IDQ_schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaBuildAndRunMerge.sql" />
+    <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaDeDupe.sql" />
+    <None Include="Migrations\1.0.3\009_rename_PsaToPsa_procedures.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\010_drop_all_old_psa_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\011_add_new_psa_movex_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\012_add_new_tsa_movex_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\013_Remove_ICS_POC_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITPOP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITPOP.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.3\014_Add_movex_MITPOP_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\001_drop_country_M3_tsa_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITPOP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\002_add_new_tsa_M3_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITPOP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\003_add_new_psa_M3_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_CCURRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_CSYTAB.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MILOMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITAUN.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITBAL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITFAC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITLOC.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITPOP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OCHCUS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OCUSMA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OINVOH.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OINVOL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OOHEAD.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OOLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\005_add_new_tsa_M3V7_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\004_drop_country_M3v7_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CCURRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CSYTAB.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MILOMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITAUN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITBAL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITFAC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITLOC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITPOP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OCHCUS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OCUSMA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OINVOH.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OINVOL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OOHEAD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OOLINE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OSBSTD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\006_add_new_psa_M3V7_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.4\007_Remove_sysname_from_psaToTsaLoadControlTable.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

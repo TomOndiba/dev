@@ -1,4 +1,4 @@
-﻿create procedure [sqlcop].[test Columns with float data type]
+﻿CREATE procedure [sqlcop].[test Columns with float data type]
 as
 begin
 	-- Written by George Mastros
@@ -14,7 +14,7 @@ begin
 	select 	@Output = @Output + TABLE_SCHEMA + '.' + TABLE_NAME + '.' + COLUMN_NAME + char(13) + char(10)
 	from	INFORMATION_SCHEMA.COLUMNS
 	where	DATA_TYPE in ('float', 'real')
-			and TABLE_SCHEMA <> 'tSQLt'
+	and TABLE_SCHEMA  not in ('tsa','psa', 'tSQLt','stg')
 	order by TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME
 
 	if @Output > '' 

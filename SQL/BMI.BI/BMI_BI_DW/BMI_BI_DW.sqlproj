@@ -546,7 +546,6 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\Security\Schemas\idq.sql" />
-    <None Include="Schema-Model\dbo\Tables\psaTotsaLoadControlTable.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_ADR6.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_ADRC.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_EKKO.sql" />

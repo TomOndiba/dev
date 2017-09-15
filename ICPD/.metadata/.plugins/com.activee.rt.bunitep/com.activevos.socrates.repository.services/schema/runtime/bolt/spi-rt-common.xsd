@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://schemas.informatica.com/spi/types/2013/12/spi-interface/"
+            xmlns:runtime="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+            elementFormDefault="qualified"
+            targetNamespace="http://schemas.informatica.com/spi/types/2013/12/spi-interface/">
+
+   <xsd:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+               schemaLocation="../../avosCommonRuntime.xsd"/>
+
+   <xsd:element name="initiate" type="tns:requestType"/>
+   <xsd:element name="initiateResponse" type="tns:responseType"/>
+   <xsd:element name="input" type="runtime:parametersType"/>
+   <xsd:element name="output" type="runtime:fieldsType"/>
+   <xsd:element name="faultResponse" type="runtime:faultResponseType"/>
+   
+   <xsd:complexType name="abstractRequestType">
+      <xsd:sequence>
+         <xsd:element minOccurs="0" ref="runtime:correlationId"/>
+         <xsd:element minOccurs="0" ref="runtime:hostContext"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:complexType name="requestType">
+      <xsd:complexContent>
+         <xsd:extension base="tns:abstractRequestType">
+            <xsd:sequence>
+               <xsd:element ref="tns:input"/>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+
+   <xsd:complexType name="responseType">
+      <xsd:sequence>
+         <xsd:element minOccurs="0" ref="runtime:hostContext"/>
+         <xsd:element ref="tns:output"/>
+         <xsd:element minOccurs="0" name="modifiedInputs" type="runtime:parametersType"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   
+</xsd:schema>

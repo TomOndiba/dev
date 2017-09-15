@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/reporting/2009/05/reporting.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/reporting/2009/05/reporting.xsd">
+
+   <!-- =================================================== -->
+   <!-- Define some simple types to be used by the schema.  -->
+   <!-- =================================================== -->
+    <xs:simpleType name="FormatType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="pdf"/>
+         <xs:enumeration value="doc"/>
+         <xs:enumeration value="xls"/>
+         <xs:enumeration value="ppt"/>
+         <xs:enumeration value="ps"/>
+         <xs:enumeration value="html"/>
+      </xs:restriction>
+    </xs:simpleType>
+
+            
+   <!-- =================================================== -->
+   <!-- Define some complex types to be used by the schema. -->
+   <!-- =================================================== -->
+   <xs:complexType name="pairType">
+       <xs:attribute name="name" type="xs:string"/>
+       <xs:attribute name="value" type="xs:string"/>
+   </xs:complexType>
+
+    <xs:complexType name="MapType">
+        <xs:sequence>
+           <xs:element maxOccurs="unbounded" minOccurs="1" name="map" type="xs:string"/>
+        </xs:sequence>		    
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>    
+    
+    <xs:complexType name="FormatMapType">
+      <xs:annotation>
+         <xs:documentation>
+            format maps
+         </xs:documentation>
+      </xs:annotation>
+	    <xs:sequence>
+	        <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="format"
+                     type="tns:MapType"/>
+	    </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ParametersType">
+      <xs:annotation>
+         <xs:documentation>
+            Various Report Parameters
+         </xs:documentation>
+      </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="param"
+                     type="tns:pairType"/>
+        </xs:sequence>
+    </xs:complexType>
+   
+   <xs:complexType name="OtherOptionsType">
+      <xs:annotation>
+         <xs:documentation>
+            Various Birt optional parameters
+         </xs:documentation>
+      </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="option"
+                     type="tns:pairType"/>
+        </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="ReportingMessageInputType">
+      <xs:annotation>
+         <xs:documentation>
+            reporting input document
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element minOccurs="1" name="report" type="xs:string"/>
+         <xs:element minOccurs="1" name="format" type="tns:FormatType"/>
+         <xs:element minOccurs="0" name="parameters" type="tns:ParametersType"/>
+         <xs:element minOccurs="0" name="otherOptions" type="tns:OtherOptionsType"/>
+      </xs:sequence>
+   </xs:complexType>
+         
+   <xs:complexType name="ReportMessageOutputType">
+      <xs:annotation>
+         <xs:documentation>
+            Output data in case of any inline data.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="response" type="xs:anyType"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="ReportFaultType">
+      <xs:annotation>
+         <xs:documentation>
+            report faults.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="message" type="xs:string"/>
+          <xs:element maxOccurs="1"
+                     minOccurs="1"
+                     name="messageDetails"
+                     type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+            
+   <!-- =================================================== -->
+   <!-- The definition (uses the above declared types).     -->
+   <!-- =================================================== -->
+   
+   <xs:element name="reportMessageInput" type="tns:ReportingMessageInputType"/>
+   <xs:element name="reportMessageOutput" type="tns:ReportMessageOutputType"/>
+   <xs:element name="reportFault" type="tns:ReportFaultType"/>
+            
+</xs:schema>

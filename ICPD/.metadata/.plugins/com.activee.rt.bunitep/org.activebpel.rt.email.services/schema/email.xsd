@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/email/2007/01/email.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/email/2007/01/email.xsd">
+
+	<!-- =================================================== -->
+	<!-- Define some simple types to be used by the schema.  -->
+	<!-- =================================================== -->
+
+	<!-- =================================================== -->
+	<!-- Define some complex types to be used by the schema. -->
+	<!-- =================================================== -->
+	  <xs:complexType name="tEmailMessage">
+		    <xs:annotation>
+			      <xs:documentation>
+				A simple email message. The body is a mixed type so it's either a simple string or
+				its structured data.
+			</xs:documentation>
+		    </xs:annotation>
+		    <xs:sequence>
+			      <xs:element minOccurs="0" name="from" type="xs:string"/>
+			      <xs:element minOccurs="0" name="replyTo" type="xs:string"/>
+			      <xs:element maxOccurs="unbounded" minOccurs="0" name="to" type="xs:string"/>
+			      <xs:element maxOccurs="unbounded" minOccurs="0" name="cc" type="xs:string"/>
+			      <xs:element maxOccurs="unbounded" minOccurs="0" name="bcc" type="xs:string"/>
+			      <xs:element minOccurs="0" name="subject" type="xs:string"/>
+			      <xs:element maxOccurs="unbounded" name="body">
+				        <xs:complexType>
+					          <xs:complexContent mixed="true">
+						            <xs:extension base="xs:anyType">
+							              <xs:attribute name="mimeType" type="xs:string"/>
+						            </xs:extension>
+					          </xs:complexContent>
+				        </xs:complexType>
+			      </xs:element>
+		    </xs:sequence>
+	  </xs:complexType>
+
+	  <!-- =================================================== -->
+	  <!-- The definition (uses the above declared types).     -->
+	  <!-- =================================================== -->
+	  <xs:element name="emailMessage" type="tns:tEmailMessage"/>
+
+</xs:schema>

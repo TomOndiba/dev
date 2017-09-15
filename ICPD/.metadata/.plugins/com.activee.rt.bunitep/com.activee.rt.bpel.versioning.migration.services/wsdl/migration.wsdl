@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:migration="http://docs.active-endpoints/wsdl/migration/2011/04/migration.xsd"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+                  xmlns:tns="http://docs.active-endpoints/wsdl/migration/2011/04/migration.wsdl"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://docs.active-endpoints/wsdl/migration/2011/04/migration.wsdl">
+                  
+   <plnk:partnerLinkType name="IAeProcessMigrationPLT">
+      <plnk:role name="sender">
+         <plnk:portType name="tns:IAeProcessMigration"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+
+
+  <wsdl:types>
+
+      <xs:schema elementFormDefault="qualified"
+                 targetNamespace="http://docs.active-endpoints/wsdl/migration/2011/04/migration.wsdl">
+
+         <xs:import namespace="http://docs.active-endpoints/wsdl/migration/2011/04/migration.xsd"
+                    schemaLocation="../schema/migration.xsd"/>
+
+      </xs:schema>
+  </wsdl:types>
+
+   <wsdl:message name="createMapRequest">
+      <wsdl:part element="migration:createMapRequest" name="createMapRequest"/>
+   </wsdl:message>
+   
+   <wsdl:message name="createMapResponse">
+      <wsdl:part element="migration:createMapResponse" name="createMapResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="createMapFault">
+      <wsdl:part element="migration:createMapFault" name="createMapFault"/>
+   </wsdl:message>
+
+   <wsdl:message name="migrateRequest">
+      <wsdl:part element="migration:migrateRequest" name="migrateRequest"/>
+   </wsdl:message>
+
+   <wsdl:message name="migrateResponse">
+      <wsdl:part element="migration:migrateResponse" name="migrateResponse"/>
+   </wsdl:message>
+
+   <wsdl:message name="migrateFault">
+      <wsdl:part element="migration:migrateFault" name="migrateFault"/>
+   </wsdl:message>
+
+   <wsdl:portType name="IAeProcessMigration">
+      <wsdl:operation name="createMap">
+         <wsdl:input message="tns:createMapRequest"/>
+         <wsdl:output message="tns:createMapResponse"/>
+         <wsdl:fault message="tns:createMapFault" name="createMapFault"/>
+      </wsdl:operation>
+      
+      <wsdl:operation name="migrate">
+         <wsdl:input message="tns:migrateRequest"/>
+         <wsdl:output message="tns:migrateResponse"/>
+         <wsdl:fault message="tns:migrateFault" name="migrateFault"/>
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+</wsdl:definitions>

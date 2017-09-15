@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:aecmn="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+             xmlns:trt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+             xmlns:tns="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-events.wsdl"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:evts="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-events-wsdl.xsd"
+             xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+             xmlns:htdt="http://www.example.org/WS-HT/api/xsd"
+             xmlns:ae="urn:active-endpoints:documentation"
+             targetNamespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-events.wsdl">
+
+   <import location="aeb4p-task-common.wsdl"
+           namespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl"/>
+	
+   <plnk:partnerLinkType name="taskStateChangeRegistryPLT">
+      <plnk:role name="process" portType="tns:IAeTaskStateChangeRegistry"/>
+   </plnk:partnerLinkType>
+		
+   <plnk:partnerLinkType name="taskStateChangeListenerPLT">
+      <plnk:role name="listener" portType="tns:IAeTaskStateChangeListener"/>
+   </plnk:partnerLinkType>
+
+   <plnk:partnerLinkType name="taskEventListenerPLT">
+      <plnk:role name="listener" portType="tns:IAeTaskEventListener"/>
+   </plnk:partnerLinkType>
+
+   <vprop:propertyAlias element="evts:taskStateChangeEvent" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   	
+   <vprop:propertyAlias element="evts:taskStateChangeEvent" propertyName="aecmn:listenerId">
+      <vprop:query>evts:listenerId</vprop:query>
+   </vprop:propertyAlias>
+ 	 
+   <vprop:propertyAlias element="evts:addListenerData" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias> 	 
+
+   <vprop:propertyAlias element="evts:removeListenerData" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias> 	 
+
+   <vprop:propertyAlias element="evts:removeListenerData" propertyName="aecmn:listenerId">
+      <vprop:query>evts:listenerId</vprop:query>
+   </vprop:propertyAlias>
+   	
+   <types>
+      <xs:schema elementFormDefault="qualified"
+                 targetNamespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-events.wsdl">               
+			      <xs:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-events-wsdl.xsd"
+                    schemaLocation="../schema/aeb4p-task-events-wsdl.xsd"/>			
+			      <xs:import namespace="http://www.example.org/WS-HT/api/xsd"
+                    schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api-wsdl.xsd"/>											
+		    </xs:schema>				
+	  </types>
+
+   <!-- Messages -->
+   <message name="EmptyMessage"/>
+   <message name="AddTaskStateChangeListenerMessage">
+      <part element="evts:addListenerData" name="addListenerData"/>
+   </message>
+   <message name="AddTaskStateChangeListenerMessageResponse">
+      <part element="evts:listenerId" name="listenerId"/>
+   </message>   
+	  <message name="illegalStateFault">
+	    <part element="htdt:illegalState" name="illegalState"/>
+	  </message>   
+   <message name="RemoveTaskStateChangeListenerMessage">
+      <part element="evts:removeListenerData" name="removeListenerData"/>
+   </message>      
+   <message name="TaskStateChangeMessage">
+      <part element="evts:taskStateChangeEvent" name="taskStateChangeEvent"/>
+   </message>
+
+   <message name="TaskEventMessage">
+      <part element="evts:taskEvent" name="taskEvent"/>
+   </message>
+
+   <!-- State change listener registry interface -->
+   <portType name="IAeTaskStateChangeRegistry">
+      <operation name="addTaskStateChangeListener">
+         <documentation>
+            <ae:doc>
+               <ae:desc>
+                  Adds a process as a listener for state changes
+               </ae:desc>
+            </ae:doc>
+         </documentation>
+         <input message="tns:AddTaskStateChangeListenerMessage"/>
+         <output message="tns:AddTaskStateChangeListenerMessageResponse"/>
+         <fault message="tns:illegalStateFault" name="illegalStateFault"/>
+      </operation>
+      <operation name="removeTaskStateChangeListener">
+         <documentation>
+            <ae:doc>
+               <ae:desc>
+                  Removes a process from the list of state change listeners
+               </ae:desc>
+            </ae:doc>
+         </documentation>
+         <input message="tns:RemoveTaskStateChangeListenerMessage"/>
+         <output message="tns:EmptyMessage"/>
+      </operation>
+   </portType>   
+
+   <!-- State change listener callback interface -->
+   <portType name="IAeTaskStateChangeListener">
+      <operation name="handleStateChangeEvent">
+      	  <documentation>
+            <ae:doc>
+               <ae:desc>
+                  Call back function (event handler) that is invoked when the task goes through a state change.
+               </ae:desc>
+            </ae:doc>   
+         </documentation>      
+         <input message="tns:TaskStateChangeMessage"/>
+      </operation>
+   </portType>
+
+   <portType name="IAeTaskEventListener">
+      <operation name="handleTaskEvent">
+         <input message="tns:TaskEventMessage"/>
+      </operation>
+   </portType>
+</definitions>

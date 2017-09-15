@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:aecmn="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl"
+             xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+             xmlns:ns="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl"
+             xmlns:htd="http://www.example.org/WS-HT"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+             xmlns:trt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+             xmlns:tsst="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-state-wsdl.xsd"
+             xmlns:htw="http://www.example.org/WS-HT/api/wsdl"
+             xmlns:tns="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-state.wsdl"
+             xmlns:ns0="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-state-wsdl.xsd"
+             xmlns:evt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-events-wsdl.xsd"
+             xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+             xmlns:htdt="http://www.example.org/WS-HT/api/xsd"
+             xmlns:ae="urn:active-endpoints:documentation"
+             targetNamespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-state.wsdl">
+   <wsp:Policy wsu:Id="AeB4PTaskClient-aeTaskOperations">
+      <abp:ReceiverXPathMap xmlns:abp="http://schemas.active-endpoints.com/ws/2005/12/policy">
+          <abp:parameter name="xmlns:abx" value="http://www.activebpel.org/bpel/extension"/>
+          <abp:parameter name="xpath:principal" value="//abx:principal"/>
+       </abp:ReceiverXPathMap>
+      <abp:Validation xmlns:abp="http://schemas.active-endpoints.com/ws/2005/12/policy"
+                      direction="in"/>
+   </wsp:Policy>
+   <wsp:Policy wsu:Id="AeB4PTaskClient-taskOperations">
+      <abp:ReceiverXPathMap xmlns:abp="http://schemas.active-endpoints.com/ws/2005/12/policy">
+         <abp:parameter name="xmlns:abx" value="http://www.activebpel.org/bpel/extension"/>
+         <abp:parameter name="xpath:principal" value="//abx:principal"/>
+      </abp:ReceiverXPathMap>
+      <abp:Validation xmlns:abp="http://schemas.active-endpoints.com/ws/2005/12/policy"
+                      direction="in"/>
+      <abp:Validation xmlns:abp="http://schemas.active-endpoints.com/ws/2005/12/policy"
+                      direction="none"
+                      operation="setFault"/>
+      <abp:Validation xmlns:abp="http://schemas.active-endpoints.com/ws/2005/12/policy"
+                      direction="none"
+                      operation="setOutput"/>
+      <abp:Validation xmlns:abp="http://schemas.active-endpoints.com/ws/2005/12/policy"
+                      direction="none"
+                      operation="complete"/>
+   </wsp:Policy>
+   <plnk:partnerLinkType name="wakeupPLT">
+      <plnk:role name="process" portType="tns:SuspendUntilResumer"/>
+   </plnk:partnerLinkType>
+   <plnk:partnerLinkType name="removeOwnerPLT">
+      <plnk:role name="service_provider" portType="tns:RemoveOwnerService"/>
+   </plnk:partnerLinkType>
+   <plnk:partnerLinkType name="taskOperationsPLT">
+      <plnk:role name="process" portType="htw:taskOperations"/>
+   </plnk:partnerLinkType>
+   <plnk:partnerLinkType name="aeTaskOperationsPLT">
+      <plnk:role name="process" portType="tns:aeTaskOperations"/>
+   </plnk:partnerLinkType>
+   <plnk:partnerLinkType name="aeInternalTaskOperationsPLT">
+      <plnk:role name="process" portType="tns:aeInternalTaskOperations"/>
+   </plnk:partnerLinkType>
+   <vprop:propertyAlias element="tsst:identifier" propertyName="aecmn:identifier"/>
+   <vprop:propertyAlias element="tsst:createTaskResponse" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:createTaskResponse" propertyName="aecmn:listenerId">
+      <vprop:query>evt:listenerId</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:cancel" propertyName="aecmn:identifier">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:finalize" propertyName="aecmn:identifier">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:reassign" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:activate" propertyName="aecmn:identifier">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:expire" propertyName="aecmn:identifier">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:escalate" propertyName="aecmn:identifier">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:resume" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:scheduleWakeupRequest" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:cancelWakeupRequest" propertyName="aecmn:identifier">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:getTaskInstance" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:updateComment" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:getAttachmentById" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:deleteAttachmentById" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:deleteComment" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:activate" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:nominate" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:setGenericHumanRole" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:claim" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:start" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:remove" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:stop" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:release" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:suspend" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:suspendUntil" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:resume" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:setOutput" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:deleteOutput" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:deleteFault" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:complete" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:fail" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:setPriority" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:addAttachment" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:skip" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:forward" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:delegate" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getTaskInfo" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:getTaskHistory" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:getTaskHistoryById" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getTaskDescription" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getComments" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getRenderingTypes" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getRendering" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getAttachmentInfos" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getAttachments" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:addAttachment" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:deleteAttachments" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:addComment" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getInput" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getOutput" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:setFault" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="htdt:getFault" propertyName="aecmn:identifier">
+      <vprop:query>htdt:identifier</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:cancelWakeupRequest"
+                        propertyName="aecmn:peopleActivityPid">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:scheduleWakeupResponse"
+                        propertyName="aecmn:peopleActivityPid">
+      <vprop:query>text()</vprop:query>
+   </vprop:propertyAlias>
+   <vprop:propertyAlias element="tsst:stateOperationRequest" propertyName="aecmn:identifier">
+      <vprop:query>trt:identifier</vprop:query>
+   </vprop:propertyAlias>
+  <import location="aeb4p-task-common.wsdl"
+           namespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-common.wsdl">
+    </import>
+  <import location="../../org.activebpel.rt.ht.services/wsdl/ws-humantask-api.wsdl"
+           namespace="http://www.example.org/WS-HT/api/wsdl">
+    </import>
+  <types>
+      <xs:schema elementFormDefault="qualified"
+                 targetNamespace="http://www.activebpel.org/b4p/2007/10/wshumantask/aeb4p-task-state.wsdl">     
+                   
+			      <xs:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+                    schemaLocation="../schema/aeb4p-task-rt.xsd"/>			
+         
+			      <xs:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-state-wsdl.xsd"
+                    schemaLocation="../schema/aeb4p-task-state-wsdl.xsd"/>			
+				
+			      <xs:import namespace="http://www.example.org/WS-HT"
+                    schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask.xsd"/>         
+				
+			      <xs:import namespace="http://www.example.org/WS-HT/api/xsd"
+                    schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api-wsdl.xsd"/>											
+		    </xs:schema>
+  </types>
+  <message name="GetTaskHistoryRequest">
+      <part element="tsst:getTaskHistory" name="getTaskHistory">
+    </part>
+  </message>
+  <message name="illegalArgumentFault">
+      <part element="htdt:illegalArgument" name="illegalArgument">
+    </part>
+  </message>
+  <message name="GetAllDelegatesResponse">
+      <part element="tsst:getAllDelegatesResponse" name="getAllDelegatesResponse">
+    </part>
+  </message>
+  <message name="RemoveOwnerResponse">
+      <part element="tsst:removeOwnerResponse" name="removeOwnerResponse">
+    </part>
+  </message>
+  <message name="AuthorizeResponse">
+      <part element="tsst:authorizeResponse" name="authorizeResponse">
+    </part>
+  </message>
+  <message name="DeleteAttachmentByIdRequest">
+      <part element="tsst:deleteAttachmentById" name="deleteAttachmentById">
+    </part>
+  </message>
+  <message name="GetTasksResponse">
+      <part element="tsst:getTasksResponse" name="getTasksResponse">
+    </part>
+  </message>
+  <message name="ReassignTaskRequest">
+      <part element="tsst:reassign" name="reassign">
+    </part>
+  </message>
+  <message name="DeleteCommentRequest">
+      <part element="tsst:deleteComment" name="deleteComment">
+    </part>
+  </message>
+  <message name="UpdateCommentRequest">
+      <part element="tsst:updateComment" name="updateComment">
+    </part>
+  </message>
+  <message name="CreateTaskRequest">
+      <part element="tsst:createTaskRequest" name="createTaskRequest">
+    </part>
+  </message>
+  <message name="ActivateTaskRequest">
+      <part element="tsst:activate" name="activate">
+    </part>
+  </message>
+  <message name="PerformTaskStateRetrievalOperationRequest">
+      <part element="tsst:stateOperationRequest" name="stateOperationRequest">
+    </part>
+  </message>
+  <message name="PerformTaskStateUpdateOperationRequest">
+      <part element="tsst:stateOperationRequest" name="stateOperationRequest">
+    </part>
+  </message>
+  <message name="FinalizeTaskRequest">
+      <part element="tsst:finalize" name="finalize">
+    </part>
+  </message>
+  <message name="ScheduleWakeupRequest">
+      <part element="tsst:scheduleWakeupRequest" name="scheduleWakeupRequest">
+    </part>
+  </message>
+  <message name="GetPotentialTaskDelegateesRequest">
+      <part element="tsst:getPotentialTaskDelegateesRequest"
+            name="getPotentialTaskDelegateesResponse">
+    </part>
+  </message>
+  <message name="RemoveDelegateRequest">
+      <part element="tsst:removeDelegate" name="removeDelegate">
+    </part>
+  </message>
+  <message name="AuthorizeRequest">
+      <part element="tsst:authorizeRequest" name="authorizeRequest">
+    </part>
+  </message>
+  <message name="PerformTaskStateRetrievalOperationResponse">
+      <part element="tsst:stateOperationResponse" name="stateOperationResponse">
+    </part>
+  </message>
+  <message name="PerformTaskStateUpdateOperationResponse">
+      <part element="tsst:stateOperationResponse" name="stateOperationResponse">
+    </part>
+  </message>
+  <message name="GetTaskInstanceRequest">
+      <part element="tsst:getTaskInstance" name="getTaskInstance">
+    </part>
+  </message>
+  <message name="GetAllDelegatesRequest">
+      <part element="tsst:getAllDelegates" name="getAllDelegates">
+    </part>
+  </message>
+  <message name="GetTaskHistoryByIdRequest">
+      <part element="tsst:getTaskHistoryById" name="getTaskHistoryById">
+    </part>
+  </message>
+  <message name="illegalStateFault">
+      <part element="htdt:illegalState" name="illegalState">
+    </part>
+  </message>
+  <message name="EscalateTaskRequest">
+      <part element="tsst:escalate" name="escalate">
+    </part>
+  </message>
+  <message name="GetAttachmentByIdResponse">
+      <part element="tsst:getAttachmentByIdResponse"
+            name="getAttachmentByIdResponse">
+    </part>
+  </message>
+  <message name="GetTasksRequest">
+      <part element="tsst:getTasks" name="getTasks">
+    </part>
+  </message>
+  <message name="AddDelegateRequest">
+      <part element="tsst:addDelegate" name="addDelegate">
+    </part>
+  </message>
+  <message name="ResumeTaskRequest">
+      <part element="tsst:resume" name="resume">
+    </part>
+  </message>
+  <message name="GetTaskHistoryResponse">
+      <part element="tsst:getTaskHistoryResponse" name="getTaskHistoryResponse">
+    </part>
+  </message>
+  <message name="CancelTaskRequest">
+      <part element="tsst:cancel" name="cancel">
+    </part>
+  </message>
+  <message name="CancelWakeupRequest">
+      <part element="tsst:cancelWakeupRequest" name="cancelWakeupRequest">
+    </part>
+  </message>
+  <message name="ScheduleWakeupResponse">
+      <part element="tsst:scheduleWakeupResponse" name="scheduleWakeupResponse">
+    </part>
+  </message>
+  <message name="EmptyMessage">
+  </message>
+  <message name="illegalAccessFault">
+      <part element="htdt:illegalAccess" name="illegalAccess">
+    </part>
+  </message>
+  <message name="GetTaskHistoryByIdResponse">
+      <part element="tsst:getTaskHistoryByIdResponse"
+            name="getTaskHistoryByIdResponse">
+    </part>
+  </message>
+  <message name="GetPotentialTaskDelegateesResponse">
+      <part element="tsst:getPotentialTaskDelegateesResponse"
+            name="getPotentialTaskDelegateesResponse">
+    </part>
+  </message>
+  <message name="RemoveOwnerRequest">
+      <part element="tsst:removeOwnerRequest" name="removeOwnerRequest">
+    </part>
+  </message>
+  <message name="ExpireTaskRequest">
+      <part element="tsst:expire" name="expire">
+    </part>
+  </message>
+  <message name="GetTaskInstanceResponse">
+      <part element="trt:taskInstance" name="taskInstance">
+    </part>
+  </message>
+  <message name="CreateTaskResponse">
+      <part element="tsst:createTaskResponse" name="createTaskResponse">
+    </part>
+  </message>
+  <message name="GetAttachmentByIdRequest">
+      <part element="tsst:getAttachmentById" name="getAttachmentById">
+    </part>
+  </message>
+  <message name="DeleteAttachmentByIdResponse">
+  </message>
+  <portType name="RemoveOwnerService">
+      <documentation>
+			Remove some one (represented by principal name) from the
+			potential owners list and add the entity to the excluded
+			owners list. Returns either a boolean flag if all potential
+			owners have been removed based on the count of excluded
+			owners and the count of the potential owners count, or the
+			excluded owners list.
+
+			Throws illegal argument fault if the excluded owners in the
+			input contains groups. Throws illegal operation fault if the
+			owner to be removed is not on the potential owners list or
+			is on the excluded owners list
+		</documentation>
+      <operation name="RemoveOwner">
+         <input message="tns:RemoveOwnerRequest">
+    </input>
+         <output message="tns:RemoveOwnerResponse">
+    </output>
+         <fault message="tns:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="tns:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+  </portType>
+  <portType name="SuspendUntilResumer">
+      <operation name="scheduleWakeup">
+         <input message="tns:ScheduleWakeupRequest">
+    </input>
+         <output message="tns:ScheduleWakeupResponse">
+    </output>
+      </operation>
+      <operation name="cancelWakeup">
+         <input message="tns:CancelWakeupRequest">
+    </input>
+      </operation>
+  </portType>
+  <portType name="aeTaskOperations">
+      <operation name="authorize">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Operation for the inbox to invoke to see if it's authorized to hit the server.
+    				If the inbox is able to invoke this operation using the credentials it has
+    				from the user then those credentials were valid.  
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:AuthorizeRequest">
+    </input>
+         <output message="tns:AuthorizeResponse">
+    </output>
+      </operation>
+      <operation name="getInstance">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Returns the task run time instance document
+    				including operational data such as attachments and
+    				comments.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:GetTaskInstanceRequest">
+    </input>
+         <output message="tns:GetTaskInstanceResponse">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+      <operation name="updateComment">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Updates the comment. Comments can be updated while
+    				the task is not in a final state. Users can update
+    				their own comments and the admin can update any
+    				comments on the task.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:UpdateCommentRequest">
+    </input>
+         <output message="tns:EmptyMessage">
+    </output>
+         <fault message="htw:illegalStateFault" name="illegalStateFault">
+    </fault>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+      <operation name="deleteComment">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Deletes the comment. Comments can be deleted while
+    				the task is not in a final state. Users can delete
+    				their own comments and the admin can delete any
+    				comments on the task.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:DeleteCommentRequest">
+    </input>
+         <output message="tns:EmptyMessage">
+    </output>
+         <fault message="htw:illegalStateFault" name="illegalStateFault">
+    </fault>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+      <operation name="getAttachmentById">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Gets an attachment by its id.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:GetAttachmentByIdRequest">
+    </input>
+         <output message="tns:GetAttachmentByIdResponse">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+      <operation name="deleteAttachmentById">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Deletes an attachment by its id.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:DeleteAttachmentByIdRequest">
+    </input>
+         <output message="tns:DeleteAttachmentByIdResponse">
+    </output>
+         <fault message="htw:illegalStateFault" name="illegalStateFault">
+    </fault>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+      <operation name="getTasks">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Returns list of tasks. This is similar to ws-ht getMyTasks,
+    				but with support for paging and column sorting.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:GetTasksRequest">
+    </input>
+         <output message="tns:GetTasksResponse">
+    </output>
+         <fault message="htw:illegalStateFault" name="illegalStateFault">
+    </fault>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+      </operation>
+      <operation name="getTaskHistory">
+         <documentation>
+            <ae:doc>
+               <ae:desc>
+               Returns list of task events. 
+            </ae:desc>
+            </ae:doc>
+         </documentation>
+         <input message="tns:GetTaskHistoryRequest">
+    </input>
+         <output message="tns:GetTaskHistoryResponse">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+      <operation name="getTaskHistoryById">
+         <documentation>
+            <ae:doc>
+               <ae:desc>
+               Returns a single task history entry given id or empty response if task event was not found. 
+            </ae:desc>
+            </ae:doc>
+         </documentation>
+         <input message="tns:GetTaskHistoryByIdRequest">
+    </input>
+         <output message="tns:GetTaskHistoryByIdResponse">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault">
+    </fault>
+      </operation>
+      <operation name="addDelegate">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    			   Adds delegate user for the principal
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:AddDelegateRequest">
+    </input>
+         <output message="tns:EmptyMessage">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+      </operation>
+      <operation name="removeDelegate">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    			   Removes delegate user(s) for the principal
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:RemoveDelegateRequest">
+    </input>
+         <output message="tns:EmptyMessage">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+      </operation>
+      <operation name="getAllDelegates">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    			   Returns all delegates of principal based on input date range.
+    			   All delegates are returned if there is no date range given.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:GetAllDelegatesRequest">
+    </input>
+         <output message="tns:GetAllDelegatesResponse">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+      </operation>
+      <operation name="getPotentialTaskDelegatees">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    			   Returns identities of all potential task delegates.
+    			   This list is based on the delegation element in the task definition.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:GetPotentialTaskDelegateesRequest">
+    </input>
+         <output message="tns:GetPotentialTaskDelegateesResponse">
+    </output>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault">
+    </fault>
+      </operation>
+  </portType>
+  <portType name="aeInternalTaskOperations">
+      <operation name="create">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Called by the task lifecycle to create task state
+    				machine.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:CreateTaskRequest">
+    </input>
+         <output message="tns:CreateTaskResponse">
+    </output>
+      </operation>
+      <operation name="activate">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Called by the state machine's deferActivation alarm
+    				handler. If there is a single potential owner user
+    				then the user will become the owner and the task
+    				will transition into the reserved state. Otherwise,
+    				the task will transition into the ready state.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:ActivateTaskRequest">
+    </input>
+      </operation>
+      <operation name="getInstance">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Returns the task run time instance document
+    				including operational data such as attachments and
+    				comments.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:GetTaskInstanceRequest">
+    </input>
+         <output message="tns:GetTaskInstanceResponse">
+    </output>
+      </operation>
+      <operation name="cancel">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Called by the task lifecycle to cancel state
+    				machine.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:CancelTaskRequest">
+    </input>
+         <output message="tns:EmptyMessage">
+    </output>
+         <fault message="tns:illegalStateFault" name="illegalStateFault">
+    </fault>
+      </operation>
+      <operation name="expire">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Called by the task lifecycle to expire the task.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:ExpireTaskRequest">
+    </input>
+      </operation>
+      <operation name="escalate">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Called by the task lifecycle when the task has been
+    				escalated
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:EscalateTaskRequest">
+    </input>
+      </operation>
+      <operation name="finalize">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Called by the task lifecycle when the task should be
+    				finalized.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:FinalizeTaskRequest">
+    </input>
+      </operation>
+      <operation name="reassign">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Reassigns the task to another set of potential
+    				owners.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:ReassignTaskRequest">
+    </input>
+      </operation>
+      <operation name="resume">
+         <documentation>
+    		      <ae:doc>
+    			        <ae:desc>
+    				Called by the alarm process that is spawned from a
+    				suspendUntil operation. This helper process will
+    				callback the state machine and change its state from
+    				suspended to whatever the previous state was.
+    			</ae:desc>
+    		      </ae:doc>
+    	    </documentation>
+         <input message="tns:ResumeTaskRequest">
+    </input>
+      </operation>
+      <operation name="performTaskStateRetrievalOperation">
+         <input message="tns:PerformTaskStateRetrievalOperationRequest"/>
+         <output message="tns:PerformTaskStateRetrievalOperationResponse"/>
+         <fault message="htw:illegalStateFault" name="illegalStateFault"/>
+         <fault message="htw:illegalOperationFault" name="illegalOperationFault"/>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault"/>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault"/>
+      </operation>
+      <operation name="performTaskStateUpdateOperation">
+         <input message="tns:PerformTaskStateUpdateOperationRequest"/>
+	        <output message="tns:PerformTaskStateUpdateOperationResponse"/>
+         <fault message="htw:illegalAccessFault" name="illegalAccessFault"/>
+         <fault message="htw:illegalStateFault" name="illegalStateFault"/>
+         <fault message="htw:illegalArgumentFault" name="illegalArgumentFault"/>
+         <fault message="htw:illegalOperationFault" name="illegalOperationFault"/>
+         <fault message="htw:recipientNotAllowed" name="recipientNotAllowed"/>
+      </operation>
+  </portType>
+</definitions>

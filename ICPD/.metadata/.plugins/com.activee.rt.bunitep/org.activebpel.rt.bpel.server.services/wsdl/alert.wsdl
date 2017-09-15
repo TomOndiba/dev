@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:alrt="http://www.active-endpoints.com/services/alert"
+                  xmlns:tns="http://www.active-endpoints.com/services/alert"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://www.active-endpoints.com/services/alert">
+
+   <plnk:partnerLinkType xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="AlertPLT">
+      <plnk:role name="process" portType="tns:alertPT"/>
+   </plnk:partnerLinkType>
+
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema"
+              targetNamespace="http://www.active-endpoints.com/services/alert">
+         <simpleType name="AlertStatus">
+            <xsd:restriction base="xsd:string">
+               <xsd:enumeration value="suspended"/>
+               <xsd:enumeration value="faulting"/>
+               <xsd:enumeration value="invokeRecovery"/>
+            </xsd:restriction>
+         </simpleType>
+         <complexType name="AlertType">
+            <sequence minOccurs="0">
+               <any namespace="##any" processContents="skip"/>
+            </sequence>
+            <attribute name="processId" type="xsd:long"/>
+            <attribute name="processNamespace" type="xsd:string"/>
+            <attribute name="processName" type="xsd:string"/>
+            <attribute name="faultNamespace" type="xsd:string"/>
+            <attribute name="faultName" type="xsd:string"/>
+            <attribute name="locationPath" type="xsd:string"/>
+            <attribute name="status" type="tns:AlertStatus"/>
+            <attribute name="processTenant" type="xsd:string" use="optional"/>
+            <attribute name="processInitiator" type="xsd:string" use="optional"/>
+            <attribute name="processInitiatorTenant" type="xsd:string" use="optional"/>
+            <attribute name="emailIdForAlert" type="xsd:string" use="optional"/>
+         </complexType>
+         <element name="alert" type="tns:AlertType"/>
+      </schema>
+    </wsdl:types>
+    
+   <wsdl:message name="alertMessage">
+      <wsdl:part element="tns:alert" name="alert"/>
+   </wsdl:message>
+
+   <wsdl:portType name="alertPT">
+      <wsdl:operation name="alert">
+         <wsdl:input message="tns:alertMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+
+</wsdl:definitions>

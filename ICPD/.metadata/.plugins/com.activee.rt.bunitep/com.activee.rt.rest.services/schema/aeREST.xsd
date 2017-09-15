@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.activebpel.org/REST/2007/12/01/aeREST.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.activebpel.org/REST/2007/12/01/aeREST.xsd">
+
+    <!-- HTTP Method enumeration used for REST -->
+    <xs:simpleType name="httpMethodType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GET"/>
+            <xs:enumeration value="POST"/>
+            <xs:enumeration value="PUT"/>
+            <xs:enumeration value="DELETE"/>
+            <xs:enumeration value="TRACE"/>
+            <xs:enumeration value="OPTIONS"/>
+            <xs:enumeration value="HEAD"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Error type enumeration used for REST -->
+    <xs:simpleType name="errorType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="transport"/>
+            <xs:enumeration value="system"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:complexType name="pairType">
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="value" type="xs:string"/>
+    </xs:complexType>
+    
+    <xs:complexType name="paramsType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="param"
+                     type="tns:pairType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="headersType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="header"
+                     type="tns:pairType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType mixed="true" name="payloadType">
+        <xs:sequence>
+            <xs:any minOccurs="0" namespace="##any" processContents="skip"/>
+        </xs:sequence>
+        <xs:attribute name="contentType" type="xs:string"/>
+    </xs:complexType>
+    
+    <xs:complexType name="partType">
+        <xs:sequence>
+            <xs:element maxOccurs="1"
+                     minOccurs="0"
+                     name="headers"
+                     type="tns:headersType"/>
+            <xs:element maxOccurs="1"
+                     minOccurs="1"
+                     name="payload"
+                     type="tns:payloadType"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="partsType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="part"
+                     type="tns:partType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+   <xs:element name="locale">
+      <xs:complexType>  
+         <xs:simpleContent>  
+            <xs:extension base="xs:string">  
+               <xs:attribute name="lang" type="xs:string" use="required"/>  
+               <xs:attribute name="country" type="xs:string" use="optional"/>  
+            </xs:extension>  
+         </xs:simpleContent>  
+      </xs:complexType>  
+   </xs:element>    
+    
+   <xs:element name="locales">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1" ref="tns:locale"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>    
+
+    <xs:element name="RESTRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="subdomain" type="xs:string"/>
+                <xs:element name="method" type="tns:httpMethodType"/>
+                <xs:element minOccurs="0" name="pathInfo" type="xs:string"/>
+                <xs:element minOccurs="0" name="params" type="tns:paramsType"/>
+                <xs:element minOccurs="0" name="headers" type="tns:headersType"/>
+                <xs:choice>
+                   <xs:element minOccurs="0" name="payload" type="tns:payloadType"/>
+                   <xs:element minOccurs="0" name="parts" type="tns:partsType"/>
+                </xs:choice>
+                <xs:element minOccurs="0" name="queryString" type="xs:string"/>
+                <xs:element minOccurs="0" name="authType" type="xs:string"/>
+                <xs:element minOccurs="0" name="ssl" type="xs:boolean"/>
+                <xs:element minOccurs="0" name="contextPath" type="xs:string"/>
+                <xs:element minOccurs="0" name="requestURI" type="xs:string"/>
+                <xs:element minOccurs="0" ref="tns:locales"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RESTResponse">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element minOccurs="0" name="headers" type="tns:headersType"/>
+                <xs:element minOccurs="0" name="payload" type="tns:payloadType"/>
+            </xs:sequence>
+            <xs:attribute name="statusCode" type="xs:int" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RESTFault">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="errorCode" type="xs:int"/>
+                <xs:element minOccurs="0" name="headers" type="tns:headersType"/>
+                <xs:element maxOccurs="1" minOccurs="1" name="message" type="xs:string"/>
+                <xs:element maxOccurs="1"
+                        minOccurs="1"
+                        name="messageDetails"
+                        type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="errorType" type="tns:errorType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

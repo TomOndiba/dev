@@ -1,10 +1,10 @@
 exec sp_generate_merge
-	  @table_name = 'TranslationStatus' -- varchar(776) The table/view for which the MERGE statement will be generated using the existing data
+	  @table_name = 'RunState' -- varchar(776) The table/view for which the MERGE statement will be generated using the existing data
 	, @target_table = null -- varchar(776) Use this parameter to specify a different table name into which the data will be inserted/updated/deleted
 	, @from = null -- varchar(800) Use this parameter to filter the rows based on a filter condition (using WHERE)
 	, @include_timestamp = 0 -- bit Specify 1 for this parameter, if you want to include the TIMESTAMP/ROWVERSION column's data in the MERGE statement
 	, @debug_mode = 0 -- bit If @debug_mode is set to 1, the SQL statements constructed by this procedure will be printed for later examination
-	, @schema = 'dbo' -- varchar(64) Use this parameter if you are not the owner of the table
+	, @schema = 'privy' -- varchar(64) Use this parameter if you are not the owner of the table
 	, @ommit_images = 0 -- bit Use this parameter to generate MERGE statement by omitting the 'image' columns
 	, @ommit_identity = 0 -- bit Use this parameter to ommit the identity columns
 	, @top = null -- int Use this parameter to generate a MERGE statement only for the TOP n rows

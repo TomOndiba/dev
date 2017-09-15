@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                  xmlns:tns="http://docs.active-endpoints.com/wsdl/eventing/2008/06/eventing.wsdl"
+                  xmlns:evt="http://docs.active-endpoints.com/wsdl/eventing/2008/06/eventing.wsdl"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://docs.active-endpoints.com/wsdl/eventing/2008/06/eventing.wsdl">
+
+   <plnk:partnerLinkType name="eventingPLT">
+      <plnk:role name="actionProcess" portType="tns:IAeEventAction"/>
+   </plnk:partnerLinkType>
+
+   <wsdl:types>
+      <xsd:schema targetNamespace="http://docs.active-endpoints.com/wsdl/eventing/2008/06/eventing.wsdl">
+
+         <xsd:element name="trigger">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:choice>
+                     <xsd:any maxOccurs="unbounded"
+                              minOccurs="0"
+                              namespace="##local"
+                              processContents="skip"/>
+                     <xsd:any maxOccurs="unbounded"
+                              minOccurs="0"
+                              namespace="##other"
+                              processContents="skip"/>
+                  </xsd:choice>
+               </xsd:sequence>
+               <xsd:anyAttribute namespace="##other" processContents="lax"/>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:schema>
+   </wsdl:types>
+
+   <wsdl:message name="trigger">
+      <wsdl:part element="tns:trigger" name="trigger"/>
+   </wsdl:message>
+
+   <wsdl:portType name="IAeEventAction">
+      <wsdl:operation name="trigger">
+         <wsdl:input message="tns:trigger"/>
+      </wsdl:operation>
+   </wsdl:portType>
+
+</wsdl:definitions>

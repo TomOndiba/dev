@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd">
+
+   <xs:include schemaLocation="../core/core.xsd"/>
+
+   <!-- Main process element -->
+   <xs:element name="process">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:abstractProcessType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:appliesTo"/>
+                  <xs:element minOccurs="0" ref="tns:description"/>
+                  <xs:element minOccurs="0" ref="tns:tags"/>
+                  <xs:element minOccurs="0" ref="tns:generator"/>
+                  <xs:element minOccurs="0" ref="tns:input"/>
+                  <xs:element minOccurs="0" ref="tns:output"/>
+                  <xs:element minOccurs="0" ref="tns:tempFields"/>
+                  <xs:element minOccurs="0" ref="tns:notes"/>
+                  <xs:element minOccurs="0" ref="tns:deployment"/>
+                  <xs:element minOccurs="0" ref="tns:eventDefinitions"/>
+                  <xs:element ref="tns:flow"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+      <xs:key name="UniqueMessageDefinitionName">
+         <xs:selector xpath="tns:eventDefinitions/tns:messageDefinition"/>
+         <xs:field xpath="@name"/>
+      </xs:key>
+      <xs:keyref name="KnownMessageDefinitions" refer="tns:UniqueMessageDefinitionName">
+         <xs:selector xpath=".//tns:message"/>
+         <xs:field xpath="@refer"/>
+      </xs:keyref>
+   </xs:element>
+
+   <xs:element name="start">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:startStepType">
+               <xs:sequence>
+                  <xs:element ref="tns:link"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="milestone" type="tns:milestoneType"/>
+   <xs:element name="end" type="tns:milestoneType"/>
+   <xs:element name="create" type="tns:createType"/>
+   <xs:element name="jumpTo">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:abstractStepType">
+               <xs:sequence>
+                  <xs:element ref="tns:link"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="empty">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:emptyStepType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:link"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="service">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:serviceStepType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:link"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="subflow">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:abstractSubprocessType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:appliesToDataName"/>
+                  <xs:element minOccurs="0" name="runForEach" type="xs:boolean"/>
+                  <xs:element minOccurs="0" name="breakOnCondition" type="tns:baseExpressionType"/>
+                  <xs:element minOccurs="0" name="runAsUser" type="tns:runAsUser"/>
+                  <xs:element minOccurs="0" name="input" type="tns:serviceInputType"/>
+                  <xs:element minOccurs="0" name="outputDef" type="tns:processOutputType"/>
+                  <xs:element minOccurs="0" ref="tns:link"/>
+                  <xs:any maxOccurs="unbounded"
+                          minOccurs="0"
+                          namespace="##other"
+                          processContents="lax"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="userTask">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:abstractSubprocessType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:appliesToDataName"/>
+                  <xs:element name="subject" type="tns:simpleDataMappingType"/>
+                  <xs:element name="description" type="tns:simpleDataMappingType"/>
+                  <xs:element name="priority" type="tns:simpleDataMappingType"/>
+                  <xs:element minOccurs="0"
+                              name="potentialOwners"
+                              type="tns:BoltOrganizationalEntity"/>
+                  <xs:element name="businessAdministrators" type="tns:BoltOrganizationalEntity"/>
+                  <xs:element minOccurs="0"
+                              name="excludedOwners"
+                              type="tns:BoltOrganizationalEntity"/>                  
+                  <xs:element minOccurs="0" name="input" type="tns:serviceInputType"/>
+                  <xs:element minOccurs="0" name="outputDef" type="tns:processOutputType"/>
+                  <xs:element minOccurs="0" ref="tns:link"/>
+                  <xs:any maxOccurs="unbounded"
+                          minOccurs="0"
+                          namespace="##other"
+                          processContents="lax"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>  
+   
+   <!-- this type is used to define a set of users and user groups for  -->
+   <xs:complexType name="BoltOrganizationalEntity">
+      <xs:sequence>
+         <xs:element maxOccurs="1"
+                     minOccurs="0"
+                     name="users"
+                     type="tns:simpleDataMappingType"/>
+         <xs:element maxOccurs="1"
+                     minOccurs="0"
+                     name="groups"
+                     type="tns:simpleDataMappingType"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:element name="wait">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:titledStepType">
+               <xs:sequence>
+                  <xs:choice>
+                     <xs:element name="duration" type="tns:baseExpressionType"/>
+                     <xs:element name="time" type="tns:baseExpressionType"/>
+                  </xs:choice>
+                  <xs:element minOccurs="0" ref="tns:link"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="receive">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:titledStepType">
+               <xs:sequence>
+                  <xs:element name="message" type="tns:messageEventType"/>
+                  <xs:element minOccurs="0" ref="tns:link"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="throw">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:titledStepType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="throwInput" type="tns:serviceInputType">
+                     <xs:annotation>
+                        <xs:documentation>
+                           The input to the throw step is treated as serviceInputType because the inputs must conform to the pre-defined 
+                           interface as described by the faultInfo process object. 
+                        </xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="assignment" type="tns:assignmentType"/>
+   <xs:element name="container" type="tns:containerType"/>
+   <xs:element name="eventContainer" type="tns:eventContainerType"/>
+   <xs:element name="repeat" type="tns:repeatType"/>
+
+   <xs:group name="step">
+      <xs:choice>
+         <xs:element ref="tns:start"/>
+         <xs:element ref="tns:end"/>
+         <xs:element ref="tns:milestone"/>
+         <xs:element ref="tns:jumpTo"/>
+         <xs:element ref="tns:create"/>
+         <xs:element ref="tns:empty"/>
+         <xs:element ref="tns:service"/>
+         <xs:element ref="tns:subflow"/>
+         <xs:element ref="tns:userTask"/>
+         <xs:element ref="tns:repeat"/>
+         <xs:element ref="tns:assignment"/>
+         <xs:element ref="tns:wait"/>
+         <xs:element ref="tns:receive"/>
+         <xs:element ref="tns:throw"/>
+         <xs:element ref="tns:container"/>
+         <xs:element ref="tns:eventContainer"/>
+      </xs:choice>
+   </xs:group>
+
+   <!-- Flow Step Type Container -->
+   <xs:element name="flow">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:extensibleStepType">
+               <xs:sequence>
+                  <xs:group maxOccurs="unbounded" minOccurs="0" ref="tns:step"/>
+                  <xs:element minOccurs="0" ref="tns:link"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- Condition -->
+   <xs:element name="condition" type="tns:baseExpressionType">
+      <xs:annotation>
+         <xs:documentation>
+            A condition is a boolean expression.
+         </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+
+   <!-- Milestone with link -->
+   <xs:complexType name="milestoneType">
+      <xs:complexContent>
+         <xs:extension base="tns:milestoneStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="httpStatus" type="xs:integer"/>
+               <xs:element minOccurs="0" ref="tns:link"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Create with link -->
+   <xs:complexType name="createType">
+      <xs:complexContent>
+         <xs:extension base="tns:createStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" ref="tns:link"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Assignment Step Type -->
+   <xs:complexType name="assignmentType">
+      <xs:complexContent>
+         <xs:extension base="tns:assignmentStepType">
+            <xs:sequence>
+               <xs:element minOccurs="0" ref="tns:link"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- RepeatUntil Step Type -->
+   <xs:complexType name="repeatType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:choice>
+                  <xs:annotation>
+                     <xs:documentation>
+                        Must provided a condition element for While or Until and a appliesToDataName
+                        element for a ForEach.
+                     </xs:documentation>
+                  </xs:annotation>
+                  <xs:element ref="tns:condition"/>
+                  <xs:element ref="tns:appliesToDataName"/>
+               </xs:choice>
+               <xs:element ref="tns:flow"/>
+               <xs:element minOccurs="0" ref="tns:link"/>
+            </xs:sequence>
+            <xs:attribute default="Until" name="type" type="tns:loopType">
+               <xs:annotation>
+                  <xs:documentation>
+                     A Until loop will always execute at least once where a While loop will only execute
+                     if the condition is true. If the condition
+                     element is not provided, then this type is not used.
+                  </xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:simpleType name="loopType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Until"/>
+         <xs:enumeration value="While"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- Event Container Type -->
+   <xs:complexType name="eventContainerType">
+      <xs:annotation>
+         <xs:documentation>
+            An event container consists of a single root step that MUST have at least 1 associated event.
+            Each event will also contain a link targeting a flow in the container. It is required that the events each
+            have 1 containerLink. The container will only contain 1 containerLink for the root step to the optional flow
+            that may be executed after the root step completes.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:abstractStepType">
+            <xs:sequence>
+               <xs:choice>
+                  <xs:element ref="tns:service"/>
+                  <xs:element ref="tns:subflow"/>
+                  <xs:element ref="tns:userTask"/>
+                  <xs:element ref="tns:create"/>
+               </xs:choice>
+               <xs:element maxOccurs="unbounded" ref="tns:flow"/>
+               <xs:element maxOccurs="2" minOccurs="0" ref="tns:link"/>
+               <xs:element ref="tns:events"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:element name="events" type="tns:eventsType"/>
+   <xs:complexType name="eventsType">
+      <xs:annotation>
+         <xs:documentation>Container for timer and message events.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="timer"
+                     type="tns:timerEventType"/>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="message"
+                     type="tns:messageBoundaryEventType"/>
+         <xs:element minOccurs="0" name="catch" type="tns:catchEventType">
+            <xs:annotation>
+               <xs:documentation>
+                  Only a single, interrupting, boundary fault event is supported per step.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="catchEventType">
+      <xs:annotation>
+         <xs:documentation>
+            Describes a 'catch' event. It is an interrupting boundary event.
+            If the link doesn't specifiy a condition, then the sematics of the catch event is to
+            'catch-all faults', otherwise the fault will only be executed if link condition
+            evaluates to true.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:abstractStepType">
+            <xs:sequence>
+               <xs:element ref="tns:link"/>
+            </xs:sequence>
+            <xs:attribute default="faultInfo"
+                          name="faultField"
+                          type="xs:string"
+                          use="optional"/>
+            <xs:attribute fixed="true"
+                          name="interrupting"
+                          type="xs:boolean"
+                          use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="timerEventType">
+      <xs:annotation>
+         <xs:documentation>
+            Type for timer events based on a point in time or duration for the current time.
+            By default timer events are non-interrupting unless the 'interrupting' is true.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:choice>
+                  <xs:element name="duration" type="tns:baseExpressionType"/>
+                  <xs:element name="time" type="tns:baseExpressionType"/>
+               </xs:choice>
+               <xs:element minOccurs="0" name="repeatEvery" type="tns:baseExpressionType">
+                  <xs:annotation>
+                     <xs:documentation>
+                        Only valid for non-interrupting events. The expression must resolve to a
+                        xs:duration and will first execute after the initial time/duration elapses.
+                     </xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="tns:link"/>
+            </xs:sequence>
+            <xs:attribute name="interrupting" type="xs:boolean"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:element name="eventDefinitions">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1" ref="tns:messageDefinition"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="messageDefinition">
+      <xs:complexType>
+         <xs:annotation>
+            <xs:documentation>
+               Type for message event definition.
+            </xs:documentation>
+         </xs:annotation>
+         <xs:sequence>
+            <xs:element minOccurs="0" name="input" type="tns:messageEventInputType"/>
+            <xs:element minOccurs="0" ref="tns:output"/>
+            <xs:element minOccurs="0" ref="tns:deployment"/>
+         </xs:sequence>
+         <xs:attribute name="name" type="xs:NCName" use="required"/>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:complexType name="messageEventInputType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="parameter"
+                     type="tns:messageInputParameter"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="messageInputParameter">
+      <xs:complexContent>
+         <xs:extension base="tns:processInputParameter">
+            <xs:attribute name="correlationPath" type="xs:string" use="optional">
+               <xs:annotation>
+                  <xs:documentation>This attribute is only applicable if the parameter is required.
+                  </xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="messageBoundaryEventType">
+      <xs:complexContent>
+         <xs:extension base="tns:messageEventType">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:title"/>
+               <xs:element ref="tns:link"/>
+            </xs:sequence>
+            <xs:attribute name="interrupting" type="xs:boolean"/>
+            <xs:attribute name="id" type="xs:NCName" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="messageEventType">
+      <xs:sequence>
+         <xs:element name="correlation">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded"
+                              minOccurs="0"
+                              name="parameter"
+                              type="tns:dataMappingType"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="refer" type="xs:NCName" use="required"/>
+   </xs:complexType>
+
+   <!-- Container -->
+   <xs:complexType name="containerType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="1" ref="tns:flow"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:link"/>
+            </xs:sequence>
+            <xs:attribute name="type" type="tns:containerExecutionEnumType" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:element name="link">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" ref="tns:condition"/>
+         </xs:sequence>
+         <xs:attribute name="id" type="xs:NCName" use="required"/>
+         <xs:attribute default="flowLink"
+                       name="type"
+                       type="tns:linkEnumType"
+                       use="optional"/>
+         <xs:attribute name="targetId" type="xs:NCName" use="required"/>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:simpleType name="linkEnumType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="flowLink"/>
+         <xs:enumeration value="containerLink"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <xs:simpleType name="containerExecutionEnumType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="parallel"/>
+         <xs:enumeration value="exclusive"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

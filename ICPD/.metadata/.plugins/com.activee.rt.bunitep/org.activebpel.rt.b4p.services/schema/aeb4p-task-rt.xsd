@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:htd="http://www.example.org/WS-HT"
+           xmlns:tns="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+           xmlns:htdp="http://www.example.org/WS-HT/protocol"
+           xmlns:api="http://www.example.org/WS-HT/api"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd">
+
+   <xs:import namespace="http://www.example.org/WS-HT"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask.xsd"/>
+      
+	  <xs:import namespace="http://www.example.org/WS-HT/api"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api.xsd"/>      
+
+	  <xs:import namespace="http://www.example.org/WS-HT/protocol"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-protocol.xsd"/>      
+
+	  <!--  Schema type for AE custom XSL renderings -->
+	  <xs:element name="xsl">
+		    <xs:complexType>
+			      <xs:sequence>
+			         <xs:element name="presentation-xsl" type="xs:anyURI"/>
+	           <xs:element name="command-xsl" type="xs:anyURI"/>
+       	</xs:sequence>
+         <xs:attribute name="developmentMode" type="xs:boolean"/>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <!--  Schema type for catalog contribution id renderings -->
+	  <xs:element name="contribution">
+		    <xs:complexType>
+			      <xs:simpleContent>
+				        <xs:extension base="xs:string">
+		             <xs:attribute name="id" type="xs:integer" use="required"/>
+		             <xs:attribute name="version" type="xs:string"/>
+				        </xs:extension>            
+			      </xs:simpleContent>      
+		    </xs:complexType>	
+	  </xs:element>
+	
+	  <xs:element name="processVariable" type="tns:tProcessVariable"/>	
+   <xs:complexType mixed="true" name="tProcessVariable">
+      <xs:annotation>
+         <xs:documentation>
+            Container for process variable data.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:any minOccurs="0" processContents="skip"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:NCName" use="required"/>
+      <xs:attribute name="element" type="xs:QName"/>
+      <xs:attribute name="type" type="xs:QName"/>
+      <xs:attribute name="message" type="xs:QName"/>
+   </xs:complexType>
+   
+   <xs:element name="messagePart" type="tns:tMessagePart"/>
+   <xs:complexType name="tMessagePart">
+      <xs:annotation>
+         <xs:documentation>
+            Container for process variable message part.
+         </xs:documentation>
+      </xs:annotation>
+		    <xs:complexContent>
+			      <xs:restriction base="tns:tProcessVariable">
+		          <xs:attribute name="name" type="xs:NCName" use="required"/>
+		          <xs:attribute name="element" type="xs:QName"/>
+		          <xs:attribute name="type" type="xs:QName"/>			
+			      </xs:restriction>
+		    </xs:complexContent>
+   </xs:complexType>   
+
+   <xs:element name="processVariables">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:processVariable"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+	  <xs:element name="part" type="tns:tPart"/>
+   <xs:complexType mixed="true" name="tPart">
+      <xs:annotation>
+         <xs:documentation>
+            The value of a data part for a Task Instance.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:any minOccurs="0" processContents="skip"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:NCName" use="required"/>
+   </xs:complexType>
+   
+    <xs:element name="interfaceMetadata">
+       <xs:complexType>
+          <xs:sequence>
+             <xs:element name="input" type="tns:tPartsMetadata"/>
+             <xs:element minOccurs="0" name="output" type="tns:tPartsMetadata"/>
+             <xs:element minOccurs="0" name="faults">
+                <xs:complexType>
+                   <xs:sequence>
+                      <xs:element maxOccurs="unbounded" name="fault">
+                         <xs:complexType>
+                            <xs:attribute name="name" type="xs:NCName" use="required"/>
+                         </xs:complexType>
+                      </xs:element>
+                   </xs:sequence>
+                </xs:complexType>
+             </xs:element>
+          </xs:sequence>
+       </xs:complexType>
+    </xs:element>
+   <xs:complexType name="tPartsMetadata">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="part">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:any minOccurs="0" processContents="skip"/>
+               </xs:sequence>
+               <xs:attribute name="name" type="xs:NCName" use="required"/>
+               <xs:attribute name="typeHint">
+                  <xs:simpleType>
+                     <xs:annotation>
+                        <xs:documentation>
+                           Hint used to describe the type of data for a part. Useful for our
+                           generic UI only since custom UI's will have direct knowledge of the
+                           task's input, output, and fault data.
+                        </xs:documentation>
+                     </xs:annotation>
+                     <xs:restriction base="xs:string">
+                        <xs:enumeration value="boolean"/>
+                        <xs:enumeration value="number"/>
+                        <xs:enumeration value="string"/>
+                        <xs:enumeration value="date"/>
+                        <xs:enumeration value="complex"/>
+                     </xs:restriction>
+                  </xs:simpleType>
+               </xs:attribute>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:element name="input" type="tns:tRuntimeData"/>
+   <xs:element name="output" nillable="true" type="tns:tRuntimeData"/>
+   <xs:complexType name="tRuntimeData">
+      <xs:annotation>
+         <xs:documentation>
+            Contains the runtime data for the input or output of the
+            task.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:part"/>
+      </xs:sequence>
+   </xs:complexType>
+
+	  <xs:element name="fault" nillable="true" type="tns:tFaultData"/>
+   <xs:complexType mixed="true" name="tFaultData">
+      <xs:annotation>
+         <xs:documentation>
+            Contains fault data.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:any minOccurs="0" processContents="skip"/>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:NCName"/>
+   </xs:complexType>
+
+	  <xs:element name="modified" type="tns:tModified"/>
+   <xs:complexType name="tModified">
+      <xs:annotation>
+         <xs:documentation>
+            Contains content modification meta data such as time and user name.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+		       <xs:element name="modifiedAt" type="xs:dateTime"/>
+		       <xs:element name="modifiedBy" type="htd:tUser"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:element name="attachments">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="api:attachment"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="newAttachmentsList">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="attachmentId"
+                        type="xs:long"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element> 
+
+   <xs:element name="commentId" type="xs:int"/>
+
+   <xs:element name="comments">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="api:comment"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="presentationParamValue"
+               nillable="true"
+               type="tns:tPresentationParamValue"/>   
+   <xs:complexType name="tPresentationParamValue">
+		    <xs:annotation>
+			      <xs:documentation>
+		      Contains evaluated values for presentation parameters.
+		      The element is nil if the evaluated value is null.
+		   	</xs:documentation>
+		    </xs:annotation>		
+		    <xs:simpleContent>
+			      <xs:extension base="xs:string">
+				        <xs:attribute name="name" type="xs:NCName" use="required"/>
+				        <xs:attribute name="type" type="xs:QName" use="required"/>
+			      </xs:extension>     			
+		    </xs:simpleContent>  			
+	  </xs:complexType>
+	
+	  <xs:element name="presentationParamValues">	
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        ref="tns:presentationParamValue"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+   
+   <xs:element name="presentation">
+      <xs:complexType>
+         <xs:annotation>
+            <xs:documentation>
+               Presentation data - The data is derived from the task definition or the 
+               notification definition such as the name, subject or description.
+            </xs:documentation>
+         </xs:annotation>
+         <xs:sequence>
+         	 <!--  instance values of presentation name, subject and description. -->
+             <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="name"
+                        type="htd:tText"/>
+             <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="subject"
+                        type="htd:tText"/>
+             <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="description"
+                        type="htd:tDescription"/>      	       	 
+         	  <!--  
+         			Note ws-ht api and instance documents define types tPresentationName (64 char string)
+         			and tPresentationSubject (254 char string) corresponding to name and subject. 
+         			But tPresentationName and tPresentationSubject do not specify xml:lang attribute.
+         	 -->
+         	 <xs:element maxOccurs="1" minOccurs="0" ref="tns:presentationParamValues"/>
+         </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+	
+   <xs:complexType name="tContextData">
+      <xs:annotation>
+         <xs:documentation>
+				Context data - A set of dynamic properties, such as priority, task state, 
+				time stamps and values for all generic human roles.         
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+    		   <xs:element name="status" type="api:tStatus"/>    		
+    		   <xs:element minOccurs="0" name="priority" type="xs:int"/>
+    		   <xs:element minOccurs="0"
+                     name="taskInitiator"
+                     nillable="true"
+                     type="htd:tUser"/>
+			      <xs:element minOccurs="0"
+                     name="taskStakeholders"
+                     nillable="true"
+                     type="htd:tOrganizationalEntity"/>
+    		   <xs:element minOccurs="0"
+                     name="potentialOwners"
+                     nillable="true"
+                     type="htd:tOrganizationalEntity"/>
+    		   <xs:element minOccurs="0"
+                     name="excludedOwners"
+                     nillable="true"
+                     type="htd:tOrganizationalEntity"/>
+    		   <xs:element minOccurs="0"
+                     name="businessAdministrators"
+                     nillable="true"
+                     type="htd:tOrganizationalEntity"/>
+    		   <xs:element minOccurs="0"
+                     name="recipients"
+                     nillable="true"
+                     type="htd:tOrganizationalEntity"/>
+         <xs:element minOccurs="0" name="delegation" type="htd:tDelegation"/>
+    		   <xs:element minOccurs="0"
+                     name="actualOwner"
+                     nillable="true"
+                     type="htd:tUser"/>
+    		   <xs:element name="createdOn" type="xs:dateTime"/>
+			      <xs:element minOccurs="0" name="createdBy" type="xs:string"/>
+    		   <xs:element minOccurs="0"
+                     name="activationTime"
+                     nillable="true"
+                     type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="expirationTime" type="xs:dateTime"/>
+	        <xs:element minOccurs="0"
+                     name="lastModifiedTime"
+                     nillable="true"
+                     type="xs:dateTime"/>
+	        <xs:element minOccurs="0"
+                     name="lastModifiedBy"
+                     nillable="true"
+                     type="xs:string"/>
+	        <xs:element minOccurs="0"
+                     name="completionTime"
+                     nillable="true"
+                     type="xs:dateTime"/>
+    		   <xs:element minOccurs="0" name="isSkipable" type="xs:boolean"/>   
+    		   <xs:element minOccurs="0"
+                     name="lastEscalatedTime"
+                     nillable="true"
+                     type="xs:dateTime"/>   
+            <xs:element minOccurs="0" name="primarySearchBy" type="xs:string"/>   
+            <xs:element minOccurs="0" name="startByMillis" type="xs:dateTime"/>   
+            <xs:element minOccurs="0" name="completeByMillis" type="xs:dateTime"/>   
+      </xs:sequence>
+	  </xs:complexType>	
+
+   <xs:complexType name="tOperationalData">
+      <xs:annotation>
+         <xs:documentation>
+				Operational data - The data includes the input message, output message, attachments
+				and comments.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+           <xs:element ref="tns:input"/>
+           <xs:element ref="tns:output"/>
+           <xs:element minOccurs="0" ref="tns:fault"/>
+           <xs:element minOccurs="0" ref="tns:comments"/>
+           <xs:element minOccurs="0" ref="tns:attachments"/>  
+      </xs:sequence>
+	  </xs:complexType>
+   
+   <xs:element name="identifier" type="tns:tIdentifier"/>
+   <xs:simpleType name="tIdentifier">
+      <xs:restriction base="xs:anyURI"/>
+   </xs:simpleType>	
+
+	  <xs:element name="taskInstance" type="tns:tTaskInstance"/>   
+	  <xs:complexType name="tTaskInstance">
+	     <xs:annotation>
+	        <xs:documentation>
+	         Models task instance data.
+	      </xs:documentation>
+	     </xs:annotation>
+	     <xs:sequence>         
+	        <xs:element ref="tns:identifier"/>
+	        <xs:element name="name" type="xs:string"/>
+	        <xs:element name="targetNamespace" type="xs:string"/>
+	        <xs:element name="taskType" type="xs:string"/>
+	        <xs:element ref="tns:presentation"/>
+	        <xs:element name="context" type="tns:tContextData"/>
+	        <xs:element name="operational" type="tns:tOperationalData"/>
+         <xs:element minOccurs="0" name="processVersion" type="xs:string"/>
+         <xs:element minOccurs="0" ref="tns:peopleActivityData"/>
+	        <xs:element minOccurs="0" ref="tns:permissions"/>
+	        <xs:element minOccurs="0" ref="tns:interfaceMetadata"/>
+	        <xs:element minOccurs="0" ref="tns:renderings"/>                  
+	     </xs:sequence>
+	  </xs:complexType>
+	
+	  <xs:element name="renderings" type="htd:tRenderings"/>
+	
+   <xs:complexType name="tPermission"/>
+	
+   <xs:element name="permissions">
+      <xs:complexType>
+         <xs:all>
+            <xs:element minOccurs="0" name="claim" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="start" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="stop" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="release" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="suspend" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="suspendUntil" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="resume" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="complete" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="remove" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="fail" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="setPriority" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="addAttachment" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getAttachmentInfos" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getAttachments" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="deleteAttachments" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="addComment" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getComments" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="skip" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="forward" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="delegate" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getRendering" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getRenderingTypes" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getTaskInfo" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getTaskDescription" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="setOutput" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="deleteOutput" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="setFault" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="deleteFault" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getInput" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getOutput" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="getFault" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="activate" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="nominate" type="tns:tPermission"/>
+            <xs:element minOccurs="0" name="setGenericHumanRole" type="tns:tPermission"/>
+         </xs:all>
+         <xs:attribute name="isOwner" type="xs:boolean"/>	
+         <xs:attribute name="isBusinessAdministrator" type="xs:boolean"/>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:element name="initialState">
+   	  <xs:complexType>
+   		    <xs:annotation>
+   			      <xs:documentation>
+   				Contains task initial creation data overrides.
+   			</xs:documentation>
+   		    </xs:annotation>
+   		    <xs:sequence>
+   			      <xs:element ref="tns:input"/>
+   			      <xs:element name="createdBy" type="xs:string"/>
+   			      <xs:element minOccurs="0" name="startBy" type="xs:dateTime"/>
+   			      <xs:element minOccurs="0" name="completeBy" type="xs:dateTime"/>
+   			      <xs:element minOccurs="0" ref="htdp:humanTaskContext"/>
+   			      <xs:element minOccurs="0" ref="tns:comments"/>
+   			      <xs:element minOccurs="0" ref="tns:processVariables"/>
+   			      <xs:element minOccurs="0" ref="htd:logicalPeopleGroups"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+   <xs:element name="peopleActivityData">
+   	  <xs:complexType>
+   		    <xs:sequence>
+   			      <xs:element name="processId" type="xs:long"/>
+   			      <xs:element name="locationPath" type="xs:string"/>
+   			      <xs:element name="locationId" type="xs:int"/>
+         	  <xs:element minOccurs="0" name="peopleActivityExecCtr" type="xs:int"/>
+         	  <xs:element minOccurs="0" name="peopleActivityPlanId" type="xs:int"/>
+         	  <xs:element minOccurs="0" name="taskLocationId" type="xs:int"/>
+            <xs:element minOccurs="0" name="tenantContextId" type="xs:string"/>
+   		    </xs:sequence>
+   	  </xs:complexType>
+   </xs:element>
+   
+</xs:schema>

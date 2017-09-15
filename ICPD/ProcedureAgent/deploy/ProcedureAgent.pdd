@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pdd:process xmlns:bpelns="http://spRunEnd_Cloud" xmlns:pdd="http://schemas.active-endpoints.com/pdd/2006/08/pdd.xsd" location="bpel/spRunEnd_Cloud/bpel/spRunEnd_Cloud.bpel" name="bpelns:spRunEnd_Cloud" platform="enterprise">
+  <pdd:partnerLinks>
+    <pdd:partnerLink name="Process_Consumer">
+      <pdd:myRole allowedRoles="" binding="MSG" service="spRunEnd_Cloud"/>
+    </pdd:partnerLink>
+    <pdd:partnerLink name="Provider">
+      <pdd:partnerRole endpointReference="dynamic" invokeHandler="system:JNDI/OracleJDBC"/>
+    </pdd:partnerLink>
+  </pdd:partnerLinks>
+  <pdd:references>
+    <pdd:wsdl location="project:/spRunEnd_Cloud/wsdl/spRunEnd_Cloud.wsdl" namespace="http://www.example.org/spRunEnd_Cloud/"/>
+    <pdd:wsdl location="project:/com.activevos.socrates.repository.services/wsdl/avosAutomatedStep.wsdl" namespace="http://schemas.active-endpoints.com/wsdl/screenFlow/2010/10/avosAutomatedStep.wsdl"/>
+    <pdd:wsdl location="project:/spRunEnd_Cloud/wsdl/bpel/spRunEnd_Cloud.public.wsdl" namespace="http://spRunEnd_Cloud/sprunendcloud/public"/>
+  </pdd:references>
+</pdd:process>

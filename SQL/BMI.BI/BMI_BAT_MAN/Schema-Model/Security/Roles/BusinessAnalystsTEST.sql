@@ -1,0 +1,4 @@
+CREATE ROLE [BusinessAnalystsTEST]
+AUTHORIZATION [dbo]
+GO
+GRANT VIEW DEFINITION TO [BusinessAnalystsTEST]

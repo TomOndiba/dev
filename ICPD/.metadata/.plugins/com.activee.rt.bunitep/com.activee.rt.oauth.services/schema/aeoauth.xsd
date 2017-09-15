@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.activebpel.org/REST/2011/08/01/aeoauth.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.activebpel.org/REST/2011/08/01/aeoauth.xsd">
+
+	  <xs:complexType name="AesOAuthBaseRequestType">
+	    <xs:sequence>
+			      <xs:element maxOccurs="1" minOccurs="1" name="user" type="xs:string"/>
+		    </xs:sequence>
+	  </xs:complexType>
+	
+	  <xs:complexType name="pairType">
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="value" type="xs:string"/>
+    </xs:complexType>
+	
+	  <xs:complexType name="headersType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="header"
+                     type="tns:pairType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	  <xs:complexType name="AesOAuthToken">
+		    <xs:sequence>
+			      <xs:element maxOccurs="1" minOccurs="1" name="token" type="xs:string"/>
+			      <xs:element maxOccurs="1" minOccurs="1" name="secret" type="xs:string"/>
+			      <xs:element maxOccurs="1" minOccurs="1" name="rawResponse" type="xs:string"/>
+		    </xs:sequence>
+	  </xs:complexType>
+
+	  <xs:complexType name="AesOAuthFault">
+		    <xs:sequence>
+			      <xs:element maxOccurs="1" minOccurs="1" name="errorCode" type="xs:int"/>
+			      <xs:element maxOccurs="1" minOccurs="1" name="message" type="xs:string"/>
+			      <xs:element maxOccurs="1"
+                     minOccurs="1"
+                     name="messageDetails"
+                     type="xs:string"/>
+		    </xs:sequence>
+	  </xs:complexType>
+
+	  <xs:element name="getAuthorizationUrlRequest" type="tns:AesOAuthBaseRequestType"/>
+
+	  <xs:element name="getAuthorizationUrlResponse">
+		    <xs:complexType>
+			      <xs:sequence>
+				        <xs:element maxOccurs="1" minOccurs="1" name="authUrl" type="xs:string"/>
+			      </xs:sequence>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="authorizeRequest">
+		    <xs:complexType>
+			      <xs:complexContent>
+				        <xs:extension base="tns:AesOAuthBaseRequestType">
+					          <xs:sequence>
+						            <xs:element maxOccurs="1"
+                              minOccurs="1"
+                              name="verifierString"
+                              type="xs:string"/>
+					          </xs:sequence>
+				        </xs:extension>
+			      </xs:complexContent>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="authorizeResponse" type="tns:AesOAuthToken"/>
+
+	  <xs:element name="getAccessTokenRequest" type="tns:AesOAuthBaseRequestType"/>
+	  <xs:element name="getAccessTokenResponse" type="tns:AesOAuthToken"/>
+	  <xs:element name="getAccessTokenFault" type="tns:AesOAuthFault"/>
+
+	  <xs:element name="sendRequestRequest">
+		    <xs:complexType>
+			      <xs:complexContent>
+				        <xs:extension base="tns:AesOAuthBaseRequestType">
+					          <xs:sequence>
+						            <xs:element maxOccurs="1" minOccurs="1" name="url" type="xs:string"/>
+						            <xs:element minOccurs="0" name="headers" type="tns:headersType"/>
+					          </xs:sequence>
+				        </xs:extension>
+			      </xs:complexContent>
+		    </xs:complexType>
+	  </xs:element>
+
+	  <xs:element name="sendRequestResponse" type="xs:string"/>
+	  <xs:element name="sendRequestFault" type="tns:AesOAuthFault"/>
+
+	  <xs:element name="getAuthorizationUrlFault" type="tns:AesOAuthFault"/>
+	  <xs:element name="authorizeFault" type="tns:AesOAuthFault"/>
+
+</xs:schema>

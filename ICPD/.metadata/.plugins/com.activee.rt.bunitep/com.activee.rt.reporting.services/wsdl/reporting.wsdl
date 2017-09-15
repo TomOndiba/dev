@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+                  xmlns:ael="http://schemas.active-endpoints.com/reporting/2009/05/reporting.xsd"
+                  xmlns:tns="http://docs.active-endpoints/wsdl/reporting/2009/05/reporting.wsdl"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:reporting="http://docs.active-endpoints/wsdl/reporting/2009/05/reporting.wsdl"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://docs.active-endpoints/wsdl/reporting/2009/05/reporting.wsdl">
+                  
+   <plnk:partnerLinkType name="reportingPLT">
+      <plnk:role name="report">
+         <plnk:portType name="tns:reportingPT"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+   
+  <wsdl:types>
+      <xs:schema elementFormDefault="qualified"
+                 targetNamespace="http://docs.active-endpoints/wsdl/reporting/2009/05/reporting.wsdl">
+
+         <xs:import namespace="http://schemas.active-endpoints.com/reporting/2009/05/reporting.xsd"
+                    schemaLocation="../schema/reporting.xsd"/>
+
+      </xs:schema>
+  </wsdl:types>
+
+	  <wsdl:message name="reportMessageInput">
+		    <wsdl:part element="ael:reportMessageInput" name="reportInputPart"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="reportMessageOutput">
+		    <wsdl:part element="ael:reportMessageOutput" name="reportOutputPart"/>
+	  </wsdl:message>
+
+	  <wsdl:message name="reportFault">
+		    <wsdl:part element="ael:reportFault" name="reportFaultPart"/>
+	  </wsdl:message>
+
+	  <wsdl:portType name="reportingPT">
+		    <wsdl:operation name="report">
+			      <wsdl:input message="tns:reportMessageInput"/>
+         <wsdl:output message="tns:reportMessageOutput"/>
+         <wsdl:fault message="tns:reportFault" name="reportFault"/>
+		    </wsdl:operation>
+	  </wsdl:portType>
+
+</wsdl:definitions>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://docs.active-endpoints/wsdl/migration/2011/04/migration.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://docs.active-endpoints/wsdl/migration/2011/04/migration.xsd">
+    
+   <xs:complexType name="AesCreateMapRequestType">
+      <xs:annotation>
+         <xs:documentation>
+            create map request message
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="1" minOccurs="1" name="fromPlanId" type="xs:int"/>
+	        <xs:element maxOccurs="1" minOccurs="0" name="toPlanId" type="xs:int"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="AesCreateMapResponseType">
+      <xs:annotation>
+         <xs:documentation>
+            create map response message
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="1"
+                     minOccurs="1"
+                     name="migrationMap"
+                     type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <xs:complexType name="AesCreateMapFaultType">
+      <xs:annotation>
+         <xs:documentation>
+            migration map faults
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="message" type="xs:string"/>
+          <xs:element maxOccurs="1"
+                     minOccurs="1"
+                     name="messageDetails"
+                     type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="AesMigrateRequestType">
+      <xs:annotation>
+         <xs:documentation>
+            migrate request type
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="1"
+                     minOccurs="1"
+                     name="migrationMap"
+                     type="xs:string"/>
+         <xs:element maxOccurs="1" minOccurs="1" name="pid" type="xs:long"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="toPlanId" type="xs:int"/>
+         <xs:element maxOccurs="1"
+                     minOccurs="0"
+                     name="createBackup"
+                     type="xs:boolean"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="AesMigrateResponseType">
+      <xs:annotation>
+         <xs:documentation>
+            migrate request type
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="response"
+                     type="xs:string"/>
+         <xs:element maxOccurs="1" minOccurs="0" name="backupPid" type="xs:long"/>
+      </xs:sequence>
+   </xs:complexType>
+
+   <xs:complexType name="AesMigrateFaultType">
+      <xs:annotation>
+         <xs:documentation>
+            migration faults
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="message" type="xs:string"/>
+          <xs:element maxOccurs="1"
+                     minOccurs="1"
+                     name="messageDetails"
+                     type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+    
+   <!-- =================================================== -->
+   <!-- The definition (uses the above declared types).     -->
+   <!-- =================================================== -->
+   
+   <xs:element name="createMapRequest" type="tns:AesCreateMapRequestType"/>
+   <xs:element name="createMapResponse" type="tns:AesCreateMapResponseType"/>
+   <xs:element name="createMapFault" type="tns:AesCreateMapFaultType"/>
+    
+   <xs:element name="migrateRequest" type="tns:AesMigrateRequestType"/>
+   <xs:element name="migrateResponse" type="tns:AesMigrateResponseType"/>
+   <xs:element name="migrateFault" type="tns:AesMigrateFaultType"/>
+    
+</xs:schema>

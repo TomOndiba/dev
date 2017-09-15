@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd"
+           xmlns:common="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+           xmlns:core="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/06/avosHostEnvironment.xsd">
+
+    <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+              schemaLocation="avosCommon.xsd"/>
+    <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+              schemaLocation="model/core/core.xsd"/>
+    
+    <!-- top level element for a description of an entity -->
+    <xs:element name="entity" type="tns:TAbstractHostEntity">
+    	<xs:annotation>
+    		   <xs:documentation>
+    			Top level element for a description of an entity.
+    			
+    			This element is Deprecated. See schema with namespace:
+    				http://schemas.active-endpoints.com/appmodules/screenflow/2012/09/avosObjectDiscovery.xsd
+    		</xs:documentation>
+    	</xs:annotation>
+    </xs:element>
+    
+    <!-- top level element for the list of entities -->
+    <xs:element name="entityList" type="tns:TEntityAbstractList">
+		    <xs:annotation>
+    		   <xs:documentation>
+    			Top level element for the list of entities.
+    			
+    			This element is Deprecated. See schema with namespace:
+    				http://schemas.active-endpoints.com/appmodules/screenflow/2012/09/avosObjectDiscovery.xsd
+    		</xs:documentation>
+    	</xs:annotation>
+    </xs:element>
+        
+	  <!-- Describes a list of entity abstracts for the host environment -->
+    <xs:complexType name="TEntityAbstractList">
+    	<xs:annotation>
+    		   <xs:documentation>
+    			Describes a list of entity abstracts for the host environment.
+    			
+    			This type is Deprecated. See schema with namespace:
+    				http://schemas.active-endpoints.com/appmodules/screenflow/2012/09/avosObjectDiscovery.xsd
+    		</xs:documentation>
+    	</xs:annotation>
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:entity"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- supported languages -->
+    <xs:element name="langList" type="tns:langs"/>
+    <xs:complexType name="langs">
+    	<xs:sequence>
+    		   <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="lang"
+                     type="xs:language"/>
+    	</xs:sequence>
+    	<xs:attribute name="default" type="xs:language" use="optional"/>
+    </xs:complexType>
+        
+    <!-- top level element for the details of an entity and process object -->
+	  <xs:element name="entityDetail" type="tns:TEntityDetail"/>
+	  <xs:element name="processObject" type="tns:TEntityDetail"/>
+	
+	  <!-- This element is used to store list of object picklist translation in one file -->
+    <xs:element name="entityDetailTranslations" type="tns:EntityDetailTranslationsType"/>
+    <xs:complexType name="EntityDetailTranslationsType">
+       <xs:sequence>
+           <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     ref="tns:entityDetailTranslation"/>
+       </xs:sequence>
+       <!-- code of the default language -->
+       <xs:attribute name="default" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+    <xs:element name="entityDetailTranslation" type="tns:EntityDetailTranslationType"/>
+    <xs:complexType name="EntityDetailTranslationType">
+        <xs:sequence>
+            <xs:element ref="tns:entityDetail"/>
+        </xs:sequence>
+        <xs:attribute name="lang" type="xs:string" use="required"/>
+    </xs:complexType>
+	
+	  <xs:complexType name="TAbstractHostEntity">
+   		<xs:complexContent>
+   		    <xs:extension base="common:entityAbstractType">
+   			      <xs:sequence>
+				           <xs:element minOccurs="0" name="description" type="xs:string"/>
+				           <xs:element minOccurs="0" name="tags" type="xs:string"/>
+			         </xs:sequence>
+   		    </xs:extension>
+   		</xs:complexContent>
+   	</xs:complexType>
+
+	  <!-- Describes an overview of entity in the host environment -->
+	  <xs:complexType name="TEntityDetail">
+		    <xs:complexContent>
+		       <xs:extension base="tns:TAbstractHostEntity">
+	           <xs:sequence>
+	              <xs:element minOccurs="1" name="detail">
+	                <xs:complexType>
+	                    <xs:sequence>
+	                        <xs:element maxOccurs="unbounded"
+                                    minOccurs="0"
+                                    name="childRelationship"
+                                    type="tns:TChildRelationship"/>
+	                        <xs:element maxOccurs="unbounded"
+                                    minOccurs="0"
+                                    name="field"
+                                    type="tns:TField"/>
+	                    </xs:sequence>
+	                </xs:complexType>
+	              </xs:element>
+	           </xs:sequence>
+		       </xs:extension>
+		    </xs:complexContent>
+	  </xs:complexType>
+	
+	  <!-- List of entity details -->
+	  <xs:complexType name="TEntityDetailList">
+		    <xs:sequence>
+			      <xs:element maxOccurs="unbounded"
+                     minOccurs="0"
+                     name="entity"
+                     type="tns:TEntityDetail"/>
+		    </xs:sequence>
+      <xs:attribute name="total" type="xs:integer" use="optional"/>
+	  </xs:complexType>
+
+	  <!-- Describes the detailed information of an entity in the host environment -->
+
+	  <!-- Describes a field in an entity of the host environment -->
+	  <xs:complexType name="TField">
+		    <xs:sequence>
+			      <xs:element minOccurs="0" name="description" type="xs:string"/>
+			      <xs:element minOccurs="0" name="options">
+				        <xs:complexType>
+					          <xs:sequence>
+						            <xs:element maxOccurs="unbounded"
+                              minOccurs="0"
+                              name="option"
+                              type="common:optionType"/>
+					          </xs:sequence>
+				        </xs:complexType>
+			      </xs:element>
+		    </xs:sequence>
+		    <xs:attribute name="name" type="xs:NCName" use="required"/>
+		    <xs:attribute name="label" type="xs:string" use="optional"/>
+		    <xs:attribute name="type" type="xs:string" use="optional"/>
+		    <xs:attribute default="false"
+                    name="readonly"
+                    type="xs:boolean"
+                    use="optional"/>
+		    <xs:attribute default="false"
+                    name="required"
+                    type="xs:boolean"
+                    use="optional"/>
+		    <!-- Only one field should have @useForDisplay="true". That field will be shown to users instead of IDs -->
+		    <xs:attribute default="false"
+                    name="useForDisplay"
+                    type="xs:boolean"
+                    use="optional"/>
+		    <xs:attribute default="true"
+                    name="createable"
+                    type="xs:boolean"
+                    use="optional">
+		</xs:attribute>
+		    <xs:attribute default="false"
+                    name="defaultedOnCreate"
+                    type="xs:boolean"
+                    use="optional">
+		</xs:attribute>
+		    <xs:attribute default="true"
+                    name="queryable"
+                    type="xs:boolean"
+                    use="optional">
+		</xs:attribute>
+      <xs:attribute default="false" name="isKey" type="xs:boolean" use="optional"/>
+      <xs:attribute name="nativeType" type="xs:string" use="optional"/>
+      <!-- Allow host providers to include any other meta-data on the field. -->
+		    <xs:anyAttribute namespace="##other" processContents="lax"/>
+	  </xs:complexType>
+
+	  <!-- Describes a child relationship in an entity of the host environment -->
+	  <xs:complexType name="TChildRelationship">
+      <xs:attribute name="childSObject" type="xs:string" use="required"/>
+      <xs:attribute name="field" type="xs:string" use="required"/>
+      <xs:attribute name="relationshipName" type="xs:string" use="required"/>
+	  </xs:complexType>
+
+   <!-- ....................................................................................... -->
+   <!-- The following types define the operations for Create, Read, Update and Delete and Query -->
+   <!-- ....................................................................................... -->
+
+   <xs:complexType abstract="true" name="TBaseHostMessage">
+      <xs:attribute name="objectType" type="xs:string" use="required"/>
+      <xs:attribute name="name" type="xs:string"/>
+   </xs:complexType>
+
+   <xs:complexType name="TCreate">
+      <xs:annotation>
+         <xs:documentation>
+            Describes an entity create operation. A Create type specifies the type of Object to create
+            plus the values for the fields in the Object.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:sequence>
+               <!-- the field values to apply on the create -->
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="1"
+                           name="fieldValue"
+                           type="common:nameValueType"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="TCreateOutput">
+      <xs:annotation>
+         <xs:documentation>
+            This type defines the object id and type of the newly
+            created Object.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:attribute name="id" type="xs:string"/>
+            <xs:attribute name="displayName" type="xs:string"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="TRead">
+      <xs:annotation>
+         <xs:documentation>
+            Describes an entity read operation. The id element is the unique identifier for the
+            Object to be read, and optionally the unbounded field element will define any fields
+            that should be read and returned. The name of the object to be read is defined as a
+            required attribute.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:sequence>
+               <!-- the id which identifies the object to read -->
+               <xs:element minOccurs="1" name="id" type="xs:string"/>
+               <!-- the list of fields to read -->
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="field"
+                           type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="TReadOutput">
+      <xs:annotation>
+         <xs:documentation>
+            Describes an entity read operation output.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:sequence>
+               <!-- the field values to apply on the create -->
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="fieldValue">
+                  <xs:complexType>
+                     <xs:complexContent>
+                        <xs:extension base="common:nameValueType">
+                           <xs:attribute name="displayName" type="xs:boolean"/>
+                        </xs:extension>
+                     </xs:complexContent>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="TUpdate">
+      <xs:annotation>
+         <xs:documentation>
+            Describes an entity update operation.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:sequence>
+               <!-- the id which identifies the object to read -->
+               <xs:element minOccurs="1" name="id" type="xs:string"/>
+               <!-- the field values to update -->
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="1"
+                           name="fieldValue"
+                           type="common:nameValueType"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+	
+	  <!-- Describes an entity delete operation -->
+   <xs:complexType name="TDelete">
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:sequence>
+               <!-- the id which identifies the object to delete -->
+               <xs:element minOccurs="1" name="id" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="TQuery">
+      <xs:annotation>
+         <xs:documentation>
+            Describes a query request type. The objectType attribute specifies the entity type
+            to serve as the base object to query. For example, in a SQL database, the objectType
+            attribute would become part of the FROM, i.e 'select * FROM objectType'.
+
+            The field element specifies which fields are to be read from the Object, by default
+            the ObjectId and the ObjectName are always read. The ObjectName is the fieldForDisplay
+            and if not set on the Object then it won't be returned.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:sequence>
+               <!-- the list of fields to read -->
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="field"
+                           type="xs:string"/>
+               <xs:choice minOccurs="0">
+                  <xs:element name="where">
+                     <xs:complexType mixed="true">
+                        <xs:sequence>
+                           <xs:any minOccurs="0" namespace="##any" processContents="lax"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" name="id" type="xs:string"/>
+                  <xs:element name="name">
+                     <xs:complexType>
+                        <xs:simpleContent>
+                           <xs:extension base="xs:string">
+                              <xs:attribute default="false" name="exactMatch" type="xs:boolean"/>
+                           </xs:extension>
+                        </xs:simpleContent>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="limit" type="xs:int"/>
+            <xs:attribute name="asCopy" type="xs:boolean"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:complexType name="TQueryOutput">
+      <xs:annotation>
+         <xs:documentation>
+            Describes the output of a query.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="tns:TBaseHostMessage">
+            <xs:choice>
+               <xs:element maxOccurs="unbounded"
+                           minOccurs="0"
+                           name="entry"
+                           type="tns:TQueryOutputEntry"/>
+               <xs:any maxOccurs="unbounded"
+                       minOccurs="0"
+                       namespace="##local"
+                       processContents="skip"/>
+            </xs:choice>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+    <xs:complexType name="TQueryOutputEntry">
+      <xs:annotation>
+         <xs:documentation>
+            Describes a query result entry for a single object
+         </xs:documentation>
+      </xs:annotation>
+        <xs:sequence>
+            <!-- the field values to apply on the create -->
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="fieldValue">
+            	<xs:complexType>
+            		<xs:complexContent>
+            			   <xs:extension base="common:nameValueType">
+            				     <xs:attribute name="displayName" type="xs:boolean"/>
+            			   </xs:extension>
+            		</xs:complexContent>
+            	</xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <!-- the id of the object that was read -->
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd"
+           xmlns:common="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/appmodules/screenflow/2010/10/avosScreenflow.xsd">
+
+   <xs:include schemaLocation="model/core/core.xsd"/>
+   <xs:import namespace="http://schemas.active-endpoints.com/appmodules/screenflow/2011/07/avosCommon.xsd"
+              schemaLocation="avosCommon.xsd"/>
+
+   <!-- The screenflow model contains the hierarchical information associated with a screenflow model. -->
+   <!-- Models contain a set of steps. The two most common steps screens and services which have -->
+   <!-- unique ids and contain references to the child models in the hierarchy. Additionally the -->
+   <!-- the jumpTo step can be used to jump to arbitrary points in the hierarchy. -->
+
+   <!-- Main screenflow element. -->
+   <xs:element name="avosScreenflow">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:abstractProcessType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:visibility"/>
+                  <!-- this element is used to store translations of the guide name (default translation is stored in the name attribute for compatibility with old guides) -->
+                  <xs:element minOccurs="0" ref="tns:nameTranslations"/>
+                  <!-- guide can have translations of its description -->
+                  <xs:element maxOccurs="unbounded"
+                              minOccurs="0"
+                              name="description"
+                              type="tns:GuideDescriptionType"/>
+                  <xs:element minOccurs="0" ref="tns:appliesTo"/>
+                  <xs:element minOccurs="0" ref="tns:tags"/>
+                  <xs:element minOccurs="0" ref="tns:generator"/>
+                  <!-- time to live has been deprecated, but left for old guide documents. -->
+                  <xs:element minOccurs="0" ref="tns:timeToLive"/>
+                  <xs:element minOccurs="0" ref="tns:input"/>
+                  <xs:element minOccurs="0" ref="tns:output"/>
+                  <xs:element minOccurs="0" ref="tns:tempFields"/>
+                  <xs:element minOccurs="0" ref="tns:possibleOutcomes"/>
+                  <!-- viewerTemplate is deprecated as of 3.2 -->
+                  <xs:element minOccurs="0" ref="tns:viewerTemplate"/>
+                  <xs:element minOccurs="0" ref="tns:runOn"/>
+                  <xs:element minOccurs="0" ref="tns:notes"/>
+                  <xs:element minOccurs="0" ref="tns:deployment"/>
+                  <xs:element minOccurs="0" ref="tns:sendFeedback"/>
+				              <xs:element maxOccurs="1" minOccurs="0" ref="tns:languages"/>
+                  <xs:element minOccurs="0" ref="tns:flow"/>
+               </xs:sequence>
+               <xs:attribute name="path" type="xs:string" use="optional"/>
+               <xs:attribute name="allowRestart" type="xs:boolean" use="optional"/>
+               <xs:attribute name="doneOnEndStep" type="xs:boolean" use="optional"/>
+               <xs:attribute name="publishDate" type="xs:dateTime" use="optional"/>
+               <xs:attribute default="true" name="guideEventing" type="xs:boolean"/>
+               <xs:attribute name="disableScreenRollback" type="xs:boolean"/>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="label" type="xs:string"/>
+   <!-- number of days a flow will exist before exiting -->
+   <xs:element name="timeToLive" type="xs:int"/>
+   <xs:element name="viewerTemplate" type="xs:string"/>
+   
+   <!-- translated guide names -->
+   <xs:element name="nameTranslations">
+	     <xs:complexType>
+	       <xs:sequence>
+	           <xs:element maxOccurs="unbounded" minOccurs="0" name="name">
+	               <xs:complexType>
+			               <xs:simpleContent>
+			                  <xs:extension base="tns:processNameType">
+			                    <xs:attribute name="lang" type="common:language" use="required"/>
+			                  </xs:extension>
+			               </xs:simpleContent>
+			            </xs:complexType>
+	           </xs:element>
+	       </xs:sequence>
+	     </xs:complexType>
+   </xs:element>
+   
+   <!-- guide description with optional lang attribute that is used to store translations -->
+   <xs:complexType name="GuideDescriptionType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="lang" type="common:language" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+   </xs:complexType>   
+   
+   <!-- Field for requirement #14824 - Send Feedback button -->
+   <xs:element name="sendFeedback">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="emailTo" type="xs:string"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+   <!-- list of supported languages -->
+   <xs:element name="languages">
+       <xs:complexType>
+          <xs:sequence maxOccurs="unbounded" minOccurs="0">
+              <xs:element name="language" type="common:language"/>
+          </xs:sequence>
+       </xs:complexType>
+   </xs:element>
+
+   <xs:element name="runOn">
+      <xs:complexType>
+         <xs:attribute default="desktop"
+                       name="target"
+                       type="tns:runOnTarget"
+                       use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <!-- run-on target devices -->
+   <xs:simpleType name="runOnTarget">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="desktop"/>
+         <xs:enumeration value="mobile"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- Describes the visibility of a screenflow -->
+   <xs:element name="visibility">
+      <xs:complexType>
+         <xs:attribute name="privateEntry" type="xs:boolean" use="optional"/>
+         <xs:attribute name="roleList" type="xs:string" use="optional"/>
+         <xs:attribute name="dataExpression" type="xs:string" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- main flow -->
+   <xs:element name="flow">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+               <xs:element ref="tns:startScreen"/>
+               <xs:element ref="tns:screen"/>
+               <xs:element ref="tns:endScreen"/>
+               <xs:element ref="tns:milestone"/>
+               <xs:element ref="tns:empty"/>
+               <xs:element ref="tns:service"/>
+               <xs:element ref="tns:jumpTo"/>
+               <xs:element ref="tns:create"/>
+               <xs:element ref="tns:subflow"/>
+               <xs:element ref="tns:callProcess"/>
+               <xs:element ref="tns:dataDecision"/>
+               <xs:element ref="tns:assignment"/>
+            </xs:choice>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- Elements common to all flow steps with a screen -->
+   <xs:group name="screenStepGroup">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:body"/>
+         <xs:element minOccurs="0" ref="tns:actionPrompt"/>
+         <xs:element minOccurs="0" ref="tns:actions"/>
+         <xs:element minOccurs="0" ref="tns:screenData"/>
+      </xs:sequence>
+   </xs:group>
+   
+   <!-- Attributes common to all flow steps with a screen -->
+   <xs:complexType name="screenStepType">
+      <xs:complexContent>
+         <xs:extension base="tns:titledStepType">
+            <xs:sequence>
+               <xs:group ref="tns:screenStepGroup"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+
+   <!-- Step types -->
+
+   <!-- jumpTo step allows jumping to arbitrary point in hierarchy. -->
+   <xs:element name="jumpTo">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:jumpStepType">
+               <!-- Jump to steps have one action which is the unconditional target of the jump -->
+               <xs:sequence>
+                  <xs:element maxOccurs="1" minOccurs="1" ref="tns:actions"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- Gateway types can be set for empty steps -->
+   <xs:simpleType name="gatewayType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="exclusive"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+   <!-- empty is an editing construct to allow place holder steps for incomplete work. -->
+   <xs:element name="empty">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:emptyStepType">
+               <!-- Empty steps may have one (optional) action linking to the next screen -->
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:actions"/>
+               </xs:sequence>
+               <xs:attribute name="gatewayType" type="tns:gatewayType">
+                  <xs:annotation>
+                     <xs:documentation>
+                        Gateway type is used when this empty step is acting as a gateway.
+                        For example, exclusive gateway type can be used to represent the merging gateway of screen steps.
+                     </xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- References to fields variables used on a screen. This is used at both design and runtime, at runtime the value field is utilized. -->
+   <xs:element name="screenData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="screenDataItem">
+               <xs:complexType>
+                  <xs:sequence>
+                     <!-- These are all options including ones defaulted from the type rendering info. -->
+                     <xs:element minOccurs="0" ref="tns:options"/>
+                     <!-- At runtime this value is filled in with the actual data to be displayed by the screen or filled in by the user when sent from the screen -->
+                     <xs:element maxOccurs="1" minOccurs="0" name="value" type="xs:anyType"/>
+                  </xs:sequence>
+                  <!-- This name is a qualified reference to the input.parameterName, output.fieldName or if it doesn't start with input. or output. it is this. (which is context, but this. isn't needed). -->
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute default="string" name="type" type="xs:string" use="optional"/>
+                  <xs:attribute default="false"
+                                name="required"
+                                type="xs:boolean"
+                                use="optional"/>
+                  <xs:attribute default="false"
+                                name="readonly"
+                                type="xs:boolean"
+                                use="optional"/>
+                  <xs:attribute name="renderingType" type="xs:string" use="optional">
+                     <xs:annotation>
+                        <xs:documentation>If not specified, rendering type is the same as type.</xs:documentation>
+                     </xs:annotation>
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+         <xs:attribute default="false"
+                       name="skipIfRequiredFilled"
+                       type="xs:boolean"
+                       use="optional"/>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- screen is a step which displays a question to the user. -->
+   <xs:element name="screen">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:titledStepType">
+               <xs:sequence>
+                  <xs:group ref="tns:screenStepGroup"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- startScreen connotes the start of a screenflow. -->
+   <xs:element name="startScreen">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:startStepType">
+               <xs:sequence>
+                  <xs:group ref="tns:screenStepGroup"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- milestone connotes a stop point within a screenflow. -->
+   <xs:complexType name="milestoneType">
+      <xs:complexContent>
+         <xs:extension base="tns:milestoneStepType">
+            <xs:sequence>
+               <xs:group ref="tns:screenStepGroup"/>
+               <xs:element minOccurs="0" ref="tns:redirectTo"/>
+            </xs:sequence>
+            <xs:attribute name="allowHistory" type="xs:boolean" use="optional"/>
+            <xs:attribute name="dontShowScreen" type="xs:boolean" use="optional"/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="milestone" type="tns:milestoneType"/>
+
+   <!-- create is used to create a new entity. -->
+   <xs:element name="create">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:abstractCreateStepType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:skipOption"/>
+                  <xs:element minOccurs="0" name="createInput" type="tns:serviceInputType"/>
+                  <xs:element minOccurs="0" ref="tns:screen"/>
+                  <xs:element minOccurs="0" ref="tns:actions"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- assignment is used to set data for fields. -->
+   <xs:element name="assignment">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:assignmentStepType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" ref="tns:screen"/>
+                  <xs:element minOccurs="0" ref="tns:actions"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- endScreen is a special milestone that connotes the end of a screenflow with possible outcomes. -->
+   <xs:element name="endScreen">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:milestoneType">
+               <xs:sequence>
+                  <xs:element minOccurs="0"
+                              name="screenActionLabel"
+                              type="tns:screenActionLabelType"/>
+               </xs:sequence>
+               <xs:attribute name="outcomeId" type="xs:NCName" use="optional"/>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   
+    <xs:complexType mixed="true" name="screenActionLabelType">
+        <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="text" type="common:text"/>
+        </xs:sequence>
+    </xs:complexType>
+
+   <!-- service is a step which calls an automated service. -->
+   <xs:element name="service">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:abstractServiceStepType">
+               <xs:sequence>
+                        <xs:element minOccurs="0" ref="tns:skipOption"/>
+                        <xs:element minOccurs="0" ref="tns:serviceInput"/>
+                  <xs:element minOccurs="0" ref="tns:screen"/>
+                  <xs:element minOccurs="0" ref="tns:actions"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <xs:complexType name="subflowType">
+         <xs:complexContent>
+            <xs:extension base="tns:abstractSubprocessType">
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="appliesToDataName">
+                     <xs:complexType mixed="true">
+                        <xs:attribute default="field"
+                                   name="source"
+                                   type="tns:sourceEnumType"
+                                   use="optional"/>
+                     </xs:complexType>
+                  </xs:element>
+                  <!-- If the runForEach element is set to true then the appliesToDataName is an object list otherwise it is a reference -->
+                  <xs:element minOccurs="0" name="runForEach" type="xs:boolean"/>
+                  <xs:choice>
+	                  <xs:element minOccurs="0" name="runForEachBreakOutcome" type="xs:string"/>
+                      <!-- breakOnCondition should only available on process call -->
+	                  <xs:element minOccurs="0" name="breakOnCondition" type="tns:baseExpressionType"/>
+                  </xs:choice>
+                  <xs:element minOccurs="0" name="runAsUser" type="tns:runAsUser"/>
+                  <xs:element minOccurs="0" ref="tns:serviceInput"/>
+                  <xs:element minOccurs="0" name="subflowOutput" type="tns:processOutputType"/>
+                  <xs:element minOccurs="0" ref="tns:screen"/>
+                  <xs:element minOccurs="0"
+                           name="screenActionLabel"
+                           type="tns:screenActionLabelType"/>
+                  <xs:element minOccurs="0" ref="tns:actions"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+   </xs:complexType>
+
+    <!-- subflow is a step which calls another flow. -->
+   <xs:element name="subflow" type="tns:subflowType"/>
+
+   <!-- process is a step which calls another process. -->
+   <xs:element name="callProcess" type="tns:subflowType"/>
+
+   <!-- dataDecision is a step which performs a switch based on data values in choice fields. -->
+   <xs:element name="dataDecision">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="tns:titledStepType">
+               <xs:sequence>
+                  <xs:element name="dataName" type="xs:string"/>
+                  <xs:element minOccurs="0" ref="tns:actions"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- Common screen step info -->
+   <xs:element name="body">
+      <xs:complexType mixed="true">
+         <xs:sequence>
+            <xs:any maxOccurs="unbounded"
+                    minOccurs="0"
+                    namespace="##any"
+                    processContents="skip"/>
+         </xs:sequence>
+         <xs:attribute default="text/html"
+                       name="contentType"
+                       type="xs:string"
+                       use="optional"/>
+         <xs:attribute name="lang" type="common:language" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="actionPrompt" type="xs:string"/>
+   <xs:element name="actions">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:action"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- url or object to redirect after completing GT -->
+   <xs:element name="redirectTo">
+      <xs:complexType mixed="true">
+         <xs:attribute name="type" type="xs:string" use="required"/>
+         <xs:attribute name="name" type="xs:string" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+
+   <!-- actions are the set of answers the user can select from on a screen -->
+   <xs:element name="action" type="tns:TAction"/>
+   <xs:complexType mixed="true" name="TAction">
+      <xs:sequence maxOccurs="unbounded" minOccurs="0">
+        <xs:element name="text" type="common:text"/>
+      </xs:sequence>
+      <xs:attribute name="alt" type="xs:string" use="optional"/>
+      <xs:attribute name="id" type="xs:NCName" use="required"/>
+      <xs:attribute name="targetScreen" type="xs:NCName" use="required"/>
+   </xs:complexType>
+   
+   <!-- parameter mapping for automated step input -->
+   <xs:element name="serviceInput">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="parameter"
+                        type="tns:screenflowParameterType"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   
+   <!--  todo: re-use from core as this is same/similar to struct in core.xsd 'dataMappingType' complex type -->
+   <xs:complexType mixed="true" name="screenflowParameterType">
+      <xs:complexContent>
+         <xs:extension base="tns:abstractDataMappingType">
+            <xs:attribute name="source" type="tns:sourceEnumType" use="required"/>
+         </xs:extension>      
+      </xs:complexContent>
+   </xs:complexType>
+
+   <xs:element name="skipOption">
+      <xs:simpleType>
+         <xs:restriction base="xs:string">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+            <xs:enumeration value="yes_no_branch"/>
+         </xs:restriction>
+      </xs:simpleType>
+   </xs:element>
+</xs:schema>

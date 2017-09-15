@@ -1,0 +1,5 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://ProcedureAgent/procedureagent/public"
+                  name="ProcedureAgent.public"
+                  targetNamespace="http://ProcedureAgent/procedureagent/public">
+</wsdl:definitions>

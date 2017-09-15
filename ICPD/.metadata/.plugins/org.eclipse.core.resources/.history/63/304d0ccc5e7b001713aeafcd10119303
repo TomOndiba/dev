@@ -1,0 +1,116 @@
+<processRenderings modified="1501779886460">
+   <layout-segments>
+      <segment height="317" id="process_0" tiled="false" width="359">
+         <image height="317" name="process_0_R1C1.jpg" width="359"/>
+      </segment>
+   </layout-segments>
+   <process>
+      <bpel locationId="1"
+            name="spRunStart_Agent"
+            path="/process"
+            segment="process_0"
+            sheight="317"
+            swidth="359"
+            sx="0"
+            sy="0"
+            type="process">
+         <bpel locationId="11" path="/process/partnerLinks" type="partnerLinks">
+            <bpel locationId="12"
+                  name="Process_Consumer"
+                  path="/process/partnerLinks/partnerLink[@name='Process_Consumer']"
+                  type="partnerLink"/>
+            <bpel locationId="13"
+                  name="Provider"
+                  path="/process/partnerLinks/partnerLink[@name='Provider']"
+                  type="partnerLink"/>
+         </bpel>
+         <bpel locationId="15" path="/process/variables" type="variables">
+            <bpel locationId="16"
+                  name="NewOperation"
+                  path="/process/variables/variable[@name='NewOperation']"
+                  type="variable"/>
+            <bpel locationId="17"
+                  name="multiDataAccessResponse"
+                  path="/process/variables/variable[@name='multiDataAccessResponse']"
+                  type="variable"/>
+         </bpel>
+         <bpel height="10"
+               locationId="18"
+               name=""
+               path="/process/sequence"
+               type="sequence"
+               width="1"
+               x="222"
+               y="10">
+            <bpel height="60"
+                  locationId="19"
+                  name="NewOperation"
+                  path="/process/sequence/receive[@name='NewOperation']"
+                  type="receive"
+                  width="70"
+                  x="187"
+                  y="20"/>
+            <bpel locationId="20"
+                  name="execMultiSQL"
+                  path="/process/sequence/scope[@name='execMultiSQL']"
+                  type="scope">
+               <bpel locationId="21"
+                     path="/process/sequence/scope[@name='execMultiSQL']/variables"
+                     type="variables">
+                  <bpel locationId="22"
+                        name="parameters"
+                        path="/process/sequence/scope[@name='execMultiSQL']/variables/variable[@name='parameters']"
+                        type="variable"/>
+               </bpel>
+               <bpel height="53"
+                     locationId="23"
+                     name=""
+                     path="/process/sequence/scope[@name='execMultiSQL']/sequence"
+                     type="sequence"
+                     width="125"
+                     x="160"
+                     y="105">
+                  <bpel locationId="24"
+                        name=""
+                        path="/process/sequence/scope[@name='execMultiSQL']/sequence/assign"
+                        type="assign"/>
+                  <bpel locationId="28"
+                        name="execMultiSQL"
+                        path="/process/sequence/scope[@name='execMultiSQL']/sequence/invoke[@name='execMultiSQL']"
+                        type="invoke"/>
+               </bpel>
+            </bpel>
+            <bpel locationId="29"
+                  name="NewOperation-Reply"
+                  path="/process/sequence/scope[@name='NewOperation-Reply']"
+                  type="scope">
+               <bpel locationId="30"
+                     path="/process/sequence/scope[@name='NewOperation-Reply']/variables"
+                     type="variables">
+                  <bpel locationId="31"
+                        name="parameters"
+                        path="/process/sequence/scope[@name='NewOperation-Reply']/variables/variable[@name='parameters']"
+                        type="variable"/>
+               </bpel>
+               <bpel locationId="32"
+                     name=""
+                     path="/process/sequence/scope[@name='NewOperation-Reply']/sequence"
+                     type="sequence">
+                  <bpel locationId="33"
+                        name=""
+                        path="/process/sequence/scope[@name='NewOperation-Reply']/sequence/assign"
+                        type="assign"/>
+                  <bpel height="60"
+                        locationId="50"
+                        name="NewOperation-Reply"
+                        path="/process/sequence/scope[@name='NewOperation-Reply']/sequence/reply[@name='NewOperation-Reply']"
+                        type="reply"
+                        width="70"
+                        x="187"
+                        y="183"/>
+               </bpel>
+            </bpel>
+         </bpel>
+      </bpel>
+   </process>
+</processRenderings>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+              xmlns:ProcedureAgent="http://www.example.org/ProcedureAgent/"
+              xmlns:das="http://schemas.active-endpoints.com/data-access/2010/04/data-access.xsd"
+              xmlns:ns="http://ProcedureAgent/procedureagent/public"
+              xmlns:ext1="http://www.activebpel.org/2009/06/bpel/extension/links"
+              xmlns:data-access="http://docs.active-endpoints/wsdl/data-access/2010/04/data-access.wsdl"
+              xmlns:abx="http://www.activebpel.org/bpel/extension"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+              xmlns:ext="http://www.activebpel.org/2006/09/bpel/extension/query_handling"
+              xmlns:aei="http://www.activebpel.org/2009/02/bpel/extension/ignorable"
+              aei:editStyle="BPMN"
+              ext1:linksAreTransitions="yes"
+              ext:createTargetXPath="yes"
+              ext:disableSelectionFailure="yes"
+              name="ProcedureAgent"
+              suppressJoinFailure="yes"
+              targetNamespace="http://ProcedureAgent">
+   <bpmndi:BPMNDiagram xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                       xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                       aei:bpelDigest=""
+                       aei:editStyle="BPMN"
+                       aei:layoutNeeded="false"
+                       aei:modelVersion="5"
+                       aei:objectId="147394699724322319"
+                       aei:processInitiatorSim=""
+                       isHorizontal="false">
+      <bpmndi:BPMNPlane>
+         <bpmndi:BPMNShape aei:backgroundImageLocation="icons/bpmn/activity/ActivityBlock.png"
+                           aei:objectId="147394718071122577"
+                           aei:type="PARTNER_LINK"
+                           aei:visible="false,false,false,false,false,"
+                           bpmnElement="147394718071122577"/>
+         <bpmndi:BPMNShape aei:backgroundImageLocation="icons/bpmn/activity/ActivityBlock.png"
+                           aei:objectId="147394724225623287"
+                           aei:type="PARTNER_LINK"
+                           aei:visible="false,false,false,false,false,"
+                           bpmnElement="147394724225623287"/>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {150,10}"
+                           aei:absoluteSize="DIM {145,243}"
+                           aei:objectId="147394722299723023"
+                           aei:type="SEQUENCE"
+                           bpmnElement="147394722299723023"
+                           isHorizontal="false">
+            <dc:Bounds height="-1" width="-1" x="140" y="0"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {187,20}"
+                           aei:absoluteSize="DIM {70,60}"
+                           aei:attachments=""
+                           aei:name="NewOperation"
+                           aei:objectId="147394722299423019"
+                           aei:principal=""
+                           aei:text="NewOperation"
+                           aei:type="RECEIVE"
+                           bpmnElement="147394722299423019">
+            <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            <bpmndi:BPMNLabel aei:absoluteLocation="LOC {198,77}"
+                              aei:absoluteSize="DIM {69,13}"
+                              aei:anchor.location="1"
+                              aei:anchor.objectId="147394722299423019"
+                              aei:backgroundColor="RGB {255,255,255}"
+                              aei:objectId="147394722299823025"
+                              aei:relative.location="LOC {-34,47}"
+                              aei:text="NewOperation"
+                              bpmnElement="147394722299423019label">
+               <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {160,105}"
+                           aei:absoluteSize="DIM {125,53}"
+                           aei:attachments=""
+                           aei:name="execMultiSQL"
+                           aei:objectId="147422490286808927"
+                           aei:subprocessPath=""
+                           aei:text="execMultiSQL"
+                           aei:type="INVOKE"
+                           bpmnElement="147422490286808927">
+            <dc:Bounds height="-1" width="-1" x="185" y="107"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape aei:absoluteLocation="LOC {187,183}"
+                           aei:absoluteSize="DIM {70,60}"
+                           aei:name="NewOperation-Reply"
+                           aei:objectId="147394722299623021"
+                           aei:text="NewOperation-Reply"
+                           aei:type="REPLY"
+                           bpmnElement="147394722299623021">
+            <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            <bpmndi:BPMNLabel aei:absoluteLocation="LOC {182,240}"
+                              aei:absoluteSize="DIM {100,13}"
+                              aei:anchor.location="1"
+                              aei:anchor.objectId="147394722299623021"
+                              aei:backgroundColor="RGB {255,255,255}"
+                              aei:objectId="147394722299823027"
+                              aei:relative.location="LOC {-50,47}"
+                              aei:text="NewOperation-Reply"
+                              bpmnElement="147394722299623021label">
+               <dc:Bounds height="-1" width="-1" x="0" y="0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+      </bpmndi:BPMNPlane>
+   </bpmndi:BPMNDiagram>
+   <bpel:extensions>
+      <bpel:extension mustUnderstand="no"
+                      namespace="http://www.activebpel.org/2009/02/bpel/extension/ignorable"/>
+      <bpel:extension mustUnderstand="no"
+                      namespace="http://www.omg.org/spec/BPMN/20100524/DI"/>
+      <bpel:extension mustUnderstand="yes"
+                      namespace="http://www.activebpel.org/2006/09/bpel/extension/query_handling"/>
+      <bpel:extension mustUnderstand="yes"
+                      namespace="http://www.activebpel.org/2009/06/bpel/extension/links"/>
+   </bpel:extensions>
+   <bpel:import aei:implicit="true"
+                importType="http://schemas.xmlsoap.org/wsdl/"
+                location="../wsdl/bpel/ProcedureAgent.public.wsdl"
+                namespace="http://ProcedureAgent/procedureagent/public"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+                location="../wsdl/ProcedureAgent.wsdl"
+                namespace="http://www.example.org/ProcedureAgent/"/>
+   <bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+                namespace="http://docs.active-endpoints/wsdl/data-access/2010/04/data-access.wsdl"/>
+   <bpel:partnerLinks>
+      <bpel:partnerLink aei:id="147394718071122577"
+                        aei:interface="ProcedureAgent:ProcedureAgent"
+                        myRole="Provider"
+                        name="Process_Consumer"
+                        partnerLinkType="ns:ProcedureAgentPLT"/>
+      <bpel:partnerLink aei:id="147394724225623287"
+                        name="Provider"
+                        partnerLinkType="data-access:dataAccessPLT"
+                        partnerRole="sender"/>
+   </bpel:partnerLinks>
+   <bpel:variables>
+      <bpel:variable element="ProcedureAgent:NewOperation" name="NewOperation"/>
+      <bpel:variable element="das:multiDataAccessResponse" name="multiDataAccessResponse"/>
+   </bpel:variables>
+   <bpel:sequence aei:id="147394722299723023">
+      <bpel:receive aei:id="147394722299423019"
+                    createInstance="yes"
+                    name="NewOperation"
+                    operation="NewOperation"
+                    partnerLink="Process_Consumer"/>
+      <bpel:scope aei:implicit="true" name="execMultiSQL">
+         <bpel:variables>
+            <bpel:variable messageType="data-access:multiDataAccessMessage" name="parameters"/>
+         </bpel:variables>
+         <bpel:sequence>
+            <bpel:assign aei:assignType="XQUERY" aei:id="147422490740809915">
+               <bpel:copy>
+                  <bpel:from expressionLanguage="urn:active-endpoints:expression-language:xquery1.0">&lt;das:multiDataAccessRequest xmlns:das="http://schemas.active-endpoints.com/data-access/2010/04/data-access.xsd"&gt;
+&lt;das:sqlStatement columnCase="unchanged" statementId="call-proc"&gt;
+	&lt;das:statement&gt;CALL ProcessRunStart(?,?,?,?,?,?)&lt;/das:statement&gt;
+		&lt;das:procedure&gt;
+			&lt;das:parameter name="ProcessName" sqlType="string" mode="in"&gt; { $NewOperation/ProcessName/text()} &lt;/das:parameter&gt;
+			&lt;das:parameter name="ProcessID" sqlType="integer" mode="in"&gt; {$NewOperation/ProcessID/number() }&lt;/das:parameter&gt;
+			&lt;das:parameter name="ProcessRunId" sqlType="integer" mode="out" /&gt;
+			&lt;das:parameter name="RunType" sqlType="string" mode="out" /&gt;
+			&lt;das:parameter name="Instruction" sqlType="string" mode="out" /&gt;
+			&lt;das:parameter name="Message" sqlType="string" mode="out" /&gt;
+		&lt;/das:procedure&gt;
+	&lt;/das:sqlStatement&gt;
+&lt;/das:multiDataAccessRequest&gt;</bpel:from>
+                  <bpel:to part="dataAccessPart" variable="parameters"/>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke aei:id="147422490286808927"
+                         inputVariable="parameters"
+                         name="execMultiSQL"
+                         operation="execMultiSQL"
+                         outputVariable="multiDataAccessResponse"
+                         partnerLink="Provider"/>
+         </bpel:sequence>
+      </bpel:scope>
+      <bpel:scope aei:implicit="true" name="NewOperation-Reply">
+         <bpel:variables>
+            <bpel:variable messageType="ProcedureAgent:NewOperationResponse" name="parameters"/>
+         </bpel:variables>
+         <bpel:sequence>
+            <bpel:assign aei:assignType="XPATHS" aei:id="147394950304529735">
+               <bpel:copy>
+                  <bpel:from>$multiDataAccessResponse/das:result/das:row/ProcessRunId/number()</bpel:from>
+                  <bpel:to part="parameters" variable="parameters">
+                     <bpel:query>ProcessRunId</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+               <bpel:copy>
+                  <bpel:from>$multiDataAccessResponse/das:result/das:row/RunType/text()</bpel:from>
+                  <bpel:to part="parameters" variable="parameters">
+                     <bpel:query>RunType</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+               <bpel:copy>
+                  <bpel:from>$multiDataAccessResponse/das:result/das:row/Instruction/text()</bpel:from>
+                  <bpel:to part="parameters" variable="parameters">
+                     <bpel:query>Instruction</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+               <bpel:copy>
+                  <bpel:from>$multiDataAccessResponse/das:result/das:row/Message/text()</bpel:from>
+                  <bpel:to part="parameters" variable="parameters">
+                     <bpel:query>Message</bpel:query>
+                  </bpel:to>
+               </bpel:copy>
+            </bpel:assign>
+            <bpel:reply aei:id="147394722299623021"
+                        name="NewOperation-Reply"
+                        operation="NewOperation"
+                        partnerLink="Process_Consumer"
+                        variable="parameters"/>
+         </bpel:sequence>
+      </bpel:scope>
+   </bpel:sequence>
+</bpel:process>

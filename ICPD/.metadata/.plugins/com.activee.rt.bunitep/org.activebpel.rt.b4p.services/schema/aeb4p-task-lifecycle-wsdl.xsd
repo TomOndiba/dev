@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:trt="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+           xmlns:htd="http://www.example.org/WS-HT"
+           xmlns:tns="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-lifecycle-wsdl.xsd"
+           xmlns:htdp="http://www.example.org/WS-HT/protocol"
+           xmlns:api="http://www.example.org/WS-HT/api"
+           elementFormDefault="qualified"
+           targetNamespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-lifecycle-wsdl.xsd">
+
+   <xs:import namespace="http://www.w3.org/2001/XMLSchema"/>
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+   <xs:import namespace="http://www.example.org/WS-HT"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask.xsd"/>
+	  <xs:import namespace="http://www.example.org/WS-HT/api"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-api.xsd"/>      
+	  <xs:import namespace="http://www.example.org/WS-HT/protocol"
+              schemaLocation="../../org.activebpel.rt.ht.services/schema/ws-humantask-protocol.xsd"/>      
+	  <xs:import namespace="http://schemas.active-endpoints.com/b4p/wshumantask/2007/10/aeb4p-task-rt.xsd"
+              schemaLocation="aeb4p-task-rt.xsd"/>      
+
+   <!--  Parent or people activity process id.  -->
+   <xs:element name="peopleActivityPid" type="xs:long"/>
+   <!--  A unique identifier within PA process to identity the PA. E.g. its Location Id.  -->
+   <xs:element name="peopleActivityId" type="xs:integer"/>
+   <!--  Location path of people activity -->
+   <xs:element name="peopleActivityLocationPath" type="xs:string"/>
+   <!--  plan id of PA process -->
+   <xs:element name="peopleActivityPlanId" type="xs:integer"/>
+   <!--  location id of task used by PA -->
+   <xs:element name="taskLocationId" type="xs:integer"/>
+   <!--  PA execution instance  counter -->
+   <xs:element name="peopleActivityExecCtr" type="xs:integer"/>
+   <!--  PA tenant context id -->
+   <xs:element name="tenantContextId" type="xs:string"/>
+
+	  <xs:element name="processTaskRequest" type="tns:tProcessTaskRequest"/>
+   <xs:complexType name="tProcessTaskRequest">
+      <xs:annotation>
+         <xs:documentation>
+            Contains ws-ht task definition and creation data overrides.
+         </xs:documentation>
+      </xs:annotation>    
+      <xs:sequence>
+         <xs:element ref="htd:task"/>
+         <xs:element ref="trt:initialState"/>
+         <xs:element ref="trt:interfaceMetadata"/>
+         <xs:element ref="tns:peopleActivityPid"/>
+         <xs:element ref="tns:peopleActivityId"/>
+         <xs:element minOccurs="0" ref="tns:peopleActivityExecCtr"/>
+         <xs:element ref="tns:peopleActivityLocationPath"/>
+         <!--  plan id of the people activity process and location id of  task def. -->
+         <xs:element minOccurs="0" ref="tns:peopleActivityPlanId"/>
+         <xs:element minOccurs="0" ref="tns:taskLocationId"/>
+         <xs:element minOccurs="0" ref="tns:tenantContextId"/>
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:element name="processTaskResponse" type="tns:tProcessTaskResponse"/>   
+   <xs:complexType name="tProcessTaskResponse">
+      <xs:annotation>
+         <xs:documentation>
+            Contains response after executing a ws-task.
+         </xs:documentation>
+      </xs:annotation>    
+      <xs:sequence>
+	        <xs:element ref="trt:identifier"/>
+	        <xs:element name="metadata" type="trt:tContextData"/>   
+         <xs:element minOccurs="0" ref="trt:output"/>
+         <xs:element minOccurs="0" ref="trt:fault"/>         
+         <xs:element minOccurs="0" ref="trt:comments"/>
+         <xs:element minOccurs="0" ref="trt:attachments"/>  	      
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:element name="cancelTaskRequest">   
+	     <xs:complexType>
+	        <xs:annotation>
+	           <xs:documentation>
+	            Contains  request data to cancel a task
+	         </xs:documentation>
+	        </xs:annotation>    
+	        <xs:sequence>
+				        <xs:element ref="tns:peopleActivityPid"/>         
+				        <xs:element ref="tns:peopleActivityId"/>
+            <xs:element minOccurs="0" ref="tns:peopleActivityExecCtr"/>
+	        </xs:sequence>
+	     </xs:complexType>   
+	  </xs:element>
+	
+	  <xs:element name="nonRecoverableError" type="xs:string"/>
+</xs:schema>

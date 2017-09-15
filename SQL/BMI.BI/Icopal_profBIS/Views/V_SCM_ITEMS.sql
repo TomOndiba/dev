@@ -1,29 +1,47 @@
 ﻿
-
-
-
-
-
-create view [dbo].[V_SCM_ITEMS] as
+CREATE view [dbo].[V_SCM_ITEMS] as 
 SELECT itm.[SYSTEM_ID]
       ,itm.[ITEM_NO]
       ,isnull(itm.[ITEM_NAME], 'UNKNOWN') as ITEM_NAME
-      ,isnull(itm.[ITEM_TYPE_ID], 9)      as ITEM_TYPE_ID
-      ,itm.[ITEM_TYPE]
-      ,itm.[ITEM_GNIT]
-      ,itm.[ITEM_DESCRIPTION_1]
-      ,itm.[ITEM_DESCRIPTION_2]
-      ,itm.[ITEM_GROUP_1]
-      ,itm.[ITEM_GROUP_2]
-      ,itm.[ITEM_GROUP_3]
-      ,itm.[ITEM_GROUP_4]
-      ,itm.[ITEM_GROUP_5]
-      ,RTrim(LTrim(Cast(itm.SYSTEM_ID as Varchar(10)))) + '|' + itm.ITEM_NO as ITEM_CATEGORY_ID
+      ,ITEM_CATEGORY_ID =
+			case
+				when not sli.ITEM_NO is null then  RTrim(LTrim(Cast(itm.SYSTEM_ID as Varchar(10)))) + '|' + itm.ITEM_NO
+				else
+					fx.TEKST
+			end
   FROM MD_ITEMS as  itm
-  	left outer join
-	   SA_LINK_ITEM as lic on (lic.SYSTEM_ID = itm.SYSTEM_ID and
-	                           lic.ITEM_NO   = itm.ITEM_NO)
-where exists (select *
-              from KPI_SHIFT_PRODUCTION as sprod
-              where sprod.SYSTEM_ID = itm.SYSTEM_ID and
-                    sprod.ITEM_NO   = itm.ITEM_NO)
+     left outer join
+	    SA_LINK_ITEM as sli on (sli.SYSTEM_ID = itm.SYSTEM_ID and
+		                        sli.ITEM_NO   = itm.ITEM_NO)
+	   left outer join
+	     FLEXPARAMS as fx on (fx.PARAMTYPE = 'DWH' and
+		                      fx.PARAMNAVN = 'SA_UNMAPPED_ITEM') 
+where (
+		exists (select 1
+			    from KPI_SHIFT_PRODUCTION_NEW as sprod
+                 where sprod.SYSTEM_ID = itm.SYSTEM_ID and
+                       sprod.ITEM_NO   = itm.ITEM_NO) 
+		or
+		exists (select 1
+			    from KPI_SHIFT_PRODUCTION_NEW as sprod
+                 where sprod.SYSTEM_ID = itm.SYSTEM_ID and
+                       sprod.ITEM_NO   = SUBSTRING(itm.ITEM_NO, PATINDEX('%[^0]%', itm.ITEM_NO+'.'), LEN(itm.ITEM_NO)))
+	   )
+
+union 
+
+select plant.SYSTEM_ID,
+       spi.ITEM_NO,
+	   spi.ITEM_NAME,
+	   fx.TEKST		as ITEM_CATEGORY_ID
+	   --RTrim(LTrim(Cast(plant.SYSTEM_ID as Varchar(10)))) + '|' + spi.ITEM_NO as ITEM_CATEGORY_ID
+from KPI_SHIFT_PLANT_ITEMS as spi
+       left outer join
+	     MD_PLANT as plant on (plant.PLANT_ID = spi.PLANT_ID)
+	   left outer join
+	     FLEXPARAMS as fx on (fx.PARAMTYPE = 'DWH' and
+		                      fx.PARAMNAVN = 'SA_UNMAPPED_ITEM') 
+where not exists (select 1
+                  from MD_ITEMS as itm
+				  where itm.SYSTEM_ID = plant.SYSTEM_ID and
+				        itm.ITEM_NO   = spi.ITEM_NO)

@@ -2,6 +2,1229 @@
     AS '';
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS].[ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS].[ITEM_NAME]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS].[UPDATE_BY]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS].[CREATE_BY]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA].[ITEM_NO]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA].[CREATE_BY]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA].[NORM_UOM]';
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA].[UPDATE_BY]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS_BACKUP].[UPDATE_BY]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_TYPE].[CREATE_BY]';
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_TYPE].[UPDATE_BY]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_OLD].[UOM]';
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_OLD].[PROD_SHIFT]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_OLD].[CREATE_BY]';
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_OLD].[ITEM_NO]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[SITE_SOLD]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[INVOICE_NUMBER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[INVOICE_LINE_NUMBER]';
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[INVOICE_UOM]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[INVOICE_TYPE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[ORDER_NUMBER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[ORDER_LINE_NUMBER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[SOLD_TO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[SHIP_TO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[SALESPERSON_ID]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[SALESPERSON_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[DELIVERY_TERM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[DELIVERY_TERM_TEXT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[PAYMENT_TERM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[PAYMENT_TERM_TEXT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[MATERIAL_CHAR1]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_DATA_BACKUP].[PROD_SHIFT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_DATA_BACKUP].[CREATE_BY]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_DATA_BACKUP].[UPDATE_BY]';
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_REPORT_BACKUP].[DESCRIPTION]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_REPORT_BACKUP].[UPDATE_BY]';
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_REPORT_BACKUP].[CREATE_BY]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[MATERIAL_CHAR5]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[MATERIAL_CHAR4]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[MATERIAL_CHAR3]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[MATERIAL_CHAR2]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[UOM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[STATISTIC_UOM]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA_BACKUP].[ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA_BACKUP].[NORM_UOM]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA_BACKUP].[CREATE_BY]';
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODLINE_ITEM_DATA_BACKUP].[UPDATE_BY]';
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS_BACKUP].[ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS_BACKUP].[ITEM_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PLANT_ITEMS_BACKUP].[CREATE_BY]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[LOCAL_ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[SUPPLIER_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_TYPE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_GNIT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_DESCRIPTION_1]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_DESCRIPTION_2]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[SUPPLIER_ITEM_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_GROUP_1]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_GROUP_2]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_GROUP_3]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_GROUP_4]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[ITEM_GROUP_5]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[CREATE_BY]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS_BACKUP].[UPDATE_BY]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_0_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_1_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_2_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_3_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_4_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_5_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_6_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_7_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_8_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_REPORT_CATEGORY_FLAT].[LEVEL_9_NAME]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON_BACKUP].[LOCAL_PLANT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON_BACKUP].[LOCAL_PRODLINE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON_BACKUP].[LOCAL_REASON_CODE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON_BACKUP].[LOCAL_REASON_NAME]';
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_NEW_BACKUP].[PROD_SHIFT]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_NEW_BACKUP].[CREATE_BY]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_NEW_BACKUP].[ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_NEW_BACKUP].[PRODUCTION_ORDER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_NEW_BACKUP].[UOM]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[PU_PURCHASE].[SUPPLIER_ITEM_TEXT]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[SITE_SOLD]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[INVOICE_NUMBER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[INVOICE_LINE_NUMBER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[STATISTIC_UOM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[INVOICE_UOM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[INVOICE_TYPE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[ORDER_NUMBER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[ORDER_LINE_NUMBER]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[ITEM_NO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[SOLD_TO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[SHIP_TO]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[SALESPERSON_ID]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[SALESPERSON_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[MATERIAL_CHAR3]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[MATERIAL_CHAR2]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[UOM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[DELIVERY_TERM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[DELIVERY_TERM_TEXT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[PAYMENT_TERM]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[PAYMENT_TERM_TEXT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[MATERIAL_CHAR1]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[MATERIAL_CHAR5]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[MATERIAL_CHAR4]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LINK_REASON].[LOCAL_PLANT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LINK_REASON].[LOCAL_PRODLINE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LINK_REASON].[LOCAL_REASON_CODE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LINK_REASON].[LOCAL_REASON_NAME]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LINK_REASON].[CREATE_BY]';
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[MD_ITEMS].[SUPPLIER_ITEM_NAME]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON].[LOCAL_PLANT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON].[LOCAL_PRODLINE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON].[LOCAL_REASON_CODE]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_LOCAL_REASON].[LOCAL_REASON_NAME]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 GO
 EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[PU_LINK_RMI_CATEGORY].[PRODUCT_GROUP]';
 
@@ -1379,19 +2602,19 @@ EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[PU_LINK_C
 
 
 GO
-EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION].[PROD_SHIFT]';
 
-
-GO
-EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION].[ITEM_NO]';
 
 
 GO
-EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION].[UOM]';
+
 
 
 GO
-EXECUTE sp_bindefault @defname = N'[dbo].[Blank]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION].[CREATE_BY]';
+
+
+
+GO
+
 
 
 GO

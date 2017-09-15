@@ -17,6 +17,8 @@
     [WEIGHT]              [dbo].[D_DEC7.2]    NULL,
     [NORM_SPEED]          [dbo].[D_DEC11.4]   NULL,
     [KG_PER_M2]           [dbo].[D_DEC11.4]   NULL,
+    [WEIGHT_ROLL]         [dbo].[D_DEC7.2]    NULL,
+    [NORM_SPEED_M_MIN]    [dbo].[D_DEC7.2]    NULL,
     [UOM]                 [dbo].[N_C20]       NULL,
     [PRIMA_KG]            [dbo].[D_INT]       NULL,
     [DEFECT_KG]           [dbo].[D_INT]       NULL,
@@ -29,4 +31,6 @@
     [MANUAL_INPUT]        [dbo].[N_BOOLEAN_Y] NULL,
     CONSTRAINT [PK_KPI_SHIFT_PRODUCTION_NEW] PRIMARY KEY CLUSTERED ([PRODUCTION_ID] ASC)
 );
+
+
 

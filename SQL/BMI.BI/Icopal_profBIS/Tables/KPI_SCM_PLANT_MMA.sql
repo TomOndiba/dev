@@ -12,6 +12,8 @@
     [LTA_CONT_WORK_HOURS] [dbo].[D_DEC12.2] NULL,
     [LTA_PROD_COUNT]      [dbo].[D_DEC12.2] NULL,
     [LTA_CONT_COUNT]      [dbo].[D_DEC12.2] NULL,
+    [LOST_PROD_WORKDAYS]  [dbo].[D_DEC12.2] NULL,
+    [LOST_CONT_WORKDAYS]  [dbo].[D_DEC12.2] NULL,
     [NLTA_PROD_COUNT]     [dbo].[D_DEC12.2] NULL,
     [NLTA_CONT_COUNT]     [dbo].[D_DEC12.2] NULL,
     [NEAR_PROD_COUNT]     [dbo].[D_DEC12.2] NULL,
@@ -23,4 +25,6 @@
     [EC_OTHER_KWH]        [dbo].[D_INT]     NULL,
     CONSTRAINT [PK_KPI_SCM_PLANT_AMM_1] PRIMARY KEY CLUSTERED ([PLANT_ID] ASC, [KPI_YEAR] ASC, [KPI_MONTH] ASC)
 );
+
+
 

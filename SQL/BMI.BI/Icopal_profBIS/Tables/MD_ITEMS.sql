@@ -10,6 +10,7 @@
     [ITEM_GNIT]          [dbo].[N_C50]  NULL,
     [ITEM_DESCRIPTION_1] [dbo].[N_C100] NULL,
     [ITEM_DESCRIPTION_2] [dbo].[N_C100] NULL,
+    [SUPPLIER_ITEM_NAME] [dbo].[N_C100] NULL,
     [ITEM_GROUP_1]       [dbo].[N_C50]  NULL,
     [ITEM_GROUP_2]       [dbo].[N_C50]  NULL,
     [ITEM_GROUP_3]       [dbo].[N_C50]  NULL,
@@ -21,4 +22,6 @@
     [UPDATE_BY]          [dbo].[N_USER] NULL,
     CONSTRAINT [PK_MD_ITEMS] PRIMARY KEY CLUSTERED ([SYSTEM_ID] ASC, [ITEM_NO] ASC)
 );
+
+
 

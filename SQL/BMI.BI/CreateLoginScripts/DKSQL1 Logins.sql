@@ -51,3 +51,11 @@ if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL
 else
 	alter login [GROUPICOPAL\uktma] with default_language = British, default_database = [profBIS_View];
 go
+
+use [master]
+go
+grant view server state to [GROUPICOPAL\ukglu];
+grant view server state to [GROUPICOPAL\ukvmi];
+grant view server state to [GROUPICOPAL\ukjbo];
+grant view server state to [GROUPICOPAL\ukrna];
+go

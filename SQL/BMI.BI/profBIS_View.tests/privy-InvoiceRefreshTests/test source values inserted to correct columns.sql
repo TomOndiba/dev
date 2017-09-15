@@ -11,58 +11,58 @@ begin
 	create table #expected
 	(
 	  InvoiceKey int not null
-	, EtlDeltaHash char(32) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlDeltaHash char(32) collate Danish_Norwegian_CI_AS null
 	, EtlCreatedOn datetime null
-	, EtlCreatedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlCreatedBy varchar(200) collate Danish_Norwegian_CI_AS null
 	, EtlUpdatedOn datetime not null
-	, EtlUpdatedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlUpdatedBy varchar(200) collate Danish_Norwegian_CI_AS null
 	, EtlDeletedOn datetime null
-	, EtlDeletedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
-	, IsDeleted char(1) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlDeletedBy varchar(200) collate Danish_Norwegian_CI_AS null
+	, IsDeleted char(1) collate Danish_Norwegian_CI_AS null
 	-----------------------------------------------------------
 	, REC_ID uniqueidentifier null -- QlikView surrogate key
 	-----------------------------------------------------------
 	--! This is effectively the business key that the ETL process will lookup
 	, SYSTEM_ID int null
 	, INVOICE_DATE datetime null
-	, INVOICE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, INVOICE_LINE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, ORDER_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, ORDER_LINE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, INVOICE_LINE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, ORDER_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, ORDER_LINE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, Uniqueifier bigint null
 	-----------------------------------------------------------
-	, INVOICE_TYPE nvarchar(1) collate SQL_Latin1_General_CP1_CI_AS null
-	, InvoiceTypeName nvarchar(29) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_SITE_SOLD nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_TYPE nvarchar(1) collate Danish_Norwegian_CI_AS null
+	, InvoiceTypeName nvarchar(29) collate Danish_Norwegian_CI_AS null
+	, LOCAL_SITE_SOLD nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, SITE_ID int null
-	, ITEM_NO nvarchar(50) collate SQL_Latin1_General_CP1_CI_AS null
+	, ITEM_NO nvarchar(50) collate Danish_Norwegian_CI_AS null
 	, ITEM_CATEGORY_ID int null
 	, ENV_CATEGORY_ID int null
-	, SOLD_TO_CUSTOMER_NO nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, SHIP_TO_CUSTOMER_NO nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, SALESPERSON_ID nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, SALESPERSON_NAME nvarchar(100) collate SQL_Latin1_General_CP1_CI_AS null
+	, SOLD_TO_CUSTOMER_NO nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, SHIP_TO_CUSTOMER_NO nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, SALESPERSON_ID nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, SALESPERSON_NAME nvarchar(100) collate Danish_Norwegian_CI_AS null
 	, DELIVERY_DATE datetime null
 	, EXPECTED_PAYMENT_DATE datetime null
 	, ACTUAL_PAYMENT_DATE datetime null
-	, LOCAL_DELIVERY_TERM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_DELIVERY_TERM_TEXT nvarchar(100) collate SQL_Latin1_General_CP1_CI_AS null
+	, LOCAL_DELIVERY_TERM nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, LOCAL_DELIVERY_TERM_TEXT nvarchar(100) collate Danish_Norwegian_CI_AS null
 	, PAYMENT_TERM_ID int null
-	, LOCAL_PAYMENT_TERM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_PAYMENT_TERM_TEXT nvarchar(100) collate SQL_Latin1_General_CP1_CI_AS null
+	, LOCAL_PAYMENT_TERM nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, LOCAL_PAYMENT_TERM_TEXT nvarchar(100) collate Danish_Norwegian_CI_AS null
 	, INVOICE_QUANTITY decimal(12, 2) null
-	, INVOICE_UOM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_UOM nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, STATISTIC_QUANTITY decimal(12, 2) null
-	, STATISTIC_UOM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, STATISTIC_UOM nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, QUANTITY decimal(12, 2) null
-	, LOCAL_UOM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_UOM_HARMONIZED nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, LOCAL_UOM nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, LOCAL_UOM_HARMONIZED nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, LOCAL_UOM_FACTOR decimal(11, 4) null
 	, INVOICE_AMOUNT decimal(15, 4) null
 	, LOCAL_AMOUNT decimal(15, 4) null
 	, GROUP_AMOUNT decimal(15, 4) null
-	, INVOICE_CURRENCY nvarchar(3) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_CURRENCY nvarchar(3) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_CURRENCY nvarchar(3) collate Danish_Norwegian_CI_AS null
+	, LOCAL_CURRENCY nvarchar(3) collate Danish_Norwegian_CI_AS null
 	, LINE_DISCOUNT_AMOUNT decimal(15, 4) null
 	, INVOICE_DISCOUNT_AMOUNT decimal(15, 4) null
 	, LINE_BONUS_AMOUNT decimal(15, 4) null
@@ -214,8 +214,8 @@ begin
 	set @_I001A_DeltaHash
 		= privy.InvoiceDeltaHash
 			(
-			  @_I001A_Uniqueifier
-			, @_I001A_SYSTEM_ID
+			  
+			   @_I001A_SYSTEM_ID
 			, @_I001A_INVOICE_NUMBER
 			, @_I001A_ORDER_NUMBER
 			, @_I001A_INVOICE_LINE_NUMBER

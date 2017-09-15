@@ -28,6 +28,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		08-JUN-2017		GML		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+002		20-AUG-2017		GML		N/A		Now LEFT joins to SA_LINK_ITEM (instead of INNER) aligned with V_SA_ITEMS
+------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -123,10 +125,10 @@ begin
 				---------------------------------------------------------------------------------------------------
 			from
 				[$(Icopal_profBIS)].[dbo].[MD_ITEMS] as p
-			inner join [$(Icopal_profBIS)].[dbo].[SA_LINK_ITEM] as ic
+			left join [$(Icopal_profBIS)].[dbo].[SA_LINK_ITEM] as ic
 				on ic.SYSTEM_ID = p.SYSTEM_ID
 				and ic.ITEM_NO = p.ITEM_NO
-			inner join stg.ProductCategory as pc
+			left join stg.ProductCategory as pc
 				on pc.NativeProductCategoryKey = cast(coalesce(ic.ITEM_CATEGORY_ID, @_UnmappedProductCategoryId) as nvarchar(50))
 		)
 		merge into stg.Product as tgt

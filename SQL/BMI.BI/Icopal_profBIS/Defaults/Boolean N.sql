@@ -2,6 +2,74 @@
     AS 'N';
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean N]', @objname = N'[dbo].[SA_INVOICE_BACKUP].[KEEP_RECORD]';
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean N]', @objname = N'[dbo].[SA_INVOICE_FRANCE_SPAIN_BACKUP].[KEEP_RECORD]';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 GO
 EXECUTE sp_bindefault @defname = N'[dbo].[Boolean N]', @objname = N'[dbo].[PU_CONTRACTING].[KEEP_RECORD]';
 

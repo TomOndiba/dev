@@ -1,66 +1,68 @@
-﻿CREATE procedure [privy-InvoiceRefreshTests].[test source values update correct columns]
+﻿create     procedure [privy-InvoiceRefreshTests].[test source values update correct columns]
 as
 begin
 	exec tSQLt.FakeTable @TableName = 'stg.Invoice', @Identity = 1, @Defaults = 1 ;
 	exec tSQLt.FakeTable 'privy.StagingLoadParameter' ;
 	insert privy.StagingLoadParameter (ModuleName, DataCaptureStart, DataCaptureEnd)
 	values ('[privy].[InvoiceRefresh]', '20170710 00:00:00', '20170715 23:59:59.997') ;
-
+	
 	create table #expected
 	(
 	  InvoiceKey int not null
-	, EtlDeltaHash char(32) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlDeltaHash char(32) collate Danish_Norwegian_CI_AS null
 	, EtlCreatedOn datetime null
-	, EtlCreatedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlCreatedBy varchar(200) collate Danish_Norwegian_CI_AS null
 	, EtlUpdatedOn datetime not null
-	, EtlUpdatedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
+
+
+	, EtlUpdatedBy varchar(200) collate Danish_Norwegian_CI_AS null
 	, EtlDeletedOn datetime null
-	, EtlDeletedBy varchar(200) collate SQL_Latin1_General_CP1_CI_AS null
-	, IsDeleted char(1) collate SQL_Latin1_General_CP1_CI_AS null
+	, EtlDeletedBy varchar(200) collate Danish_Norwegian_CI_AS null
+	, IsDeleted char(1) collate Danish_Norwegian_CI_AS null
 	-----------------------------------------------------------
 	, REC_ID uniqueidentifier null -- QlikView surrogate key
 	-----------------------------------------------------------
 	--! This is effectively the business key that the ETL process will lookup
 	, SYSTEM_ID int null
 	, INVOICE_DATE datetime null
-	, INVOICE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, INVOICE_LINE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, ORDER_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, ORDER_LINE_NUMBER nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, INVOICE_LINE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, ORDER_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, ORDER_LINE_NUMBER nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, Uniqueifier bigint null
 	-----------------------------------------------------------
-	, INVOICE_TYPE nvarchar(1) collate SQL_Latin1_General_CP1_CI_AS null
-	, InvoiceTypeName nvarchar(29) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_SITE_SOLD nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_TYPE nvarchar(1) collate Danish_Norwegian_CI_AS null
+	, InvoiceTypeName nvarchar(29) collate Danish_Norwegian_CI_AS null
+	, LOCAL_SITE_SOLD nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, SITE_ID int null
-	, ITEM_NO nvarchar(50) collate SQL_Latin1_General_CP1_CI_AS null
+	, ITEM_NO nvarchar(50) collate Danish_Norwegian_CI_AS null
 	, ITEM_CATEGORY_ID int null
 	, ENV_CATEGORY_ID int null
-	, SOLD_TO_CUSTOMER_NO nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, SHIP_TO_CUSTOMER_NO nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, SALESPERSON_ID nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, SALESPERSON_NAME nvarchar(100) collate SQL_Latin1_General_CP1_CI_AS null
+	, SOLD_TO_CUSTOMER_NO nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, SHIP_TO_CUSTOMER_NO nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, SALESPERSON_ID nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, SALESPERSON_NAME nvarchar(100) collate Danish_Norwegian_CI_AS null
 	, DELIVERY_DATE datetime null
 	, EXPECTED_PAYMENT_DATE datetime null
 	, ACTUAL_PAYMENT_DATE datetime null
-	, LOCAL_DELIVERY_TERM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_DELIVERY_TERM_TEXT nvarchar(100) collate SQL_Latin1_General_CP1_CI_AS null
+	, LOCAL_DELIVERY_TERM nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, LOCAL_DELIVERY_TERM_TEXT nvarchar(100) collate Danish_Norwegian_CI_AS null
 	, PAYMENT_TERM_ID int null
-	, LOCAL_PAYMENT_TERM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_PAYMENT_TERM_TEXT nvarchar(100) collate SQL_Latin1_General_CP1_CI_AS null
+	, LOCAL_PAYMENT_TERM nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, LOCAL_PAYMENT_TERM_TEXT nvarchar(100) collate Danish_Norwegian_CI_AS null
 	, INVOICE_QUANTITY decimal(12, 2) null
-	, INVOICE_UOM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_UOM nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, STATISTIC_QUANTITY decimal(12, 2) null
-	, STATISTIC_UOM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, STATISTIC_UOM nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, QUANTITY decimal(12, 2) null
-	, LOCAL_UOM nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_UOM_HARMONIZED nvarchar(20) collate SQL_Latin1_General_CP1_CI_AS null
+	, LOCAL_UOM nvarchar(20) collate Danish_Norwegian_CI_AS null
+	, LOCAL_UOM_HARMONIZED nvarchar(20) collate Danish_Norwegian_CI_AS null
 	, LOCAL_UOM_FACTOR decimal(11, 4) null
 	, INVOICE_AMOUNT decimal(15, 4) null
 	, LOCAL_AMOUNT decimal(15, 4) null
 	, GROUP_AMOUNT decimal(15, 4) null
-	, INVOICE_CURRENCY nvarchar(3) collate SQL_Latin1_General_CP1_CI_AS null
-	, LOCAL_CURRENCY nvarchar(3) collate SQL_Latin1_General_CP1_CI_AS null
+	, INVOICE_CURRENCY nvarchar(3) collate Danish_Norwegian_CI_AS null
+	, LOCAL_CURRENCY nvarchar(3) collate Danish_Norwegian_CI_AS null
 	, LINE_DISCOUNT_AMOUNT decimal(15, 4) null
 	, INVOICE_DISCOUNT_AMOUNT decimal(15, 4) null
 	, LINE_BONUS_AMOUNT decimal(15, 4) null
@@ -335,7 +337,12 @@ begin
 	exec privy.InvoiceRefresh @LoadStart = @_InsertedOn, @DebugLevel = 0 ;
 
 	--! Collect the delta hash for the unchanging row before we make another call to privy.InvoiceRefresh
-	select @_I002A_DeltaHash = EtlDeltaHash from stg.Invoice where InvoiceKey = @_I002A_InvoiceKey;
+	select @_I001A_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001A_REC_ID;
+	select @_I002A_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I002A_REC_ID;
+
+	--select @_I001A_DeltaHash,@_I002A_DeltaHash
+
+	--select SYSTEM_ID,INVOICE_NUMBER,INVOICE_LINE_NUMBER,ORDER_NUMBER,ORDER_LINE_NUMBER, * from stg.Invoice
 
 	--! Now change the data at source
 	delete Icopal_profBIS.dbo.SA_INVOICE where REC_ID = @_I001A_REC_ID
@@ -359,10 +366,10 @@ begin
 	values
 	(
 	  @_I001A_REC_ID
-	, @_I001B_SYSTEM_ID, @_I001B_LOCAL_SITE_SOLD
-	, @_I001B_INVOICE_NUMBER, @_I001B_INVOICE_LINE_NUMBER
+	, @_I001A_SYSTEM_ID, @_I001B_LOCAL_SITE_SOLD
+	, @_I001A_INVOICE_NUMBER, @_I001A_INVOICE_LINE_NUMBER
 	, @_I001B_INVOICE_DATE, @_I001B_INVOICE_TYPE
-	, @_I001B_ORDER_NUMBER, @_I001B_ORDER_LINE_NUMBER
+	, @_I001A_ORDER_NUMBER, @_I001A_ORDER_LINE_NUMBER
 	, @_I001B_ITEM_NO, @_I001B_SOLD_TO_CUSTOMER_NO, @_I001B_SHIP_TO_CUSTOMER_NO
 	, @_I001B_INVOICE_QUANTITY, @_I001B_INVOICE_UOM, @_I001B_STATISTIC_QUANTITY, @_I001B_STATISTIC_UOM, @_I001B_QUANTITY, @_I001B_LOCAL_UOM
 	, @_I001B_INVOICE_AMOUNT, @_I001B_LOCAL_AMOUNT, @_I001B_GROUP_AMOUNT
@@ -378,12 +385,11 @@ begin
 	set @_I001B_DeltaHash
 		= privy.InvoiceDeltaHash
 			(
-			  @_I001B_Uniqueifier
-			, @_I001B_SYSTEM_ID
-			, @_I001B_INVOICE_NUMBER
-			, @_I001B_ORDER_NUMBER
-			, @_I001B_INVOICE_LINE_NUMBER
-			, @_I001B_ORDER_LINE_NUMBER
+			  @_I001A_SYSTEM_ID
+			, @_I001A_INVOICE_NUMBER
+			, @_I001A_ORDER_NUMBER
+			, @_I001A_INVOICE_LINE_NUMBER
+			, @_I001A_ORDER_LINE_NUMBER
 			, @_I001B_INVOICE_DATE
 			, @_I001B_INVOICE_TYPE
 			, @_I001B_InvoiceTypeName
@@ -424,10 +430,13 @@ begin
 			, @_I001B_STD_COST
 			, @_I001B_STD_FREIGHT
 			);
-
+		
 	--! Act - this second call to InvoiceRefresh should only update one record: I001(A/B)
 	exec privy.InvoiceRefresh @LoadStart = @_ModifiedOn, @DebugLevel = 0 ;
-	
+
+	select @_I001A_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I001A_REC_ID;
+	select @_I002A_DeltaHash = EtlDeltaHash from stg.Invoice where REC_ID = @_I002A_REC_ID;
+
 	--! Assert - What do we expect to see?
 	insert #expected
 	(
@@ -490,45 +499,45 @@ begin
 	)
 	values
 	(
-	  @_I002A_InvoiceKey
-	, @_I002A_DeltaHash
-	, @_InsertedOn
-	, @_ModifiedBy
-	, @_InsertedOn
-	, @_ModifiedBy
-	, null -- EtlDeletedOn
-	, null -- EtlDeletedBy
-	, @_I002A_IsDeleted
-	, @_I002A_REC_ID
-	, @_I002A_SYSTEM_ID
-	, @_I002A_INVOICE_DATE
-	, @_I002A_INVOICE_NUMBER
-	, @_I002A_INVOICE_LINE_NUMBER
+	  @_I002A_InvoiceKey 
+	, @_I002A_DeltaHash collate Danish_Norwegian_CI_AS
+	, @_InsertedOn 
+	, @_ModifiedBy collate Danish_Norwegian_CI_AS
+	, @_InsertedOn 
+	, @_ModifiedBy collate Danish_Norwegian_CI_AS
+	, null  -- EtlDeletedOn collate Danish_Norwegian_CI_AS
+	, null  -- EtlDeletedBy
+	, @_I002A_IsDeleted collate Danish_Norwegian_CI_AS
+	, @_I002A_REC_ID 
+	, @_I002A_SYSTEM_ID 
+	, @_I002A_INVOICE_DATE 
+	, @_I002A_INVOICE_NUMBER 
+	, @_I002A_INVOICE_LINE_NUMBER 
 	, @_I002A_ORDER_NUMBER
-	, @_I002A_ORDER_LINE_NUMBER
-	, @_I002A_Uniqueifier
-	, @_I002A_INVOICE_TYPE
-	, @_I002A_InvoiceTypeName
-	, @_I002A_LOCAL_SITE_SOLD
-	, @_I002A_SITE_ID
-	, @_I002A_ITEM_NO
-	, @_STD_ITEM_CATEGORY_ID
-	, @_I002A_ENV_CATEGORY_ID
-	, @_I002A_SOLD_TO_CUSTOMER_NO
-	, @_I002A_SHIP_TO_CUSTOMER_NO
-	, @_I002A_SALESPERSON_ID
-	, @_I002A_SALESPERSON_NAME
-	, @_I002A_DELIVERY_DATE
-	, @_I002A_EXPECTED_PAYMENT_DATE
-	, @_I002A_ACTUAL_PAYMENT_DATE
-	, @_I002A_LOCAL_DELIVERY_TERM
-	, @_I002A_LOCAL_DELIVERY_TERM_TEXT
-	, @_STD_PAYMENT_TERM_ID
-	, @_I002A_LOCAL_PAYMENT_TERM
-	, @_I002A_LOCAL_PAYMENT_TERM_TEXT
-	, @_I002A_INVOICE_QUANTITY
+	, @_I002A_ORDER_LINE_NUMBER 
+	, @_I002A_Uniqueifier 
+	, @_I002A_INVOICE_TYPE collate Danish_Norwegian_CI_AS
+	, @_I002A_InvoiceTypeName 
+	, @_I002A_LOCAL_SITE_SOLD 
+	, @_I002A_SITE_ID 
+	, @_I002A_ITEM_NO 
+	, @_STD_ITEM_CATEGORY_ID 
+	, @_I002A_ENV_CATEGORY_ID 
+	, @_I002A_SOLD_TO_CUSTOMER_NO 
+	, @_I002A_SHIP_TO_CUSTOMER_NO 
+	, @_I002A_SALESPERSON_ID 
+	, @_I002A_SALESPERSON_NAME 
+	, @_I002A_DELIVERY_DATE 
+	, @_I002A_EXPECTED_PAYMENT_DATE 
+	, @_I002A_ACTUAL_PAYMENT_DATE 
+	, @_I002A_LOCAL_DELIVERY_TERM 
+	, @_I002A_LOCAL_DELIVERY_TERM_TEXT 
+	, @_STD_PAYMENT_TERM_ID 
+	, @_I002A_LOCAL_PAYMENT_TERM 
+	, @_I002A_LOCAL_PAYMENT_TERM_TEXT 
+	, @_I002A_INVOICE_QUANTITY 
 	, @_I002A_INVOICE_UOM
-	, @_I002A_STATISTIC_QUANTITY
+	, @_I002A_STATISTIC_QUANTITY 
 	, @_I002A_STATISTIC_UOM
 	, @_I002A_QUANTITY
 	, @_I002A_LOCAL_UOM
@@ -550,7 +559,7 @@ begin
 	,
 	(
 	  @_I001A_InvoiceKey
-	, @_I001B_DeltaHash
+	, @_I001A_DeltaHash
 	, @_InsertedOn
 	, @_ModifiedBy
 	, @_ModifiedOn
@@ -561,9 +570,9 @@ begin
 	, @_I001A_REC_ID
 	, @_I001B_SYSTEM_ID
 	, @_I001B_INVOICE_DATE
-	, @_I001B_INVOICE_NUMBER
-	, @_I001B_INVOICE_LINE_NUMBER
-	, @_I001B_ORDER_NUMBER
+	, @_I001A_INVOICE_NUMBER
+	, @_I001A_INVOICE_LINE_NUMBER
+	, @_I001A_ORDER_NUMBER
 	, @_I001B_ORDER_LINE_NUMBER
 	, @_I001B_Uniqueifier
 	, @_I001B_INVOICE_TYPE
@@ -606,6 +615,5 @@ begin
 	, @_I001B_STD_FREIGHT
 	, @_I001B_DuplicateCount
 	) ;
-		
-	exec tSQLt.AssertEqualsTable '#expected', 'stg.Invoice'
+		exec tSQLt.AssertEqualsTable '#expected', 'stg.Invoice'
 end

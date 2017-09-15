@@ -1,7 +1,6 @@
-﻿create function [privy].[OrderShippedNotInvoicedDeltaHash]
+﻿CREATE function [privy].[OrderShippedNotInvoicedDeltaHash]
 (
-  @Uniqueifier bigint
-, @SYSTEM_ID int
+   @SYSTEM_ID int
 , @ORDER_NUMBER nvarchar(50)
 , @ORDER_LINE_NUMBER nvarchar(50)
 , @SHIPPING_DOCUMENT nvarchar(50)
@@ -67,8 +66,7 @@ begin
 	select
 		@OutputValue = convert(nvarchar(32), hashbytes('MD5'
 						, convert(nvarchar(max)
-							, coalesce(cast(@Uniqueifier as nvarchar(30)), 'Uniqueifier')
-							+ coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
+							, coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
 							+ coalesce(nullif(@ORDER_NUMBER, ''), 'INVOICE_NUMBER')
 							+ coalesce(nullif(@ORDER_LINE_NUMBER, ''), 'INVOICE_LINE_NUMBER')
 							+ coalesce(nullif(@SHIPPING_DOCUMENT, ''), 'SHIPPING_DOCUMENT')

@@ -56,3 +56,11 @@ grant view definition to [GROUPICOPAL\uktma];
 grant view definition to [GROUPICOPAL\ukrna];
 go
 
+use [Icopal_profBIS]
+go
+grant showplan to [GROUPICOPAL\ukglu];
+grant showplan to [GROUPICOPAL\ukvmi];
+grant showplan to [GROUPICOPAL\ukjbo];
+grant showplan to [GROUPICOPAL\ukrna];
+go
+

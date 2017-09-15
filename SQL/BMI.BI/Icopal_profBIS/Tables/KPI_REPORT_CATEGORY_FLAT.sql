@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[KPI_REPORT_CATEGORY_FLAT] (
+    [REPORT_CATEGORY_ID] [dbo].[D_INT]  NOT NULL,
+    [REPORT_TYPE_ID]     [dbo].[D_INT]  NULL,
+    [REPORT_SORT_ID]     [dbo].[D_INT]  NULL,
+    [REPORT_LEVEL]       [dbo].[D_INT]  NULL,
+    [LEVEL_0_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_1_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_2_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_3_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_4_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_5_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_6_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_7_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_8_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_9_ID]         [dbo].[D_INT]  NULL,
+    [LEVEL_0_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_1_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_2_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_3_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_4_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_5_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_6_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_7_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_8_NAME]       [dbo].[N_C100] NULL,
+    [LEVEL_9_NAME]       [dbo].[N_C100] NULL,
+    CONSTRAINT [PK_KPI_REPORT_CATEGORY_FLAT] PRIMARY KEY CLUSTERED ([REPORT_CATEGORY_ID] ASC)
+);
+

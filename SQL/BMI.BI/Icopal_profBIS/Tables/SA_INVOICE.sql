@@ -48,8 +48,11 @@
     [MATERIAL_CHAR5]          [dbo].[N_C50]       NULL,
     [MATERIAL_CHAR5_VALUE]    [dbo].[D_DEC12.2]   NULL,
     [KEEP_RECORD]             [dbo].[N_BOOLEAN_N] NULL,
+    [ETL_CREATED_ON]          DATETIME            CONSTRAINT [DF_SA_INVOICE_ETL_CREATED_ON] DEFAULT (getdate()) NULL,
     CONSTRAINT [PK_SA_INVOICE] PRIMARY KEY CLUSTERED ([REC_ID] ASC)
 );
+
+
 
 
 GO

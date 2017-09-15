@@ -33,6 +33,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 003		25-JUL-2017		GML		BSR-132	Further revised Uniqueifier logic mark all non-preferred dupes as inactive
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+004		06-Sep-2017		RN		BSR-132	De-duping before the merge statement instaed after.
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -208,14 +209,16 @@ begin
 		set @_Step = 'Upsert Main'
 		set @_StepStartTime = getdate();
 
-		;with sourceCte
+		;with sourceCte1
 		as
 		(
 			--! The following columns are defined as NOT NULL on the source table: REC_ID, SYSTEM_ID, SITE_SOLD, INVOICE_NUMBER, INVOICE_LINE_NUMBER
 			--! In the first pass we use REC_ID (a GUID) to uniquely identify each source record.  Then later, we use the following columns to de-dupe:
 			--! SYSTEM_ID, INVOICE_NUMBER, ORDER_NUMBER, INVOICE_LINE_NUMBER, ORDER_LINE_NUMBER
 			select
-				  inv.REC_ID
+				row_number() over (partition by inv.SYSTEM_ID, inv.INVOICE_NUMBER, inv.ORDER_NUMBER, inv.INVOICE_LINE_NUMBER, inv.ORDER_LINE_NUMBER order by 
+				inv.ETL_CREATED_ON desc ,EtlUpdatedOn desc,inv.INVOICE_DATE desc, InvoiceKey desc,inv.REC_ID desc) as rn
+				,  inv.REC_ID
 				, inv.SYSTEM_ID
 				, inv.INVOICE_DATE
 				, inv.INVOICE_NUMBER as [INVOICE_NUMBER]
@@ -281,8 +284,7 @@ begin
 				--! Encapsulate ALL non-key columns into a hash value to speed up CDC checks during susbseqent loads
 				, privy.InvoiceDeltaHash
 					(
-					  coalesce(tgt.Uniqueifier, 1)
-					, inv.SYSTEM_ID
+					  inv.SYSTEM_ID
 					, inv.INVOICE_NUMBER
 					, inv.ORDER_NUMBER
 					, inv.INVOICE_LINE_NUMBER
@@ -370,9 +372,20 @@ begin
 				and isnull(pCat.ITEM_CATEGORY_ID, -1) <> @_ExcludeFromQlikViewProductCategoryId
 				and isnull(lcc.CUSTOMER_CATEGORY_ID, -1) <> @_ExcludeFromQlikViewCustomerCategoryId
 		)
+		,sourceCte as (select * from sourceCte1 where rn=1	)
 		merge into stg.Invoice as tgt
 		using sourceCte as src
-			on src.REC_ID = tgt.REC_ID
+		on 
+		src.SYSTEM_ID=tgt.SYSTEM_ID  --collate SQL_Latin1_General_CP1_CI_AS
+		and 
+		src.INVOICE_NUMBER=tgt.INVOICE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
+		and 
+		src.ORDER_NUMBER=tgt.ORDER_NUMBER collate SQL_Latin1_General_CP1_CI_AS
+		and
+		src.INVOICE_LINE_NUMBER=tgt.INVOICE_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
+		and
+		src.ORDER_LINE_NUMBER=tgt.ORDER_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
+
 		when not matched by target
 			then insert
 			(  
@@ -628,8 +641,7 @@ begin
 				, u.DupeCount
 				, privy.InvoiceDeltaHash
 					(
-					  u.Uniqueifier
-					, i.SYSTEM_ID
+					i.SYSTEM_ID
 					, i.INVOICE_NUMBER
 					, i.ORDER_NUMBER
 					, i.INVOICE_LINE_NUMBER

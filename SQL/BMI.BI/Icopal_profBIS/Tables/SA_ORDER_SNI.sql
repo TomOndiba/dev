@@ -28,6 +28,9 @@
     [SALESPERSON_ID]        [dbo].[N_C20]       NULL,
     [SALESPERSON_NAME]      [dbo].[N_C100]      NULL,
     [KEEP_RECORD]           [dbo].[N_BOOLEAN_N] NULL,
+    [ETL_CREATED_ON]        DATETIME            CONSTRAINT [DF_SA_ORDER_SNI_ETL_CREATED_ON] DEFAULT (getdate()) NOT NULL,
     CONSTRAINT [PK_SA_ORDER_SNI] PRIMARY KEY CLUSTERED ([REC_ID] ASC)
 );
+
+
 

@@ -1,7 +1,6 @@
-﻿create function [privy].[OrderBacklogDeltaHash]
+﻿CREATE function [privy].[OrderBacklogDeltaHash]
 (
-  @Uniqueifier bigint
-, @SYSTEM_ID int
+  @SYSTEM_ID int
 , @ORDER_NUMBER nvarchar(50)
 , @ORDER_LINE_NUMBER nvarchar(50)
 , @EXPECTED_INVOICE_DATE datetime
@@ -66,8 +65,7 @@ begin
 	select
 		@OutputValue = convert(nvarchar(32), hashbytes('MD5'
 						, convert(nvarchar(max)
-							, coalesce(cast(@Uniqueifier as nvarchar(30)), 'Uniqueifier')
-							+ coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
+							,  coalesce(cast(@SYSTEM_ID as varchar(30)), 'SYSTEM_ID')
 							+ coalesce(nullif(@ORDER_NUMBER, ''), 'INVOICE_NUMBER')
 							+ coalesce(nullif(@ORDER_LINE_NUMBER, ''), 'INVOICE_LINE_NUMBER')
 							+ coalesce(convert(varchar(24), @EXPECTED_INVOICE_DATE, 120), 'EXPECTED_INVOICE_DATE')

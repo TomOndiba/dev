@@ -2,6 +2,42 @@
     AS 'Y';
 
 
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_SHIFT_REPORT].[MANUAL_INPUT]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_OLD].[MANUAL_INPUT]';
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_SHIFT_REPORT_BACKUP].[MANUAL_INPUT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_SHIFT_DATA_BACKUP].[MANUEL_INPUT]';
+
+
+
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION_NEW_BACKUP].[MANUAL_INPUT]';
+
+
+GO
+EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_SHIFT_DATA].[MANUEL_INPUT]';
+
+
+
+
+
+
+
 GO
 EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[MD_SYSTEMID].[REMOVE_FTP_FILE]';
 
@@ -15,7 +51,7 @@ EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_S
 
 
 GO
-EXECUTE sp_bindefault @defname = N'[dbo].[Boolean Y]', @objname = N'[dbo].[KPI_SHIFT_PRODUCTION].[MANUAL_INPUT]';
+
 
 
 GO

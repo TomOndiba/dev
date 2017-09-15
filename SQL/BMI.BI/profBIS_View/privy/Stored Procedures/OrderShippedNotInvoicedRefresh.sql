@@ -1,4 +1,4 @@
-﻿create procedure [privy].[OrderShippedNotInvoicedRefresh]
+﻿CREATE procedure [privy].[OrderShippedNotInvoicedRefresh]
 (
   @LoadStart datetime
 , @DebugLevel tinyint = 0
@@ -33,7 +33,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 003		25-JUL-2017		GML		BSR-132	Further revised Uniqueifier logic mark all non-preferred dupes as inactive
 ------- ------------	------	-------	-----------------------------------------------------------------------------
-
+004		06-Sep-2017		RN		BSR-132	Further revised De-Dupe process before merge instead after merge.
 **********************************************************************************************************************/
 --</CommentHeader>
 begin
@@ -207,13 +207,15 @@ begin
 		set @_Step = 'Upsert Main'
 		set @_StepStartTime = getdate();
 
-		;with sourceCte
+		;with sourceCte1
 		as
 		(
 			--! The following columns are defined as NOT NULL on the underlying table: REC_ID, SYSTEM_ID, SITE_SOLD
 			--! We use the following columns to uniquely identify each row: SYSTEM_ID, ORDER_NUMBER, ORDER_LINE_NUMBER, SHIPPING_DOCUMENT and Uniqueifier
 			select
-				  ord.REC_ID
+				 row_number() over (partition by ord.SYSTEM_ID, ord.ORDER_NUMBER, ord.ORDER_LINE_NUMBER, ord.SHIPPING_DOCUMENT order by 
+				ord.ETL_CREATED_ON desc, EtlUpdatedOn desc,ord.EXPECTED_INVOICE_DATE desc, OrderShippedNotInvoicedKey desc,ord.REC_ID desc) as rn
+				, ord.REC_ID
 				, ord.SYSTEM_ID
 				, coalesce(ord.ORDER_NUMBER, '') as [ORDER_NUMBER]
 				, coalesce(ord.ORDER_LINE_NUMBER, '') as [ORDER_LINE_NUMBER]
@@ -266,8 +268,7 @@ begin
 				--! Encapsulate ALL non-key columns into a hash value to speed up CDC checks during susbseqent loads
 				, privy.OrderShippedNotInvoicedDeltaHash
 					(
-					  coalesce(tgt.Uniqueifier, 1)
-					, ord.SYSTEM_ID
+					  ord.SYSTEM_ID
 					, ord.ORDER_NUMBER
 					, ord.ORDER_LINE_NUMBER
 					, ord.SHIPPING_DOCUMENT
@@ -340,9 +341,18 @@ begin
 				and isnull(pCat.ITEM_CATEGORY_ID, -1) <> @_ExcludeFromQlikViewProductCategoryId
 				and isnull(lcc.CUSTOMER_CATEGORY_ID, -1) <> @_ExcludeFromQlikViewCustomerCategoryId
 		)
+	,  sourceCte as
+		(select * from sourceCte1 where rn=1)
 		merge into stg.OrderShippedNotInvoiced as tgt
 		using sourceCte as src
-			on src.REC_ID = tgt.REC_ID
+		on 
+		src.SYSTEM_ID=tgt.SYSTEM_ID  --collate SQL_Latin1_General_CP1_CI_AS
+		and 
+		src.ORDER_NUMBER=tgt.ORDER_NUMBER collate SQL_Latin1_General_CP1_CI_AS
+		and
+		src.SHIPPING_DOCUMENT=tgt.SHIPPING_DOCUMENT collate SQL_Latin1_General_CP1_CI_AS
+		and
+		src.ORDER_LINE_NUMBER=tgt.ORDER_LINE_NUMBER collate SQL_Latin1_General_CP1_CI_AS
 		when not matched by target
 			then insert
 			(  
@@ -561,8 +571,7 @@ begin
 				, u.DupeCount
 				, privy.OrderShippedNotInvoicedDeltaHash
 					(
-					  u.Uniqueifier
-					, ord.SYSTEM_ID
+					  ord.SYSTEM_ID
 					, ord.ORDER_NUMBER
 					, ord.ORDER_LINE_NUMBER
 					, ord.SHIPPING_DOCUMENT

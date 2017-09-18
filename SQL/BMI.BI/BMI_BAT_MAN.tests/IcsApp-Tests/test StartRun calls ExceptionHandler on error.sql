@@ -1,4 +1,4 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun calls ExceptionHandler on error]
+﻿CREATE   procedure [IcsApp-Tests].[test StartRun calls ExceptionHandler on error]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -8,7 +8,7 @@ begin
 	exec tSQLt.SpyProcedure @ProcedureName = N'log4.ExceptionHandler';
 
 	select
-		  cast('Failed to record start of run for ICRT Process: "A", ICRT Sub-Process: "B" and MCT Name: NULL at step: [Validate inputs]' as varchar(max)) as [ErrorContext]
+		  cast('Failed to record start of run for ICRT Process: "A", ICRT Sub-Process: "B" and MCT Name: NULL at step: [Validate Inputs]' as varchar(max)) as [ErrorContext]
 		, cast('[IcsApp].[StartRun]' as varchar(max)) as [ErrorProcedure]
 	into
 		#expected

@@ -38,6 +38,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		01-Aug-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+001		18-Sep-2017		RN		N/A		Cast numeric values to varchar(255) for merge statemnet isnull operation
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -156,9 +157,8 @@ begin
 						set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ', '''')<>' + 'isnull(t.' + @columnname +','''')';
 				
 					if (@columndatatype in ('int','float','real','bigint','tinyint','decimal','smallint','numeric','bit','money','smallmoney'))
-						set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ',-999) <>' + 'isnull(t.' + @columnname+',-999)' ;
-
-					end 
+						set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(cast(s.' + @columnname + ' as varchar(255)),'''') <>' + 'isnull(cast(t.' + @columnname+' as varchar(255)),'''')' ;
+				end 
 					
 			set @i = @i + 1 ;
 		end ;

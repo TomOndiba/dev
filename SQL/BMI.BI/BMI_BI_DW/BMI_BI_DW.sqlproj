@@ -338,6 +338,7 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
     <Folder Include="Migrations\1.0.4" />
     <Folder Include="Migrations\1.0.5" />
+    <Folder Include="Migrations\1.0.6\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />

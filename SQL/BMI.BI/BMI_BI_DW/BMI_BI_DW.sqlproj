@@ -1045,7 +1045,7 @@ Static Data;
     <None Include="Programmable Objects\etl\Stored Procedures\CheckForDuplicateQlikViewTransactions.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.6\012_Poland_Constraints_Standardised_ukrna.sql" />
+    <None Include="Migrations\1.0.6\012_Poland_Constraints_Standardised.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.6\001_Remove_incorrect_case_SAP_GBR_tables_.sql" />

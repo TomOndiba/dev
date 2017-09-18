@@ -369,6 +369,7 @@ Static Data;
     <None Include="Static Data\dbo.Country.data.sql" />
     <None Include="Static Data\dbo.Culture.data.sql" />
     <None Include="Static Data\dbo.TranslationStatus.data.sql" />
+    <None Include="Static Data\dbo.TsaToPsaControlTable.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -1045,6 +1046,22 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.6\012_Poland_Constraints_Standardised_ukrna.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.6\001_Remove_incorrect_case_SAP_GBR_tables_.sql" />
+    <None Include="Migrations\1.0.6\002_Add_new_SAP_GBR_tables.sql" />
+    <None Include="Migrations\1.0.6\003_Add_NotNull_PK_on_Psa_Tables.sql" />
+    <None Include="Migrations\1.0.6\004_Refactor_TsaToPsaLoadControlTable.sql" />
+    <None Include="Migrations\1.0.6\005_Recreate_SAP_GBR_tables.sql" />
+    <None Include="Migrations\1.0.6\006_Re-delete_SAP_DEU_land_tables.sql" />
+    <None Include="Migrations\1.0.6\007_Add_Tsa_Poland_Tables_And_NotNull Constraints_And_PKs_For_m3_m3v7.sql" />
+    <None Include="Migrations\1.0.6\008_Add_Movex_And_Poland_Tables_And_Constraints.sql" />
+    <None Include="Migrations\1.0.6\009_Add_m3v7_PKs.sql" />
+    <None Include="Migrations\1.0.6\010_Truncate Tsa tables.sql" />
+    <None Include="Migrations\1.0.6\011_Create_Clustered_Index_On_Tsa.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Stored Procedures\PopulateTsaToPsaLoadControlTable.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

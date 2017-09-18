@@ -74,6 +74,7 @@ Table=[psa].[ICS_STG_test];
 Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
+StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1297,6 +1298,9 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.6\012_Poland_Constraints_Standardised.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.6\013_psa.ics_stg_m3v7_OINVOL_PK_Rearranged.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

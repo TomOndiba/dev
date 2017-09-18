@@ -1,10 +1,10 @@
-﻿create   procedure [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error]
+﻿CREATE   procedure [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error]
 as
 begin
 	exec tSQLt.SpyProcedure @ProcedureName = N'log4.ExceptionHandler';
 
 	select
-		  cast('Failed to output current run Ids for MCT Name: NULL at step: [Validate inputs]' as varchar(max)) as [ErrorContext]
+		  cast('Failed to output current run Ids for MCT Name: NULL at step: [Validate Inputs]' as varchar(max)) as [ErrorContext]
 		, cast('[IcsApp].[MappingConfigTaskGetCurrentRunIds]' as varchar(max)) as [ErrorProcedure]
 	into
 		#expected

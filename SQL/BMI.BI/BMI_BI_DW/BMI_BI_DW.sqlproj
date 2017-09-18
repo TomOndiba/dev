@@ -32,7 +32,7 @@
     <PostDeploymentSubFolder>Post-Deployment</PostDeploymentSubFolder>
     <GenerateSqlPackage>True</GenerateSqlPackage>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DeployChangesForProgrammableObjects>False</DeployChangesForProgrammableObjects>
+    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
     <DeployOnceUseSemver>True</DeployOnceUseSemver>
     <SemverInitialBaseline>True</SemverInitialBaseline>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
@@ -125,6 +125,7 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
 1c8c4dc5-8292-5543-a1fb-f2b75fa1e109|Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql;
 131969b2-c406-5950-a8d9-e7a552a86a97|Programmable Objects\pbi\Views\factSaleForecastTotal.sql;
 </DeployChangesExecutionOrder>
+    <IncludeObjectsInDataSync />
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
@@ -1037,6 +1038,9 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\etl\Stored Procedures\CheckForDuplicateQlikViewTransactions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.6\012_20170915-1748_ukrna.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

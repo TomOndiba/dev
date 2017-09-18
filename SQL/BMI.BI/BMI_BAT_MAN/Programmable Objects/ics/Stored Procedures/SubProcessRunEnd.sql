@@ -56,7 +56,7 @@ begin
 	declare	@_ExceptionId int;
 
 	begin try
-		set @_step = 'Record POC' ;
+		set @_Step = 'Record POC' ;
 
 		/*===============================================================================================*/
 		/**/	set @_Message = 'Record end of Sub-process run - Not Yet Implemented'

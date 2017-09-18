@@ -99,6 +99,9 @@ d97c8bf2-6979-5773-9063-b5bc29f01103|Programmable Objects\ics\Stored Procedures\
 fefeebd1-8d51-528c-8869-49475887df83|Static Data\batch.RunState.data.sql;
 </DeployChangesExecutionOrder>
     <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
+    <AdditionalScriptFolders>
+Static Data;
+</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>

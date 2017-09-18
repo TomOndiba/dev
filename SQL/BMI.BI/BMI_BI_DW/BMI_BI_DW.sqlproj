@@ -1296,7 +1296,7 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <None Include="Migrations\1.0.6\010_Truncate Tsa tables.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.6\012_20170915-1748_ukrna.sql" />
+    <None Include="Migrations\1.0.6\012_Poland_Constraints_Standardised.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -32,7 +32,7 @@
     <PostDeploymentSubFolder>Post-Deployment</PostDeploymentSubFolder>
     <GenerateSqlPackage>True</GenerateSqlPackage>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DeployChangesForProgrammableObjects>False</DeployChangesForProgrammableObjects>
+    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
     <DeployOnceUseSemver>True</DeployOnceUseSemver>
     <ExcludeObjectsFromSync>
 Schema=[dbo].[log4];

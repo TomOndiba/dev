@@ -127,6 +127,9 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
 131969b2-c406-5950-a8d9-e7a552a86a97|Programmable Objects\pbi\Views\factSaleForecastTotal.sql;
 </DeployChangesExecutionOrder>
     <IncludeObjectsInDataSync />
+    <AdditionalScriptFolders>
+Static Data;
+</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
@@ -1297,13 +1300,7 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
     <None Include="Migrations\1.0.6\010_Truncate Tsa tables.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.6\012_Poland_Constraints_Standardised.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Migrations\1.0.6\013_psa.ics_stg_m3v7_OINVOL_PK_Rearranged.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\014_PKs_And_Constraints_Fix.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\etl\Stored Procedures\CheckForDuplicateQlikViewTransactions.sql" />

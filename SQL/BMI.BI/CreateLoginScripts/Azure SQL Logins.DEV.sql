@@ -75,3 +75,15 @@ go
 if not exists (select 1 from sys.database_principals where name = 'PowerBiReaderDev')
 	create user [PowerBiReaderDev] for login [PowerBiReaderDev] with default_schema = [dbo];
 go
+
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'ReleaseManager')
+	create login [ReleaseManager] with password = 'De1tyL!keP0wer5' ;
+else
+	alter login [ReleaseManager] with password = 'De1tyL!keP0wer5' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'ReleaseManager')
+	create user [ReleaseManager] for login [ReleaseManager] with default_schema = [dbo];
+go

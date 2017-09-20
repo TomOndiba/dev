@@ -118,6 +118,8 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'BmiBiMartFeedProd'						, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'PowerBiReaderDev'						, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'PowerBiReaderProd'						, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'ReleaseManager'							, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'ReleaseManager'							, 'dbo'	, 1	, 1)
 
 	--! SQL Developers
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
@@ -229,6 +231,7 @@ values ('', '')
 	, ('BmiBiMartFeedProd'						, 'DataFeedWriters')
 	, ('PowerBiReaderDev'						, 'PowerBiReporters')
 	, ('PowerBiReaderProd'						, 'PowerBiReporters')
+	, ('ReleaseManager'							, 'DeploymentManagers')
 
 	, (''		, 'DeploymentManagers')
 	, (''		, 'CodeReviewers')

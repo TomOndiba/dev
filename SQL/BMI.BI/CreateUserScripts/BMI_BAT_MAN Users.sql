@@ -110,6 +110,8 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'BmiBiDwFeedProd'							, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'BmiBiMartFeedDev'						, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'BmiBiMartFeedProd'						, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'ReleaseManager'							, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'ReleaseManager'							, 'dbo'	, 1	, 1)
 
 	--! SQL Developers
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
@@ -178,6 +180,7 @@ values ('', '')
 	, ('BmiBiDwFeedProd'						, 'IcsDataFeeders')
 	, ('BmiBiMartFeedDev'						, 'IcsDataFeeders')
 	, ('BmiBiMartFeedProd'						, 'IcsDataFeeders')
+	, ('ReleaseManager'							, 'DeploymentManagers')
 
 	, (''		, 'DeploymentManagers')
 	, (''		, 'CodeReviewers')
@@ -539,3 +542,10 @@ if object_id(N'tempdb..#Users') is not null drop table #Users;
 go
 if object_id(N'tempdb..#RoleMembers') is not null drop table #RoleMembers;
 go
+
+if not exists (select 1 from sys.database_principals where name = 'ReleaseManager')
+	create user [ReleaseManager] for login [ReleaseManager] with default_schema = [dbo];
+go
+exec sp_addrolemember 'BatchManagers', 'ReleaseManager' ;
+go
+

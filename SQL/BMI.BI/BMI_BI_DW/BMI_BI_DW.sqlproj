@@ -531,7 +531,7 @@ Static Data;
     <None Include="Migrations\1.0.1\010_AddColumn_InvoiceQuantityConformed.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.2\001_Add_Schema_And_tables.sql" />
+    <None Include="Migrations\1.0.2\001_Permission.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\Security\Schemas\idq.sql" />
@@ -1208,6 +1208,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\etl\Stored Procedures\CheckForDuplicateQlikViewTransactions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.2\002_Create_Schema_And_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

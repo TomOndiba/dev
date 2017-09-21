@@ -1,72 +1,5 @@
 ﻿-- <Migration ID="c3f0c86b-e07d-462a-8a96-2713776de39b" />
 GO
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[stg].[SSIS_BUDGET_ProductCategoryLookup]') AND type in (N'U'))
-ALTER TABLE [stg].[SSIS_BUDGET_ProductCategoryLookup] DROP CONSTRAINT IF EXISTS [FK_SSIS_BUDGET_ProductCategoryLookup_ProductCategoryGroup]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[stg].[SSIS_BUDGET_BusinessUnitLookup]') AND type in (N'U'))
-ALTER TABLE [stg].[SSIS_BUDGET_BusinessUnitLookup] DROP CONSTRAINT IF EXISTS [FK_SSIS_BUDGET_BusinessUnitLookup_Region]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[TranslationColour]') AND type in (N'U'))
-ALTER TABLE [qvstg].[TranslationColour] DROP CONSTRAINT IF EXISTS [FK_qvstg_TranslationColour_TranslationStatus]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[TranslationColour]') AND type in (N'U'))
-ALTER TABLE [qvstg].[TranslationColour] DROP CONSTRAINT IF EXISTS [FK_qvstg_TranslationColour_Culture_Translated]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[TranslationColour]') AND type in (N'U'))
-ALTER TABLE [qvstg].[TranslationColour] DROP CONSTRAINT IF EXISTS [FK_qvstg_TranslationColour_Culture_Source]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[TranslationColour]') AND type in (N'U'))
-ALTER TABLE [qvstg].[TranslationColour] DROP CONSTRAINT IF EXISTS [FK_qvstg_TranslationColour_Country_Source]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductTranslation_qvstg_Product]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductTranslation_TranslationStatus]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductTranslation_Culture_Translated]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductTranslation_Culture_Source]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductTranslation_Country_Source]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductColourTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductColourTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductColourTranslation_qvstg_Product]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductColourTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductColourTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductColourTranslation_TranslationStatus]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductColourTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductColourTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductColourTranslation_Culture_Translated]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductColourTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductColourTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductColourTranslation_Culture_Source]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[qvstg].[ProductColourTranslation]') AND type in (N'U'))
-ALTER TABLE [qvstg].[ProductColourTranslation] DROP CONSTRAINT IF EXISTS [FK_qvstg_ProductColourTranslation_Country_Source]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[log4Private].[JournalDetail]') AND type in (N'U'))
-ALTER TABLE [log4Private].[JournalDetail] DROP CONSTRAINT IF EXISTS [FK_JournalDetail_Journal]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[log4Private].[Journal]') AND type in (N'U'))
-ALTER TABLE [log4Private].[Journal] DROP CONSTRAINT IF EXISTS [FK_Journal_SqlException]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[log4Private].[Journal]') AND type in (N'U'))
-ALTER TABLE [log4Private].[Journal] DROP CONSTRAINT IF EXISTS [FK_Journal_Severity]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Culture]') AND type in (N'U'))
-ALTER TABLE [dbo].[Culture] DROP CONSTRAINT IF EXISTS [FK_Culture_Culture]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Culture]') AND type in (N'U'))
-ALTER TABLE [dbo].[Culture] DROP CONSTRAINT IF EXISTS [FK_Culture_Country_AsIs]
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Country]') AND type in (N'U'))
-ALTER TABLE [dbo].[Country] DROP CONSTRAINT IF EXISTS [FK_Country_Country]
-GO
 /****** Object:  Table [tsa].[ics_land_movex_OSBSTD]    Script Date: 21/09/2017 10:46:31 ******/
 DROP TABLE IF EXISTS [tsa].[ics_land_movex_OSBSTD]
 GO
@@ -810,79 +743,7 @@ DROP TABLE IF EXISTS [tsa].[ics_land_M3V10gen_POL_CIDADR]
 GO
 /****** Object:  Table [tsa].[ics_land_M3V10gen_POL_CCURRA]    Script Date: 21/09/2017 10:46:46 ******/
 DROP TABLE IF EXISTS [tsa].[ics_land_M3V10gen_POL_CCURRA]
-GO
-/****** Object:  Table [stg].[SSIS_STG_BUDGET_2017_VolumeCheck]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_STG_BUDGET_2017_VolumeCheck]
-GO
-/****** Object:  Table [stg].[SSIS_STG_BUDGET_2017_Volume]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_STG_BUDGET_2017_Volume]
-GO
-/****** Object:  Table [stg].[SSIS_STG_BUDGET_2017_SalesCheck]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_STG_BUDGET_2017_SalesCheck]
-GO
-/****** Object:  Table [stg].[SSIS_STG_BUDGET_2017_Sales]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_STG_BUDGET_2017_Sales]
-GO
-/****** Object:  Table [stg].[SSIS_LAND_BUDGET_2017_Volume]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_LAND_BUDGET_2017_Volume]
-GO
-/****** Object:  Table [stg].[SSIS_LAND_BUDGET_2017_Sales]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_LAND_BUDGET_2017_Sales]
-GO
-/****** Object:  Table [stg].[SSIS_BUDGET_RegionLookup]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_BUDGET_RegionLookup]
-GO
-/****** Object:  Table [stg].[SSIS_BUDGET_ProductCategoryLookup]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_BUDGET_ProductCategoryLookup]
-GO
-/****** Object:  Table [stg].[SSIS_BUDGET_ProductCategoryGroupLookup]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_BUDGET_ProductCategoryGroupLookup]
-GO
-/****** Object:  Table [stg].[SSIS_BUDGET_BusinessUnitLookup]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [stg].[SSIS_BUDGET_BusinessUnitLookup]
-GO
-/****** Object:  Table [qvstg].[TranslationColour]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [qvstg].[TranslationColour]
-GO
-/****** Object:  Table [qvstg].[Site]    Script Date: 21/09/2017 10:46:46 ******/
-DROP TABLE IF EXISTS [qvstg].[Site]
-GO
-/****** Object:  Table [qvstg].[ProductTranslation]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[ProductTranslation]
-GO
-/****** Object:  Table [qvstg].[ProductColourTranslation]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[ProductColourTranslation]
-GO
-/****** Object:  Table [qvstg].[ProductCategory]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[ProductCategory]
-GO
-/****** Object:  Table [qvstg].[Product]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[Product]
-GO
-/****** Object:  Table [qvstg].[PaymentTerm]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[PaymentTerm]
-GO
-/****** Object:  Table [qvstg].[OrderShippedNotInvoiced]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[OrderShippedNotInvoiced]
-GO
-/****** Object:  Table [qvstg].[OrderBacklog]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[OrderBacklog]
-GO
-/****** Object:  Table [qvstg].[Invoice]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[Invoice]
-GO
-/****** Object:  Table [qvstg].[Customer]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[Customer]
-GO
-/****** Object:  Table [qvstg].[BusinessUnit]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[BusinessUnit]
-GO
-/****** Object:  Table [qvstg].[BudgetVolumes]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[BudgetVolumes]
-GO
-/****** Object:  Table [qvstg].[BudgetSales]    Script Date: 21/09/2017 10:46:47 ******/
-DROP TABLE IF EXISTS [qvstg].[BudgetSales]
-GO
+go
 /****** Object:  Table [psa].[ics_stg_movex_OSBSTD]    Script Date: 21/09/2017 10:46:47 ******/
 DROP TABLE IF EXISTS [psa].[ics_stg_movex_OSBSTD]
 GO
@@ -1617,40 +1478,5 @@ DROP TABLE IF EXISTS [psa].[ics_stg_M3V10gen_POL_CIDMAS]
 GO
 /****** Object:  Table [psa].[ics_stg_M3V10gen_POL_CCURRA]    Script Date: 21/09/2017 10:47:02 ******/
 DROP TABLE IF EXISTS [psa].[ics_stg_M3V10gen_POL_CCURRA]
-GO
-/****** Object:  Table [log4Private].[SqlException]    Script Date: 21/09/2017 10:47:02 ******/
-DROP TABLE IF EXISTS [log4Private].[SqlException]
-GO
-/****** Object:  Table [log4Private].[Severity]    Script Date: 21/09/2017 10:47:02 ******/
-DROP TABLE IF EXISTS [log4Private].[Severity]
-GO
---/****** Object:  Table [log4Private].[JournalDetail]    Script Date: 21/09/2017 10:47:02 ******/
---DROP TABLE IF EXISTS [log4Private].[JournalDetail]
-----GO
---/****** Object:  Table [log4Private].[JournalControl]    Script Date: 21/09/2017 10:47:02 ******/
---DROP TABLE IF EXISTS [log4Private].[JournalControl]
---GO
---/****** Object:  Table [log4Private].[Journal]    Script Date: 21/09/2017 10:47:02 ******/
---DROP TABLE IF EXISTS [log4Private].[Journal]
---GO
---/****** Object:  Table [dbo].[__MigrationLog]    Script Date: 21/09/2017 10:47:02 ******/
---DROP TABLE IF EXISTS [dbo].[__MigrationLog]
---GO
-/****** Object:  Table [dbo].[TsaToPsaLoadControlTable]    Script Date: 21/09/2017 10:47:02 ******/
 DROP TABLE IF EXISTS [dbo].[TsaToPsaLoadControlTable]
-GO
-/****** Object:  Table [dbo].[TranslationStatus]    Script Date: 21/09/2017 10:47:03 ******/
-DROP TABLE IF EXISTS [dbo].[TranslationStatus]
-GO
-/****** Object:  Table [dbo].[DataSource]    Script Date: 21/09/2017 10:47:03 ******/
-DROP TABLE IF EXISTS [dbo].[DataSource]
-GO
-/****** Object:  Table [dbo].[Culture]    Script Date: 21/09/2017 10:47:03 ******/
-DROP TABLE IF EXISTS [dbo].[Culture]
-GO
-/****** Object:  Table [dbo].[Country]    Script Date: 21/09/2017 10:47:03 ******/
-DROP TABLE IF EXISTS [dbo].[Country]
-GO
-/****** Object:  Table [dbo].[Calendar]    Script Date: 21/09/2017 10:47:03 ******/
-DROP TABLE IF EXISTS [dbo].[Calendar]
 GO

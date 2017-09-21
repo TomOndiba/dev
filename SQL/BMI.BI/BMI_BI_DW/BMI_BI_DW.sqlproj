@@ -332,7 +332,6 @@ Static Data;
     <Folder Include="Schema-Model\tsa\Tables\" />
     <Folder Include="Migrations\1.0.1" />
     <Folder Include="Migrations\1.0.2" />
-    <Folder Include="Migrations\1.0.3" />
     <Folder Include="Programmable Objects\dbo\Stored Procedures\" />
     <Folder Include="Programmable Objects\privy\" />
     <Folder Include="Programmable Objects\privy\Stored Procedures\" />
@@ -340,8 +339,6 @@ Static Data;
     <Folder Include="Schema-Model\utils\Stored Procedures" />
     <Folder Include="Programmable Objects\IcsApp\" />
     <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
-    <Folder Include="Migrations\1.0.4" />
-    <Folder Include="Migrations\1.0.6" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -534,16 +531,7 @@ Static Data;
     <None Include="Migrations\1.0.1\010_AddColumn_InvoiceQuantityConformed.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.2\001_GrantExtraRolesSelectOnPbiSchema.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\001_Rename_psa_IsProcessedToIsIncomplete.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\002_Add_ICS_sproc_dummy_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\003_Rename_EtlSampleTable_column.sql" />
+    <None Include="Migrations\1.0.2\001_Add_Schema_And_tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\Security\Schemas\idq.sql" />
@@ -640,13 +628,9 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\dbo\Stored Procedures\PopulatepsaTotsaLoadControlTable.sql" />
     <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaValidateSchema.sql" />
-    <None Include="Migrations\1.0.3\004_Create_psa_and_tsa_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\privy\Stored Procedures\BuildAndRunMerge.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\005_Add_Columns_To_psaTotsaLoadControlTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\utils\Stored Procedures\LoadCalendarDimension.sql" />
@@ -656,16 +640,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql" />
-    <None Include="Migrations\1.0.3\006_Create_schema_IcsApp.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\007_Modify_psaTotsaLoadControlTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\privy\Stored Procedures\DeDupe.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\008_Add_IDQ_schema.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql" />
@@ -673,10 +650,6 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaBuildAndRunMerge.sql" />
     <None Include="Programmable Objects\privy\Stored Procedures\TsaToPsaDeDupe.sql" />
-    <None Include="Migrations\1.0.3\009_rename_PsaToPsa_procedures.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\010_drop_all_old_psa_tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_movex_CCURRA.sql" />
@@ -696,9 +669,6 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_movex_OSBSTD.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.3\011_add_new_psa_movex_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\tsa\Tables\ics_land_movex_CCURRA.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_movex_CSYTAB.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_movex_MILOMA.sql" />
@@ -716,20 +686,8 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_movex_OSBSTD.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.3\012_add_new_tsa_movex_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\013_Remove_ICS_POC_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_movex_MITPOP.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_movex_MITPOP.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.3\014_Add_movex_MITPOP_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.4\001_drop_country_M3_tsa_tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\tsa\Tables\ics_land_m3_CCURRA.sql" />
@@ -750,9 +708,6 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_m3_OSBSTD.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.4\002_add_new_tsa_M3_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_CCURRA.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_CSYTAB.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_MILOMA.sql" />
@@ -769,9 +724,6 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_OOHEAD.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_OOLINE.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_OSBSTD.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.4\003_add_new_psa_M3_tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_CCURRA.sql" />
@@ -792,12 +744,6 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_OSBSTD.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.4\005_add_new_tsa_M3V7_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.4\004_drop_country_M3v7_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CCURRA.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CSYTAB.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MILOMA.sql" />
@@ -814,15 +760,6 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OOHEAD.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OOLINE.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_OSBSTD.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.4\006_add_new_psa_M3V7_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.4\007_Remove_sysname_from_psaToTsaLoadControlTable.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\001_Remove_incorrect_case_SAP_GBR_tables_.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_BKPF.sql" />
@@ -858,12 +795,6 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VEDA.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VTTK.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_VTTP.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\002_Add_new_SAP_GBR_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\003_Add_NotNull_PK_on_Psa_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\dbo\Tables\TsaToPsaLoadControlTable.sql" />
@@ -905,15 +836,6 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_VEDA.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_VTTK.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_VTTP.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\005_Recreate_SAP_GBR_tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\004_Refactor_TsaToPsaLoadControlTable.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\006_Re-delete_SAP_DEU_land_tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_CCURRA.sql" />
@@ -1036,9 +958,6 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_OPAYMD.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_OPAYMH.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_OSBSTD.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\007_Add_Tsa_Poland_Tables_And_NotNull Constraints_And_PKs_For_m3_m3v7.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_land_M3V10gen_POL_CCURRA.sql" />
@@ -1285,22 +1204,7 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_OSBSTD.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.6\008_Add_Movex_And_Poland_Tables_And_Constraints.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\009_Add_m3v7_PKs.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\011_Create_Clustered_Index_On_Tsa.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Static Data\dbo.TsaToPsaControlTable.data.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\010_Truncate Tsa tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.6\013_psa.ics_stg_m3v7_OINVOL_PK_Rearranged.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\etl\Stored Procedures\CheckForDuplicateQlikViewTransactions.sql" />

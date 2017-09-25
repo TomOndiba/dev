@@ -74,7 +74,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 			exec [privy].[TsaToPsaValidateSchema] @DataSourceKey ;
 
-			update	dbo.TsaToPsaLoadControlTable set Done = 0 ;
+			update	dbo.TsaToPsaLoadControlTable set Done = 0 where DataSourceKey=@DataSourceKey;
 
 			set @max =(select	count(*) from dbo.TsaToPsaLoadControlTable	where DataSourceKey = @DataSourceKey group by DataSourceKey) ;
 		

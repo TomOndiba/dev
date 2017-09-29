@@ -217,6 +217,13 @@
     <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds throws error after handling exception.sql" />
     <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values.sql" />
     <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart stop message includes running ProcessRunId.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart outputs ProcessRunId as null on stopped batch.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart instructs STOP on process already running.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart instructs RUN on no process running.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart insert row into batch.ProcessRun table for an existing process.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart insert row into batch.ProcessRun table for a new process.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

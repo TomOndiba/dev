@@ -59,6 +59,15 @@ Role=[dbo].[db_datawriter];
 Role=[dbo].[db_owner];
 Schema=[dbo].[log4Private];
 StoredProcedure=[log4].[JournalWriter];
+StoredProcedure=[log4].[tSQLt_tempobject_552df64d7608412ab7748ae540bc966c];
+Schema=[dbo].[ics];
+Schema=[dbo].[IcsApp];
+StoredProcedure=[log4Private].[SessionInfoOutput];
+StoredProcedure=[log4Utils].[ExceptionReader];
+StoredProcedure=[log4Utils].[JournalPrinter];
+StoredProcedure=[log4Utils].[JournalReader];
+StoredProcedure=[log4Utils].[PrintString];
+StoredProcedure=[log4].[ExceptionHandler];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -102,6 +111,7 @@ fefeebd1-8d51-528c-8869-49475887df83|Static Data\batch.RunState.data.sql;
     <AdditionalScriptFolders>
 Static Data;
 </AdditionalScriptFolders>
+    <IncludeObjectsInDataSync />
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>

@@ -286,3 +286,5 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/PostgreSQL/adventureworks_sales_extract_json_mssql.sql
+/PostgreSQL/sales_extract_xml_mssql.sql

@@ -13,11 +13,11 @@ CREATE procedure [ics].[ProcessRunStart]
   , @RunType	   varchar(8)	= null output
   , @Instruction   varchar(16)	= null output
   , @Message	   varchar(500) = null output
-  , @SetDate	   datetime =null
+  , @SetDate	   datetime		= null
 )
 as
 	--<CommentHeader>
-	/**********************************************************************************************************************
+/**********************************************************************************************************************
 
 Properties
 ==========
@@ -60,30 +60,47 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_Step varchar(128) ;
 		declare @_ExceptionId int ;
 		declare @BatchProcessId int ;
-		declare @_Isdisable bit=1;
+		declare @_Isdisable bit = 1 ;
 
 		begin try
 			set @_Step = 'Fetch dummy values for stub' ;
-			set @SetDate=isnull(@SetDate,getdate());
+			set @SetDate = isnull(@SetDate, getdate()) ;
 
 			exec [batch].[ProcessGetIdFromIcrtProcessName]
 				@IcrtProcessName = @ProcessName
 			  , @BatchProcessName = null	---optinal if null set to @ProcessName in the sp
 			  , @BatchProcessId = @BatchProcessId output ;
-			  			  		  
-			set @_Isdisable=(select IsDisabled from batch.Process where BatchProcessId=@BatchProcessId)
-			set @_Isdisable=isnull(@_Isdisable,0);
 
+			set @_Isdisable =
+			(
+				select	IsDisabled from batch.Process where BatchProcessId = @BatchProcessId
+			) ;
+			set @_Isdisable = isnull(@_Isdisable, 0) ;
 
-		select @_Isdisable
 			if exists
-			(select	1 from [batch].[ProcessRun]	where BatchProcessId = @BatchProcessId
-				and EndTime is null)
+			(
+				select
+					1
+				from
+					[batch].[ProcessRun]
+				where
+					BatchProcessId = @BatchProcessId
+					and EndTime is null and @_Isdisable=0
+			)
 				begin
-							
-					declare  @_ProcessRunID int =(select	ProcessRunId from [batch].[ProcessRun]	where BatchProcessId = @BatchProcessId		and EndTime is null)
-					set @ProcessRunId = NULL;
-					set @Message = 'Failed to start new batch process as it is already in progress with a ProcessRunId of '	+ coalesce(cast(@_ProcessRunID as varchar(16)), '' );
+
+					declare @_ProcessRunID int = (
+													 select
+															ProcessRunId
+													 from
+															[batch].[ProcessRun]
+													 where
+															BatchProcessId = @BatchProcessId
+														 and EndTime is null
+												 ) ;
+					set @ProcessRunId = null ;
+					set @Message = 'Failed to start new batch process as it is already in progress with a ProcessRunId of '
+								   + coalesce(cast(@_ProcessRunID as varchar(16)), '') ;
 					set @ProcessRunId = null ;
 					set @Instruction = 'STOP' ;
 
@@ -108,126 +125,126 @@ Version	ChangeDate		Author	BugRef	Narrative
 					)
 					values
 					(
-						@BatchProcessId		
-					  , @IcrtProcessId
-					  , @SetDate			
-					  , @SetDate			
-					  , 4					
-					  , 'process stopped'	
-					  , 'process already existed'					
-					  , @SetDate		
-					  , @SetDate		
+						@BatchProcessId, @IcrtProcessId, @SetDate, @SetDate, 4, 'process stopped', 'process already existed', @SetDate, @SetDate
 					) ;
 
-		
+
 				end ;
 
-			if not exists(select	1	from	[batch].[ProcessRun]	where		BatchProcessId = @BatchProcessId
-				and EndTime is null 
-				
-				)
+			if not exists
+			(
+				select
+					1
+				from
+					[batch].[ProcessRun]
+				where
+					BatchProcessId = @BatchProcessId
+					and EndTime is null
+			)
 				begin
-			
-
-					if  @_Isdisable=0
-			begin
-            select '1'
-					insert into batch.ProcessRun
-					(
-						BatchProcessId
-					  , IcrtProcessId
-					  , StartTime
-					  , RunStateId
-					  , EndState
-					  , EndMessage
-					  , MinChangeDataCapturePoint
-					  , MaxChangeDataCapturePoint
-					)
-					values
-					(
-
-						@BatchProcessId
-					  , @IcrtProcessId	
-					  , @SetDate
-					  , 1			
-					  , ''			
-					  , ''			
-					  , @SetDate
-					  , @SetDate
-					) ;
-
-					set @ProcessRunId =
-					(
-						select
-							max(ProcessRunId)
-						from
-							batch.ProcessRun
-						where
-							IcrtProcessId = @IcrtProcessId
-							and EndState = ''
-					) ;
-
-					set @Instruction = 'RUN' ;
-					set @Message = '' ;
-
-					select	@RunType = RunType	from	dbo.StubResultSet	where		FunctionName = @_FunctionName ;
-					set @ProcessRunId =	(select	ProcessRunId from batch.ProcessRun	where BatchProcessId = @BatchProcessId and EndState = ''	) ;
-					end 
 
 
+					if @_Isdisable = 0
+						begin
+						insert into batch.ProcessRun
+							(
+								BatchProcessId
+							  , IcrtProcessId
+							  , StartTime
+							  , RunStateId
+							  , EndState
+							  , EndMessage
+							  , MinChangeDataCapturePoint
+							  , MaxChangeDataCapturePoint
+							)
+							values
+							(
+								@BatchProcessId, @IcrtProcessId, @SetDate, 1, '', '', @SetDate, @SetDate
+							) ;
 
+							set @ProcessRunId =
+							(
+								select
+									max(ProcessRunId)
+								from
+									batch.ProcessRun
+								where
+									IcrtProcessId = @IcrtProcessId
+									and EndState = ''
+							) ;
 
-					
-					if  @_Isdisable=1
-			begin
-            select '1'
-					insert into batch.ProcessRun
-					(
-						BatchProcessId
-					  , IcrtProcessId
-					  , StartTime
-					  , RunStateId
-					  , EndState
-					  , EndMessage
-					  , MinChangeDataCapturePoint
-					  , MaxChangeDataCapturePoint
-					)
-					values
-					(
+							set @Instruction = 'RUN' ;
+							set @Message = '' ;
 
-						@BatchProcessId
-					  , @IcrtProcessId	
-					  , @SetDate
-					  , 1			
-					  , ''			
-					  , ''			
-					  , @SetDate
-					  , @SetDate
-					) ;
+							select
+								@RunType = RunType
+							from
+								dbo.StubResultSet
+							where
+								FunctionName = @_FunctionName ;
+							set @ProcessRunId =
+							(
+								select
+									ProcessRunId
+								from
+									batch.ProcessRun
+								where
+									BatchProcessId = @BatchProcessId
+									and EndState = ''
+							) ;
+						end ;
 
-					set @ProcessRunId =
-					(
-						select
-							max(ProcessRunId)
-						from
-							batch.ProcessRun
-						where
-							IcrtProcessId = @IcrtProcessId
-							and EndState = ''
-					) ;
+					if @_Isdisable = 1
+						begin
+						insert into batch.ProcessRun
+							(
+								BatchProcessId
+							  , IcrtProcessId
+							  , StartTime
+							  , EndTime
+							  , RunStateId
+							  , EndState
+							  , EndMessage
+							  , MinChangeDataCapturePoint
+							  , MaxChangeDataCapturePoint
+							)
+							values
+							(
+								@BatchProcessId, @IcrtProcessId, @SetDate,@SetDate, 4, 'process stopped', 'process is disabled', @SetDate, @SetDate
+							) ;
 
-					set @Instruction = 'RUN' ;
-					set @Message = '' ;
+							set @ProcessRunId =
+							(
+								select
+									max(ProcessRunId)
+								from
+									batch.ProcessRun
+								where
+									IcrtProcessId = @IcrtProcessId
+									and EndState = ''
+							) ;
 
-					select	@RunType = RunType	from	dbo.StubResultSet	where		FunctionName = @_FunctionName ;
-					set @ProcessRunId =	(select	ProcessRunId from batch.ProcessRun	where BatchProcessId = @BatchProcessId and EndState = ''	) ;
-					end 
+							set @Instruction = 'STOP' ;
+							set @Message = '' ;
+
+							select
+								@RunType = RunType
+							from
+								dbo.StubResultSet
+							where
+								FunctionName = @_FunctionName ;
+							set @ProcessRunId =
+							(
+								select
+									ProcessRunId
+								from
+									batch.ProcessRun
+								where
+									BatchProcessId = @BatchProcessId
+									and EndState = ''
+							) ;
+						end ;
 				end ;
-
-				
-
-			
-			
 				
 		end try
 		begin catch
@@ -235,8 +252,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 								 + ' and ICRT Process Id: ' + coalesce(cast(@IcrtProcessId as varchar(32)), 'NULL') + ' at step: '
 								 + coalesce('[' + @_Step + ']', 'NULL') + ' (New Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL') + ')' ;
 
-							
-	
+
+
 			exec log4.ExceptionHandler
 				@ErrorContext = @_ErrorContext
 			  , @ErrorProcedure = @_FunctionName
@@ -244,7 +261,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , @ReturnMessage = @_Message out
 			  , @ExceptionId = @_ExceptionId out ;
 
-	
+
 		end catch ;
 
 		--/////////////////////////////////////////////////////////////////////////////////////////////////

@@ -6,6 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
 CREATE procedure [ics].[SubProcessRunStart]
 (
 	@ProcessName	 varchar(200)
@@ -64,6 +65,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_BatchProcessId int ;
 		declare @_IcrtSubProcessId int ;
 		declare @temp table (StepRunId int);
+		declare @_StepId int;
 
 		begin try
 
@@ -75,7 +77,14 @@ Version	ChangeDate		Author	BugRef	Narrative
 			exec ics.IcrtSubProcessGetId
 				@IcrtSubProcessName = @SubProcessName
 			  , @BatchProcessId = @_BatchProcessId
-			  , @IcrtSubProcessId = @_IcrtSubProcessId output ;
+			  , @IcrtSubProcessId = @_IcrtSubProcessId output;
+
+
+			  EXEC	[batch].[StepGetId]
+				@IcrtSubProcessId = @_IcrtSubProcessId,
+				@StepName=@SubProcessName,
+		@BatchProcessId = @_BatchProcessId,
+		@StepId = @_StepId OUTPUT
 
 			set @Instruction = 'RUN' ;
 			set @Message = '' ;
@@ -92,8 +101,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , EndMessage
 			)
 		 output inserted.StepRunId
-		 INTO  @temp
-			values(	@ProcessRunId, @_IcrtSubProcessId, @SetDate, '', 1, '', '' );
+		 into  @temp
+			values(	@ProcessRunId, @_StepId, @SetDate, null, 1, '', '' );
 			
 			set @SubProcessRunId=(select StepRunId from @temp);
 		

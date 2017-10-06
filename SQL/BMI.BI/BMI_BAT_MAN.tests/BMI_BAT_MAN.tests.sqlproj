@@ -231,6 +231,7 @@
     <Build Include="Ics-ModuleTests\test SubProcessRunStart insert rows into batch.StepRun table.sql" />
     <Build Include="Ics-ModuleTests\test SubProcessRunStart calls ics.IcrtSubProcessGetId.sql" />
     <Build Include="Ics-ModuleTests\test SubProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart calls ics.MappingConfigTaskGetId.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

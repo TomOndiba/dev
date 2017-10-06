@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test SubProcessRunStart insert rows into batch.StepRun table]
+﻿CREATE   procedure [Ics-ModuleTests].[test SubProcessRunStart insert rows into batch.StepRun table]
 as
 	begin
 		--! Mock all the calls that might be made by this wrapper sproc
@@ -13,6 +13,10 @@ as
 		exec tSQLt.SpyProcedure
 			@ProcedureName = N'ics.IcrtSubProcessGetId'
 		  , @CommandToExecute = N'set @IcrtSubProcessId=1' ; ;
+
+		exec tSQLt.SpyProcedure
+			@ProcedureName = N'batch.StepGetId'
+		  , @CommandToExecute = N'set @StepId=1' ; 
 
 		delete	from batch.StepRun ;
 
@@ -33,7 +37,7 @@ as
 		  , cast(1 as int) as ProcessRunId
 		  , cast(1 as int) as StepId
 		  , @SetDate	   as StartTime
-		  , ''			   as EndTime
+		  , cast (null as datetime)			   as EndTime
 		  , cast(1 as int) as RunStateId
 		  , ''			   as EndState
 		  , ''			   as EndMessage

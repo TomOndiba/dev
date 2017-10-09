@@ -16,6 +16,7 @@ CREATE procedure [ics].[ThreadRunStart]
   , @Message			   varchar(500) = null output
   , @StartCapturePoint	   datetime		= null output
   , @EndCapturePoint	   datetime		= null output
+  , @SetDate			   datetime		=null 
 )
 as
 	--<CommentHeader>
@@ -64,12 +65,14 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 		begin try
 
+		set @SetDate=isnull(@SetDate,getdate());
+
+	
 			exec [ics].[MappingConfigTaskGetId]
 				@MappingConfigTaskName = @MappingConfigTaskName
 			  , @MappingName = @MappingName
 			  , @MappingConfigTaskId = @_MappingConfigTaskId out ;
 
-			  
 			set @StepId =
 			(
 				select	StepId from batch.StepRun where StepRunId = @SubProcessRunId
@@ -77,24 +80,23 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 			exec batch.ThreadGetId
 				@ThreadName = @MappingConfigTaskName
-			  , @StepId = @SubProcessRunId						-- int
-			  , @MappingConfigTaskId =@_MappingConfigTaskId		-- int
-			  , @ThreadId = @_ThreadId output ; -- int
-			  
-			set @_Step = 'Fetch dummy values for stub' ;
+			  , @StepId = @StepId								-- int
+			  , @MappingConfigTaskId = @_MappingConfigTaskId	-- int
+			  , @ThreadId = @_ThreadId output ;					-- int
+
+			set @Instruction = 'RUN' ;
+			set @Message = '' ;
 			
+			set @_Step = 'Fetch dummy values for stub' ;
 			select
-				 @RunType		   = RunType
-			  , @Message		   = [Message]
-			  , @StartCapturePoint = StartCapturePoint
+				@RunType		   = RunType
+			   , @StartCapturePoint = StartCapturePoint
 			  , @EndCapturePoint   = EndCapturePoint
 			from
 				dbo.StubResultSet
 			where
 				FunctionName = @_FunctionName ;
-				set @Instruction='Run'
-				set @Message='';
-
+				
 			insert into batch.ThreadRun
 			(
 				StepRunId
@@ -113,22 +115,22 @@ Version	ChangeDate		Author	BugRef	Narrative
 			)
 			values
 			(
-				@SubProcessRunId			-- StepRunId - int
-			  , @_ThreadId		-- ThreadId - int
-			  , getdate()	-- StartTime - datetime
-			  , null	-- EndTime - datetime
-			  , 1			-- RunStateId - int
-			  , ''			-- EndState - varchar(16)
-			  , ''			-- EndMessage - varchar(500)
-			  , 0			-- SuccessSourceRows - int
-			  , 0			-- FailedSourceRows - int
-			  , 0			-- SuccessTargetRows - int
-			  , 0			-- FailedTargetRows - int
-			  , null	-- MinChangeDataCapturePoint - datetime
-			  , null	-- MaxChangeDataCapturePoint - datetime
-			) 
+				1--@SubProcessRunId	-- StepRunId - int
+			  , 1--@_ThreadId			-- ThreadId - int
+			  , @SetDate			-- StartTime - datetime
+			  , null				-- EndTime - datetime
+			  , 1					-- RunStateId - int
+			  , ''					-- EndState - varchar(16)
+			  , ''					-- EndMessage - varchar(500)
+			  , 0					-- SuccessSourceRows - int
+			  , 0					-- FailedSourceRows - int
+			  , 0					-- SuccessTargetRows - int
+			  , 0					-- FailedTargetRows - int
+			  , null				-- MinChangeDataCapturePoint - datetime
+			  , null				-- MaxChangeDataCapturePoint - datetime
+			) ;
 
-			
+
 		end try
 		begin catch
 			set @_ErrorContext = 'Failed to start new thread run' + ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL') + ' , Mapping: '

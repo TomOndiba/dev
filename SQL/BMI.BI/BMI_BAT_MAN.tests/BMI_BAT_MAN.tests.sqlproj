@@ -232,6 +232,10 @@
     <Build Include="Ics-ModuleTests\test SubProcessRunStart calls ics.IcrtSubProcessGetId.sql" />
     <Build Include="Ics-ModuleTests\test SubProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql" />
     <Build Include="Ics-ModuleTests\test ThreadRunStart calls ics.MappingConfigTaskGetId.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart sets %40Message.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart sets %40Instruction.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart insert rows into batch.ThreadRun table.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart calls batch.ThreadGetId.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

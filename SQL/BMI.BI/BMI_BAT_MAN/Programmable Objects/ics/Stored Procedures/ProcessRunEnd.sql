@@ -6,12 +6,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create   proc [ics].[ProcessRunEnd]
+CREATE   proc [ics].[ProcessRunEnd]
 (
   @ProcessName varchar(100)
 , @ProcessRunId int
-, @EndState varchar(16)
+, @EndState varchar(100)
 , @EndMessage varchar(500) = null
+, @SetDate  datetime= null
 )
 as
 --<CommentHeader>
@@ -53,10 +54,29 @@ begin
 	declare	@_ErrorContext nvarchar(512);
 	declare	@_Step varchar(128);
 	declare	@_ExceptionId int;
-
+	declare @BatchProcessId int;
+	declare @RunStateId int;
+	
+	
 	begin try
-		set @_Step = 'Record POC' ;
+		set @_Step = 'Record POC';
+		set @SetDate =isnull(@SetDate,getdate());
+		
+		set @RunStateId=(select RunStateId from batch.RunState
+		where RunStateName=@EndState);
+	
+		set @BatchProcessId=(select BatchProcessId from batch.Process
+		where BatchProcessName=@ProcessName);
+				
+		update batch.ProcessRun
+		set EndTime=@SetDate,
+		RunStateId=@RunStateId,
+		EndState='',
+		EndMessage=''
+		where ProcessRunId=@ProcessRunId
+		and BatchProcessId=@BatchProcessId;
 
+					
 		/*===============================================================================================*/
 		/**/	set @_Message = 'Record end of Process run - Not Yet Implemented'
 		/**/		+ ' for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')

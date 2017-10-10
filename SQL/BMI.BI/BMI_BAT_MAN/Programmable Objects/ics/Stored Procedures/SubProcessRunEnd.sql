@@ -6,13 +6,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create proc [ics].[SubProcessRunEnd]
+CREATE proc [ics].[SubProcessRunEnd]
 (
   @ProcessName varchar(100)
 , @SubProcessName varchar(100)
 , @SubProcessRunId int
-, @EndState varchar(16)
+, @EndState varchar(100)
 , @EndMessage varchar(500) = null
+, @SetDate datetime =null
 )
 as
 --<CommentHeader>
@@ -54,9 +55,22 @@ begin
 	declare	@_ErrorContext nvarchar(512);
 	declare	@_Step varchar(128);
 	declare	@_ExceptionId int;
+	declare @RunStateId int;
 
 	begin try
-		set @_Step = 'Record POC' ;
+				
+		set @_Step = 'Record POC';
+		set @SetDate =isnull(@SetDate,getdate());
+		
+		set @RunStateId=(select RunStateId from batch.RunState
+		where RunStateName=@EndState);
+
+		update batch.StepRun
+		set EndTime=@SetDate
+		,RunStateId=@RunStateId
+		,EndState=''
+		,EndMessage=''
+		where StepRunId=@SubProcessRunId;		
 
 		/*===============================================================================================*/
 		/**/	set @_Message = 'Record end of Sub-process run - Not Yet Implemented'
@@ -105,7 +119,6 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error) ;
 end ;
-
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Records the end state of the indicated sub-process run.  ICS Note:  This call is not required if the output from the initiating call from this sub-process to SubProcessRunStart was “SKIP”, “STOP” or “ERROR”', 'SCHEMA', N'ics', 'PROCEDURE', N'SubProcessRunEnd', NULL, NULL
 GO

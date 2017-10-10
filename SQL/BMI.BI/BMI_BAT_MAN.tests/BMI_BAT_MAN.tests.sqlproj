@@ -236,6 +236,9 @@
     <Build Include="Ics-ModuleTests\test ThreadRunStart sets %40Instruction.sql" />
     <Build Include="Ics-ModuleTests\test ThreadRunStart insert rows into batch.ThreadRun table.sql" />
     <Build Include="Ics-ModuleTests\test ThreadRunStart calls batch.ThreadGetId.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunEnd updates batch.ThreadRun.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunEnd updates batch.StepRun.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunEnd updates batch.ProcessRun.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

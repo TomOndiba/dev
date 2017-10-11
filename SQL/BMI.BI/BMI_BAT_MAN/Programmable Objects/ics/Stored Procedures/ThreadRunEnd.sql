@@ -43,6 +43,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		24-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+002		11-OCT-2017		RN		N/A		Modified- stub repleaced with logic
 
 **********************************************************************************************************************/
 	--</CommentHeader>
@@ -66,32 +67,38 @@ Version	ChangeDate		Author	BugRef	Narrative
 
 			set @SetDate = isnull(@SetDate, getdate()) ;
 
+			--set @RunStateId =
+			--(
+			--	select	RunStateId from batch.RunState where RunStateName = @EndState
+			--) ;
+
+
 			set @RunStateId =
 			(
-				select RunStateId from batch.RunState where RunStateName = @EndState
+				select
+					s.RunStateId
+				from
+					batch.RunStateFlag f
+				  , batch.RunState s
+				where
+					s.FlagBit = f.FlagBit
+					and s.RunStateName like 'Thre%'
+					and f.FlagName = @EndState
 			) ;
-
+			
 			update
 				batch.ThreadRun
 			set
 				EndTime = @SetDate
 			  , RunStateId = @RunStateId
-			  , EndState = ''
-			  , EndMessage = ''
+			  , EndState = @EndState
+			  , EndMessage = @EndMessage
 			  , SuccessSourceRows = @SuccessSourceRows
 			  , FailedSourceRows = @FailedSourceRows
 			  , SuccessTargetRows = @SuccessTargetRows
 			  , FailedTargetRows = @FailedTargetRows
 			where
 				ThreadRunId = @ThreadRunId ;
-
-		/*===============================================================================================*/
-			/**/ set @_Message = 'Record end of Thread run - Not Yet Implemented'
-			/**/				 + ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
-			/**/				 + ' , Mapping: ' + coalesce('"' + @MappingName + '"', 'NULL')
-			/**/				 + ' and (BatMan) Thread Run Id: ' + coalesce(cast(@ThreadRunId as varchar(32)), 'NULL')
-			/**/				 + ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL') ;
-		/*===============================================================================================*/
 
 		end try
 		begin catch
@@ -112,21 +119,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 		EndEx:
 		--/////////////////////////////////////////////////////////////////////////////////////////////////
 
-		/*===========================================================================*/
-		/**/ exec log4.JournalWriter
-		/**/
-				 @Task = 'POC'
-									/**/
-			   , @FunctionName = @_FunctionName
-									/**/
-			   , @StepInFunction = @_Step
-									/**/
-			   , @MessageText = @_Message
-									/**/
-			   , @Severity = 1024	-- DEBUG
-									/**/
-			   , @ExceptionId = @_ExceptionId ;
-		/*===========================================================================*/
 
 		--! Finally, throw an exception that will be detected by the caller
 		if @_Error > 0 raiserror(@_Message, 16, 99) ;

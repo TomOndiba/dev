@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test ThreadRunEnd updates batch.ThreadRun]
+﻿CREATE procedure [Ics-ModuleTests].[test ThreadRunEnd updates batch.ThreadRun]
 as
 	begin
 
@@ -49,17 +49,17 @@ as
 
 		select
 			1					   ThreadRunId
-		  , 1					   StepRunId										 -- int
-		  , 1					   ThreadId											 -- int
-		  , @SetDate			   StartTime								  -- datetime
-		  , @SetDate			   EndTime									  -- datetime
-		  , 15					   RunStateId										-- int
-		  , ''					   EndState											-- varchar(16)
-		  , ''					   EndMessage										-- varchar(500)
-		  , 10					   SuccessSourceRows								-- int
-		  , 1					   FailedSourceRows									 -- -int
-		  , 100					   SuccessTargetRows							   -- int
-		  , 1					   FailedTargetRows									 -- int
+		  , 1					   StepRunId					-- int
+		  , 1					   ThreadId						 -- int
+		  , @SetDate			   StartTime					-- datetime
+		  , @SetDate			   EndTime						-- datetime
+		  , 15					   RunStateId					-- int
+		  , 'Succeeded'			   EndState						-- varchar(16)
+		  , null				   EndMessage					-- varchar(500)
+		  , 10					   SuccessSourceRows			-- int
+		  , 1					   FailedSourceRows				-- -int
+		  , 100					   SuccessTargetRows			 -- int
+		  , 1					   FailedTargetRows				 -- int
 		  , cast(null as datetime) MinChangeDataCapturePoint	-- datetime
 		  , cast(null as datetime) MaxChangeDataCapturePoint	-- datetime
 		into
@@ -69,7 +69,7 @@ as
 			@MappingConfigTaskName = 'MCTN'
 		  , @MappingName = 'MN'
 		  , @ThreadRunId = 1
-		  , @EndState = 'Thread Succeeded'
+		  , @EndState = 'Succeeded'
 		  , @EndMessage = null
 		  , @SuccessSourceRows = 10
 		  , @FailedSourceRows = 1

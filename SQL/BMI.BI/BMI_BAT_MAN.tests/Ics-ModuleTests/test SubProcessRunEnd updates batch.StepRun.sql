@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test SubProcessRunEnd updates batch.StepRun]
+﻿CREATE   procedure [Ics-ModuleTests].[test SubProcessRunEnd updates batch.StepRun]
 as
 	begin
 
@@ -44,8 +44,8 @@ as
 		  , @SetDate StartTime	-- datetime
 		  , @SetDate EndTime	-- datetime
 		  , 9		 RunStateId		   -- int
-		  , ''		 EndState		  -- varchar(16)
-		  , ''		 EndMessage		  -- varchar(500)
+		  , 'Succeeded'		 EndState		  -- varchar(16)
+		  , null		 EndMessage		  -- varchar(500)
 		into
 			#expected ;
 
@@ -53,7 +53,7 @@ as
 			@ProcessName = 'PN'
 		  , @SubProcessName = 'SPN'
 		  , @SubProcessRunId = 1
-		  , @EndState = 'Sub-Process/Step Succeeded'
+		  , @EndState = 'Succeeded'
 		  , @EndMessage = null
 		  , @SetDate = @SetDate ;
 

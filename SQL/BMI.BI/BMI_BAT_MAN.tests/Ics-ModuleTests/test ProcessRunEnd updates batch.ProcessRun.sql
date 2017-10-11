@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test ProcessRunEnd updates batch.ProcessRun]
+﻿CREATE procedure [Ics-ModuleTests].[test ProcessRunEnd updates batch.ProcessRun]
 as
 	begin
 
@@ -60,25 +60,25 @@ as
 		  , @SetDate	-- MinChangeDataCapturePoint - datetime
 		  , @SetDate	-- MaxChangeDataCapturePoint - datetime
 		) ;
-		
+
 		select
-			1		 ProcessRunId
-		  , 1		 BatchProcessId
-		  , 1		 IcrtProcessId
-		  , @SetDate StartTime
-		  , @SetDate EndTime
-		  , 3		 RunStateId
-		  , ''		 EndState						  -- varchar(16)
-		  , ''		 EndMessage						  -- varchar(500)
-		  , @SetDate MinChangeDataCapturePoint	-- datetime
-		  , @SetDate MaxChangeDataCapturePoint	-- datetime
+			1			ProcessRunId
+		  , 1			BatchProcessId
+		  , 1			IcrtProcessId
+		  , @SetDate	StartTime
+		  , @SetDate	EndTime
+		  , 3			RunStateId
+		  , 'Succeeded' EndState				-- varchar(16)
+		  , null		EndMessage					   -- varchar(500)
+		  , @SetDate	MinChangeDataCapturePoint  -- datetime
+		  , @SetDate	MaxChangeDataCapturePoint  -- datetime
 		into
 			#expected ;
-			
+
 		exec [ics].[ProcessRunEnd]
 			@ProcessName = 'PN'
 		  , @ProcessRunId = 1
-		  , @EndState = 'Process Succeeded'
+		  , @EndState = 'Succeeded'
 		  , @SetDate = @SetDate ;
 
 		exec tSQLt.AssertEqualsTable

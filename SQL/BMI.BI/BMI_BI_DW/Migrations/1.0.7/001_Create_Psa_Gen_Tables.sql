@@ -1,41 +1,15 @@
 ﻿-- <Migration ID="37c3da1f-f09b-4250-8f38-2619754af3aa" />
 GO
 
-PRINT N'Dropping constraints from [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'
-GO
-ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] DROP CONSTRAINT [CK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsProcessed]
-GO
-PRINT N'Dropping constraints from [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'
-GO
-ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] DROP CONSTRAINT [CK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsDeleted]
-GO
-PRINT N'Dropping constraints from [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'
-GO
-ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] DROP CONSTRAINT [PK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]
-GO
-PRINT N'Dropping constraints from [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'
-GO
-ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] DROP CONSTRAINT [AK_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]
-GO
-PRINT N'Dropping constraints from [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'
-GO
-ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] DROP CONSTRAINT [DF_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsProcessed]
-GO
-PRINT N'Dropping constraints from [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'
-GO
-ALTER TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName] DROP CONSTRAINT [DF_ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName_IsDeleted]
-GO
-PRINT N'Dropping constraints from [tsa].[ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName]'
-GO
-ALTER TABLE [tsa].[ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName] DROP CONSTRAINT [PK_ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName]
-GO
 PRINT N'Dropping [tsa].[ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName]'
 GO
-DROP TABLE [tsa].[ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName]
+if objectpropertyex(object_id(N'[tsa].[ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName]'), N'IsUserTable') is not null
+	DROP TABLE [tsa].[ICS_LAND_SampleSystemName_SourceCountryCode_SampleTableName]
 GO
 PRINT N'Dropping [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'
 GO
-DROP TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]
+if objectpropertyex(object_id(N'[psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]'), N'IsUserTable') is not null
+	DROP TABLE [psa].[ICS_STG_SampleSystemName_SourceCountryCode_SampleTableName]
 GO
 PRINT N'Creating [psa].[ics_stg_M3V10gen_POL_CIDADR]'
 GO

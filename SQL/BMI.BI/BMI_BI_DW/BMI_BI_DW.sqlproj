@@ -1242,7 +1242,7 @@ Static Data;
     <None Include="Migrations\1.0.7\008_Add_Col_DataSource.PbiTxnViewSource.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.7\009_20171018-1317_ukrna.sql" />
+    <None Include="Migrations\1.0.7\009_Add_SAP_GBR_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

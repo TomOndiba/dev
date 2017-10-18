@@ -231,6 +231,12 @@ set
 where
 	SourceTable like '%[_]movex[_]%' ;
 
+	update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100101
+where
+	SourceTable like '%SAP%' ;
 
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;

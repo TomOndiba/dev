@@ -114,11 +114,10 @@ begin
 
 	set @maxid  = (select max(id) from #PkeyTable) ;
 		
-	
 	while (@i <=@maxid )
 		begin
 
-			set @pkcolumnsTemp =(select PK from dbo.#PkeyTable where id=@i );
+			set @pkcolumnsTemp =(select '['+PK+']' from dbo.#PkeyTable where id=@i );
 				
 			if (@maxid>1)
 
@@ -133,7 +132,7 @@ begin
 
 			set @i=@i+1;
 	end
-
+	
 	set @pkcolumns= substring(@pkcolumns,5,len(@pkcolumns))
 			
     set @i=1;
@@ -145,19 +144,19 @@ begin
 			set @columndatatype=(select ColumnDataType from #TableStructure where id = @i) ;
 								
 			if (@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted','ExcludeFromMerge','IsDuplicate'))
-				set @insertcolumnstring = @insertcolumnstring + ',' + @columnname ;
+				set @insertcolumnstring = @insertcolumnstring + ',' + '['+@columnname+']' ;
 															
 			if ( @columnname not in  ( select	PK from #PkeyTable )  and 	@columnname not in ('EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted','ExcludeFromMerge','IsDuplicate') )
-				set @updatesetcolumnstring = @updatesetcolumnstring + ' , ' + 't.' + @columnname + '=' + 's.' + @columnname ;
+				set @updatesetcolumnstring = @updatesetcolumnstring + ' , ' + 't.[' + @columnname + ']=' + 's.[' + @columnname+']' ;
 
 			if (@columnname not in   (  select	PK from #PkeyTable  )  and	@columnname not in	('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlCreatedOn', 'EtlCreatedBy', 'EtlSourceTable', 'EtlRecordId', 'IsIncomplete', 'EtlUpdatedOn', 'EtlUpdatedBy', 'EtlDeletedOn', 'EtlDeletedBy', 'IsDeleted'	,'ExcludeFromMerge','IsDuplicate') )
 				begin 
 
 					if (@columndatatype in ('time','datetime','varchar','date','datetime2','smalldatetime','char','nvarchar','nchar'))
-						set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.' + @columnname + ', '''')<>' + 'isnull(t.' + @columnname +','''')';
+						set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(s.[' + @columnname + '], '''')<>' + 'isnull(t.[' + @columnname +'],'''')';
 				
 					if (@columndatatype in ('int','float','real','bigint','tinyint','decimal','smallint','numeric','bit','money','smallmoney'))
-						set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(cast(s.' + @columnname + ' as varchar(255)),'''') <>' + 'isnull(cast(t.' + @columnname+' as varchar(255)),'''')' ;
+						set @updatecolumnstring = @updatecolumnstring + ' or ' + 'isnull(cast(s.[' + @columnname + '] as varchar(255)),'''') <>' + 'isnull(cast(t.[' + @columnname+'] as varchar(255)),'''')' ;
 				end 
 					
 			set @i = @i + 1 ;
@@ -200,6 +199,7 @@ begin
 	set @_Step = 'Execute Merge statement ' ;
 
 	execute sp_executesql @sql ;
+
 	
 	set @_Message = 'Step: "' +  @_Step + '" processed ' + coalesce(cast(@@ROWCOUNT as varchar(16)), 'NULL') + ' row(s)'
 				+ ' in ' + log4.FormatElapsedTime(@_StepStartTime, null, 3)

@@ -60,8 +60,6 @@ Role=[dbo].[db_owner];
 Schema=[dbo].[log4Private];
 StoredProcedure=[log4].[JournalWriter];
 StoredProcedure=[log4].[tSQLt_tempobject_552df64d7608412ab7748ae540bc966c];
-Schema=[dbo].[ics];
-Schema=[dbo].[IcsApp];
 StoredProcedure=[log4Private].[SessionInfoOutput];
 StoredProcedure=[log4Utils].[ExceptionReader];
 StoredProcedure=[log4Utils].[JournalPrinter];
@@ -491,6 +489,9 @@ Static Data;
     <None Include="Programmable Objects\batch\Stored Procedures\StepGetId.sql" />
     <None Include="Programmable Objects\batch\Stored Procedures\ThreadGetId.sql" />
     <None Include="Migrations\1.0.0\020_20171006-1629_ukrna.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.0\021_IcsApp_permissions.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

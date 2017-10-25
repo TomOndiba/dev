@@ -71,7 +71,7 @@ go
 if schema_id('psa') is not null
 	begin
 		--! TRUNCATE not required on PSA tables
-		exec (N'grant select on schema :: [psa] to [DataFeedWriters];');
+		exec (N'grant select, insert, update on schema :: [psa] to [DataFeedWriters];');
 	end
 go
 if schema_id('etl') is not null

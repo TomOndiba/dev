@@ -116,7 +116,6 @@
     <Build Include="Ics-ModuleTests\test MappingConfigTaskGetId throws exception on %40MappingConfigTaskName null.sql" />
     <Build Include="Test Classes\Ics-ModuleTests.sql" />
     <Build Include="Test Classes\sqlcop.sql" />
-    <Build Include="Ics-ModuleTests\test ProcessRunStart outputs expected parameter values.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId zero when starting a thread _sub-process present_.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId zero when starting a thread _sub-process missing_.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId null when starting a thread _sub-process present_.sql" />
@@ -134,9 +133,7 @@
     <Build Include="IcsApp-Tests\test StartRun allows null input for all output parameters.sql" />
     <Build Include="IcsApp-Tests\test StartRun allows all output parameters to be ignored.sql" />
     <Build Include="Ics-ModuleTests\test ThreadRunStart throws error after handling exception.sql" />
-    <Build Include="Ics-ModuleTests\test ThreadRunStart outputs expected parameter values.sql" />
     <Build Include="Ics-ModuleTests\test SubProcessRunStart throws error after handling exception.sql" />
-    <Build Include="Ics-ModuleTests\test SubProcessRunStart outputs expected parameter values.sql" />
     <Build Include="Ics-ModuleTests\test ProcessRunStart throws error after handling exception.sql" />
     <Build Include="IcsApp-Tests\test StartRun percolates outputs from ics.ThreadRunStart.sql" />
     <Build Include="IcsApp-Tests\test StartRun percolates outputs from ics.SubProcessRunStart.sql" />

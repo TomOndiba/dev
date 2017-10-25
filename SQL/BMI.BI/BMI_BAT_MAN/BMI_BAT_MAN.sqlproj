@@ -488,7 +488,7 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\batch\Stored Procedures\StepGetId.sql" />
     <None Include="Programmable Objects\batch\Stored Procedures\ThreadGetId.sql" />
-    <None Include="Migrations\1.0.0\020_20171006-1629_ukrna.sql" />
+    <None Include="Migrations\1.0.0\020_Keys_Enabled.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.0\021_IcsApp_permissions.sql" />

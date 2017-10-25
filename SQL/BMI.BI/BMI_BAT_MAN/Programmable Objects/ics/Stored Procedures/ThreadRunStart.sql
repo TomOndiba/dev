@@ -115,8 +115,8 @@ Version	ChangeDate		Author	BugRef	Narrative
 			)
 			values
 			(
-				1--@SubProcessRunId	-- StepRunId - int
-			  , 1--@_ThreadId			-- ThreadId - int
+			@SubProcessRunId	-- StepRunId - int
+			  , @_ThreadId			-- ThreadId - int
 			  , @SetDate			-- StartTime - datetime
 			  , null				-- EndTime - datetime
 			  , 1					-- RunStateId - int

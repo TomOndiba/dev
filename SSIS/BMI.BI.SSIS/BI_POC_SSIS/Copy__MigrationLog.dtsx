@@ -1,0 +1,738 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/27/2017 11:29:08 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="UKX260-003"
+  DTS:CreatorName="GROUPICOPAL\ukglu"
+  DTS:DTSID="{9837EEE2-C46D-4C0D-8A5F-C5907EB25F27}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.90"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Copy__MigrationLog"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{541D4D37-6F87-439F-8B86-168756BBC79A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[(local).BMI_BI_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3E89E706-989E-4909-A6B7-68B138863330}"
+      DTS:ObjectName="(local).BMI_BI_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=BMI_BI_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[bmibidwh.database.windows.net.BMI_BI_DW_DEV.localadmin1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3CFC8244-BF15-42F4-9DBA-90E37928AA75}"
+      DTS:ObjectName="bmibidwh.database.windows.net.BMI_BI_DW_DEV.localadmin1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=bmibidwh.database.windows.net;User ID=localadmin;Initial Catalog=BMI_BI_DW_DEV;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="Txe/D/RkFtM="
+            IV="6oNEbGUZFOHeE0WYue/6rQ==" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" />
+            <CipherData>
+              <CipherValue>6oNEbGUZFOHeE0WYue/6rXpss/4N1lVY5+ufsAamgRfXUSzMu9kCVIDFtRjibZ1LVaE/vwyKMsddsizauoDB4fRpFWHqEYh4YXApVOmUOfCIXicZvd3b0AlvBHj3HgaEn/JHBbKapg/SS+bYF6l71oXFClWq1d3inKOSrzVBUw6uyMZjrk8XNaTFA/9DghfQ</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Copy Migration Log"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FBD1AC49-6FD2-4BCA-9CD5-42C811A41CA7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy Migration Log"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLEDB_SRC_MigrationLog"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[__MigrationLog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(local).BMI_BI_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[(local).BMI_BI_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[migration_id]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[migration_id]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[migration_id]"
+                      name="migration_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[script_checksum]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[script_checksum]"
+                      length="64"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[script_checksum]"
+                      name="script_checksum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[script_filename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[script_filename]"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[script_filename]"
+                      name="script_filename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[complete_dt]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[complete_dt]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[complete_dt]"
+                      name="complete_dt"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[applied_by]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[applied_by]"
+                      length="100"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[applied_by]"
+                      name="applied_by"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[deployed]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[deployed]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[deployed]"
+                      name="deployed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[version]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[version]"
+                      name="version"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[package_version]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[package_version]"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[package_version]"
+                      name="package_version"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[release_version]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[release_version]"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[release_version]"
+                      name="release_version"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[sequence_no]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[sequence_no]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[sequence_no]"
+                      name="sequence_no"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[migration_id]"
+                      dataType="guid"
+                      name="migration_id" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[script_checksum]"
+                      dataType="wstr"
+                      length="64"
+                      name="script_checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[script_filename]"
+                      dataType="wstr"
+                      length="255"
+                      name="script_filename" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[complete_dt]"
+                      dataType="dbTimeStamp2"
+                      name="complete_dt"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[applied_by]"
+                      dataType="wstr"
+                      length="100"
+                      name="applied_by" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[deployed]"
+                      dataType="ui1"
+                      name="deployed" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="version" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[package_version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="package_version" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[release_version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="release_version" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].ExternalColumns[sequence_no]"
+                      dataType="i4"
+                      name="sequence_no" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[migration_id]"
+                      dataType="guid"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[migration_id]"
+                      name="migration_id" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[script_checksum]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[script_checksum]"
+                      name="script_checksum" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[script_filename]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[script_filename]"
+                      name="script_filename" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[complete_dt]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[complete_dt]"
+                      name="complete_dt"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[applied_by]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[applied_by]"
+                      name="applied_by" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[deployed]"
+                      dataType="ui1"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[deployed]"
+                      name="deployed" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[version]"
+                      name="version" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[package_version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[package_version]"
+                      name="package_version" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[release_version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[release_version]"
+                      name="release_version" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[sequence_no]"
+                      dataType="i4"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[sequence_no]"
+                      name="sequence_no" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDB_TGT_MigrationLog"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[__MigrationLog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[bmibidwh.database.windows.net.BMI_BI_DW_DEV.localadmin1]"
+                  connectionManagerRefId="Package.ConnectionManagers[bmibidwh.database.windows.net.BMI_BI_DW_DEV.localadmin1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[migration_id]"
+                      cachedDataType="guid"
+                      cachedName="migration_id"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[migration_id]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[migration_id]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[script_checksum]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="script_checksum"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[script_checksum]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[script_checksum]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[script_filename]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="script_filename"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[script_filename]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[script_filename]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[complete_dt]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="complete_dt"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[complete_dt]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[complete_dt]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[applied_by]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="applied_by"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[applied_by]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[applied_by]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[deployed]"
+                      cachedDataType="ui1"
+                      cachedName="deployed"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[deployed]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[deployed]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[version]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="version"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[version]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[version]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[package_version]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="package_version"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[package_version]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[package_version]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[release_version]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="release_version"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[release_version]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[release_version]" />
+                    <inputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].Columns[sequence_no]"
+                      cachedDataType="i4"
+                      cachedName="sequence_no"
+                      externalMetadataColumnId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[sequence_no]"
+                      lineageId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output].Columns[sequence_no]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[migration_id]"
+                      dataType="guid"
+                      name="migration_id" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[script_checksum]"
+                      dataType="wstr"
+                      length="64"
+                      name="script_checksum" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[script_filename]"
+                      dataType="wstr"
+                      length="255"
+                      name="script_filename" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[complete_dt]"
+                      dataType="dbTimeStamp2"
+                      name="complete_dt"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[applied_by]"
+                      dataType="wstr"
+                      length="100"
+                      name="applied_by" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[deployed]"
+                      dataType="ui1"
+                      name="deployed" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="version" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[package_version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="package_version" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[release_version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="release_version" />
+                    <externalMetadataColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input].ExternalColumns[sequence_no]"
+                      dataType="i4"
+                      name="sequence_no" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Copy Migration Log.Paths[OLE DB Source Output]"
+              endId="Package\Copy Migration Log\OLEDB_TGT_MigrationLog.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Copy Migration Log\OLEDB_SRC_MigrationLog.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Target Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7194D9EE-60FB-42F4-809A-9EA7C50F49F8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Target Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 CTP2.1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3CFC8244-BF15-42F4-9DBA-90E37928AA75}"
+          SQLTask:SqlStatementSource="truncate table dbo.__MigrationLog" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C3803480-70F0-467F-99B4-079AB5E830BF}"
+      DTS:From="Package\Truncate Target Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Copy Migration Log" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Truncate Target Table"
+          TopLeft="106,54" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Copy Migration Log"
+          TopLeft="119,166" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="201,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70"
+              Start="0,0"
+              End="0,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Copy Migration Log">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Copy Migration Log\OLEDB_SRC_MigrationLog"
+          TopLeft="194,111" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Copy Migration Log\OLEDB_TGT_MigrationLog"
+          TopLeft="195,214" />
+        <EdgeLayout
+          Id="Package\Copy Migration Log.Paths[OLE DB Source Output]"
+          TopLeft="296,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Copy Migration Log\OLEDB_SRC_MigrationLog">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Copy Migration Log\OLEDB_TGT_MigrationLog">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

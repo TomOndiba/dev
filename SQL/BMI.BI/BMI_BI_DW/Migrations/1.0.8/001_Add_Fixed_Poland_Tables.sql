@@ -1,7 +1,5 @@
 ﻿-- <Migration ID="a0caf9f9-8b9a-49d4-ae6a-b2751cd408fd" />
 GO
--- <Migration ID="d23442fe-9b01-4d68-bc42-b165ee333be1" />
-GO
 
 PRINT N'Dropping extended properties'
 GO

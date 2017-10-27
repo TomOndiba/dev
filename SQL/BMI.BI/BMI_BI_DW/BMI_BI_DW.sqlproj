@@ -1260,9 +1260,6 @@ Static Data;
     <None Include="Migrations\1.0.7\014_Add_Poland_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.7\015_Add_Fixed_Poland_Tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Migrations\1.0.8\001_Add_Fixed_Poland_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>

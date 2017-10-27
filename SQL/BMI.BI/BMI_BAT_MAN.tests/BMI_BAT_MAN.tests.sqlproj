@@ -116,7 +116,6 @@
     <Build Include="Ics-ModuleTests\test MappingConfigTaskGetId throws exception on %40MappingConfigTaskName null.sql" />
     <Build Include="Test Classes\Ics-ModuleTests.sql" />
     <Build Include="Test Classes\sqlcop.sql" />
-    <Build Include="Ics-ModuleTests\test ProcessRunStart outputs expected parameter values.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId zero when starting a thread _sub-process present_.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId zero when starting a thread _sub-process missing_.sql" />
     <Build Include="IcsApp-Tests\test StartRun throws error on %40SubProcessRunId null when starting a thread _sub-process present_.sql" />
@@ -134,9 +133,7 @@
     <Build Include="IcsApp-Tests\test StartRun allows null input for all output parameters.sql" />
     <Build Include="IcsApp-Tests\test StartRun allows all output parameters to be ignored.sql" />
     <Build Include="Ics-ModuleTests\test ThreadRunStart throws error after handling exception.sql" />
-    <Build Include="Ics-ModuleTests\test ThreadRunStart outputs expected parameter values.sql" />
     <Build Include="Ics-ModuleTests\test SubProcessRunStart throws error after handling exception.sql" />
-    <Build Include="Ics-ModuleTests\test SubProcessRunStart outputs expected parameter values.sql" />
     <Build Include="Ics-ModuleTests\test ProcessRunStart throws error after handling exception.sql" />
     <Build Include="IcsApp-Tests\test StartRun percolates outputs from ics.ThreadRunStart.sql" />
     <Build Include="IcsApp-Tests\test StartRun percolates outputs from ics.SubProcessRunStart.sql" />
@@ -217,6 +214,28 @@
     <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds throws error after handling exception.sql" />
     <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values.sql" />
     <Build Include="IcsApp-Tests\test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart stop message includes running ProcessRunId.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart outputs ProcessRunId as null on stopped batch.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart instructs STOP on process already running.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart instructs RUN on no process running.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart insert row into batch.ProcessRun table for an existing process.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart insert row into batch.ProcessRun table for a new process.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunStart insert row into batch.ProcessRun table for a disabled process.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunStart sets %40StepRunId.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunStart sets %40Message.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunStart sets %40Instruction.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunStart insert rows into batch.StepRun table.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunStart calls ics.IcrtSubProcessGetId.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart calls ics.MappingConfigTaskGetId.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart sets %40Message.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart sets %40Instruction.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart insert rows into batch.ThreadRun table.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunStart calls batch.ThreadGetId.sql" />
+    <Build Include="Ics-ModuleTests\test ThreadRunEnd updates batch.ThreadRun.sql" />
+    <Build Include="Ics-ModuleTests\test SubProcessRunEnd updates batch.StepRun.sql" />
+    <Build Include="Ics-ModuleTests\test ProcessRunEnd updates batch.ProcessRun.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="..\..\ReferenceProjects\tSQLt_SAFE\bin\Debug\tSQLt_SAFE.dacpac">

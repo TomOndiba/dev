@@ -71,11 +71,14 @@ go
 if schema_id('psa') is not null
 	begin
 		--! TRUNCATE not required on PSA tables
-		exec (N'grant select on schema :: [psa] to [DataFeedWriters];');
+		exec (N'grant select, insert, update on schema :: [psa] to [DataFeedWriters];');
 	end
 go
 if schema_id('etl') is not null
 	exec (N'grant execute, select on schema :: [etl] to [DataFeedWriters];');
+go
+if schema_id('IcsApp') is not null
+	exec (N'grant execute on schema :: [IcsApp] to [DataFeedWriters];');
 go
 
 
@@ -106,7 +109,7 @@ go
 
 if schema_id('pbi') is not null exec (N'grant select on schema :: [pbi] to [PowerBiReporters];') ;
 go
-
+if schema_id('discovery') is not null exec (N'grant select on schema :: [discovery] to [PowerBiReporters];');
 
 --!
 --! Create read-only role for App Support Team 
@@ -291,10 +294,11 @@ grant view definition to [BusinessAnalystsPROD];
 go
 if schema_id('qvstg') is not null exec (N'grant select on schema :: [qvstg] to [BusinessAnalystsPROD];');
 if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [BusinessAnalystsPROD];');
-if schema_id('tsa') is not null exec (N'grant select on schema :: [tsa] to [BusinessAnalystsPROD];');
+if schema_id('tsa') is not null exec (N'revoke select on schema :: [tsa] to [BusinessAnalystsPROD];');
 if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [BusinessAnalystsPROD];');
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [BusinessAnalystsPROD];');
 if schema_id('pbi') is not null exec (N'grant select on schema :: [pbi] to [BusinessAnalystsPROD];');
 if schema_id('idq') is not null exec (N'grant select on schema :: [idq] to [BusinessAnalystsPROD];');
+if schema_id('discovery') is not null exec (N'grant select on schema :: [discovery] to [BusinessAnalystsPROD];');
 go
 

@@ -62,7 +62,6 @@ Role=[dbo].[DataFeedWriters];
 Role=[dbo].[DataFeedReaders];
 Role=[dbo].[DeploymentManagers];
 Role=[dbo].[DataFeeds];
-Role=[dbo].[EtlDevelopersDEV];
 Role=[dbo].[EtlDevelopersPROD];
 StoredProcedure=[utils].[LoadCalendarDimension];
 Table=[tsa].[Customer];
@@ -340,6 +339,7 @@ Static Data;
     <Folder Include="Programmable Objects\IcsApp\" />
     <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
     <Folder Include="Migrations\1.0.5\" />
+    <Folder Include="Migrations\1.0.7" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -1215,6 +1215,45 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.5\002_Create_Schema_And_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\001_Create_Psa_Gen_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\002_Create_discovery_schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\003_Add_standard_column_descriptors.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\004_BusinessUnit_column_descriptors.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\005_Customer_column_descriptors.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\006_Correct_std_column_descriptors.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\007_Porduct_column_descriptors.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\008_Add_Col_DataSource.PbiTxnViewSource.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\009_Add_SAP_GBR_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\010_SAP_Column_Name_Fixed.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\011_SAP_Constraints_Fixed.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\012_Selected_SAP_Tables_for_Prod.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\013_Additional_PSA_Permissions.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -11,6 +11,10 @@ begin
 	--!
 	alter table ics.IcrtSubProcess drop constraint FK_ics_IcrtSubProcess_batch_Process ;
 	alter table batch.Step drop constraint FK_batch_Step_batch_Process ;
+
+	alter table batch.ProcessRun drop constraint FK_batch_ProcessRun_batch_Process
+
+
 	delete batch.Process where 1 = 1;
 
 	--! Assemble

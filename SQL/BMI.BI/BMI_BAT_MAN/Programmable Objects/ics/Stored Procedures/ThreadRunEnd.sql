@@ -1,25 +1,26 @@
 if object_id('[ics].[ThreadRunEnd]') is not null
 	drop procedure [ics].[ThreadRunEnd];
 go
-set quoted_identifier on
-go
-set ansi_nulls on
-go
-create proc [ics].[ThreadRunEnd]
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE proc [ics].[ThreadRunEnd]
 (
-  @MappingConfigTaskName varchar(100)
-, @MappingName varchar(100)
-, @ThreadRunId int
-, @EndState varchar(16)
-, @EndMessage varchar(500) = null
-, @SuccessSourceRows int
-, @FailedSourceRows int
-, @SuccessTargetRows int
-, @FailedTargetRows int
+	@MappingConfigTaskName varchar(100)
+  , @MappingName		   varchar(100)
+  , @ThreadRunId		   int
+  , @EndState			   varchar(16)
+  , @EndMessage			   varchar(500) = null
+  , @SuccessSourceRows	   int
+  , @FailedSourceRows	   int
+  , @SuccessTargetRows	   int
+  , @FailedTargetRows	   int
+  , @SetDate			   datetime		= null
 )
 as
---<CommentHeader>
-/**********************************************************************************************************************
+	--<CommentHeader>
+	/**********************************************************************************************************************
 
 Properties
 ==========
@@ -42,73 +43,91 @@ Version	ChangeDate		Author	BugRef	Narrative
 =======	============	======	=======	=============================================================================
 001		24-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
+002		11-OCT-2017		RN		N/A		Modified- stub repleaced with logic
 
 **********************************************************************************************************************/
---</CommentHeader>
+	--</CommentHeader>
 
-begin
-	set nocount on ;
+	begin
+		set nocount on ;
 
-	--! Standard/ExceptionHandler variables
-	declare	@_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid));
-	declare	@_Error int = 0;
-	declare @_RowCount int = 0;
-	declare @_ReturnValue int = 0;
-	declare	@_Message nvarchar(512);
-	declare	@_ErrorContext nvarchar(512);
-	declare	@_Step varchar(128);
-	declare	@_ExceptionId int;
+		--! Standard/ExceptionHandler variables
+		declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid)) ;
+		declare @_Error int = 0 ;
+		declare @_RowCount int = 0 ;
+		declare @_ReturnValue int = 0 ;
+		declare @_Message nvarchar(512) ;
+		declare @_ErrorContext nvarchar(512) ;
+		declare @_Step varchar(128) ;
+		declare @_ExceptionId int ;
+		declare @RunStateId int ;
 
-	begin try
-		set @_Step = 'Record POC' ;
+		begin try
+			set @_Step = 'Record POC' ;
 
-		/*===============================================================================================*/
-		/**/	set @_Message = 'Record end of Thread run - Not Yet Implemented'
-		/**/		+ ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
-		/**/		+ ' , Mapping: ' + coalesce('"' + @MappingName + '"', 'NULL')
-		/**/		+ ' and (BatMan) Thread Run Id: ' + coalesce(cast(@ThreadRunId as varchar(32)), 'NULL')
-		/**/		+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
-		/*===============================================================================================*/
+			set @SetDate = isnull(@SetDate, getdate()) ;
 
-	end try
-	begin catch
-		set @_ErrorContext = 'Failed to record end of thread run'
-			+ ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
-			+ ' , Mapping: ' + coalesce('"' + @MappingName + '"', 'NULL')
-			+ ' and (BatMan) Thread Run Id: ' + coalesce(cast(@ThreadRunId as varchar(32)), 'NULL')
-			+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
-			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')
+			--set @RunStateId =
+			--(
+			--	select	RunStateId from batch.RunState where RunStateName = @EndState
+			--) ;
 
-		exec log4.ExceptionHandler
-			  @ErrorContext = @_ErrorContext
-			, @ErrorProcedure = @_FunctionName
-			, @ErrorNumber = @_Error out
-			, @ReturnMessage = @_Message out
-			, @ExceptionId = @_ExceptionId out ;
-	end catch ;
 
---/////////////////////////////////////////////////////////////////////////////////////////////////
-EndEx:
---/////////////////////////////////////////////////////////////////////////////////////////////////
+			set @RunStateId =
+			(
+				select
+					s.RunStateId
+				from
+					batch.RunStateFlag f
+				  , batch.RunState s
+				where
+					s.FlagBit = f.FlagBit
+					and s.RunStateName like 'Thre%'
+					and f.FlagName = @EndState
+			) ;
+			
+			update
+				batch.ThreadRun
+			set
+				EndTime = @SetDate
+			  , RunStateId = @RunStateId
+			  , EndState = @EndState
+			  , EndMessage = @EndMessage
+			  , SuccessSourceRows = @SuccessSourceRows
+			  , FailedSourceRows = @FailedSourceRows
+			  , SuccessTargetRows = @SuccessTargetRows
+			  , FailedTargetRows = @FailedTargetRows
+			where
+				ThreadRunId = @ThreadRunId ;
 
-	/*===========================================================================*/
-	/**/	exec log4.JournalWriter
-	/**/		  @Task = 'POC'
-	/**/		, @FunctionName = @_FunctionName
-	/**/		, @StepInFunction = @_Step
-	/**/		, @MessageText = @_Message
-	/**/		, @Severity = 1024 -- DEBUG
-	/**/		, @ExceptionId = @_ExceptionId
-	/*===========================================================================*/
+		end try
+		begin catch
+			set @_ErrorContext = 'Failed to record end of thread run' + ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
+								 + ' , Mapping: ' + coalesce('"' + @MappingName + '"', 'NULL') + ' and (BatMan) Thread Run Id: '
+								 + coalesce(cast(@ThreadRunId as varchar(32)), 'NULL') + ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
+								 + ' at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
 
-	--! Finally, throw an exception that will be detected by the caller
-	if @_Error > 0 raiserror(@_Message, 16, 99) ;
-	
-	set nocount off ;
+			exec log4.ExceptionHandler
+				@ErrorContext = @_ErrorContext
+			  , @ErrorProcedure = @_FunctionName
+			  , @ErrorNumber = @_Error out
+			  , @ReturnMessage = @_Message out
+			  , @ExceptionId = @_ExceptionId out ;
+		end catch ;
 
-	--! Return the value of @@ERROR (which will be zero on success)
-	return (@_Error) ;
-end ;
+		--/////////////////////////////////////////////////////////////////////////////////////////////////
+		EndEx:
+		--/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		--! Finally, throw an exception that will be detected by the caller
+		if @_Error > 0 raiserror(@_Message, 16, 99) ;
+
+		set nocount off ;
+
+		--! Return the value of @@ERROR (which will be zero on success)
+		return (@_Error) ;
+	end ;
 
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Records the end state of the indicated thread run.  ICS Note:  This call is not required if the output from the initiating call from this MCT to ThreadRunStart was “SKIP”, “STOP” or “ERROR”', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', NULL, NULL

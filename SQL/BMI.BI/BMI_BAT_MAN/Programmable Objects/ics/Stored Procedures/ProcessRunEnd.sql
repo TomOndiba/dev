@@ -6,16 +6,17 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create   proc [ics].[ProcessRunEnd]
+CREATE proc [ics].[ProcessRunEnd]
 (
-  @ProcessName varchar(100)
-, @ProcessRunId int
-, @EndState varchar(16)
-, @EndMessage varchar(500) = null
+	@ProcessName  varchar(100)
+  , @ProcessRunId int
+  , @EndState	  varchar(100)
+  , @EndMessage	  varchar(500) = null
+  , @SetDate	  datetime	   = null
 )
 as
---<CommentHeader>
-/**********************************************************************************************************************
+	--<CommentHeader>
+	/**********************************************************************************************************************
 
 Properties
 ==========
@@ -39,69 +40,77 @@ Version	ChangeDate		Author	BugRef	Narrative
 001		25-JUL-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 **********************************************************************************************************************/
---</CommentHeader>
+	--</CommentHeader>
 
-begin
-	set nocount on ;
+	begin
+		set nocount on ;
 
-	--! Standard/ExceptionHandler variables
-	declare	@_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid));
-	declare	@_Error int = 0;
-	declare @_RowCount int = 0;
-	declare @_ReturnValue int = 0;
-	declare	@_Message nvarchar(512);
-	declare	@_ErrorContext nvarchar(512);
-	declare	@_Step varchar(128);
-	declare	@_ExceptionId int;
+		--! Standard/ExceptionHandler variables
+		declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid)) ;
+		declare @_Error int = 0 ;
+		declare @_RowCount int = 0 ;
+		declare @_ReturnValue int = 0 ;
+		declare @_Message nvarchar(512) ;
+		declare @_ErrorContext nvarchar(512) ;
+		declare @_Step varchar(128) ;
+		declare @_ExceptionId int ;
+		declare @BatchProcessId int ;
+		declare @RunStateId int ;
 
-	begin try
-		set @_Step = 'Record POC' ;
 
-		/*===============================================================================================*/
-		/**/	set @_Message = 'Record end of Process run - Not Yet Implemented'
-		/**/		+ ' for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
-		/**/		+ ' and (BatMan) Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL')
-		/**/		+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
-		/*===============================================================================================*/
+		begin try
+			set @_Step = 'Record POC' ;
+			set @SetDate = isnull(@SetDate, getdate()) ;
 
-	end try
-	begin catch
-		set @_ErrorContext = 'Failed to record end of process run'
-			+ ' for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
-			+ ' and (BatMan) Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL')
-			+ ' with End State: ' + coalesce('[' + @EndState + ']', 'NULL')
-			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')
+			set @RunStateId =
+			(
+				select
+					s.RunStateId
+				from
+					batch.RunStateFlag f
+				  , batch.RunState s
+				where
+					s.FlagBit = f.FlagBit
+					and s.RunStateName like 'Pro%'
+					and FlagName = @EndState
+			) ;
 
-		exec log4.ExceptionHandler
-			  @ErrorContext = @_ErrorContext
-			, @ErrorProcedure = @_FunctionName
-			, @ErrorNumber = @_Error out
-			, @ReturnMessage = @_Message out
-			, @ExceptionId = @_ExceptionId out ;
-	end catch ;
+			update
+				batch.ProcessRun
+			set
+				EndTime = @SetDate
+			  , RunStateId = @RunStateId
+			  , EndState = @EndState
+			  , EndMessage = @EndMessage
+			where
+				ProcessRunId = @ProcessRunId ;
 
---/////////////////////////////////////////////////////////////////////////////////////////////////
-EndEx:
---/////////////////////////////////////////////////////////////////////////////////////////////////
+		end try
+		begin catch
+			set @_ErrorContext = 'Failed to record end of process run' + ' for ICRT Process: ' + coalesce('"' + @ProcessName + '"', 'NULL')
+								 + ' and (BatMan) Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL') + ' with End State: '
+								 + coalesce('[' + @EndState + ']', 'NULL') + ' at step: ' + coalesce('[' + @_Step + ']', 'NULL') ;
 
-	/*===========================================================================*/
-	/**/	exec log4.JournalWriter
-	/**/		  @Task = 'POC'
-	/**/		, @FunctionName = @_FunctionName
-	/**/		, @StepInFunction = @_Step
-	/**/		, @MessageText = @_Message
-	/**/		, @Severity = 1024 -- DEBUG
-	/**/		, @ExceptionId = @_ExceptionId
-	/*===========================================================================*/
+			exec log4.ExceptionHandler
+				@ErrorContext = @_ErrorContext
+			  , @ErrorProcedure = @_FunctionName
+			  , @ErrorNumber = @_Error out
+			  , @ReturnMessage = @_Message out
+			  , @ExceptionId = @_ExceptionId out ;
+		end catch ;
 
-	--! Finally, throw an exception that will be detected by the caller
-	if @_Error > 0 raiserror(@_Message, 16, 99) ;
+		--/////////////////////////////////////////////////////////////////////////////////////////////////
+		EndEx:
+		--/////////////////////////////////////////////////////////////////////////////////////////////////
 
-	set nocount off ;
+		--! Finally, throw an exception that will be detected by the caller
+		if @_Error > 0 raiserror(@_Message, 16, 99) ;
 
-	--! Return the value of @@ERROR (which will be zero on success)
-	return (@_Error) ;
-end ;
+		set nocount off ;
+
+		--! Return the value of @@ERROR (which will be zero on success)
+		return (@_Error) ;
+	end ;
 
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Records the end state of the indicated process run.  ICS Note:  This call is not required if the output from the initiating call from this process to ProcessRunStart was “SKIP”, “STOP” or “ERROR”', 'SCHEMA', N'ics', 'PROCEDURE', N'ProcessRunEnd', NULL, NULL

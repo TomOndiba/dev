@@ -74,7 +74,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , t.TABLE_CATALOG as TargetDB
 			  , t.TABLE_SCHEMA	as TargetSchema
 			  , t.TABLE_NAME	as TargetTable
-			  , 'Delta Full'	as LoadMode
+			  , 'Full'	as LoadMode
 			  , 0				as DataSourceKey
 			--,'y n' as Action 
 			from
@@ -231,6 +231,12 @@ set
 where
 	SourceTable like '%[_]movex[_]%' ;
 
+	update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100101
+where
+	SourceTable like '%SAP%' ;
 
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;

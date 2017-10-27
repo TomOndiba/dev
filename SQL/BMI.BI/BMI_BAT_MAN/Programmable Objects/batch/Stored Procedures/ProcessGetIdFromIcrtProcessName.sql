@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[batch].[ProcessGetIdFromIcrtProcessName]') IS NOT NULL
+IF OBJECT_ID('[batch].[ProcessGetIdFromIcrtProcessName]') IS NOT NULL
 	DROP PROCEDURE [batch].[ProcessGetIdFromIcrtProcessName];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create procedure [batch].[ProcessGetIdFromIcrtProcessName]
+CREATE procedure [batch].[ProcessGetIdFromIcrtProcessName]
 (
   @IcrtProcessName varchar(100)
 , @BatchProcessName varchar(100) = null
@@ -70,8 +70,8 @@ begin
 				set @_Step = 'Add Missing';
 
 				set @BatchProcessId = coalesce((select max(BatchProcessId) from batch.Process) + 1, 1) ;
-				
 				insert batch.Process(BatchProcessId, BatchProcessName, IcrtProcessName) values (@BatchProcessId, @BatchProcessName, @IcrtProcessName);
+				
 			end
 
 		--!
@@ -90,7 +90,10 @@ begin
 		--! its own external txn 
 		if (xact_state() = -1) or (xact_state() = 1 and error_number() = 1205) or (xact_state() = 1 and @_TxnIsExternal = 0)
 			begin
-				rollback tran;
+
+
+			select 'roll'
+				--rollback tran;
 				set @_ErrorContext = @_ErrorContext + ' (Forced roll back all changes)';
 			end
 

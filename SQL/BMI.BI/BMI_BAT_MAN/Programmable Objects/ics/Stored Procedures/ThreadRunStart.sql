@@ -1,25 +1,26 @@
 if object_id('[ics].[ThreadRunStart]') is not null
 	drop procedure [ics].[ThreadRunStart];
 go
-set quoted_identifier on
-go
-set ansi_nulls on
-go
-create procedure [ics].[ThreadRunStart]
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [ics].[ThreadRunStart]
 (
-  @MappingConfigTaskName varchar(200)
-, @MappingName varchar(200)
-, @SubProcessRunId int
-, @ThreadRunId int = null output
-, @RunType varchar(8) = null output
-, @Instruction varchar(16) = null output
-, @Message varchar(500) = null output
-, @StartCapturePoint datetime = null output
-, @EndCapturePoint datetime = null output
+	@MappingConfigTaskName varchar(200)
+  , @MappingName		   varchar(200)
+  , @SubProcessRunId	   int
+  , @ThreadRunId		   int			= null output
+  , @RunType			   varchar(8)	= null output
+  , @Instruction		   varchar(16)	= null output
+  , @Message			   varchar(500) = null output
+  , @StartCapturePoint	   datetime		= null output
+  , @EndCapturePoint	   datetime		= null output
+  , @SetDate			   datetime		=null 
 )
 as
---<CommentHeader>
-/**********************************************************************************************************************
+	--<CommentHeader>
+	/**********************************************************************************************************************
 
 Properties
 ==========
@@ -44,65 +45,119 @@ Version	ChangeDate		Author	BugRef	Narrative
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 
 **********************************************************************************************************************/
---</CommentHeader>
+	--</CommentHeader>
 
-begin
-	set nocount on ;
+	begin
+		set nocount on ;
 
-	--! Standard/ExceptionHandler variables
-	declare	@_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid));
-	declare	@_Error int = 0;
-	declare @_RowCount int = 0;
-	declare @_ReturnValue int = 0;
-	declare	@_Message nvarchar(512);
-	declare	@_ErrorContext nvarchar(512);
-	declare	@_Step varchar(128);
-	declare	@_ExceptionId int;
+		--! Standard/ExceptionHandler variables
+		declare @_FunctionName nvarchar(255) = quotename(object_schema_name(@@procid)) + '.' + quotename(object_name(@@procid)) ;
+		declare @_Error int = 0 ;
+		declare @_RowCount int = 0 ;
+		declare @_ReturnValue int = 0 ;
+		declare @_Message nvarchar(512) ;
+		declare @_ErrorContext nvarchar(512) ;
+		declare @_Step varchar(128) ;
+		declare @_ExceptionId int ;
+		declare @_MappingConfigTaskId int ;
+		declare @StepId int ;
+		declare @_ThreadId int ;
 
-	begin try
-		set @_Step = 'Fetch dummy values for stub' ;
+		begin try
 
-		select
-			  @ThreadRunId = ThreadRunID
-			, @RunType = RunType
-			, @Instruction = Instruction
-			, @Message = [Message]
-			, @StartCapturePoint = StartCapturePoint
-			, @EndCapturePoint = EndCapturePoint
-		from
-			dbo.StubResultSet
-		where
-			FunctionName = @_FunctionName ;
-	end try
-	begin catch
-		set @_ErrorContext = 'Failed to start new thread run'
-			+ ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL')
-			+ ' , Mapping: ' + coalesce('"' + @MappingName + '"', 'NULL')
-			+ ' and (BatMan) Sub-process Run Id: ' + coalesce(cast(@SubProcessRunId as varchar(32)), 'NULL')
-			+ ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')
-			+ ' (New Thread Run Id: ' + coalesce(cast(@ThreadRunId as varchar(32)), 'NULL') + ')'
+		set @SetDate=isnull(@SetDate,getdate());
 
-		exec log4.ExceptionHandler
-			  @ErrorContext = @_ErrorContext
-			, @ErrorProcedure = @_FunctionName
-			, @ErrorNumber = @_Error out
-			, @ReturnMessage = @_Message out
-			, @ExceptionId = @_ExceptionId out ;
-	end catch
+	
+			exec [ics].[MappingConfigTaskGetId]
+				@MappingConfigTaskName = @MappingConfigTaskName
+			  , @MappingName = @MappingName
+			  , @MappingConfigTaskId = @_MappingConfigTaskId out ;
 
---/////////////////////////////////////////////////////////////////////////////////////////////////
-EndEx:
---/////////////////////////////////////////////////////////////////////////////////////////////////
+			set @StepId =
+			(
+				select	StepId from batch.StepRun where StepRunId = @SubProcessRunId
+			) ;
 
-	--! Finally, throw an exception that will be detected by the caller
-	if @_Error > 0 raiserror(@_Message, 16, 99) ;
+			exec batch.ThreadGetId
+				@ThreadName = @MappingConfigTaskName
+			  , @StepId = @StepId								-- int
+			  , @MappingConfigTaskId = @_MappingConfigTaskId	-- int
+			  , @ThreadId = @_ThreadId output ;					-- int
 
-	set nocount off ;
+			set @Instruction = 'RUN' ;
+			set @Message = '' ;
+			
+			set @_Step = 'Fetch dummy values for stub' ;
+			select
+				@RunType		   = RunType
+			   , @StartCapturePoint = StartCapturePoint
+			  , @EndCapturePoint   = EndCapturePoint
+			from
+				dbo.StubResultSet
+			where
+				FunctionName = @_FunctionName ;
+				
+			insert into batch.ThreadRun
+			(
+				StepRunId
+			  , ThreadId
+			  , StartTime
+			  , EndTime
+			  , RunStateId
+			  , EndState
+			  , EndMessage
+			  , SuccessSourceRows
+			  , FailedSourceRows
+			  , SuccessTargetRows
+			  , FailedTargetRows
+			  , MinChangeDataCapturePoint
+			  , MaxChangeDataCapturePoint
+			)
+			values
+			(
+			@SubProcessRunId	-- StepRunId - int
+			  , @_ThreadId			-- ThreadId - int
+			  , @SetDate			-- StartTime - datetime
+			  , null				-- EndTime - datetime
+			  , 1					-- RunStateId - int
+			  , ''					-- EndState - varchar(16)
+			  , ''					-- EndMessage - varchar(500)
+			  , 0					-- SuccessSourceRows - int
+			  , 0					-- FailedSourceRows - int
+			  , 0					-- SuccessTargetRows - int
+			  , 0					-- FailedTargetRows - int
+			  , null				-- MinChangeDataCapturePoint - datetime
+			  , null				-- MaxChangeDataCapturePoint - datetime
+			) ;
 
-	--! Return the value of @@ERROR (which will be zero on success)
-	return (@_Error) ;
-end
 
+		end try
+		begin catch
+			set @_ErrorContext = 'Failed to start new thread run' + ' for MCT Name: ' + coalesce('"' + @MappingConfigTaskName + '"', 'NULL') + ' , Mapping: '
+								 + coalesce('"' + @MappingName + '"', 'NULL') + ' and (BatMan) Sub-process Run Id: '
+								 + coalesce(cast(@SubProcessRunId as varchar(32)), 'NULL') + ' at step: ' + coalesce('[' + @_Step + ']', 'NULL')
+								 + ' (New Thread Run Id: ' + coalesce(cast(@ThreadRunId as varchar(32)), 'NULL') + ')' ;
+
+			exec log4.ExceptionHandler
+				@ErrorContext = @_ErrorContext
+			  , @ErrorProcedure = @_FunctionName
+			  , @ErrorNumber = @_Error out
+			  , @ReturnMessage = @_Message out
+			  , @ExceptionId = @_ExceptionId out ;
+		end catch ;
+
+		--/////////////////////////////////////////////////////////////////////////////////////////////////
+		EndEx:
+		--/////////////////////////////////////////////////////////////////////////////////////////////////
+
+		--! Finally, throw an exception that will be detected by the caller
+		if @_Error > 0 raiserror(@_Message, 16, 99) ;
+
+		set nocount off ;
+
+		--! Return the value of @@ERROR (which will be zero on success)
+		return (@_Error) ;
+	end ;
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Checks that the requested thread is runnable at this time and if so, initiates a new thread run instance within the context of the current sub-process run (adding a row to the table: batch.ThreadRun)', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunStart', NULL, NULL
 GO

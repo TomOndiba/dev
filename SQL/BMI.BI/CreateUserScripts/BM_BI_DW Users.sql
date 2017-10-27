@@ -563,6 +563,22 @@ AddRoleMembers:
 	else
 		raiserror('[%s] step skipped as disabled', 0, 1, @_Step) ; 
 
+	--!
+	--! Add any special permissions for DEV
+	--!
+	if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BI_DW_DEV'
+		begin
+			if exists (select 1 from sys.database_principals where name = 'InfaDev')
+				begin
+					grant alter on schema::tsa to [InfaDev];
+					grant create table to [InfaDev];
+				end 
+		end
+	else
+		begin
+			raiserror('Failed to run users script due incorrect Azure SQL Server instance or database', 16, 1) ;
+		end
+
 	--raiserror('ERROR THROWN TO FORCE ROLLBACK', 16, 1) ;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

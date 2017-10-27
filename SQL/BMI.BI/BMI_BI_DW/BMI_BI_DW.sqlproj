@@ -340,6 +340,7 @@ Static Data;
     <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
     <Folder Include="Migrations\1.0.5\" />
     <Folder Include="Migrations\1.0.7" />
+    <Folder Include="Migrations\1.0.8" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -1260,6 +1261,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.7\015_Add_Fixed_Poland_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\001_Add_Fixed_Poland_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

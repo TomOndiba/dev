@@ -12,10 +12,9 @@ SET IDENTITY_INSERT [dbo].[TsaToPsaLoadControlTable] ON
 
 MERGE INTO [dbo].[TsaToPsaLoadControlTable] AS Target
 USING (VALUES
-  (94,'2017-10-23T13:01:12.157','GROUPICOPAL\ukrna','BMI_BI_DW.tests','tsa','ics_land_SAP_GBR_T001L','BMI_BI_DW.tests','psa','ics_stg_SAP_GBR_T001L','Full',100101,'LGORT,WERKS,MANDT','LGORT,WERKS,MANDT',0)
- ,(101,'2017-10-23T13:01:12.157','GROUPICOPAL\ukrna','BMI_BI_DW.tests','tsa','ics_land_SAP_GBR_T001W','BMI_BI_DW.tests','psa','ics_stg_SAP_GBR_T001W','Full',100101,'WERKS','WERKS',0)
- ,(108,'2017-10-23T13:01:12.157','GROUPICOPAL\ukrna','BMI_BI_DW.tests','tsa','ics_land_SAP_GBR_MAKT','BMI_BI_DW.tests','psa','ics_stg_SAP_GBR_MAKT','Full',100101,'SPRAS,MATNR','SPRAS,MATNR',0)
- ,(115,'2017-10-23T13:01:12.157','GROUPICOPAL\ukrna','BMI_BI_DW.tests','tsa','ics_land_SAP_GBR_MARD','BMI_BI_DW.tests','psa','ics_stg_SAP_GBR_MARD','Full',100101,'WERKS,MATNR,LGORT','WERKS,MATNR,LGORT',0)
+  (20,'2017-10-27T11:17:19.640','GROUPICOPAL\ukrna','BMI_BI_DW.tests','tsa','ics_land_M3V10gen_POL_MITTRA','BMI_BI_DW.tests','psa','ics_stg_M3V10gen_POL_MITTRA','Full',100147,'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO','MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO',0)
+ ,(64,'2017-10-27T11:17:19.640','GROUPICOPAL\ukrna','BMI_BI_DW.tests','tsa','ics_land_M3V10ved_POL_MITTRA','BMI_BI_DW.tests','psa','ics_stg_M3V10ved_POL_MITTRA','Full',100140,'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO','MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO',0)
+ ,(108,'2017-10-27T11:17:19.640','GROUPICOPAL\ukrna','BMI_BI_DW.tests','tsa','ics_land_M3V10vil_POL_MITTRA','BMI_BI_DW.tests','psa','ics_stg_M3V10vil_POL_MITTRA','Full',100141,'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO','MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO',0)
 ) AS Source ([ID],[CreatedDate],[CreatedBy],[SourceDB],[SourceSchema],[SourceTable],[TargetDB],[TargetSchema],[TargetTable],[LoadMode],[DataSourceKey],[SourcePK],[TargetPK],[Done])
 ON (Target.[ID] = Source.[ID])
 WHEN MATCHED AND (
@@ -70,4 +69,5 @@ SET IDENTITY_INSERT [dbo].[TsaToPsaLoadControlTable] OFF
 GO
 SET NOCOUNT OFF
 GO
+
 

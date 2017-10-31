@@ -1,4 +1,4 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string]
+﻿CREATE   procedure [IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -13,7 +13,9 @@ begin
 		, @EndMessage = null
 		, @ProcessRunId = 11
 
-	--declare @_actual varchar(500) = (select EndMessage from ics.ProcessRunEnd_SpyProcedureLog) ;
 
-	--exec tSQLt.AssertEqualsString '', @_actual ;
+		select EndMessage from ics.ProcessRunEnd_SpyProcedureLog
+	declare @_actual varchar(500) = (select EndMessage from ics.ProcessRunEnd_SpyProcedureLog) ;
+
+	exec tSQLt.AssertEqualsString '', @_actual ;
 end;

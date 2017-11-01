@@ -1,3 +1,5 @@
 CREATE SCHEMA [IcsApp]
 AUTHORIZATION [dbo]
 GO
+GRANT EXECUTE ON SCHEMA:: [IcsApp] TO [DataFeedWriters]
+GO

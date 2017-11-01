@@ -13,6 +13,10 @@ GRANT EXECUTE ON SCHEMA:: [psa] TO [DataFeedReaders]
 GO
 GRANT SELECT ON SCHEMA:: [psa] TO [DataFeedWriters]
 GO
+GRANT INSERT ON SCHEMA:: [psa] TO [DataFeedWriters]
+GO
+GRANT UPDATE ON SCHEMA:: [psa] TO [DataFeedWriters]
+GO
 GRANT SELECT ON SCHEMA:: [psa] TO [EtlDevelopersDEV]
 GO
 GRANT INSERT ON SCHEMA:: [psa] TO [EtlDevelopersDEV]

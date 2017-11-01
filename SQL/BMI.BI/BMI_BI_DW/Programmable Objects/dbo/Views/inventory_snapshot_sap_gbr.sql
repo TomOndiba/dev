@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[dbo].[inventory_snapshot_sap_gbr]') IS NOT NULL
+IF OBJECT_ID('[dbo].[inventory_snapshot_sap_gbr]') IS NOT NULL
 	DROP VIEW [dbo].[inventory_snapshot_sap_gbr];
 
 GO
@@ -43,14 +43,14 @@ as
 (
 	select distinct
 		m.EtlCreatedOn															as etl_created_on
-	  , m.EtlUpdatedOn															 as etl_updated_on
+	  , m.EtlUpdatedOn															as etl_updated_on
 	  , m.EtlSourceTable														as etl_source_table
 	  , m.IsDeleted																as is_deleted
-	  , m.DLINL																	as snapshot_date			--'DateofLastPostedCountforUnrestrictedUseStock'---snapshotdate
+	  , m.DLINL																	as snapshot_date			--'DateofLastPostedCountforUnrestrictedUseStock'
 	  , m.DataSourceKey															as data_source_key
 	  , ds.DataSourceName														as data_source_name
 	  , 'GBR'																	as country_code
-	  , m.WERKS																	as native_warehouse_number --Plant but close to the warehouse 
+	  , m.WERKS																	as native_warehouse_number	--Plant but close to the warehouse 
 	  , w.NAME1 + ' ' + w.NAME2													as native_warehouse_name	--plant but close to the warehouse 
 	  , isnull(m.MATNR, p.NativeProductKey)										as native_product_key
 	  , isnull(md.MAKTG, p.ProductName)											as product_name
@@ -64,7 +64,7 @@ as
 	  , null																	as native_unit_of_measure
 	  , null																	as standard_stock_on_hand
 	  , null																	as standard_unit_of_measure
-	  , 'GBR'																	as local_ccy
+	  , 'GBP'																	as local_ccy
 	  , cast(null as decimal(18, 2))											as native_unit_value_local_ccy
 	  , cast(null as decimal(18, 2))											as standard_unit_value_local_ccy
 	  , cast(null as decimal(18, 2))											as stock_in_hand_value_local_ccy
@@ -73,17 +73,16 @@ as
 	  , cast(null as decimal(18, 2))											as stock_in_hand_value_eur
 	  , dense_rank() over (partition by m.MATNR, m.WERKS order by m.DLINL desc) as RankingMaterialPlant
 	from
-		psa.ics_stg_SAP_GBR_MARD			  m
-	left outer join psa.ics_stg_SAP_GBR_T001W w
+		psa.ics_stg_SAP_GBR_MARD			  m						-- material
+	left outer join psa.ics_stg_SAP_GBR_T001W w						--plant
 		on w.WERKS = m.WERKS
-	left outer join psa.ics_stg_SAP_GBR_MAKT  md
+	left outer join psa.ics_stg_SAP_GBR_MAKT  md					--look up for material desc
 		on m.MATNR = md.MATNR
 	left outer join qvstg.Product			  p
 		on m.MATNR = p.NativeProductKey
+		and p.DataSourceKey = m.DataSourceKey
 	left outer join DataSource				  ds
 		on ds.DataSourceKey = m.DataSourceKey
-	left outer join psa.ics_stg_SAP_GBR_T001L t
-		on m.LGORT = t.LGORT
 	where
 		LVORM is null
 )
@@ -92,12 +91,12 @@ select
   , etl_updated_on
   , etl_source_table
   , is_deleted
-  , snapshot_date			--'D
+  , snapshot_date			
   , data_source_key
   , data_source_name
   , country_code
-  , native_warehouse_number --Pl
-  , native_warehouse_name	--pl
+  , native_warehouse_number 
+  , native_warehouse_name	
   , native_product_key
   , product_name
   , product_category_direct

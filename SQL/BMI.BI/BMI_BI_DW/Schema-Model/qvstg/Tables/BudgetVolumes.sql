@@ -34,3 +34,19 @@ ALTER TABLE [qvstg].[BudgetVolumes] ADD CONSTRAINT [AK_qvstg_BudgetVolumes_Busin
 GO
 CREATE NONCLUSTERED INDEX [NCI_qvstg_BudgetVolumes_LoadFilter] ON [qvstg].[BudgetVolumes] ([BusinessUnitKey], [ProductCategoryKey], [EtlDeltaHash], [IsDeleted])
 GO
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for this record being added.', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'EtlCreatedBy'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process first added this record.', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'EtlCreatedOn'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that last marked this record deleted/inactive; not usually re-set to null if the record is subsequently re-activated/un-deleted.', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'EtlDeletedBy'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process last marked this record deleted/inactive; not usually re-set to null if the record is subsequently re-activated/un-deleted.', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'EtlDeletedOn'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'A hash (typically MD45 or SHA256) of all non-key, changeable values in this record - used by ETL processes to identify changed rows (included columns are defined within the ETL).', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'EtlDeltaHash'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for the last update for this record; will be the same as EtlCreatedBy when the record is first added.', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'EtlUpdatedBy'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process last updated this record; will be the same as EtlCreatedOn when the record is first added.', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'EtlUpdatedOn'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Indicates that this record is marked as or has been physically deleted in the source system of record.', 'SCHEMA', N'qvstg', 'TABLE', N'BudgetVolumes', 'COLUMN', N'IsDeleted'
+GO

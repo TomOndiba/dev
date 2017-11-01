@@ -12,10 +12,10 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_MARA]
 [EtlUpdatedBy] [varchar] (200) NOT NULL,
 [EtlDeletedOn] [datetime] NULL,
 [EtlDeletedBy] [varchar] (200) NULL,
-[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_SAP_GBR_MARA_IsDeleted] DEFAULT ('N'),
-[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_SAP_GBR_MARA_IsIncomplete] DEFAULT ('N'),
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_stg_SAP_GBR_MARA_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_stg_SAP_GBR_MARA_IsIncomplete] DEFAULT ('N'),
 [MANDT] [nvarchar] (3) NULL,
-[MATNR] [nvarchar] (18) NULL,
+[MATNR] [nvarchar] (18) NOT NULL,
 [ERSDA] [datetime] NULL,
 [ERNAM] [nvarchar] (12) NULL,
 [LAEDA] [datetime] NULL,
@@ -231,5 +231,5 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_MARA]
 [FASHGRD] [nvarchar] (4) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_SAP_GBR_MARA] ADD CONSTRAINT [AK_psa_ics_stg_SAP_GBR_MARA_EtlRecordId] UNIQUE CLUSTERED  ([EtlRecordId])
+ALTER TABLE [psa].[ics_stg_SAP_GBR_MARA] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_MARA_PK] PRIMARY KEY CLUSTERED  ([MATNR])
 GO

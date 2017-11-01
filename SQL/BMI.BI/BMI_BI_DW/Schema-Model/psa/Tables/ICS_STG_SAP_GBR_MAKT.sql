@@ -12,14 +12,14 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_MAKT]
 [EtlUpdatedBy] [varchar] (200) NOT NULL,
 [EtlDeletedOn] [datetime] NULL,
 [EtlDeletedBy] [varchar] (200) NULL,
-[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_SAP_GBR_MAKT_IsDeleted] DEFAULT ('N'),
-[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_SAP_GBR_MAKT_IsIncomplete] DEFAULT ('N'),
-[MANDT] [nvarchar] (3) NULL,
-[MATNR] [nvarchar] (18) NULL,
-[SPRAS] [nvarchar] (1) NULL,
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_stg_SAP_GBR_MAKT_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_stg_SAP_GBR_MAKT_IsIncomplete] DEFAULT ('N'),
+[MAKTG] [nvarchar] (40) NULL,
 [MAKTX] [nvarchar] (40) NULL,
-[MAKTG] [nvarchar] (40) NULL
+[MANDT] [nvarchar] (3) NULL,
+[MATNR] [nvarchar] (18) NOT NULL,
+[SPRAS] [nvarchar] (1) NOT NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_SAP_GBR_MAKT] ADD CONSTRAINT [AK_psa_ics_stg_SAP_GBR_MAKT_EtlRecordId] UNIQUE CLUSTERED  ([EtlRecordId])
+ALTER TABLE [psa].[ics_stg_SAP_GBR_MAKT] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_MAKT_PK] PRIMARY KEY CLUSTERED  ([MATNR], [SPRAS])
 GO

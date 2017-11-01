@@ -1,5 +1,6 @@
 CREATE TABLE [psa].[ics_stg_M3V10vil_POL_MSYTXL]
 (
+[EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
 [EtlStepRunId] [int] NOT NULL,
 [EtlThreadRunId] [int] NOT NULL,
@@ -7,8 +8,12 @@ CREATE TABLE [psa].[ics_stg_M3V10vil_POL_MSYTXL]
 [EtlSourceTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
 [EtlCreatedBy] [varchar] (200) NOT NULL,
-[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_psa_ics_stg_M3V10vil_POL_MSYTXL_ExcludeFromMerge] DEFAULT ((0)),
-[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_psa_ics_stg_M3V10vil_POL_MSYTXL_IsDuplicate] DEFAULT ((0)),
+[EtlUpdatedOn] [datetime] NOT NULL,
+[EtlUpdatedBy] [varchar] (200) NOT NULL,
+[EtlDeletedOn] [datetime] NULL,
+[EtlDeletedBy] [varchar] (200) NULL,
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_vil_MSYTXL_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_vil_MSYTXL_IsIncomplete] DEFAULT ('N'),
 [TLCONO] [numeric] (18, 0) NOT NULL,
 [TLDIVI] [nchar] (3) NOT NULL,
 [TLLINO] [numeric] (18, 0) NOT NULL,

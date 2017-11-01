@@ -132,7 +132,7 @@ Static Data;
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
@@ -1280,6 +1280,41 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\discovery\Views\inventory_snapshot_sap_gbr.sql" />
     <None Include="Migrations\1.0.8\005_Add_inventory_snapshot_sap_gbr_View.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_MITTRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_MITWHL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_MITTRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_MITWHL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_MITTRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_MITWHL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_T001L.sql" />
+    <None Include="Schema-Model\Security\Schemas\discovery.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_MITTRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_MITWHL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_MITTRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_MITWHL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_MITTRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_MITWHL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_T001L.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

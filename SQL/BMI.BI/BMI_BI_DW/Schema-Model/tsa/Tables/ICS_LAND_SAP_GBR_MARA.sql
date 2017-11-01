@@ -226,3 +226,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_MARA]
 [FASHGRD] [nvarchar] (4) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_MARA_1] ON [tsa].[ics_land_SAP_GBR_MARA] ([MATNR])
+GO

@@ -8,10 +8,13 @@ CREATE TABLE [dbo].[DataSource]
 [DataCountries] [nvarchar] (100) NOT NULL CONSTRAINT [DF_DataSource_DataCountries] DEFAULT (''),
 [Narrative] [nvarchar] (500) NOT NULL CONSTRAINT [DF_DataSource_Narrative] DEFAULT (''),
 [QlikViewSourceSystemId] [int] NULL,
-[IsActive] [char] (1) NOT NULL CONSTRAINT [DF_DataSource_IsActive] DEFAULT ('Y')
+[IsActive] [char] (1) NOT NULL CONSTRAINT [DF_DataSource_IsActive] DEFAULT ('Y'),
+[PbiTxnViewSource] [char] (3) NOT NULL CONSTRAINT [DF_DataSource_PbiTxnViewSource] DEFAULT ('QVS')
 )
 GO
 ALTER TABLE [dbo].[DataSource] ADD CONSTRAINT [CK_DataSource_IsActive] CHECK (([IsActive]='Y' OR [IsActive]='N'))
+GO
+ALTER TABLE [dbo].[DataSource] ADD CONSTRAINT [CK_DataSource_PbiTxnViewSource] CHECK (([PbiTxnViewSource]='PSA' OR [PbiTxnViewSource]='QVS'))
 GO
 ALTER TABLE [dbo].[DataSource] ADD CONSTRAINT [PK_DataSource] PRIMARY KEY CLUSTERED  ([DataSourceKey])
 GO
@@ -36,6 +39,8 @@ GO
 EXEC sp_addextendedproperty N'MS_Description', N'Indicates that this record is marked as deleted or otherwise inactive', 'SCHEMA', N'dbo', 'TABLE', N'DataSource', 'COLUMN', N'IsActive'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Detailed description (if any) of this data source', 'SCHEMA', N'dbo', 'TABLE', N'DataSource', 'COLUMN', N'Narrative'
+GO
+EXEC sp_addextendedproperty N'MS_Description', 'Flag to indicate from where transactioonal data should be retrieved for each data source. E.g. "QVS" = the data drawn from the QlikView source database and stored in the qvstg schema; "PSA" = the views over the PSA tables which hold raw data extracted directly from source ERP systems', 'SCHEMA', N'dbo', 'TABLE', N'DataSource', 'COLUMN', N'PbiTxnViewSource'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Optional identifier of a source system as detailed in the QlikView database (Icopal_profBIS)', 'SCHEMA', N'dbo', 'TABLE', N'DataSource', 'COLUMN', N'QlikViewSourceSystemId'
 GO

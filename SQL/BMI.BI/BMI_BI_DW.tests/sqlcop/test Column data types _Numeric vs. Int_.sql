@@ -18,7 +18,7 @@ begin
             where	C.DATA_TYPE in ('numeric','decimal') 
 					and NUMERIC_SCALE = 0 
 					and NUMERIC_PRECISION <= 18
-					and TABLE_SCHEMA  not in ('tsa','psa', 'tSQLt','stg')
+					and TABLE_SCHEMA  not in ('tsa','psa', 'tSQLt','stg', 'discovery')
 			) as Problems
 	order by ProblemItem
 

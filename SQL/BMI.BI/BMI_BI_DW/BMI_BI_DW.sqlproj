@@ -1316,6 +1316,9 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_MITWHL.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_T001L.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\006_Reapply_extended_properties.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

@@ -46,13 +46,13 @@ ALTER TABLE [qvstg].[ProductColourTranslation] ADD CONSTRAINT [FK_qvstg_ProductC
 GO
 ALTER TABLE [qvstg].[ProductColourTranslation] ADD CONSTRAINT [FK_qvstg_ProductColourTranslation_TranslationStatus] FOREIGN KEY ([TranslationStatusId]) REFERENCES [dbo].[TranslationStatus] ([TranslationStatusId])
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for this record being added.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlCreatedBy'
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for this record being added to this table.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlCreatedBy'
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process first added this record.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlCreatedOn'
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process first added this record to this table.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlCreatedOn'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'A hash (typically MD45 or SHA256) of all non-key, changeable values in this record - used by ETL processes to identify changed rows (included columns are defined within the ETL).', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlDeltaHash'
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for the last update for this record; will be the same as EtlCreatedBy when the record is first added.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlUpdatedBy'
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for the last update for this record on this table; will be the same as EtlCreatedBy when the record is first added.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlUpdatedBy'
 GO
-EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process last updated this record; will be the same as EtlCreatedOn when the record is first added.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlUpdatedOn'
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process last updated this record on this table; will be the same as EtlCreatedOn when the record is first added.', 'SCHEMA', N'qvstg', 'TABLE', N'ProductColourTranslation', 'COLUMN', N'EtlUpdatedOn'
 GO

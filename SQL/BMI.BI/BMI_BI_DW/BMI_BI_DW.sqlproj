@@ -342,6 +342,8 @@ Static Data;
     <Folder Include="Migrations\1.0.7" />
     <Folder Include="Migrations\1.0.8" />
     <Folder Include="Programmable Objects\dbo\Views\" />
+    <Folder Include="Programmable Objects\discovery\" />
+    <Folder Include="Programmable Objects\discovery\Views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -1274,6 +1276,10 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.8\004_Tsa_Poland_Gen_Constraints_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\inventory_snapshot_sap_gbr.sql" />
+    <None Include="Migrations\1.0.8\005_Add_inventory_snapshot_sap_gbr_View.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

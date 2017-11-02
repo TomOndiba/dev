@@ -110,6 +110,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BAT_MAN.tests", "BMI_BA
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "profBIS_View.tests", "profBIS_View.tests\profBIS_View.tests.sqlproj", "{6C2681D7-22B9-4842-AA33-814D32D0B40F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", "{00BE345E-C57B-4164-9637-2214C47431D8}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\SQL Scripts\1 create table from source system.sql = ..\..\..\SQL Scripts\1 create table from source system.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

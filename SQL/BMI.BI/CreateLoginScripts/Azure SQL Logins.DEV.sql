@@ -87,3 +87,77 @@ go
 if not exists (select 1 from sys.database_principals where name = 'ReleaseManager')
 	create user [ReleaseManager] for login [ReleaseManager] with default_schema = [dbo];
 go
+
+
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'greg.lucas.sql')
+	create login [greg.lucas.sql] with password = 'Mko0Nhy6Vfgy!' ;
+else
+	alter login [greg.lucas.sql] with password = 'Mko0Nhy6Vfgy!' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
+	create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo];
+go
+
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'razia.nazir.sql')
+	create login [razia.nazir.sql] with password = 'VfBg%t6yBnDf' ;
+else
+	alter login [razia.nazir.sql] with password = 'VfBg%t6yBnDf' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
+	create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo];
+go
+
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'vince.mitchell.sql')
+	create login [vince.mitchell.sql] with password = 'IjnTyu7*9Vfg' ;
+else
+	alter login [vince.mitchell.sql] with password = 'IjnTyu7*9Vfg' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'vince.mitchell.sql')
+	create user [vince.mitchell.sql] for login [vince.mitchell.sql] with default_schema = [dbo];
+go
+
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'jason.bogart.sql')
+	create login [jason.bogart.sql] with password = 'Bhu@bhfX78hi' ;
+else
+	alter login [jason.bogart.sql] with password = 'Bhu@bhfX78hi' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'jason.bogart.sql')
+	create user [jason.bogart.sql] for login [jason.bogart.sql] with default_schema = [dbo];
+go
+
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'tom.manville.sql')
+	create login [tom.manville.sql] with password = 'MnbKjhOiu)98' ;
+else
+	alter login [tom.manville.sql] with password = 'MnbKjhOiu)98' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'tom.manville.sql')
+	create user [tom.manville.sql] for login [tom.manville.sql] with default_schema = [dbo];
+go
+
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'mark.bolton.sql')
+	create login [mark.bolton.sql] with password = 'VbnFghYtr65$' ;
+else
+	alter login [mark.bolton.sql] with password = 'VbnFghYtr65$' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'mark.bolton.sql')
+	create user [mark.bolton.sql] for login [mark.bolton.sql] with default_schema = [dbo];
+go
+

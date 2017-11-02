@@ -67,8 +67,8 @@ create table #RoleMembers
 go
 
 --! Actions
-declare @_DoDropInactiveUsers bit = 1 ;
-declare @_DoDropAllUsers bit = 1 ;
+declare @_DoDropInactiveUsers bit = 0 ;
+declare @_DoDropAllUsers bit = 0 ;
 declare @_DoAddDatabaseUsers bit = 1 ;
 declare @_DoAddRoleMembers bit = 1 ;
 declare @_Debug bit = 1 ;
@@ -123,104 +123,133 @@ values (0, '', '', '', 0, 0)
 
 	--! SQL Developers
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
---	, (1	, 'DEV'		, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
---	, (1	, 'DEV'		, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+--	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
+--	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
+--	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 1)
+--	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'razia.nazir.sql'							, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'razia.nazir.sql'							, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
-	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'vince.mitchell.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'vince.mitchell.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'jason.bogart.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'jason.bogart.sql'						, 'dbo'	, 1	, 1)
 
 	--! App/Report Developers
-	, (1	, 'DEV'		, 'tom.manville@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'tom.manville@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'tom.manville@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'tom.manville@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'tom.manville.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'tom.manville.sql'						, 'dbo'	, 1	, 1)
 
 	--! Business Analysts/Testers/Management
-	, (1	, 'DEV'		, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'mark.bolton@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'mark.bolton.sql'							, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'mark.bolton.sql'							, 'dbo'	, 1	, 1)
 
 	--! Supply Chain Users
-	, (1	, 'DEV'		, 'Amelie.Pogson@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Amelie.Pogson@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Andrew.Marshall@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Andrew.Marshall@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Angus.Beattie@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Angus.Beattie@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Anne.DuffyPenny@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Anne.DuffyPenny@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Amelie.Pogson@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Amelie.Pogson@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Andrew.Marshall@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Andrew.Marshall@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Angus.Beattie@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Angus.Beattie@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Anne.DuffyPenny@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Anne.DuffyPenny@icopal.com'				, 'dbo'	, 1	, 1)
 --	, (1	, 'DEV'		, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 1)
 --	, (1	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Patrick.LeBlond@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Patrick.LeBlond@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Redouane.Berksi@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Redouane.Berksi@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Robert.Metcalfe@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Robert.Metcalfe@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Stuart.Walton@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Stuart.Walton@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Tony.Pagett@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Tony.Pagett@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Patrick.LeBlond@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Patrick.LeBlond@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Redouane.Berksi@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Redouane.Berksi@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Robert.Metcalfe@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Robert.Metcalfe@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Stuart.Walton@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Stuart.Walton@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'Tony.Pagett@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'Tony.Pagett@icopal.com'					, 'dbo'	, 1	, 1)
 	---------------------------------------------------------------------------------------------------
 
 	--! Expired User Accounts
-	, (0	, 'DEV'		, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
-	, (0	, 'PROD'	, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
-	, (0	, 'DEV'		, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
-	, (0	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
+--	, (0	, 'DEV'		, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
+--	, (0	, 'PROD'	, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
+--	, (0	, 'DEV'		, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
+--	, (0	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
+--	, (0	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
+--	, (0	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
 ;
 
 insert #RoleMembers (UserName, RoleName)
 values ('', '')
 	--! SQL Developers
-	, ('greg.lucas@icopal.com'					, 'SqlDevelopers')
-	, ('greg.lucas@icopal.com'					, 'BatchManagers')
-	, ('greg.lucas@icopal.com'					, 'CodeReviewers')
-	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
-	, ('razia.nazir@icopal.com'					, 'BatchManagers')
-	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
+--	, ('greg.lucas@icopal.com'					, 'SqlDevelopers')
+--	, ('greg.lucas@icopal.com'					, 'BatchManagers')
+--	, ('greg.lucas@icopal.com'					, 'CodeReviewers')
+--	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
+--	, ('razia.nazir@icopal.com'					, 'BatchManagers')
+--	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
+	, ('greg.lucas.sql'							, 'SqlDevelopers')
+	, ('greg.lucas.sql'							, 'BatchManagers')
+	, ('greg.lucas.sql'							, 'CodeReviewers')
+	, ('razia.nazir.sql'						, 'SqlDevelopers')
+	, ('razia.nazir.sql'						, 'BatchManagers')
+	, ('razia.nazir.sql'						, 'CodeReviewers')
 
 	--! ETL Developers
-	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')
-	, ('Vincent.Mitchell@icopal.com'			, 'BatchManagers')
-	, ('Vincent.Mitchell@icopal.com'			, 'CodeReviewers')
-	, ('Jason.Bogart@icopal.com'				, 'EtlDevelopers')
-	, ('Jason.Bogart@icopal.com'				, 'BatchManagers')
-	, ('Jason.Bogart@icopal.com'				, 'CodeReviewers')
-	, ('Jarek.Czujak@icopal.com'				, 'EtlDevelopers')
-	, ('Jarek.Czujak@icopal.com'				, 'BatchManagers')
-	, ('Jarek.Czujak@icopal.com'				, 'CodeReviewers')
+--	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')
+--	, ('Vincent.Mitchell@icopal.com'			, 'BatchManagers')
+--	, ('Vincent.Mitchell@icopal.com'			, 'CodeReviewers')
+--	, ('Jason.Bogart@icopal.com'				, 'EtlDevelopers')
+--	, ('Jason.Bogart@icopal.com'				, 'BatchManagers')
+--	, ('Jason.Bogart@icopal.com'				, 'CodeReviewers')
+--	, ('Jarek.Czujak@icopal.com'				, 'EtlDevelopers')
+--	, ('Jarek.Czujak@icopal.com'				, 'BatchManagers')
+--	, ('Jarek.Czujak@icopal.com'				, 'CodeReviewers')
+	, ('vince.mitchell.sql'						, 'EtlDevelopers')
+	, ('vince.mitchell.sql'						, 'BatchManagers')
+	, ('vince.mitchell.sql'						, 'CodeReviewers')
+	, ('jason.bogart.sql'						, 'EtlDevelopers')
+	, ('jason.bogart.sql'						, 'BatchManagers')
+	, ('jason.bogart.sql'						, 'CodeReviewers')
 
 	--! App/Report Developers
-	, ('tom.manville@icopal.com'				, 'AppDevelopers')
+--	, ('tom.manville@icopal.com'				, 'AppDevelopers')
+	, ('tom.manville.sql'						, 'AppDevelopers')
 
 	--! Business Analysts/Testers/Management
-	, ('mark.bolton@icopal.com'					, 'BusinessAnalysts')
-	, ('bob.abildgaard-joergensen@icopal.com'	, 'BusinessAnalysts')
-	, ('gary.kearns@icopal.com'					, 'BusinessAnalysts')
+--	, ('mark.bolton@icopal.com'					, 'BusinessAnalysts')
+--	, ('bob.abildgaard-joergensen@icopal.com'	, 'BusinessAnalysts')
+--	, ('gary.kearns@icopal.com'					, 'BusinessAnalysts')
+	, ('mark.bolton.sql'						, 'BusinessAnalysts')
 
 	--! Supply Chain Users
-	, ('Amelie.Pogson@icopal.com'				, 'PowerBiReporters')
-	, ('Andrew.Marshall@icopal.com'				, 'PowerBiReporters')
-	, ('Angus.Beattie@icopal.com'				, 'PowerBiReporters')
-	, ('Anne.DuffyPenny@icopal.com'				, 'PowerBiReporters')
-	, ('Humayun.Kabir@icopal.com'				, 'PowerBiReporters')
-	, ('Patrick.LeBlond@icopal.com'				, 'PowerBiReporters')
-	, ('Redouane.Berksi@icopal.com'				, 'PowerBiReporters')
-	, ('Robert.Metcalfe@icopal.com'				, 'PowerBiReporters')
-	, ('Stuart.Walton@icopal.com'				, 'PowerBiReporters')
-	, ('Tony.Pagett@icopal.com'					, 'PowerBiReporters')
+--	, ('Amelie.Pogson@icopal.com'				, 'PowerBiReporters')
+--	, ('Andrew.Marshall@icopal.com'				, 'PowerBiReporters')
+--	, ('Angus.Beattie@icopal.com'				, 'PowerBiReporters')
+--	, ('Anne.DuffyPenny@icopal.com'				, 'PowerBiReporters')
+--	, ('Humayun.Kabir@icopal.com'				, 'PowerBiReporters')
+--	, ('Patrick.LeBlond@icopal.com'				, 'PowerBiReporters')
+--	, ('Redouane.Berksi@icopal.com'				, 'PowerBiReporters')
+--	, ('Robert.Metcalfe@icopal.com'				, 'PowerBiReporters')
+--	, ('Stuart.Walton@icopal.com'				, 'PowerBiReporters')
+--	, ('Tony.Pagett@icopal.com'					, 'PowerBiReporters')
 
 	--! Other Roles
-	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
+--	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
+	, ('greg.lucas.sql'							, 'DeploymentManagers')
 	, ('BmiBiDwFeedDev'							, 'EtlDevelopers')
 
 	, ('InfaDev'								, 'DataFeedWriters')
@@ -609,4 +638,64 @@ go
 if object_id(N'tempdb..#Users') is not null drop table #Users;
 go
 if object_id(N'tempdb..#RoleMembers') is not null drop table #RoleMembers;
+go
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Admins:
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+if not exists (select 1 from sys.database_principals where name = 'ReleaseManager')
+	create user [ReleaseManager] for login [ReleaseManager] with default_schema = [dbo];
+go
+exec sp_addrolemember 'BatchManagers', 'ReleaseManager' ;
+go
+
+if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BI_DW_DEV'
+	begin
+		raiserror('Create SQL Login Administrators in DEV...', 0, 1) ;
+
+		--!
+		--!
+		--!
+		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
+			create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo] ;
+
+		alter role [db_accessadmin] add member [greg.lucas.sql]
+		alter role [db_owner] add member [greg.lucas.sql]
+		grant alter any user to [greg.lucas.sql]
+
+		--!
+		--!
+		--!
+		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
+			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+
+		alter role [db_accessadmin] add member [razia.nazir.sql]
+		alter role [db_owner] add member [razia.nazir.sql]
+		grant alter any user to [razia.nazir.sql]
+	end
+else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BI_DW_PROD'
+	begin
+		raiserror('Create SQL Login Administrators in PROD...', 0, 1) ;
+
+		--!
+		--!
+		--!
+		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
+			create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo] ;
+
+		alter role [db_accessadmin] add member [greg.lucas.sql]
+		alter role [db_owner] add member [greg.lucas.sql]
+		grant alter any user to [greg.lucas.sql]
+
+		--!
+		--!
+		--!
+		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
+			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+
+		alter role [db_accessadmin] add member [razia.nazir.sql]
+		alter role [db_owner] add member [razia.nazir.sql]
+		grant alter any user to [razia.nazir.sql]
+	end
 go

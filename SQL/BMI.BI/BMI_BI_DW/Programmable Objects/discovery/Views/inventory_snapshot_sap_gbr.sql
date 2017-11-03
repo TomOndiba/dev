@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[discovery].[inventory_snapshot_sap_gbr]') IS NOT NULL
+IF OBJECT_ID('[discovery].[inventory_snapshot_sap_gbr]') IS NOT NULL
 	DROP VIEW [discovery].[inventory_snapshot_sap_gbr];
 
 GO
@@ -9,7 +9,8 @@ GO
 
 
 
-create   view [discovery].[inventory_snapshot_sap_gbr]
+
+CREATE view [discovery].[inventory_snapshot_sap_gbr]
 as
 
 --<CommentHeader>
@@ -62,9 +63,9 @@ as
 	  , p.ProductCategoryLevel4													as product_category_level_4
 	  , p.ProductCategoryLevel5													as product_category_level_5
 	  , m.LABST																	as native_stock_on_hand
-	  , null																	as native_unit_of_measure
+	  , ma.MEINS																as native_unit_of_measure
 	  , null																	as standard_stock_on_hand
-	  , null																	as standard_unit_of_measure
+	  , um.unit_of_measure_code													as standard_unit_of_measure
 	  , 'GBP'																	as local_ccy
 	  , cast(null as decimal(18, 2))											as native_unit_value_local_ccy
 	  , cast(null as decimal(18, 2))											as standard_unit_value_local_ccy
@@ -74,30 +75,38 @@ as
 	  , cast(null as decimal(18, 2))											as stock_in_hand_value_eur
 	  , dense_rank() over (partition by m.MATNR, m.WERKS order by m.DLINL desc) as RankingMaterialPlant
 	from
-		psa.ics_stg_SAP_GBR_MARD			  m						-- material
-	left outer join psa.ics_stg_SAP_GBR_T001W w						--plant
+		psa.ics_stg_SAP_GBR_MARD			   m -- material
+	left outer join psa.ics_stg_SAP_GBR_T001W  w --plant
 		on w.WERKS = m.WERKS
-	left outer join psa.ics_stg_SAP_GBR_MAKT  md					--look up for material desc
+	left outer join psa.ics_stg_SAP_GBR_MAKT   md --look up for material desc
 		on m.MATNR = md.MATNR
-	left outer join qvstg.Product			  p
+	left outer join qvstg.Product			   p
 		on m.MATNR = p.NativeProductKey
-		and p.DataSourceKey = m.DataSourceKey
-	left outer join DataSource				  ds
+			and p.DataSourceKey = m.DataSourceKey
+	left outer join DataSource				   ds
 		on ds.DataSourceKey = m.DataSourceKey
+	left outer join psa.ics_stg_SAP_GBR_MARA   ma --- material master 
+		on ma.MATNR = m.MATNR
+	left outer join etl.unit_of_measure_lookup l
+		on ma.MEINS = l.native_key
+			and m.DataSourceKey = l.data_source_key
+	left outer join dbo.unit_of_measure		   um
+		on um.unit_of_measure_id = l.unit_of_measure_id
 	where
-		LVORM is null
+		m.LVORM is null
+		and ma.LVORM is null
 )
 select
 	etl_created_on
   , etl_updated_on
   , etl_source_table
   , is_deleted
-  , snapshot_date			
+  , snapshot_date
   , data_source_key
   , data_source_name
   , country_code
-  , native_warehouse_number 
-  , native_warehouse_name	
+  , native_warehouse_number
+  , native_warehouse_name
   , native_product_key
   , product_name
   , product_category_direct

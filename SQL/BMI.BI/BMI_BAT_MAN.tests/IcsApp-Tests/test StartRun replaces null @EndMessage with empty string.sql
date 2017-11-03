@@ -1,4 +1,4 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string]
+﻿CREATE   procedure [IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc

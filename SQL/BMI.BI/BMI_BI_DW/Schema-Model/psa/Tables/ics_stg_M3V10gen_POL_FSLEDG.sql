@@ -1,5 +1,6 @@
 CREATE TABLE [psa].[ics_stg_M3V10gen_POL_FSLEDG]
 (
+[EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
 [EtlStepRunId] [int] NOT NULL,
 [EtlThreadRunId] [int] NOT NULL,
@@ -7,75 +8,107 @@ CREATE TABLE [psa].[ics_stg_M3V10gen_POL_FSLEDG]
 [EtlSourceTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
 [EtlCreatedBy] [varchar] (200) NOT NULL,
-[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_psa_ics_stg_M3V10gen_POL_FSLEDG_ExcludeFromMerge] DEFAULT ((0)),
-[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_psa_ics_stg_M3V10gen_POL_FSLEDG_IsDuplicate] DEFAULT ((0)),
-[ESACBL] [numeric] (18, 0) NULL,
-[ESACDT] [numeric] (18, 0) NULL,
-[ESADAT] [numeric] (18, 0) NULL,
-[ESAPRV] [numeric] (18, 0) NULL,
-[ESARAT] [numeric] (18, 0) NULL,
-[ESARCD] [numeric] (18, 0) NULL,
+[EtlUpdatedOn] [datetime] NOT NULL,
+[EtlUpdatedBy] [varchar] (200) NOT NULL,
+[EtlDeletedOn] [datetime] NULL,
+[EtlDeletedBy] [varchar] (200) NULL,
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_gen_FSLEDG_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_gen_FSLEDG_IsIncomplete] DEFAULT ('N'),
+[ESACBL] [numeric] (1, 0) NULL,
+[ESACDT] [numeric] (8, 0) NULL,
+[ESADAT] [numeric] (8, 0) NULL,
+[ESAPRV] [numeric] (1, 0) NULL,
+[ESARAT] [numeric] (11, 6) NULL,
+[ESARCD] [numeric] (1, 0) NULL,
 [ESBKID] [nchar] (5) NULL,
 [ESBLBY] [nchar] (10) NULL,
-[ESBLDT] [numeric] (18, 0) NULL,
+[ESBLDT] [numeric] (8, 0) NULL,
 [ESCHID] [nchar] (10) NULL,
-[ESCHNO] [numeric] (18, 0) NULL,
+[ESCHNO] [numeric] (3, 0) NULL,
 [ESCINO] [nchar] (15) NULL,
-[ESCLCD] [numeric] (18, 0) NULL,
-[ESCLST] [numeric] (18, 0) NULL,
+[ESCLCD] [numeric] (1, 0) NULL,
+[ESCLST] [numeric] (1, 0) NULL,
 [ESCONO] [numeric] (18, 0) NOT NULL,
-[ESCRST] [numeric] (18, 0) NULL,
-[ESCRTP] [numeric] (18, 0) NULL,
-[ESCUAM] [numeric] (18, 0) NULL,
+[ESCRST] [numeric] (1, 0) NULL,
+[ESCRTP] [numeric] (2, 0) NULL,
+[ESCUAM] [numeric] (15, 2) NULL,
 [ESCUCD] [nchar] (3) NULL,
 [ESCUCL] [nchar] (3) NULL,
 [ESCUNO] [nchar] (10) NULL,
-[ESDCAM] [numeric] (18, 0) NULL,
-[ESDFPD] [numeric] (18, 0) NULL,
-[ESDFPT] [numeric] (18, 0) NULL,
+[ESDCAM] [numeric] (1, 0) NULL,
+[ESDFPD] [numeric] (8, 0) NULL,
+[ESDFPT] [numeric] (1, 0) NULL,
 [ESDIVI] [nchar] (3) NOT NULL,
 [ESDNRE] [nchar] (8) NULL,
-[ESDTP5] [numeric] (18, 0) NULL,
-[ESDUDT] [numeric] (18, 0) NULL,
-[ESGRPD] [numeric] (18, 0) NULL,
-[ESIIAM] [numeric] (18, 0) NULL,
-[ESIICD] [numeric] (18, 0) NULL,
-[ESIIST] [numeric] (18, 0) NULL,
-[ESINYR] [numeric] (18, 0) NULL,
+[ESDTP5] [numeric] (8, 0) NULL,
+[ESDUDT] [numeric] (8, 0) NULL,
+[ESGRPD] [numeric] (8, 0) NULL,
+[ESIIAM] [numeric] (15, 2) NULL,
+[ESIICD] [numeric] (1, 0) NULL,
+[ESIIST] [numeric] (1, 0) NULL,
+[ESINYR] [numeric] (4, 0) NULL,
 [ESIVCL] [nchar] (5) NULL,
-[ESIVDT] [numeric] (18, 0) NULL,
+[ESIVDT] [numeric] (8, 0) NULL,
 [ESIVTP] [nchar] (2) NULL,
 [ESJRNO] [numeric] (18, 0) NOT NULL,
 [ESJSNO] [numeric] (18, 0) NOT NULL,
-[ESLMDT] [numeric] (18, 0) NULL,
+[ESLMDT] [numeric] (8, 0) NULL,
 [ESLMTS] [numeric] (18, 0) NULL,
-[ESLRDT] [numeric] (18, 0) NULL,
+[ESLRDT] [numeric] (8, 0) NULL,
 [ESPYCD] [nchar] (3) NULL,
 [ESPYNO] [nchar] (10) NULL,
 [ESPYRS] [nchar] (2) NULL,
 [ESPYTP] [nchar] (2) NULL,
-[ESRECO] [numeric] (18, 0) NULL,
-[ESREDE] [numeric] (18, 0) NULL,
+[ESRECO] [numeric] (1, 0) NULL,
+[ESREDE] [numeric] (8, 0) NULL,
 [ESRESP] [nchar] (10) NULL,
-[ESRGDT] [numeric] (18, 0) NULL,
-[ESRGTM] [numeric] (18, 0) NULL,
-[ESRMBL] [numeric] (18, 0) NULL,
-[ESRMQT] [numeric] (18, 0) NULL,
-[ESRMST] [numeric] (18, 0) NULL,
-[ESRVDT] [numeric] (18, 0) NULL,
-[ESSAGS] [numeric] (18, 0) NULL,
-[ESSLOP] [numeric] (18, 0) NULL,
+[ESRGDT] [numeric] (8, 0) NULL,
+[ESRGTM] [numeric] (6, 0) NULL,
+[ESRMBL] [numeric] (1, 0) NULL,
+[ESRMQT] [numeric] (1, 0) NULL,
+[ESRMST] [numeric] (1, 0) NULL,
+[ESRVDT] [numeric] (8, 0) NULL,
+[ESSAGS] [numeric] (2, 0) NULL,
+[ESSLOP] [numeric] (2, 0) NULL,
 [ESSMCD] [nchar] (4) NULL,
 [ESTDSC] [nchar] (10) NULL,
 [ESTECD] [nchar] (3) NULL,
 [ESTEPY] [nchar] (3) NULL,
-[ESTRCD] [numeric] (18, 0) NULL,
-[ESTXID] [numeric] (18, 0) NULL,
-[ESVONO] [numeric] (18, 0) NULL,
+[ESTRCD] [numeric] (2, 0) NULL,
+[ESTXID] [numeric] (13, 0) NULL,
+[ESVONO] [numeric] (8, 0) NULL,
 [ESVSER] [nchar] (3) NULL,
-[ESVTAM] [numeric] (18, 0) NULL,
+[ESVTAM] [numeric] (15, 2) NULL,
 [ESYEA4] [numeric] (18, 0) NOT NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_M3V10gen_POL_FSLEDG] ADD CONSTRAINT [PK_psa_ics_stg_M3V10gen_POL_FSLEDG] PRIMARY KEY CLUSTERED  ([ESCONO], [ESDIVI], [ESJRNO], [ESJSNO], [ESYEA4])
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Mandatory reference to the database-specific unique identifier for the original source system of this data record.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'DataSourceKey'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The Batch Run Id context in which this record was added or last updated on this table – soft link back to the Batch Management database (BMI_BAT_MAN).', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlBatchRunId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for this record being added to this table.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlCreatedBy'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process first added this record to this table.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlCreatedOn'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that last marked this record deleted/inactive on this table; not usually re-set to null if the record is subsequently re-activated/un-deleted.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlDeletedBy'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process last marked this record deleted/inactive on this table; not usually re-set to null if the record is subsequently re-activated/un-deleted.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlDeletedOn'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The database-specific unique key of this record as identified within the ETL sub-system', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlRecordId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the only or main table or object in the source system of record from which this row was extracted', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlSourceTable'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The Step Run Id context (within a Batch Run) in which this record was added or last updated on this table – soft link back to the Batch Management database (BMI_BAT_MAN).', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlStepRunId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The Thread Run Id context (within a Step Run) in which this record was added or last updated on this table – soft link back to the Batch Management database (BMI_BAT_MAN).', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlThreadRunId'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The name of the module or mapping within the ETL process that was responsible for the last update for this record on this table; will be the same as EtlCreatedBy when the record is first added.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlUpdatedBy'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'The ETL system date and time that the ETL process last updated this record on this table; will be the same as EtlCreatedOn when the record is first added.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'EtlUpdatedOn'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Indicates that this record is marked as or has been physically deleted in the source system of record.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'IsDeleted'
+GO
+EXEC sp_addextendedproperty N'MS_Description', N'Indicates whether ETL processing is complete.  Used on PSA staging tables to indicate that the row may have changes that need to be re-processed by the ETL process (regardless of current ETL Batch Run Id).  May be used for late arriving dimensions to force facts to be re-processed outside of their originating batch.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FSLEDG', 'COLUMN', N'IsIncomplete'
 GO

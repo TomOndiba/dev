@@ -101,7 +101,6 @@ baa3fc97-2ffd-521e-bf0e-b384f9abcc58|Programmable Objects\etl\Stored Procedures\
 3225b809-e790-51bb-9b80-895f9adf2f08|Programmable Objects\log4Utils\Stored Procedures\PrintString.sql;
 670576e6-3bc5-5ece-a037-8b11d9f6c0fc|Programmable Objects\log4Utils\Stored Procedures\JournalPrinter.sql;
 67693b34-7581-5c4d-9fd7-a11538fae713|Programmable Objects\dbo\Functions\Numbers.sql;
-8117c898-6c56-5981-850f-dc0a51ec2ac9|Programmable Objects\utils\Stored Procedures\LoadDateDimension.sql;
 6fa1ede2-33fa-52c4-9851-10d1307aeabc|Programmable Objects\log4\Functions\GetJournalControl.sql;
 f1c132d0-a9be-559e-9b9f-df02fa90e78b|Programmable Objects\log4Utils\Stored Procedures\ExceptionReader.sql;
 a36600a2-33f7-5123-b295-e43d787c3464|Programmable Objects\log4Utils\Stored Procedures\JournalReader.sql;
@@ -124,6 +123,23 @@ f508adf0-fe95-583d-aad0-1ebf45ab1ffb|Programmable Objects\pbi\Views\factBudgetVo
 932a5491-2aa7-5f8a-a962-b2368db40ae3|Programmable Objects\pbi\Views\factOrderBacklog.sql;
 1c8c4dc5-8292-5543-a1fb-f2b75fa1e109|Programmable Objects\pbi\Views\factOrderShippedNotInvoiced.sql;
 131969b2-c406-5950-a8d9-e7a552a86a97|Programmable Objects\pbi\Views\factSaleForecastTotal.sql;
+ff31945c-f0c3-5d1f-8ebd-2d5e151081af|Programmable Objects\dbo\Stored Procedures\PopulatepsaTotsaLoadControlTable.sql;
+66312d18-2f70-5cf6-a8c4-25d5c1744516|Programmable Objects\dbo\Stored Procedures\PopulateTsaToPsaLoadControlTable.sql;
+7b9d61ae-d1eb-5bfe-bbfa-ad9f5639ce1e|Programmable Objects\dbo\Views\inventory_snapshot_sap_gbr.sql;
+34ec80b2-41f2-52ba-8a25-42e11b1135f0|Programmable Objects\discovery\Views\inventory_snapshot_sap_gbr.sql;
+17cbdb56-4099-5de9-b346-9ebe8a1f165e|Programmable Objects\etl\Stored Procedures\CheckForDuplicateQlikViewTransactions.sql;
+bd96afdd-c5f6-50aa-8590-116366b9ddf7|Programmable Objects\IcsApp\Stored Procedures\TsaToPsaMerge.sql;
+4a776900-95a8-558b-ad88-94adaa4564f3|Programmable Objects\pbi\Views\Today.sql;
+840e6b77-2420-50c0-8d2b-bfd62a6b27a3|Programmable Objects\privy\Stored Procedures\BuildAndRunMerge.sql;
+328d6d16-331a-5cd0-92cd-28f8258fda76|Programmable Objects\privy\Stored Procedures\DeDupe.sql;
+e11766de-db3c-53a7-9c94-79678367d136|Programmable Objects\privy\Stored Procedures\TsaToPsaBuildAndRunMerge.sql;
+74ac60e7-dc74-5f1b-aa21-cb07061e5fe2|Programmable Objects\privy\Stored Procedures\TsaToPsaDeDupe.sql;
+655842f8-8aba-5d74-b8f1-5b42b5ff387c|Programmable Objects\privy\Stored Procedures\TsaToPsaValidateSchema.sql;
+5a56a1ba-2923-5dc8-8aee-8c9ec0a54378|Programmable Objects\utils\Stored Procedures\LoadCalendarDimension.sql;
+d5a874c5-fe3c-51c2-88d8-562885f811b2|Static Data\dbo.TsaToPsaControlTable.data.sql;
+e5fa4b4e-94ee-5bed-bca5-e1fbb5eb531c|Static Data\dbo.unit_of_measure_type.data.sql;
+6b261802-9926-5e6b-baaf-e8d898ae03a3|Static Data\dbo.unit_of_measure.data.sql;
+10146340-7552-5b26-9102-6af711374852|Static Data\etl.unit_of_measure_lookup.data.sql;
 </DeployChangesExecutionOrder>
     <IncludeObjectsInDataSync />
     <AdditionalScriptFolders>
@@ -132,7 +148,7 @@ Static Data;
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
@@ -340,6 +356,12 @@ Static Data;
     <Folder Include="Programmable Objects\IcsApp\Stored Procedures\" />
     <Folder Include="Migrations\1.0.5\" />
     <Folder Include="Migrations\1.0.7" />
+    <Folder Include="Migrations\1.0.8" />
+    <Folder Include="Programmable Objects\dbo\Views\" />
+    <Folder Include="Programmable Objects\discovery\" />
+    <Folder Include="Programmable Objects\discovery\Views\" />
+    <Folder Include="Schema-Model\etl\" />
+    <Folder Include="Schema-Model\etl\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -367,6 +389,9 @@ Static Data;
     <None Include="Static Data\dbo.Country.data.sql" />
     <None Include="Static Data\dbo.Culture.data.sql" />
     <None Include="Static Data\dbo.TranslationStatus.data.sql" />
+    <None Include="Static Data\dbo.unit_of_measure_type.data.sql" />
+    <None Include="Static Data\dbo.unit_of_measure.data.sql" />
+    <None Include="Static Data\etl.unit_of_measure_lookup.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -1254,6 +1279,77 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.7\013_Additional_PSA_Permissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.7\014_Add_Poland_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\001_Add_Fixed_Poland_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Views\inventory_snapshot_sap_gbr.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\002_Tsa_SAP_GBR_Poland_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\003_Psa_SAP_GBR_Poland_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\004_Tsa_Poland_Gen_Constraints_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\inventory_snapshot_sap_gbr.sql" />
+    <None Include="Migrations\1.0.8\005_Add_inventory_snapshot_sap_gbr_View.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_MITTRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_MITWHL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_MITTRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_MITWHL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_MITTRA.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_MITWHL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_T001L.sql" />
+    <None Include="Schema-Model\Security\Schemas\discovery.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_MITTRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_MITWHL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_MITTRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_MITWHL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_CMNCMP.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_MITTRA.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_MITWHL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_T001L.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\006_Reapply_extended_properties.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\unit_of_measure.sql" />
+    <None Include="Schema-Model\dbo\Tables\unit_of_measure_type.sql" />
+    <None Include="Schema-Model\etl\Tables\unit_of_measure_lookup.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\007_add_UoM_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\inventory_snapshot_m3v10_pol.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

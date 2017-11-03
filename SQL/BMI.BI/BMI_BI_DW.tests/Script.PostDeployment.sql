@@ -13,6 +13,9 @@ Post-Deployment Script Template
 :r "..\BMI_BI_DW\Static Data\log4Private.Severity.data.sql"
 
 :r "..\BMI_BI_DW\Static Data\dbo.DataSource.data.sql"
+:r "..\BMI_BI_DW\Static Data\dbo.unit_of_measure_type.data.sql"
+:r "..\BMI_BI_DW\Static Data\dbo.unit_of_measure.data.sql"
+:r "..\BMI_BI_DW\Static Data\etl.unit_of_measure_lookup.data.sql"
 
 :r "..\BMI_BI_DW\Static Data\stg.SSIS_BUDGET_RegionLookup.data.sql"
 :r "..\BMI_BI_DW\Static Data\stg.SSIS_BUDGET_BusinessUnitLookup.data.sql"

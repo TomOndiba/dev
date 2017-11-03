@@ -5,8 +5,6 @@ GRANT SELECT ON SCHEMA:: [tsa] TO [AppDevelopersPROD]
 GO
 GRANT SELECT ON SCHEMA:: [tsa] TO [BatchManagers]
 GO
-GRANT SELECT ON SCHEMA:: [tsa] TO [BusinessAnalystsPROD]
-GO
 GRANT SELECT ON SCHEMA:: [tsa] TO [DataFeedReaders]
 GO
 GRANT EXECUTE ON SCHEMA:: [tsa] TO [DataFeedReaders]

@@ -10,6 +10,7 @@ GO
 
 
 
+
 CREATE view [discovery].[inventory_snapshot_sap_gbr]
 as
 
@@ -67,9 +68,10 @@ as
 	  , null																	as standard_stock_on_hand
 	  , um.unit_of_measure_code													as standard_unit_of_measure
 	  , 'GBP'																	as local_ccy
-	  , cast(null as decimal(18, 2))											as native_unit_value_local_ccy
+	  , case when mb.LBKUM>0 then cast(mb. SALK3/mb.LBKUM	 as decimal(18, 2))
+	   else 0 end 																as native_unit_value_local_ccy
 	  , cast(null as decimal(18, 2))											as standard_unit_value_local_ccy
-	  , cast(null as decimal(18, 2))											as stock_in_hand_value_local_ccy
+	  , cast(mb. SALK3 as decimal(18, 2))										as stock_in_hand_value_local_ccy
 	  , cast(null as decimal(18, 2))											as native_unit_value_eur
 	  , cast(null as decimal(18, 2))											as standard_unit_value_eur
 	  , cast(null as decimal(18, 2))											as stock_in_hand_value_eur
@@ -92,10 +94,13 @@ as
 			and m.DataSourceKey = l.data_source_key
 	left outer join dbo.unit_of_measure		   um
 		on um.unit_of_measure_id = l.unit_of_measure_id
+	left outer join tsa.ics_land_SAP_GBR_MBEW mb   --material valuation
+	on mb.MATNR=m.MATNR
+	and mb.BWKEY=m.WERKS
 	where
 		m.LVORM is null
 		and ma.LVORM is null
-)
+	)
 select
 	etl_created_on
   , etl_updated_on
@@ -129,5 +134,6 @@ select
 from
 	cte
 where
-	cte.RankingMaterialPlant = 1 ;
+	cte.RankingMaterialPlant = 1 
+	;
 GO

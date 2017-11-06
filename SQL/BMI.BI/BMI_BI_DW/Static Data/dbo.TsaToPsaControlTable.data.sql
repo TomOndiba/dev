@@ -4,78 +4,159 @@
 --Originally by Vyas (http://vyaskn.tripod.com): sp_generate_inserts (build 22)
 --Adapted for SQL Server 2008/2012 by Daniel Nolan (http://danere.com)
 
-SET NOCOUNT ON
+set nocount on ;
 
-SET IDENTITY_INSERT [dbo].[TsaToPsaLoadControlTable] ON
+set identity_insert [dbo].[TsaToPsaLoadControlTable] on ;
 
-MERGE INTO [dbo].[TsaToPsaLoadControlTable] AS Target
-USING (VALUES
-  (19,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10gen_POL_MITMAS','BMI_BI_DW','psa','ics_stg_M3V10gen_POL_MITMAS','Full',100147,'MMITNO,MMCONO','MMITNO,MMCONO',0)
- ,(20,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10gen_POL_MITTRA','BMI_BI_DW','psa','ics_stg_M3V10gen_POL_MITTRA','Full',100147,'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO','MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO',0)
- ,(22,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10gen_POL_MITWHL','BMI_BI_DW','psa','ics_stg_M3V10gen_POL_MITWHL','Full',100147,'MWWHLO,MWCONO','MWWHLO,MWCONO',0)
- ,(64,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10ved_POL_MITMAS','BMI_BI_DW','psa','ics_stg_M3V10ved_POL_MITMAS','Full',100140,'MMITNO,MMCONO','MMITNO,MMCONO',0)
- ,(65,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10ved_POL_MITTRA','BMI_BI_DW','psa','ics_stg_M3V10ved_POL_MITTRA','Full',100140,'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO','MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO',0)
- ,(67,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10ved_POL_MITWHL','BMI_BI_DW','psa','ics_stg_M3V10ved_POL_MITWHL','Full',100140,'MWWHLO,MWCONO','MWWHLO,MWCONO',0)
- ,(109,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10vil_POL_MITMAS','BMI_BI_DW','psa','ics_stg_M3V10vil_POL_MITMAS','Full',100141,'MMITNO,MMCONO','MMITNO,MMCONO',0)
- ,(110,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10vil_POL_MITTRA','BMI_BI_DW','psa','ics_stg_M3V10vil_POL_MITTRA','Full',100141,'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO','MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO',0)
- ,(112,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_M3V10vil_POL_MITWHL','BMI_BI_DW','psa','ics_stg_M3V10vil_POL_MITWHL','Full',100141,'MWWHLO,MWCONO','MWWHLO,MWCONO',0)
- ,(136,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_SAP_GBR_MAKT','BMI_BI_DW','psa','ics_stg_SAP_GBR_MAKT','Full',100101,'SPRAS,MATNR','SPRAS,MATNR',0)
- ,(137,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_SAP_GBR_MARA','BMI_BI_DW','psa','ics_stg_SAP_GBR_MARA','Full',100101,'MATNR','MATNR',0)
- ,(138,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_SAP_GBR_MARD','BMI_BI_DW','psa','ics_stg_SAP_GBR_MARD','Full',100101,'WERKS,MATNR,LGORT','WERKS,MATNR,LGORT',0)
- ,(139,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_SAP_GBR_T001L','BMI_BI_DW','psa','ics_stg_SAP_GBR_T001L','Full',100101,'LGORT,WERKS,MANDT','LGORT,WERKS,MANDT',0)
- ,(140,'2017-11-01T14:21:51.870','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','ics_land_SAP_GBR_T001W','BMI_BI_DW','psa','ics_stg_SAP_GBR_T001W','Full',100101,'WERKS','WERKS',0)
-) AS Source ([ID],[CreatedDate],[CreatedBy],[SourceDB],[SourceSchema],[SourceTable],[TargetDB],[TargetSchema],[TargetTable],[LoadMode],[DataSourceKey],[SourcePK],[TargetPK],[Done])
-ON (Target.[ID] = Source.[ID])
-WHEN MATCHED AND (
-	NULLIF(Source.[CreatedDate], Target.[CreatedDate]) IS NOT NULL OR NULLIF(Target.[CreatedDate], Source.[CreatedDate]) IS NOT NULL OR 
-	NULLIF(Source.[CreatedBy], Target.[CreatedBy]) IS NOT NULL OR NULLIF(Target.[CreatedBy], Source.[CreatedBy]) IS NOT NULL OR 
-	NULLIF(Source.[SourceDB], Target.[SourceDB]) IS NOT NULL OR NULLIF(Target.[SourceDB], Source.[SourceDB]) IS NOT NULL OR 
-	NULLIF(Source.[SourceSchema], Target.[SourceSchema]) IS NOT NULL OR NULLIF(Target.[SourceSchema], Source.[SourceSchema]) IS NOT NULL OR 
-	NULLIF(Source.[SourceTable], Target.[SourceTable]) IS NOT NULL OR NULLIF(Target.[SourceTable], Source.[SourceTable]) IS NOT NULL OR 
-	NULLIF(Source.[TargetDB], Target.[TargetDB]) IS NOT NULL OR NULLIF(Target.[TargetDB], Source.[TargetDB]) IS NOT NULL OR 
-	NULLIF(Source.[TargetSchema], Target.[TargetSchema]) IS NOT NULL OR NULLIF(Target.[TargetSchema], Source.[TargetSchema]) IS NOT NULL OR 
-	NULLIF(Source.[TargetTable], Target.[TargetTable]) IS NOT NULL OR NULLIF(Target.[TargetTable], Source.[TargetTable]) IS NOT NULL OR 
-	NULLIF(Source.[LoadMode], Target.[LoadMode]) IS NOT NULL OR NULLIF(Target.[LoadMode], Source.[LoadMode]) IS NOT NULL OR 
-	NULLIF(Source.[DataSourceKey], Target.[DataSourceKey]) IS NOT NULL OR NULLIF(Target.[DataSourceKey], Source.[DataSourceKey]) IS NOT NULL OR 
-	NULLIF(Source.[SourcePK], Target.[SourcePK]) IS NOT NULL OR NULLIF(Target.[SourcePK], Source.[SourcePK]) IS NOT NULL OR 
-	NULLIF(Source.[TargetPK], Target.[TargetPK]) IS NOT NULL OR NULLIF(Target.[TargetPK], Source.[TargetPK]) IS NOT NULL OR 
-	NULLIF(Source.[Done], Target.[Done]) IS NOT NULL OR NULLIF(Target.[Done], Source.[Done]) IS NOT NULL) THEN
- UPDATE SET
-  [CreatedDate] = Source.[CreatedDate], 
-  [CreatedBy] = Source.[CreatedBy], 
-  [SourceDB] = Source.[SourceDB], 
-  [SourceSchema] = Source.[SourceSchema], 
-  [SourceTable] = Source.[SourceTable], 
-  [TargetDB] = Source.[TargetDB], 
-  [TargetSchema] = Source.[TargetSchema], 
-  [TargetTable] = Source.[TargetTable], 
-  [LoadMode] = Source.[LoadMode], 
-  [DataSourceKey] = Source.[DataSourceKey], 
-  [SourcePK] = Source.[SourcePK], 
-  [TargetPK] = Source.[TargetPK], 
-  [Done] = Source.[Done]
-WHEN NOT MATCHED BY TARGET THEN
- INSERT([ID],[CreatedDate],[CreatedBy],[SourceDB],[SourceSchema],[SourceTable],[TargetDB],[TargetSchema],[TargetTable],[LoadMode],[DataSourceKey],[SourcePK],[TargetPK],[Done])
- VALUES(Source.[ID],Source.[CreatedDate],Source.[CreatedBy],Source.[SourceDB],Source.[SourceSchema],Source.[SourceTable],Source.[TargetDB],Source.[TargetSchema],Source.[TargetTable],Source.[LoadMode],Source.[DataSourceKey],Source.[SourcePK],Source.[TargetPK],Source.[Done])
-WHEN NOT MATCHED BY SOURCE THEN 
- DELETE
-;
-GO
-DECLARE @mergeError int
- , @mergeCount int
-SELECT @mergeError = @@ERROR, @mergeCount = @@ROWCOUNT
-IF @mergeError != 0
- BEGIN
- PRINT 'ERROR OCCURRED IN MERGE FOR [dbo].[TsaToPsaLoadControlTable]. Rows affected: ' + CAST(@mergeCount AS VARCHAR(100)); -- SQL should always return zero rows affected
- END
-ELSE
- BEGIN
- PRINT '[dbo].[TsaToPsaLoadControlTable] rows affected by MERGE: ' + CAST(@mergeCount AS VARCHAR(100));
- END
-GO
+merge into [dbo].[TsaToPsaLoadControlTable] as Target
+using
+(
+	values
+		(19, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10gen_POL_MITMAS', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10gen_POL_MITMAS', 'Full', 100147, 'MMITNO,MMCONO', 'MMITNO,MMCONO', 0
+		)
+	  , (20, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10gen_POL_MITTRA', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10gen_POL_MITTRA', 'Full', 100147, 'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO', 'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO', 0
+		)
+	  , (22, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10gen_POL_MITWHL', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10gen_POL_MITWHL', 'Full', 100147, 'MWWHLO,MWCONO', 'MWWHLO,MWCONO', 0
+		)
+	  , (64, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10ved_POL_MITMAS', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10ved_POL_MITMAS', 'Full', 100140, 'MMITNO,MMCONO', 'MMITNO,MMCONO', 0
+		)
+	  , (65, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10ved_POL_MITTRA', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10ved_POL_MITTRA', 'Full', 100140, 'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO', 'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO', 0
+		)
+	  , (67, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10ved_POL_MITWHL', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10ved_POL_MITWHL', 'Full', 100140, 'MWWHLO,MWCONO', 'MWWHLO,MWCONO', 0
+		)
+	  , (109, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10vil_POL_MITMAS', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10vil_POL_MITMAS', 'Full', 100141, 'MMITNO,MMCONO', 'MMITNO,MMCONO', 0
+		)
+	  , (110, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10vil_POL_MITTRA', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10vil_POL_MITTRA', 'Full', 100141, 'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO', 'MTWHLO,MTTMSX,MTRGTM,MTRGDT,MTITNO,MTCONO', 0
+		)
+	  , (112, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_M3V10vil_POL_MITWHL', 'BMI_BI_DW', 'psa'
+	   , 'ics_stg_M3V10vil_POL_MITWHL', 'Full', 100141, 'MWWHLO,MWCONO', 'MWWHLO,MWCONO', 0
+		)
+	  , (136, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_SAP_GBR_MAKT', 'BMI_BI_DW', 'psa', 'ics_stg_SAP_GBR_MAKT', 'Full'
+	   , 100101, 'SPRAS,MATNR', 'SPRAS,MATNR', 0
+		)
+	  , (137, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_SAP_GBR_MARA', 'BMI_BI_DW', 'psa', 'ics_stg_SAP_GBR_MARA', 'Full'
+	   , 100101, 'MATNR', 'MATNR', 0
+		)
+	  , (138, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_SAP_GBR_MARD', 'BMI_BI_DW', 'psa', 'ics_stg_SAP_GBR_MARD', 'Full'
+	   , 100101, 'WERKS,MATNR,LGORT', 'WERKS,MATNR,LGORT', 0
+		)
+	  , (139, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_SAP_GBR_T001L', 'BMI_BI_DW', 'psa', 'ics_stg_SAP_GBR_T001L', 'Full'
+	   , 100101, 'LGORT,WERKS,MANDT', 'LGORT,WERKS,MANDT', 0
+		)
+	  , (140, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_SAP_GBR_T001W', 'BMI_BI_DW', 'psa', 'ics_stg_SAP_GBR_T001W', 'Full'
+	   , 100101, 'WERKS', 'WERKS', 0
+		)
+	  , (141, '2017-11-06 12:07:05.383', 'GROUPICOPAL\ukrna', 'BMI_BI_DW', 'tsa', 'ics_land_SAP_GBR_MBEW', 'BMI_BI_DW', 'psa', 'ics_stg_SAP_GBR_MBEW', 'Full'
+	   , 100101, 'BWKEY,MATNR', 'BWKEY,MATNR', 0
+		)
+) as Source ([ID], [CreatedDate], [CreatedBy], [SourceDB], [SourceSchema], [SourceTable], [TargetDB], [TargetSchema], [TargetTable], [LoadMode]
+		   , [DataSourceKey], [SourcePK], [TargetPK], [Done]
+			)
+on (Target.[ID] = Source.[ID])
+when matched and (
+					 nullif(Source.[CreatedDate], Target.[CreatedDate]) is not null
+					 or nullif(Target.[CreatedDate], Source.[CreatedDate]) is not null
+					 or nullif(Source.[CreatedBy], Target.[CreatedBy]) is not null
+					 or nullif(Target.[CreatedBy], Source.[CreatedBy]) is not null
+					 or nullif(Source.[SourceDB], Target.[SourceDB]) is not null
+					 or nullif(Target.[SourceDB], Source.[SourceDB]) is not null
+					 or nullif(Source.[SourceSchema], Target.[SourceSchema]) is not null
+					 or nullif(Target.[SourceSchema], Source.[SourceSchema]) is not null
+					 or nullif(Source.[SourceTable], Target.[SourceTable]) is not null
+					 or nullif(Target.[SourceTable], Source.[SourceTable]) is not null
+					 or nullif(Source.[TargetDB], Target.[TargetDB]) is not null
+					 or nullif(Target.[TargetDB], Source.[TargetDB]) is not null
+					 or nullif(Source.[TargetSchema], Target.[TargetSchema]) is not null
+					 or nullif(Target.[TargetSchema], Source.[TargetSchema]) is not null
+					 or nullif(Source.[TargetTable], Target.[TargetTable]) is not null
+					 or nullif(Target.[TargetTable], Source.[TargetTable]) is not null
+					 or nullif(Source.[LoadMode], Target.[LoadMode]) is not null
+					 or nullif(Target.[LoadMode], Source.[LoadMode]) is not null
+					 or nullif(Source.[DataSourceKey], Target.[DataSourceKey]) is not null
+					 or nullif(Target.[DataSourceKey], Source.[DataSourceKey]) is not null
+					 or nullif(Source.[SourcePK], Target.[SourcePK]) is not null
+					 or nullif(Target.[SourcePK], Source.[SourcePK]) is not null
+					 or nullif(Source.[TargetPK], Target.[TargetPK]) is not null
+					 or nullif(Target.[TargetPK], Source.[TargetPK]) is not null
+					 or nullif(Source.[Done], Target.[Done]) is not null
+					 or nullif(Target.[Done], Source.[Done]) is not null
+				 )
+	then update set
+			 [CreatedDate] = Source.[CreatedDate]
+		   , [CreatedBy] = Source.[CreatedBy]
+		   , [SourceDB] = Source.[SourceDB]
+		   , [SourceSchema] = Source.[SourceSchema]
+		   , [SourceTable] = Source.[SourceTable]
+		   , [TargetDB] = Source.[TargetDB]
+		   , [TargetSchema] = Source.[TargetSchema]
+		   , [TargetTable] = Source.[TargetTable]
+		   , [LoadMode] = Source.[LoadMode]
+		   , [DataSourceKey] = Source.[DataSourceKey]
+		   , [SourcePK] = Source.[SourcePK]
+		   , [TargetPK] = Source.[TargetPK]
+		   , [Done] = Source.[Done]
+when not matched by target
+	then insert
+		 (
+			 [ID]
+		   , [CreatedDate]
+		   , [CreatedBy]
+		   , [SourceDB]
+		   , [SourceSchema]
+		   , [SourceTable]
+		   , [TargetDB]
+		   , [TargetSchema]
+		   , [TargetTable]
+		   , [LoadMode]
+		   , [DataSourceKey]
+		   , [SourcePK]
+		   , [TargetPK]
+		   , [Done]
+		 )
+		 values
+		 (
+			 Source.[ID]
+		   , Source.[CreatedDate]
+		   , Source.[CreatedBy]
+		   , Source.[SourceDB]
+		   , Source.[SourceSchema]
+		   , Source.[SourceTable]
+		   , Source.[TargetDB]
+		   , Source.[TargetSchema]
+		   , Source.[TargetTable]
+		   , Source.[LoadMode]
+		   , Source.[DataSourceKey]
+		   , Source.[SourcePK]
+		   , Source.[TargetPK]
+		   , Source.[Done]
+		 )
+when not matched by source
+	then delete ;
+go
+declare
+	@mergeError int
+  , @mergeCount int ;
+select	@mergeError = @@error, @mergeCount = @@rowcount ;
+if @mergeError != 0
+	begin
+		print 'ERROR OCCURRED IN MERGE FOR [dbo].[TsaToPsaLoadControlTable]. Rows affected: ' + cast(@mergeCount as varchar(100)) ; -- SQL should always return zero rows affected
+	end ;
+else
+	begin
+		print '[dbo].[TsaToPsaLoadControlTable] rows affected by MERGE: ' + cast(@mergeCount as varchar(100)) ;
+	end ;
+go
 
-SET IDENTITY_INSERT [dbo].[TsaToPsaLoadControlTable] OFF
-GO
-SET NOCOUNT OFF
-GO
+set identity_insert [dbo].[TsaToPsaLoadControlTable] off ;
+go
+set nocount off ;
+go
 

@@ -1,5 +1,11 @@
-CREATE TABLE [tsa].[ics_land_SAP_GBR_MBEW]
+﻿-- <Migration ID="72ed62a9-54e2-4a09-b03d-3da81146ede9" />
+GO
+
+PRINT N'Creating [psa].[ics_stg_SAP_GBR_MBEW]'
+GO
+CREATE TABLE [psa].[ics_stg_SAP_GBR_MBEW]
 (
+[EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
 [EtlStepRunId] [int] NOT NULL,
 [EtlThreadRunId] [int] NOT NULL,
@@ -7,11 +13,15 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_MBEW]
 [EtlSourceTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
 [EtlCreatedBy] [varchar] (200) NOT NULL,
-[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_MBEW_ExcludeFromMerge] DEFAULT ((0)),
-[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_SAP_GBR_MBEW_IsDuplicate] DEFAULT ((0)),
+[EtlUpdatedOn] [datetime] NOT NULL,
+[EtlUpdatedBy] [varchar] (200) NOT NULL,
+[EtlDeletedOn] [datetime] NULL,
+[EtlDeletedBy] [varchar] (200) NULL,
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_stg_SAP_GBR_MBEW_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_stg_SAP_GBR_MBEW_IsIncomplete] DEFAULT ('N'),
 [MANDT] [nvarchar] (3) NULL,
-[MATNR] [nvarchar] (18) NULL,
-[BWKEY] [nvarchar] (4) NULL,
+[MATNR] [nvarchar] (18) NOT NULL,
+[BWKEY] [nvarchar] (4) NOT NULL,
 [BWTAR] [nvarchar] (10) NULL,
 [LVORM] [nvarchar] (1) NULL,
 [LBKUM] [decimal] (13, 3) NULL,
@@ -120,5 +130,7 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_MBEW]
 [OIPPINV] [nvarchar] (1) NULL
 )
 GO
-CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_MBEW_1] ON [tsa].[ics_land_SAP_GBR_MBEW] ([MATNR], [BWKEY])
+PRINT N'Creating primary key [psa_ics_stg_SAP_GBR_MBEW_PK] on [psa].[ics_stg_SAP_GBR_MBEW]'
+GO
+ALTER TABLE [psa].[ics_stg_SAP_GBR_MBEW] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_MBEW_PK] PRIMARY KEY CLUSTERED  ([MATNR], [BWKEY])
 GO

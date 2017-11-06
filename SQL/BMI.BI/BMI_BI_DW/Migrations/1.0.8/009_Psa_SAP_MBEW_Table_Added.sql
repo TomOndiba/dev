@@ -1,3 +1,8 @@
+﻿-- <Migration ID="72ed62a9-54e2-4a09-b03d-3da81146ede9" />
+GO
+
+PRINT N'Creating [psa].[ics_stg_SAP_GBR_MBEW]'
+GO
 CREATE TABLE [psa].[ics_stg_SAP_GBR_MBEW]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
@@ -124,6 +129,8 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_MBEW]
 [OKLAS] [nvarchar] (4) NULL,
 [OIPPINV] [nvarchar] (1) NULL
 )
+GO
+PRINT N'Creating primary key [psa_ics_stg_SAP_GBR_MBEW_PK] on [psa].[ics_stg_SAP_GBR_MBEW]'
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_MBEW] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_MBEW_PK] PRIMARY KEY CLUSTERED  ([MATNR], [BWKEY])
 GO

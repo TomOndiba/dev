@@ -1,3 +1,5 @@
 CREATE SCHEMA [batch]
 AUTHORIZATION [dbo]
 GO
+GRANT REFERENCES ON SCHEMA:: [batch] TO [IcsDataFeeders]
+GO

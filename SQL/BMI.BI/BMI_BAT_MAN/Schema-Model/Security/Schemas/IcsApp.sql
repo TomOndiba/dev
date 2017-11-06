@@ -1,3 +1,11 @@
 CREATE SCHEMA [IcsApp]
 AUTHORIZATION [dbo]
 GO
+GRANT REFERENCES ON SCHEMA:: [IcsApp] TO [EtlDevelopersDEV]
+GO
+GRANT EXECUTE ON SCHEMA:: [IcsApp] TO [EtlDevelopersDEV]
+GO
+GRANT SELECT ON SCHEMA:: [IcsApp] TO [IcsDataFeeders]
+GO
+GRANT EXECUTE ON SCHEMA:: [IcsApp] TO [IcsDataFeeders]
+GO

@@ -6,9 +6,9 @@ set nocount on
 
 merge into [dbo].[StubResultSet] as Target
 using (values
-  ('[ics].[ProcessRunStart]',999,null,null,'RUN','FULL','Process Message',null,null,null,null,null,null,null,null,null)
- ,('[ics].[SubProcessRunStart]',null,888,null,'RUN','FULL','Sub-Process Message',null,null,null,null,null,null,null,null,null)
- ,('[ics].[ThreadRunStart]',null,null,777,'RUN','FULL','Thread Message','2017-07-25T00:00:00','2017-07-25T00:00:00',null,null,null,null,null,null,null)
+  ('[ics].[ProcessRunStart]',999,null,null,'RUN','DELTA','Process Message',null,null,null,null,null,null,null,null,null)
+ ,('[ics].[SubProcessRunStart]',null,888,null,'RUN','DELTA','Sub-Process Message',null,null,null,null,null,null,null,null,null)
+ ,('[ics].[ThreadRunStart]',null,null,777,'RUN','DELTA','Thread Message','2017-07-25T00:00:00','2017-07-25T00:00:00',null,null,null,null,null,null,null)
  ,('[IcsApp].[MappingConfigTaskGetCurrentRunIds]',999,888,777,null,null,null,null,null,null,null,null,null,null,null,null)
  ,('[IcsApp].[SubProcessCheckThreads]',null,888,null,null,null,null,null,null,'SUCCEEDED',1,1,1,0,0,0)
 ) as Source ([FunctionName],[ProcessRunID],[SubProcessRunID],[ThreadRunID],[Instruction],[RunType],[Message],[StartCapturePoint],[EndCapturePoint],[Outcome],[ExpectedThreadCount],[ActualThreadCount],[ThreadsSucceeded],[ThreadsSkipped],[ThreadsStopped],[ThreadsFailed])

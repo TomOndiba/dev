@@ -1,3 +1,11 @@
+﻿-- <Migration ID="022d2fdb-e424-44e5-948c-1cb63a94e254" />
+GO
+if object_id('tsa.ics_land_SAP_GBR_MBEW', 'U') is not null
+	drop table tsa.ics_land_SAP_GBR_MBEW ;
+go
+
+PRINT N'Creating [tsa].[ics_land_SAP_GBR_MBEW]'
+GO
 CREATE TABLE [tsa].[ics_land_SAP_GBR_MBEW]
 (
 [EtlBatchRunId] [int] NOT NULL,
@@ -119,6 +127,8 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_MBEW]
 [OKLAS] [nvarchar] (4) NULL,
 [OIPPINV] [nvarchar] (1) NULL
 )
+GO
+PRINT N'Creating index [IndClust_tsa_ics_land_SAP_GBR_MBEW_1] on [tsa].[ics_land_SAP_GBR_MBEW]'
 GO
 CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_MBEW_1] ON [tsa].[ics_land_SAP_GBR_MBEW] ([MATNR], [BWKEY])
 GO

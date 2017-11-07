@@ -44,7 +44,7 @@ as
 		  , @SetDate StartTime	-- datetime
 		  , @SetDate EndTime	-- datetime
 		  , 9		 RunStateId		   -- int
-		  , 'Succeeded'		 EndState		  -- varchar(16)
+		  , 'SUCCEEDED'		 EndState		  -- varchar(16)
 		  , null		 EndMessage		  -- varchar(500)
 		into
 			#expected ;
@@ -53,7 +53,7 @@ as
 			@ProcessName = 'PN'
 		  , @SubProcessName = 'SPN'
 		  , @SubProcessRunId = 1
-		  , @EndState = 'Succeeded'
+		  , @EndState = 'SUCCEEDED'
 		  , @EndMessage = null
 		  , @SetDate = @SetDate ;
 

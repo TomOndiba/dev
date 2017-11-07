@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for a new process]
+﻿CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for a new process]
 as
 	begin
 
@@ -53,8 +53,8 @@ as
 		  , 1		 as [RunStateId]
 		  , ''		 as [EndState]
 		  , ''		 as [EndMessage]
-		  , @SetDate [MinChangeDataCapturePoint]
-		  , @SetDate [MaxChangeDataCapturePoint] ;
+		  , cast(null as datetime) [MinChangeDataCapturePoint]
+		  , cast(null as datetime) [MaxChangeDataCapturePoint] ;
 
 
 		exec tSQLt.AssertEqualsTable '#Expected', 'batch.ProcessRun' ;

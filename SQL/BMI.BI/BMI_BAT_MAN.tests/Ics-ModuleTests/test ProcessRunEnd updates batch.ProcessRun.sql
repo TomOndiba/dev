@@ -57,8 +57,8 @@ as
 		  , 1			-- RunStateId - int
 		  , null		-- EndState - varchar(16)
 		  , null		-- EndMessage - varchar(500)
-		  , @SetDate	-- MinChangeDataCapturePoint - datetime
-		  , @SetDate	-- MaxChangeDataCapturePoint - datetime
+		  , cast(null as datetime)	-- MinChangeDataCapturePoint - datetime
+		  , cast(null as datetime)	-- MaxChangeDataCapturePoint - datetime
 		) ;
 
 		select
@@ -68,17 +68,17 @@ as
 		  , @SetDate	StartTime
 		  , @SetDate	EndTime
 		  , 3			RunStateId
-		  , 'Succeeded' EndState				-- varchar(16)
+		  , 'SUCCEEDED' EndState				-- varchar(16)
 		  , null		EndMessage					   -- varchar(500)
-		  , @SetDate	MinChangeDataCapturePoint  -- datetime
-		  , @SetDate	MaxChangeDataCapturePoint  -- datetime
+		  , cast(null as datetime)	MinChangeDataCapturePoint  -- datetime
+		  , cast(null as datetime)	MaxChangeDataCapturePoint  -- datetime
 		into
 			#expected ;
 
 		exec [ics].[ProcessRunEnd]
 			@ProcessName = 'PN'
 		  , @ProcessRunId = 1
-		  , @EndState = 'Succeeded'
+		  , @EndState = 'SUCCEEDED'
 		  , @SetDate = @SetDate ;
 
 		exec tSQLt.AssertEqualsTable

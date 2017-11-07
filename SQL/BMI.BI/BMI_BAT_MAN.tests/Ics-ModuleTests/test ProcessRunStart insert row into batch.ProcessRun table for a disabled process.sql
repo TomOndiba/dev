@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for a disabled process]
+﻿CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for a disabled process]
 as
 	begin
 
@@ -60,8 +60,8 @@ as
 		  , 4					  as [RunStateId]
 		  , 'process stopped'	  as [EndState]
 		  , 'process is disabled' as [EndMessage]
-		  , @SetDate			  [MinChangeDataCapturePoint]
-		  , @SetDate			  [MaxChangeDataCapturePoint] ;
+		  , cast(null as datetime)			  [MinChangeDataCapturePoint]
+		  ,cast(null as datetime)			  [MaxChangeDataCapturePoint] ;
 		;
 
 		exec tSQLt.AssertEqualsTable '#Expected', 'batch.ProcessRun' ;

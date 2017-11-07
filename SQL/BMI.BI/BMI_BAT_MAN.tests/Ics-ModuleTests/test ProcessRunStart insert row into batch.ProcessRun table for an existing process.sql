@@ -1,4 +1,4 @@
-﻿create   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for an existing process]
+﻿CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for an existing process]
 as
 	begin
 
@@ -58,8 +58,8 @@ as
 		  , 1		 as [RunStateId]
 		  , ''		 as [EndState]
 		  , ''		 as [EndMessage]
-		  , @SetDate [MinChangeDataCapturePoint]
-		  , @SetDate [MaxChangeDataCapturePoint] 
+		  , cast(null as datetime) [MinChangeDataCapturePoint]
+		  , cast(null as datetime) [MaxChangeDataCapturePoint] 
 		  union 
 		  select 
 		  	2		 as [ProcessRunId]
@@ -69,9 +69,9 @@ as
 		  , @SetDate	 [EndTime]
 		  , 4		 as [RunStateId]
 		  , 'process stopped'		 as [EndState]
-		  , 'process already existed'	 as [EndMessage]
-		  , @SetDate [MinChangeDataCapturePoint]
-		  , @SetDate [MaxChangeDataCapturePoint] ;
+		  , 'process in progress'	 as [EndMessage]
+		  , cast(null as datetime) [MinChangeDataCapturePoint]
+		  , cast(null as datetime) [MaxChangeDataCapturePoint] ;
 		  ;
 		  
 		  exec tSQLt.AssertEqualsTable '#Expected', 'batch.ProcessRun' ;

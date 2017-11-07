@@ -1,4 +1,4 @@
-﻿create procedure [StaticDataTests].[test batch.RunStateFlag static data]
+﻿CREATE procedure [StaticDataTests].[test batch.RunStateFlag static data]
 as
 begin
 	--! Assemble
@@ -6,9 +6,9 @@ begin
 	as
 	(
 			  select cast(-1 as int), cast('' as varchar(500))
-		union all select 00	, 'Not Applicable'
+		union all select 00	, 'Not applicable'
 		union all select 01	, 'Started'
-		union all select 02	, 'In-Progress'
+		union all select 02	, 'In-progress'
 		union all select 04	, 'Succeeded'
 		union all select 08	, 'Stopped'
 		union all select 16 , 'Failed'

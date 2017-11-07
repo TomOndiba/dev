@@ -54,7 +54,7 @@ as
 		  , @SetDate			   StartTime					-- datetime
 		  , @SetDate			   EndTime						-- datetime
 		  , 15					   RunStateId					-- int
-		  , 'Succeeded'			   EndState						-- varchar(16)
+		  , 'SUCCEEDED'			   EndState						-- varchar(16)
 		  , null				   EndMessage					-- varchar(500)
 		  , 10					   SuccessSourceRows			-- int
 		  , 1					   FailedSourceRows				-- -int
@@ -69,7 +69,7 @@ as
 			@MappingConfigTaskName = 'MCTN'
 		  , @MappingName = 'MN'
 		  , @ThreadRunId = 1
-		  , @EndState = 'Succeeded'
+		  , @EndState = 'SUCCEEDED'
 		  , @EndMessage = null
 		  , @SuccessSourceRows = 10
 		  , @FailedSourceRows = 1

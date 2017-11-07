@@ -16,7 +16,7 @@ CREATE procedure [ics].[ThreadRunStart]
   , @Message			   varchar(500) = null output
   , @StartCapturePoint	   datetime		= null output
   , @EndCapturePoint	   datetime		= null output
-  , @SetDate			   datetime		=null 
+  , @SetDate			   datetime		= null
 )
 as
 	--<CommentHeader>
@@ -62,40 +62,43 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_MappingConfigTaskId int ;
 		declare @StepId int ;
 		declare @_ThreadId int ;
+		declare @temp table (ThreadRunId int);
 
+		set @SetDate = isnull(@SetDate, getdate()) ;
 		begin try
 
-		set @SetDate=isnull(@SetDate,getdate());
-
-	
-			exec [ics].[MappingConfigTaskGetId]
+				exec [ics].[MappingConfigTaskGetId]
 				@MappingConfigTaskName = @MappingConfigTaskName
 			  , @MappingName = @MappingName
 			  , @MappingConfigTaskId = @_MappingConfigTaskId out ;
 
+			  
 			set @StepId =
 			(
 				select	StepId from batch.StepRun where StepRunId = @SubProcessRunId
 			) ;
 
-			exec batch.ThreadGetId
+				exec batch.ThreadGetId
 				@ThreadName = @MappingConfigTaskName
 			  , @StepId = @StepId								-- int
 			  , @MappingConfigTaskId = @_MappingConfigTaskId	-- int
 			  , @ThreadId = @_ThreadId output ;					-- int
 
+			  
 			set @Instruction = 'RUN' ;
 			set @Message = '' ;
-			
+
 			set @_Step = 'Fetch dummy values for stub' ;
 			select
 				@RunType		   = RunType
-			   , @StartCapturePoint = StartCapturePoint
+			  , @StartCapturePoint = StartCapturePoint
 			  , @EndCapturePoint   = EndCapturePoint
 			from
 				dbo.StubResultSet
 			where
 				FunctionName = @_FunctionName ;
+
+
 				
 			insert into batch.ThreadRun
 			(
@@ -113,9 +116,13 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , MinChangeDataCapturePoint
 			  , MaxChangeDataCapturePoint
 			)
+
+			 output inserted.ThreadRunId
+		 into  @temp
+		 
 			values
 			(
-			@SubProcessRunId	-- StepRunId - int
+				@SubProcessRunId	-- StepRunId - int
 			  , @_ThreadId			-- ThreadId - int
 			  , @SetDate			-- StartTime - datetime
 			  , null				-- EndTime - datetime
@@ -129,6 +136,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , null				-- MinChangeDataCapturePoint - datetime
 			  , null				-- MaxChangeDataCapturePoint - datetime
 			) ;
+
+				set @ThreadRunId=(select ThreadRunId from @temp);
+
 
 
 		end try

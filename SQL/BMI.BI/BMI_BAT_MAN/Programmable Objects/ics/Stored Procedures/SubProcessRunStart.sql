@@ -66,7 +66,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_IcrtSubProcessId int ;
 		declare @temp table (StepRunId int);
 		declare @_StepId int;
-
+		set @SetDate = isnull(@SetDate, getdate()) ;
 		begin try
 
 			exec [batch].[ProcessGetIdFromIcrtProcessName]

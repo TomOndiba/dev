@@ -56,11 +56,11 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_Step varchar(128) ;
 		declare @_ExceptionId int ;
 		declare @RunStateId int ;
-
+		set @SetDate = isnull(@SetDate, getdate()) ;
 		begin try
 
 			set @_Step = 'Record POC' ;
-			set @SetDate = isnull(@SetDate, getdate()) ;
+		
 
 			set @RunStateId =
 			(

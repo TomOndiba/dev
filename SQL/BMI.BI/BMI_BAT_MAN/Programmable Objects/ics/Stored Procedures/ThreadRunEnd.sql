@@ -61,11 +61,11 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_Step varchar(128) ;
 		declare @_ExceptionId int ;
 		declare @RunStateId int ;
-
+		set @SetDate = isnull(@SetDate, getdate()) ;
 		begin try
 			set @_Step = 'Record POC' ;
 
-			set @SetDate = isnull(@SetDate, getdate()) ;
+		
 
 			--set @RunStateId =
 			--(
@@ -128,7 +128,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--! Return the value of @@ERROR (which will be zero on success)
 		return (@_Error) ;
 	end ;
-
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Records the end state of the indicated thread run.  ICS Note:  This call is not required if the output from the initiating call from this MCT to ThreadRunStart was “SKIP”, “STOP” or “ERROR”', 'SCHEMA', N'ics', 'PROCEDURE', N'ThreadRunEnd', NULL, NULL
 GO

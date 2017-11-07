@@ -61,10 +61,10 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @_ExceptionId int ;
 		declare @BatchProcessId int ;
 		declare @_Isdisable bit = 1 ;
-
-		begin try
+		set @SetDate = isnull(@SetDate, getdate()) ;
+			begin try
 			set @_Step = 'Fetch dummy values for stub' ;
-			set @SetDate = isnull(@SetDate, getdate()) ;
+		
 
 			exec [batch].[ProcessGetIdFromIcrtProcessName]
 				@IcrtProcessName = @ProcessName
@@ -125,7 +125,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 					)
 					values
 					(
-						@BatchProcessId, @IcrtProcessId, @SetDate, @SetDate, 4, 'process stopped', 'process already existed', @SetDate, @SetDate
+						@BatchProcessId, @IcrtProcessId, @SetDate, @SetDate, 4, 'process stopped', 'process in progress', null, null
 					) ;
 
 
@@ -159,7 +159,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 							)
 							values
 							(
-								@BatchProcessId, @IcrtProcessId, @SetDate, 1, '', '', @SetDate, @SetDate
+								@BatchProcessId, @IcrtProcessId, @SetDate, 1, '', '', null, null
 							) ;
 
 							set @ProcessRunId =
@@ -210,7 +210,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 							)
 							values
 							(
-								@BatchProcessId, @IcrtProcessId, @SetDate,@SetDate, 4, 'process stopped', 'process is disabled', @SetDate, @SetDate
+								@BatchProcessId, @IcrtProcessId, @SetDate,@SetDate, 4, 'process stopped', 'process is disabled', null, null
 							) ;
 
 							set @ProcessRunId =

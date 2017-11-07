@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[batch].[ThreadGetId]') IS NOT NULL
+IF OBJECT_ID('[batch].[ThreadGetId]') IS NOT NULL
 	DROP PROCEDURE [batch].[ThreadGetId];
 
 GO
@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create   procedure [batch].[ThreadGetId]
+CREATE   procedure [batch].[ThreadGetId]
 (
 @ThreadName varchar(255),
 @StepId  int,
@@ -19,8 +19,8 @@ as
 
 Properties
 ==========
-FUNCTION NAME:  ics.IcrtSubProcessGetId
-DESCRIPTION:    Creates an entry for the specified ICRT sub-process if not already present then outputs the Id
+FUNCTION NAME:  batch.ThreadGetId
+DESCRIPTION:    Creates an entry for the specified  thread if not already present then outputs the Id
 AUTHOR:         Greg M. Lucas
 ORIGIN DATE:    02-AUG-2017
 
@@ -47,7 +47,6 @@ begin
 	declare	@_ErrorContext nvarchar(512);
 	declare	@_Message nvarchar(512);
 	declare	@_Step varchar(128);
-	declare @_ThreadId int;
 
 	--! Find out if we are already in a transaction
 	declare	@_TxnIsExternal bit = case when @@trancount > 0 then 1 else 0 end;
@@ -63,15 +62,14 @@ begin
 		if @_TxnIsExternal = 0 begin tran;
 
 		set @_Step = 'Get Id';
-		select @_ThreadId = ThreadId from [batch].[Thread] where ThreadName = @ThreadName ;
+		select @ThreadId = ThreadId from [batch].[Thread] where ThreadName = @ThreadName ;
 
-		if @_ThreadId is null
+		if @ThreadId is null
 			begin
 				set @_Step = 'Add Missing';
 
-				set @_ThreadId = coalesce((select max(ThreadId) from batch.Thread) + 1, 1) ;
-				
-				insert batch.Thread(ThreadId, ThreadName, StepId) values (@_ThreadId, @ThreadName, @StepId);
+				set @ThreadId = coalesce((select max(ThreadId) from batch.Thread) + 1, 1) ;
+				insert batch.Thread(ThreadId, ThreadName, StepId) values (@ThreadId, @ThreadName, @StepId);
 			end
 
 		--!
@@ -93,6 +91,7 @@ begin
 		--! its own external txn 
 		if (xact_state() = -1) or (xact_state() = 1 and error_number() = 1205) or (xact_state() = 1 and @_TxnIsExternal = 0)
 			begin
+
 				rollback tran;
 				set @_ErrorContext = @_ErrorContext + ' (Forced roll back all changes)';
 			end

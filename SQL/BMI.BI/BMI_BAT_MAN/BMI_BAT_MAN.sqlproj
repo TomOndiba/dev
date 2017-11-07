@@ -57,7 +57,6 @@ Role=[dbo].[SqlDevelopersTEST];
 Role=[dbo].[db_datareader];
 Role=[dbo].[db_datawriter];
 Role=[dbo].[db_owner];
-Schema=[dbo].[log4Private];
 StoredProcedure=[log4].[JournalWriter];
 StoredProcedure=[log4].[tSQLt_tempobject_552df64d7608412ab7748ae540bc966c];
 StoredProcedure=[log4Private].[SessionInfoOutput];
@@ -114,7 +113,7 @@ Static Data;
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
@@ -310,6 +309,7 @@ Static Data;
     <Folder Include="Schema-Model\batch\Tables\" />
     <Folder Include="Programmable Objects\batch\" />
     <Folder Include="Programmable Objects\batch\Stored Procedures\" />
+    <Folder Include="Migrations\1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -492,6 +492,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.0\021_IcsApp_permissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.1\001_Extra_IcsDataFeeds_role_perms.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

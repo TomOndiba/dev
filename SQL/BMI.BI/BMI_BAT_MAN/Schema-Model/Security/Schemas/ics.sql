@@ -1,3 +1,17 @@
 CREATE SCHEMA [ics]
 AUTHORIZATION [dbo]
 GO
+GRANT REFERENCES ON SCHEMA:: [ics] TO [BatchManagers]
+GO
+GRANT SELECT ON SCHEMA:: [ics] TO [BatchManagers]
+GO
+GRANT REFERENCES ON SCHEMA:: [ics] TO [EtlDevelopersDEV]
+GO
+GRANT SELECT ON SCHEMA:: [ics] TO [EtlDevelopersDEV]
+GO
+GRANT REFERENCES ON SCHEMA:: [ics] TO [EtlDevelopersPROD]
+GO
+GRANT SELECT ON SCHEMA:: [ics] TO [EtlDevelopersPROD]
+GO
+GRANT REFERENCES ON SCHEMA:: [ics] TO [IcsDataFeeders]
+GO

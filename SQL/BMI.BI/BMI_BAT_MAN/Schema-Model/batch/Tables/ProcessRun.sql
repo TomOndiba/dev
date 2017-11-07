@@ -14,9 +14,9 @@ CREATE TABLE [batch].[ProcessRun]
 GO
 ALTER TABLE [batch].[ProcessRun] ADD CONSTRAINT [PK_batch_ProcessRun] PRIMARY KEY CLUSTERED  ([ProcessRunId])
 GO
-ALTER TABLE [batch].[ProcessRun] ADD CONSTRAINT [FK_batch_ProcessRun_batch_Process] FOREIGN KEY ([BatchProcessId]) REFERENCES [batch].[Process] ([BatchProcessId])
+ALTER TABLE [batch].[ProcessRun] WITH NOCHECK ADD CONSTRAINT [FK_batch_ProcessRun_batch_Process] FOREIGN KEY ([BatchProcessId]) REFERENCES [batch].[Process] ([BatchProcessId])
 GO
-ALTER TABLE [batch].[ProcessRun] ADD CONSTRAINT [FK_batch_ProcessRun_batch_RunState] FOREIGN KEY ([RunStateId]) REFERENCES [batch].[RunState] ([RunStateId])
+ALTER TABLE [batch].[ProcessRun] WITH NOCHECK ADD CONSTRAINT [FK_batch_ProcessRun_batch_RunState] FOREIGN KEY ([RunStateId]) REFERENCES [batch].[RunState] ([RunStateId])
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Records a single ETL attempt to run a Batch Process i.e. run time logging, not batch control metadata', 'SCHEMA', N'batch', 'TABLE', N'ProcessRun', NULL, NULL
 GO

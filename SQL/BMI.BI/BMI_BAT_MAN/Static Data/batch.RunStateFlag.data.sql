@@ -6,13 +6,13 @@ set nocount on
 
 merge into [batch].[RunStateFlag] as Target
 using (values
-  (0,'Not Applicable')
- ,(1,'Started')
- ,(2,'In-Progress')
- ,(4,'Succeeded')
- ,(8,'Stopped')
- ,(16,'Failed')
- ,(32,'Skipped')
+  (0,'NOT APPLICABLE')
+ ,(1,'STARTED')
+ ,(2,'IN-PROGRESS')
+ ,(4,'SUCCEEDED')
+ ,(8,'STOPPED')
+ ,(16,'FAILED')
+ ,(32,'SKIPPED')
 ) as Source ([FlagBit],[FlagName])
 on (Target.[FlagBit] = Source.[FlagBit])
 when matched and (

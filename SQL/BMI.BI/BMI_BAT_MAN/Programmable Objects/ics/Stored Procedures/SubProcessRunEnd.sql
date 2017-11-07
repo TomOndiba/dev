@@ -72,7 +72,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 				where
 					s.FlagBit = f.FlagBit
 					and s.RunStateName like 'Sub-Pro%'
-					and f.FlagName = @EndState
+					and upper(f.FlagName) = upper(@EndState)
 			) ;
 
 			update

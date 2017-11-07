@@ -83,7 +83,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 				where
 					s.FlagBit = f.FlagBit
 					and s.RunStateName like 'Thre%'
-					and f.FlagName = @EndState
+					and upper(f.FlagName) =upper( @EndState)
 			) ;
 			
 			update

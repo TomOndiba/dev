@@ -62,10 +62,10 @@ Version	ChangeDate		Author	BugRef	Narrative
 		declare @BatchProcessId int ;
 		declare @_Isdisable bit = 1 ;
 		set @SetDate = isnull(@SetDate, getdate()) ;
+
 			begin try
 			set @_Step = 'Fetch dummy values for stub' ;
 		
-
 			exec [batch].[ProcessGetIdFromIcrtProcessName]
 				@IcrtProcessName = @ProcessName
 			  , @BatchProcessName = null	---optinal if null set to @ProcessName in the sp
@@ -88,7 +88,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and EndTime is null and @_Isdisable=0
 			)
 				begin
-
 					declare @_ProcessRunID int = (
 													 select
 															ProcessRunId
@@ -142,8 +141,6 @@ Version	ChangeDate		Author	BugRef	Narrative
 					and EndTime is null
 			)
 				begin
-
-
 					if @_Isdisable = 0
 						begin
 						insert into batch.ProcessRun
@@ -252,15 +249,12 @@ Version	ChangeDate		Author	BugRef	Narrative
 								 + ' and ICRT Process Id: ' + coalesce(cast(@IcrtProcessId as varchar(32)), 'NULL') + ' at step: '
 								 + coalesce('[' + @_Step + ']', 'NULL') + ' (New Process Run Id: ' + coalesce(cast(@ProcessRunId as varchar(32)), 'NULL') + ')' ;
 
-
-
 			exec log4.ExceptionHandler
 				@ErrorContext = @_ErrorContext
 			  , @ErrorProcedure = @_FunctionName
 			  , @ErrorNumber = @_Error out
 			  , @ReturnMessage = @_Message out
 			  , @ExceptionId = @_ExceptionId out ;
-
 
 		end catch ;
 
@@ -269,13 +263,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 		--/////////////////////////////////////////////////////////////////////////////////////////////////
 
 		--! Finally, throw an exception that will be detected by the caller
-		--select 'finally'
 
-		if @_Error > 0
-			begin
-				--select @_Error
-				raiserror(@_Message, 16, 99) ;
-			end ;
+		if @_Error > 0 raiserror(@_Message, 16, 99) ;
+
 		set nocount off ;
 
 		--! Return the value of @@ERROR (which will be zero on success)

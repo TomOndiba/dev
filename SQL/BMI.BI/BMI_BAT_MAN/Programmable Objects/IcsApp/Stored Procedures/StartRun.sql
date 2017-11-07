@@ -1,11 +1,11 @@
 if object_id('[IcsApp].[StartRun]') is not null
 	drop procedure [IcsApp].[StartRun];
 go
-set quoted_identifier on
-go
-set ansi_nulls on
-go
-create procedure [IcsApp].[StartRun]
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [IcsApp].[StartRun]
 (
 --! ICRT master Process level inputs
   @ProcessName varchar(100) 
@@ -121,7 +121,7 @@ begin
 				if isnull(@MappingName, '') = '' raiserror ('Mapping Name input can not be null or empty when starting a new thread: "%s"', 16, 1, @MappingConfigTaskName);
 
 				/*===================================================================================================================*/
-				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ThreadRunStart...' ;
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + char(10) +  'initiating call to ics.ThreadRunStart...' ;
 				/*===================================================================================================================*/
 				
 				set @_Step = 'Start Thread';
@@ -145,7 +145,7 @@ begin
 					raiserror('(BatMan) Process Run Id can not be null, negative or zero when starting a new sub process: "%s"', 16, 1, @SubProcessName);
 
 				/*===================================================================================================================*/
-				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.SubProcessRunStart...' ;
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + char(10) +  'initiating call to ics.SubProcessRunStart...' ;
 				/*===================================================================================================================*/
 				
 				set @_Step = 'Start Sub-process';
@@ -165,7 +165,7 @@ begin
 				--! a new (master) process run and the (BAT_MAN) Process Run Id becomes mandatory
 
 				/*===================================================================================================================*/
-				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + 'initiating call to ics.ProcessRunStart...' ;
+				/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + char(10) +  'initiating call to ics.ProcessRunStart...' ;
 				/*===================================================================================================================*/
 				
 				set @_Step = 'Start Process';
@@ -193,7 +193,7 @@ begin
 		/**/		+ char(10) + '    Run Type (out)                : ' + coalesce(@RunType, 'NULL')
 		/**/		+ char(10) + '    Instruction (out)             : ' + coalesce(@Instruction, 'NULL')
 		/**/
-		/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + @_ProgressMessage ;
+		/**/	set @_ProgressLog = coalesce(@_ProgressLog, '') + char(10) +  @_ProgressMessage ;
 		/*===================================================================================================================*/
 
 	end try
@@ -235,8 +235,7 @@ EndEx:
 	--! Return the value of @@ERROR (which will be zero on success)
 	return (@_Error);
 end
-
-go
+GO
 exec sp_addextendedproperty N'MS_Description', N'ICRT interface/wrapper for the ics.ProcessRunStart, SubProcessRunStart or ThreadRunStart procedures.  Validates inputs and then, depending on the supplied values calls one and only one of the above procedures.
 1) If @MappingConfigTaskName is populated, and if @SubProcessRunId & @MappingName are valid,  then ics.ThreadRunStart will be called to record the start of a new thread run instance (which equates to the execution of a Mapping Config Task in ICS)
 2) If @MappingConfigTaskName is null or empty, and if @SubProcessName is populated, and if @ProcessRunId is valid, then ics.SubProcessRunStart will be called to record the start of a new sub-process/step run (which equates to the execution of a subject area-specific ICRT sub-process)

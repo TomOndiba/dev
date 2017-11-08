@@ -1377,7 +1377,7 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_FPLEDG.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.8\011_Tsa_Poland_Procurement_Tables_Added.sql" />
+    <None Include="Migrations\1.0.8\011_Psa_Poland_Procurement_Tables_Added.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

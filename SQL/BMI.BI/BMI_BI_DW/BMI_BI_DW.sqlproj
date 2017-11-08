@@ -1368,6 +1368,17 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.8\010_Tsa_Poland_Procurement_Tables_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_FGINLI.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_FPLEDG.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_FGINLI.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_FPLEDG.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_FGINLI.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_FPLEDG.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\011_Tsa_Poland_Procurement_Tables_Added.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

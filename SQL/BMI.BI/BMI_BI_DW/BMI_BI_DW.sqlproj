@@ -1390,6 +1390,15 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.8\012_Tsa_SAP_Procurement_Tables_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_EKBE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_LFM1.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_T052U.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_TCURR.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\013_Psa_SAP_Procurement_Tables_Added.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

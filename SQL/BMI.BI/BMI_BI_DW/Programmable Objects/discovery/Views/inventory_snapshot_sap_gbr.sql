@@ -11,7 +11,9 @@ GO
 
 
 
-CREATE view [discovery].[inventory_snapshot_sap_gbr]
+
+
+create     view [discovery].[inventory_snapshot_sap_gbr]
 as
 
 --<CommentHeader>
@@ -135,5 +137,6 @@ from
 	cte
 where
 	cte.RankingMaterialPlant = 1 
+	and native_stock_on_hand<>0
 	;
 GO

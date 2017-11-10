@@ -74,8 +74,6 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
-View=[discovery].[inventory_snapshot_sap_gbr];
-View=[discovery].[inventory_snapshot_m3v10_pol];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1398,6 +1396,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.0.8\013_Psa_SAP_Procurement_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\inventory.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

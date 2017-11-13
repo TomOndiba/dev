@@ -128,7 +128,11 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_TCURR]
 [FFACT] [decimal] (9, 0) NULL,
 [TFACT] [decimal] (9, 0) NULL
 )
-GO
+go
+
+ALTER TABLE [psa].[ics_stg_SAP_GBR_TCURR] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_TCURR_PK] PRIMARY KEY CLUSTERED  ([MANDT], [KURST], [FCURR], [TCURR], [GDATU])
+go
+
 PRINT N'Creating [psa].[ics_stg_SAP_GBR_T052U]'
 GO
 CREATE TABLE [psa].[ics_stg_SAP_GBR_T052U]

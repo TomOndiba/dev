@@ -74,6 +74,7 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
+Table=[psa].[ics_stg_SAP_GBR_TCURR];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1399,6 +1400,14 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\discovery\Views\inventory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_CIDMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITWHL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\014_Tsa_M3V7_Tables_Added.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

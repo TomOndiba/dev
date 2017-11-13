@@ -1417,6 +1417,15 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.8\015_Psa_M3V7_Tables_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CIDMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITWHL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\016_Tsa_M3_Tables_Added.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

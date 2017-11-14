@@ -1407,15 +1407,9 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITWHL.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.8\014_Tsa_M3V7_Tables_Added.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CIDADR.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CIDMAS.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITWHL.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.8\015_Psa_M3V7_Tables_Added.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\tsa\Tables\ics_land_m3_CIDADR.sql" />
@@ -1424,25 +1418,10 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITWHL.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.0.8\016_Tsa_M3_Tables_Added.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_CIDADR.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_CIDMAS.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_CMNDIV.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITWHL.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.8\017_Psa_M3_Tables_Added.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.8\018_Add_Tsa_Constraints.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.8\019_Add_Psa_Constraintsa.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.0.8\020_Add_PK_TCURR_Table.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

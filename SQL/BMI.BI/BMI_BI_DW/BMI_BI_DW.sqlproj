@@ -1428,6 +1428,12 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.8\015_Psa_M3_M3V7_Tables_SAP_Constraints_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EKBZ.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\016_Tsa_SAP_EKBZ_Added.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

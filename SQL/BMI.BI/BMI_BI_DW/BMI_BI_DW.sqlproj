@@ -1440,6 +1440,9 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.8\017_Psa_SAP_EKBZ_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\018_Tsa_Clustered_Index_SAP_Standardised.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

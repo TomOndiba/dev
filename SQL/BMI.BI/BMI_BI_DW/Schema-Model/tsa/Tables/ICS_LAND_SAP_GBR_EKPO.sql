@@ -276,5 +276,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKPO]
 [ZWERT] [decimal] (18, 0) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_EKPO_1] ON [tsa].[ics_land_SAP_GBR_EKPO] ([EBELN], [EBELP])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_EKPO_1] ON [tsa].[ics_land_SAP_GBR_EKPO] ([EBELN], [EBELP])
 GO

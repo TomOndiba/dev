@@ -186,5 +186,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_LIKP]
 [ZUKRL] [nvarchar] (40) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_LIKP_1] ON [tsa].[ics_land_SAP_GBR_LIKP] ([VBELN])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_LIKP_1] ON [tsa].[ics_land_SAP_GBR_LIKP] ([VBELN])
 GO

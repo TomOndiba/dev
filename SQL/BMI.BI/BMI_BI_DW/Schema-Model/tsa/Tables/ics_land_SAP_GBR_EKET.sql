@@ -79,5 +79,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKET]
 [WEMNG] [decimal] (18, 0) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_EKET_1] ON [tsa].[ics_land_SAP_GBR_EKET] ([EBELN], [EBELP], [ETENR])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_EKET_1] ON [tsa].[ics_land_SAP_GBR_EKET] ([EBELN], [EBELP], [ETENR])
 GO

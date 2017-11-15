@@ -134,5 +134,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKKO]
 [ZTERM] [nvarchar] (4) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_EKKO_1] ON [tsa].[ics_land_SAP_GBR_EKKO] ([EBELN])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_EKKO_1] ON [tsa].[ics_land_SAP_GBR_EKKO] ([EBELN])
 GO

@@ -66,5 +66,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_LFM1]
 [STAGING_TIME] [decimal] (3, 0) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_LFM1_1] ON [tsa].[ics_land_SAP_GBR_LFM1] ([MANDT], [LIFNR], [EKORG])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_LFM1_1] ON [tsa].[ics_land_SAP_GBR_LFM1] ([MANDT], [LIFNR], [EKORG])
 GO

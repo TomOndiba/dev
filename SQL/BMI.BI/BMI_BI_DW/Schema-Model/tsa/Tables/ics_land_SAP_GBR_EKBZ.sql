@@ -54,5 +54,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKBZ]
 [WKURS] [decimal] (9, 5) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_EKBZ_1] ON [tsa].[ics_land_SAP_GBR_EKBZ] ([EBELN], [ZAEHK], [BELNR], [BUZEI])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_EKBZ_1] ON [tsa].[ics_land_SAP_GBR_EKBZ] ([EBELN], [ZAEHK], [BELNR], [BUZEI])
 GO

@@ -83,5 +83,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_LFB1]
 [ZWELS] [nvarchar] (10) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_LFB1_1] ON [tsa].[ics_land_SAP_GBR_LFB1] ([LIFNR], [BUKRS])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_LFB1_1] ON [tsa].[ics_land_SAP_GBR_LFB1] ([LIFNR], [BUKRS])
 GO

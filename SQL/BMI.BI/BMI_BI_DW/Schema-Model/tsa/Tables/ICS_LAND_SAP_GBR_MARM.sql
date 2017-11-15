@@ -40,5 +40,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_MARM]
 [XFHDW] [nvarchar] (1) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_MARM_1] ON [tsa].[ics_land_SAP_GBR_MARM] ([MATNR], [MEINH])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_MARM_1] ON [tsa].[ics_land_SAP_GBR_MARM] ([MATNR], [MEINH])
 GO

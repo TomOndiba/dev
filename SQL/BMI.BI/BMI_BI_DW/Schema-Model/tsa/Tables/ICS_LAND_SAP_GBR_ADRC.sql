@@ -99,5 +99,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_ADRC]
 [TRANSPZONE] [nvarchar] (10) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_ADRC_1] ON [tsa].[ics_land_SAP_GBR_ADRC] ([ADDRNUMBER], [DATE_FROM])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_ADRC_1] ON [tsa].[ics_land_SAP_GBR_ADRC] ([ADDRNUMBER], [DATE_FROM])
 GO

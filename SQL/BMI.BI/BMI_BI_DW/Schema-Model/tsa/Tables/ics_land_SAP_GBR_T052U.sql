@@ -16,5 +16,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_T052U]
 [TEXT1] [nvarchar] (50) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_T052U_1] ON [tsa].[ics_land_SAP_GBR_T052U] ([MANDT], [SPRAS], [ZTERM], [ZTAGG])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_T052U_1] ON [tsa].[ics_land_SAP_GBR_T052U] ([MANDT], [SPRAS], [ZTERM], [ZTAGG])
 GO

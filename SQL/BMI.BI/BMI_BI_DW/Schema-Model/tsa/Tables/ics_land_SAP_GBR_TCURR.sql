@@ -19,5 +19,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_TCURR]
 [TFACT] [decimal] (9, 0) NULL
 )
 GO
-CREATE CLUSTERED INDEX [tsa_ics_land_SAP_GBR_TCURR_1] ON [tsa].[ics_land_SAP_GBR_TCURR] ([MANDT], [KURST], [FCURR], [TCURR], [GDATU])
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_TCURR_1] ON [tsa].[ics_land_SAP_GBR_TCURR] ([MANDT], [KURST], [FCURR], [TCURR], [GDATU])
 GO

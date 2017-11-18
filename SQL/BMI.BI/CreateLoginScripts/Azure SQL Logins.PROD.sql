@@ -78,6 +78,45 @@ if not exists (select 1 from sys.database_principals where name = 'ReleaseManage
 go
 
 
+if exists(select * from sys.database_principals where name = 'greg.lucas.sql')
+  drop user [greg.lucas.sql] ;
+go
+if exists(select * from sys.sql_logins where name = 'greg.lucas.sql')
+  drop login [greg.lucas.sql] ;
+go
+if exists(select * from sys.database_principals where name = 'razia.nazir.sql')
+  drop user [razia.nazir.sql] ;
+go
+if exists(select * from sys.sql_logins where name = 'razia.nazir.sql')
+  drop login [razia.nazir.sql] ;
+go
+if exists(select * from sys.database_principals where name = 'vince.mitchell.sql')
+  drop user [vince.mitchell.sql] ;
+go
+if exists(select * from sys.sql_logins where name = 'vince.mitchell.sql')
+  drop login [vince.mitchell.sql] ;
+go
+if exists(select * from sys.database_principals where name = 'jason.bogart.sql')
+  drop user [jason.bogart.sql] ;
+go
+if exists(select * from sys.sql_logins where name = 'jason.bogart.sql')
+  drop login [jason.bogart.sql] ;
+go
+if exists(select * from sys.database_principals where name = 'tom.manville.sql')
+  drop user [tom.manville.sql] ;
+go
+if exists(select * from sys.sql_logins where name = 'tom.manville.sql')
+  drop login [tom.manville.sql] ;
+go
+if exists(select * from sys.database_principals where name = 'mark.bolton.sql')
+  drop user [mark.bolton.sql] ;
+go
+if exists(select * from sys.sql_logins where name = 'mark.bolton.sql')
+  drop login [mark.bolton.sql] ;
+go
+
+
+/*
 --!
 --!
 --!
@@ -149,4 +188,4 @@ go
 if not exists (select 1 from sys.database_principals where name = 'mark.bolton.sql')
 	create user [mark.bolton.sql] for login [mark.bolton.sql] with default_schema = [dbo];
 go
-
+*/

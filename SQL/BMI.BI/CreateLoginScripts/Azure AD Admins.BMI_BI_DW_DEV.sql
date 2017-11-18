@@ -32,6 +32,18 @@ go
 grant alter any user to [Greg.Lucas@icopal.com]
 go
 
+if not exists (select 1 from sys.sysusers where name = 'matthew.basoo@icopal.com')
+	begin
+		create user [matthew.basoo@icopal.com] from external provider;
+	end
+go
+alter role [db_accessadmin] add member [matthew.basoo@icopal.com]
+go
+alter role [db_owner] add member [matthew.basoo@icopal.com]
+go
+grant alter any user to [matthew.basoo@icopal.com]
+go
+
 if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
 	begin
 		create user [razia.nazir@icopal.com] from external provider;

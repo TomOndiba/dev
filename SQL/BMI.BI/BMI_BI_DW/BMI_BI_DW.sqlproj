@@ -1446,6 +1446,9 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.0.8\019_Psa_SAP_Constraints_Standardised.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_sap_gbr.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

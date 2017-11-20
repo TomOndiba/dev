@@ -55,7 +55,7 @@ as
 				--, 'Razia'
 		  , @_now
 		  , 'Razia'
-		  , 1	---when deleted
+		  , 'Y'	---when deleted
 		  , null
 		  , 2
 		  , 1 ;

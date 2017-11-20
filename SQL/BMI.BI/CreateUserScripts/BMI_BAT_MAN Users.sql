@@ -115,8 +115,8 @@ values (0, '', '', '', 0, 0)
 
 	--! SQL Developers
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
-	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
+--	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
+--	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 1)

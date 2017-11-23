@@ -11,6 +11,7 @@ GO
 
 
 
+
 --<CommentHeader>
 /**********************************************************************************************************************
 
@@ -38,7 +39,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 **********************************************************************************************************************/
 --</CommentHeader>
 
-create   view [discovery].[inventory_snapshot_m3v10_pol]
+create    view [discovery].[inventory_snapshot_m3v10_pol]
 as
 select
 	MITTRA.EtlCreatedOn									  as etl_created_on
@@ -67,6 +68,7 @@ select
   , ''													  as stock_in_hand_value_local_ccy
   , MITMAS.MMPUPR										  as native_unit_value_eur
   , sum(MITTRA.MTTRQT * MITMAS.MMPUPR)					  as stock_in_hand_value_eur
+  ,prod.ProductKey										as product_key
 from
 	psa.ics_stg_M3V10gen_POL_MITTRA		  as MITTRA ---- Material table
 inner join dbo.DataSource				  as ds
@@ -106,6 +108,7 @@ group by
   , MITMAS.MMPUPR
   , MITTRA.EtlUpdatedOn
   , MITTRA.IsDeleted
+    ,prod.ProductKey	
 having
 	sum(MITTRA.MTTRQT) <> 0
 union
@@ -136,6 +139,7 @@ select
   , ''													  as stock_in_hand_value_local_ccy
   , MITMAS.MMPUPR										  as native_unit_value_eur
   , sum(MITTRA.MTTRQT * MITMAS.MMPUPR)					  as stock_in_hand_value_eur
+  ,prod.ProductKey										as product_key
 from
 	psa.ics_stg_M3V10ved_POL_MITTRA		  as MITTRA ---- Material table
 inner join dbo.DataSource				  as ds
@@ -175,6 +179,7 @@ group by
   , MITMAS.MMPUPR
   , MITTRA.EtlUpdatedOn
   , MITTRA.IsDeleted
+    ,prod.ProductKey	
 having
 	sum(MITTRA.MTTRQT) <> 0
 union
@@ -205,6 +210,7 @@ select
   , ''													  as stock_in_hand_value_local_ccy
   , MITMAS.MMPUPR										  as native_unit_value_eur
   , sum(MITTRA.MTTRQT * MITMAS.MMPUPR)					  as stock_in_hand_value_eur
+  ,prod.ProductKey										as product_key
 from
 	psa.ics_stg_M3V10vil_POL_MITTRA		  as MITTRA ---- Material table
 inner join dbo.DataSource				  as ds
@@ -244,6 +250,7 @@ group by
   , MITMAS.MMPUPR
   , MITTRA.EtlUpdatedOn
   , MITTRA.IsDeleted
+  ,prod.ProductKey										
 having
 	sum(MITTRA.MTTRQT) <> 0 ;
 GO

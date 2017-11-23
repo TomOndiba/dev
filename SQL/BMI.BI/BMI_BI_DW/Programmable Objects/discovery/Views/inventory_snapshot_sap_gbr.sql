@@ -8,6 +8,8 @@ SET ANSI_NULLS ON
 GO
 
 
+
+
 create   view [discovery].[inventory_snapshot_sap_gbr]
 as
 
@@ -75,6 +77,7 @@ as
 	  , cast(null as decimal(18, 2))											as native_unit_value_eur
 	  , cast(null as decimal(18, 2))											as standard_unit_value_eur
 	  , cast(null as decimal(18, 2))											as stock_in_hand_value_eur
+	  , p.ProductKey					[product_key]						 
 	  , dense_rank() over (partition by m.MATNR, m.WERKS order by m.DLINL desc) as RankingMaterialPlant
 	from
 		psa.ics_stg_SAP_GBR_MARD			   m -- material
@@ -134,6 +137,7 @@ as
 	  , native_unit_value_eur
 	  , standard_unit_value_eur
 	  , stock_in_hand_value_eur
+	  , [product_key]
 	from
 		cte
 	where
@@ -142,8 +146,8 @@ as
 )
 select
 	v.*
-  , ma.UMREN denominator_for_conversion_to_base_units_of_measure
-  , ma.UMREZ numerator_for_conversion_to_base_units_of_measure
+	--, ma.UMREN denominator_for_conversion_to_base_units_of_measure
+	--, ma.UMREZ numerator_for_conversion_to_base_units_of_measure
   , case
 		when
 		(
@@ -152,10 +156,10 @@ select
 		)
 			then ma.MEINH
 		else null
-	end														   as reporting_unit_of_measure_for_rolls
-  , round(((ma.UMREN / ma.UMREZ) * v.native_stock_on_hand), 2) as reporting_stock_on_hand_for_rolls
+	end														   as reporting_unit_of_measure
+  , round(((ma.UMREN / ma.UMREZ) * v.native_stock_on_hand), 2) as reporting_stock_on_hand
 from
-	cte2								  v
+	cte2								 v
 left outer join psa.ics_stg_SAP_GBR_MARM ma
 	on ma.MATNR = v.native_product_key
 		and (

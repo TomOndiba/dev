@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[pbi].[dimProduct]') IS NOT NULL
+IF OBJECT_ID('[pbi].[dimProduct]') IS NOT NULL
 	DROP VIEW [pbi].[dimProduct];
 
 GO
@@ -6,7 +6,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create view [pbi].[dimProduct]
+
+create   view [pbi].[dimProduct]
 as
 --<CommentHeader>
 /**********************************************************************************************************************
@@ -58,6 +59,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 		, cast('99991231 23:59:59' as datetime) as [RowValidToUTC]
 		, cast('Y' as char(1)) as [IsCurrent]
 		, p.IsDeleted
+		,DataSourceKey
+,NativeProductKey
+
 	from
 		qvstg.Product as p
 GO

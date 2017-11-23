@@ -193,7 +193,7 @@ begin
 						+ @insertcolumnstring + ',EtlCreatedBy,' + '''' + @_LoadDateTime + '''' + ')' + ' when matched  and ExcludeFromMerge =0 and ' + @updatecolumnstring
 						+ ' then update set  ' + @updatesetcolumnstring + ', t.EtlUpdatedOn=' + '''' + @_LoadDateTime + ''''
 						+ ', t.EtlUpdatedBy=s.EtlCreatedBy' + ' when not matched by source then update set  t.EtlDeletedOn=' + '''' + @_LoadDateTime + ''''
-						+ ', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted=1' + ';' ;
+						+ ', t.EtlDeletedBy=EtlCreatedBy, t.IsDeleted='+ ''''+ 'Y'+ '''' + ';' ;
 		end ;
 
 	set @_Step = 'Execute Merge statement ' ;

@@ -1351,6 +1351,104 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\discovery\Views\inventory_snapshot_m3v10_pol.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\008_Tsa_SAP_MBEW_Table_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\009_Psa_SAP_MBEW_Table_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_FGINLI.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10gen_POL_FPLEDG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_FGINLI.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10ved_POL_FPLEDG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_FGINLI.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_M3V10vil_POL_FPLEDG.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\010_Tsa_Poland_Procurement_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_FGINLI.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10gen_POL_FPLEDG.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_FGINLI.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10ved_POL_FPLEDG.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_FGINLI.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_M3V10vil_POL_FPLEDG.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\011_Psa_Poland_Procurement_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EKBE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_LFM1.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_T052U.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_TCURR.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\012_Tsa_SAP_Procurement_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_EKBE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_LFM1.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_T052U.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_TCURR.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\013_Psa_SAP_Procurement_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\inventory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_CIDMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MITWHL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_CIDMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3v7_MITWHL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CIDADR.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CIDMAS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_CMNDIV.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MITWHL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_CIDADR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_CIDMAS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_CMNDIV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MITWHL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\014_Tsa_M3_M3V7_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\015_Psa_M3_M3V7_Tables_SAP_Constraints_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_SAP_GBR_EKBZ.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\016_Tsa_SAP_EKBZ_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_SAP_GBR_EKBZ.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\017_Psa_SAP_EKBZ_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\018_Tsa_Clustered_Index_SAP_Standardised.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.0.8\019_Psa_SAP_Constraints_Standardised.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_sap_gbr.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

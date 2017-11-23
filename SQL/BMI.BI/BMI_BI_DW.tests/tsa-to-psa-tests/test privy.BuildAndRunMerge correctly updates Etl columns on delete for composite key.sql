@@ -32,59 +32,59 @@ as
 
 		insert into [tsa-to-psa-tests].Expected([EtlBatchRunId], [EtlStepRunId], [EtlThreadRunId], [EtlCreatedOn], [EtlCreatedBy], [EtlSourceTable], [DataSourceKey], [EtlUpdatedOn],[EtlUpdatedBy],
 		[EtlDeletedOn], [EtlDeletedBy], IsDeleted,IsIncomplete, pk1, pk2, pk3, col1, col2)
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,1	,1 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,1	,1 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,1	,2 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,1	,2 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,1  ,3 ,14	,'col'	
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,1  ,3 ,14	,'col'	
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,2	,2 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,2	,2 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,3	,3 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,3	,3 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,1	,2 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,1	,2 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,2	,2 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,2	,2 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,2	,3 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,2	,3 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,3  ,1 ,14	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,3  ,1 ,14	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,3	,2 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,3	,2 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,3	,3 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,3	,3 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,1  ,1 ,14	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,1  ,1 ,14	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,1	,3 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,1	,3 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,2  ,1 ,14	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,2  ,1 ,14	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,2	,3 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,2	,3 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,1	,1 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,1	,1 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,1  ,2 ,14	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,1  ,2 ,14	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,1	,3 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,1	,3 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,2	,1 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,2	,1 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,2	,3 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,2	,3 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,3	,1 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,3	,1 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,3	,2 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,3	,2 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,2	,3	,3 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,2	,3	,3 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,3	,1 ,12	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,3	,1 ,12	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,3	,2 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,3	,2 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,3	,2	,2 ,13	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,3	,2	,2 ,13	,'col'
 		union
-		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia',1 ,null	,1	,2  ,1 ,14	,'col'
+		select	1, 1 ,1	,@_now	,'Razia','Dummy',1	,null ,null,@_now	,'Razia','Y' ,null	,1	,2  ,1 ,14	,'col'
 	
 		exec (N'create schema test_tsa;') ;
 		exec (N'create schema test_psa;') ;

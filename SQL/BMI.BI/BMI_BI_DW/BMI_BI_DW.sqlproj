@@ -362,6 +362,7 @@ Static Data;
     <Folder Include="Programmable Objects\discovery\Views\" />
     <Folder Include="Schema-Model\etl\" />
     <Folder Include="Schema-Model\etl\Tables\" />
+    <Folder Include="Migrations\1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -392,6 +393,7 @@ Static Data;
     <None Include="Static Data\dbo.unit_of_measure_type.data.sql" />
     <None Include="Static Data\dbo.unit_of_measure.data.sql" />
     <None Include="Static Data\etl.unit_of_measure_lookup.data.sql" />
+    <None Include="Migrations\1.1.0\PlaceHolder.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />

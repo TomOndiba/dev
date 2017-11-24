@@ -4,7 +4,7 @@
 
 set nocount on
 
-merge into [dbo].[unit_of_measure_type] as tgt
+merge into [dbo].[unit_of_measure_type] as Target
 using (values
   (-5,'Not Defined','Used where the logic to identify the correct static type has not been supplied or specified')
  ,(-4,'Not Applicable','Used where this static type has no relevance in this context')
@@ -20,10 +20,10 @@ using (values
  ,(16,'Periodicity','E.g. Monthly, Quarterly, Annually etc.')
  ,(17,'Weight','E.g Kilograms, grams, metric tonne, imperial ton etc')
 ) as Source ([unit_of_measure_type_id],[unit_of_measure_type_name],[narrative])
-on (tgt.[unit_of_measure_type_id] = Source.[unit_of_measure_type_id])
+on (Target.[unit_of_measure_type_id] = Source.[unit_of_measure_type_id])
 when matched and (
-	nullif(Source.[unit_of_measure_type_name], tgt.[unit_of_measure_type_name]) is not null or nullif(tgt.[unit_of_measure_type_name], Source.[unit_of_measure_type_name]) is not null or 
-	nullif(Source.[narrative], tgt.[narrative]) is not null or nullif(tgt.[narrative], Source.[narrative]) is not null) then
+	nullif(Source.[unit_of_measure_type_name], Target.[unit_of_measure_type_name]) is not null or nullif(Target.[unit_of_measure_type_name], Source.[unit_of_measure_type_name]) is not null or 
+	nullif(Source.[narrative], Target.[narrative]) is not null or nullif(Target.[narrative], Source.[narrative]) is not null) then
  update set
   [unit_of_measure_type_name] = Source.[unit_of_measure_type_name], 
   [narrative] = Source.[narrative]

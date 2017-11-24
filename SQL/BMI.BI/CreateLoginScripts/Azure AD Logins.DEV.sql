@@ -41,23 +41,11 @@ if not exists (select * from sys.sysusers where name = 'matthew.basoo@icopal.com
 		create user [matthew.basoo@icopal.com] from external provider;
 	end
 go
-alter role [dbmanager] add member [matthew.basoo@icopal.com]
-go
-alter role [loginmanager] add member [matthew.basoo@icopal.com]
-go
-grant alter any user to [matthew.basoo@icopal.com]
-go
 
 if not exists (select * from sys.sysusers where name = 'razia.nazir@icopal.com')
 	begin
 		create user [razia.nazir@icopal.com] from external provider;
 	end
-go
-alter role [dbmanager] add member [razia.nazir@icopal.com]
-go
-alter role [loginmanager] add member [razia.nazir@icopal.com]
-go
-grant alter any user to [razia.nazir@icopal.com]
 go
 
 if not exists (select * from sys.sysusers where name = 'Vincent.Mitchell@icopal.com')
@@ -68,11 +56,6 @@ go
 if not exists (select * from sys.sysusers where name = 'Jason.Bogart@icopal.com')
 	begin
 		create user [Jason.Bogart@icopal.com] from external provider;
-	end
-go
-if not exists (select * from sys.sysusers where name = 'Jarek.Czujak@icopal.com')
-	begin
-		create user [Jarek.Czujak@icopal.com] from external provider;
 	end
 go
 if not exists (select * from sys.sysusers where name = 'tom.manville@icopal.com')

@@ -166,6 +166,7 @@ Static Data;
   </PropertyGroup>
   <!-- READYROLL SCRIPT GENERATION OPTIONS -->
   <PropertyGroup>
+    <PackageScriptBatchExecutionStrategy>WrapInExecuteWithSingleSetNoExec</PackageScriptBatchExecutionStrategy>
     <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
     <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <!-- These properties might be set by the Developer -->

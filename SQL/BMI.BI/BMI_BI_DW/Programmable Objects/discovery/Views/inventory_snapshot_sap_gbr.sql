@@ -10,7 +10,8 @@ GO
 
 
 
-create   view [discovery].[inventory_snapshot_sap_gbr]
+
+create     view [discovery].[inventory_snapshot_sap_gbr]
 as
 
 --<CommentHeader>
@@ -86,7 +87,7 @@ as
 	left outer join psa.ics_stg_SAP_GBR_MAKT   md --look up for material desc
 		on m.MATNR = md.MATNR
 	left outer join qvstg.Product			   p
-		on m.MATNR = p.NativeProductKey
+		on  replace(ltrim(replace(m.MATNR,'0',' ')),' ','0') = replace(ltrim(replace(p.NativeProductKey,'0',' ')),' ','0')
 			and p.DataSourceKey = m.DataSourceKey
 	left outer join DataSource				   ds
 		on ds.DataSourceKey = m.DataSourceKey

@@ -21,6 +21,7 @@ begin
 	where
 			k.parent_object_id is null
 		and s.name not in ('tSQLt', 'TestHelpers')
+		and not (s.name = 'dbo' and t.name = '__SchemaSnapshot')
 		and not (s.name = 'fred' and t.name like '%ginger%')
 	order by
 		s.name, t.name

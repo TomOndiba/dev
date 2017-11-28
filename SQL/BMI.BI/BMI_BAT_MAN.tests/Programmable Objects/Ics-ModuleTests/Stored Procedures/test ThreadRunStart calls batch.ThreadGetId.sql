@@ -1,4 +1,12 @@
-﻿create   procedure [Ics-ModuleTests].[test ThreadRunStart calls batch.ThreadGetId]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ThreadRunStart calls batch.ThreadGetId]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ThreadRunStart calls batch.ThreadGetId];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [Ics-ModuleTests].[test ThreadRunStart calls batch.ThreadGetId]
 as
 	begin
 		--! Mock all the calls that might be made by this wrapper sproc
@@ -54,3 +62,4 @@ as
 			'#expected'
 		  , 'batch.ThreadGetId_SpyProcedureLog' ;
 	end ;
+GO

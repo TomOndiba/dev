@@ -1,4 +1,12 @@
-﻿CREATE   procedure [IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [IcsApp-Tests].[test StartRun replaces null @EndMessage with empty string]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -17,3 +25,4 @@ begin
 
 	exec tSQLt.AssertEqualsString '', @_actual ;
 end;
+GO

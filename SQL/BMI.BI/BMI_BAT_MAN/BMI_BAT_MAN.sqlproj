@@ -110,6 +110,7 @@ fefeebd1-8d51-528c-8869-49475887df83|Static Data\batch.RunState.data.sql;
 Static Data;
 </AdditionalScriptFolders>
     <IncludeObjectsInDataSync />
+    <DefaultConnectionString>Data Source=(local);Initial Catalog=BMI_BAT_MAN;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=10;Encrypt=False;TrustServerCertificate=True</DefaultConnectionString>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
@@ -133,7 +134,7 @@ Static Data;
   <PropertyGroup>
     <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
     <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
-    <SyncOptionIgnoreColumnsOrder>True</SyncOptionIgnoreColumnsOrder>
+    <SyncOptionIgnoreColumnsOrder>False</SyncOptionIgnoreColumnsOrder>
     <!-- These properties might be set by the Developer -->
     <!--
     <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>
@@ -500,6 +501,7 @@ Static Data;
     <None Include="Migrations\1.0.1\002_Batch_ProcessRun_Table_Constraints_Added.sql" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Tables that start with tbl]
+﻿IF OBJECT_ID('[sqlcop].[test Tables that start with tbl]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Tables that start with tbl];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Tables that start with tbl]
 as
 begin
 	-- Written by George Mastros
@@ -29,3 +37,4 @@ begin
 			exec tSQLt.Fail @Output
 		end  
 end;
+GO

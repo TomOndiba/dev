@@ -1,4 +1,12 @@
-﻿CREATE   procedure [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error]
 as
 begin
 	exec tSQLt.SpyProcedure @ProcedureName = N'log4.ExceptionHandler';
@@ -15,3 +23,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEqualsTable '#expected', 'log4.ExceptionHandler_SpyProcedureLog';
 end;
+GO

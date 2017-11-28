@@ -1,4 +1,12 @@
-﻿create procedure [StaticDataTests].[test batch.RunState static data]
+﻿IF OBJECT_ID('[StaticDataTests].[test batch.RunState static data]') IS NOT NULL
+	DROP PROCEDURE [StaticDataTests].[test batch.RunState static data];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [StaticDataTests].[test batch.RunState static data]
 as
 begin
 	--! Assemble
@@ -40,3 +48,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = 'batch.RunState';
 end
+GO

@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Wide Table]
+﻿IF OBJECT_ID('[sqlcop].[test Wide Table]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Wide Table];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Wide Table]
 as
 begin
 	-- Written by George Mastros
@@ -35,3 +43,4 @@ begin
 			exec tSQLt.Fail @Output
 		end	
 end;
+GO

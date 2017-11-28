@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Procedures without SET NOCOUNT ON]
+﻿IF OBJECT_ID('[sqlcop].[test Procedures without SET NOCOUNT ON]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Procedures without SET NOCOUNT ON];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Procedures without SET NOCOUNT ON]
 as
 begin
 	-- Written by George Mastros
@@ -41,3 +49,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

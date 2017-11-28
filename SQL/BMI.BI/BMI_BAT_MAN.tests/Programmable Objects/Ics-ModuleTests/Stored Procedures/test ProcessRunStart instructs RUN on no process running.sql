@@ -1,4 +1,12 @@
-﻿CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart instructs RUN on no process running]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ProcessRunStart instructs RUN on no process running]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ProcessRunStart instructs RUN on no process running];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart instructs RUN on no process running]
 as
 	begin
 		declare @_BatchProcessId int = 999;
@@ -19,3 +27,4 @@ as
 		--! Assert
 		exec tSQLt.AssertEqualsString 'RUN', @_actual;
 	end ;
+GO

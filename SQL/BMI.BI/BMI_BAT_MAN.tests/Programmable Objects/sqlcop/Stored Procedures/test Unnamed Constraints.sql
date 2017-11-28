@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Unnamed Constraints]
+﻿IF OBJECT_ID('[sqlcop].[test Unnamed Constraints]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Unnamed Constraints];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Unnamed Constraints]
 as
 begin
 	-- Written by George Mastros
@@ -29,3 +37,4 @@ begin
 			exec tSQLt.Fail @Output
 		end	  
 end;
+GO

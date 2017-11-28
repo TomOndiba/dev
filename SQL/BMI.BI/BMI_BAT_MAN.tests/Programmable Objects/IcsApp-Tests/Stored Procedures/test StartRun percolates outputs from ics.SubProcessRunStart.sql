@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun percolates outputs from ics.SubProcessRunStart]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun percolates outputs from ics.SubProcessRunStart]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun percolates outputs from ics.SubProcessRunStart];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StartRun percolates outputs from ics.SubProcessRunStart]
 as
 begin
 	declare @_ExpectedSubProcessRunId int = 33
@@ -39,3 +47,4 @@ begin
 	exec tSQLt.AssertEqualsString @Expected = @_ExpectedInstruction, @Actual = @_ActualInstruction, @Message = N'@Instruction output value wrong: ' ;
 	exec tSQLt.AssertEqualsString @Expected = @_ExpectedMessage, @Actual = @_ActualMessage, @Message = N'@Message output value wrong: ' ;
 end;
+GO

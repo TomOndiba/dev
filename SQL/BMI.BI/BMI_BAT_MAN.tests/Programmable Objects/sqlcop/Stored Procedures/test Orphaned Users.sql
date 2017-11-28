@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Orphaned Users]
+﻿IF OBJECT_ID('[sqlcop].[test Orphaned Users]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Orphaned Users];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Orphaned Users]
 as
 begin
 	-- Written by George Mastros
@@ -46,3 +54,4 @@ begin
 				end;  
 		end
 end;
+GO

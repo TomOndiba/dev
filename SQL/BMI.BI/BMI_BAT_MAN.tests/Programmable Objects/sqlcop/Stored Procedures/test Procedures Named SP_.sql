@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Procedures Named SP_]
+﻿IF OBJECT_ID('[sqlcop].[test Procedures Named SP_]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Procedures Named SP_];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Procedures Named SP_]
 as
 begin
     -- Written by George Mastros
@@ -29,3 +37,4 @@ begin
             exec tSQLt.Fail @Output
         end 
 end;
+GO

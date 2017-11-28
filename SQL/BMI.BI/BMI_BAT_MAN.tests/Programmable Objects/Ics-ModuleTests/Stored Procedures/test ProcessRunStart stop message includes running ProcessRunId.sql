@@ -1,4 +1,12 @@
-﻿CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart stop message includes running ProcessRunId]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ProcessRunStart stop message includes running ProcessRunId]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ProcessRunStart stop message includes running ProcessRunId];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart stop message includes running ProcessRunId]
 as
 	begin
 		declare @_BatchProcessId int = 999;
@@ -21,3 +29,4 @@ as
 		--! Assert
 		exec tSQLt.AssertEqualsString @_expected, @_actual;
 	end ;
+GO

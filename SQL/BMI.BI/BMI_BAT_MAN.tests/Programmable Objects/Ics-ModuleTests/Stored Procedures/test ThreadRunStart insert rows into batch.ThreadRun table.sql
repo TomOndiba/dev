@@ -1,4 +1,12 @@
-﻿create   procedure [Ics-ModuleTests].[test ThreadRunStart insert rows into batch.ThreadRun table]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ThreadRunStart insert rows into batch.ThreadRun table]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ThreadRunStart insert rows into batch.ThreadRun table];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [Ics-ModuleTests].[test ThreadRunStart insert rows into batch.ThreadRun table]
 as
 	begin
 		--! Mock all the calls that might be made by this wrapper sproc
@@ -87,3 +95,4 @@ as
 		exec tSQLt.AssertEqualsTable @Expected = @expected, @Actual = @actual ;
 
 	end ;
+GO

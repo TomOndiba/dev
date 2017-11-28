@@ -1,4 +1,12 @@
-﻿create   procedure [Ics-ModuleTests].[test SubProcessRunStart calls ics.IcrtSubProcessGetId]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test SubProcessRunStart calls ics.IcrtSubProcessGetId]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test SubProcessRunStart calls ics.IcrtSubProcessGetId];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [Ics-ModuleTests].[test SubProcessRunStart calls ics.IcrtSubProcessGetId]
 as
 	begin
 		--! Mock all the calls that might be made by this wrapper sproc
@@ -23,3 +31,4 @@ as
 			'#expected'
 		  , 'ics.IcrtSubProcessGetId_SpyProcedureLog' ;
 	end ;
+GO

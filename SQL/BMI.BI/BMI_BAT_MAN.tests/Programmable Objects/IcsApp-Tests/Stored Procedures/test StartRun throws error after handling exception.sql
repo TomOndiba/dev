@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun throws error after handling exception]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun throws error after handling exception]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun throws error after handling exception];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StartRun throws error after handling exception]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -12,3 +20,4 @@ begin
 	--! Act
 	exec IcsApp.StartRun @ProcessName = NULL, @IcrtProcessId = 99
 end;
+GO

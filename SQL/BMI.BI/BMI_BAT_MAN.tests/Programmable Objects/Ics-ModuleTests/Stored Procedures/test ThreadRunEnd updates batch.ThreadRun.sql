@@ -1,4 +1,12 @@
-﻿CREATE procedure [Ics-ModuleTests].[test ThreadRunEnd updates batch.ThreadRun]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ThreadRunEnd updates batch.ThreadRun]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ThreadRunEnd updates batch.ThreadRun];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [Ics-ModuleTests].[test ThreadRunEnd updates batch.ThreadRun]
 as
 	begin
 
@@ -82,3 +90,4 @@ as
 		  , @Actual = N'batch.ThreadRun' ;	-- nvarchar(max)
 
 	end ;
+GO

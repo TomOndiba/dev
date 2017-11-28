@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StopRun throws error on @EndState empty]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StopRun throws error on @EndState empty]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StopRun throws error on @EndState empty];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StopRun throws error on @EndState empty]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -24,3 +32,4 @@ begin
 		, @SuccessTargetRows = 8
 		, @FailedTargetRows = 2
 end;
+GO

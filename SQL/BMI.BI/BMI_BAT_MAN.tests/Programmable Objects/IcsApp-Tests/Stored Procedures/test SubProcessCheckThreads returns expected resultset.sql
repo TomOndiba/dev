@@ -1,4 +1,12 @@
-﻿CREATE procedure [IcsApp-Tests].[test SubProcessCheckThreads returns expected resultset]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test SubProcessCheckThreads returns expected resultset]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test SubProcessCheckThreads returns expected resultset];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [IcsApp-Tests].[test SubProcessCheckThreads returns expected resultset]
 as
 begin
 	create table [IcsApp-Tests].expected
@@ -16,3 +24,4 @@ begin
 
  exec tSQLt.AssertResultSetsHaveSameMetaData 'SELECT * From [IcsApp-Tests].expected', 'Exec [IcsApp].[SubProcessCheckThreads] ''PN'',1 ';
 end;
+GO

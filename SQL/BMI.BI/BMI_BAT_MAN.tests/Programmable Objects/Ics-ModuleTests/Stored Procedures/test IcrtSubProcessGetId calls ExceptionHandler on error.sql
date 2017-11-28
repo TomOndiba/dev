@@ -1,4 +1,12 @@
-﻿CREATE procedure [Ics-ModuleTests].[test IcrtSubProcessGetId calls ExceptionHandler on error]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test IcrtSubProcessGetId calls ExceptionHandler on error]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test IcrtSubProcessGetId calls ExceptionHandler on error];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [Ics-ModuleTests].[test IcrtSubProcessGetId calls ExceptionHandler on error]
 as
 begin
 	--! Assemble
@@ -16,3 +24,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEqualsTable '#expected', 'log4.ExceptionHandler_SpyProcedureLog';
 end;
+GO

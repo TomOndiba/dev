@@ -1,4 +1,12 @@
-﻿CREATE   procedure [Ics-ModuleTests].[test SubProcessRunStart insert rows into batch.StepRun table]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test SubProcessRunStart insert rows into batch.StepRun table]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test SubProcessRunStart insert rows into batch.StepRun table];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [Ics-ModuleTests].[test SubProcessRunStart insert rows into batch.StepRun table]
 as
 	begin
 		--! Mock all the calls that might be made by this wrapper sproc
@@ -53,3 +61,4 @@ as
 			@Expected = @expected	-- N'' -- nvarchar(max)
 		  , @Actual = @actual ;		--N''	-- nvarchar(max)
 	end ;
+GO

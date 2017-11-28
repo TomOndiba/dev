@@ -1,4 +1,12 @@
-﻿CREATE procedure [Ics-ModuleTests].[test ProcessRunEnd updates batch.ProcessRun]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ProcessRunEnd updates batch.ProcessRun]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ProcessRunEnd updates batch.ProcessRun];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [Ics-ModuleTests].[test ProcessRunEnd updates batch.ProcessRun]
 as
 	begin
 
@@ -86,3 +94,4 @@ as
 		  , @Actual = N'batch.ProcessRun' ; -- nvarchar(max)
 
 	end ;
+GO

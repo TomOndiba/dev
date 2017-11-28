@@ -89,7 +89,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SchemaComparisons", "Schema
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dacpacs", "dacpacs", "{C469F7AE-520A-4BF8-86E1-F086F41D747F}"
 	ProjectSection(SolutionItems) = preProject
-		dacpacs\BMI_BAT_MAN_SQL2016.dacpac = dacpacs\BMI_BAT_MAN_SQL2016.dacpac
 		dacpacs\BMI_BI_DW_SQL2016.dacpac = dacpacs\BMI_BI_DW_SQL2016.dacpac
 	EndProjectSection
 EndProject
@@ -107,6 +106,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "profBIS_View.tests", "profBIS_View.tests\profBIS_View.tests.sqlproj", "{6C2681D7-22B9-4842-AA33-814D32D0B40F}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BMI_BAT_MAN.tests", "BMI_BAT_MAN.tests\BMI_BAT_MAN.tests.sqlproj", "{31085F60-3EA5-454A-99D3-009238691504}"
+	ProjectSection(ProjectDependencies) = postProject
+		{356F3988-D140-4D3F-A860-D71D990EB793} = {356F3988-D140-4D3F-A860-D71D990EB793}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -178,6 +182,15 @@ Global
 		{6C2681D7-22B9-4842-AA33-814D32D0B40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C2681D7-22B9-4842-AA33-814D32D0B40F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C2681D7-22B9-4842-AA33-814D32D0B40F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Development|Any CPU.Deploy.0 = Debug|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31085F60-3EA5-454A-99D3-009238691504}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

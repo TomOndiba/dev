@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun allows all output parameters to be ignored]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun allows all output parameters to be ignored]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun allows all output parameters to be ignored];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StartRun allows all output parameters to be ignored]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -15,3 +23,4 @@ begin
 	  , @MappingName = ''
 	  , @MappingConfigTaskName = ''
 end;
+GO

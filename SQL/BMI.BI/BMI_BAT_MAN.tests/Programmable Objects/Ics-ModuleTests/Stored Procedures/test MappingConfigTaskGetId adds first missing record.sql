@@ -1,4 +1,12 @@
-﻿create procedure [Ics-ModuleTests].[test MappingConfigTaskGetId adds first missing record]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test MappingConfigTaskGetId adds first missing record]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test MappingConfigTaskGetId adds first missing record];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [Ics-ModuleTests].[test MappingConfigTaskGetId adds first missing record]
 as
 begin
 	--!
@@ -23,3 +31,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEqualsTable '#expected', 'ics.MappingConfigTask';
 end;
+GO

@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StopRun throws error on @IcrtProcessId negative]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StopRun throws error on @IcrtProcessId negative]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StopRun throws error on @IcrtProcessId negative];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StopRun throws error on @IcrtProcessId negative]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -15,3 +23,4 @@ begin
 		, @EndMessage = ''
 		, @ProcessRunId = 11
 end;
+GO

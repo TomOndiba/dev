@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun percolates outputs from ics.ThreadRunStart]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun percolates outputs from ics.ThreadRunStart]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun percolates outputs from ics.ThreadRunStart];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StartRun percolates outputs from ics.ThreadRunStart]
 as
 begin
 	declare @_ExpectedThreadRunId int = 44
@@ -50,3 +58,4 @@ begin
 	exec tSQLt.AssertEquals @Expected = @_ExpectedStartCapturePoint, @Actual = @_ActualStartCapturePoint, @Message = N'@StartCapturePoint output value wrong: ' ;
 	exec tSQLt.AssertEquals @Expected = @_ExpectedEndCapturePoint, @Actual = @_ActualEndCapturePoint, @Message = N'@EndCapturePoint output value wrong: ' ;
 end;
+GO

@@ -1,13 +1,7 @@
-﻿CREATE SCHEMA [IcsApp-Tests]
-    AUTHORIZATION [dbo];
-
-
-
-
-
-
-
-
+CREATE SCHEMA [IcsApp-Tests]
+AUTHORIZATION [dbo]
 GO
-EXECUTE sp_addextendedproperty @name = N'tSQLt.TestClass', @value = 1, @level0type = N'SCHEMA', @level0name = N'IcsApp-Tests';
-
+DECLARE @xp int
+SELECT @xp=1
+EXEC sp_addextendedproperty N'tSQLt.TestClass', @xp, 'SCHEMA', N'IcsApp-Tests', NULL, NULL, NULL, NULL
+GO

@@ -1,4 +1,12 @@
-﻿create   procedure [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName adds subsequent missing record]
+﻿IF OBJECT_ID('[batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName adds subsequent missing record]') IS NOT NULL
+	DROP PROCEDURE [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName adds subsequent missing record];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName adds subsequent missing record]
 as
 begin
 	--! Assemble
@@ -26,3 +34,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEqualsTable '#expected', 'batch.Process';
 end;
+GO

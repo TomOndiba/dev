@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Forwarded Records]
+﻿IF OBJECT_ID('[sqlcop].[test Forwarded Records]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Forwarded Records];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Forwarded Records]
 as
 begin
 	-- Written by George Mastros
@@ -46,3 +54,4 @@ begin
 		end	  
   
 end;
+GO

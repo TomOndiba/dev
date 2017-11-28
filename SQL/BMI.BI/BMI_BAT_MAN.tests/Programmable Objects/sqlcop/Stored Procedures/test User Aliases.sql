@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test User Aliases]
+﻿IF OBJECT_ID('[sqlcop].[test User Aliases]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test User Aliases];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test User Aliases]
 as
 begin
 	-- Written by George Mastros
@@ -27,3 +35,4 @@ begin
 			exec tSQLt.Fail @Output
 		end 
 end;
+GO

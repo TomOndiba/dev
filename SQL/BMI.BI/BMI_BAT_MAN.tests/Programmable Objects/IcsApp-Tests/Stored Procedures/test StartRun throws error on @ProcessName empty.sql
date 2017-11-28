@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun throws error on @ProcessName empty]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun throws error on @ProcessName empty]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun throws error on @ProcessName empty];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StartRun throws error on @ProcessName empty]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -23,3 +31,4 @@ begin
 	  , @Instruction = ''
 	  , @Message = ''
 end;
+GO

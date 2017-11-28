@@ -1,4 +1,12 @@
-﻿create   procedure [sqlcop].[test Decimal Size Problem]
+﻿IF OBJECT_ID('[sqlcop].[test Decimal Size Problem]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Decimal Size Problem];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [sqlcop].[test Decimal Size Problem]
 as
 begin
     -- Written by George Mastros
@@ -44,3 +52,4 @@ begin
             exec tSQLt.Fail @Output
         end  
 end;
+GO

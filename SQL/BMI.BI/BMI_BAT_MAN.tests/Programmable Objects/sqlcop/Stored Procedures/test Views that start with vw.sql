@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Views that start with vw]
+﻿IF OBJECT_ID('[sqlcop].[test Views that start with vw]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Views that start with vw];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Views that start with vw]
 as
 begin
 	set nocount on
@@ -22,3 +30,4 @@ begin
 			exec tSQLt.Fail @Output
 		end  
 end;
+GO

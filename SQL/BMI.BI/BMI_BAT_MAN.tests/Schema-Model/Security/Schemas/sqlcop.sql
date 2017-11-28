@@ -1,7 +1,7 @@
-﻿CREATE SCHEMA [sqlcop]
-    AUTHORIZATION [dbo];
-
-
+CREATE SCHEMA [sqlcop]
+AUTHORIZATION [dbo]
 GO
-EXECUTE sp_addextendedproperty @name = N'tSQLt.TestClass', @value = 1, @level0type = N'SCHEMA', @level0name = N'sqlcop';
-
+DECLARE @xp int
+SELECT @xp=1
+EXEC sp_addextendedproperty N'tSQLt.TestClass', @xp, 'SCHEMA', N'sqlcop', NULL, NULL, NULL, NULL
+GO

@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Auto Shrink]
+﻿IF OBJECT_ID('[sqlcop].[test Auto Shrink]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Auto Shrink];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Auto Shrink]
 as
 begin
 	-- Written by George Mastros
@@ -25,3 +33,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

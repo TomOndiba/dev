@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Varchar Size Problem]
+﻿IF OBJECT_ID('[sqlcop].[test Varchar Size Problem]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Varchar Size Problem];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Varchar Size Problem]
 as
 begin
 	-- Written by George Mastros
@@ -47,3 +55,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

@@ -1,0 +1,855 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BMI_BAT_MAN.tests</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{31085f60-3ea5-454a-99d3-009238691504}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BMI_BAT_MAN.tests</RootNamespace>
+    <AssemblyName>BMI_BAT_MAN.tests</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <GenerateCreateScript>False</GenerateCreateScript>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
+    <IsReadyRollProject>True</IsReadyRollProject>
+    <ReadyRollToolsVersion>1.12</ReadyRollToolsVersion>
+    <DeployOnceSubFolder>Migrations</DeployOnceSubFolder>
+    <DeployChangesSubFolder>Programmable Objects</DeployChangesSubFolder>
+    <DeployChangesImportSchemaFolders>True</DeployChangesImportSchemaFolders>
+    <PreDeploymentSubFolder>Pre-Deployment</PreDeploymentSubFolder>
+    <PostDeploymentSubFolder>Post-Deployment</PostDeploymentSubFolder>
+    <GenerateSqlPackage>True</GenerateSqlPackage>
+    <PackageScriptBatchExecutionStrategy>WrapInExecuteWithSingleSetNoExec</PackageScriptBatchExecutionStrategy>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
+    <SyncToOfflineSchemaModelBySchema>False</SyncToOfflineSchemaModelBySchema>
+    <DefaultConnectionString>Data Source=(local);Initial Catalog=BMI_BAT_MAN;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=10;Encrypt=False;TrustServerCertificate=True</DefaultConnectionString>
+    <ExcludeObjectsFromSync>
+Schema=[dbo].[dbo];
+</ExcludeObjectsFromSync>
+    <IncludeObjectsInDataSync />
+    <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
+    <DeployChangesExecutionOrder>
+69b16ab2-4916-5e56-aac0-56b2964080e7|Programmable Objects\tSQLt\Stored Procedures\Fail.sql;
+8ccbc1b6-124b-5c1b-a3f0-ba244e5659c0|Programmable Objects\tSQLt\Stored Procedures\TableToText.sql;
+0a87f863-e06a-55f2-8610-bf7ba1e821f1|Programmable Objects\tSQLt\Stored Procedures\Private_CompareTablesFailIfUnequalRowsExists.sql;
+f17d6c08-e648-5d82-b3f0-fad3bc73edb2|Programmable Objects\tSQLt\Stored Procedures\Private_CompareTables.sql;
+94b4450e-8a25-5d2d-8b70-5a5b85c08a76|Programmable Objects\tSQLt\Stored Procedures\Private_ValidateThatAllDataTypesInTableAreSupported.sql;
+5558590f-f32f-5488-a901-76b2e4f753b1|Programmable Objects\tSQLt\Functions\Private_GetCommaSeparatedColumnList.sql;
+bf8b8cfc-c5a2-5cb6-a857-11653e40bd8c|Programmable Objects\tSQLt\Stored Procedures\Private_CreateResultTableForCompareTables.sql;
+375118cf-24bc-5859-849e-aca2ef2ca3c6|Programmable Objects\tSQLt\Stored Procedures\AssertObjectExists.sql;
+c7939a94-b8a4-5a57-a8b3-177dc70f1271|Programmable Objects\tSQLt\Stored Procedures\AssertEqualsTable.sql;
+d97fa1a9-5127-58d0-9705-52f4c02ac024|Programmable Objects\tSQLt\Stored Procedures\Private_MarkFakeTable.sql;
+252ebf93-887a-5f12-a359-aae561ce5f6b|Programmable Objects\tSQLt\Functions\Private_GetIdentityDefinition.sql;
+e889e6df-ddef-5386-afbf-44bf906150fd|Programmable Objects\tSQLt\Functions\Private_GetDefaultConstraintDefinition.sql;
+b1c9ac49-50ce-5d01-ab7b-9debb97c1ad7|Programmable Objects\tSQLt\Views\Private_SysTypes.sql;
+4e92093b-dcdc-5f2c-ac27-84a112553672|Programmable Objects\tSQLt\Functions\Private_GetFullTypeName.sql;
+db78c1ae-9368-5c4d-b2ef-d604d697332e|Programmable Objects\tSQLt\Functions\Private_GetDataTypeOrComputedColumnDefinition.sql;
+e932fa34-3967-578d-b251-8f91b25541f8|Programmable Objects\tSQLt\Stored Procedures\Private_CreateFakeOfTable.sql;
+36d277d9-bb1c-5ecd-8935-b7242d7b6eac|Programmable Objects\tSQLt\Stored Procedures\SuppressOutput.sql;
+e836289c-c7ca-5cc9-acb6-d11a98fa8b81|Programmable Objects\tSQLt\Stored Procedures\Private_MarkObjectBeforeRename.sql;
+bcb0538e-e521-5e76-9592-4ff3fe6754f7|Programmable Objects\tSQLt\Stored Procedures\Private_RenameObjectToUniqueName.sql;
+9c2a9879-a354-5fe5-8dc9-506a10cf9944|Programmable Objects\tSQLt\Stored Procedures\Private_ValidateFakeTableParameters.sql;
+a91ef07b-88b0-5d75-9566-754b7f3e43c7|Programmable Objects\tSQLt\Functions\Private_ResolveFakeTableNamesForBackwardCompatibility.sql;
+b48a3906-7745-55ec-8438-11fcc10998fe|Programmable Objects\tSQLt\Stored Procedures\FakeTable.sql;
+68a19545-21eb-5727-a13b-1edc24aef2dd|Programmable Objects\tSQLt\Stored Procedures\Private_CreateProcedureSpy.sql;
+c2e8aa01-97b2-55fd-ada5-922958dfbd2e|Programmable Objects\tSQLt\Stored Procedures\Private_RenameObjectToUniqueNameUsingObjectId.sql;
+9ace0f6b-dc42-5a44-a389-c7f17b2a3301|Programmable Objects\tSQLt\Stored Procedures\Private_ValidateProcedureCanBeUsedWithSpyProcedure.sql;
+3851e198-caf8-5a65-80a2-537f12d64818|Programmable Objects\tSQLt\Stored Procedures\SpyProcedure.sql;
+28baa191-121f-5e42-98cd-c272d347560d|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName adds first missing record.sql;
+4536e2c7-44ba-5bc4-8143-b39af55b1d20|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName adds subsequent missing record.sql;
+073979a3-d006-5bd5-9965-56e0021fc5bf|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName calls ExceptionHandler on error.sql;
+4c6d1019-954f-536b-96ad-503d650784e4|Programmable Objects\tSQLt\Stored Procedures\AssertEquals.sql;
+9b627640-ee97-5e08-813e-2757cf38a6c2|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName outputs new BatchProcessId.sql;
+ef7c4d93-396d-5e69-863d-30a3336bf791|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName replaces empty @BatchProcessName with @IcrtProcessName.sql;
+73a73b9c-d56c-55ff-9338-ea5e1ec6e036|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName replaces null @BatchProcessName with @IcrtProcessName.sql;
+324cd5e2-a471-5765-b1d1-59a5241bd36d|Programmable Objects\tSQLt\Stored Procedures\ExpectException.sql;
+bdeff95e-7d56-5230-ba79-bb8d8c57e316|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName throws error after handling exception.sql;
+80463a82-fb9e-524c-8ee7-09e722b7cf31|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName throws exception on @IcrtProcessName empty.sql;
+4cf3103b-91f1-57d2-85e4-0d2258e8b578|Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName throws exception on @IcrtProcessName null.sql;
+078ec493-9a09-5338-b8ca-2e282cc56cf8|Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error.sql;
+b075a7ff-d183-57d5-9b8d-98061cd7f8a2|Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values.sql;
+44139153-0b5a-5552-a61f-d8e258f41e01|Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds throws error after handling exception.sql;
+b8a3611b-0126-5e20-bc31-df501f484904|Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds throws error on @MappingConfigTaskName empty.sql;
+042cc837-4169-561f-8db5-95cbab709393|Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds throws error on @MappingConfigTaskName null.sql;
+9bee6afb-d960-5909-b492-8c8e8e5bd29b|Programmable Objects\tSQLt\Stored Procedures\ExpectNoException.sql;
+69552ceb-8223-55a3-b9f0-bdf077d95542|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun allows all output parameters to be ignored.sql;
+4722e8ce-1e27-5325-b0b5-58da53d47d19|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun allows null input for all output parameters.sql;
+7f675697-1ea1-5f3d-aeaf-97ff4166c591|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on error.sql;
+323fbf57-be19-5cb1-b09b-444915649e9d|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ProcessRunEnd error.sql;
+58865ba1-6cee-59b9-b47d-e53f7bf24053|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ProcessRunStart error.sql;
+61849185-b8a8-5419-b1ee-04e2d2b370b2|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.SubProcessRunEnd error.sql;
+d21e599c-8e87-5aa0-8e8c-c51d119d67eb|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.SubProcessRunStart error.sql;
+9c1ed4ff-9795-5ce9-8269-cc58fe2d2b7e|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ThreadRunEnd error.sql;
+d0d079f1-b065-50c5-b712-b38b2005509d|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ThreadRunStart error.sql;
+1ee15665-5200-5e1d-a266-a91d64735fb9|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ProcessRunEnd when process name and id are valid.sql;
+5603ecc1-2302-50d7-ae10-772a6fb2918b|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ProcessRunStart when process name and id are valid.sql;
+f5320c7f-d7e3-554e-ac1d-ce2cf049313a|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.SubProcessRunEnd when sub-process name is valid.sql;
+8ed686b9-888b-5c67-9f98-08c0ae47d1a2|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.SubProcessRunStart when sub-process name is valid.sql;
+1aba1f3f-2736-5377-86ea-36bf548b7d55|Programmable Objects\tSQLt\Functions\Private_GetQuotedFullName.sql;
+ab56a95e-ea0c-567f-a992-043c9cd0b99f|Programmable Objects\tSQLt\Stored Procedures\AssertEmptyTable.sql;
+8865a6b0-f957-58fd-b6f1-98c6e6ab0e4f|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ThreadRunEnd when mapping config task name is valid.sql;
+b4539cff-c105-51be-91fd-1abd08f54e2b|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ThreadRunStart when mapping config task name is valid.sql;
+f6b9a680-2e1d-5c7c-87d4-d919d70eedf2|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.ProcessRunEnd when process name and id are valid.sql;
+aff1afae-529d-573c-8e1c-bd1185281f41|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.ProcessRunStart when process name and id are valid.sql;
+9ae3f229-0dfe-5562-8426-41f00b68f0f6|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.SubProcessRunStart when sub-process name is valid.sql;
+f02573cb-aaf2-50a8-b849-bd2b12c70e58|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.ThreadRunStart when mapping config task name is valid.sql;
+c1edaacc-3e0f-5126-9937-cbb6f975a807|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun only calls ics.SubProcessRunEnd when sub-process name is valid.sql;
+60dda544-6976-5e06-86a0-d89b20f2a674|Programmable Objects\tSQLt\Stored Procedures\AssertEqualsString.sql;
+a5306a43-074e-5987-816d-14fe8a0917ad|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun percolates outputs from ics.ProcessRunStart.sql;
+84bfd88d-9147-522c-9558-c09c46d37fa0|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun percolates outputs from ics.SubProcessRunStart.sql;
+cdf3fb29-707a-544c-9d99-b50ae15e0735|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun percolates outputs from ics.ThreadRunStart.sql;
+56e30ad6-35a8-5342-a23a-87f64f0d5334|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun replaces null @EndMessage with empty string.sql;
+7a59f61b-54b4-57ca-82e0-c70dd0df0bd2|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error after handling exception.sql;
+ffb9de27-3761-55a8-ad3f-e9ecea76f6fe|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @IcrtProcessId negative.sql;
+61c1437c-3c63-5281-a791-fb38ce1c228e|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @IcrtProcessId null.sql;
+a41d7765-ab39-552f-880b-09bf52844955|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @IcrtProcessId zero.sql;
+15dee4f4-2715-5160-92f0-33fc8f381190|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @Mapping empty when starting a thread.sql;
+516b2c21-9a0f-54e8-9df5-a1be87f0d73d|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @Mapping null when starting a thread.sql;
+a89cbd99-c528-5d72-b05d-0658f6399d2c|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @ProcessName empty.sql;
+c0cb16c8-470e-5ee2-9b81-9a3b0664c9af|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @ProcessName null.sql;
+aa8f88fc-b259-5cb2-93b6-f97d1fb6feff|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @ProcessRunId negative when starting a sub-process.sql;
+d1bd7f71-a2fb-51e2-8193-2b2156a7d7fb|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @ProcessRunId null when starting a sub-process.sql;
+65f1145f-a389-5427-9c1f-9552fc76ffd3|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @ProcessRunId zero when starting a sub-process.sql;
+d4f61088-a775-5c43-b893-8fb771a82454|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @SubProcessRunId negative when starting a thread (sub-process missing).sql;
+591bd2c7-057f-531c-ad7f-ccf3e0732a01|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @SubProcessRunId negative when starting a thread (sub-process present).sql;
+4a010967-15cd-5692-951a-e6eba69f3af5|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @SubProcessRunId null when starting a thread (sub-process missing).sql;
+c0c4e6f6-f074-52e3-a5b6-33f8a8dcc43d|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @SubProcessRunId null when starting a thread (sub-process present).sql;
+84707ac4-fcbb-5314-9845-1ccbfd772d4c|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @SubProcessRunId zero when starting a thread (sub-process missing).sql;
+40e93a34-36d2-59d1-ac09-26fcc300406f|Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on @SubProcessRunId zero when starting a thread (sub-process present).sql;
+e60aebaf-3b3e-5cf1-a0ea-dd22c76d6bf8|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun @EndState allows _FAILED_.sql;
+86e4182c-9806-5587-aa2a-6687f4bee63b|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun @EndState allows _SKIPPED_.sql;
+2513b13a-7e5d-5cd6-8c3c-217d64896f83|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun @EndState allows _STOPPED_.sql;
+6cf177ef-24bd-5a87-b97c-c55c7617fef4|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun @EndState allows _SUCCEEDED_.sql;
+58892fa0-6bce-5ee2-a4a6-63e4169eb7d2|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @EndState empty.sql;
+2b1c1be2-2e44-50b4-9617-2934f3e3c5af|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @EndState null.sql;
+8f89ad73-688f-5fae-b1d8-878efd2ffac4|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @FailedSourceRows negative when ending a thread.sql;
+37165614-e19c-5840-a602-69f51ac672ec|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @FailedSourceRows null when ending a thread.sql;
+ad3d4f83-b158-534b-aff6-3154b08c5f31|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @FailedTargetRows negative when ending a thread.sql;
+49c2e982-d316-53c2-a457-05a5917d8546|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @FailedTargetRows null when ending a thread.sql;
+8bf298b7-8214-5db4-8751-5a89246179b3|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @IcrtProcessId negative.sql;
+d70d7c9b-2ac9-54d8-82b2-d73a6f32e6e4|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @IcrtProcessId null.sql;
+cca210c4-6413-5c81-9975-c2eb1bd6b15e|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @IcrtProcessId zero.sql;
+cc162a76-6704-5257-8eca-000880044056|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ProcessName empty.sql;
+ad3974b7-63de-5fc0-b686-4493cb365103|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ProcessName null.sql;
+8b148137-e5bd-5228-b542-35a089d7dc1f|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ProcessRunId negative when ending a process.sql;
+90516b3d-2751-5cbe-99f0-5024f4825fc8|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ProcessRunId null when ending a process.sql;
+a8cdfa87-a14b-545c-9459-8cad24386e78|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ProcessRunId zero when ending a process.sql;
+b131fbbc-f868-5e4d-97cd-7091b13ca7f1|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SubProcessRunId negative when ending a sub-process (process not present).sql;
+2347f6db-ddfd-5f42-b725-ae8f1d6b7380|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SubProcessRunId negative when ending a sub-process (process present).sql;
+c7573e4c-7026-57ac-b3ac-21062542845a|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SubProcessRunId null when ending a sub-process (process not present).sql;
+3f25976d-8940-5670-b229-317718bdc905|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SubProcessRunId null when ending a sub-process (process present).sql;
+07e39c5a-fb90-5ee6-9302-5bebe162e597|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SubProcessRunId zero when ending a sub-process (process not present).sql;
+b718e391-dea8-5fd7-b644-33d1e4da1dc0|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SubProcessRunId zero when ending a sub-process (process present).sql;
+3dcf634e-2a24-582a-af0f-f1e9366dc1d9|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SuccessSourceRows negative when ending a thread.sql;
+e3d4a1bf-501b-59bb-bc24-736239c97572|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SuccessSourceRows null when ending a thread.sql;
+ef30f3a6-83d4-5727-a655-56bb30cb5858|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SuccessTargetRows negative when ending a thread.sql;
+4d2a2eb4-518c-5cf5-9205-a1d3d4385821|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @SuccessTargetRows null when ending a thread.sql;
+5c6fd1eb-c910-587d-a7db-7d874f47faac|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ThreadRunId negative when ending a thread (sub-process not present).sql;
+d76695d0-4903-5d75-ac8e-b170089c7c61|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ThreadRunId negative when ending a thread (sub-process present).sql;
+f39bd54a-df20-5f13-bf53-a6020e258e6f|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ThreadRunId null when ending a thread (sub-process not present).sql;
+39093513-3e58-58fa-9129-dccb5ba7b57f|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ThreadRunId null when ending a thread (sub-process present).sql;
+6eabefdb-8dca-5a1e-8051-ab5c2251085c|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ThreadRunId zero when ending a thread (sub-process not present).sql;
+ac5e569d-9a62-5ed7-9083-c388b523f17c|Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on @ThreadRunId zero when ending a thread (sub-process present).sql;
+6cc0bbb7-39fb-563a-ba9f-3f889d96a67d|Programmable Objects\tSQLt\Stored Procedures\AssertResultSetsHaveSameMetaData.sql;
+d145b416-bafa-5e70-8ad9-c062f62a6659|Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads returns expected resultset.sql;
+a8c27c15-62ef-5536-8cc2-f00a1b07b945|Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on @ProcessName empty.sql;
+31b2058a-a1ce-5d36-beca-a66375a718d7|Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on @ProcessName null.sql;
+be7fd1bd-35c4-5a24-afbb-ab9c060f62f7|Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on @SubProcessRunID null.sql;
+a1e45cdd-b5e6-5204-8acb-0d55d8664498|Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on @SubProcessRunID zero.sql;
+8f7d749d-51ba-5b9b-9151-47a28f3af3f6|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId adds first missing record.sql;
+8e1abc19-7363-5ed9-9ab3-f4db00e67b7e|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId adds subsequent missing record.sql;
+430130ce-6ebc-52eb-a433-8002439f4fad|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId calls ExceptionHandler on error.sql;
+8694b788-3835-5598-8b91-63c51a85c8ec|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId outputs new IcrtSubProcessId.sql;
+a8500ab6-7449-5f26-9e83-3895047e89d5|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws error after handling exception.sql;
+c1374de2-4ad6-5972-a3d3-27f27973b9ad|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on @BatchProcessId negative.sql;
+a0b613c5-c53e-5e0d-9bf1-ca9505004303|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on @BatchProcessId null.sql;
+db37ccaf-918c-5a9f-ad8c-3d38adfe52ec|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on @BatchProcessId zero.sql;
+f43cb3a5-fbf9-5429-acfa-7b56c9d38d2c|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on @IcrtSubProcessName empty.sql;
+f52ab9f6-fd4d-57d5-87db-57ba63a34512|Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on @IcrtSubProcessName null.sql;
+b131664e-cc6c-5257-b0cd-d2371a4086d3|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId adds first missing record.sql;
+04aa9a8b-6c34-5796-8da2-4202cf3ec9c6|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId adds subsequent missing record.sql;
+d40a41a5-25f5-5699-b155-4f1c2a651b28|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId calls ExceptionHandler on error.sql;
+49ec89ee-0084-5837-a603-8f527bf6dc08|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId outputs new MappingConfigTaskId.sql;
+d9cf9cfd-c76a-51eb-a9aa-03afdbb3f537|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws error after handling exception.sql;
+fc51e5a7-9dec-5581-8485-d021edc9958f|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on @MappingConfigTaskName empty.sql;
+457df5b6-f1b6-5133-ab2d-8b69e355bd3f|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on @MappingConfigTaskName null.sql;
+60b95f58-7409-5899-8353-85ef874a4595|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on @MappingName empty.sql;
+5943f6f4-68c7-5d30-8da3-fb107da7e6b1|Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on @MappingName null.sql;
+dbbd3e87-a410-5458-b218-eb75c23a3554|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunEnd updates batch.ProcessRun.sql;
+50c84187-3ff1-5469-bbc5-93fdfe879e8f|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql;
+65d6f24d-bb60-5ec0-b76c-575af3b3d8d3|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart insert row into batch.ProcessRun table for a disabled process.sql;
+f4331c83-d0e1-5b41-9353-c538860a0243|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart insert row into batch.ProcessRun table for a new process.sql;
+97b75f40-30b6-5da9-a863-e9bce5ae3d40|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart insert row into batch.ProcessRun table for an existing process.sql;
+5018be4c-9e73-5bec-a945-57bde6fbed5b|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart instructs RUN on no process running.sql;
+3bb173d7-7c49-54f1-9ea2-b5d982774080|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart instructs STOP on process already running.sql;
+ed40bfa2-1ebb-5655-bdeb-5e9950bfbcf1|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart outputs ProcessRunId as null on stopped batch.sql;
+fcc8f4ab-4dde-5eda-9a23-53af799b3ecc|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart stop message includes running ProcessRunId.sql;
+10ada897-ec9a-5a3f-9547-55670031d09d|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart throws error after handling exception.sql;
+b3a106bd-b96d-56e4-9f2d-351b5f6844d7|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunEnd updates batch.StepRun.sql;
+929bc08c-9d94-5376-acae-6a8e5607c3d0|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql;
+4381d071-a133-5250-b84b-f33c065a5476|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart calls ics.IcrtSubProcessGetId.sql;
+bd120515-c35e-510b-b683-65fb706a99cf|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart insert rows into batch.StepRun table.sql;
+e313005d-8eb2-592f-934a-0880c4de5a5c|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart sets @Instruction.sql;
+aa3df95c-ed16-5bee-94ab-ef089633ad81|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart sets @Message.sql;
+00c4a9f8-a340-57bc-b72e-bf9aaaeef4d4|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart sets @StepRunId.sql;
+60527fb1-e676-5c76-b6c6-c96d5c5948c9|Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart throws error after handling exception.sql;
+710ddaca-d774-56ef-9f5c-25987f880458|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunEnd updates batch.ThreadRun.sql;
+d13973d5-94c2-5695-8bf8-db81b2192392|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart calls batch.ThreadGetId.sql;
+10ebe997-ffa5-54ea-913f-cc8d093825a2|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart calls ics.MappingConfigTaskGetId.sql;
+1cc483d0-f387-56a6-ba96-e11b1ac94143|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart insert rows into batch.ThreadRun table.sql;
+a8bf8ca2-25e9-5c41-bd22-d2d39d726ed4|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart sets @Instruction.sql;
+dd23aa63-e2ea-5f08-993a-de81e58d4af5|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart sets @Message.sql;
+7c111fc2-f52f-5251-abf8-ffd934b81410|Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart throws error after handling exception.sql;
+3416bc73-5d8d-5f3e-b394-9eebf132fb21|Programmable Objects\sqlcop\Stored Procedures\test Ad hoc distributed queries.sql;
+8365f758-f963-5631-a224-16c11bff7906|Programmable Objects\sqlcop\Stored Procedures\test Auto Shrink.sql;
+f8988f13-ec69-5179-b469-dfe221a9288b|Programmable Objects\sqlcop\Stored Procedures\test Column data types (Numeric vs. Int).sql;
+ca5ac0b3-2040-58ef-89d0-79e4745abe41|Programmable Objects\sqlcop\Stored Procedures\test Column Name Problems.sql;
+59e6f02d-3078-5821-bc35-8b174279c188|Programmable Objects\sqlcop\Stored Procedures\test Columns of data type Text_nText.sql;
+6dae15c2-aae0-5404-b9cf-3ff300767b64|Programmable Objects\sqlcop\Stored Procedures\test Columns with float data type.sql;
+fa0c0bd5-5082-5795-8d2b-6f31950c2151|Programmable Objects\sqlcop\Stored Procedures\test Decimal Size Problem.sql;
+9c2c0c8e-f9dc-5195-bccb-545f949e4047|Programmable Objects\sqlcop\Stored Procedures\test Forwarded Records.sql;
+103c1f15-d036-54ba-913e-0192495041bf|Programmable Objects\sqlcop\Stored Procedures\test Fragmented Indexes.sql;
+0358f232-a318-56b2-b3fc-4ba4a7740791|Programmable Objects\sqlcop\Stored Procedures\test Orphaned Users.sql;
+7be40d3c-94ab-5f61-a28e-b579ed7d6e3b|Programmable Objects\sqlcop\Stored Procedures\test Procedures Named SP_.sql;
+6229ad71-aa3c-54ff-b838-0e7f92980d5c|Programmable Objects\sqlcop\Stored Procedures\test Procedures that start with usp.sql;
+af6f5537-7ff4-56aa-8424-c5012fd7ccef|Programmable Objects\sqlcop\Stored Procedures\test Procedures using dynamic SQL without sp_executesql.sql;
+54a7b5f6-072c-5d6c-9cae-0525f75dca1a|Programmable Objects\sqlcop\Stored Procedures\test Procedures using xp_cmdshell.sql;
+8d3b9108-7d00-54b3-8e85-a995947cdfbc|Programmable Objects\sqlcop\Stored Procedures\test Procedures with @@Identity.sql;
+6d80dd65-a280-5169-ac59-2afee708e6c7|Programmable Objects\sqlcop\Stored Procedures\test Procedures without SET NOCOUNT ON.sql;
+1fc56243-60a7-5c82-9369-43ead65e58e1|Programmable Objects\sqlcop\Stored Procedures\test Table name problems.sql;
+d1b4debd-8b6c-57d3-bf97-6a6ff338b49c|Programmable Objects\sqlcop\Stored Procedures\test Tables that start with tbl.sql;
+1c28bb98-892f-5982-8faf-9f9bfe151e35|Programmable Objects\sqlcop\Stored Procedures\test Tables without a primary key.sql;
+afaf6155-5334-5495-934c-006561a1badd|Programmable Objects\sqlcop\Stored Procedures\test Unnamed Constraints.sql;
+d4de10a7-9f8a-5afd-8d74-8aafaba75c46|Programmable Objects\sqlcop\Stored Procedures\test User Aliases.sql;
+786e9677-2980-540e-b699-ffadb10da11b|Programmable Objects\sqlcop\Stored Procedures\test Varchar Size Problem.sql;
+07d803aa-b9db-5430-8993-e21980c7016e|Programmable Objects\sqlcop\Stored Procedures\test Views that start with vw.sql;
+f71a8f60-f690-5f85-b1ec-6df9869e23b9|Programmable Objects\sqlcop\Stored Procedures\test Wide Table.sql;
+55bbf4fc-d5c3-5753-a9b8-f581fd3aef6d|Programmable Objects\StaticDataTests\Stored Procedures\test batch.RunState static data.sql;
+3aaa03ad-3918-53c6-98e0-070f993f7223|Programmable Objects\StaticDataTests\Stored Procedures\test batch.RunStateFlag static data.sql;
+2160ed82-0786-55e5-9c8a-52d5174ec33e|Programmable Objects\tSQLt\Functions\Private_SqlVersion.sql;
+1129acc8-4c9b-59b1-83db-43ddb57a9124|Programmable Objects\tSQLt\Functions\Info.sql;
+0bae336e-d096-51df-86f4-10e1fd36670b|Programmable Objects\tSQLt\Functions\Private_GetOriginalTableInfo.sql;
+6a468f79-dc22-5948-ba5d-47de132e412c|Programmable Objects\tSQLt\Functions\Private_FindConstraint.sql;
+e4495b62-e6de-5afa-a740-90de2bb65079|Programmable Objects\tSQLt\Functions\Private_GetForeignKeyRefColumns.sql;
+fd9eb96b-32a3-5c1f-ae8f-e4d31a058c37|Programmable Objects\tSQLt\Functions\Private_GetForeignKeyParColumns.sql;
+b902f2e1-4348-5362-a6e4-98b23c42fbb0|Programmable Objects\tSQLt\Functions\Private_GetForeignKeyDefinition.sql;
+759753a7-0980-575d-9c38-430e1aef855f|Programmable Objects\tSQLt\Functions\Private_GetUniqueConstraintDefinition.sql;
+a6d31f13-e155-53cd-9e35-316f7a5cb51e|Programmable Objects\tSQLt\Functions\Private_GetSchemaId.sql;
+0dbca57c-a243-54f8-821a-f4a7bef83cd7|Programmable Objects\tSQLt\Views\TestClasses.sql;
+f614e174-5cc6-5c9b-bae6-eb1ec0fa67f7|Programmable Objects\tSQLt\Functions\Private_IsTestClass.sql;
+e8320a4e-70b6-5984-b0f2-de927da211d3|Programmable Objects\tSQLt\Functions\Private_ResolveApplyConstraintParameters.sql;
+37eb7ad2-4c85-509c-9b81-9f9140d16fe8|Programmable Objects\tSQLt\Functions\Private_ResolveObjectName.sql;
+7f6c8657-296b-5285-96af-7563234edd72|Programmable Objects\tSQLt\Functions\Private_ResolveSchemaName.sql;
+4c469b76-c5c0-50f1-93a7-a34b1dd57f38|Programmable Objects\tSQLt\Functions\Private_ResolveName.sql;
+679d77f0-19ca-5ba2-aa29-5f4d14cbcf21|Programmable Objects\tSQLt\Views\Private_SysIndexes.sql;
+a89ac78b-207d-5b3f-b9cc-df3eb44ec611|Programmable Objects\tSQLt\Functions\Private_ScriptIndex.sql;
+953926ad-18d3-56eb-a7af-cb37930eec6f|Programmable Objects\tSQLt\Functions\Private_GetQuotedTableNameForConstraint.sql;
+a254966e-ea32-5421-ab7c-8efb9a31fbd0|Programmable Objects\tSQLt\Stored Procedures\Private_ApplyUniqueConstraint.sql;
+28264d77-c9ea-5c85-9f9a-853dcab16a96|Programmable Objects\tSQLt\Stored Procedures\Private_ApplyForeignKeyConstraint.sql;
+c76156c3-8d97-5af2-bf12-1cc0daa7b6ad|Programmable Objects\tSQLt\Stored Procedures\Private_ApplyCheckConstraint.sql;
+dc90f566-cfd6-5354-970b-af76821d69ed|Programmable Objects\tSQLt\Stored Procedures\ApplyConstraint.sql;
+1fee5f21-f676-5fef-9d3a-cfcfa8971ff4|Programmable Objects\tSQLt\Stored Procedures\RemoveObject.sql;
+eca620b2-2232-595a-8296-911de1e6014e|Programmable Objects\tSQLt\Stored Procedures\ApplyTrigger.sql;
+ffbc754b-319d-58f0-8e55-f539889e9bcd|Programmable Objects\tSQLt\Stored Procedures\AssertEqualsTableSchema.sql;
+34e9412b-2ce0-5d50-8e1a-dca5cb217f29|Programmable Objects\tSQLt\Stored Procedures\AssertLike.sql;
+7f1de455-6de3-56d0-b506-ffd58019a4b1|Programmable Objects\tSQLt\Functions\Private_SqlVariantFormatter.sql;
+29dcd203-71ba-537f-b978-a9d93e3967d6|Programmable Objects\tSQLt\Stored Procedures\AssertNotEquals.sql;
+d7f791e1-5444-53e6-bcfd-cfb4fcb3cd79|Programmable Objects\tSQLt\Stored Procedures\AssertObjectDoesNotExist.sql;
+9f537584-2428-5b4f-8dba-469d1bb60b25|Programmable Objects\tSQLt\Stored Procedures\AssertStringIn.sql;
+ec7bdad9-1b16-534e-9579-2f51454a4e77|Programmable Objects\tSQLt\Stored Procedures\Private_Print.sql;
+80a93992-b8ea-5334-86ea-b6a90c5cb6c0|Programmable Objects\tSQLt\Functions\TestCaseSummary.sql;
+0598c04a-c972-5ef3-8ab4-4409a6242d14|Programmable Objects\tSQLt\Stored Procedures\DefaultResultFormatter.sql;
+7d3f0189-630d-53ac-808f-99ae9fa169ce|Programmable Objects\tSQLt\Stored Procedures\Private_CreateFakeFunction.sql;
+d964ed14-a88b-5a0b-aa18-6181d8889b9c|Programmable Objects\tSQLt\Stored Procedures\Private_ValidateObjectsCompatibleWithFakeFunction.sql;
+387840f3-29e8-590b-8889-c30f98b30a6b|Programmable Objects\tSQLt\Stored Procedures\FakeFunction.sql;
+d10e1f16-196b-5868-903d-4259e9efff19|Programmable Objects\tSQLt\Stored Procedures\Private_MarkSchemaAsTestClass.sql;
+51458064-a17b-5bfc-ad53-4b783bd79304|Programmable Objects\tSQLt\Stored Procedures\MarkSchemaAsTestClass.sql;
+f58529c6-62e6-575b-ad43-2679a95cd3b5|Programmable Objects\tSQLt\Functions\Private_QuoteClassNameForNewTestClass.sql;
+61b1a635-1f96-5d67-b5b4-1873f3593a56|Programmable Objects\tSQLt\Stored Procedures\DropClass.sql;
+51df215b-3fe5-58df-bbb0-3ca6895c73b6|Programmable Objects\tSQLt\Stored Procedures\Private_DisallowOverwritingNonTestSchema.sql;
+67115271-1cb5-5aa8-8601-a4f08a2db845|Programmable Objects\tSQLt\Stored Procedures\NewTestClass.sql;
+70894fab-5aad-5684-a513-5300176c48e3|Programmable Objects\tSQLt\Stored Procedures\Private_GetSetupProcedureName.sql;
+2dbe9ddf-7c31-580f-be49-a4e977d481a2|Programmable Objects\tSQLt\Functions\GetTestResultFormatter.sql;
+ade5e63a-f959-5403-8d10-2e72b6162710|Programmable Objects\tSQLt\Stored Procedures\Private_OutputTestResults.sql;
+d7f5293b-b108-566c-9be2-dd0fd171a964|Programmable Objects\tSQLt\Functions\Private_GetCleanObjectName.sql;
+1bf24099-3bcb-5846-aa21-0e14f1934f6f|Programmable Objects\tSQLt\Functions\Private_GetConfiguration.sql;
+29c8b6b5-cc9e-5127-b253-9c8a73c9359d|Programmable Objects\tSQLt\Stored Procedures\GetNewTranName.sql;
+c84b5d7f-a68f-56b7-9ff1-af1310bb2a00|Programmable Objects\tSQLt\Stored Procedures\Private_RunTest.sql;
+8ab690e8-f1e3-5af1-b43b-de3bff4c6414|Programmable Objects\tSQLt\Stored Procedures\Private_RunTestClass.sql;
+3cd5fa1f-d39c-5e86-a4ad-fa860d9e1d14|Programmable Objects\tSQLt\Stored Procedures\Private_CleanTestResult.sql;
+7c932c04-6d64-5745-8b74-14d7aaafbfa1|Programmable Objects\tSQLt\Stored Procedures\Private_SaveTestNameForSession.sql;
+cdb7eac1-fdda-5e81-add2-137ea8082353|Programmable Objects\tSQLt\Functions\Private_GetLastTestNameIfNotProvided.sql;
+4706e8b9-8e46-5690-a930-c91d16706945|Programmable Objects\tSQLt\Stored Procedures\Private_Run.sql;
+dd11fbfd-c6a3-5044-84cd-0f9e69d7f7ea|Programmable Objects\tSQLt\Stored Procedures\Private_RunAll.sql;
+bec64edb-1b41-5a87-82bd-1ffd7bbbacc6|Programmable Objects\tSQLt\Stored Procedures\RemoveObjectIfExists.sql;
+4d583ae6-3c5f-5a96-a86e-549df449e52e|Programmable Objects\tSQLt\Stored Procedures\RenameClass.sql;
+14b74a9f-b39e-58b3-82df-89fdfe8f1848|Programmable Objects\tSQLt\Stored Procedures\Run.sql;
+eccdbe5c-54e7-5ce7-a0f9-69bea6425422|Programmable Objects\tSQLt\Stored Procedures\RunAll.sql;
+b83b461f-94cb-5912-ae01-6de8b334f712|Programmable Objects\tSQLt\Stored Procedures\Private_InputBuffer.sql;
+4ad8cc5f-434c-5c15-ac33-1487d0ac9f74|Programmable Objects\tSQLt\Stored Procedures\RunC.sql;
+7d120fda-a9b6-596c-8b38-b526a8b99981|Programmable Objects\tSQLt\Stored Procedures\RunTestClass.sql;
+609521ce-ca11-5542-ba7d-4b4fae4afa97|Programmable Objects\tSQLt\Stored Procedures\RunWithNullResults.sql;
+61695f2f-71ef-5c8b-ac8c-ca04e671d840|Programmable Objects\tSQLt\Stored Procedures\RunWithXmlResults.sql;
+b68a3fdb-461e-517b-bc37-ffde7d3bc62b|Programmable Objects\tSQLt\Stored Procedures\Private_SetFakeViewOff_SingleView.sql;
+e3b61876-9707-5e23-92fb-51ec667534ab|Programmable Objects\tSQLt\Stored Procedures\SetFakeViewOff.sql;
+2c9b107c-2727-51f0-bc3a-9040c8dd376e|Programmable Objects\tSQLt\Stored Procedures\Private_SetFakeViewOn_SingleView.sql;
+73c21d72-162a-5bf1-a1a2-193f0ebedf1b|Programmable Objects\tSQLt\Stored Procedures\SetFakeViewOn.sql;
+b3f05d76-3653-5c03-9904-81b8c67755f7|Programmable Objects\tSQLt\Stored Procedures\Private_SetConfiguration.sql;
+bb7560db-8602-5534-afa4-cc5b32f6e755|Programmable Objects\tSQLt\Stored Procedures\SetVerbose.sql;
+70ca5842-de9a-538b-8e77-472c4710c45a|Programmable Objects\tSQLt\Stored Procedures\Uninstall.sql;
+68257541-74b6-5850-be15-41c098cb0c51|Programmable Objects\tSQLt\Stored Procedures\Private_PrintXML.sql;
+6fcf65d0-c965-5871-8d06-6af64c14c038|Programmable Objects\tSQLt\Stored Procedures\XmlResultFormatter.sql;
+7a3c8d19-b3e0-5f51-89f6-82b37c9b223f|Programmable Objects\tSQLt\Views\Tests.sql;
+</DeployChangesExecutionOrder>
+  </PropertyGroup>
+  <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
+  <PropertyGroup>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <!--
+    <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
+    <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
+    <SchemaModelSubFolder>Schema-Model</SchemaModelSubFolder>
+    -->
+  </PropertyGroup>
+  <!-- READYROLL PROGRAMMABLE OBJECT OPTIONS -->
+  <PropertyGroup>
+    <!--
+    <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
+    <DeployChangesInitialImportDone>False</DeployChangesInitialImportDone>
+    <DeployChangesImportObjectTypes>StoredProcedure;UserDefinedFunction;View;Trigger;DatabaseDdlTrigger</DeployChangesImportObjectTypes>
+    <DeployChangesSubFolder>Deploy-Changes</DeployChangesSubFolder>
+    -->
+  </PropertyGroup>
+  <!-- READYROLL SCRIPT GENERATION OPTIONS -->
+  <PropertyGroup>
+    <SyncOptionIgnoretSQLt>False</SyncOptionIgnoretSQLt>
+    <!-- These properties might be set by the Developer -->
+    <!--
+    <SyncOptionIncludeDependentObjects>False</SyncOptionIncludeDependentObjects>
+    <SyncOptionIncludeExistenceChecks>False</SyncOptionIncludeExistenceChecks>
+    <SyncOptionUseDropCreateInsteadOfAlter>False</SyncOptionUseDropCreateInsteadOfAlter>
+    <SyncOptionDisableDdlTriggers>True</SyncOptionDisableDdlTriggers>
+    <SyncOptionCaseSensitiveObjectDefinition>False</SyncOptionCaseSensitiveObjectDefinition>
+
+    <SyncOptionIgnoreExtendedProperties>False</SyncOptionIgnoreExtendedProperties>
+    <SyncOptionIgnoreCommentsInBodies>False</SyncOptionIgnoreCommentsInBodies>
+    <SyncOptionIgnoreAnsiOptions>False</SyncOptionIgnoreAnsiOptions>
+    <SyncOptionIgnoreCollations>True</SyncOptionIgnoreCollations>
+    <SyncOptionIgnoreColumnsOrder>True</SyncOptionIgnoreColumnsOrder>
+    <SyncOptionIgnoreWhiteSpace>True</SyncOptionIgnoreWhiteSpace>
+    <SyncOptionIgnoreSynonymDatabaseAndServerName>True</SyncOptionIgnoreSynonymDatabaseAndServerName>
+    <SyncOptionIgnoretSQLt>True</SyncOptionIgnoretSQLt>
+    <SyncOptionIgnoreDmlTriggers>False</SyncOptionIgnoreDmlTriggers>
+    <SyncOptionIgnoreInsteadOfTriggers>False</SyncOptionIgnoreInsteadOfTriggers>
+    <SyncOptionIgnoreBindings>False</SyncOptionIgnoreBindings>
+    <SyncOptionIgnoreQueueEventNotifications>False</SyncOptionIgnoreQueueEventNotifications>
+    <SyncOptionIgnoreSquareBrackets>False</SyncOptionIgnoreSquareBrackets>
+    <SyncOptionIgnoreWithElementOrder>True</SyncOptionIgnoreWithElementOrder>
+    <SyncOptionIgnoreWithEncryption>False</SyncOptionIgnoreWithEncryption>
+    -->
+    <!-- These properties might be set by the DBA -->
+    <!--
+    <SyncOptionIgnoreDataspaces>True</SyncOptionIgnoreDataspaces>
+    <SyncOptionIgnoreConstraintNotForReplicationAttribute>True</SyncOptionIgnoreConstraintNotForReplicationAttribute>
+    <SyncOptionIgnoreFillFactor>True</SyncOptionIgnoreFillFactor>
+    <SyncOptionIgnoreIndexLockAttributes>False</SyncOptionIgnoreIndexLockAttributes>
+    <SyncOptionIgnoreStatistics>True</SyncOptionIgnoreStatistics>
+    <SyncOptionIgnoreDataCompression>True</SyncOptionIgnoreDataCompression>
+    <SyncOptionIgnoreFullTextIndexing>False</SyncOptionIgnoreFullTextIndexing>
+    <SyncOptionIgnoreReplicationTriggers>True</SyncOptionIgnoreReplicationTriggers>
+    <SyncOptionIgnoreSchemaObjectAuthorization>False</SyncOptionIgnoreSchemaObjectAuthorization>
+    <SyncOptionIgnoreStatisticsNorecompute>False</SyncOptionIgnoreStatisticsNorecompute>
+    <SyncOptionConsiderNextFilegroupInPartitionSchemes>False</SyncOptionConsiderNextFilegroupInPartitionSchemes>
+    -->
+    <!-- Shared Developer/DBA options -->
+    <!--
+    <SyncOptionIgnoreIndexes>False</SyncOptionIgnoreIndexes>
+    <SyncOptionIgnorePermissions>False</SyncOptionIgnorePermissions>
+    <SyncOptionIgnoreConstraintWithNoCheckAttribute>True</SyncOptionIgnoreConstraintWithNoCheckAttribute>
+    <SyncOptionIgnoreNocheckAndWithNocheckAttributes>False</SyncOptionIgnoreNocheckAndWithNocheckAttributes>
+    <SyncOptionIgnoreIdentitySeedAndIncrement>False</SyncOptionIgnoreIdentitySeedAndIncrement>
+    <SyncOptionIgnoreUserProperties>True</SyncOptionIgnoreUserProperties>
+    <SyncOptionIgnoreUsersPermissionsAndRoleMemberships>False</SyncOptionIgnoreUsersPermissionsAndRoleMemberships>
+    <SyncOptionAddWithEncryption>False</SyncOptionAddWithEncryption>
+    <SyncOptionDecryptEncryptedObjects>True</SyncOptionDecryptEncryptedObjects>
+    <SyncOptionUseCompatibilityLevel>False</SyncOptionUseCompatibilityLevel>
+    -->
+    <!-- Data comparison/sync options -->
+    <!--
+    <SyncDataOptionDropKeysIndexesAndConstraints>False</SyncDataOptionDropKeysIndexesAndConstraints>
+    <SyncDataOptionDisableForeignKeys>False</SyncDataOptionDisableForeignKeys>
+    <SyncDataOptionIncludeTimestampColumns>False</SyncDataOptionIncludeTimestampColumns>
+    <SyncDataOptionCaseSensitiveObjectDefinition>True</SyncDataOptionCaseSensitiveObjectDefinition>
+    <SyncDataOptionForceBinaryCollation>True</SyncDataOptionForceBinaryCollation>
+    <SyncDataOptionTrimTrailingSpaces>False</SyncDataOptionTrimTrailingSpaces>
+    <SyncDataOptionDisableDmlTriggers>False</SyncDataOptionDisableDmlTriggers>
+    <SyncDataOptionDisableDdlTriggers>True</SyncDataOptionDisableDdlTriggers>
+    <SyncDataOptionDontIncludeCommentsInScript>False</SyncDataOptionDontIncludeCommentsInScript>
+    <SyncDataOptionReseedIdentityColumns>False</SyncDataOptionReseedIdentityColumns>
+    <SyncDataOptionSkipIntegrityChecksForForeignKeys>False</SyncDataOptionSkipIntegrityChecksForForeignKeys>
+    <SyncDataOptionTransportClrDataTypesAsBinary>False</SyncDataOptionTransportClrDataTypesAsBinary>
+    <SyncDataOptionCompressTemporaryFiles>False</SyncDataOptionCompressTemporaryFiles>
+    <SyncDataOptionTreatEmptyStringAsNull>False</SyncDataOptionTreatEmptyStringAsNull>
+    <SyncDataOptionUseChecksumComparison>False</SyncDataOptionUseChecksumComparison>
+    <SyncDataOptionUseMaxPrecisionForFloatComparison>False</SyncDataOptionUseMaxPrecisionForFloatComparison>
+    -->
+    <!-- Exclude specific objects from being scripted, by object type & object name (using regular expression for name) -->
+    <ExcludeObjectsFromImport>
+      Role=\[*?\];
+      Schema=\[INFORMATION_SCHEMA\];
+      Table=\[dbo\]\.\[(.*?)\];
+      View=\[dbo\]\.\[(.*?)\];
+      UserDefinedFunction=\[dbo\]\.\[(.*?)\];
+      StoredProcedure=\[dbo\]\.\[(.*?)\];
+      Schema=\[log4Private\];
+      Schema=\[log4\];
+      Schema=\[log4Utils\];
+      Table=\[log4Private\]\.\[(.*?)\];
+      UserDefinedFunction=\[log4\]\.\[(.*?)\];
+      UserDefinedFunction=\[log4Private\]\.\[(.*?)\];
+      UserDefinedFunction=\[log4Utils\]\.\[(.*?)\];
+      StoredProcedure=\[log4\]\.\[(.*?)\];
+      StoredProcedure=\[log4Private\]\.\[(.*?)\];
+      StoredProcedure=\[log4Utils\]\.\[(.*?)\];
+      Schema=\[ics\];
+      Table=\[ics\]\.\[(.*?)\];
+      View=\[ics\]\.\[(.*?)\];
+      UserDefinedFunction=\[ics\]\.\[(.*?)\];
+      StoredProcedure=\[ics\]\.\[(.*?)\];
+      Schema=\[IcsApp\];
+      Table=\[IcsApp\]\.\[(.*?)\];
+      View=\[IcsApp\]\.\[(.*?)\];
+      UserDefinedFunction=\[IcsApp\]\.\[(.*?)\];
+      StoredProcedure=\[IcsApp\]\.\[(.*?)\];
+      Schema=\[batch\];
+      Table=\[batch\]\.\[(.*?)\];
+      View=\[batch\]\.\[(.*?)\];
+      UserDefinedFunction=\[batch\]\.\[(.*?)\];
+      StoredProcedure=\[batch\]\.\[(.*?)\];
+      Schema=\[privy\];
+      Table=\[privy\]\.\[(.*?)\];
+      View=\[privy\]\.\[(.*?)\];
+      UserDefinedFunction=\[privy\]\.\[(.*?)\];
+      StoredProcedure=\[privy\]\.\[(.*?)\];
+    </ExcludeObjectsFromImport>
+    <!--
+    <ExcludeObjectsFromImport>
+      Assembly=\[myschemaname\];
+      Credential=\[mycredential\];
+      DatabaseDdlTrigger=\[ddltriggername\];
+      Default=\[dbautil\]\.\[(.*?)\];
+      PartitionFunction=\[mypartitionfunction\];
+      PartitionScheme=\[mypartitionfunction\];
+      Role=\[myrole\];
+      Rule=\[dbautil\]\.\[(.*?)\];
+      Schema=\[dbautil\];
+      Sequence=\[dbautil\]\.\[(.*?)\];
+      StoredProcedure=\[dbautil\]\.\[(.*?)\];
+      Synonym=\[dbautil\]\.\[(.*?)\];
+      Table=\[dbautil\]\.\[(.*?)\];
+      User=\[myusername\];
+      UserDefinedDataType=\[dbautil\]\.\[(.*?)\];
+      UserDefinedFunction=\[dbautil\]\.\[(.*?)\];
+      View=\[dbautil\]\.\[(.*?)\];
+      XmlSchemaCollection=\[dbautil\]\.\[(.*?)\];
+
+      Contract=\[myservicebrokercontract\];
+      EventNotification=\[myservicebrokereventnotification\];
+      MessageType=\[myservicebrokermessagetype\];
+      Queue=\[myservicebrokerqueue\];
+      RemoteServiceBinding=\[myservicebrokerremotebinding\];
+      Route=\[myservicebrokerroute\];
+      Service=\[myservicebrokerservice\];
+
+    </ExcludeObjectsFromImport>
+    -->
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!--Import the settings-->
+  <PropertyGroup>
+    <AppDataPath>$(LOCALAPPDATA)</AppDataPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(AppDataPath)==''">
+    <AppDataPath>$(APPDATA)</AppDataPath>
+  </PropertyGroup>
+  <Import Condition="Exists('$(ReadyRollTargetsPath)')" Project="$(ReadyRollTargetsPath)" />
+  <Import Condition="!Exists('$(ReadyRollTargetsPath)')" Project="$(MSBuildExtensionsPath)\ReadyRoll\ReadyRoll.Data.Schema.SSDT.targets" />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Pre-Deployment\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Post-Deployment\" />
+    <Folder Include="Schema-Model\" />
+    <Folder Include="Schema-Model\Assemblies\" />
+    <Folder Include="Schema-Model\Security\" />
+    <Folder Include="Schema-Model\Security\Schemas\" />
+    <Folder Include="Schema-Model\Tables\" />
+    <Folder Include="Schema-Model\Types\" />
+    <Folder Include="Schema-Model\Types\User-defined Data Types\" />
+    <Folder Include="Programmable Objects\" />
+    <Folder Include="Programmable Objects\batch-ModuleTests\" />
+    <Folder Include="Programmable Objects\batch-ModuleTests\Stored Procedures\" />
+    <Folder Include="Programmable Objects\Ics-ModuleTests\" />
+    <Folder Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\" />
+    <Folder Include="Programmable Objects\IcsApp-Tests\" />
+    <Folder Include="Programmable Objects\IcsApp-Tests\Stored Procedures\" />
+    <Folder Include="Programmable Objects\sqlcop\" />
+    <Folder Include="Programmable Objects\sqlcop\Stored Procedures\" />
+    <Folder Include="Programmable Objects\StaticDataTests\" />
+    <Folder Include="Programmable Objects\StaticDataTests\Stored Procedures\" />
+    <Folder Include="Programmable Objects\tSQLt\" />
+    <Folder Include="Programmable Objects\tSQLt\Functions\" />
+    <Folder Include="Programmable Objects\tSQLt\Stored Procedures\" />
+    <Folder Include="Programmable Objects\tSQLt\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pre-Deployment\01_Create_Database.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\Assemblies\tSQLtCLR.sql" />
+    <None Include="Schema-Model\Security\Schemas\batch-ModuleTests.sql" />
+    <None Include="Schema-Model\Security\Schemas\Ics-ModuleTests.sql" />
+    <None Include="Schema-Model\Security\Schemas\IcsApp-Tests.sql" />
+    <None Include="Schema-Model\Security\Schemas\sqlcop.sql" />
+    <None Include="Schema-Model\Security\Schemas\StaticDataTests.sql" />
+    <None Include="Schema-Model\Security\Schemas\tSQLt.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.CaptureOutputLog.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.Private_AssertEqualsTableSchema_Actual.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.Private_AssertEqualsTableSchema_Expected.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.Private_Configurations.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.Private_ExpectException.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.Private_NullCellTable.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.Private_RenamedObjectLog.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.Run_LastExecution.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.TestMessage.sql" />
+    <None Include="Schema-Model\Tables\tSQLt.TestResult.sql" />
+    <None Include="Schema-Model\Types\User-defined Data Types\tSQLt.AssertStringTable.sql" />
+    <None Include="Schema-Model\Types\User-defined Data Types\tSQLt.Private.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName adds first missing record.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName adds subsequent missing record.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName calls ExceptionHandler on error.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName outputs new BatchProcessId.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName replaces empty %40BatchProcessName with %40IcrtProcessName.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName replaces null %40BatchProcessName with %40IcrtProcessName.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName throws error after handling exception.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName throws exception on %40IcrtProcessName empty.sql" />
+    <None Include="Programmable Objects\batch-ModuleTests\Stored Procedures\test ProcessGetIdFromIcrtProcessName throws exception on %40IcrtProcessName null.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId adds first missing record.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId adds subsequent missing record.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId calls ExceptionHandler on error.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId outputs new IcrtSubProcessId.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws error after handling exception.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on %40BatchProcessId negative.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on %40BatchProcessId null.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on %40BatchProcessId zero.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on %40IcrtSubProcessName empty.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test IcrtSubProcessGetId throws exception on %40IcrtSubProcessName null.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId adds first missing record.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId adds subsequent missing record.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId calls ExceptionHandler on error.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId outputs new MappingConfigTaskId.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws error after handling exception.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on %40MappingConfigTaskName empty.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on %40MappingConfigTaskName null.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on %40MappingName empty.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test MappingConfigTaskGetId throws exception on %40MappingName null.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunEnd updates batch.ProcessRun.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart insert row into batch.ProcessRun table for a disabled process.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart insert row into batch.ProcessRun table for a new process.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart insert row into batch.ProcessRun table for an existing process.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart instructs RUN on no process running.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart instructs STOP on process already running.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart outputs ProcessRunId as null on stopped batch.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart stop message includes running ProcessRunId.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ProcessRunStart throws error after handling exception.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunEnd updates batch.StepRun.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart calls batch.ProcessGetIdFromIcrtProcessName.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart calls ics.IcrtSubProcessGetId.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart insert rows into batch.StepRun table.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart sets %40Instruction.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart sets %40Message.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart sets %40StepRunId.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test SubProcessRunStart throws error after handling exception.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunEnd updates batch.ThreadRun.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart calls batch.ThreadGetId.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart calls ics.MappingConfigTaskGetId.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart insert rows into batch.ThreadRun table.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart sets %40Instruction.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart sets %40Message.sql" />
+    <None Include="Programmable Objects\Ics-ModuleTests\Stored Procedures\test ThreadRunStart throws error after handling exception.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds calls ExceptionHandler on error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds throws error after handling exception.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds throws error on %40MappingConfigTaskName empty.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test MappingConfigTaskGetCurrentRunIds throws error on %40MappingConfigTaskName null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun allows all output parameters to be ignored.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun allows null input for all output parameters.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ProcessRunEnd error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ProcessRunStart error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.SubProcessRunEnd error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.SubProcessRunStart error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ThreadRunEnd error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ExceptionHandler on ics.ThreadRunStart error.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ProcessRunEnd when process name and id are valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ProcessRunStart when process name and id are valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.SubProcessRunEnd when sub-process name is valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.SubProcessRunStart when sub-process name is valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ThreadRunEnd when mapping config task name is valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls ics.ThreadRunStart when mapping config task name is valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.ProcessRunEnd when process name and id are valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.ProcessRunStart when process name and id are valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.SubProcessRunStart when sub-process name is valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun calls only ics.ThreadRunStart when mapping config task name is valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun only calls ics.SubProcessRunEnd when sub-process name is valid.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun percolates outputs from ics.ProcessRunStart.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun percolates outputs from ics.SubProcessRunStart.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun percolates outputs from ics.ThreadRunStart.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun replaces null %40EndMessage with empty string.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error after handling exception.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40IcrtProcessId negative.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40IcrtProcessId null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40IcrtProcessId zero.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40Mapping empty when starting a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40Mapping null when starting a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40ProcessName empty.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40ProcessName null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40ProcessRunId negative when starting a sub-process.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40ProcessRunId null when starting a sub-process.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40ProcessRunId zero when starting a sub-process.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40SubProcessRunId negative when starting a thread %28sub-process missing).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40SubProcessRunId negative when starting a thread %28sub-process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40SubProcessRunId null when starting a thread %28sub-process missing).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40SubProcessRunId null when starting a thread %28sub-process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40SubProcessRunId zero when starting a thread %28sub-process missing).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StartRun throws error on %40SubProcessRunId zero when starting a thread %28sub-process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun %40EndState allows _FAILED_.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun %40EndState allows _SKIPPED_.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun %40EndState allows _STOPPED_.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun %40EndState allows _SUCCEEDED_.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40EndState empty.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40EndState null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40FailedSourceRows negative when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40FailedSourceRows null when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40FailedTargetRows negative when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40FailedTargetRows null when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40IcrtProcessId negative.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40IcrtProcessId null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40IcrtProcessId zero.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ProcessName empty.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ProcessName null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ProcessRunId negative when ending a process.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ProcessRunId null when ending a process.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ProcessRunId zero when ending a process.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SubProcessRunId negative when ending a sub-process %28process not present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SubProcessRunId negative when ending a sub-process %28process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SubProcessRunId null when ending a sub-process %28process not present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SubProcessRunId null when ending a sub-process %28process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SubProcessRunId zero when ending a sub-process %28process not present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SubProcessRunId zero when ending a sub-process %28process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SuccessSourceRows negative when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SuccessSourceRows null when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SuccessTargetRows negative when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40SuccessTargetRows null when ending a thread.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ThreadRunId negative when ending a thread %28sub-process not present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ThreadRunId negative when ending a thread %28sub-process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ThreadRunId null when ending a thread %28sub-process not present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ThreadRunId null when ending a thread %28sub-process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ThreadRunId zero when ending a thread %28sub-process not present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test StopRun throws error on %40ThreadRunId zero when ending a thread %28sub-process present).sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads returns expected resultset.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName empty.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40ProcessName null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40SubProcessRunID null.sql" />
+    <None Include="Programmable Objects\IcsApp-Tests\Stored Procedures\test SubProcessCheckThreads throws error on %40SubProcessRunID zero.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Ad hoc distributed queries.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Auto Shrink.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Column data types %28Numeric vs. Int).sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Column Name Problems.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Columns of data type Text_nText.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Columns with float data type.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Decimal Size Problem.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Forwarded Records.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Fragmented Indexes.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Orphaned Users.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Procedures Named SP_.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Procedures that start with usp.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Procedures using dynamic SQL without sp_executesql.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Procedures using xp_cmdshell.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Procedures with %40%40Identity.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Procedures without SET NOCOUNT ON.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Table name problems.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Tables that start with tbl.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Tables without a primary key.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Unnamed Constraints.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test User Aliases.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Varchar Size Problem.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Views that start with vw.sql" />
+    <None Include="Programmable Objects\sqlcop\Stored Procedures\test Wide Table.sql" />
+    <None Include="Programmable Objects\StaticDataTests\Stored Procedures\test batch.RunState static data.sql" />
+    <None Include="Programmable Objects\StaticDataTests\Stored Procedures\test batch.RunStateFlag static data.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\F_Num.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\GetTestResultFormatter.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Info.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_FindConstraint.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetCleanObjectName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetCleanSchemaName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetCommaSeparatedColumnList.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetConfiguration.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetConstraintType.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetDataTypeOrComputedColumnDefinition.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetDefaultConstraintDefinition.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetForeignKeyDefinition.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetForeignKeyParColumns.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetForeignKeyRefColumns.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetFullTypeName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetIdentityDefinition.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetLastTestNameIfNotProvided.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetOriginalTableInfo.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetOriginalTableName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetQuotedFullName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetQuotedTableNameForConstraint.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetSchemaId.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_GetUniqueConstraintDefinition.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_IsTestClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_QuoteClassNameForNewTestClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_ResolveApplyConstraintParameters.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_ResolveFakeTableNamesForBackwardCompatibility.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_ResolveName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_ResolveObjectName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_ResolveSchemaName.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_ScriptIndex.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_SqlVariantFormatter.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\Private_SqlVersion.sql" />
+    <None Include="Programmable Objects\tSQLt\Functions\TestCaseSummary.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\ApplyConstraint.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\ApplyTrigger.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertEmptyTable.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertEquals.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertEqualsString.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertEqualsTable.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertEqualsTableSchema.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertLike.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertNotEquals.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertObjectDoesNotExist.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertObjectExists.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertResultSetsHaveSameMetaData.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\AssertStringIn.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\CaptureOutput.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\DefaultResultFormatter.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\DropClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\ExpectException.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\ExpectNoException.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Fail.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\FakeFunction.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\FakeTable.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\GetNewTranName.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\LogCapturedOutput.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\MarkSchemaAsTestClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\NewConnection.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\NewTestClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\NullTestResultFormatter.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_ApplyCheckConstraint.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_ApplyForeignKeyConstraint.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_ApplyUniqueConstraint.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_CleanTestResult.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_CompareTables.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_CompareTablesFailIfUnequalRowsExists.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_CreateFakeFunction.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_CreateFakeOfTable.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_CreateProcedureSpy.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_CreateResultTableForCompareTables.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_DisallowOverwritingNonTestSchema.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_GetSetupProcedureName.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_InputBuffer.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_MarkFakeTable.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_MarkObjectBeforeRename.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_MarkSchemaAsTestClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_OutputTestResults.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_Print.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_PrintXML.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_RemoveSchemaBinding.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_RemoveSchemaBoundReferences.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_RenameObjectToUniqueName.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_RenameObjectToUniqueNameUsingObjectId.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_Run.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_RunAll.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_RunTest.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_RunTestClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_SaveTestNameForSession.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_SetConfiguration.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_SetFakeViewOff_SingleView.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_SetFakeViewOn_SingleView.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_ValidateFakeTableParameters.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_ValidateObjectsCompatibleWithFakeFunction.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_ValidateProcedureCanBeUsedWithSpyProcedure.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Private_ValidateThatAllDataTypesInTableAreSupported.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RemoveObject.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RemoveObjectIfExists.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RenameClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\ResultSetFilter.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Run.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RunAll.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RunC.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RunTest.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RunTestClass.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RunWithNullResults.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\RunWithXmlResults.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\SetFakeViewOff.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\SetFakeViewOn.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\SetTestResultFormatter.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\SetVerbose.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\SpyProcedure.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\StubRecord.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\SuppressOutput.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\TableToText.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\Uninstall.sql" />
+    <None Include="Programmable Objects\tSQLt\Stored Procedures\XmlResultFormatter.sql" />
+    <None Include="Programmable Objects\tSQLt\Views\Private_SysIndexes.sql" />
+    <None Include="Programmable Objects\tSQLt\Views\Private_SysTypes.sql" />
+    <None Include="Programmable Objects\tSQLt\Views\TestClasses.sql" />
+    <None Include="Programmable Objects\tSQLt\Views\Tests.sql" />
+    <None Include="Migrations\0001_Initial_Baseline.sql" />
+  </ItemGroup>
+</Project>

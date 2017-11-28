@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Procedures that start with usp]
+﻿IF OBJECT_ID('[sqlcop].[test Procedures that start with usp]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Procedures that start with usp];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Procedures that start with usp]
 as
 begin
     set nocount on
@@ -23,3 +31,4 @@ begin
             exec tSQLt.Fail @Output
         end 
 end;
+GO

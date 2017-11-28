@@ -1,4 +1,12 @@
-﻿CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for an existing process]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for an existing process]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for an existing process];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [Ics-ModuleTests].[test ProcessRunStart insert row into batch.ProcessRun table for an existing process]
 as
 	begin
 
@@ -77,3 +85,4 @@ as
 		  exec tSQLt.AssertEqualsTable '#Expected', 'batch.ProcessRun' ;
 
 	end ;
+GO

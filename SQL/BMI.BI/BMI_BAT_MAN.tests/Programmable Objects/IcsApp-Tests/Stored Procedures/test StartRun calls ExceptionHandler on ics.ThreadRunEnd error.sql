@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun calls ExceptionHandler on ics.ThreadRunEnd error]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun calls ExceptionHandler on ics.ThreadRunEnd error]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun calls ExceptionHandler on ics.ThreadRunEnd error];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StartRun calls ExceptionHandler on ics.ThreadRunEnd error]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -32,3 +40,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEqualsTable '#expected', 'log4.ExceptionHandler_SpyProcedureLog';
 end;
+GO

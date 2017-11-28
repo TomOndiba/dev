@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Columns of data type Text/nText]
+﻿IF OBJECT_ID('[sqlcop].[test Columns of data type Text/nText]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Columns of data type Text/nText];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Columns of data type Text/nText]
 as
 begin
 	-- Written by George Mastros
@@ -34,3 +42,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test StartRun calls ics.ProcessRunStart when process name and id are valid]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test StartRun calls ics.ProcessRunStart when process name and id are valid]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test StartRun calls ics.ProcessRunStart when process name and id are valid];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test StartRun calls ics.ProcessRunStart when process name and id are valid]
 as
 begin
 	--! Mock all the calls that might be made by this wrapper sproc
@@ -21,3 +29,4 @@ begin
 
 	exec tSQLt.AssertEqualsTable @Expected = '#expected', @Actual = 'ics.ProcessRunStart_SpyProcedureLog' ;
 end;
+GO

@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Column Name Problems]
+﻿IF OBJECT_ID('[sqlcop].[test Column Name Problems]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Column Name Problems];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Column Name Problems]
 as
 begin
 	-- Written by George Mastros
@@ -28,3 +36,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

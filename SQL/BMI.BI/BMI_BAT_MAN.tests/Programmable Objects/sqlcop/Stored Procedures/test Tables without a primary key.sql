@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Tables without a primary key]
+﻿IF OBJECT_ID('[sqlcop].[test Tables without a primary key]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Tables without a primary key];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [sqlcop].[test Tables without a primary key]
 as
 begin
 	-- Written by George Mastros
@@ -33,3 +41,4 @@ begin
 				@Output
 		end	
 end;
+GO

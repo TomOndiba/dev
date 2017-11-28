@@ -1,4 +1,12 @@
-﻿CREATE   procedure [Ics-ModuleTests].[test ThreadRunStart throws error after handling exception]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ThreadRunStart throws error after handling exception]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ThreadRunStart throws error after handling exception];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [Ics-ModuleTests].[test ThreadRunStart throws error after handling exception]
 as
 begin
 	--! Assemble
@@ -17,3 +25,4 @@ begin
 		, @MappingName = 'C'
 		, @SubProcessRunId = 22
 end;
+GO

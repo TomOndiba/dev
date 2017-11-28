@@ -1,4 +1,12 @@
-﻿create   procedure [Ics-ModuleTests].[test ProcessRunStart outputs ProcessRunId as null on stopped batch]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ProcessRunStart outputs ProcessRunId as null on stopped batch]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ProcessRunStart outputs ProcessRunId as null on stopped batch];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [Ics-ModuleTests].[test ProcessRunStart outputs ProcessRunId as null on stopped batch]
 as
 	begin
 
@@ -37,3 +45,4 @@ as
 		exec tSQLt.AssertEqualsString @Expected = @expect, @Actual = @ProcessRunId ;
 
 	end ;
+GO

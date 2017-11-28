@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Procedures using xp_cmdshell]
+﻿IF OBJECT_ID('[sqlcop].[test Procedures using xp_cmdshell]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Procedures using xp_cmdshell];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Procedures using xp_cmdshell]
 as
 begin
 	set nocount on
@@ -26,3 +34,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

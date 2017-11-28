@@ -1,4 +1,12 @@
-﻿create procedure [Ics-ModuleTests].[test IcrtSubProcessGetId outputs new IcrtSubProcessId]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test IcrtSubProcessGetId outputs new IcrtSubProcessId]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test IcrtSubProcessGetId outputs new IcrtSubProcessId];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [Ics-ModuleTests].[test IcrtSubProcessGetId outputs new IcrtSubProcessId]
 as
 begin
 	--! Assemble
@@ -17,3 +25,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEquals 4, @_actual ;
 end;
+GO

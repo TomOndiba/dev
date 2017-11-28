@@ -1,4 +1,12 @@
-﻿CREATE   procedure [Ics-ModuleTests].[test SubProcessRunStart sets @StepRunId]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test SubProcessRunStart sets @StepRunId]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test SubProcessRunStart sets @StepRunId];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE   procedure [Ics-ModuleTests].[test SubProcessRunStart sets @StepRunId]
 as
 	begin
 		--! Mock all the calls that might be made by this wrapper sproc
@@ -39,3 +47,4 @@ as
 		  , @Actual = @actual ;		-- sql_variant
 
 	end ;
+GO

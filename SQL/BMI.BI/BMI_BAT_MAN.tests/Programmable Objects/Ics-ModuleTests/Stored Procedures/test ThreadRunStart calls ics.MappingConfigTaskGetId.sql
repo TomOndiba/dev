@@ -1,4 +1,12 @@
-﻿create   procedure [Ics-ModuleTests].[test ThreadRunStart calls ics.MappingConfigTaskGetId]
+﻿IF OBJECT_ID('[Ics-ModuleTests].[test ThreadRunStart calls ics.MappingConfigTaskGetId]') IS NOT NULL
+	DROP PROCEDURE [Ics-ModuleTests].[test ThreadRunStart calls ics.MappingConfigTaskGetId];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [Ics-ModuleTests].[test ThreadRunStart calls ics.MappingConfigTaskGetId]
 as
 	begin
 		--! Mock all the calls that might be made by this wrapper sproc
@@ -20,3 +28,4 @@ as
 			'#expected'
 		  , 'ics.MappingConfigTaskGetId_SpyProcedureLog' ;
 	end ;
+GO

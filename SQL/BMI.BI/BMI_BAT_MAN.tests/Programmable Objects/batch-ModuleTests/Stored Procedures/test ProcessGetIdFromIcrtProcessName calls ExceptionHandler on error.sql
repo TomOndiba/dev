@@ -1,4 +1,12 @@
-﻿CREATE procedure [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName calls ExceptionHandler on error]
+﻿IF OBJECT_ID('[batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName calls ExceptionHandler on error]') IS NOT NULL
+	DROP PROCEDURE [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName calls ExceptionHandler on error];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName calls ExceptionHandler on error]
 as
 begin
 	--! Assemble
@@ -16,3 +24,4 @@ begin
 	--! Assert
 		exec tSQLt.AssertEqualsTable '#expected', 'log4.ExceptionHandler_SpyProcedureLog';
 end;
+GO

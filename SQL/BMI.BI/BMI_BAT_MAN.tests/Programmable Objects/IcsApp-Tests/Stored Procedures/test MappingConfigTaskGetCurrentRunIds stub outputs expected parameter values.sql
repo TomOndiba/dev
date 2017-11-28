@@ -1,4 +1,12 @@
-﻿create   procedure [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values]
+﻿IF OBJECT_ID('[IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values]') IS NOT NULL
+	DROP PROCEDURE [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [IcsApp-Tests].[test MappingConfigTaskGetCurrentRunIds stub outputs expected parameter values]
 as
 begin
 	declare @_ExpectedProcessRunId int = (select ProcessRunID from dbo.StubResultSet where FunctionName = '[IcsApp].[MappingConfigTaskGetCurrentRunIds]') ;
@@ -31,3 +39,4 @@ begin
 
 	exec tSQLt.AssertEqualsTable '#expected', '#actual' ;
 end;
+GO

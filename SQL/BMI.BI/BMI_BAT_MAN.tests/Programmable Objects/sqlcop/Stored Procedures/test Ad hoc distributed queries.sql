@@ -1,4 +1,12 @@
-﻿CREATE procedure [sqlcop].[test Ad hoc distributed queries]
+﻿IF OBJECT_ID('[sqlcop].[test Ad hoc distributed queries]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Ad hoc distributed queries];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+CREATE procedure [sqlcop].[test Ad hoc distributed queries]
 as
 begin
 	-- Written by George Mastros
@@ -27,3 +35,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

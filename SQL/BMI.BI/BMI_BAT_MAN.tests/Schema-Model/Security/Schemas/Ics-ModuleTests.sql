@@ -1,35 +1,7 @@
-﻿CREATE SCHEMA [Ics-ModuleTests]
-    AUTHORIZATION [dbo];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CREATE SCHEMA [Ics-ModuleTests]
+AUTHORIZATION [dbo]
 GO
-EXECUTE sp_addextendedproperty @name = N'tSQLt.TestClass', @value = 1, @level0type = N'SCHEMA', @level0name = N'Ics-ModuleTests';
-
+DECLARE @xp int
+SELECT @xp=1
+EXEC sp_addextendedproperty N'tSQLt.TestClass', @xp, 'SCHEMA', N'Ics-ModuleTests', NULL, NULL, NULL, NULL
+GO

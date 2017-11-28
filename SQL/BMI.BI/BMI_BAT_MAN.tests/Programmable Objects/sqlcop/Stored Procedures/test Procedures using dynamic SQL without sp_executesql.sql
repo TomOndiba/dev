@@ -1,4 +1,12 @@
-﻿create procedure [sqlcop].[test Procedures using dynamic SQL without sp_executesql]
+﻿IF OBJECT_ID('[sqlcop].[test Procedures using dynamic SQL without sp_executesql]') IS NOT NULL
+	DROP PROCEDURE [sqlcop].[test Procedures using dynamic SQL without sp_executesql];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create procedure [sqlcop].[test Procedures using dynamic SQL without sp_executesql]
 as
 begin
 	-- Written by George Mastros
@@ -45,3 +53,4 @@ begin
 			exec tSQLt.Fail @Output
 		end
 end;
+GO

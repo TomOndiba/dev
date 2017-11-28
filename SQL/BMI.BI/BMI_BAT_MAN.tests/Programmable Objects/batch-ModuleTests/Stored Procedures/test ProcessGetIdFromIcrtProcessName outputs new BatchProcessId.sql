@@ -1,4 +1,12 @@
-﻿create   procedure [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName outputs new BatchProcessId]
+﻿IF OBJECT_ID('[batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName outputs new BatchProcessId]') IS NOT NULL
+	DROP PROCEDURE [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName outputs new BatchProcessId];
+
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+create   procedure [batch-ModuleTests].[test ProcessGetIdFromIcrtProcessName outputs new BatchProcessId]
 as
 begin
 	--! Assemble
@@ -17,3 +25,4 @@ begin
 	--! Assert
 	exec tSQLt.AssertEquals 4, @_actual ;
 end;
+GO

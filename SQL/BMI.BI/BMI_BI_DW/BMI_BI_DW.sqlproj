@@ -394,7 +394,6 @@ Static Data;
     <None Include="Static Data\dbo.unit_of_measure_type.data.sql" />
     <None Include="Static Data\dbo.unit_of_measure.data.sql" />
     <None Include="Static Data\etl.unit_of_measure_lookup.data.sql" />
-    <None Include="Migrations\1.1.0\PlaceHolder.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />
@@ -1451,6 +1450,23 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\discovery\Views\procurement_sap_gbr.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_FGINLI.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_FPLEDG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MPLIND.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3v7_MPLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_FGINLI.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_FPLEDG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MPLIND.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MPLINE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_FGINLI.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_FPLEDG.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MPLIND.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_movex_MPLINE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\001_Tsa_M3_Movex_M3v7_Tables_Added.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

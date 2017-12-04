@@ -30,15 +30,15 @@ CREATE TABLE [psa].[ics_stg_m3v7_FPLEDG]
 [EPCUCD] [nvarchar] (255) NULL,
 [EPDCAM] [decimal] (1, 0) NULL,
 [EPDEDA] [decimal] (8, 0) NULL,
-[EPDIVI] [nvarchar] (255) NULL,
+[EPDIVI] [nvarchar] (255) NOT NULL,
 [EPDUDT] [decimal] (8, 0) NULL,
 [EPENME] [decimal] (1, 0) NULL,
 [EPINYR] [decimal] (4, 0) NULL,
 [EPIVBL] [decimal] (1, 0) NULL,
 [EPIVDT] [decimal] (8, 0) NULL,
 [EPIVTP] [nvarchar] (255) NULL,
-[EPJRNO] [decimal] (7, 0) NULL,
-[EPJSNO] [decimal] (7, 0) NULL,
+[EPJRNO] [decimal] (7, 0) NOT NULL,
+[EPJSNO] [decimal] (7, 0) NOT NULL,
 [EPLMDT] [decimal] (8, 0) NULL,
 [EPPYME] [nvarchar] (255) NULL,
 [EPPYRS] [nvarchar] (255) NULL,
@@ -62,6 +62,8 @@ CREATE TABLE [psa].[ics_stg_m3v7_FPLEDG]
 [EPVONO] [decimal] (8, 0) NULL,
 [EPVSER] [nvarchar] (255) NULL,
 [EPVTAM] [decimal] (15, 2) NULL,
-[EPYEA4] [decimal] (4, 0) NULL
+[EPYEA4] [decimal] (4, 0) NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_FPLEDG] ADD CONSTRAINT [PK_psa_ics_stg_m3v7_FPLEDG_] PRIMARY KEY CLUSTERED  ([EPDIVI], [EPYEA4], [EPJRNO], [EPJSNO])
 GO

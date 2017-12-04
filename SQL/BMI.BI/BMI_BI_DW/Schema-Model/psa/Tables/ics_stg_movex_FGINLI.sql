@@ -46,23 +46,25 @@ CREATE TABLE [psa].[ics_stg_movex_FGINLI]
 [F5IVQA] [decimal] (15, 6) NULL,
 [F5IVQT] [decimal] (15, 6) NULL,
 [F5LMDT] [decimal] (8, 0) NULL,
-[F5PNLI] [decimal] (3, 0) NULL,
-[F5PNLS] [decimal] (3, 0) NULL,
+[F5PNLI] [decimal] (3, 0) NOT NULL,
+[F5PNLS] [decimal] (3, 0) NOT NULL,
 [F5PPUN] [nvarchar] (3) NULL,
 [F5PUCD] [decimal] (5, 0) NULL,
-[F5PUNO] [nvarchar] (7) NULL,
+[F5PUNO] [nvarchar] (7) NOT NULL,
 [F5PUUN] [nvarchar] (3) NULL,
 [F5RCAC] [decimal] (15, 2) NULL,
-[F5RELP] [decimal] (1, 0) NULL,
-[F5REPN] [decimal] (10, 0) NULL,
+[F5RELP] [decimal] (1, 0) NOT NULL,
+[F5REPN] [decimal] (10, 0) NOT NULL,
 [F5RGDT] [decimal] (8, 0) NULL,
 [F5RGTM] [decimal] (6, 0) NULL,
 [F5RPQA] [decimal] (15, 6) NULL,
 [F5RPQT] [decimal] (15, 6) NULL,
 [F5SERA] [decimal] (11, 6) NULL,
-[F5SINO] [nvarchar] (24) NULL,
+[F5SINO] [nvarchar] (24) NOT NULL,
 [F5SUNO] [nvarchar] (10) NULL,
 [F5VRCD] [nvarchar] (2) NULL,
 [F5VTCD] [decimal] (2, 0) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_FGINLI] ADD CONSTRAINT [PK_psa_ics_stg_movex_FGINLI] PRIMARY KEY CLUSTERED  ([F5SINO], [F5PUNO], [F5PNLI], [F5PNLS], [F5REPN], [F5RELP])
 GO

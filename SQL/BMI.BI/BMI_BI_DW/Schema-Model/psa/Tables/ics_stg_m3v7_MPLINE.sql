@@ -61,7 +61,7 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLINE]
 [IBEXAT] [decimal] (1, 0) NULL,
 [IBEXAV] [decimal] (1, 0) NULL,
 [IBEXEP] [decimal] (15, 2) NULL,
-[IBFACI] [nvarchar] (255) NULL,
+[IBFACI] [nvarchar] (255) NOT NULL,
 [IBFUSC] [nvarchar] (255) NULL,
 [IBGRMT] [nvarchar] (255) NULL,
 [IBHAFE] [nvarchar] (255) NULL,
@@ -101,8 +101,8 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLINE]
 [IBPLDT] [decimal] (8, 0) NULL,
 [IBPLPN] [decimal] (7, 0) NULL,
 [IBPLPS] [decimal] (3, 0) NULL,
-[IBPNLI] [decimal] (3, 0) NULL,
-[IBPNLS] [decimal] (3, 0) NULL,
+[IBPNLI] [decimal] (3, 0) NOT NULL,
+[IBPNLS] [decimal] (3, 0) NOT NULL,
 [IBPOTC] [nvarchar] (255) NULL,
 [IBPPUN] [nvarchar] (255) NULL,
 [IBPRCS] [nvarchar] (255) NULL,
@@ -111,7 +111,7 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLINE]
 [IBPROJ] [nvarchar] (255) NULL,
 [IBPTCD] [decimal] (1, 0) NULL,
 [IBPUCD] [decimal] (5, 0) NULL,
-[IBPUNO] [nvarchar] (255) NULL,
+[IBPUNO] [nvarchar] (255) NOT NULL,
 [IBPUPR] [decimal] (17, 6) NULL,
 [IBPURC] [nvarchar] (255) NULL,
 [IBPUSL] [nvarchar] (255) NULL,
@@ -153,4 +153,6 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLINE]
 [IBVTCD] [decimal] (2, 0) NULL,
 [IBWHLO] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MPLINE] ADD CONSTRAINT [PK_psa_ics_stg_m3v7_MPLINE] PRIMARY KEY CLUSTERED  ([IBFACI], [IBPUNO], [IBPNLI], [IBPNLS])
 GO

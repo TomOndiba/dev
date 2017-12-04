@@ -53,25 +53,27 @@ CREATE TABLE [psa].[ics_stg_m3_FGINLI]
 [F5OPTX] [nvarchar] (255) NULL,
 [F5OPTY] [nvarchar] (255) NULL,
 [F5OPTZ] [nvarchar] (255) NULL,
-[F5PNLI] [decimal] (3, 0) NULL,
-[F5PNLS] [decimal] (3, 0) NULL,
 [F5PPUN] [nvarchar] (255) NULL,
 [F5PUCD] [decimal] (5, 0) NULL,
-[F5PUNO] [nvarchar] (255) NULL,
 [F5PUUN] [nvarchar] (255) NULL,
 [F5RCAC] [decimal] (15, 2) NULL,
-[F5RELP] [decimal] (1, 0) NULL,
-[F5REPN] [decimal] (10, 0) NULL,
+[F5PNLI] [decimal] (3, 0) NOT NULL,
+[F5RELP] [decimal] (1, 0) NOT NULL,
+[F5REPN] [decimal] (10, 0) NOT NULL,
+[F5PUNO] [nvarchar] (255) NOT NULL,
+[F5SINO] [nvarchar] (255) NOT NULL,
+[F5PNLS] [decimal] (3, 0) NOT NULL,
 [F5RGDT] [decimal] (8, 0) NULL,
 [F5RGTM] [decimal] (6, 0) NULL,
 [F5RPQA] [decimal] (15, 6) NULL,
 [F5RPQT] [decimal] (15, 6) NULL,
 [F5SERA] [decimal] (11, 6) NULL,
 [F5SERS] [decimal] (2, 0) NULL,
-[F5SINO] [nvarchar] (255) NULL,
 [F5SUNO] [nvarchar] (255) NULL,
 [F5TXID] [decimal] (13, 0) NULL,
 [F5VRCD] [nvarchar] (255) NULL,
 [F5VTCD] [decimal] (2, 0) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3_FGINLI] ADD CONSTRAINT [PK_psa_ics_stg_m3_FGINLI] PRIMARY KEY CLUSTERED  ([F5SINO], [F5PUNO], [F5PNLI], [F5PNLS], [F5REPN], [F5RELP])
 GO

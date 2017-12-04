@@ -37,7 +37,7 @@ CREATE TABLE [psa].[ics_stg_movex_MPLINE]
 [IBCLLN] [decimal] (3, 0) NULL,
 [IBCOCE] [nvarchar] (8) NULL,
 [IBCODT] [decimal] (8, 0) NULL,
-[IBCONO] [decimal] (3, 0) NULL,
+[IBCONO] [decimal] (3, 0) NOT NULL,
 [IBCPPR] [decimal] (17, 6) NULL,
 [IBCPRI] [nvarchar] (5) NULL,
 [IBCPUC] [decimal] (5, 0) NULL,
@@ -96,8 +96,8 @@ CREATE TABLE [psa].[ics_stg_movex_MPLINE]
 [IBPLDT] [decimal] (8, 0) NULL,
 [IBPLPN] [decimal] (7, 0) NULL,
 [IBPLPS] [decimal] (3, 0) NULL,
-[IBPNLI] [decimal] (3, 0) NULL,
-[IBPNLS] [decimal] (3, 0) NULL,
+[IBPNLI] [decimal] (3, 0) NOT NULL,
+[IBPNLS] [decimal] (3, 0) NOT NULL,
 [IBPOTC] [nvarchar] (2) NULL,
 [IBPPUN] [nvarchar] (3) NULL,
 [IBPRCS] [nvarchar] (3) NULL,
@@ -106,7 +106,7 @@ CREATE TABLE [psa].[ics_stg_movex_MPLINE]
 [IBPROJ] [nvarchar] (7) NULL,
 [IBPTCD] [decimal] (1, 0) NULL,
 [IBPUCD] [decimal] (5, 0) NULL,
-[IBPUNO] [nvarchar] (7) NULL,
+[IBPUNO] [nvarchar] (7) NOT NULL,
 [IBPUPR] [decimal] (17, 6) NULL,
 [IBPURC] [nvarchar] (10) NULL,
 [IBPUSL] [nvarchar] (2) NULL,
@@ -145,4 +145,6 @@ CREATE TABLE [psa].[ics_stg_movex_MPLINE]
 [IBVTCD] [decimal] (2, 0) NULL,
 [IBWHLO] [nvarchar] (3) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_MPLINE] ADD CONSTRAINT [PK_psa_ics_stg_movex_MPLINE] PRIMARY KEY CLUSTERED  ([IBCONO], [IBPUNO], [IBPNLI], [IBPNLS])
 GO

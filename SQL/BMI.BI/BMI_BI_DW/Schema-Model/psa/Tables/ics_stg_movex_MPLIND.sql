@@ -30,14 +30,14 @@ CREATE TABLE [psa].[ics_stg_movex_MPLIND]
 [ICNOPK] [decimal] (5, 0) NULL,
 [ICOEND] [decimal] (1, 0) NULL,
 [ICPLDT] [decimal] (8, 0) NULL,
-[ICPNLI] [decimal] (3, 0) NULL,
-[ICPNLS] [decimal] (3, 0) NULL,
-[ICPNLX] [decimal] (3, 0) NULL,
-[ICPUNO] [nvarchar] (7) NULL,
+[ICPNLI] [decimal] (3, 0) NOT NULL,
+[ICPNLS] [decimal] (3, 0) NOT NULL,
+[ICPNLX] [decimal] (3, 0) NOT NULL,
+[ICPUNO] [nvarchar] (7) NOT NULL,
 [ICPUOS] [nvarchar] (2) NULL,
 [ICRENE] [nvarchar] (10) NULL,
 [ICREOR] [decimal] (1, 0) NULL,
-[ICREPN] [decimal] (10, 0) NULL,
+[ICREPN] [decimal] (10, 0) NOT NULL,
 [ICRESP] [nvarchar] (10) NULL,
 [ICRGDT] [decimal] (8, 0) NULL,
 [ICRGTM] [decimal] (6, 0) NULL,
@@ -46,7 +46,7 @@ CREATE TABLE [psa].[ics_stg_movex_MPLIND]
 [ICSCOP] [decimal] (17, 6) NULL,
 [ICSERA] [decimal] (11, 6) NULL,
 [ICSMDT] [decimal] (8, 0) NULL,
-[ICSUDO] [nvarchar] (20) NULL,
+[ICSUDO] [nvarchar] (20) NOT NULL,
 [ICTIHM] [decimal] (4, 0) NULL,
 [ICTRDT] [decimal] (8, 0) NULL,
 [ICTXID] [decimal] (13, 0) NULL,
@@ -54,4 +54,6 @@ CREATE TABLE [psa].[ics_stg_movex_MPLIND]
 [ICWHLO] [nvarchar] (3) NULL,
 [ICWHSL] [nvarchar] (10) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_movex_MPLIND] ADD CONSTRAINT [PK_psa_ics_stg_movex_MPLIND] PRIMARY KEY CLUSTERED  ([ICPUNO], [ICPNLI], [ICPNLS], [ICPNLX], [ICSUDO], [ICREPN])
 GO

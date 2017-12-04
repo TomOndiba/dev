@@ -14,7 +14,7 @@ CREATE TABLE [psa].[ics_stg_m3_MPLINE]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_land_m3_MPLINE_IsDeleted] DEFAULT ((0)),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_ics_land_m3_MPLINE_IsIncomplete] DEFAULT ((0)),
-[IBACLI] [decimal] (1, 0) NULL,
+[IBACLI] [decimal] (1, 0) NOT NULL,
 [IBACRF] [nvarchar] (255) NULL,
 [IBADQA] [decimal] (15, 6) NULL,
 [IBAGNB] [nvarchar] (255) NULL,
@@ -69,7 +69,7 @@ CREATE TABLE [psa].[ics_stg_m3_MPLINE]
 [IBEXAT] [decimal] (1, 0) NULL,
 [IBEXAV] [decimal] (1, 0) NULL,
 [IBEXEP] [decimal] (15, 2) NULL,
-[IBFACI] [nvarchar] (255) NULL,
+[IBFACI] [nvarchar] (255) NOT NULL,
 [IBFATP] [nvarchar] (255) NULL,
 [IBFRRC] [decimal] (1, 0) NULL,
 [IBFRRE] [decimal] (12, 0) NULL,
@@ -121,8 +121,8 @@ CREATE TABLE [psa].[ics_stg_m3_MPLINE]
 [IBPLDT] [decimal] (8, 0) NULL,
 [IBPLPN] [decimal] (7, 0) NULL,
 [IBPLPS] [decimal] (3, 0) NULL,
-[IBPNLI] [decimal] (3, 0) NULL,
-[IBPNLS] [decimal] (3, 0) NULL,
+[IBPNLI] [decimal] (3, 0) NOT NULL,
+[IBPNLS] [decimal] (3, 0) NOT NULL,
 [IBPOTC] [nvarchar] (255) NULL,
 [IBPPUN] [nvarchar] (255) NULL,
 [IBPRCS] [nvarchar] (255) NULL,
@@ -132,7 +132,7 @@ CREATE TABLE [psa].[ics_stg_m3_MPLINE]
 [IBPSET] [decimal] (1, 0) NULL,
 [IBPTCD] [decimal] (1, 0) NULL,
 [IBPUCD] [decimal] (5, 0) NULL,
-[IBPUNO] [nvarchar] (255) NULL,
+[IBPUNO] [nvarchar] (255) NOT NULL,
 [IBPUPR] [decimal] (17, 6) NULL,
 [IBPURC] [nvarchar] (255) NULL,
 [IBPUSL] [nvarchar] (255) NULL,
@@ -188,4 +188,6 @@ CREATE TABLE [psa].[ics_stg_m3_MPLINE]
 [IBWHLO] [nvarchar] (255) NULL,
 [IBWSCA] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3_MPLINE] ADD CONSTRAINT [PK_psa_ics_stg_m3_MPLINE] PRIMARY KEY CLUSTERED  ([IBFACI], [IBPUNO], [IBPNLI], [IBPNLS])
 GO

@@ -32,14 +32,14 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLIND]
 [ICPACC] [nvarchar] (255) NULL,
 [ICPACN] [nvarchar] (255) NULL,
 [ICPLDT] [decimal] (8, 0) NULL,
-[ICPNLI] [decimal] (3, 0) NULL,
-[ICPNLS] [decimal] (3, 0) NULL,
-[ICPNLX] [decimal] (5, 0) NULL,
-[ICPUNO] [nvarchar] (255) NULL,
+[ICPNLI] [decimal] (3, 0) NOT NULL,
+[ICPNLS] [decimal] (3, 0) NOT NULL,
+[ICPNLX] [decimal] (5, 0) NOT NULL,
+[ICPUNO] [nvarchar] (255) NOT NULL,
 [ICPUOS] [nvarchar] (255) NULL,
 [ICRENE] [nvarchar] (255) NULL,
 [ICREOR] [decimal] (1, 0) NULL,
-[ICREPN] [decimal] (10, 0) NULL,
+[ICREPN] [decimal] (10, 0) NOT NULL,
 [ICRESP] [nvarchar] (255) NULL,
 [ICRGDT] [decimal] (8, 0) NULL,
 [ICRGTM] [decimal] (6, 0) NULL,
@@ -48,7 +48,7 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLIND]
 [ICSCOP] [decimal] (17, 6) NULL,
 [ICSERA] [decimal] (11, 6) NULL,
 [ICSMDT] [decimal] (8, 0) NULL,
-[ICSUDO] [nvarchar] (255) NULL,
+[ICSUDO] [nvarchar] (255) NOT NULL,
 [ICTIHM] [decimal] (4, 0) NULL,
 [ICTRDT] [decimal] (8, 0) NULL,
 [ICTXID] [decimal] (13, 0) NULL,
@@ -56,4 +56,6 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLIND]
 [ICWHLO] [nvarchar] (255) NULL,
 [ICWHSL] [nvarchar] (255) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_m3v7_MPLIND] ADD CONSTRAINT [PK_psa_ics_stg_m3v7_MPLIND] PRIMARY KEY CLUSTERED  ([ICPUNO], [ICPNLI], [ICPNLS], [ICPNLX], [ICSUDO], [ICREPN])
 GO

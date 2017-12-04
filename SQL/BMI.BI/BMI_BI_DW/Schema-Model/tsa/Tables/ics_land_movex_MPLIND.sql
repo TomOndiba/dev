@@ -50,3 +50,5 @@ CREATE TABLE [tsa].[ics_land_movex_MPLIND]
 [ICTXID] [decimal] (13, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_movex_MPLIND_1] ON [tsa].[ics_land_movex_MPLIND] ([ICPNLI], [ICPNLS], [ICPNLX], [ICPUNO], [ICREPN], [ICSUDO])
+GO

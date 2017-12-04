@@ -58,3 +58,5 @@ CREATE TABLE [tsa].[ics_land_m3_MPLIND]
 [ICSTWH] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_MPLIND_1] ON [tsa].[ics_land_m3_MPLIND] ([ICPNLI], [ICPNLS], [ICPNLX], [ICPUNO], [ICREPN], [ICSUDO])
+GO

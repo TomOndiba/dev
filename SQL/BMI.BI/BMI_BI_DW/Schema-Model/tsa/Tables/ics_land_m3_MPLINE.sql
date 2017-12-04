@@ -184,3 +184,5 @@ CREATE TABLE [tsa].[ics_land_m3_MPLINE]
 [IBOFCI] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_MPLINE_1] ON [tsa].[ics_land_m3_MPLINE] ([IBFACI], [IBPNLI], [IBPNLS], [IBPUNO])
+GO

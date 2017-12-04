@@ -61,3 +61,5 @@ CREATE TABLE [tsa].[ics_land_movex_FGINLI]
 [F5CHID] [nvarchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_movex_FGINLI_1] ON [tsa].[ics_land_movex_FGINLI] ([F5PNLI], [F5PNLS], [F5PUNO], [F5RELP], [F5REPN], [F5SINO])
+GO

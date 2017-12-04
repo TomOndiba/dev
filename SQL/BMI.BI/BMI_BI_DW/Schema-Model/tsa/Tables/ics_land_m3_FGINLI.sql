@@ -70,3 +70,5 @@ CREATE TABLE [tsa].[ics_land_m3_FGINLI]
 [F5OPTZ] [nvarchar] (255) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_FGINLI_1] ON [tsa].[ics_land_m3_FGINLI] ([F5PNLI], [F5PNLS], [F5PUNO], [F5RELP], [F5REPN], [F5SINO])
+GO

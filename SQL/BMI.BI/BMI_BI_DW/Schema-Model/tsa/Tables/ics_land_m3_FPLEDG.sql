@@ -64,3 +64,5 @@ CREATE TABLE [tsa].[ics_land_m3_FPLEDG]
 [EPGEOC] [decimal] (9, 0) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_m3_FPLEDG_1] ON [tsa].[ics_land_m3_FPLEDG] ([EPDIVI], [EPJRNO], [EPJSNO], [EPYEA4])
+GO

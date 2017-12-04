@@ -141,3 +141,5 @@ CREATE TABLE [tsa].[ics_land_movex_MPLINE]
 [IBCHID] [nvarchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_movex_MPLINE_1] ON [tsa].[ics_land_movex_MPLINE] ([IBCONO], [IBPNLI], [IBPNLS], [IBPUNO])
+GO

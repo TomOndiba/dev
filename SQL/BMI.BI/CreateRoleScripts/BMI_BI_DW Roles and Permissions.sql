@@ -292,6 +292,8 @@ go
 
 grant view definition to [BusinessAnalystsPROD];
 go
+grant references, select on schema :: [dbo] to [BusinessAnalystsPROD];
+go
 if schema_id('qvstg') is not null exec (N'grant select on schema :: [qvstg] to [BusinessAnalystsPROD];');
 if schema_id('stg') is not null exec (N'grant select on schema :: [stg] to [BusinessAnalystsPROD];');
 if schema_id('tsa') is not null exec (N'revoke select on schema :: [tsa] to [BusinessAnalystsPROD];');

@@ -242,6 +242,7 @@ values ('', '')
 
 	--! App/Report Developers
 	, ('tom.manville@icopal.com'				, 'AppDevelopers')
+	, ('tom.manville@icopal.com'				, 'BusinessAnalysts')
 --	, ('tom.manville.sql'						, 'AppDevelopers')
 
 	--! Business Analysts/Testers/Management
@@ -607,7 +608,7 @@ AddRoleMembers:
 		end
 	else
 		raiserror('[%s] step skipped as disabled', 0, 1, @_Step) ; 
-
+/*
 	--!
 	--! Add any special permissions for DEV
 	--!
@@ -623,7 +624,7 @@ AddRoleMembers:
 		begin
 			raiserror('Failed to run users script due incorrect Azure SQL Server instance or database', 16, 1) ;
 		end
-
+*/
 	--raiserror('ERROR THROWN TO FORCE ROLLBACK', 16, 1) ;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -666,6 +667,7 @@ go
 exec sp_addrolemember 'BatchManagers', 'ReleaseManager' ;
 go
 
+/*
 if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BI_DW_DEV'
 	begin
 		raiserror('Create SQL Login Administrators in DEV...', 0, 1) ;
@@ -715,3 +717,4 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		grant alter any user to [razia.nazir.sql]
 	end
 go
+*/

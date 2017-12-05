@@ -74,6 +74,19 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
+Table=[tsa].[ics_land_SAP_SVK_EKBZ];
+Table=[tsa].[ics_land_SAP_SVK_EKKO];
+Table=[tsa].[ics_land_SAP_SVK_EKPO];
+Table=[tsa].[ics_land_SAP_SVK_TCURR];
+Table=[tsa].[ics_land_SAP_SVK_T001W];
+Table=[tsa].[ics_land_SAP_SVK_MARM];
+Table=[tsa].[ics_land_SAP_SVK_MARA];
+Table=[tsa].[ics_land_SAP_SVK_MAKT];
+Table=[tsa].[ics_land_SAP_SVK_LFB1];
+Table=[tsa].[ics_land_SAP_SVK_LFA1];
+Table=[tsa].[ics_land_SAP_SVK_EKET];
+Table=[tsa].[ics_land_SAP_SVK_ADRC];
+Table=[tsa].[ics_land_SAP_SVK_EKBE];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1493,6 +1506,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\005_Psa_M3_M3V7_Movex_Constraints_Standardised.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\006_Psa_M3_M3V7_Movex_Constraints_Standardised.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

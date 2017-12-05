@@ -1233,3 +1233,94 @@ CREATE TABLE [tsa].[ics_land_SAP_SVK_EKBE]
 [ZEKKN] [nvarchar] (2) NULL
 )
 GO
+create table tsa.ics_land_SAP_SVK_LFM1
+(
+	EtlBatchRunId	 int		  not null
+  , EtlStepRunId	 int		  not null
+  , EtlThreadRunId	 int		  not null
+  , DataSourceKey	 int		  not null
+  , EtlSourceTable	 varchar(200) not null
+  , EtlCreatedOn	 datetime	  not null
+  , EtlCreatedBy	 varchar(200) not null
+  , ExcludeFromMerge bit		  not null constraint DF_tsa_ics_land_SAP_SVK_LFM1_ExcludeFromMerge default 0
+  , IsDuplicate		 bit		  not null constraint DF_tsa_ics_land_SAP_SVK_LFM1_IsDuplicate default 0
+  , ABUEB			 nvarchar(4)
+  , AGREL			 nvarchar(1)
+  , AUBEL			 nvarchar(1)
+  , BLIND			 nvarchar(1)
+  , BOIND			 nvarchar(1)
+  , BOLRE			 nvarchar(1)
+  , BOPNR			 nvarchar(4)
+  , BSTAE			 nvarchar(4)
+  , EIKTO			 nvarchar(12)
+  , EKGRP			 nvarchar(3)
+  , EKORG			 nvarchar(4)
+  , ERDAT			 nvarchar(8)
+  , ERNAM			 nvarchar(12)
+  , EXPVZ			 nvarchar(1)
+  , HSCABS			 decimal(13, 2)
+  , HSCMAX			 decimal(13, 2)
+  , HSCMIN			 decimal(13, 2)
+  , HSCPE			 decimal(5, 2)
+  , INCO1			 nvarchar(3)
+  , INCO2			 nvarchar(28)
+  , J_1NBOESL		 nvarchar(3)
+  , KALSK			 nvarchar(2)
+  , KZABS			 nvarchar(1)
+  , KZAUT			 nvarchar(1)
+  , KZRET			 nvarchar(1)
+  , LEBRE			 nvarchar(1)
+  , LFABC			 nvarchar(1)
+  , LFRHY			 nvarchar(3)
+  , LIBES			 nvarchar(1)
+  , LIFNR			 nvarchar(10)
+  , LIPRE			 nvarchar(2)
+  , LISER			 nvarchar(1)
+  , LOEVM			 nvarchar(1)
+  , MANDT			 nvarchar(3)
+  , MEGRU			 nvarchar(4)
+  , MEPRF			 nvarchar(1)
+  , MINBW			 decimal(13, 2)
+  , MRPPP			 nvarchar(3)
+  , NRGEW			 nvarchar(1)
+  , PAPRF			 nvarchar(4)
+  , PLIFZ			 decimal(3, 0)
+  , PRFRE			 nvarchar(1)
+  , RDPRF			 nvarchar(4)
+  , SKRIT			 nvarchar(1)
+  , SPERM			 nvarchar(1)
+  , TELF1			 nvarchar(16)
+  , UMSAE			 nvarchar(1)
+  , UPPRS			 nvarchar(1)
+  , VALID_PRO		 nvarchar(4)
+  , VENSL			 decimal(4, 1)
+  , VERKF			 nvarchar(30)
+  , VSBED			 nvarchar(2)
+  , WAERS			 nvarchar(5)
+  , WEBRE			 nvarchar(1)
+  , XERSR			 nvarchar(1)
+  , XERSY			 nvarchar(1)
+  , XNBWY			 nvarchar(1)
+  , ZOLLA			 nvarchar(6)
+  , ZTERM			 nvarchar(4)
+) ;
+go
+
+create table tsa.ics_land_SAP_SVK_T052U
+(
+	EtlBatchRunId	 int		  not null
+  , EtlStepRunId	 int		  not null
+  , EtlThreadRunId	 int		  not null
+  , DataSourceKey	 int		  not null
+  , EtlSourceTable	 varchar(200) not null
+  , EtlCreatedOn	 datetime	  not null
+  , EtlCreatedBy	 varchar(200) not null
+  , ExcludeFromMerge bit		  not null constraint DF_tsa_ics_land_SAP_SVK_T052U_ExcludeFromMerge default 0
+  , IsDuplicate		 bit		  not null constraint DF_tsa_ics_land_SAP_SVK_T052U_IsDuplicate default 0
+  , MANDT			 nvarchar(3)
+  , SPRAS			 nvarchar(1)
+  , TEXT1			 nvarchar(50)
+  , ZTAGG			 nvarchar(2)
+  , ZTERM			 nvarchar(4)
+) ;
+go

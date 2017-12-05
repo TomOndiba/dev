@@ -1,5 +1,51 @@
 ﻿-- <Migration ID="ffb9b2d0-3f2e-405f-8bb0-fe5fa112a54e" />
-GO
+go
+
+if object_id('tsa.ics_land_SAP_SVK_ADRC','U') is not null
+drop table tsa.ics_land_SAP_SVK_ADRC
+go
+if object_id('tsa.ics_land_SAP_SVK_EKPO','U') is not null
+drop table tsa.ics_land_SAP_SVK_EKPO
+go
+if object_id('tsa.ics_land_SAP_SVK_MAKT','U') is not null
+drop table tsa.ics_land_SAP_SVK_MAKT
+go
+if object_id('tsa.ics_land_SAP_SVK_T052U','U') is not null
+drop table tsa.ics_land_SAP_SVK_T052U
+go
+if object_id('tsa.ics_land_SAP_SVK_EKBE','U') is not null
+drop table tsa.ics_land_SAP_SVK_EKBE
+go
+if object_id('tsa.ics_land_SAP_SVK_EKBZ','U') is not null
+drop table tsa.ics_land_SAP_SVK_EKBZ
+go
+if object_id('tsa.ics_land_SAP_SVK_TCURR','U') is not null
+drop table tsa.ics_land_SAP_SVK_TCURR
+go
+if object_id('tsa.ics_land_SAP_SVK_EKET','U') is not null
+drop table tsa.ics_land_SAP_SVK_EKET
+go
+if object_id('tsa.ics_land_SAP_SVK_LFB1','U') is not null
+drop table tsa.ics_land_SAP_SVK_LFB1
+go
+if object_id('tsa.ics_land_SAP_SVK_EKKO','U') is not null
+drop table tsa.ics_land_SAP_SVK_EKKO
+go
+if object_id('tsa.ics_land_SAP_SVK_LFA1','U') is not null
+drop table tsa.ics_land_SAP_SVK_LFA1
+go
+if object_id('tsa.ics_land_SAP_SVK_LFM1','U') is not null
+drop table tsa.ics_land_SAP_SVK_LFM1
+go
+if object_id('tsa.ics_land_SAP_SVK_MARM','U') is not null
+drop table tsa.ics_land_SAP_SVK_MARM
+go
+if object_id('tsa.ics_land_SAP_SVK_MARA','U') is not null
+drop table tsa.ics_land_SAP_SVK_MARA
+go
+if object_id('tsa.ics_land_SAP_SVK_T001W','U') is not null
+drop table tsa.ics_land_SAP_SVK_T001W
+go
 
 PRINT N'Creating [tsa].[ics_land_SAP_SVK_EKBZ]'
 GO

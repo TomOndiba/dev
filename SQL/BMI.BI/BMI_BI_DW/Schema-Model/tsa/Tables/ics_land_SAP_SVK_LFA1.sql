@@ -123,3 +123,5 @@ CREATE TABLE [tsa].[ics_land_SAP_SVK_LFA1]
 [XZEMP] [nvarchar] (1) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_SVK_LFA1_1] ON [tsa].[ics_land_SAP_SVK_LFA1] ([LIFNR], [MANDT])
+GO

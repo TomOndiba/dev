@@ -67,3 +67,5 @@ CREATE TABLE [tsa].[ics_land_SAP_SVK_T001W]
 [ZONE1] [nvarchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_SVK_T001W_1] ON [tsa].[ics_land_SAP_SVK_T001W] ([MANDT], [WERKS])
+GO

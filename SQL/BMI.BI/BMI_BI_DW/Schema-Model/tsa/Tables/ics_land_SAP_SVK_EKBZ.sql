@@ -46,3 +46,5 @@ CREATE TABLE [tsa].[ics_land_SAP_SVK_EKBZ]
 [ZAEHK] [nvarchar] (2) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_SVK_EKBZ_1] ON [tsa].[ics_land_SAP_SVK_EKBZ] ([BELNR], [BUZEI], [EBELN], [ZAEHK])
+GO

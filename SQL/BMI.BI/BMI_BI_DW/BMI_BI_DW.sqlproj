@@ -1544,6 +1544,61 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_SVK_LFM1.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_SVK_T052U.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\JobsExecutionDetails.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur000610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur001610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur002610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur010610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur011610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur020610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur021610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur027610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur028610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur030610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur031610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur032610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur033610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur034610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur035610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur036610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur037610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur040610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur041610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur042610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur043610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur045610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur046610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur047610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur048610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur050610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur051610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur053610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur054610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur061610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur080610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur081610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur082610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur300610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur301610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur302610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur303610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur305610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur306610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur310610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur332610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur333610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur335610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur336610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur400610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur401610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur703610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur704610.sql" />
+    <None Include="Schema-Model\tsa\Tables\JobsExecutionDetails.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\010_Tsa_Baan_Tables_Added.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

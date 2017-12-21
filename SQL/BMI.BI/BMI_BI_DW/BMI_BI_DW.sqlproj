@@ -74,6 +74,7 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
+Table=[psa].[ics_stg_M3V10gen_POL_MWOPOL];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -142,13 +143,10 @@ e5fa4b4e-94ee-5bed-bca5-e1fbb5eb531c|Static Data\dbo.unit_of_measure_type.data.s
 10146340-7552-5b26-9102-6af711374852|Static Data\etl.unit_of_measure_lookup.data.sql;
 </DeployChangesExecutionOrder>
     <IncludeObjectsInDataSync />
-    <AdditionalScriptFolders>
-Static Data;
-</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
@@ -364,6 +362,8 @@ Static Data;
     <Folder Include="Schema-Model\etl\" />
     <Folder Include="Schema-Model\etl\Tables\" />
     <Folder Include="Migrations\1.1.0" />
+    <Folder Include="Programmable Objects\cg\" />
+    <Folder Include="Programmable Objects\cg\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -1543,6 +1543,16 @@ Static Data;
   <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_SVK_LFM1.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_SVK_T052U.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\010_Tsa_Navision_Bulgaria_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\011_Psa_Navision_Bulgaria_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\cg\Stored Procedures\CreatePSATable.sql" />
+    <None Include="Migrations\1.1.0\012_20171221-1420_ukmbs.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -23,3 +23,5 @@ CREATE TABLE [tsa].[ics_land_baan_ttdpur031610]
 [t_tdat] [datetime] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_baan_ttdpur031610_1] ON [tsa].[ics_land_baan_ttdpur031610] ([t_cpgp], [t_dile], [t_qanp], [t_stdt], [t_suno])
+GO

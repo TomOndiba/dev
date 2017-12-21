@@ -23,3 +23,5 @@ CREATE TABLE [tsa].[ics_land_baan_ttdpur704610]
 [t_user] [varchar] (12) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_baan_ttdpur704610_1] ON [tsa].[ics_land_baan_ttdpur704610] ([t_date], [t_orno], [t_pono], [t_time])
+GO

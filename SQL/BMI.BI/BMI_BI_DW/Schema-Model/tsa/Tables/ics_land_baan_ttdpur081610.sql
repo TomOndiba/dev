@@ -18,3 +18,5 @@ CREATE TABLE [tsa].[ics_land_baan_ttdpur081610]
 [t_qana] [float] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_baan_ttdpur081610_1] ON [tsa].[ics_land_baan_ttdpur081610] ([t_cntr], [t_item], [t_orno])
+GO

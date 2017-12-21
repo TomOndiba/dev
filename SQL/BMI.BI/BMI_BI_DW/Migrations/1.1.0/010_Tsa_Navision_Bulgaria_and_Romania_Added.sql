@@ -13,6 +13,18 @@ IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name
 IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Bul_SalesPerson_Purchaser') DROP TABLE [tsa].[ics_land_Navision_Bul_SalesPerson_Purchaser];
 IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Bul_Std_Purchase_Line') DROP TABLE [tsa].[ics_land_Navision_Bul_Std_Purchase_Line];
 
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Code') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Code];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Header') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Header];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Invoice_Header') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Invoice_Header];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Invoice_Line') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Invoice_Line];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Line') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Line];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Line_Discount') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Line_Discount];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Payables_Setup') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Payables_Setup];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_PrePayment_Pct') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_PrePayment_Pct];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Purchase_Price') DROP TABLE [tsa].[ics_land_Navision_Rom_Purchase_Price];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_SalesPerson_Purchaser') DROP TABLE [tsa].[ics_land_Navision_Rom_SalesPerson_Purchaser];
+IF EXISTS (SELECT 1 FROM sys.tables WHERE SCHEMA_NAME(schema_id)=N'tsa' AND name=N'ics_land_Navision_Rom_Std_Purchase_Line') DROP TABLE [tsa].[ics_land_Navision_Rom_Std_Purchase_Line];
+
 PRINT N'Creating [tsa].[ics_land_Navision_Bul_Purchase_Code]'
 GO
 CREATE TABLE [tsa].[ics_land_Navision_Bul_Purchase_Code]

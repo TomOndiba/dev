@@ -1,11 +1,13 @@
-﻿IF OBJECT_ID('[cg].[CreatePSATable]') IS NOT NULL
-	DROP PROCEDURE [cg].[CreatePSATable];
+USE [BMI_BI_DW]
+GO
 
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+/****** Object:  StoredProcedure [cg].[CreatePSATable]    Script Date: 21/12/2017 16:55:54 ******/
 SET ANSI_NULLS ON
 GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 /* Procedure to create PSA table and associated dbo.TsaToPsaLoadControlTable entry
  * 
  * USAGE:
@@ -13,12 +15,15 @@ GO
  * @dataSourceCode = the DataSourceCode from dbo.DataSource table
  * @doNotCommit = 1 if you just want to see the table definition, anything else to commit the table and insert row to dbo.TsaToPsaLoadControlTable
  *
+ * Create the proc then delete it after you've done so that it doesn't get included in the build.
+ * TODO: Modify so that it can work from master AND/OR use as a temporary procedure
+ *
  * PREREQUISITES:
  * 1. The source table must exist in TSA
  * 2. The source table must have a clustered index over the primary keys called that starts with: IndClust_tsa_ics_land_
  *     so if you know what the primary key(s) are issue a CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_M3V10gen_POL_MWOPOL_1] ON [tsa].[ics_land_M3V10gen_POL_MWOPOL] ([BHCONO] ASC, [BHFACI] ASC, [BHPLNO] ASC, [BHWOSQ] ASC)
 */
-CREATE PROC [cg].[CreatePSATable] 
+CREATE PROC [dbo].[CreatePSATable] 
 	 @sourceTsaTable NVARCHAR(128)
 	,@dataSourceCode NVARCHAR(20)
 	,@doNotCommit BIT = 0
@@ -166,3 +171,4 @@ BEGIN CATCH
 	THROW 50000, 'ERROR: There was an error creating the table or adding the control data', 1;
 END CATCH
 GO
+

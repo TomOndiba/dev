@@ -18,7 +18,7 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur042610]
 [t_Refcntu] [int] NULL,
 [t_cadr] [varchar] (6) NULL,
 [t_ccty] [varchar] (3) NULL,
-[t_ckor] [tinyint] NULL,
+[t_ckor] [tinyint] NOT NULL,
 [t_geoc_l] [varchar] (10) NULL,
 [t_nama] [varchar] (35) NULL,
 [t_namb] [varchar] (30) NULL,
@@ -26,8 +26,10 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur042610]
 [t_namd] [varchar] (30) NULL,
 [t_name] [varchar] (30) NULL,
 [t_namf] [varchar] (30) NULL,
-[t_orno] [int] NULL,
-[t_pono] [smallint] NULL,
+[t_orno] [int] NOT NULL,
+[t_pono] [smallint] NOT NULL,
 [t_pstc] [varchar] (10) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur042610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur042610] PRIMARY KEY CLUSTERED  ([t_ckor], [t_orno], [t_pono])
 GO

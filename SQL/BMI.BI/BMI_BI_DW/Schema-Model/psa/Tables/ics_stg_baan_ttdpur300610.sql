@@ -26,7 +26,7 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur300610]
 [t_cdes] [varchar] (30) NULL,
 [t_cfrw] [varchar] (3) NULL,
 [t_clan] [varchar] (3) NULL,
-[t_cono] [int] NULL,
+[t_cono] [int] NOT NULL,
 [t_cpay] [varchar] (3) NULL,
 [t_csts] [tinyint] NULL,
 [t_cvyn] [tinyint] NULL,
@@ -41,4 +41,6 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur300610]
 [t_txta] [int] NULL,
 [t_txtb] [int] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur300610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur300610] PRIMARY KEY CLUSTERED  ([t_cono])
 GO

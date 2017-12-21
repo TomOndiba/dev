@@ -69,7 +69,7 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur000610]
 [t_rpcs_3] [tinyint] NULL,
 [t_rpds_1] [int] NULL,
 [t_sepi_4] [tinyint] NULL,
-[t_sern] [smallint] NULL,
+[t_sern] [smallint] NOT NULL,
 [t_serp_3] [tinyint] NULL,
 [t_serp_4] [tinyint] NULL,
 [t_serq_1] [tinyint] NULL,
@@ -79,4 +79,6 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur000610]
 [t_tcsp_5] [tinyint] NULL,
 [t_uoia_3] [tinyint] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur000610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur000610] PRIMARY KEY CLUSTERED  ([t_sern])
 GO

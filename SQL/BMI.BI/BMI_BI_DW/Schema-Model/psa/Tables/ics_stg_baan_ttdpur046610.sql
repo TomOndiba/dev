@@ -25,14 +25,16 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur046610]
 [t_clos] [tinyint] NULL,
 [t_icom] [smallint] NULL,
 [t_invn] [int] NULL,
-[t_orno] [int] NULL,
+[t_orno] [int] NOT NULL,
 [t_pdat] [datetime] NULL,
-[t_pono] [smallint] NULL,
+[t_pono] [smallint] NOT NULL,
 [t_qana] [float] NULL,
-[t_srnb] [tinyint] NULL,
-[t_srni] [tinyint] NULL,
+[t_srnb] [tinyint] NOT NULL,
+[t_srni] [tinyint] NOT NULL,
 [t_stsp] [tinyint] NULL,
-[t_suno] [varchar] (6) NULL,
+[t_suno] [varchar] (6) NOT NULL,
 [t_ttyp] [varchar] (3) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur046610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur046610] PRIMARY KEY CLUSTERED  ([t_orno], [t_pono], [t_srnb], [t_srni], [t_suno])
 GO

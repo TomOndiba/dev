@@ -19,7 +19,7 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur080610]
 [t_cdis_1] [varchar] (3) NULL,
 [t_cdis_2] [varchar] (3) NULL,
 [t_cdis_3] [varchar] (3) NULL,
-[t_cntr] [varchar] (3) NULL,
+[t_cntr] [varchar] (3) NOT NULL,
 [t_cpgp] [varchar] (6) NULL,
 [t_cvpp] [float] NULL,
 [t_cvqp] [float] NULL,
@@ -35,13 +35,13 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur080610]
 [t_dmth_1] [tinyint] NULL,
 [t_dmth_2] [tinyint] NULL,
 [t_dmth_3] [tinyint] NULL,
-[t_item] [varchar] (16) NULL,
+[t_item] [varchar] (16) NOT NULL,
 [t_itst] [tinyint] NULL,
 [t_ldam_1] [float] NULL,
 [t_ldam_2] [float] NULL,
 [t_ldam_3] [float] NULL,
 [t_oqua] [float] NULL,
-[t_orno] [int] NULL,
+[t_orno] [int] NOT NULL,
 [t_pgst_1] [tinyint] NULL,
 [t_pgst_2] [tinyint] NULL,
 [t_pgst_3] [tinyint] NULL,
@@ -49,11 +49,13 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur080610]
 [t_plst_1] [tinyint] NULL,
 [t_plst_2] [tinyint] NULL,
 [t_plst_3] [tinyint] NULL,
-[t_pono] [smallint] NULL,
+[t_pono] [smallint] NOT NULL,
 [t_pric] [float] NULL,
 [t_updd_1] [tinyint] NULL,
 [t_updd_2] [tinyint] NULL,
 [t_updd_3] [tinyint] NULL,
 [t_updp] [tinyint] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur080610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur080610] PRIMARY KEY CLUSTERED  ([t_cntr], [t_item], [t_orno], [t_pono])
 GO

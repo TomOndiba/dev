@@ -28,7 +28,7 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur051610]
 [t_cdsc_2] [varchar] (3) NULL,
 [t_cdsc_3] [varchar] (3) NULL,
 [t_citg] [varchar] (6) NULL,
-[t_ckor] [tinyint] NULL,
+[t_ckor] [tinyint] NOT NULL,
 [t_clot] [varchar] (16) NULL,
 [t_cntr] [varchar] (3) NULL,
 [t_cono] [int] NULL,
@@ -78,13 +78,13 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur051610]
 [t_odat] [datetime] NULL,
 [t_opno] [smallint] NULL,
 [t_opol] [tinyint] NULL,
-[t_orno] [int] NULL,
+[t_orno] [int] NOT NULL,
 [t_pacn] [varchar] (12) NULL,
 [t_pcsr] [tinyint] NULL,
 [t_pdno] [int] NULL,
 [t_plev] [tinyint] NULL,
 [t_pmsk] [varchar] (20) NULL,
-[t_pono] [smallint] NULL,
+[t_pono] [smallint] NOT NULL,
 [t_posi] [smallint] NULL,
 [t_pric] [float] NULL,
 [t_qana] [float] NULL,
@@ -92,7 +92,7 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur051610]
 [t_qual] [tinyint] NULL,
 [t_quap] [float] NULL,
 [t_revi] [varchar] (6) NULL,
-[t_sern] [smallint] NULL,
+[t_sern] [smallint] NOT NULL,
 [t_sorn] [int] NULL,
 [t_spon] [smallint] NULL,
 [t_spur] [tinyint] NULL,
@@ -101,8 +101,8 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur051610]
 [t_stcd] [tinyint] NULL,
 [t_suno] [varchar] (6) NULL,
 [t_thic] [float] NULL,
-[t_trdt] [datetime] NULL,
-[t_trtm] [int] NULL,
+[t_trdt] [datetime] NOT NULL,
+[t_trtm] [int] NOT NULL,
 [t_txta] [int] NULL,
 [t_txtb] [int] NULL,
 [t_typ1] [tinyint] NULL,
@@ -113,4 +113,6 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur051610]
 [t_user] [varchar] (12) NULL,
 [t_widt] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur051610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur051610] PRIMARY KEY CLUSTERED  ([t_ckor], [t_orno], [t_pono], [t_sern], [t_trdt], [t_trtm])
 GO

@@ -35,7 +35,7 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur010610]
 [t_fixr] [tinyint] NULL,
 [t_odis] [real] NULL,
 [t_qdat] [datetime] NULL,
-[t_qono] [int] NULL,
+[t_qono] [int] NOT NULL,
 [t_ratf] [int] NULL,
 [t_ratp] [float] NULL,
 [t_refa] [varchar] (30) NULL,
@@ -43,9 +43,11 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur010610]
 [t_rpdt] [datetime] NULL,
 [t_rtdt] [datetime] NULL,
 [t_suno] [varchar] (6) NULL,
-[t_trdt] [datetime] NULL,
-[t_trtm] [int] NULL,
+[t_trdt] [datetime] NOT NULL,
+[t_trtm] [int] NOT NULL,
 [t_txta] [int] NULL,
 [t_txtb] [int] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur010610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur010610] PRIMARY KEY CLUSTERED  ([t_qono], [t_trdt], [t_trtm])
 GO

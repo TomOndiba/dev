@@ -16,9 +16,11 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur053610]
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_baan_ttdpur053610_IsIncomplete] DEFAULT ('N'),
 [t_Refcntd] [int] NULL,
 [t_Refcntu] [int] NULL,
-[t_cosn] [varchar] (8) NULL,
+[t_cosn] [varchar] (8) NOT NULL,
 [t_date] [datetime] NULL,
 [t_dsca] [varchar] (30) NULL,
-[t_orno] [int] NULL
+[t_orno] [int] NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur053610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur053610] PRIMARY KEY CLUSTERED  ([t_cosn], [t_orno])
 GO

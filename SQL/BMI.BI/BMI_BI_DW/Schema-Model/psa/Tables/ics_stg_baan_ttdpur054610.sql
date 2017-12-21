@@ -20,7 +20,9 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur054610]
 [t_epon] [smallint] NULL,
 [t_oorn] [int] NULL,
 [t_opon] [smallint] NULL,
-[t_orno] [int] NULL,
-[t_pono] [smallint] NULL
+[t_orno] [int] NOT NULL,
+[t_pono] [smallint] NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur054610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur054610] PRIMARY KEY CLUSTERED  ([t_orno], [t_pono])
 GO

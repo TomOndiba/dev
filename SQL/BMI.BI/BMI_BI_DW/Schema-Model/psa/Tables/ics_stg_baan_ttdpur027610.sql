@@ -17,8 +17,10 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur027610]
 [t_Refcntd] [int] NULL,
 [t_Refcntu] [int] NULL,
 [t_ccos] [varchar] (3) NULL,
-[t_cplp] [varchar] (3) NULL,
+[t_cplp] [varchar] (3) NOT NULL,
 [t_inta] [tinyint] NULL,
-[t_suno] [varchar] (6) NULL
+[t_suno] [varchar] (6) NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur027610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur027610] PRIMARY KEY CLUSTERED  ([t_cplp], [t_suno])
 GO

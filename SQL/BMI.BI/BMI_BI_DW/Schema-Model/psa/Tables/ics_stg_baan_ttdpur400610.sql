@@ -18,12 +18,14 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur400610]
 [t_Refcntu] [int] NULL,
 [t_bqua] [float] NULL,
 [t_date] [datetime] NULL,
-[t_dino] [varchar] (10) NULL,
+[t_dino] [varchar] (10) NOT NULL,
 [t_diqu] [float] NULL,
 [t_oqua] [float] NULL,
-[t_orno] [int] NULL,
-[t_pono] [smallint] NULL,
-[t_suno] [varchar] (6) NULL,
+[t_orno] [int] NOT NULL,
+[t_pono] [smallint] NOT NULL,
+[t_suno] [varchar] (6) NOT NULL,
 [t_text] [int] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_baan_ttdpur400610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur400610] PRIMARY KEY CLUSTERED  ([t_dino], [t_orno], [t_pono], [t_suno])
 GO

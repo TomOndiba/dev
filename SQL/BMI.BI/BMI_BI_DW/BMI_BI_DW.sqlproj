@@ -74,7 +74,6 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
-Table=[psa].[ics_stg_M3V10gen_POL_MWOPOL];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -143,10 +142,13 @@ e5fa4b4e-94ee-5bed-bca5-e1fbb5eb531c|Static Data\dbo.unit_of_measure_type.data.s
 10146340-7552-5b26-9102-6af711374852|Static Data\etl.unit_of_measure_lookup.data.sql;
 </DeployChangesExecutionOrder>
     <IncludeObjectsInDataSync />
+    <AdditionalScriptFolders>
+Static Data;
+</AdditionalScriptFolders>
   </PropertyGroup>
   <!-- READYROLL OFFLINE SCHEMA MODEL OPTIONS -->
   <PropertyGroup>
-    <SyncToOfflineSchemaModel>False</SyncToOfflineSchemaModel>
+    <SyncToOfflineSchemaModel>True</SyncToOfflineSchemaModel>
     <!--
     <SyncToOfflineSchemaModelBySchema>True</SyncToOfflineSchemaModelBySchema>
     <SyncToOfflineSchemaModelObjectTypes>Table;Assembly;Contract;Default;EventNotification;FullTextCatalog;FullTextStoplist;MessageType;PartitionFunction;PartitionScheme;Queue;ServiceBinding;Role;Route;Rule;Schema;SearchPropertyList;Service;Sequence;Synonym;User;UserDefinedType;XmlSchemaCollection</SyncToOfflineSchemaModelObjectTypes>
@@ -1543,16 +1545,124 @@ e5fa4b4e-94ee-5bed-bca5-e1fbb5eb531c|Static Data\dbo.unit_of_measure_type.data.s
     <None Include="Schema-Model\psa\Tables\ics_stg_SAP_SVK_T052U.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\010_Tsa_Navision_Bulgaria_and_Romania_Added.sql" />
+    <None Include="Schema-Model\psa\Tables\JobsExecutionDetails.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur000610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur001610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur002610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur010610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur011610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur020610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur021610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur027610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur028610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur030610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur031610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur032610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur033610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur034610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur035610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur036610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur037610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur040610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur041610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur042610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur043610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur045610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur046610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur047610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur048610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur050610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur051610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur053610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur054610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur061610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur080610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur081610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur082610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur300610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur301610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur302610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur303610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur305610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur306610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur310610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur332610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur333610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur335610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur336610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur400610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur401610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur703610.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttdpur704610.sql" />
+    <None Include="Schema-Model\tsa\Tables\JobsExecutionDetails.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\011_Psa_Navision_Bulgaria_Added.sql" />
+    <None Include="Migrations\1.1.0\010_Tsa_Baan_Tables_Added.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\013_Tsa_Navision_Romania_Indexes.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur000610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur001610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur002610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur010610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur011610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur020610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur021610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur027610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur028610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur030610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur031610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur032610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur033610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur034610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur035610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur036610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur037610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur040610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur041610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur042610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur043610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur045610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur046610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur047610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur048610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur050610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur051610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur053610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur054610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur061610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur080610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur081610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur082610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur300610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur301610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur302610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur303610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur305610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur306610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur310610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur332610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur333610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur335610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur336610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur400610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur401610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur703610.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttdpur704610.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\014_Psa_Navision_Romania_Tables.sql" />
+    <None Include="Migrations\1.1.0\011_Psa_Baan_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\012_Tsa_JobsExecutionDetails_Table_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\013_psa_JobsExecutionDetails_Table_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\014_Psa_Baan_Not_Null_And_PK_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\015_Tsa_Baan_Clustered_Indexes_Added.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

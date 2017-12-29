@@ -238,6 +238,16 @@ set
 where
 	SourceTable like '%SAP%' ;
 
+
+		update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100142
+where
+	SourceTable like '%baan%' ;
+
+	
+
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;
 		end try

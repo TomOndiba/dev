@@ -74,48 +74,6 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Line];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Line_Discount];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Payables_Setup];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Price];
-Table=[psa].[ics_stg_Navision_ROU_SalesPerson_Purchaser];
-Table=[psa].[ics_stg_Navision_ROU_Std_Purchase_Line];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Invoice_Line];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Code];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Header];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Invoice_Header];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Invoice_Line];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Invoice_Header];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Header];
-Table=[psa].[ics_stg_Navision_ROU_Purchase_Code];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Header];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Invoice_Header];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Invoice_Line];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Line];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Line_Discount];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Payables_Setup];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_PrePayment_Pct];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Price];
-Table=[psa].[ics_stg_Navision_BGR_SalesPerson_Purchaser];
-Table=[psa].[ics_stg_Navision_BGR_Std_Purchase_Line];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Line];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Line_Discount];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Payables_Setup];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_PrePayment_Pct];
-Table=[tsa].[ics_land_Navision_ROU_Std_Purchase_Line];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Price];
-Table=[tsa].[ics_land_Navision_BGR_Purchase_Price];
-Table=[tsa].[ics_land_Navision_BGR_SalesPerson_Purchaser];
-Table=[tsa].[ics_land_Navision_BGR_Std_Purchase_Line];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Code];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Header];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Invoice_Header];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Invoice_Line];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Line];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Line_Discount];
-Table=[tsa].[ics_land_Navision_ROU_Purchase_Payables_Setup];
-Table=[tsa].[ics_land_Navision_ROU_SalesPerson_Purchaser];
-Table=[psa].[ics_stg_Navision_BGR_Purchase_Code];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1705,6 +1663,58 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\015_Tsa_Baan_Clustered_Indexes_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Code.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Invoice_Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Invoice_Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Line_Discount.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Payables_Setup.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_PrePayment_Pct.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Price.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_SalesPerson_Purchaser.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Std_Purchase_Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Code.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Invoice_Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Invoice_Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Line_Discount.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Payables_Setup.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Price.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_SalesPerson_Purchaser.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Std_Purchase_Line.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\016_Tsa_Navision_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Code.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Header.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Invoice_Header.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Invoice_Line.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Line.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Line_Discount.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Payables_Setup.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_PrePayment_Pct.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Price.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_SalesPerson_Purchaser.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Std_Purchase_Line.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Code.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Header.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Invoice_Header.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Invoice_Line.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Line.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Line_Discount.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Payables_Setup.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Price.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_SalesPerson_Purchaser.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Std_Purchase_Line.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\017_Psa_Navision_Tables_Added.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -1666,55 +1666,7 @@ Static Data;
     <None Include="Migrations\1.1.0\015_Tsa_Baan_Clustered_Indexes_Added.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Code.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Header.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Invoice_Header.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Invoice_Line.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Line.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Line_Discount.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Payables_Setup.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_PrePayment_Pct.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purchase_Price.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_SalesPerson_Purchaser.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Std_Purchase_Line.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Code.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Header.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Invoice_Header.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Invoice_Line.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Line.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Line_Discount.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Payables_Setup.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purchase_Price.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_SalesPerson_Purchaser.sql" />
-    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Std_Purchase_Line.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Migrations\1.1.0\016_Tsa_Navision_Tables_Added.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Code.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Header.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Invoice_Header.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Invoice_Line.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Line.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Line_Discount.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Payables_Setup.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_PrePayment_Pct.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Purchase_Price.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_SalesPerson_Purchaser.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_BGR_Std_Purchase_Line.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Code.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Header.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Invoice_Header.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Invoice_Line.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Line.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Line_Discount.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Payables_Setup.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Purchase_Price.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_SalesPerson_Purchaser.sql" />
-    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Std_Purchase_Line.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Migrations\1.1.0\017_Psa_Navision_Tables_Added.sql" />
   </ItemGroup>
   <PropertyGroup>

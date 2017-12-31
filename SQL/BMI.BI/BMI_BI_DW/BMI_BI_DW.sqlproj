@@ -394,6 +394,7 @@ Static Data;
     <None Include="Static Data\dbo.unit_of_measure_type.data.sql" />
     <None Include="Static Data\dbo.unit_of_measure.data.sql" />
     <None Include="Static Data\etl.unit_of_measure_lookup.data.sql" />
+    <None Include="Static Data\tsa.JobsExecutionDetails.data.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\01_Finalize_Deployment.sql" />

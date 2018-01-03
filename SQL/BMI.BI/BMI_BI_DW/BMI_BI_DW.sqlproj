@@ -1669,6 +1669,15 @@ Static Data;
     <None Include="Migrations\1.1.0\016_Tsa_Navision_Tables_Added.sql" />
     <None Include="Migrations\1.1.0\017_Psa_Navision_Tables_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\018_Remove_Navision_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\019_Tsa_Navision_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\020_Psa_Navision_Tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

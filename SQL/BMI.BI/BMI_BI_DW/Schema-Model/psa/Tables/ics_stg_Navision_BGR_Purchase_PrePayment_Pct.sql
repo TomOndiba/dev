@@ -14,12 +14,12 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Purchase_PrePayment_Pct]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Purchase_PrePayment_Pct_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Purchase_PrePayment_Pct_IsIncomplete] DEFAULT ('N'),
-[Ending Date] [datetime] NULL,
-[Item No_] [varchar] (20) NOT NULL,
-[Prepayment %] [decimal] (38, 20) NULL,
-[Starting Date] [datetime] NOT NULL,
 [timestamp] [varbinary] (8) NULL,
-[Vendor No_] [varchar] (20) NOT NULL
+[Item No_] [varchar] (20) NOT NULL,
+[Vendor No_] [varchar] (20) NOT NULL,
+[Starting Date] [datetime] NOT NULL,
+[Ending Date] [datetime] NULL,
+[Prepayment %] [decimal] (38, 20) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_BGR_Purchase_PrePayment_Pct] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Purchase_PrePayment_Pct] PRIMARY KEY CLUSTERED  ([Item No_], [Vendor No_], [Starting Date])

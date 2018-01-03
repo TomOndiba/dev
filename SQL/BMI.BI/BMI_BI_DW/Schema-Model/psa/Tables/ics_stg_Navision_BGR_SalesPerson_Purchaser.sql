@@ -14,17 +14,17 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_SalesPerson_Purchaser]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_SalesPerson_Purchaser_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_SalesPerson_Purchaser_IsIncomplete] DEFAULT ('N'),
+[timestamp] [varbinary] (8) NULL,
 [Code] [varchar] (10) NOT NULL,
+[Name] [varchar] (50) NULL,
 [Commission %] [decimal] (38, 20) NULL,
-[E-Mail] [varchar] (80) NULL,
-[E-Mail 2] [varchar] (80) NULL,
 [Global Dimension 1 Code] [varchar] (20) NULL,
 [Global Dimension 2 Code] [varchar] (20) NULL,
-[Job Title] [varchar] (30) NULL,
-[Name] [varchar] (50) NULL,
+[E-Mail] [varchar] (80) NULL,
 [Phone No_] [varchar] (30) NULL,
+[Job Title] [varchar] (30) NULL,
 [Search E-Mail] [varchar] (80) NULL,
-[timestamp] [varbinary] (8) NULL
+[E-Mail 2] [varchar] (80) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_BGR_SalesPerson_Purchaser] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_SalesPerson_Purchaser] PRIMARY KEY CLUSTERED  ([Code])

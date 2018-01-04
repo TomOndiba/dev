@@ -14,10 +14,10 @@ CREATE TABLE [psa].[ics_stg_Navision_ROU_Purchase_Code]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_ROU_Purchase_Code_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_ROU_Purchase_Code_IsIncomplete] DEFAULT ('N'),
+[timestamp] [varbinary] (8) NULL,
 [Code] [varchar] (10) NOT NULL,
-[Currency Code] [varchar] (10) NULL,
 [Description] [varchar] (50) NULL,
-[timestamp] [varbinary] (8) NULL
+[Currency Code] [varchar] (10) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_ROU_Purchase_Code] ADD CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Purchase_Code] PRIMARY KEY CLUSTERED  ([Code])

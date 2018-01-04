@@ -9,10 +9,10 @@ CREATE TABLE [tsa].[ics_land_Navision_ROU_Purchase_Code]
 [EtlCreatedBy] [varchar] (200) NOT NULL,
 [ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Purchase_Code_ExcludedFromMerge] DEFAULT ((0)),
 [IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Purchase_Code_IsDuplicate] DEFAULT ((0)),
+[timestamp] [varbinary] (8) NULL,
 [Code] [varchar] (10) NOT NULL,
-[Currency Code] [varchar] (10) NULL,
 [Description] [varchar] (50) NULL,
-[timestamp] [varbinary] (8) NULL
+[Currency Code] [varchar] (10) NULL
 )
 GO
 CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_ROU_Purchase_Code] ON [tsa].[ics_land_Navision_ROU_Purchase_Code] ([Code])

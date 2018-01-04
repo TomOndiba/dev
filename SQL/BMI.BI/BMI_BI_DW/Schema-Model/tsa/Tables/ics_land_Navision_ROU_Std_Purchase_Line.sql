@@ -9,17 +9,17 @@ CREATE TABLE [tsa].[ics_land_Navision_ROU_Std_Purchase_Line]
 [EtlCreatedBy] [varchar] (200) NOT NULL,
 [ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Std_Purchase_Line_ExcludedFromMerge] DEFAULT ((0)),
 [IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Std_Purchase_Line_IsDuplicate] DEFAULT ((0)),
-[Amount Excl_ VAT] [decimal] (38, 20) NULL,
-[Description] [varchar] (50) NULL,
+[timestamp] [varbinary] (8) NULL,
+[Standard Purchase Code] [varchar] (10) NOT NULL,
 [Line No_] [int] NOT NULL,
+[Type] [int] NULL,
 [No_] [varchar] (20) NULL,
+[Description] [varchar] (50) NULL,
 [Quantity] [decimal] (38, 20) NULL,
+[Amount Excl_ VAT] [decimal] (38, 20) NULL,
+[Unit of Measure Code] [varchar] (10) NULL,
 [Shortcut Dimension 1 Code] [varchar] (20) NULL,
 [Shortcut Dimension 2 Code] [varchar] (20) NULL,
-[Standard Purchase Code] [varchar] (10) NOT NULL,
-[timestamp] [varbinary] (8) NULL,
-[Type] [int] NULL,
-[Unit of Measure Code] [varchar] (10) NULL,
 [Variant Code] [varchar] (10) NULL
 )
 GO

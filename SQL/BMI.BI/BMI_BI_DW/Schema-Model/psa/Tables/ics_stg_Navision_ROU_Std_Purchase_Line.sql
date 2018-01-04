@@ -14,17 +14,17 @@ CREATE TABLE [psa].[ics_stg_Navision_ROU_Std_Purchase_Line]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_ROU_Std_Purchase_Line_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_ROU_Std_Purchase_Line_IsIncomplete] DEFAULT ('N'),
-[Amount Excl_ VAT] [decimal] (38, 20) NULL,
-[Description] [varchar] (50) NULL,
+[timestamp] [varbinary] (8) NULL,
+[Standard Purchase Code] [varchar] (10) NOT NULL,
 [Line No_] [int] NOT NULL,
+[Type] [int] NULL,
 [No_] [varchar] (20) NULL,
+[Description] [varchar] (50) NULL,
 [Quantity] [decimal] (38, 20) NULL,
+[Amount Excl_ VAT] [decimal] (38, 20) NULL,
+[Unit of Measure Code] [varchar] (10) NULL,
 [Shortcut Dimension 1 Code] [varchar] (20) NULL,
 [Shortcut Dimension 2 Code] [varchar] (20) NULL,
-[Standard Purchase Code] [varchar] (10) NOT NULL,
-[timestamp] [varbinary] (8) NULL,
-[Type] [int] NULL,
-[Unit of Measure Code] [varchar] (10) NULL,
 [Variant Code] [varchar] (10) NULL
 )
 GO

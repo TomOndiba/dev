@@ -9,12 +9,12 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Purchase_PrePayment_Pct]
 [EtlCreatedBy] [varchar] (200) NOT NULL,
 [ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purchase_PrePayment_Pct_ExcludedFromMerge] DEFAULT ((0)),
 [IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purchase_PrePayment_Pct_IsDuplicate] DEFAULT ((0)),
-[Ending Date] [datetime] NULL,
-[Item No_] [varchar] (20) NOT NULL,
-[Prepayment %] [decimal] (38, 20) NULL,
-[Starting Date] [datetime] NOT NULL,
 [timestamp] [varbinary] (8) NULL,
-[Vendor No_] [varchar] (20) NOT NULL
+[Item No_] [varchar] (20) NOT NULL,
+[Vendor No_] [varchar] (20) NOT NULL,
+[Starting Date] [datetime] NOT NULL,
+[Ending Date] [datetime] NULL,
+[Prepayment %] [decimal] (38, 20) NULL
 )
 GO
 CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Purchase_PrePayment_Pct] ON [tsa].[ics_land_Navision_BGR_Purchase_PrePayment_Pct] ([Item No_], [Vendor No_], [Starting Date])

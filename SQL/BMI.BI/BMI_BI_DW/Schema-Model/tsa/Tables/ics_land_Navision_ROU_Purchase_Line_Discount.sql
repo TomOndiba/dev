@@ -9,16 +9,16 @@ CREATE TABLE [tsa].[ics_land_Navision_ROU_Purchase_Line_Discount]
 [EtlCreatedBy] [varchar] (200) NOT NULL,
 [ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Purchase_Line_Discount_ExcludedFromMerge] DEFAULT ((0)),
 [IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Purchase_Line_Discount_IsDuplicate] DEFAULT ((0)),
-[Currency Code] [varchar] (10) NOT NULL,
-[Ending Date] [datetime] NULL,
-[Item No_] [varchar] (20) NOT NULL,
-[Line Discount %] [decimal] (38, 20) NULL,
-[Minimum Quantity] [decimal] (38, 20) NOT NULL,
-[Starting Date] [datetime] NOT NULL,
 [timestamp] [varbinary] (8) NULL,
-[Unit of Measure Code] [varchar] (10) NOT NULL,
+[Item No_] [varchar] (20) NOT NULL,
+[Vendor No_] [varchar] (20) NOT NULL,
+[Starting Date] [datetime] NOT NULL,
+[Currency Code] [varchar] (10) NOT NULL,
 [Variant Code] [varchar] (10) NOT NULL,
-[Vendor No_] [varchar] (20) NOT NULL
+[Unit of Measure Code] [varchar] (10) NOT NULL,
+[Minimum Quantity] [decimal] (38, 20) NOT NULL,
+[Line Discount %] [decimal] (38, 20) NULL,
+[Ending Date] [datetime] NULL
 )
 GO
 CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_ROU_Purchase_Line_Discount] ON [tsa].[ics_land_Navision_ROU_Purchase_Line_Discount] ([Item No_], [Vendor No_], [Starting Date], [Currency Code], [Variant Code], [Unit of Measure Code], [Minimum Quantity])

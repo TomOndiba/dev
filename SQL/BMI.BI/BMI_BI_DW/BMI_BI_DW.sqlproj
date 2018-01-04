@@ -1669,6 +1669,59 @@ Static Data;
     <None Include="Migrations\1.1.0\016_Tsa_Navision_Tables_Added.sql" />
     <None Include="Migrations\1.1.0\017_Psa_Navision_Tables_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\018_Remove_Navision_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\019_Tsa_Navision_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\020_Psa_Navision_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC013700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC033700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC063700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC103700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC2T3700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC3L3700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC413700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC423700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC433700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC443700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC453700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PC463700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PCB13700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PCB23700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PCB33700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PCB43700.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_iScala_HUN_PCR13700.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\021_Tsa_iScala_HUN_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC013700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC033700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC063700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC103700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC2T3700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC3L3700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC413700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC423700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC433700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC443700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC453700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PC463700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PCB13700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PCB23700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PCB33700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PCB43700.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_iScala_HUN_PCR13700.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\022_Psa_iScala_HUN_Tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

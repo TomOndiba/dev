@@ -1,0 +1,43 @@
+CREATE TABLE [tsa].[ics_land_iScala_HUN_PCB43700]
+(
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_iScala_HUN_PCB43700_ExcludedFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_iScala_HUN_PCB43700_IsDuplicate] DEFAULT ((0)),
+[PCB4001] [nchar] (38) NOT NULL,
+[PCB4002] [int] NOT NULL,
+[PCB4003] [int] NULL,
+[PCB4004] [int] NULL,
+[PCB4005] [numeric] (28, 8) NULL,
+[PCB4006] [int] NULL,
+[PCB4007] [int] NULL,
+[PCB4008] [nchar] (2) NULL,
+[PCB4009] [int] NULL,
+[PCB4010] [int] NULL,
+[PCB4011] [int] NULL,
+[PCB4012] [int] NULL,
+[PCB4013] [int] NULL,
+[PCB4014] [int] NULL,
+[PCB4015] [int] NULL,
+[PCB4016] [int] NULL,
+[PCB4017] [int] NULL,
+[PCB4018] [nchar] (1) NULL,
+[PCB4019] [nchar] (1) NULL,
+[PCB4020] [nchar] (1) NULL,
+[PCB4021] [nchar] (1) NULL,
+[PCB4022] [nchar] (1) NULL,
+[PCB4023] [nchar] (2) NULL,
+[PCB4024] [nchar] (2) NULL,
+[PCB4025] [nchar] (2) NULL,
+[PCB4026] [nchar] (2) NULL,
+[PCB4027] [nchar] (2) NULL,
+[PCB4028] [numeric] (26, 8) NULL
+)
+GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_iScala_HUN_PCB43700] ON [tsa].[ics_land_iScala_HUN_PCB43700] ([PCB4001], [PCB4002])
+GO

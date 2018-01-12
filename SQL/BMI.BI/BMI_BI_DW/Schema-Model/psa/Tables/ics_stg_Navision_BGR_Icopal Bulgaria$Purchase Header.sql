@@ -54,7 +54,7 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Header]
 [Do not include in VAT Ledgers] [tinyint] NULL,
 [Doc_ No_ Occurrence] [int] NULL,
 [Document Date] [datetime] NULL,
-[Document Type] [int] NULL,
+[Document Type] [int] NOT NULL,
 [Due Date] [datetime] NULL,
 [Entry Point] [varchar] (10) NULL,
 [Expected Receipt Date] [datetime] NULL,
@@ -75,7 +75,7 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Header]
 [Last Return Shipment No_] [varchar] (20) NULL,
 [Lead Time Calculation] [varchar] (32) NULL,
 [Location Code] [varchar] (10) NULL,
-[No_] [varchar] (20) NULL,
+[No_] [varchar] (20) NOT NULL,
 [No_ Printed] [int] NULL,
 [No_ Series] [varchar] (10) NULL,
 [On Hold] [varchar] (3) NULL,
@@ -174,4 +174,6 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Header]
 [Void Date] [datetime] NULL,
 [Your Reference] [varchar] (30) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Header] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Header] PRIMARY KEY CLUSTERED  ([Document Type], [No_])
 GO

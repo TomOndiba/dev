@@ -40,8 +40,8 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line]
 [Description] [varchar] (50) NULL,
 [Description 2] [varchar] (50) NULL,
 [Direct Unit Cost] [decimal] (38, 20) NULL,
-[Document No_] [varchar] (20) NULL,
-[Document Type] [int] NULL,
+[Document No_] [varchar] (20) NOT NULL,
+[Document Type] [int] NOT NULL,
 [Drop Shipment] [tinyint] NULL,
 [Duplicate in Depreciation Book] [varchar] (10) NULL,
 [Entry Point] [varchar] (10) NULL,
@@ -65,7 +65,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line]
 [Line Amount] [decimal] (38, 20) NULL,
 [Line Discount %] [decimal] (38, 20) NULL,
 [Line Discount Amount] [decimal] (38, 20) NULL,
-[Line No_] [int] NULL,
+[Line No_] [int] NOT NULL,
 [Location Code] [varchar] (10) NULL,
 [MPS Order] [tinyint] NULL,
 [Maintenance Code] [varchar] (10) NULL,
@@ -165,4 +165,6 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line]
 [Work Center No_] [varchar] (20) NULL,
 [timestamp] [timestamp] NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line] PRIMARY KEY CLUSTERED  ([Document No_], [Document Type], [Line No_])
 GO

@@ -46,7 +46,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Hea
 [Job No_] [varchar] (20) NULL,
 [Language Code] [varchar] (10) NULL,
 [Location Code] [varchar] (10) NULL,
-[No_] [varchar] (20) NULL,
+[No_] [varchar] (20) NOT NULL,
 [No_ Printed] [int] NULL,
 [No_ Series] [varchar] (10) NULL,
 [Not Declaration 394] [tinyint] NULL,
@@ -110,4 +110,6 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Hea
 [Your Reference] [varchar] (30) NULL,
 [timestamp] [timestamp] NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header] PRIMARY KEY CLUSTERED  ([No_])
 GO

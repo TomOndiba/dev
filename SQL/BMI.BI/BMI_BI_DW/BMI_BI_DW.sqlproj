@@ -1734,6 +1734,19 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.1.0\026_Create_Psa_Navision_Tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Purchase Line Discount.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Purchases&amp;PayablesSetup.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Salesperson_Purchaser.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Standard Purchase Code.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Standard Purchase Line.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\027_Create_PKs_Navision_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\028_Drop_Incorrect_Navision_Tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

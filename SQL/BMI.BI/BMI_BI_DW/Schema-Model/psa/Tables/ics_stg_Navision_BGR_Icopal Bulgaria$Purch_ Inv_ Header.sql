@@ -49,7 +49,7 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header]
 [Invoice Disc_ Code] [varchar] (20) NULL,
 [Language Code] [varchar] (10) NULL,
 [Location Code] [varchar] (10) NULL,
-[No_] [varchar] (20) NULL,
+[No_] [varchar] (20) NOT NULL,
 [No_ Printed] [int] NULL,
 [No_ Series] [varchar] (10) NULL,
 [On Hold] [varchar] (3) NULL,
@@ -126,4 +126,6 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header]
 [Void Date] [datetime] NULL,
 [Your Reference] [varchar] (30) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header] PRIMARY KEY CLUSTERED  ([No_])
 GO

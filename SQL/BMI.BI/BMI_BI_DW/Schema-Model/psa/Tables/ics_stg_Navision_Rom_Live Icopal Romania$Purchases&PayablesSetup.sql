@@ -1,4 +1,4 @@
-CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup]
+CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchases&PayablesSetup]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
@@ -12,48 +12,40 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchases & Payables Se
 [EtlUpdatedBy] [varchar] (200) NOT NULL,
 [EtlDeletedOn] [datetime] NULL,
 [EtlDeletedBy] [varchar] (200) NULL,
-[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup_IsDeleted] DEFAULT ('N'),
-[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup_IsIncomplete] DEFAULT ('N'),
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchases & Payables Setup_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchases & Payables Setup_IsIncomplete] DEFAULT ('N'),
 [Allow VAT Difference] [tinyint] NULL,
 [Appln_ between Currencies] [int] NULL,
-[Archive Quotes and Orders] [tinyint] NULL,
 [Blanket Order Nos_] [varchar] (10) NULL,
 [Calc_ Inv_ Disc_ per VAT ID] [tinyint] NULL,
 [Calc_ Inv_ Discount] [tinyint] NULL,
-[Check Prepmt_ when Posting] [tinyint] NULL,
 [Copy Cmts Ret_Ord_ to Cr_ Memo] [tinyint] NULL,
 [Copy Cmts Ret_Ord_ to Ret_Shpt] [tinyint] NULL,
 [Copy Comments Blanket to Order] [tinyint] NULL,
 [Copy Comments Order to Invoice] [tinyint] NULL,
 [Copy Comments Order to Receipt] [tinyint] NULL,
 [Credit Memo Nos_] [varchar] (10) NULL,
-[Default Posting Date] [int] NULL,
-[Default Qty_ to Ship_Rcv_] [int] NULL,
+[Custom Invoice No_ Mandatory] [tinyint] NULL,
 [Discount Posting] [int] NULL,
-[EU VAT Bus_ Posting Group] [varchar] (20) NULL,
 [Exact Cost Reversing Mandatory] [tinyint] NULL,
 [Ext_ Doc_ No_ Mandatory] [tinyint] NULL,
-[Intr_ Jnl_ Incl_ Item Charges] [tinyint] NULL,
 [Invoice Nos_] [varchar] (10) NULL,
 [Invoice Rounding] [tinyint] NULL,
 [Order Nos_] [varchar] (10) NULL,
 [Posted Credit Memo Nos_] [varchar] (10) NULL,
 [Posted Invoice Nos_] [varchar] (10) NULL,
-[Posted Prepmt_ Cr_ Memo Nos_] [varchar] (10) NULL,
-[Posted Prepmt_ Inv_ Nos_] [varchar] (10) NULL,
 [Posted Receipt Nos_] [varchar] (10) NULL,
 [Posted Return Shpt_ Nos_] [varchar] (10) NULL,
-[Posted Unreal_ VAT Prot_ Nos_] [varchar] (20) NULL,
+[Posted Self-Invoice Nos_] [varchar] (10) NULL,
+[Posting Desc_ Code] [varchar] (10) NULL,
 [Primary Key] [varchar] (10) NOT NULL,
-[Protokol VAT Bus_ Post_ Group] [varchar] (20) NULL,
 [Quote Nos_] [varchar] (10) NULL,
 [Receipt on Invoice] [tinyint] NULL,
 [Return Order Nos_] [varchar] (10) NULL,
 [Return Shipment on Credit Memo] [tinyint] NULL,
-[timestamp] [varbinary] (max) NULL,
-[Unreal_ VAT Prot_ Nos_] [varchar] (20) NULL,
-[Vendor Nos_] [varchar] (10) NULL
+[Vendor Nos_] [varchar] (10) NULL,
+[timestamp] [timestamp] NOT NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup] PRIMARY KEY CLUSTERED  ([Primary Key])
+ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchases&PayablesSetup] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchases & Payables Setup] PRIMARY KEY CLUSTERED  ([Primary Key])
 GO

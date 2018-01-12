@@ -49,7 +49,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header
 [Date Sent] [datetime] NULL,
 [Doc_ No_ Occurrence] [int] NULL,
 [Document Date] [datetime] NULL,
-[Document Type] [int] NULL,
+[Document Type] [int] NOT NULL,
 [Due Date] [datetime] NULL,
 [EU 3-Party Trade] [tinyint] NULL,
 [Entry Point] [varchar] (10) NULL,
@@ -69,7 +69,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header
 [Last Return Shipment No_] [varchar] (20) NULL,
 [Lead Time Calculation] [varchar] (32) NULL,
 [Location Code] [varchar] (10) NULL,
-[No_] [varchar] (20) NULL,
+[No_] [varchar] (20) NOT NULL,
 [No_ Printed] [int] NULL,
 [No_ Series] [varchar] (10) NULL,
 [Not Declaration 394] [tinyint] NULL,
@@ -148,4 +148,6 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header
 [Your Reference] [varchar] (30) NULL,
 [timestamp] [timestamp] NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header] PRIMARY KEY CLUSTERED  ([Document Type], [No_])
 GO

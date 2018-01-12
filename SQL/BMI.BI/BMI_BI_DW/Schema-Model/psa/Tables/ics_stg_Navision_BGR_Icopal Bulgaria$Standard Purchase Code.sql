@@ -14,9 +14,11 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Code]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Code_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Code_IsIncomplete] DEFAULT ('N'),
-[Code] [varchar] (10) NULL,
+[Code] [varchar] (10) NOT NULL,
 [Currency Code] [varchar] (10) NULL,
 [Description] [varchar] (50) NULL,
 [timestamp] [varbinary] (max) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Code] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Code] PRIMARY KEY CLUSTERED  ([Code])
 GO

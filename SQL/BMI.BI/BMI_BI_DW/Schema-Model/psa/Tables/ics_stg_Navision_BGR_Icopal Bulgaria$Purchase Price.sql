@@ -14,15 +14,17 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Price]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Price_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Price_IsIncomplete] DEFAULT ('N'),
-[Currency Code] [varchar] (10) NULL,
+[Currency Code] [varchar] (10) NOT NULL,
 [Direct Unit Cost] [decimal] (38, 20) NULL,
 [Ending Date] [datetime] NULL,
-[Item No_] [varchar] (20) NULL,
-[Minimum Quantity] [decimal] (38, 20) NULL,
-[Starting Date] [datetime] NULL,
+[Item No_] [varchar] (20) NOT NULL,
+[Minimum Quantity] [decimal] (18, 0) NOT NULL,
+[Starting Date] [datetime] NOT NULL,
 [timestamp] [varbinary] (max) NULL,
-[Unit of Measure Code] [varchar] (10) NULL,
-[Variant Code] [varchar] (10) NULL,
-[Vendor No_] [varchar] (20) NULL
+[Unit of Measure Code] [varchar] (10) NOT NULL,
+[Variant Code] [varchar] (10) NOT NULL,
+[Vendor No_] [varchar] (20) NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Price] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Price] PRIMARY KEY CLUSTERED  ([Currency Code], [Item No_], [Minimum Quantity], [Starting Date], [Unit of Measure Code], [Variant Code], [Vendor No_])
 GO

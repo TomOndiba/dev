@@ -34,7 +34,7 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line]
 [Description] [varchar] (50) NULL,
 [Description 2] [varchar] (50) NULL,
 [Direct Unit Cost] [decimal] (38, 20) NULL,
-[Document No_] [varchar] (20) NULL,
+[Document No_] [varchar] (20) NOT NULL,
 [Duplicate in Depreciation Book] [varchar] (10) NULL,
 [Entry Point] [varchar] (10) NULL,
 [Expected Receipt Date] [datetime] NULL,
@@ -67,7 +67,7 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line]
 [Line Amount] [decimal] (38, 20) NULL,
 [Line Discount %] [decimal] (38, 20) NULL,
 [Line Discount Amount] [decimal] (38, 20) NULL,
-[Line No_] [int] NULL,
+[Line No_] [int] NOT NULL,
 [Location Code] [varchar] (10) NULL,
 [Maintenance Code] [varchar] (10) NULL,
 [Net Weight] [decimal] (38, 20) NULL,
@@ -123,4 +123,6 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line]
 [Vendor Item No_] [varchar] (20) NULL,
 [Work Center No_] [varchar] (20) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line] PRIMARY KEY CLUSTERED  ([Document No_], [Line No_])
 GO

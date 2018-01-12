@@ -1,4 +1,4 @@
-CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line]
+CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Standard Purchase Line]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line]
 [EtlUpdatedBy] [varchar] (200) NOT NULL,
 [EtlDeletedOn] [datetime] NULL,
 [EtlDeletedBy] [varchar] (200) NULL,
-[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line_IsDeleted] DEFAULT ('N'),
-[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line_IsIncomplete] DEFAULT ('N'),
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Standard Purchase Line_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Standard Purchase Line_IsIncomplete] DEFAULT ('N'),
 [Amount Excl_ VAT] [decimal] (38, 20) NULL,
 [Description] [varchar] (50) NULL,
 [Line No_] [int] NOT NULL,
@@ -22,11 +22,11 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line]
 [Shortcut Dimension 1 Code] [varchar] (20) NULL,
 [Shortcut Dimension 2 Code] [varchar] (20) NULL,
 [Standard Purchase Code] [varchar] (10) NOT NULL,
-[timestamp] [varbinary] (max) NULL,
 [Type] [int] NULL,
 [Unit of Measure Code] [varchar] (10) NULL,
-[Variant Code] [varchar] (10) NULL
+[Variant Code] [varchar] (10) NULL,
+[timestamp] [timestamp] NOT NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line] PRIMARY KEY CLUSTERED  ([Line No_], [Standard Purchase Code])
+ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Standard Purchase Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Standard Purchase Line] PRIMARY KEY CLUSTERED  ([Line No_], [Standard Purchase Code])
 GO

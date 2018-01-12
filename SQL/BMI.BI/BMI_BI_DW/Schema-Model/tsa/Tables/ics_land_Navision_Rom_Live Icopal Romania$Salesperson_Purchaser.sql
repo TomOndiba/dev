@@ -43,3 +43,5 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purcha
 [timestamp] [timestamp] NOT NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser_1] ON [tsa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser] ([Code])
+GO

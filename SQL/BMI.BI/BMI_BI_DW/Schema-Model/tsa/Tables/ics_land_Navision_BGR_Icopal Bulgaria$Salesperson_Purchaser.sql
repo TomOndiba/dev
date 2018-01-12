@@ -22,3 +22,5 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Salesperson_Purchaser]
 [timestamp] [varbinary] (max) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Icopal Bulgaria$Salesperson_Purchaser_1] ON [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Salesperson_Purchaser] ([Code])
+GO

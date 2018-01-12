@@ -15,3 +15,5 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Code
 [timestamp] [varbinary] (max) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Code_1] ON [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Code] ([Code])
+GO

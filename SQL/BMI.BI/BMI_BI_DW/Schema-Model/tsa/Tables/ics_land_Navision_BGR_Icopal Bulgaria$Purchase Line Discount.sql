@@ -21,3 +21,5 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line Discount
 [Vendor No_] [varchar] (20) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line Discount_1] ON [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line Discount] ([Currency Code], [Item No_], [Minimum Quantity], [Starting Date], [Unit of Measure Code], [Variant Code], [Vendor No_])
+GO

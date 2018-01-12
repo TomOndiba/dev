@@ -21,3 +21,5 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Price
 [timestamp] [timestamp] NOT NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Price_1] ON [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Price] ([Currency Code], [Item No_], [Minimum Quantity], [Starting Date], [Unit of Measure Code], [Variant Code], [Vendor No_])
+GO

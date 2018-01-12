@@ -144,3 +144,5 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Heade
 [timestamp] [timestamp] NOT NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Header_1] ON [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Header] ([Document Type], [No_])
+GO

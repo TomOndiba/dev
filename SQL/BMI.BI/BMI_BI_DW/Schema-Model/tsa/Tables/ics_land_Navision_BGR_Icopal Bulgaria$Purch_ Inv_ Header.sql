@@ -122,3 +122,5 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header]
 [Your Reference] [varchar] (30) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header_1] ON [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header] ([No_])
+GO

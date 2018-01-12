@@ -23,3 +23,5 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Line
 [Variant Code] [varchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Line_1] ON [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Line] ([Line No_], [Standard Purchase Code])
+GO

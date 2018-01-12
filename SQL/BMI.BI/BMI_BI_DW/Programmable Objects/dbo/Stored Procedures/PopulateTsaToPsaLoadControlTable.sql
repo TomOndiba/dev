@@ -246,6 +246,25 @@ set
 where
 	SourceTable like '%baan%' ;
 
+
+	
+		update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100139
+where
+	SourceTable like '%Navision_BGR%' ;
+
+
+	
+		update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100138
+where
+	SourceTable like '%Navision_Rom%' ;
+
+
 	
 
 /*************************************************************************************************************************************/

@@ -108,3 +108,5 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Li
 [timestamp] [timestamp] NOT NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line_1] ON [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line] ([Document No_], [Line No_])
+GO

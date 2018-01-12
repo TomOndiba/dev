@@ -183,3 +183,5 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line]
 [Work Center No_] [varchar] (20) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line_1] ON [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line] ([Document No_], [Document Type], [Line No_])
+GO

@@ -50,3 +50,5 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchases & Payables S
 [Vendor Nos_] [varchar] (10) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup_1] ON [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup] ([Primary Key])
+GO

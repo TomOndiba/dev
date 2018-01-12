@@ -74,6 +74,27 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
+Table=[psa].[ics_land_Navision_Rom_Live Icopal Romania$Purchase Line Discount];
+Table=[psa].[ics_land_Navision_Rom_Live Icopal Romania$Purchases&amp;PayablesSetup];
+Table=[psa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser];
+Table=[psa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Code];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header];
+Table=[psa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Line];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Header];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Line Discount];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Line];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Prepayment %];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Price];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purchases &amp; Payables Setup];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Code];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Salesperson_Purchaser];
+Table=[psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Standard Purchase Line];
+Table=[psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header];
+Table=[psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line];
+Table=[psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Price];
+Table=[psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header];
+Table=[psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1681,6 +1702,32 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\024_Create_JobsExecutionDetails_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purchase Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purchase Line Discount.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purchase Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purchase Prepayment %25.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purchase Price.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purchases &amp; Payables Setup.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purch_ Inv_ Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Purch_ Inv_ Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Salesperson_Purchaser.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Standard Purchase Code.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Icopal Bulgaria%24Standard Purchase Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Purchase Line Discount.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Purchases&amp;PayablesSetup.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Salesperson_Purchaser.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Standard Purchase Code.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Standard Purchase Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania1812%24Purchase Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania1812%24Purchase Line.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania1812%24Purchase Price.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania1812%24Purch_ Inv_ Header.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania1812%24Purch_ Inv_ Line.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\025_Create_Tsa_Navision_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

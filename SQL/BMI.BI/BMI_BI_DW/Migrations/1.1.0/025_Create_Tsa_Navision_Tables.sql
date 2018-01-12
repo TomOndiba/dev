@@ -1,5 +1,53 @@
 ﻿-- <Migration ID="083b44ee-ffa5-4cc2-9b0b-0d14841bb733" />
-GO
+go
+
+
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purchase Header', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Header] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line Discount', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line Discount] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purchase Prepayment %', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Prepayment %] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purchase Price', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Price] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Code', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Code] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Purchases & Payables Setup] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Salesperson_Purchaser', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Salesperson_Purchaser] ;
+if object_id('tsa.ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Line', 'U') is not null
+	drop table tsa.[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Line] ;
+
+go
+
+
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Header', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Header] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Line]', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Line] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Line Discount', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Line Discount] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Price', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Price] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Purchases & Payables Setup', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Purchases & Payables Setup] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Salesperson_Purchaser', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Salesperson_Purchaser] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Standard Purchase Code', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Standard Purchase Code] ;
+if object_id('tsa.ics_land_Navision_Rom_Live Icopal Romania1812$Standard Purchase Line', 'U') is not null
+	drop table tsa.[ics_land_Navision_Rom_Live Icopal Romania1812$Standard Purchase Line] ;
 
 PRINT N'Creating [tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Code]'
 GO

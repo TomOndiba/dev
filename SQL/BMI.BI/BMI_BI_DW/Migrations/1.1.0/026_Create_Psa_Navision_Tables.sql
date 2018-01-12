@@ -1418,9 +1418,9 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Lin
 [timestamp] [timestamp] NOT NULL
 )
 GO
-PRINT N'Creating [psa].[ics_land_Navision_Rom_Live Icopal Romania$Purchase Line Discount]'
+PRINT N'Creating [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchase Line Discount]'
 GO
-CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Purchase Line Discount]
+CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchase Line Discount]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
@@ -1478,9 +1478,9 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Price]
 [timestamp] [timestamp] NOT NULL
 )
 GO
-PRINT N'Creating [psa].[ics_land_Navision_Rom_Live Icopal Romania$Purchases&PayablesSetup]'
+PRINT N'Creating [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchases&PayablesSetup]'
 GO
-CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Purchases&PayablesSetup]
+CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchases&PayablesSetup]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
@@ -1529,9 +1529,9 @@ CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Purchases&Payables
 [timestamp] [timestamp] NOT NULL
 )
 GO
-PRINT N'Creating [psa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser]'
+PRINT N'Creating [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser]'
 GO
-CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser]
+CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
@@ -1581,9 +1581,9 @@ CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purcha
 [timestamp] [timestamp] NOT NULL
 )
 GO
-PRINT N'Creating [psa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Code]'
+PRINT N'Creating [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Standard Purchase Code]'
 GO
-CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Code]
+CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Standard Purchase Code]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,
@@ -1605,9 +1605,9 @@ CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase 
 [timestamp] [timestamp] NOT NULL
 )
 GO
-PRINT N'Creating [psa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Line]'
+PRINT N'Creating [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Standard Purchase Line]'
 GO
-CREATE TABLE [psa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Line]
+CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Standard Purchase Line]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
 [EtlBatchRunId] [int] NOT NULL,

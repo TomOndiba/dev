@@ -1666,13 +1666,6 @@ Static Data;
     <None Include="Migrations\1.1.0\015_Tsa_Baan_Clustered_Indexes_Added.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\016_Tsa_Navision_Tables_Added.sql" />
-    <None Include="Migrations\1.1.0\017_Psa_Navision_Tables_Added.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.1.0\018_Remove_Navision_Tables.sql" />
-    <None Include="Migrations\1.1.0\019_Tsa_navision_Tables.sql" />
-    <None Include="Migrations\1.1.0\020_Psa_Navision_Tables.sql" />
     <None Include="Migrations\1.1.0\021_Tsa_iScala_HUN_Tables.sql" />
     <None Include="Migrations\1.1.0\022_Psa_iScala_HUN_Tables.sql" />
   </ItemGroup>
@@ -1743,9 +1736,6 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\027_Create_PKs_Navision_Tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.1.0\028_Drop_Incorrect_Navision_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\029_Tsa_Naviosion_Tables_Indexes.sql" />

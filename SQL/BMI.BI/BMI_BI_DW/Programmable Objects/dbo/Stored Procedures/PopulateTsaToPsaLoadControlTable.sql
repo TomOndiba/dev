@@ -111,7 +111,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			from
 				(
 					select
-						col_name(ic.object_id, ic.column_id) PK
+						'['+col_name(ic.object_id, ic.column_id)+']' PK
 					  , t.TargetSchema + '.' + t.TargetTable as TableName
 					from
 						dbo.TsaToPsaLoadControlTable t
@@ -245,25 +245,6 @@ set
 	DataSourceKey = 100142
 where
 	SourceTable like '%baan%' ;
-
-
-	
-		update
-	dbo.TsaToPsaLoadControlTable
-set
-	DataSourceKey = 100139
-where
-	SourceTable like '%Navision_BGR%' ;
-
-
-	
-		update
-	dbo.TsaToPsaLoadControlTable
-set
-	DataSourceKey = 100138
-where
-	SourceTable like '%Navision_Rom%' ;
-
 
 	
 

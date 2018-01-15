@@ -82,7 +82,7 @@ begin
 	from
 		INFORMATION_SCHEMA.COLUMNS
 	where
-		TABLE_SCHEMA + '.' + TABLE_NAME = @STableName ;
+		TABLE_SCHEMA + '.[' + TABLE_NAME+']' = @STableName ;
 
 			
 	alter table #TableStructure add id int identity(1, 1) ;
@@ -108,7 +108,7 @@ begin
 	where
 		1 = 1
 		and i.is_primary_key = 1
-		and ic.object_id = object_id(@TTableName) ;
+		and ic.object_id = object_id(replace(replace(@TTableName,'[',''),']','')) ;
 						
 	alter table #PkeyTable add id int identity(1, 1) ;
 
@@ -197,6 +197,8 @@ begin
 		end ;
 
 	set @_Step = 'Execute Merge statement ' ;
+
+	select @sql
 
 	execute sp_executesql @sql ;
 

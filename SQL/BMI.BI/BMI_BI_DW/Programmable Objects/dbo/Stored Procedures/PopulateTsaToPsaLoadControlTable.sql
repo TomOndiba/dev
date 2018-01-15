@@ -70,10 +70,10 @@ Version	ChangeDate		Author	BugRef	Narrative
 			  , system_user		as CreatedBy
 			  , s.TABLE_CATALOG as SourceDB
 			  , s.TABLE_SCHEMA	as SourceSchema
-			  , s.TABLE_NAME	as SourceTable
+			  , '['+s.TABLE_NAME+']'	as SourceTable
 			  , t.TABLE_CATALOG as TargetDB
 			  , t.TABLE_SCHEMA	as TargetSchema
-			  , t.TABLE_NAME	as TargetTable
+			  , '['+t.TABLE_NAME+']'	as TargetTable
 			  , 'Full'	as LoadMode
 			  , 0				as DataSourceKey
 			--,'y n' as Action 
@@ -111,7 +111,7 @@ Version	ChangeDate		Author	BugRef	Narrative
 			from
 				(
 					select
-						'['+col_name(ic.object_id, ic.column_id)+']' PK
+						'['+replace(col_name(ic.object_id, ic.column_id),' ','_')+']' PK
 					  , t.TargetSchema + '.' + t.TargetTable as TableName
 					from
 						dbo.TsaToPsaLoadControlTable t
@@ -245,6 +245,25 @@ set
 	DataSourceKey = 100142
 where
 	SourceTable like '%baan%' ;
+
+		
+		update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100139
+where
+	SourceTable like '%Navision_BGR%' ;
+
+
+	
+		update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100138
+where
+	SourceTable like '%Navision_Rom%' ;
+
+	
 
 	
 

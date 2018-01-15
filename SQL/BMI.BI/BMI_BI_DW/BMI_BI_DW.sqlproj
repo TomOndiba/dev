@@ -1699,9 +1699,6 @@ Static Data;
     <None Include="Schema-Model\tsa\Tables\ics_land_Navision_Rom_Live Icopal Romania1812%24Purch_ Inv_ Line.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\025_Create_Tsa_Navision_Tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Purchase Line Discount.sql" />
     <None Include="Schema-Model\psa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Purchases&amp;PayablesSetup.sql" />
     <None Include="Schema-Model\psa\Tables\ics_land_Navision_Rom_Live Icopal Romania%24Salesperson_Purchaser.sql" />
@@ -1725,23 +1722,11 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania1812%24Purch_ Inv_ Line.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\026_Create_Psa_Navision_Tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Purchase Line Discount.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Purchases&amp;PayablesSetup.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Salesperson_Purchaser.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Standard Purchase Code.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_Navision_Rom_Live Icopal Romania%24Standard Purchase Line.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.1.0\027_Create_PKs_Navision_Tables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.1.0\029_Tsa_Naviosion_Tables_Indexes.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.1.0\030_Drop_Navision_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\031_Create_Tsa_Nav_BGR_Tables.sql" />

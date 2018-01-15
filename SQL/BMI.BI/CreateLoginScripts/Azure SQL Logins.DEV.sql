@@ -190,6 +190,18 @@ if not exists (select 1 from sys.database_principals where name = 'david.bradely
 	create user [david.bradely.sql] for login [david.bradely.sql] with default_schema = [dbo];
 go
 
+--!
+--!
+--!
+if not exists (select 1 from sys.sql_logins where name = 'matthew.basoo.sql')
+	create login [matthew.basoo.sql] with password = 'VbnFghYtr65$' ;
+else
+	alter login [matthew.basoo.sql] with password = 'VbnFghYtr65$' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'matthew.basoo.sql')
+	create user [matthew.basoo.sql] for login [matthew.basoo.sql] with default_schema = [dbo];
+go
+
 /*
 --!
 --!

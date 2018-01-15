@@ -133,8 +133,8 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
---	, (1	, 'DEV'		, 'razia.nazir.sql'							, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'razia.nazir.sql'							, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'matthew.basoo.sql'						, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'matthew.basoo.sql'						, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
 	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
@@ -227,9 +227,9 @@ values ('', '')
 	, ('greg.lucas.sql'							, 'SqlDevelopers')
 	, ('greg.lucas.sql'							, 'BatchManagers')
 	, ('greg.lucas.sql'							, 'CodeReviewers')
---	, ('razia.nazir.sql'						, 'SqlDevelopers')
---	, ('razia.nazir.sql'						, 'BatchManagers')
---	, ('razia.nazir.sql'						, 'CodeReviewers')
+	, ('matthew.basoo.sql'						, 'SqlDevelopers')
+	, ('matthew.basoo.sql'						, 'BatchManagers')
+	, ('matthew.basoo.sql'						, 'CodeReviewers')
 
 	--! ETL Developers
 	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')
@@ -682,7 +682,6 @@ go
 exec sp_addrolemember 'BatchManagers', 'ReleaseManager' ;
 go
 
-/*
 if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BI_DW_DEV'
 	begin
 		raiserror('Create SQL Login Administrators in DEV...', 0, 1) ;
@@ -700,12 +699,12 @@ if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name(
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
-			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'matthew.basoo.sql')
+			create user [matthew.basoo.sql] for login [matthew.basoo.sql] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [razia.nazir.sql]
-		alter role [db_owner] add member [razia.nazir.sql]
-		grant alter any user to [razia.nazir.sql]
+		alter role [db_accessadmin] add member [matthew.basoo.sql]
+		alter role [db_owner] add member [matthew.basoo.sql]
+		grant alter any user to [matthew.basoo.sql]
 	end
 else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BI_DW_PROD'
 	begin
@@ -724,12 +723,11 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
-			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'matthew.basoo.sql')
+			create user [matthew.basoo.sql] for login [matthew.basoo.sql] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [razia.nazir.sql]
-		alter role [db_owner] add member [razia.nazir.sql]
-		grant alter any user to [razia.nazir.sql]
+		alter role [db_accessadmin] add member [matthew.basoo.sql]
+		alter role [db_owner] add member [matthew.basoo.sql]
+		grant alter any user to [matthew.basoo.sql]
 	end
 go
-*/

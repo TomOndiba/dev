@@ -21,25 +21,29 @@ grant select on schema :: [dbo] to [DataFeedReaders];
 go
 if schema_id('qvstg') is not null
 	begin
-		exec (N'grant execute, select on schema :: [qvstg] to [DataFeedReaders];');
+		exec (N'grant select on schema :: [qvstg] to [DataFeedReaders];');
 	end
 go
 if schema_id('stg') is not null
 	begin
-		exec (N'grant execute, select on schema :: [stg] to [DataFeedReaders];');
+		exec (N'grant select on schema :: [stg] to [DataFeedReaders];');
 	end
 go
 if schema_id('tsa') is not null
 	begin
-		exec (N'grant execute, select on schema :: [tsa] to [DataFeedReaders];');
+		exec (N'grant select on schema :: [tsa] to [DataFeedReaders];');
 	end
 go
 if schema_id('psa') is not null
 	begin
-		exec (N'grant execute, select on schema :: [psa] to [DataFeedReaders];');
+		exec (N'grant select on schema :: [psa] to [DataFeedReaders];');
 	end
 go
-
+if schema_id('etl') is not null
+	begin
+		exec (N'grant select on schema :: [etl] to [DataFeedReaders];');
+	end
+go
 if not exists (select * from sys.database_principals where type = 'R' and name = 'DataFeedWriters')
 	exec(N'create role [DataFeedWriters] authorization [dbo];') ;
 go

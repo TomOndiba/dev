@@ -78,6 +78,7 @@ if not exists (select * from sys.sysusers where name = 'gary.kearns@icopal.com')
 		create user [Gary.Kearns@icopal.com] from external provider;
 	end
 go
+
 /*
 if not exists (select * from sys.sysusers where name = 'Amelie.Pogson@icopal.com')
 	begin

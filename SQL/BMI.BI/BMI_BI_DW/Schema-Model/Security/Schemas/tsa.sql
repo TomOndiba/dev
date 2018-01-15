@@ -7,29 +7,27 @@ GRANT SELECT ON SCHEMA:: [tsa] TO [BatchManagers]
 GO
 GRANT SELECT ON SCHEMA:: [tsa] TO [DataFeedReaders]
 GO
-GRANT EXECUTE ON SCHEMA:: [tsa] TO [DataFeedReaders]
+GRANT SELECT ON SCHEMA:: [tsa] TO [DataFeedWriters]
 GO
 GRANT ALTER ON SCHEMA:: [tsa] TO [DataFeedWriters]
 GO
-GRANT SELECT ON SCHEMA:: [tsa] TO [DataFeedWriters]
+GRANT EXECUTE ON SCHEMA:: [tsa] TO [DataFeedWriters]
 GO
 GRANT INSERT ON SCHEMA:: [tsa] TO [DataFeedWriters]
 GO
 GRANT UPDATE ON SCHEMA:: [tsa] TO [DataFeedWriters]
 GO
-GRANT EXECUTE ON SCHEMA:: [tsa] TO [DataFeedWriters]
+GRANT SELECT ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
 GO
 GRANT ALTER ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
 GO
-GRANT SELECT ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
+GRANT EXECUTE ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
 GO
 GRANT INSERT ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
 GO
-GRANT DELETE ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
-GO
 GRANT UPDATE ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
 GO
-GRANT EXECUTE ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
+GRANT DELETE ON SCHEMA:: [tsa] TO [EtlDevelopersDEV]
 GO
 GRANT SELECT ON SCHEMA:: [tsa] TO [EtlDevelopersPROD]
 GO
@@ -37,7 +35,7 @@ GRANT SELECT ON SCHEMA:: [tsa] TO [EtlDevelopersTEST]
 GO
 GRANT INSERT ON SCHEMA:: [tsa] TO [EtlDevelopersTEST]
 GO
-GRANT DELETE ON SCHEMA:: [tsa] TO [EtlDevelopersTEST]
-GO
 GRANT UPDATE ON SCHEMA:: [tsa] TO [EtlDevelopersTEST]
+GO
+GRANT DELETE ON SCHEMA:: [tsa] TO [EtlDevelopersTEST]
 GO

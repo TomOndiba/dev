@@ -74,27 +74,7 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Line];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Header];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Line];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Price];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Line];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Header];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line Discount];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Prepayment %];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Price];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Purchases &amp; Payables Setup];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Salesperson_Purchaser];
-Table=[tsa].[ics_land_Navision_BGR_Icopal Bulgaria$Standard Purchase Code];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania$Purchase Line Discount];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania$Purchases&amp;PayablesSetup];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Code];
-Table=[tsa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase Line];
+StoredProcedure=[dbo].[PopulateTsaToPsaLoadControlTable];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1760,6 +1740,9 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\029_Tsa_Naviosion_Tables_Indexes.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\030_Drop_Navision_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

@@ -108,7 +108,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Hea
 [Vendor_Order_No_] [varchar] (20) NULL,
 [Vendor_Posting_Group] [varchar] (10) NULL,
 [Your_Reference] [varchar] (30) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Header] PRIMARY KEY CLUSTERED  ([No_])

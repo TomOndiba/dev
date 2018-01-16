@@ -163,7 +163,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line]
 [Variant_Code] [varchar] (10) NULL,
 [Vendor_Item_No_] [varchar] (20) NULL,
 [Work_Center_No_] [varchar] (20) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Line] PRIMARY KEY CLUSTERED  ([Document_No_], [Document_Type], [Line_No_])

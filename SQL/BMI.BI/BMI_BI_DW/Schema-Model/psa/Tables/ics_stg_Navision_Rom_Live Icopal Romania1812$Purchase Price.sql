@@ -23,7 +23,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Price]
 [Unit_of_Measure_Code] [varchar] (10) NOT NULL,
 [Variant_Code] [varchar] (10) NOT NULL,
 [Vendor_No_] [varchar] (20) NOT NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Price] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Price] PRIMARY KEY CLUSTERED  ([Currency_Code], [Item_No_], [Minimum_Quantity], [Starting_Date], [Unit_of_Measure_Code], [Variant_Code], [Vendor_No_])

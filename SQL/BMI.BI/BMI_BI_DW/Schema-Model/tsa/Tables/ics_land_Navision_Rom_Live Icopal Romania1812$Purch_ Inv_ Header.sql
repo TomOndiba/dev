@@ -103,6 +103,6 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ He
 [Vendor_Order_No_] [varchar] (20) NULL,
 [Vendor_Posting_Group] [varchar] (10) NULL,
 [Your_Reference] [varchar] (30) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO

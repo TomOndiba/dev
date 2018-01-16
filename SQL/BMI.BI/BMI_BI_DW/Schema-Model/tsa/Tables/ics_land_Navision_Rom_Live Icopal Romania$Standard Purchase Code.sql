@@ -12,6 +12,6 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania$Standard Purchase 
 [Code] [varchar] (10) NULL,
 [Currency_Code] [varchar] (10) NULL,
 [Description] [varchar] (50) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO

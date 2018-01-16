@@ -146,7 +146,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header
 [Vendor_Quote_No_] [varchar] (20) NULL,
 [Vendor_Shipment_No_] [varchar] (20) NULL,
 [Your_Reference] [varchar] (30) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchase Header] PRIMARY KEY CLUSTERED  ([Document_Type], [No_])

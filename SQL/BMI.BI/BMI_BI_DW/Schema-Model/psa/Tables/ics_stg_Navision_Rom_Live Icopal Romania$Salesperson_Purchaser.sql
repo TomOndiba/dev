@@ -45,7 +45,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Salesperson_Purchas
 [Synchronize_To] [varchar] (32) NULL,
 [Synchronize_To-dos] [int] NULL,
 [Version_No_] [int] NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Salesperson_Purchaser] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Salesperson_Purchaser] PRIMARY KEY CLUSTERED  ([Code])

@@ -110,7 +110,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Lin
 [Variant_Code] [varchar] (10) NULL,
 [Vendor_Item_No_] [varchar] (20) NULL,
 [Work_Center_No_] [varchar] (20) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purch_ Inv_ Line] PRIMARY KEY CLUSTERED  ([Document_No_], [Line_No_])

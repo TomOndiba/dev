@@ -141,6 +141,6 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Heade
 [Vendor_Quote_No_] [varchar] (20) NULL,
 [Vendor_Shipment_No_] [varchar] (20) NULL,
 [Your_Reference] [varchar] (30) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO

@@ -44,7 +44,7 @@ CREATE TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchases&PayablesS
 [Return_Order_Nos_] [varchar] (10) NULL,
 [Return_Shipment_on_Credit_Memo] [tinyint] NULL,
 [Vendor_Nos_] [varchar] (10) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_Navision_Rom_Live Icopal Romania$Purchases&PayablesSetup] ADD CONSTRAINT [PK_psa_ics_stg_Navision_Rom_Live Icopal Romania1812$Purchases & Payables Setup] PRIMARY KEY CLUSTERED  ([Primary_Key])

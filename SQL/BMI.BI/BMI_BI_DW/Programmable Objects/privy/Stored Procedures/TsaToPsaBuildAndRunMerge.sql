@@ -198,7 +198,6 @@ begin
 
 	set @_Step = 'Execute Merge statement ' ;
 
-	select @sql
 
 	execute sp_executesql @sql ;
 

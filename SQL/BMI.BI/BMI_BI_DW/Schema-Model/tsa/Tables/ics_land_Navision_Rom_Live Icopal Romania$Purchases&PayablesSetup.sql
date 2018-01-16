@@ -39,6 +39,6 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania$Purchases&Payables
 [Return_Order_Nos_] [varchar] (10) NULL,
 [Return_Shipment_on_Credit_Memo] [tinyint] NULL,
 [Vendor_Nos_] [varchar] (10) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO

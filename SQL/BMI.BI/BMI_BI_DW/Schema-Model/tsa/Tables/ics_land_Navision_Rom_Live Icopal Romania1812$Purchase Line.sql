@@ -158,6 +158,6 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania1812$Purchase Line]
 [Variant_Code] [varchar] (10) NULL,
 [Vendor_Item_No_] [varchar] (20) NULL,
 [Work_Center_No_] [varchar] (20) NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO

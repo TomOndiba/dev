@@ -40,6 +40,6 @@ CREATE TABLE [tsa].[ics_land_Navision_Rom_Live Icopal Romania$Salesperson_Purcha
 [Synchronize_To] [varchar] (32) NULL,
 [Synchronize_To-dos] [int] NULL,
 [Version_No_] [int] NULL,
-[timestamp] [timestamp] NOT NULL
+[timestamp] [varchar] (30) NULL
 )
 GO

@@ -1741,10 +1741,7 @@ Static Data;
     <None Include="Migrations\1.1.0\034_Create_Psa_Nav_Rom_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\035_Psa_Rom_Tables_Fixed.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\1.1.0\036_Tsa_Rom_Tables_Fixed.sql" />
+    <None Include="Migrations\1.1.0\035_DataFeedReaders_perms.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

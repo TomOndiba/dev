@@ -115,12 +115,12 @@ values (0, '', '', '', 0, 0)
 
 	--! SQL Developers
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
---	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 0)
+	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'DEV'		, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
-	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
+	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
 --	, (1	, 'DEV'		, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
 --	, (1	, 'PROD'	, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
 --	, (1	, 'DEV'		, 'razia.nazir.sql'							, 'dbo'	, 0	, 1)
@@ -600,7 +600,7 @@ if not exists (select 1 from sys.database_principals where name = 'ReleaseManage
 go
 exec sp_addrolemember 'BatchManagers', 'ReleaseManager' ;
 go
-
+/*
 if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BAT_MAN_DEV'
 	begin
 		raiserror('Create SQL Login Administrators in DEV...', 0, 1) ;
@@ -650,3 +650,4 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		grant alter any user to [razia.nazir.sql]
 	end
 go
+*/

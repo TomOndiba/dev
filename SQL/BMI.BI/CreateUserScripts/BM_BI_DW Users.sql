@@ -120,19 +120,21 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'PowerBiReaderProd'						, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'ReleaseManager'							, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'ReleaseManager'							, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'SapBw4ExtractorDev'						, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'SapBw4ExtractorProd'						, 'dbo'	, 1	, 1)
 
 	--! SQL Developers
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
---	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 1)
---	, (1	, 'DEV'		, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
+--	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 0)
+--	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 0)
+	, (1	, 'DEV'		, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
-	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 1)
---	, (1	, 'DEV'		, 'razia.nazir.sql'							, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'razia.nazir.sql'							, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
+	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
+	, (1	, 'DEV'		, 'matthew.basoo.sql'						, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'matthew.basoo.sql'						, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
 	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
@@ -159,8 +161,16 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'bob.abildgaard-joergensen@icopal.com'	, 'dbo'	, 1	, 1)
 	, (1	, 'DEV'		, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
 	, (1	, 'PROD'	, 'gary.kearns@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'gary.elliott.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'gary.elliott.sql'						, 'dbo'	, 1	, 1)
 --	, (1	, 'DEV'		, 'mark.bolton.sql'							, 'dbo'	, 1	, 1)
 --	, (1	, 'PROD'	, 'mark.bolton.sql'							, 'dbo'	, 1	, 1)
+
+	--! Bluefin Consultants
+	, (1	, 'DEV'		, 'george.whitby.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'george.whitby.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'david.bradely.sql'						, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'david.bradely.sql'						, 'dbo'	, 1	, 1)
 
 	--! Supply Chain Users
 	, (1	, 'DEV'		, 'Amelie.Pogson@icopal.com'				, 'dbo'	, 1	, 1)
@@ -190,8 +200,6 @@ values (0, '', '', '', 0, 0)
 	, (0	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
-	, (0	, 'DEV'		, 'greg.lucas.sql'							, 'dbo'	, 1	, 0)
-	, (0	, 'PROD'	, 'greg.lucas.sql'							, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'razia.nazir.sql'							, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'razia.nazir.sql'							, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'vince.mitchell.sql'						, 'dbo'	, 1	, 0)
@@ -216,12 +224,12 @@ values ('', '')
 	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
 	, ('razia.nazir@icopal.com'					, 'BatchManagers')
 	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
---	, ('greg.lucas.sql'							, 'SqlDevelopers')
---	, ('greg.lucas.sql'							, 'BatchManagers')
---	, ('greg.lucas.sql'							, 'CodeReviewers')
---	, ('razia.nazir.sql'						, 'SqlDevelopers')
---	, ('razia.nazir.sql'						, 'BatchManagers')
---	, ('razia.nazir.sql'						, 'CodeReviewers')
+	, ('greg.lucas.sql'							, 'SqlDevelopers')
+	, ('greg.lucas.sql'							, 'BatchManagers')
+	, ('greg.lucas.sql'							, 'CodeReviewers')
+	, ('matthew.basoo.sql'						, 'SqlDevelopers')
+	, ('matthew.basoo.sql'						, 'BatchManagers')
+	, ('matthew.basoo.sql'						, 'CodeReviewers')
 
 	--! ETL Developers
 	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')
@@ -249,7 +257,12 @@ values ('', '')
 	, ('mark.bolton@icopal.com'					, 'BusinessAnalysts')
 	, ('bob.abildgaard-joergensen@icopal.com'	, 'BusinessAnalysts')
 	, ('gary.kearns@icopal.com'					, 'BusinessAnalysts')
+	, ('gary.elliott.sql'						, 'BusinessAnalysts')
 --	, ('mark.bolton.sql'						, 'BusinessAnalysts')
+
+	--! Bluefin Consultants
+	, ('george.whitby.sql'						, 'BusinessAnalysts')
+	, ('david.bradely.sql'						, 'BusinessAnalysts')
 
 	--! Supply Chain Users
 	, ('Amelie.Pogson@icopal.com'				, 'PowerBiReporters')
@@ -278,6 +291,8 @@ values ('', '')
 	, ('PowerBiReaderDev'						, 'PowerBiReporters')
 	, ('PowerBiReaderProd'						, 'PowerBiReporters')
 	, ('ReleaseManager'							, 'DeploymentManagers')
+	, ('SapBw4ExtractorDev'						, 'DataFeedReaders')
+	, ('SapBw4ExtractorProd'					, 'DataFeedReaders')
 
 	, (''		, 'DeploymentManagers')
 	, (''		, 'CodeReviewers')
@@ -667,7 +682,6 @@ go
 exec sp_addrolemember 'BatchManagers', 'ReleaseManager' ;
 go
 
-/*
 if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BI_DW_DEV'
 	begin
 		raiserror('Create SQL Login Administrators in DEV...', 0, 1) ;
@@ -685,12 +699,12 @@ if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name(
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
-			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'matthew.basoo.sql')
+			create user [matthew.basoo.sql] for login [matthew.basoo.sql] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [razia.nazir.sql]
-		alter role [db_owner] add member [razia.nazir.sql]
-		grant alter any user to [razia.nazir.sql]
+		alter role [db_accessadmin] add member [matthew.basoo.sql]
+		alter role [db_owner] add member [matthew.basoo.sql]
+		grant alter any user to [matthew.basoo.sql]
 	end
 else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BI_DW_PROD'
 	begin
@@ -709,12 +723,11 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
-			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'matthew.basoo.sql')
+			create user [matthew.basoo.sql] for login [matthew.basoo.sql] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [razia.nazir.sql]
-		alter role [db_owner] add member [razia.nazir.sql]
-		grant alter any user to [razia.nazir.sql]
+		alter role [db_accessadmin] add member [matthew.basoo.sql]
+		alter role [db_owner] add member [matthew.basoo.sql]
+		grant alter any user to [matthew.basoo.sql]
 	end
 go
-*/

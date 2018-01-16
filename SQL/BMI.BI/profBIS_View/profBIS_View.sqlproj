@@ -231,21 +231,6 @@
     <Build Include="privy\Functions\OrderShippedNotInvoicedDeltaHash.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Icopal_profBIS\Icopal_profBIS.sqlproj">
-      <Name>Icopal_profBIS</Name>
-      <Project>{416a3df6-504e-402b-ac1c-550597fd72d4}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
-      <DatabaseSqlCmdVariable>Icopal_profBIS</DatabaseSqlCmdVariable>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="Icopal_profBIS">
-      <DefaultValue>Icopal_profBIS</DefaultValue>
-      <Value>$(SqlCmdVar__1)</Value>
-    </SqlCmdVariable>
-  </ItemGroup>
-  <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -261,5 +246,27 @@
     <None Include="profBIS_View.sandbox.publish.xml" />
     <None Include="profBIS_View.localdb-ProjectsV13.publish.xml" />
     <None Include="profBIS_View.DKSQL1.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Icopal_profBIS\Icopal_profBIS.sqlproj">
+      <Name>Icopal_profBIS</Name>
+      <Project>{416a3df6-504e-402b-ac1c-550597fd72d4}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>Icopal_profBIS</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="Icopal_profBIS">
+      <DefaultValue>Icopal_profBIS</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\100\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
 </Project>

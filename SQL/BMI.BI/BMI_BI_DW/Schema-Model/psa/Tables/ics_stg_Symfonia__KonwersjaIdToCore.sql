@@ -14,8 +14,10 @@ CREATE TABLE [psa].[ics_stg_Symfonia__KonwersjaIdToCore]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia__KonwersjaIdToCore_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia__KonwersjaIdToCore_IsIncomplete] DEFAULT ('N'),
-[coreId] [int] NULL,
-[hmfID] [int] NULL,
-[objId] [int] NULL
+[coreId] [int] NOT NULL,
+[hmfID] [int] NOT NULL,
+[objId] [int] NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia__KonwersjaIdToCore] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia__KonwersjaIdToCore] PRIMARY KEY CLUSTERED  ([coreId], [hmfID], [objId])
 GO

@@ -15,7 +15,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_SM]
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_SM_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_SM_IsIncomplete] DEFAULT ('N'),
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idtw] [int] NULL,
 [magazyn] [int] NULL,
 [stan] [float] NULL,
@@ -24,4 +24,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_SM]
 [typ] [smallint] NULL,
 [wartosc] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_SM] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_SM] PRIMARY KEY CLUSTERED  ([id])
 GO

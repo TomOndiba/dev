@@ -16,7 +16,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_PW]
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_PW_IsIncomplete] DEFAULT ('N'),
 [data] [datetime] NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [iddkmg] [int] NULL,
 [iddw] [int] NULL,
 [idkoryg] [int] NULL,
@@ -28,4 +28,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_PW]
 [typ] [smallint] NULL,
 [wartosc] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_PW] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_PW] PRIMARY KEY CLUSTERED  ([id])
 GO

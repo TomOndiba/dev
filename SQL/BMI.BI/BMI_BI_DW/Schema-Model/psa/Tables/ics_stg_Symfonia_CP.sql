@@ -18,11 +18,13 @@ CREATE TABLE [psa].[ics_stg_Symfonia_CP]
 [cena] [float] NULL,
 [cenowy] [smallint] NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idck] [int] NULL,
 [idpoz] [int] NULL,
 [kod] [varchar] (40) NULL,
 [typ] [smallint] NULL,
 [waluta] [varchar] (3) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_CP] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_CP] PRIMARY KEY CLUSTERED  ([id])
 GO

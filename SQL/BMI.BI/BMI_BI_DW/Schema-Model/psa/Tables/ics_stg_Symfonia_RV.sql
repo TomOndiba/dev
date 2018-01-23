@@ -17,10 +17,12 @@ CREATE TABLE [psa].[ics_stg_Symfonia_RV]
 [datarej] [datetime] NULL,
 [datawyst] [datetime] NULL,
 [dkid] [int] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [netto] [float] NULL,
 [rejestr] [int] NULL,
 [stvat] [int] NULL,
 [vat] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_RV] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_RV] PRIMARY KEY CLUSTERED  ([id])
 GO

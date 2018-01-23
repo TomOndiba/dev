@@ -14,7 +14,9 @@ CREATE TABLE [psa].[ics_stg_Symfonia_AcInfo]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_AcInfo_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_AcInfo_IsIncomplete] DEFAULT ('N'),
-[Ac_Name] [varchar] (15) NULL,
+[Ac_Name] [varchar] (15) NOT NULL,
 [Ac_Value] [image] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_AcInfo] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_AcInfo] PRIMARY KEY CLUSTERED  ([Ac_Name])
 GO

@@ -18,10 +18,12 @@ CREATE TABLE [psa].[ics_stg_Symfonia_KR]
 [flag] [smallint] NULL,
 [formatNIP] [varchar] (100) NULL,
 [formatVAT] [varchar] (100) NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [kod] [varchar] (40) NULL,
 [nazwa] [varchar] (100) NULL,
 [typ] [smallint] NULL,
 [ue] [bit] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_KR] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_KR] PRIMARY KEY CLUSTERED  ([id])
 GO

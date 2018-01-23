@@ -15,9 +15,11 @@ CREATE TABLE [psa].[ics_stg_Symfonia_LOG_BASE]
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_LOG_BASE_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_LOG_BASE_IsIncomplete] DEFAULT ('N'),
 [baseName] [varchar] (19) NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [operation] [smallint] NULL,
 [rec_id] [int] NULL,
 [term] [int] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_LOG_BASE] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_LOG_BASE] PRIMARY KEY CLUSTERED  ([id])
 GO

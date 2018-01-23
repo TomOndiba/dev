@@ -26,7 +26,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_PN]
 [exp_fk] [smallint] NULL,
 [flag] [smallint] NULL,
 [guid] [uniqueidentifier] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [khadid] [int] NULL,
 [khdzial] [int] NULL,
 [khid] [int] NULL,
@@ -62,4 +62,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_PN]
 [wystawil] [int] NULL,
 [znacznik] [smallint] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_PN] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_PN] PRIMARY KEY CLUSTERED  ([id])
 GO

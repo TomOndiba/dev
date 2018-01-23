@@ -16,7 +16,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_OP]
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_OP_IsIncomplete] DEFAULT ('N'),
 [datarozl] [datetime] NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [id_co] [int] NULL,
 [id_transakcji] [int] NULL,
 [ilosc] [float] NULL,
@@ -29,4 +29,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_OP]
 [wartosc] [float] NULL,
 [wartosc_rozl] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_OP] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_OP] PRIMARY KEY CLUSTERED  ([id])
 GO

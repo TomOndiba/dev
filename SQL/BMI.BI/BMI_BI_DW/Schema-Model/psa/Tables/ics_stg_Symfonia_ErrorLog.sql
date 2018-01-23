@@ -16,9 +16,11 @@ CREATE TABLE [psa].[ics_stg_Symfonia_ErrorLog]
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_ErrorLog_IsIncomplete] DEFAULT ('N'),
 [data] [datetime] NULL,
 [errno] [int] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [opis] [varchar] (2000) NULL,
 [super] [int] NULL,
 [typ] [smallint] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_ErrorLog] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_ErrorLog] PRIMARY KEY CLUSTERED  ([id])
 GO

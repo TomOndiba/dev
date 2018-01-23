@@ -15,10 +15,12 @@ CREATE TABLE [psa].[ics_stg_Symfonia_EP]
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_EP_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_EP_IsIncomplete] DEFAULT ('N'),
 [guid] [uniqueidentifier] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [kurs] [float] NULL,
 [podmiot] [int] NULL,
 [typ] [smallint] NULL,
 [zobowiazanie] [int] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_EP] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_EP] PRIMARY KEY CLUSTERED  ([id])
 GO

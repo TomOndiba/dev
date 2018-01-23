@@ -16,7 +16,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_RP]
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_RP_IsIncomplete] DEFAULT ('N'),
 [data] [datetime] NULL,
 [exp_fk] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idrj] [int] NULL,
 [kod] [varchar] (40) NULL,
 [okres] [smallint] NULL,
@@ -34,4 +34,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_RP]
 [wyplaty] [float] NULL,
 [wyplatywal] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_RP] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_RP] PRIMARY KEY CLUSTERED  ([id])
 GO

@@ -18,7 +18,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_WD]
 [dzial] [varchar] (40) NULL,
 [flag] [smallint] NULL,
 [guid_obcy] [uniqueidentifier] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [id_obcy] [int] NULL,
 [id_wlasny] [int] NULL,
 [idkh] [int] NULL,
@@ -30,4 +30,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_WD]
 [typ] [smallint] NULL,
 [wartosc] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_WD] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_WD] PRIMARY KEY CLUSTERED  ([id])
 GO

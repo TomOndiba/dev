@@ -28,7 +28,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_ZO]
 [formaplatn] [int] NULL,
 [grupacen] [smallint] NULL,
 [guid] [uniqueidentifier] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [iddokkoryg] [int] NULL,
 [info] [smallint] NULL,
 [katalog] [int] NULL,
@@ -75,4 +75,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_ZO]
 [znacznik] [smallint] NULL,
 [zyskdod] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_ZO] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_ZO] PRIMARY KEY CLUSTERED  ([id])
 GO

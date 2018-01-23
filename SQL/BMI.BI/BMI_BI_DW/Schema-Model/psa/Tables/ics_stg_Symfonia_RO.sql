@@ -16,11 +16,13 @@ CREATE TABLE [psa].[ics_stg_Symfonia_RO]
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_RO_IsIncomplete] DEFAULT ('N'),
 [data] [datetime] NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [id1] [int] NULL,
 [id2] [int] NULL,
 [ilosc] [float] NULL,
 [typ] [smallint] NULL,
 [wartosc] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_RO] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_RO] PRIMARY KEY CLUSTERED  ([id])
 GO

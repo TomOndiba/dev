@@ -32,7 +32,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_DK]
 [formaplatn] [int] NULL,
 [grupacen] [smallint] NULL,
 [guid] [uniqueidentifier] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [iddokkoryg] [int] NULL,
 [info] [smallint] NULL,
 [jpk] [smallint] NULL,
@@ -87,4 +87,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_DK]
 [znacznik] [smallint] NULL,
 [zyskdod] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_DK] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_DK] PRIMARY KEY CLUSTERED  ([id])
 GO

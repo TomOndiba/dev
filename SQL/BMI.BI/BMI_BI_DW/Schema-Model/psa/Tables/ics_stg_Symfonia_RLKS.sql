@@ -14,10 +14,12 @@ CREATE TABLE [psa].[ics_stg_Symfonia_RLKS]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_RLKS_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_RLKS_IsIncomplete] DEFAULT ('N'),
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [iddp] [int] NULL,
 [idmz] [int] NULL,
 [ilosc] [float] NULL,
 [wartosc] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_RLKS] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_RLKS] PRIMARY KEY CLUSTERED  ([id])
 GO

@@ -25,7 +25,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_KH]
 [flag] [smallint] NULL,
 [formaplatn] [int] NULL,
 [grupacen] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idfk] [int] NULL,
 [idfk2] [int] NULL,
 [idKraju] [int] NULL,
@@ -68,4 +68,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_KH]
 [www] [varchar] (100) NULL,
 [znacznik] [smallint] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_KH] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_KH] PRIMARY KEY CLUSTERED  ([id])
 GO

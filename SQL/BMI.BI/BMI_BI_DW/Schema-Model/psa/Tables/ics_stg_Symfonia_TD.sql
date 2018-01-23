@@ -18,7 +18,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_TD]
 [charakter] [smallint] NULL,
 [datarej] [smallint] NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idDokKoryg] [int] NULL,
 [idDokSkojarz] [int] NULL,
 [idDokZal] [int] NULL,
@@ -42,4 +42,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_TD]
 [typ] [smallint] NULL,
 [typFK] [varchar] (4) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_TD] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_TD] PRIMARY KEY CLUSTERED  ([id])
 GO

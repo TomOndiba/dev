@@ -19,7 +19,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_PR]
 [dane] [text] NULL,
 [dscname] [varchar] (14) NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idComp] [int] NULL,
 [is_text] [smallint] NULL,
 [katalog] [int] NULL,
@@ -30,4 +30,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_PR]
 [typ] [smallint] NULL,
 [znacznik] [smallint] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_PR] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_PR] PRIMARY KEY CLUSTERED  ([id])
 GO

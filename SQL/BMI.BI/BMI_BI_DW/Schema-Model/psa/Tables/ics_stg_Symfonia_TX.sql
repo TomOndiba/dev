@@ -15,9 +15,11 @@ CREATE TABLE [psa].[ics_stg_Symfonia_TX]
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_TX_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_TX_IsIncomplete] DEFAULT ('N'),
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [opis] [text] NULL,
 [subtyp] [smallint] NULL,
 [typ] [smallint] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_TX] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_TX] PRIMARY KEY CLUSTERED  ([id])
 GO

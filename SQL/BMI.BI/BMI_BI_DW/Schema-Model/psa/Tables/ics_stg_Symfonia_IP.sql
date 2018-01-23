@@ -17,7 +17,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_IP]
 [cena] [float] NULL,
 [dataDw] [datetime] NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [iddw] [int] NULL,
 [idil] [int] NULL,
 [idtw] [int] NULL,
@@ -28,4 +28,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_IP]
 [typ] [smallint] NULL,
 [wartosc] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_IP] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_IP] PRIMARY KEY CLUSTERED  ([id])
 GO

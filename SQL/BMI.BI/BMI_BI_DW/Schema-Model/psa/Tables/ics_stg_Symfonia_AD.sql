@@ -16,7 +16,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_AD]
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_AD_IsIncomplete] DEFAULT ('N'),
 [dom] [varchar] (15) NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idkh] [int] NULL,
 [idKraju] [int] NULL,
 [kodpocz] [varchar] (10) NULL,
@@ -28,4 +28,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_AD]
 [typkh] [smallint] NULL,
 [ulica] [varchar] (50) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_AD] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_AD] PRIMARY KEY CLUSTERED  ([id])
 GO

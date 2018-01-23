@@ -18,7 +18,7 @@ CREATE TABLE [psa].[ics_stg_Symfonia_TR]
 [datarozl] [datetime] NULL,
 [dzial] [int] NULL,
 [flag] [smallint] NULL,
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [id_komu] [int] NULL,
 [id_kto] [int] NULL,
 [kod] [varchar] (40) NULL,
@@ -34,4 +34,6 @@ CREATE TABLE [psa].[ics_stg_Symfonia_TR]
 [wartosc] [float] NULL,
 [wartosc_rozl] [float] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_TR] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_TR] PRIMARY KEY CLUSTERED  ([id])
 GO

@@ -14,9 +14,11 @@ CREATE TABLE [psa].[ics_stg_Symfonia__MigracjaDodatkowePolaKh]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia__MigracjaDodatkowePolaKh_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia__MigracjaDodatkowePolaKh_IsIncomplete] DEFAULT ('N'),
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [idkh] [int] NULL,
 [nrpola] [smallint] NULL,
 [opis] [varchar] (60) NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia__MigracjaDodatkowePolaKh] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia__MigracjaDodatkowePolaKh] PRIMARY KEY CLUSTERED  ([id])
 GO

@@ -14,9 +14,11 @@ CREATE TABLE [psa].[ics_stg_Symfonia_INIFILE]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_INIFILE_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_INIFILE_IsIncomplete] DEFAULT ('N'),
-[klucz] [varchar] (100) NULL,
+[klucz] [varchar] (100) NOT NULL,
 [napis] [varchar] (256) NULL,
-[plik] [varchar] (100) NULL,
-[sekcja] [varchar] (100) NULL
+[plik] [varchar] (100) NOT NULL,
+[sekcja] [varchar] (100) NOT NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_INIFILE] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_INIFILE] PRIMARY KEY CLUSTERED  ([klucz], [plik], [sekcja])
 GO

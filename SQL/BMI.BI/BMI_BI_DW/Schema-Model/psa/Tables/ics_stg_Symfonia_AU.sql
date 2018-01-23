@@ -14,12 +14,14 @@ CREATE TABLE [psa].[ics_stg_Symfonia_AU]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_AU_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_AU_IsIncomplete] DEFAULT ('N'),
-[id] [int] NULL,
+[id] [int] NOT NULL,
 [o_id] [int] NULL,
 [o_oper] [smallint] NULL,
 [o_parent] [int] NULL,
-[o_seed] [int] NULL,
+[o_seed] [int] NOT NULL,
 [o_type] [int] NULL,
 [o_unit] [int] NULL
 )
+GO
+ALTER TABLE [psa].[ics_stg_Symfonia_AU] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_AU] PRIMARY KEY CLUSTERED  ([id], [o_seed])
 GO

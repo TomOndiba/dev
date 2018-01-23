@@ -1,0 +1,28 @@
+CREATE TABLE [psa].[ics_stg_Symfonia_CP]
+(
+[EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[EtlUpdatedOn] [datetime] NOT NULL,
+[EtlUpdatedBy] [varchar] (200) NOT NULL,
+[EtlDeletedOn] [datetime] NULL,
+[EtlDeletedBy] [varchar] (200) NULL,
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_CP_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Symfonia_CP_IsIncomplete] DEFAULT ('N'),
+[bazapoz] [smallint] NULL,
+[cena] [float] NULL,
+[cenowy] [smallint] NULL,
+[flag] [smallint] NULL,
+[id] [int] NULL,
+[idck] [int] NULL,
+[idpoz] [int] NULL,
+[kod] [varchar] (40) NULL,
+[typ] [smallint] NULL,
+[waluta] [varchar] (3) NULL
+)
+GO

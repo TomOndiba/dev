@@ -1825,6 +1825,84 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.1.0\037_Create_Tsa_Symfonia_Tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_AcInfo.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_AD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_amsys_objects.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ARM_BackLog.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ARM_Customerfile.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ARM_Items.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ARM_SalesInvoiceTrans.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ARM_ShipNotInvoiced.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_AU.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_CK.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_CN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_CP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_CT.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_DK.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_DP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_DT.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_DW.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_EK.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_EP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ErrorLog.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_FP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_HW.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_IL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_INIFILE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_IP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_IT.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_KH.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_KP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_KR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_LOCAL_LOG.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_LogKonwersji.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_LOG_BASE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_MG.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_MZ.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_NT.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_OP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_PN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_PO.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_PR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_PW.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_RE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_RLKS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_RN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_RO.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ROPN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_RP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_RV.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_RZ.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_SD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_SK.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_SM.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_SR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_StanyMinMax.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_TC.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_TD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_TR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_TW.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_TX.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_UR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_UZ.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_WD.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_WR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_XT.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ZE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ZL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ZN.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ZO.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ZP.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ZR.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia_ZZ.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia__KonwersjaIdToCore.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia__MigracjaDodatkowePolaKh.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_Symfonia__MigracjaDodatkowePolaTw.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\038_Create_Psa_Symfonia_Tables.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

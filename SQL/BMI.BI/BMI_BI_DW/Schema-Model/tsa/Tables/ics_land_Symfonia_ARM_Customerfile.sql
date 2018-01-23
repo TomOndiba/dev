@@ -1,0 +1,31 @@
+CREATE TABLE [tsa].[ics_land_Symfonia_ARM_Customerfile]
+(
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Symfonia_ARM_Customerfile_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Symfonia_ARM_Customerfile_IsDuplicate] DEFAULT ((0)),
+[Address_1] [nvarchar] (82) NULL,
+[Address_2] [varchar] (1) NULL,
+[Address_3] [varchar] (1) NULL,
+[City] [nvarchar] (50) NULL,
+[Code] [varchar] (4) NULL,
+[Country] [nvarchar] (50) NULL,
+[Customer_Type] [varchar] (1) NULL,
+[CustomerGroup1] [varchar] (1) NULL,
+[CustomerGroup2] [varchar] (1) NULL,
+[CustomerGroup3] [varchar] (1) NULL,
+[CustomerGroup4] [varchar] (1) NULL,
+[CustomerGroup5] [varchar] (1) NULL,
+[CustomerTypeText] [varchar] (1) NULL,
+[khid] [int] NULL,
+[Name] [nvarchar] (150) NULL,
+[SysID] [int] NULL,
+[VATID] [nvarchar] (20) NULL,
+[Zip_Code] [nvarchar] (10) NULL
+)
+GO

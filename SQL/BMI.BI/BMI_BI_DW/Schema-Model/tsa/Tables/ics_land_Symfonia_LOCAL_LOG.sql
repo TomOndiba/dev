@@ -16,3 +16,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_LOCAL_LOG]
 [term] [int] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_LOCAL_LOG_1] ON [tsa].[ics_land_Symfonia_LOCAL_LOG] ([id], [term])
+GO

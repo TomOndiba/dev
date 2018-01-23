@@ -15,3 +15,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia__MigracjaDodatkowePolaTw]
 [opis] [varchar] (60) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia__MigracjaDodatkowePolaTw_1] ON [tsa].[ics_land_Symfonia__MigracjaDodatkowePolaTw] ([id])
+GO

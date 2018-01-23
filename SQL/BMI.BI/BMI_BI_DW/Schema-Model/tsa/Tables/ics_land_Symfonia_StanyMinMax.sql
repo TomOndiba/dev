@@ -16,3 +16,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_StanyMinMax]
 [TowarId] [int] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_StanyMinMax_1] ON [tsa].[ics_land_Symfonia_StanyMinMax] ([id])
+GO

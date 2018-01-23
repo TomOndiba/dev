@@ -44,3 +44,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_ZL]
 [znacznik] [smallint] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_ZL_1] ON [tsa].[ics_land_Symfonia_ZL] ([id])
+GO

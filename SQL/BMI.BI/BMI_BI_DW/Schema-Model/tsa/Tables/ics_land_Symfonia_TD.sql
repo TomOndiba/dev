@@ -38,3 +38,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_TD]
 [typFK] [varchar] (4) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_TD_1] ON [tsa].[ics_land_Symfonia_TD] ([id])
+GO

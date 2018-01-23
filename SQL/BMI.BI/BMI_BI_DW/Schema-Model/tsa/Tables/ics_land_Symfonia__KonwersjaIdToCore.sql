@@ -14,3 +14,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia__KonwersjaIdToCore]
 [objId] [int] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia__KonwersjaIdToCore_1] ON [tsa].[ics_land_Symfonia__KonwersjaIdToCore] ([coreId], [hmfID], [objId])
+GO

@@ -13,3 +13,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_AcInfo]
 [Ac_Value] [image] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_AcInfo_1] ON [tsa].[ics_land_Symfonia_AcInfo] ([Ac_Name])
+GO

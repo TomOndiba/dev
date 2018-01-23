@@ -33,3 +33,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_ZZ]
 [waluta] [varchar] (3) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_ZZ_1] ON [tsa].[ics_land_Symfonia_ZZ] ([id])
+GO

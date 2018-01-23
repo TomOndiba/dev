@@ -32,3 +32,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_DW]
 [wartoscst] [float] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_DW_1] ON [tsa].[ics_land_Symfonia_DW] ([id])
+GO

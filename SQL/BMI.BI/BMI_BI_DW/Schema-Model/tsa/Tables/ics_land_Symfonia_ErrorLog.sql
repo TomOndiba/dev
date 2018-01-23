@@ -17,3 +17,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_ErrorLog]
 [typ] [smallint] NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_ErrorLog_1] ON [tsa].[ics_land_Symfonia_ErrorLog] ([id])
+GO

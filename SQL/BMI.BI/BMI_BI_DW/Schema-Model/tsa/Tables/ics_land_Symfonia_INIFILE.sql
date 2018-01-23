@@ -15,3 +15,5 @@ CREATE TABLE [tsa].[ics_land_Symfonia_INIFILE]
 [sekcja] [varchar] (100) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_Symfonia_INIFILE_1] ON [tsa].[ics_land_Symfonia_INIFILE] ([klucz], [plik], [sekcja])
+GO

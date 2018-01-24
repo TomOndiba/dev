@@ -264,9 +264,14 @@ where
 	SourceTable like '%Navision_Rom%' ;
 
 	
+		update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100130
+where
+	SourceTable like '%Symfoni%' ;
 
 	
-
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;
 		end try

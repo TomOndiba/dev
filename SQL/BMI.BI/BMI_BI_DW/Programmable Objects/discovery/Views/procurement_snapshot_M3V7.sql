@@ -34,8 +34,8 @@ l.IBCODT as ConfirmedDeliveryDate,
 l.IBPLDT as PlanningDeliveryDate,
 l.IBLMDT as ChangeDate
 
- from tsa.ics_land_m3v7_MPHEAD h---Header
-left outer  join tsa.ics_land_m3v7_MPLINE l on ---line
+ from psa.ics_stg_m3v7_MPHEAD h---Header
+left outer  join psa.ics_stg_m3v7_MPLINE l on ---line
 h.IAPUNO =l.IBPUNO
 --left outer join 
 --[tsa].[ics_land_m3v7_FGINLI] i---invoice

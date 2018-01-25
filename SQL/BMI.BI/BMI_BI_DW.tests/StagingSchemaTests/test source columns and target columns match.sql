@@ -20,7 +20,7 @@ as
 			 where
 					c.TABLE_SCHEMA = 'tsa'
 				 and c.TABLE_NAME not in
-						 ('ics_sql_dummySource', 'ics_sql_runLog')
+						 ('ics_sql_dummySource', 'ics_sql_runLog','JobsExecutionDetails')
 				 and c.COLUMN_NAME not in
 						 ('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlSourceTable', 'EtlCreatedOn', 'EtlCreatedBy'
 						, 'ExcludeFromMerge', 'IsDuplicate'
@@ -56,7 +56,7 @@ as
 			 where
 					c.TABLE_SCHEMA = 'psa'
 				 and c.TABLE_NAME not in
-						 ('ics_sql_dummySource', 'ics_sql_runLog')
+						 ('ics_sql_dummySource', 'ics_sql_runLog','JobsExecutionDetails')
 				 and c.COLUMN_NAME not in
 						 ('EtlBatchRunId', 'EtlStepRunId', 'EtlThreadRunId', 'DataSourceKey', 'EtlSourceTable', 'EtlCreatedOn', 'EtlCreatedBy'
 						, 'ExcludeFromMerge', 'IsDuplicate'

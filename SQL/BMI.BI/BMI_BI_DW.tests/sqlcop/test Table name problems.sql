@@ -17,7 +17,7 @@ begin
 	select  @Output = @Output + TABLE_SCHEMA + '.' + TABLE_NAME + char(13) + char(10)
     from    INFORMATION_SCHEMA.TABLES
     where   TABLE_NAME collate SQL_Latin1_General_CP1_CI_AI like '%[^a-z' + @AcceptableSymbols + ']%'
-			and TABLE_SCHEMA not in ('tSQLt', 'TestHelpers', 'stg', 'tsa','psa')
+			and TABLE_SCHEMA not in ('tSQLt', 'TestHelpers', 'stg', 'tsa','psa','discovery')
 			and not (TABLE_SCHEMA = 'fred' and TABLE_NAME = 'Ginger_Deprecated20160415')
 	order by TABLE_SCHEMA,TABLE_NAME
 

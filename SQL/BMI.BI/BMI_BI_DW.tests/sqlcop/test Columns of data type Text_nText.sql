@@ -1,4 +1,4 @@
-﻿create procedure [sqlcop].[test Columns of data type Text/nText]
+﻿CREATE procedure [sqlcop].[test Columns of data type Text/nText]
 as
 begin
 	-- Written by George Mastros
@@ -20,7 +20,7 @@ begin
 	where   o.type = 'U'         
 			and objectproperty(o.id, N'IsMSShipped') = 0         
 			and systypes.name in ('text','ntext')
-			and schema_name(o.uid) <> 'tSQLt'
+			and schema_name(o.uid) not in ('tSQLt', 'TestHelpers', 'stg', 'tsa','psa','discovery')
 	order by schema_name(o.uid),o.name, col.name
 			
 	if @Output > '' 

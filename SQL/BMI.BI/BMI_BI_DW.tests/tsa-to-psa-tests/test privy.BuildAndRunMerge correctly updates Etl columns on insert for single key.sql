@@ -104,9 +104,9 @@ as
 
 		exec privy.TsaToPsaBuildAndRunMerge
 			@RunType = 'Delta'
-		  , @SourceTableName = 'ics_land_Dummy'
+		  , @SourceTableName = '[ics_land_Dummy]'
 		  , @SourceSchemaName = 'test_tsa'
-		  , @TargetTableName = 'ics_stg_Dummy'
+		  , @TargetTableName = '[ics_stg_Dummy]'
 		  , @TargetSchemaName = 'test_psa'
 		  , @LoadDateTime = @_now ;
 

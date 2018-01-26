@@ -231,7 +231,7 @@ set
 where
 	SourceTable like '%[_]movex[_]%' ;
 
-	update
+update
 	dbo.TsaToPsaLoadControlTable
 set
 	DataSourceKey = 100101
@@ -239,15 +239,15 @@ where
 	SourceTable like '%SAP%' ;
 
 
-		update
+update
 	dbo.TsaToPsaLoadControlTable
 set
 	DataSourceKey = 100142
 where
 	SourceTable like '%baan%' ;
 
-		
-		update
+
+update
 	dbo.TsaToPsaLoadControlTable
 set
 	DataSourceKey = 100139
@@ -255,21 +255,29 @@ where
 	SourceTable like '%Navision_BGR%' ;
 
 
-	
-		update
+
+update
 	dbo.TsaToPsaLoadControlTable
 set
 	DataSourceKey = 100138
 where
 	SourceTable like '%Navision_Rom%' ;
 
-	
-		update
+
+update
 	dbo.TsaToPsaLoadControlTable
 set
 	DataSourceKey = 100130
 where
 	SourceTable like '%Symfoni%' ;
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100147
+where
+	SourceTable like '%iSc%' ;
+
 
 	
 /*************************************************************************************************************************************/

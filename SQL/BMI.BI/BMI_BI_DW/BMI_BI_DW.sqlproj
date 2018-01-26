@@ -1927,6 +1927,22 @@ Static Data;
   <ItemGroup>
     <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3V7.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_m3_MPHEAD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\044_Tsa_M3_Table_MPHead.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_m3_MPHEAD.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\045_Psa_M3_Table_MPHead.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3V10_POL.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

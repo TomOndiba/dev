@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[discovery].[procurement_snapshot_M3V10_POL]') IS NOT NULL
+IF OBJECT_ID('[discovery].[procurement_snapshot_M3V10_POL]') IS NOT NULL
 	DROP VIEW [discovery].[procurement_snapshot_M3V10_POL];
 
 GO
@@ -6,6 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
 create   view [discovery].[procurement_snapshot_M3V10_POL]
 as
 select
@@ -33,6 +34,7 @@ select
   , l.IBPLDT as PlanningDeliveryDate
   , l.IBLMDT as ChangeDate
   , 'vil'	 as DataSource
+    ,(select max(d.EtlCreatedOn) from psa.ics_stg_M3V10vil_POL_MPHEAD	 d) as DateDataExtracted
 from
 	psa.ics_stg_M3V10vil_POL_MPHEAD				h ---Header
 left outer join psa.ics_stg_M3V10vil_POL_MPLINE l
@@ -72,6 +74,7 @@ select
   , l.IBPLDT as PlanningDeliveryDate
   , l.IBLMDT as ChangeDate
   , 'ved'	 as DataSource
+    ,(select max(d.EtlCreatedOn) from psa.ics_stg_M3V10ved_POL_MPHEAD	 d) as DateDataExtracted
 from
 	psa.ics_stg_M3V10ved_POL_MPHEAD				h ---Header
 left outer join psa.ics_stg_M3V10ved_POL_MPLINE l
@@ -111,6 +114,7 @@ select
   , l.IBPLDT as PlanningDeliveryDate
   , l.IBLMDT as ChangeDate
   , 'gen'	 as DataSource
+  ,(select max(d.EtlCreatedOn) from psa.ics_stg_M3V10gen_POL_MPHEAD	 d) as DateDataExtracted
 from
 	psa.ics_stg_M3V10gen_POL_MPHEAD				h ---Header
 left outer join psa.ics_stg_M3V10gen_POL_MPLINE l

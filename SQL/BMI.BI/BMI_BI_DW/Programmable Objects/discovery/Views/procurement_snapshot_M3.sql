@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[discovery].[procurement_snapshot_M3]') IS NOT NULL
+IF OBJECT_ID('[discovery].[procurement_snapshot_M3]') IS NOT NULL
 	DROP VIEW [discovery].[procurement_snapshot_M3];
 
 GO
@@ -6,6 +6,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
+
 
 
 
@@ -35,8 +37,9 @@ l.IBLNAM as LineAmountOrderCurrency,
 l.IBDWDT as RequestedDeliveryDate,
 l.IBCODT as ConfirmedDeliveryDate,
 l.IBPLDT as PlanningDeliveryDate,
-l.IBLMDT as ChangeDate
-
+l.IBLMDT as ChangeDate,
+'M3'	 as DataSource,
+(select max(d.EtlCreatedOn) from psa.ics_stg_m3_MPHEAD d) as DateDataExtracted
  from psa.ics_stg_m3_MPHEAD h---Header
 left outer  join psa.ics_stg_m3_MPLINE l on ---line
 h.IAPUNO =l.IBPUNO

@@ -7,7 +7,8 @@ GO
 SET ANSI_NULLS ON
 GO
 
-create   view [discovery].[procurement_snapshot_M3V10_POL]
+
+CREATE   view [discovery].[procurement_snapshot_M3V10_POL]
 as
 select
 	h.IACONO as Division
@@ -21,6 +22,7 @@ select
   , h.IASUNO as Supplier
   , h.IACUCD as Currency
   , l.IBPNLI as PurchaseLine
+  ,l.IBITNO as Item
   , l.IBORQA as OrderedQty
   , l.IBRVQA as ReceivedQuantity
   , l.IBCAQA as ApprovedQty
@@ -61,6 +63,7 @@ select
   , h.IASUNO as Supplier
   , h.IACUCD as Currency
   , l.IBPNLI as PurchaseLine
+  ,l.IBITNO as Item
   , l.IBORQA as OrderedQty
   , l.IBRVQA as ReceivedQuantity
   , l.IBCAQA as ApprovedQty
@@ -101,6 +104,7 @@ select
   , h.IASUNO as Supplier
   , h.IACUCD as Currency
   , l.IBPNLI as PurchaseLine
+  ,l.IBITNO as Item
   , l.IBORQA as OrderedQty
   , l.IBRVQA as ReceivedQuantity
   , l.IBCAQA as ApprovedQty

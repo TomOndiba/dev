@@ -8,7 +8,8 @@ SET ANSI_NULLS ON
 GO
 
 
-create view [discovery].[procurement_snapshot]
+
+CREATE view [discovery].[procurement_snapshot]
 
  as 
 
@@ -24,6 +25,7 @@ select [Division]
       ,[Supplier]
       ,[Currency]
       ,[PurchaseLine]
+	  , Item
       ,[OrderedQty]
       ,[ReceivedQuantity]
       ,[ApprovedQty]
@@ -52,6 +54,7 @@ select [Division]
       ,[Supplier]
       ,[Currency]
       ,[PurchaseLine]
+	  ,Item
       ,[OrderedQty]
       ,[ReceivedQuantity]
       ,[ApprovedQty]
@@ -81,6 +84,7 @@ select [Division]
       ,[Supplier]
       ,[Currency]
       ,[PurchaseLine]
+	  ,Item
       ,[OrderedQty]
       ,[ReceivedQuantity]
       ,[ApprovedQty]

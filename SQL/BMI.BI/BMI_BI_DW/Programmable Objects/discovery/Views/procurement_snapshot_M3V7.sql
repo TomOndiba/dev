@@ -8,7 +8,8 @@ SET ANSI_NULLS ON
 GO
 
 
-create   view  
+
+CREATE   view  
  [discovery].[procurement_snapshot_M3V7]
 as
 select 
@@ -23,6 +24,7 @@ h.IAPUST as HighestStatus,
 h.IASUNO as Supplier,
 h.IACUCD as Currency,
 l.IBPNLI as PurchaseLine,
+l.IBITNO as Item,
 l.IBORQA as OrderedQty,
 l.IBRVQA as ReceivedQuantity,
 l.IBCAQA as ApprovedQty,

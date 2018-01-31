@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[discovery].[procurement_sap_gbr]') IS NOT NULL
+IF OBJECT_ID('[discovery].[procurement_sap_gbr]') IS NOT NULL
 	DROP VIEW [discovery].[procurement_sap_gbr];
 
 GO
@@ -6,726 +6,138 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-create    view [discovery].[procurement_sap_gbr]
- as 
 
-select top 100 percent 
-	--be.MATNR,
-	md.MAKTG
-  , be.BUDAT
-  , be.BLDAT
-  , be.MANDT				as EKBE_client_1
-  , be.EBELN				as EKBE_purchasing_document_number_1
-  , be.EBELP				as EKBE_item_number_of_purchasing_document_1
-  , be.ZEKKN				as sequential_number_of_account_assignment
-  , be.VGABE				as EKBE_transactionevent_type_purchase_order_history_1
-  , be.GJAHR				as material_document_year
-  , be.BELNR				as number_of_material_document
-  , be.BUZEI				as EKBE_item_in_material_document_1
-  , be.BEWTP				as EKBE_po_history_category_1
-  , be.BWART				as movement_type_inventory_management
-  , be.BUDAT				as posting_date_in_the_document
-  , be.MENGE				as EKBE_quantity
-  , be.BPMNG				as EKBE_quantity_in_purchase_order_price_unit_1
-  , be.DMBTR				as EKBE_amount_in_local_currency_1
-  , be.WRBTR				as EKBE_amount_in_document_currency_1
-  , be.WAERS				as currency_key
-  , be.AREWR				as EKBE_grir_account_clearing_value_in_local_currency_1
-  , be.WESBS				as goods_receipt_blocked_stock_in_order_unit
-  , be.BPWES				as quantity_in_gr_blocked_stock_in_order_price_unit
-  , be.SHKZG				as EKBE_debitcredit_indicator_1
-  , be.BWTAR				as valuation_type
-  , be.ELIKZ				as delivery_completed_indicator
-  , be.XBLNR				as reference_document_number
-  , be.LFGJA				as fiscal_year_of_a_reference_document
-  , be.LFBNR				as document_no_of_a_reference_document
-  , be.LFPOS				as item_of_a_reference_document
-  , be.GRUND				as reason_for_movement
-  , be.CPUDT				as day_on_which_accounting_document_was_entered
-  , be.CPUTM				as EKBE_time_of_entry_1
-  , be.REEWR				as EKBZ_invoice_value_entered_in_local_currency_1
-  , be.EVERE				as compliance_with_shipping_instructions
-  , be.REFWR				as EKBZ_invoice_value_in_foreign_currency_1
-  , be.MATNR				as material_number
-  , be.WERKS				as plant
-  , be.XWSBR				as reversal_of_gr_allowed_for_gr_based_iv_despite_invoice
-  , be.ETENS				as sequential_number_of_vendor_confirmation
-  , be.KNUMV				as number_of_the_document_condition
-  , be.MWSKZ				as EKBE_tax_on_salespurchases_code_1
-  , be.LSMNG				as quantity_in_unit_of_measure_from_delivery_note
-  , be.LSMEH				as unit_of_measure_from_delivery_note
-  , be.EMATN				as EKBE_material_number
-  , be.AREWW				as clearing_value_on_grir_clearing_account_transac_currency
-  , be.HSWAE				as local_currency_key
-  , be.BAMNG				as EKBE_quantity_3
-  , be.CHARG				as batch_number
-  , be.BLDAT				as document_date_in_document
-  , be.XWOFF				as calculation_of_val_open
-  , be.XUNPL				as unplanned_account_assignment_from_invoice_verification
-  , be.ERNAM				as name_of_person_who_created_the_object
-  , be.SRVPOS				as service_number
-  , be.PACKNO				as package_number_of_service
-  , be.INTROW				as line_number_of_service
-  , be.BEKKN				as number_of_po_account_assignment
-  , be.LEMIN				as returns_indicator
-  , be.AREWB				as EKBE_clearing_value_on_grir_account_in_po_currency_1
-  , be.REWRB				as EKBE_invoice_amount_in_po_currency_1
-  , be.SAPRL				as EKBE_sap_release_1
-  , be.MENGE_POP			as quantity
-  , be.BPMNG_POP			as EKBE_quantity_in_purchase_order_price_unit_2
-  , be.DMBTR_POP			as EKBE_amount_in_local_currency_2
-  , be.WRBTR_POP			as EKBE_amount_in_document_currency_2
-  , be.WESBB				as valuated_goods_receipt_blocked_stock_in_order_unit
-  , be.BPWEB				as quantity_in_valuated_gr_blocked_stock_in_order_price_unit
-  , be.WEORA				as EKBE_acceptance_at_origin_1
-  , be.AREWR_POP			as grir_account_clearing_value_in_local_currency
-  , be.KUDIF				as exchange_rate_difference_amount
-  , be.RETAMT_FC			as retention_amount_in_document_currency
-  , be.RETAMT_LC			as retention_amount_in_company_code_currency
-  , be.RETAMTP_FC			as posted_retention_amount_in_document_currency
-  , be.RETAMTP_LC			as posted_security_retention_amount_in_company_code_currency
-  , be.XMACC				as multiple_account_assignment
-  , be.WKURS				as exchange_rate
-  , be.VBELN_ST				as delivery
-  , be.VBELP_ST				as delivery_item
-  , be.ET_UPD				as procedure_for_updating_the_schedule_line_quantity
-  , be.J_SC_DIE_COMP_F		as depreciation_completion_flag
-  , bz.MANDT				as EKBZ_client_1
-  , bz.EBELN				as EKBZ_purchasing_document_number_1
-  , bz.EBELP				as item_number_of_purchasing_document
-  , bz.STUNR				as step_number
-  , bz.ZAEHK				as condition_counter
-  , bz.VGABE				as transactionevent_type_purchase_order_history
-  , bz.GJAHR				as fiscal_year
-  , bz.BELNR				as accounting_document_number
-  , bz.BUZEI				as item_in_material_document
-  , bz.BEWTP				as EKBZ_po_history_category_1
-  , bz.BUDAT				as EKBZ_posting_date_in_the_document_1
-  , bz.MENGE				as EKBZ_quantity
-  , bz.DMBTR				as EKBZ_amount_in_local_currency_1
-  , bz.WRBTR				as EKBZ_amount_in_document_currency_1
-  , bz.WAERS				as EKBZ_currency_key_1
-  , bz.AREWR				as EKBZ_grir_account_clearing_value_in_local_currency_1
-  , bz.SHKZG				as EKBZ_debitcredit_indicator_1
-  , bz.XBLNR				as EKBZ_reference_document_number_1
-  , bz.FRBNR				as number_of_bill_of_lading_at_time_of_goods_receipt
-  , bz.LIFNR				as account_number_of_vendor_or_creditor
-  , bz.CPUDT				as EKBZ_day_on_which_accounting_document_was_entered_1
-  , bz.CPUTM				as time_of_entry
-  , bz.REEWR				as invoice_value_entered_in_local_currency
-  , bz.REFWR				as invoice_value_in_foreign_currency
-  , bz.BWTAR				as EKBZ_valuation_type_1
-  , bz.KSCHL				as condition_type
-  , bz.BPMNG				as EKBZ_quantity_in_purchase_order_price_unit_1
-  , bz.AREWW				as EKBZ_clearing_value_on_grir_clearing_account_transac_currency_1
-  , bz.HSWAE				as EKBZ_local_currency_key_1
-  , bz.VNETW				as net_value_of_condition_predefined_externally
-  , bz.ERNAM				as EKBZ_name_of_person_who_created_the_object_1
-  , bz.SHKKO				as debitcredit_indicator
-  , bz.AREWB				as clearing_value_on_grir_account_in_po_currency
-  , bz.REWRB				as invoice_amount_in_po_currency
-  , bz.SAPRL				as sap_release
-  , bz.MENGE_POP			as EKBZ_quantity_1
-  , bz.DMBTR_POP			as amount_in_local_currency
-  , bz.WRBTR_POP			as amount_in_document_currency
-  , bz.BPMNG_POP			as quantity_in_purchase_order_price_unit
-  , bz.AREWR_POP			as EKBZ_grir_account_clearing_value_in_local_currency_2
-  , bz.KUDIF				as EKBZ_exchange_rate_difference_amount_1
-  , bz.XMACC				as EKBZ_multiple_account_assignment_1
-  , bz.WKURS				as EKBZ_exchange_rate_1
-  , ma.MANDT				as MARA_client_1
-  , ma.MATNR				as MARA_material_number
-  , ma.ERSDA				as created_on
-  , ma.ERNAM				as MARA_name_of_person_who_created_the_object_1
-  , ma.LAEDA				as date_of_last_change
-  , ma.AENAM				as name_of_person_who_changed_object
-  , ma.VPSTA				as maintenance_status_of_complete_material
-  , ma.PSTAT				as maintenance_status
-  , ma.LVORM				as flag_material_for_deletion_at_client_level
-  , ma.MTART				as material_type
-  , ma.MBRSH				as industry_sector
-  , ma.MATKL				as material_group
-  , ma.BISMT				as old_material_number
-  , ma.MEINS				as base_unit_of_measure
-  , ma.BSTME				as purchase_order_unit_of_measure
-  , ma.ZEINR				as document_number
-  , ma.ZEIAR				as document_type_without_document_management_system
-  , ma.ZEIVR				as document_version_without_document_management_system
-  , ma.ZEIFO				as page_format_of_document_without_document_management_system
-  , ma.AESZN				as document_change_number_without_document_management_system
-  , ma.BLATT				as page_number_of_document_without_document_management_system
-  , ma.BLANZ				as number_of_sheets_without_document_management_system
-  , ma.FERTH				as productioninspection_memo
-  , ma.FORMT				as page_format_of_production_memo
-  , ma.GROES				as sizedimensions
-  , ma.WRKST				as basic_material
-  , ma.NORMT				as industry_standard_description_such_as_ansi_or_iso
-  , ma.LABOR				as laboratorydesign_office
-  , ma.EKWSL				as purchasing_value_key
-  , ma.BRGEW				as gross_weight
-  , ma.NTGEW				as net_weight
-  , ma.GEWEI				as weight_unit
-  , ma.VOLUM				as volume
-  , ma.VOLEH				as volume_unit
-  , ma.BEHVO				as container_requirements
-  , ma.RAUBE				as storage_conditions
-  , ma.TEMPB				as temperature_conditions_indicator
-  , ma.DISST				as low_level_code
-  , ma.TRAGR				as transportation_group
-  , ma.STOFF				as hazardous_material_number
-  , ma.SPART				as division
-  , ma.KUNNR				as competitor
-  , ma.EANNR				as european_article_number_ean_obsolete
-  , ma.WESCH				as quantity_number_of_grgi_slips_to_be_printed
-  , ma.BWVOR				as procurement_rule
-  , ma.BWSCL				as source_of_supply
-  , ma.SAISO				as season_category
-  , ma.ETIAR				as label_type
-  , ma.ETIFO				as label_form
-  , ma.ENTAR				as deactivated
-  , ma.EAN11				as international_article_number_eanupc
-  , ma.NUMTP				as category_of_international_article_number_ean
-  , ma.LAENG				as length
-  , ma.BREIT				as width
-  , ma.HOEHE				as height
-  , ma.MEABM				as unit_of_dimension_for_lengthwidthheight
-  , ma.PRDHA				as product_hierarchy
-  , ma.AEKLK				as stock_transfer_net_change_costing
-  , ma.CADKZ				as cad_indicator
-  , ma.QMPUR				as qm_in_procurement_is_active
-  , ma.ERGEW				as allowed_packaging_weight
-  , ma.ERGEI				as unit_of_weight_allowed_packaging_weight
-  , ma.ERVOL				as allowed_packaging_volume
-  , ma.ERVOE				as volume_unit_allowed_packaging_volume
-  , ma.GEWTO				as excess_weight_tolerance_for_handling_unit
-  , ma.VOLTO				as excess_volume_tolerance_of_the_handling_unit
-  , ma.VABME				as variable_purchase_order_unit_active
-  , ma.KZREV				as revision_level_has_been_assigned_to_the_material
-  , ma.KZKFG				as configurable_material
-  , ma.XCHPF				as batch_management_requirement_indicator
-  , ma.VHART				as packaging_material_type
-  , ma.FUELG				as maximum_level_by_volume
-  , ma.STFAK				as stacking_factor
-  , ma.MAGRV				as material_group_packaging_materials
-  , ma.BEGRU				as authorization_group
-  , ma.DATAB				as valid_from_date
-  , ma.LIQDT				as deletion_date
-  , ma.SAISJ				as season_year
-  , ma.PLGTP				as price_band_category
-  , ma.MLGUT				as empties_bill_of_material
-  , ma.EXTWG				as external_material_group
-  , ma.SATNR				as cross_plant_configurable_material
-  , ma.ATTYP				as material_category
-  , ma.KZKUP				as indicator_material_can_be_co_product
-  , ma.KZNFM				as indicator_the_material_has_a_follow_up_material
-  , ma.PMATA				as pricing_reference_material
-  , ma.MSTAE				as cross_plant_material_status
-  , ma.MSTAV				as cross_distribution_chain_material_status
-  , ma.MSTDE				as date_from_which_the_cross_plant_material_status_is_valid
-  , ma.MSTDV				as date_from_which_the_x_distr_chain_material_status_is_valid
-  , ma.TAKLV				as tax_classification_of_the_material
-  , ma.RBNRM				as catalog_profile
-  , ma.MHDRZ				as minimum_remaining_shelf_life
-  , ma.MHDHB				as total_shelf_life
-  , ma.MHDLP				as storage_percentage
-  , ma.INHME				as content_unit
-  , ma.INHAL				as net_contents
-  , ma.VPREH				as comparison_price_unit
-  , ma.ETIAG				as is_r_labeling_material_grouping_deactivated_in_40
-  , ma.INHBR				as gross_contents
-  , ma.CMETH				as quantity_conversion_method
-  , ma.CUOBF				as internal_object_number
-  , ma.KZUMW				as environmentally_relevant
-  , ma.KOSCH				as product_allocation_determination_procedure
-  , ma.SPROF				as pricing_profile_for_variants
-  , ma.NRFHG				as material_qualifies_for_discount_in_kind
-  , ma.MFRPN				as MARA_manufacturer_part_number_1
-  , ma.MFRNR				as MARA_number_of_a_manufacturer_1
-  , ma.BMATN				as number_of_firms_own_internal_inventory_managed_material
-  , ma.MPROF				as manufacturer_part_profile
-  , ma.KZWSM				as units_of_measure_usage
-  , ma.SAITY				as rollout_in_a_season
-  , ma.PROFL				as dangerous_goods_indicator_profile
-  , ma.IHIVI				as indicator_highly_viscous
-  , ma.ILOOS				as indicator_in_bulkliquid
-  , ma.SERLV				as level_of_explicitness_for_serial_number
-  , ma.KZGVH				as packaging_material_is_closed_packaging
-  , ma.XGCHP				as indicator_approved_batch_record_required
-  , ma.KZEFF				as assign_effectivity_parameter_values_override_change_numbers
-  , ma.COMPL				as material_completion_level
-  , ma.IPRKZ				as MARA_period_indicator_for_shelf_life_expiration_date_1
-  , ma.RDMHD				as rounding_rule_for_calculation_of_sled
-  , ma.PRZUS				as indicator_product_composition_printed_on_packaging
-  , ma.MTPOS_MARA			as general_item_category_group
-  , ma.BFLME				as generic_material_with_logistical_variants
-  , ma.MATFI				as material_is_locked
-  , ma.CMREL				as relevant_for_configuration_management
-  , ma.BBTYP				as assortment_list_type
-  , ma.SLED_BBD				as expiration_date
-  , ma.GTIN_VARIANT			as global_trade_item_number_variant
-  , ma.GENNR				as material_number_of_the_generic_material_in_prepack_materials
-  , ma.RMATP				as reference_material_for_materials_packed_in_same_way
-  , ma.GDS_RELEVANT			as indicator_global_data_synchronization_relevant
-  , ma.WEORA				as MARA_acceptance_at_origin_1
-  , ma.HUTYP_DFLT			as standard_hu_type
-  , ma.PILFERABLE			as pilferable
-  , ma.WHSTC				as warehouse_storage_condition
-  , ma.WHMATGR				as warehouse_material_group
-  , ma.HNDLCODE				as handling_indicator
-  , ma.HAZMAT				as relevant_for_hazardous_substances
-  , ma.HUTYP				as handling_unit_type
-  , ma.TARE_VAR				as variable_tare_weight
-  , ma.MAXC					as maximum_allowed_capacity_of_packaging_material
-  , ma.MAXC_TOL				as overcapacity_tolerance_of_the_handling_unit
-  , ma.MAXL					as maximum_packing_length_of_packaging_material
-  , ma.MAXB					as maximum_packing_width_of_packaging_material
-  , ma.MAXH					as maximum_packing_height_of_packaging_material
-  , ma.MAXDIM_UOM			as unit_of_measure_for_maximum_packing_lengthwidthheight
-  , ma.HERKL				as country_of_origin_of_the_material
-  , ma.MFRGR				as material_freight_group
-  , ma.QQTIME				as quarantine_period
-  , ma.QQTIMEUOM			as time_unit_for_quarantine_period
-  , ma.QGRP					as quality_inspection_group
-  , ma.SERIAL				as serial_number_profile
-  , ma.PS_SMARTFORM			as form_name
-  , ma.LOGUNIT				as ewm_cw_logistics_unit_of_measure
-  , ma.CWQREL				as ewm_cw_material_is_a_catch_weight_material
-  , ma.CWQPROC				as ewm_cw_catch_weight_profile_for_entering_cw_quantity
-  , ma.CWQTOLGR				as ewm_cw_catch_weight_tolerance_group_for_ewm
-  , ma.ADPROF				as adjustment_profile
-  , ma.IPMIPPRODUCT			as id_for_an_intellectual_property_crm_product
-  , ma.ALLOW_PMAT_IGNO		as variant_price_allowed_for_material_master
-  , ma.MEDIUM				as medium
-  , ma.ANIMAL_ORIGIN		as indicator_contains_non_textile_parts_of_animal_origin
-  , ma.TEXTILE_COMP_IND		as indicator_new_textile_composition_function
-  , ma.ANP					as anp_code
-  , ma._BEV1_LULEINH		as loading_units
-  , ma._BEV1_LULDEGRP		as loading_unit_group_is_beverage
-  , ma._BEV1_NESTRUCCAT		as structure_category_for_material_relationship
-  , ma._DSD_SL_TOLTYP		as tolerance_type_id
-  , ma._DSD_SV_CNT_GRP		as counting_group
-  , ma._DSD_VC_GROUP		as dsd_grouping
-  , ma._VSO_R_TILT_IND		as material_may_be_tilted_vehicle_space_optimization
-  , ma._VSO_R_STACK_IND		as stacking_not_allowed_vso
-  , ma._VSO_R_BOT_IND		as bottom_layer_vehicle_space_optimization
-  , ma._VSO_R_TOP_IND		as top_layer_vso
-  , ma._VSO_R_STACK_NO		as stacking_factor_vehicle_space_optimization
-  , ma._VSO_R_PAL_IND		as load_without_packaging_material_vso
-  , ma._VSO_R_PAL_OVR_D		as permissible_overhang_depth_of_packaging_material_vso
-  , ma._VSO_R_PAL_OVR_W		as permissible_overhang_width_of_shipping_material_vso
-  , ma._VSO_R_PAL_B_HT		as maximum_stacking_height_of_the_packaging_material_vso
-  , ma._VSO_R_PAL_MIN_H		as minimum_stacking_height_of_the_packaging_material_vso
-  , ma._VSO_R_TOL_B_HT		as tolerance_to_exceed_the_max_stacking_height_vso
-  , ma._VSO_R_NO_P_GVH		as number_of_materials_for_each_closed_pkm_vso
-  , ma._VSO_R_QUAN_UNIT		as unit_of_measure_vehicle_space_optimization
-  , ma._VSO_R_KZGVH_IND		as closed_packaging_material_required_vso
-  , ma.PACKCODE				as packaging_code
-  , ma.DG_PACK_STATUS		as dangerous_goods_packaging_status
-  , ma.MCOND				as material_condition_management
-  , ma.RETDELC				as return_code
-  , ma.LOGLEV_RETO			as return_to_logistics_level
-  , ma.NSNID				as nato_stock_number
-  , ma.IMATN				as fff_class
-  , ma.PICNUM				as supersession_chain_number
-  , ma.BSTAT				as creation_status_seasonal_procurement
-  , ma.COLOR_ATINN			as internal_charactieristic_number_for_color_characteristics
-  , ma.SIZE1_ATINN			as internal_char_number_for_characteristics_for_main_sizes
-  , ma.SIZE2_ATINN			as internal_char_number_for_characteristics_for_second_sizes
-  , ma.COLOR				as characteristic_value_for_colors_of_variants
-  , ma.SIZE1				as characteristic_value_for_main_sizes_of_variants
-  , ma.SIZE2				as characteristic_value_for_second_size_for_variants
-  , ma.FREE_CHAR			as characteristic_value_for_evaluation_purposes
-  , ma.CARE_CODE			as care_codes_such_as_washing_code_ironing_code_etc
-  , ma.BRAND_ID				as brand
-  , ma.FIBER_CODE1			as fiber_code_for_textiles_component_1
-  , ma.FIBER_PART1			as percentage_share_of_fiber_component_1
-  , ma.FIBER_CODE2			as fiber_code_for_textiles_component_2
-  , ma.FIBER_PART2			as percentage_share_of_fiber_component_2
-  , ma.FIBER_CODE3			as fiber_code_for_textiles_component_3
-  , ma.FIBER_PART3			as percentage_share_of_fiber_component_3
-  , ma.FIBER_CODE4			as fiber_code_for_textiles_component_4
-  , ma.FIBER_PART4			as percentage_share_of_fiber_component_4
-  , ma.FIBER_CODE5			as fiber_code_for_textiles_component_5
-  , ma.FIBER_PART5			as percentage_share_of_fiber_component_5
-  , ma.FASHGRD				as fashion_grade
-  , ekp.MANDT				as EKPO_client_1
-  , ekp.EBELN				as EKPO_purchasing_document_number_1
-  , ekp.EBELP				as EKPO_item_number_of_purchasing_document_1
-  , ekp.LOEKZ				as deletion_indicator_in_purchasing_document
-  , ekp.STATU				as rfq_status
-  , ekp.AEDAT				as purchasing_document_item_change_date
-  , ekp.TXZ01				as short_text
-  , ekp.MATNR				as EKP_material_number_1
-  , ekp.EMATN				as EKP_material_number
-  , ekp.BUKRS				as company_code
-  , ekp.WERKS				as EKPO_plant_1
-  , ekp.LGORT				as storage_location
-  , ekp.BEDNR				as requirement_tracking_number
-  , ekp.MATKL				as EKPO_material_group_1
-  , ekp.INFNR				as number_of_purchasing_info_record
-  , ekp.IDNLF				as material_number_used_by_vendor
-  , ekp.KTMNG				as target_quantity
-  , ekp.MENGE				as purchase_order_quantity
-  , ekp.MEINS				as EKPO_purchase_order_unit_of_measure_1
-  , ekp.BPRME				as order_price_unit_purchasing
-  , ekp.BPUMZ				as numerator_for_conversion_of_order_price_unit_into_order_unit
-  , ekp.BPUMN				as denominator_for_conversion_of_order_price_unit_into_order_unit
-  , ekp.UMREZ				as numerator_for_conversion_of_order_unit_to_base_unit
-  , ekp.UMREN				as denominator_for_conversion_of_order_unit_to_base_unit
-  , ekp.NETPR				as net_price_in_purchasing_document_in_document_currency
-  , ekp.PEINH				as price_unit
-  , ekp.NETWR				as net_order_value_in_po_currency
-  , ekp.BRTWR				as gross_order_value_in_po_currency
-  , ekp.AGDAT				as deadline_for_submission_of_bidquotation
-  , ekp.WEBAZ				as goods_receipt_processing_time_in_days
-  , ekp.MWSKZ				as tax_on_salespurchases_code
-  , ekp.BONUS				as settlement_group_1_purchasing
-  , ekp.INSMK				as stock_type
-  , ekp.SPINF				as indicator_update_info_record
-  , ekp.PRSDR				as price_printout
-  , ekp.SCHPR				as indicator_estimated_price
-  , ekp.MAHNZ				as number_of_remindersexpediters
-  , ekp.MAHN1				as number_of_days_for_first_reminderexpediter
-  , ekp.MAHN2				as number_of_days_for_second_reminderexpediter
-  , ekp.MAHN3				as number_of_days_for_third_reminderexpediter
-  , ekp.UEBTO				as overdelivery_tolerance_limit
-  , ekp.UEBTK				as indicator_unlimited_overdelivery_allowed
-  , ekp.UNTTO				as underdelivery_tolerance_limit
-  , ekp.BWTAR				as EKPO_valuation_type_1
-  , ekp.BWTTY				as valuation_category
-  , ekp.ABSKZ				as rejection_indicator
-  , ekp.AGMEM				as internal_comment_on_quotation
-  , ekp.ELIKZ				as EKPO_delivery_completed_indicator_1
-  , ekp.EREKZ				as final_invoice_indicator
-  , ekp.PSTYP				as item_category_in_purchasing_document
-  , ekp.KNTTP				as account_assignment_category
-  , ekp.KZVBR				as consumption_posting
-  , ekp.VRTKZ				as distribution_indicator_for_multiple_account_assignment
-  , ekp.TWRKZ				as partial_invoice_indicator
-  , ekp.WEPOS				as goods_receipt_indicator
-  , ekp.WEUNB				as goods_receipt_non_valuated
-  , ekp.REPOS				as invoice_receipt_indicator
-  , ekp.WEBRE				as indicator_gr_based_invoice_verification
-  , ekp.KZABS				as order_acknowledgment_requirement
-  , ekp.LABNR				as order_acknowledgment_number
-  , ekp.KONNR				as number_of_principal_purchase_agreement
-  , ekp.KTPNR				as item_number_of_principal_purchase_agreement
-  , ekp.ABDAT				as reconciliation_date_for_agreed_cumulative_quantity
-  , ekp.ABFTZ				as agreed_cumulative_quantity
-  , ekp.ETFZ1				as firm_zone_go_ahead_for_production
-  , ekp.ETFZ2				as trade_off_zone_go_ahead_for_materials_procurement
-  , ekp.KZSTU				as firmtrade_off_zones_binding_with_regard_to_material_planning
-  , ekp.NOTKZ				as exclusion_in_outline_agreement_item_with_material_class
-  , ekp.LMEIN				as EKPO_base_unit_of_measure_1
-  , ekp.EVERS				as shipping_instructions
-  , ekp.ZWERT				as target_value_for_outline_agreement_in_document_currency
-  , ekp.NAVNW				as non_deductible_input_tax
-  , ekp.ABMNG				as standard_release_order_quantity
-  , ekp.PRDAT				as date_of_price_determination
-  , ekp.BSTYP				as purchasing_document_category
-  , ekp.EFFWR				as effective_value_of_item
-  , ekp.XOBLR				as item_affects_commitments
-  , ekp.KUNNR				as customer
-  , ekp.ADRNR				as manual_address_number_in_purchasing_document_item
-  , ekp.EKKOL				as condition_group_with_vendor
-  , ekp.SKTOF				as item_does_not_qualify_for_cash_discount
-  , ekp.STAFO				as update_group_for_statistics_update
-  , ekp.PLIFZ				as planned_delivery_time_in_days
-  , ekp.NTGEW				as EKPO_net_weight_1
-  , ekp.GEWEI				as unit_of_weight
-  , ekp.TXJCD				as tax_jurisdiction
-  , ekp.ETDRK				as indicator_print_relevant_schedule_lines_exist
-  , ekp.SOBKZ				as special_stock_indicator
-  , ekp.ARSNR				as settlement_reservation_number
-  , ekp.ARSPS				as item_number_of_the_settlement_reservation
-  , ekp.INSNC				as quality_inspection_indicator_cannot_be_changed
-  , ekp.SSQSS				as control_key_for_quality_management_in_procurement
-  , ekp.ZGTYP				as certificate_type
-  , ekp.EAN11				as EKPO_international_article_number_eanupc_1
-  , ekp.BSTAE				as confirmation_control_key
-  , ekp.REVLV				as revision_level
-  , ekp.GEBER				as fund
-  , ekp.FISTL				as funds_center
-  , ekp.FIPOS				as commitment_item
-  , ekp.KO_GSBER			as business_area_reported_to_the_partner
-  , ekp.KO_PARGB			as assumed_business_area_of_the_business_partner
-  , ekp.KO_PRCTR			as profit_center
-  , ekp.KO_PPRCTR			as partner_profit_center
-  , ekp.MEPRF				as price_determination_pricing_date_control
-  , ekp.BRGEW				as EKPO_gross_weight_1
-  , ekp.VOLUM				as EKPO_volume_1
-  , ekp.VOLEH				as EKPO_volume_unit_1
-  , ekp.INCO1				as incoterms_part_1
-  , ekp.INCO2				as incoterms_part_2
-  , ekp.VORAB				as advance_procurement_project_stock
-  , ekp.KOLIF				as prior_vendor
-  , ekp.LTSNR				as vendor_subrange
-  , ekp.PACKNO				as package_number
-  , ekp.FPLNR				as invoicing_plan_number
-  , ekp.GNETWR				as currently_not_used
-  , ekp.STAPO				as item_is_statistical
-  , ekp.UEBPO				as higher_level_item_in_purchasing_documents
-  , ekp.LEWED				as latest_possible_goods_receipt
-  , ekp.EMLIF				as vendor_to_be_suppliedwho_is_to_receive_delivery
-  , ekp.LBLKZ				as subcontracting_vendor
-  , ekp.SATNR				as EKPO_cross_plant_configurable_material_1
-  , ekp.ATTYP				as EKPO_material_category_1
-  , ekp.KANBA				as kanban_indicator
-  , ekp.ADRN2				as number_of_delivery_address
-  , ekp.CUOBJ				as configuration_internal_object_number
-  , ekp.XERSY				as evaluated_receipt_settlement_ers
-  , ekp.EILDT				as start_date_for_gr_based_settlement
-  , ekp.DRDAT				as last_transmission
-  , ekp.DRUHR				as time
-  , ekp.DRUNR				as sequential_number
-  , ekp.AKTNR				as promotion
-  , ekp.ABELN				as allocation_table_number
-  , ekp.ABELP				as item_number_of_allocation_table
-  , ekp.ANZPU				as number_of_points
-  , ekp.PUNEI				as points_unit
-  , ekp.SAISO				as EKPO_season_category_1
-  , ekp.SAISJ				as EKPO_season_year_1
-  , ekp.EBON2				as settlement_group_2_rebate_settlement_purchasing
-  , ekp.EBON3				as settlement_group_3_rebate_settlement_purchasing
-  , ekp.EBONF				as item_relevant_to_subsequent_period_end_rebate_settlement
-  , ekp.MLMAA				as material_ledger_activated_at_material_level
-  , ekp.MHDRZ				as EKPO_minimum_remaining_shelf_life_1
-  , ekp.ANFNR				as rfq_number
-  , ekp.ANFPS				as item_number_of_rfq
-  , ekp.KZKFG				as origin_of_configuration
-  , ekp.USEQU				as quota_arrangement_usage
-  , ekp.UMSOK				as special_stock_indicator_for_physical_stock_transfer
-  , ekp.BANFN				as purchase_requisition_number
-  , ekp.BNFPO				as item_number_of_purchase_requisition
-  , ekp.MTART				as EKPO_material_type_1
-  , ekp.UPTYP				as subitem_category_purchasing_document
-  , ekp.UPVOR				as subitems_exist
-  , ekp.KZWI1				as subtotal_1_from_pricing_procedure_for_condition
-  , ekp.KZWI2				as subtotal_2_from_pricing_procedure_for_condition
-  , ekp.KZWI3				as subtotal_3_from_pricing_procedure_for_condition
-  , ekp.KZWI4				as subtotal_4_from_pricing_procedure_for_condition
-  , ekp.KZWI5				as subtotal_5_from_pricing_procedure_for_condition
-  , ekp.KZWI6				as subtotal_6_from_pricing_procedure_for_condition
-  , ekp.SIKGR				as processing_key_for_sub_items
-  , ekp.MFZHI				as maximum_cumulative_material_go_ahead_quantity
-  , ekp.FFZHI				as maximum_cumulative_production_go_ahead_quantity
-  , ekp.RETPO				as returns_item
-  , ekp.AUREL				as relevant_to_allocation_table
-  , ekp.BSGRU				as reason_for_ordering
-  , ekp.LFRET				as delivery_type_for_returns_to_vendors
-  , ekp.MFRGR				as EKPO_material_freight_group_1
-  , ekp.NRFHG				as EKPO_material_qualifies_for_discount_in_kind_1
-  , ekp.J_1BNBM				as brazilian_ncm_code
-  , ekp.J_1BMATUSE			as usage_of_the_material
-  , ekp.J_1BMATORG			as origin_of_the_material
-  , ekp.J_1BOWNPRO			as produced_in_house
-  , ekp.J_1BINDUST			as material_cfop_category
-  , ekp.ABUEB				as release_creation_profile
-  , ekp.NLABD				as next_forecast_delivery_schedule_transmission
-  , ekp.NFABD				as next_jit_delivery_schedule_transmission
-  , ekp.KZBWS				as valuation_of_special_stock
-  , ekp.BONBA				as rebate_basis_1
-  , ekp.FABKZ				as indicator_item_relevant_to_jit_delivery_schedules
-  , ekp.J_1AINDXP			as inflation_index
-  , ekp.J_1AIDATEP			as inflation_index_date
-  , ekp.MPROF				as EKPO_manufacturer_part_profile_1
-  , ekp.EGLKZ				as outward_delivery_completed_indicator
-  , ekp.KZTLF				as partial_delivery_at_item_level_stock_transfer
-  , ekp.KZFME				as EKPO_units_of_measure_usage_1
-  , ekp.RDPRF				as rounding_profile
-  , ekp.TECHS				as parameter_variantstandard_variant
-  , ekp.CHG_SRV				as configuration_changed
-  , ekp.CHG_FPLNR			as no_invoice_for_this_item_although_not_free_of_charge
-  , ekp.MFRPN				as manufacturer_part_number
-  , ekp.MFRNR				as number_of_a_manufacturer
-  , ekp.EMNFR				as external_manufacturer_code_name_or_number
-  , ekp.NOVET				as item_blocked_for_sd_delivery
-  , ekp.AFNAM				as name_of_requisitionerrequester
-  , ekp.TZONRC				as time_zone_of_recipient_location
-  , ekp.IPRKZ				as period_indicator_for_shelf_life_expiration_date
-  , ekp.LEBRE				as indicator_for_service_based_invoice_verification
-  , ekp.BERID				as mrp_area
-  , ekp.XCONDITIONS			as conditions_for_item_although_no_invoice
-  , ekp.APOMS				as apo_as_planning_system
-  , ekp.CCOMP				as posting_logic_in_the_case_of_stock_transfers
-  , ekp.GRANT_NBR			as grant_number
-  , ekp.FKBER				as functional_area
-  , ekp.STATUS				as status_of_purchasing_document_item
-  , ekp.RESLO				as issuing_storage_location_for_stock_transport_order
-  , ekp.KBLNR				as document_number_for_earmarked_funds
-  , ekp.KBLPOS				as earmarked_funds_document_item
-  , ekp.WEORA				as acceptance_at_origin
-  , ekp.SRV_BAS_COM			as service_based_commitment
-  , ekp.PRIO_URG			as requirement_urgency
-  , ekp.PRIO_REQ			as requirement_priority
-  , ekp.EMPST				as receiving_point
-  , ekp.SPE_ABGRU			as reason_for_rejection_of_quotations_and_sales_orders
-  , ekp.SPE_CRM_SO			as crm_sales_order_number_for_tpop_process
-  , ekp.SPE_CRM_SO_ITEM		as crm_sales_order_item_number_in_tpop_process
-  , ekp.SPE_CRM_REF_SO		as crm_reference_order_number_for_tpop_process
-  , ekp.SPE_CRM_REF_ITEM	as crm_reference_sales_order_item_number_in_tpop_process
-  , ekp.SPE_CRM_FKREL		as billing_relevance_crm
-  , ekp.SPE_CHNG_SYS		as last_changers_system_type
-  , ekp.SPE_INSMK_SRC		as stock_type_of_source_storage_location_in_sto
-  , ekp.SPE_CQ_CTRLTYPE		as cq_control_type
-  , ekp.SPE_CQ_NOCQ			as no_transmission_of_cumulative_quantities_in_sa_release
-  , ekp.REASON_CODE			as goods_receipt_reason_code
-  , ekp.CQU_SAR				as cumulative_goods_receipts_from_redirected_purchase_orders
-  , ekp.ANZSN				as number_of_serial_numbers
-  , ekp.SPE_EWM_DTC			as ewm_delivery_based_tolerance_check
-  , ekp.EXLIN				as item_number_length
-  , ekp.EXSNR				as external_sorting
-  , ekp.EHTYP				as external_hierarchy_category
-  , ekp.RETPC				as retention_in_percent
-  , ekp.DPTYP				as down_payment_indicator
-  , ekp.DPPCT				as down_payment_percentage
-  , ekp.DPAMT				as down_payment_amount_in_document_currency
-  , ekp.DPDAT				as due_date_for_down_payment
-  , ekp.FLS_RSTO			as store_return_with_inbound_and_outbound_delivery
-  , ekp.EXT_RFX_NUMBER		as document_number_of_external_document
-  , ekp.EXT_RFX_ITEM		as item_number_of_external_document
-  , ekp.EXT_RFX_SYSTEM		as logical_system
-  , ekp.SRM_CONTRACT_ID		as central_contract
-  , ekp.SRM_CONTRACT_ITM	as central_contract_item_number
-  , ekp.BLK_REASON_ID		as blocking_reason_id
-  , ekp.BLK_REASON_TXT		as blocking_reason_text
-  , ekp.ITCONS				as real_time_consumption_posting_of_subcontracting_components
-  , ekp.FIXMG				as delivery_date_and_quantity_fixed
-  , ekp.WABWE				as indicator_for_gi_based_goods_receipt
-  , ekp.TC_AUT_DET			as tax_code_automatically_determined
-  , ekp.MANUAL_TC_REASON	as manual_tax_code_reason
-  , ekp.FISCAL_INCENTIVE	as tax_incentive_type
-  , ekp.TAX_SUBJECT_ST		as tax_subject_to_substituicao_tributaria
-  , ekp.FISCAL_INCENTIVE_ID as incentive_id
-  , ekp._BEV1_NEGEN_ITEM	as _bev1_negen_item
-  , ekp._BEV1_NEDEPFREE		as dependent_items_are_free_of_charge
-  , ekp._BEV1_NESTRUCCAT	as EKPO_structure_category_for_material_relationship_1
-  , ekp.ADVCODE				as advice_code
-  , ekp.BUDGET_PD			as fm_budget_period
-  , ekp.EXCPE				as acceptance_period
-  , ekp.FMFGUS_KEY			as fmfgus_key
-  , ekp.IUID_RELEVANT		as iuid_relevant
-  , ekp.MRPIND				as max_retail_price_relevant
-  , ekp.REFSITE				as reference_site_for_purchasing
-  , ekp.REF_ITEM			as reference_item_for_remaining_qty_cancellation
-  , ekp.SOURCE_ID			as origin_profile
-  , ekp.SOURCE_KEY			as key_in_source_system
-  , ekp.PUT_BACK			as indicator_for_putting_back_from_grouped_po_document
-  , ekp.POL_ID				as order_list_item_number
-  , ekp.CONS_ORDER			as purchase_order_for_consignment
-  , eke.MANDT				as EKET_client_1
-  , eke.EBELN				as EKET_purchasing_document_number_1
-  , eke.EBELP				as EKET_item_number_of_purchasing_document_1
-  , eke.ETENR				as delivery_schedule_line_counter
-  , eke.EINDT				as item_delivery_date
-  , eke.SLFDT				as statistics_relevant_delivery_date
-  , eke.LPEIN				as category_of_delivery_date
-  , eke.MENGE				as scheduled_quantity
-  , eke.AMENG				as previous_quantity_delivery_schedule_lines
-  , eke.WEMNG				as quantity_of_goods_received
-  , eke.WAMNG				as issued_quantity
-  , eke.UZEIT				as delivery_date_time_spot
-  , eke.BANFN				as EKET_purchase_requisition_number_1
-  , eke.BNFPO				as EKET_item_number_of_purchase_requisition_1
-  , eke.ESTKZ				as EKET_creation_indicator_purchase_requisitionschedule_lines_1
-  , eke.QUNUM				as number_of_quota_arrangement
-  , eke.QUPOS				as quota_arrangement_item
-  , eke.MAHNZ				as no_of_remindersexpediters_for_schedule_line
-  , eke.BEDAT				as order_date_of_schedule_line
-  , eke.RSNUM				as number_of_reservationdependent_requirement
-  , eke.SERNR				as bom_explosion_number
-  , eke.FIXKZ				as schedule_line_is_fixed
-  , eke.GLMNG				as quantity_delivered_stock_transfer
-  , eke.DABMG				as quantity_reduced_mrp
-  , eke.CHARG				as EKET_batch_number_1
-  , eke.LICHA				as vendor_batch_number
-  , eke.CHKOM				as components
-  , eke.VERID				as production_version
-  , eke.ABART				as scheduling_agreement_release_type
-  , eke.MNG02				as committed_quantity
-  , eke.DAT01				as committed_date
-  , eke.ALTDT				as previous_delivery_date
-  , eke.AULWE				as route_schedule
-  , eke.MBDAT				as material_stagingavailability_date
-  , eke.MBUHR				as material_staging_time_local_relating_to_a_plant
-  , eke.LDDAT				as loading_date
-  , eke.LDUHR				as loading_time_local_time_relating_to_a_shipping_point
-  , eke.TDDAT				as transportation_planning_date
-  , eke.TDUHR				as transp_planning_time_local_relating_to_a_shipping_point
-  , eke.WADAT				as goods_issue_date
-  , eke.WAUHR				as time_of_goods_issue_local_relating_to_a_plant
-  , eke.ELDAT				as goods_receipt_end_date
-  , eke.ELUHR				as goods_receipt_end_time_local_relating_to_a_plant
-  , eke.ANZSN				as EKET_number_of_serial_numbers_1
-  , eke.NODISP				as ind_reserv_not_applicable_to_mrppurc_req_not_created
-  , eke.GEO_ROUTE			as description_of_a_geographical_route
-  , eke.ROUTE_GTS			as route_code_for_sap_global_trade_services
-  , eke.GTS_IND				as goods_traffic_type
-  , eke.TSP					as forwarding_agent
-  , eke.CD_LOCNO			as location_number_in_apo
-  , eke.CD_LOCTYPE			as apo_location_type
-  , eke.KEY_ID				as unique_number_of_budget
-  , eke.OTB_VALUE			as required_budget
-  , eke.OTB_CURR			as otb_currency
-  , eke.OTB_RES_VALUE		as reserved_budget_for_otb_relevant_purchasing_document
-  , eke.OTB_SPEC_VALUE		as special_release_budget
-  , eke.SPR_RSN_PROFILE		as reason_profile_for_otb_special_release
-  , eke.BUDG_TYPE			as budget_type
-  , eke.OTB_STATUS			as otb_check_status
-  , eke.OTB_REASON			as reason_indicator_for_otb_check_status
-  , eke.CHECK_TYPE			as type_of_otb_check
-  , eke.DL_ID				as date_line_id_guid
-  , eke.HANDOVER_DATE		as transfer_date
-  , eke.NO_SCEM				as purchase_order_not_transferred_to_scem
-  , eke.DNG_DATE			as creation_date_of_reminder_message_record
-  , eke.DNG_TIME			as creation_time_of_reminder_message_record
-  , eke.CNCL_ANCMNT_DONE	as cancellation_threat_made
-  , eke.DATESHIFT_NUMBER	as number_of_current_date_shifts
-from
-	tsa.ics_land_SAP_GBR_EKBE			  be
-left outer join tsa.ics_land_SAP_GBR_EKBZ bz
-	on bz.EBELN = be.EBELN
-		and bz.EBELP = be.EBELP
-		and be.BELNR = bz.BELNR
-left outer join tsa.ics_land_SAP_GBR_MARA ma
-	on ma.MATNR = be.MATNR
-left outer join tsa.ics_land_SAP_GBR_EKKO ek
-	on ek.EBELN = be.EBELN
-left outer join tsa.ics_land_SAP_GBR_LFA1 lfa
-	on lfa.LIFNR = ek.LIFNR
-left outer join tsa.ics_land_SAP_GBR_LFB1 lfb
-	on lfb.LIFNR = ek.LIFNR
-		and lfb.BUKRS = ek.BUKRS
-left outer join psa.ics_stg_SAP_GBR_MAKT  md --look up for material desc
-	on be.MATNR = md.MATNR
-left outer join tsa.ics_land_SAP_GBR_EKPO ekp
-	on ekp.EBELN = be.EBELN
-		and ekp.EBELP = be.EBELP
-left outer join tsa.ics_land_SAP_GBR_EKET eke
-	on eke.EBELN = be.EBELN
-		and eke.EBELP = be.EBELP
-where
-	be.BUDAT between '28-aug-2017'and '01-oct-2017'
-	and (
-			lower(MAKTG) like '%bit%' --/SBS/reinforcements 
-			or	lower(MAKTG) like '%sbs%' --/SBS/reinforcements 
-			or	lower(MAKTG) like '%rein%' --/SBS/reinforcements  ;
-		)
-order by
-	be.EBELN
-  , be.EBELP
-  , be.BUDAT desc ;
+--/****** Object:  View [discovery].[procurement_sap_gbr]    Script Date: 29/01/2018 14:56:49 ******/
+--SET ANSI_NULLS ON
+--GO
+
+--SET QUOTED_IDENTIFIER ON
+--GO
 
 
+create   view [discovery].[procurement_sap_gbr]
+as
+with cte
+as
+(
+	select
+		''																												  as 'Division'
+	  , ekp.BUKRS																										  as [CompanyNumber]
+	  , ''																												  as [Facility]
+	  , be.WERKS																										  as [Warehouse]
+	  , be.EBELN																										  as [PurchaseOrder]
+	  , ek.BSART																										  [POType]
+	  , ''																												  as [LowestStatus]
+	  , ''																												  as [HighestStatus]
+	  , ek.LIFNR																										  Supplier
+	  , ek.WAERS																										  as [Currency]
+	  , be.EBELP																										  as [PurchaseLine]
+	  , be.MATNR																										  [Item]
+	  , ekp.MENGE																										  [OrderedQty]
+	  , case when be.BWART = 102 then be.MENGE * (-1) else be.MENGE end													  [ReceivedQuantity]
+	  , ''																												  [ApprovedQty]
+	  , ''																												  [RejectedQty]
+	  , ''																												  [StoredQty]
+	  , ekp.MEINS																										  [PurchaseOrderUnit]
+	  , round(cast((ekp.NETWR / case when isnull(ekp.MENGE, 1) = 0 then 1 else isnull(ekp.MENGE, 1) end) as float), 0, 1) [PurchasePriceUnit]
+	  , case when be.BWART = 102 then ekp.NETWR * (-1) else ekp.NETWR end												  [LineAmountOrderCurrency]
+	  , max(et.EINDT)																									  as [RequestedDeliveryDate]
+	  , ''																												  [ConfirmedDeliveryDate]
+	  , ''																												  [PlanningDeliveryDate]
+	  , ma.MEINS																										  as native_unit_of_measure
+	  , um.unit_of_measure_code																							  as standard_unit_of_measure
+	  , um.reporting_unit_of_measure_id																					  as ReportingunitOfMeasureCode
+	  , ek.AEDAT																										  [ChangeDate]
+	  , 'SAP GBR'																											  [DataSource]
+	from
+		psa.ics_stg_SAP_GBR_EKKO			   ek
+	left outer join psa.ics_stg_SAP_GBR_EKBE   be
+		on ek.EBELN = be.EBELN
+	left outer join psa.ics_stg_SAP_GBR_EKPO   ekp
+		on ekp.EBELN = be.EBELN
+			and ekp.EBELP = be.EBELP
+	left outer join psa.ics_stg_SAP_GBR_MARA   ma --- material master 
+		on ma.MATNR = be.MATNR
+	left outer join psa.ics_stg_SAP_GBR_EKET   et
+		on et.EBELP = ekp.EBELP
+			and et.EBELN = ekp.EBELN
+	left outer join etl.unit_of_measure_lookup l
+		on upper(ma.MEINS) = upper(l.native_key)
+			and l.data_source_key = 100101
+	left outer join dbo.unit_of_measure		   um
+		on um.unit_of_measure_id = l.unit_of_measure_id
+	where
+		year(ek.AEDAT) >= '2017'
+		and upper(isnull(ekp.LOEKZ, '-99')) <> 'L' --po filter
+		and upper(isnull(be.BEWTP, '-99')) = 'E' --gr filter
+
+	group by
+		ekp.BUKRS
+	  , be.WERKS
+	  , be.EBELN
+	  , ek.BSART
+	  , be.EBELP
+	  , be.MATNR
+	  , ekp.MENGE
+	  , case when be.BWART = 102 then be.MENGE * (-1) else be.MENGE end
+	  , ekp.MEINS
+	  , round(cast((ekp.NETWR / case when isnull(ekp.MENGE, 1) = 0 then 1 else isnull(ekp.MENGE, 1) end) as float), 0, 1)
+	  , case when be.BWART = 102 then ekp.NETWR * (-1) else ekp.NETWR end
+	  , ma.MEINS
+	  , ek.AEDAT
+	  , ek.LIFNR
+	  , ek.WAERS
+	  , um.unit_of_measure_code
+	  , um.reporting_unit_of_measure_id
+)
+   , cte1
+as
+(
+	select
+		cte.*
+	  , l.native_key ReportingunitOfMeasure
+	from
+		cte
+	left outer join etl.unit_of_measure_lookup l
+		on l.unit_of_measure_id = cte.ReportingunitOfMeasureCode
+	inner join psa.ics_stg_SAP_GBR_MARM		   ma
+		on ma.MATNR = cte.Item
+			and ma.MEINH = l.native_key
+	where
+		l.data_source_key = 100101
+)
+select distinct
 
 
+ [Division]
+      ,[CompanyNumber]
+      ,[Facility]
+      ,[Warehouse]
+      ,[PurchaseOrder]
+      ,[POType]
+      ,[LowestStatus]
+      ,[HighestStatus]
+      ,[Supplier]
+      ,[Currency]
+      ,[PurchaseLine]
+      ,[Item]
+      ,[OrderedQty]
+      ,[ReceivedQuantity]
+      ,[ApprovedQty]
+      ,[RejectedQty]
+      ,[StoredQty]
+      ,[PurchaseOrderUnit]
+      ,[PurchasePriceUnit]
+      ,[LineAmountOrderCurrency]
+      ,[RequestedDeliveryDate]
+      ,[ConfirmedDeliveryDate]
+      ,[PlanningDeliveryDate]
+      ,[ChangeDate]
+      , [DataSource]
+	 , (select max(d.EtlCreatedOn) from psa.ics_stg_SAP_GBR_EKBE d) as DateDataExtracted
 
 
-
-
-
---select * from tsa.ics_land_SAP_GBR_MARA
-
+ from	cte1 ;
 
 
 

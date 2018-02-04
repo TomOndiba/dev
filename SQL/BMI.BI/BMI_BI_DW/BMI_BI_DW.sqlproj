@@ -74,6 +74,7 @@ Table=[tsa].[Customer1];
 Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
+View=[discovery].[procurement_snapshot];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -1962,11 +1963,31 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_m3_FGRECL.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Programmable Objects\discovery\Views\procurement_snapshot.sql" />
     <None Include="Migrations\1.1.0\047_Create_Psa_M3_Tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Migrations\1.1.0\048_Create_Psa_M3_Pks.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_ordhtbli.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_ordltbli.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_modmtbl.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_ordhtbli.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_ordltbli.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\049_Create_Tsa_Aspect4_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\050_Create_Psa_Aspect4_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_modmtbl.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\051_Create_m3_PK.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

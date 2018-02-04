@@ -7,6 +7,12 @@ GO
 SET ANSI_NULLS ON
 GO
 
+
+
+
+
+
+
 --/****** Object:  View [discovery].[procurement_sap_gbr]    Script Date: 29/01/2018 14:56:49 ******/
 --SET ANSI_NULLS ON
 --GO
@@ -14,41 +20,52 @@ GO
 --SET QUOTED_IDENTIFIER ON
 --GO
 
+create    view 
 
-create   view [discovery].[procurement_sap_gbr]
+
+--select * from 
+[discovery].[procurement_sap_gbr]
 as
 with cte
 as
 (
 	select
-		''																												  as 'Division'
-	  , ekp.BUKRS																										  as [CompanyNumber]
-	  , ''																												  as [Facility]
-	  , be.WERKS																										  as [Warehouse]
-	  , be.EBELN																										  as [PurchaseOrder]
-	  , ek.BSART																										  [POType]
-	  , ''																												  as [LowestStatus]
-	  , ''																												  as [HighestStatus]
-	  , ek.LIFNR																										  Supplier
-	  , ek.WAERS																										  as [Currency]
-	  , be.EBELP																										  as [PurchaseLine]
-	  , be.MATNR																										  [Item]
-	  , ekp.MENGE																										  [OrderedQty]
-	  , case when be.BWART = 102 then be.MENGE * (-1) else be.MENGE end													  [ReceivedQuantity]
-	  , ''																												  [ApprovedQty]
-	  , ''																												  [RejectedQty]
-	  , ''																												  [StoredQty]
-	  , ekp.MEINS																										  [PurchaseOrderUnit]
-	  , round(cast((ekp.NETWR / case when isnull(ekp.MENGE, 1) = 0 then 1 else isnull(ekp.MENGE, 1) end) as float), 0, 1) [PurchasePriceUnit]
-	  , case when be.BWART = 102 then ekp.NETWR * (-1) else ekp.NETWR end												  [LineAmountOrderCurrency]
-	  , max(et.EINDT)																									  as [RequestedDeliveryDate]
-	  , ''																												  [ConfirmedDeliveryDate]
-	  , ''																												  [PlanningDeliveryDate]
-	  , ma.MEINS																										  as native_unit_of_measure
-	  , um.unit_of_measure_code																							  as standard_unit_of_measure
-	  , um.reporting_unit_of_measure_id																					  as ReportingunitOfMeasureCode
-	  , ek.AEDAT																										  [ChangeDate]
-	  , 'SAP GBR'																											  [DataSource]
+		''																  as 'Division'
+	  , ekp.BUKRS														  as [CompanyNumber]
+	  , ''																  as [Facility]
+	  , be.WERKS														  as [Warehouse]
+	  , be.EBELN														  as [PurchaseOrder]
+	  , ek.BSART														  [POType]
+	  , ''																  as [LowestStatus]
+	  , ''																  as [HighestStatus]
+	  , ek.LIFNR														  Supplier
+	  , ek.WAERS														  as [Currency]
+	  , be.EBELP														  as [PurchaseLine]
+	  , be.MATNR														  [Item]
+	  , ekp.MENGE														  [OrderedQty]
+	  , case when be.BWART = 102 then be.MENGE * (-1) else be.MENGE end	  [ReceivedQuantity]
+	  , ''																  [ApprovedQty]
+	  , ''																  [RejectedQty]
+	  , ''																  [StoredQty]
+	  , ekp.MEINS														  [PurchaseOrderUnit]
+	  , ekp.MEINS														  [PurchasePriceUnit]	-- round(cast((ekp.NETWR / case when isnull(ekp.MENGE, 1) = 0 then 1 else isnull(ekp.MENGE, 1) end) as float), 0, 1) 
+	  , case when be.BWART = 102 then ekp.NETWR * (-1) else ekp.NETWR end [LineAmountOrderCurrency]
+	  , max(et.EINDT)													  as [RequestedDeliveryDate]
+	  , ''																  [ConfirmedDeliveryDate]
+	  , ''																  [PlanningDeliveryDate]
+	  , ma.MEINS														  as native_unit_of_measure
+	  , um.unit_of_measure_code											  as standard_unit_of_measure
+	  , um.reporting_unit_of_measure_id									  as ReportingunitOfMeasureCode
+	  , ek.AEDAT														  [ChangeDate]
+	  , case
+			when ek.BUKRS = 'CC01'
+				then 'SAP GBR'
+			when ek.BUKRS = 'CC10'
+				then 'SAP Ireland'
+			else 'Not Known'
+		end																  as [DataSource]
+	  , ek.DataSourceKey												  as DataSourceKey
+	  , cast( convert(char(8),ek.AEDAT,112) as int)														  as EntryDate
 	from
 		psa.ics_stg_SAP_GBR_EKKO			   ek
 	left outer join psa.ics_stg_SAP_GBR_EKBE   be
@@ -89,6 +106,15 @@ as
 	  , ek.WAERS
 	  , um.unit_of_measure_code
 	  , um.reporting_unit_of_measure_id
+	  , ek.DataSourceKey
+	  , case
+			when ek.BUKRS = 'CC01'
+				then 'SAP GBR'
+			when ek.BUKRS = 'CC10'
+				then 'SAP Ireland'
+			else 'Not Known'
+		end
+	  , ek.AEDAT
 )
    , cte1
 as
@@ -107,37 +133,52 @@ as
 		l.data_source_key = 100101
 )
 select distinct
-
-
- [Division]
-      ,[CompanyNumber]
-      ,[Facility]
-      ,[Warehouse]
-      ,[PurchaseOrder]
-      ,[POType]
-      ,[LowestStatus]
-      ,[HighestStatus]
-      ,[Supplier]
-      ,[Currency]
-      ,[PurchaseLine]
-      ,[Item]
-      ,[OrderedQty]
-      ,[ReceivedQuantity]
-      ,[ApprovedQty]
-      ,[RejectedQty]
-      ,[StoredQty]
-      ,[PurchaseOrderUnit]
-      ,[PurchasePriceUnit]
-      ,[LineAmountOrderCurrency]
-      ,[RequestedDeliveryDate]
-      ,[ConfirmedDeliveryDate]
-      ,[PlanningDeliveryDate]
-      ,[ChangeDate]
-      , [DataSource]
-	 , (select max(d.EtlCreatedOn) from psa.ics_stg_SAP_GBR_EKBE d) as DateDataExtracted
-
-
- from	cte1 ;
+	[Division]
+  , [CompanyNumber]
+  , [Facility]
+  , [Warehouse]
+  , [PurchaseOrder]
+  , [POType]
+  , [LowestStatus]
+  , [HighestStatus]
+  , [Supplier]
+  , [Currency]
+  , [PurchaseLine]
+  , [Item]
+  , [OrderedQty]
+  , [ReceivedQuantity]
+  , [ApprovedQty]
+  , [RejectedQty]
+  , [StoredQty]
+  , [PurchaseOrderUnit]
+  , [PurchasePriceUnit]
+  , [LineAmountOrderCurrency]
+  , [RequestedDeliveryDate]
+  , [ConfirmedDeliveryDate]
+  , [PlanningDeliveryDate]
+  , [ChangeDate]
+  , [DataSource]
+  , null					   as 'StandardUnitofMeasure'
+  , null					   as 'StandardUnitofQty'
+  , null					   as 'ReportingUnitofMeasure'
+  , null					   as 'ReportingUnitofQty'
+  , p.ProductCategoryBaseLevel as product_category_direct
+  , p.ProductCategoryLevel1	   as product_category_level_1
+  , p.ProductCategoryLevel2	   as product_category_level_2
+  , p.ProductCategoryLevel3	   as product_category_level_3
+  , p.ProductCategoryLevel4	   as product_category_level_4
+  , p.ProductCategoryLevel5	   as product_category_level_5
+  , EntryDate
+  , cte1.DataSourceKey
+  , (
+		select	max(d.EtlCreatedOn) from psa.ics_stg_SAP_GBR_EKBE d
+	)						   as DateDataExtracted
+from
+	cte1
+left outer join qvstg.Product p
+	--on rtrim(ltrim(item)) = rtrim(ltrim(p.NativeProductKey))
+		 on replace(ltrim(replace(rtrim(cte1.Item),'0',' ')),' ','0') = replace(ltrim(replace(rtrim(p.NativeProductKey),'0',' ')),' ','0')
+		and p.DataSourceKey = 100101 ;
 
 
 

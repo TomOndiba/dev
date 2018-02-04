@@ -7,6 +7,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
+
 CREATE procedure [dbo].[PopulateTsaToPsaLoadControlTable]
 as
 
@@ -279,7 +280,13 @@ where
 	SourceTable like '%iSc%' ;
 
 
-	
+	update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100105
+where
+	SourceTable like '%aspect%' ;
+
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;
 		end try

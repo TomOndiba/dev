@@ -19,7 +19,7 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKBE]
 [BUZEI] [nvarchar] (4) NULL,
 [BEWTP] [nvarchar] (1) NULL,
 [BWART] [nvarchar] (3) NULL,
-[BUDAT] [datetime] NULL,
+[BUDAT] [datetime2] NULL,
 [MENGE] [decimal] (13, 3) NULL,
 [BPMNG] [decimal] (13, 3) NULL,
 [DMBTR] [decimal] (13, 2) NULL,
@@ -36,8 +36,8 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKBE]
 [LFBNR] [nvarchar] (10) NULL,
 [LFPOS] [nvarchar] (4) NULL,
 [GRUND] [nvarchar] (4) NULL,
-[CPUDT] [datetime] NULL,
-[CPUTM] [datetime] NULL,
+[CPUDT] [datetime2] NULL,
+[CPUTM] [datetime2] NULL,
 [REEWR] [decimal] (13, 2) NULL,
 [EVERE] [nvarchar] (2) NULL,
 [REFWR] [decimal] (13, 2) NULL,
@@ -54,7 +54,7 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKBE]
 [HSWAE] [nvarchar] (5) NULL,
 [BAMNG] [decimal] (13, 3) NULL,
 [CHARG] [nvarchar] (10) NULL,
-[BLDAT] [datetime] NULL,
+[BLDAT] [datetime2] NULL,
 [XWOFF] [nvarchar] (1) NULL,
 [XUNPL] [nvarchar] (1) NULL,
 [ERNAM] [nvarchar] (12) NULL,
@@ -86,6 +86,4 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKBE]
 [ET_UPD] [nvarchar] (1) NULL,
 [J_SC_DIE_COMP_F] [nvarchar] (1) NULL
 )
-GO
-CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_EKBE_1] ON [tsa].[ics_land_SAP_GBR_EKBE] ([BELNR], [EBELN], [MANDT], [EBELP], [BUZEI], [GJAHR], [VGABE], [ZEKKN])
 GO

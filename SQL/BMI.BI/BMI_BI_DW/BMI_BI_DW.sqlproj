@@ -75,11 +75,6 @@ Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
 View=[discovery].[procurement_snapshot];
-Table=[dbo].[PU_CATEGORY];
-Table=[dbo].[PU_LINK_CATEGORY];
-View=[discovery].[procurement_snapshot_M3V10_POL];
-View=[discovery].[procurement_snapshot_M3V7];
-View=[discovery].[procurement_snapshot_M3];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -370,6 +365,9 @@ Static Data;
     <Folder Include="Schema-Model\etl\" />
     <Folder Include="Schema-Model\etl\Tables\" />
     <Folder Include="Migrations\1.1.0" />
+    <Folder Include="Schema-Model\discovery\" />
+    <Folder Include="Schema-Model\discovery\Tables\" />
+    <Folder Include="Programmable Objects\discovery\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pre-Deployment\01_Create_Database.sql" />
@@ -2004,6 +2002,15 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\dbo\Stored Procedures\FlattenProductCategories.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\dbo\Tables\PU_CATEGORY.sql" />
+    <None Include="Schema-Model\dbo\Tables\PU_LINK_CATEGORY.sql" />
+    <None Include="Schema-Model\discovery\Tables\ProcurementSnapshot.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Stored Procedures\ProcurementSnapshotLoad.sql" />
+    <None Include="Migrations\1.1.0\053_Create_Procurement_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

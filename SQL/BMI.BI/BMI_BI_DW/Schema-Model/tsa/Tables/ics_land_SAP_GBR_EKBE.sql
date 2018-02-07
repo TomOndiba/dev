@@ -87,3 +87,5 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_EKBE]
 [J_SC_DIE_COMP_F] [nvarchar] (1) NULL
 )
 GO
+CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_EKBE_1] ON [tsa].[ics_land_SAP_GBR_EKBE] ([BELNR], [EBELN], [MANDT], [EBELP], [BUZEI], [GJAHR], [VGABE], [ZEKKN])
+GO

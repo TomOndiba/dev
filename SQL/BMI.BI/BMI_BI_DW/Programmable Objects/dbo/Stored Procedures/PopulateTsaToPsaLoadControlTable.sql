@@ -8,7 +8,8 @@ SET ANSI_NULLS ON
 GO
 
 
-CREATE procedure [dbo].[PopulateTsaToPsaLoadControlTable]
+
+create procedure [dbo].[PopulateTsaToPsaLoadControlTable]
 as
 
 	--<CommentHeader>
@@ -243,7 +244,7 @@ where
 update
 	dbo.TsaToPsaLoadControlTable
 set
-	DataSourceKey = 100142
+	DataSourceKey = 100107
 where
 	SourceTable like '%baan%' ;
 

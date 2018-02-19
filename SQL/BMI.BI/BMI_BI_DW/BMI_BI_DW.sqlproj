@@ -2019,6 +2019,24 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.1.0\055_Tsa_SAP_Index_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_ttiitm004610.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_Baan.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3V10.sql" />
+    <None Include="Migrations\1.1.0\056_Psa_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_ttiitm004610.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Stored Procedures\UpdateSAPMarmUoM.sql" />
+    <None Include="Migrations\1.1.0\057_Tsa_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\058_Discovery_ProcurementSnapshot_Table_Modified.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

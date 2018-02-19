@@ -37,7 +37,8 @@ CREATE TABLE [tsa].[ics_land_SAP_GBR_MARM]
 [VOLEH] [nvarchar] (3) NULL,
 [VOLUM] [decimal] (18, 0) NULL,
 [XBEWW] [nvarchar] (1) NULL,
-[XFHDW] [nvarchar] (1) NULL
+[XFHDW] [nvarchar] (1) NULL,
+[ReportingUnitOfMeasure] [nvarchar] (255) NULL
 )
 GO
 CREATE CLUSTERED INDEX [IndClust_tsa_ics_land_SAP_GBR_MARM_1] ON [tsa].[ics_land_SAP_GBR_MARM] ([MATNR], [MEINH])

@@ -42,7 +42,8 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_MARM]
 [VOLEH] [nvarchar] (3) NULL,
 [VOLUM] [decimal] (18, 0) NULL,
 [XBEWW] [nvarchar] (1) NULL,
-[XFHDW] [nvarchar] (1) NULL
+[XFHDW] [nvarchar] (1) NULL,
+[ReportingUnitOfMeasure] [nvarchar] (255) NULL
 )
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_MARM] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_MARM_PK] PRIMARY KEY CLUSTERED  ([MATNR], [MEINH])

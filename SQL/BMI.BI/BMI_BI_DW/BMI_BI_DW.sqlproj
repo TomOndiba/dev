@@ -75,6 +75,7 @@ Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
 View=[discovery].[procurement_snapshot];
+View=[discovery].[procurement_snapshot_M3V10_POL];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>

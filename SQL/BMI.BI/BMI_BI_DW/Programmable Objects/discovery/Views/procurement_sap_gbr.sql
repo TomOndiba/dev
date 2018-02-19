@@ -19,9 +19,6 @@ GO
 --GO
 
 create view
-
-
-----select * from 
 [discovery].[procurement_sap_gbr]
 as
 select

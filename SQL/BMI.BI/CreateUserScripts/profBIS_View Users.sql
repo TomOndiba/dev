@@ -8,12 +8,15 @@ go
 
 --! Always drop the users first so we can re-set all permissions
 --if exists (select 1 from dbo.sysusers where name = 'BmiBiEtlExtractor') drop user [BmiBiEtlExtractor];
---if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukvmi') drop user [GROUPICOPAL\ukvmi];
---if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjcz') drop user [GROUPICOPAL\ukjcz];
---if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjbo') drop user [GROUPICOPAL\ukjbo];
---if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uktma') drop user [GROUPICOPAL\uktma];
---if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukrna') drop user [GROUPICOPAL\ukrna];
---go
+--if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukglu') drop user [GROUPICOPAL\ukglu];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukaou') drop user [GROUPICOPAL\ukaou];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukasm') drop user [GROUPICOPAL\ukasm];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjbo') drop user [GROUPICOPAL\ukjbo];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uktma') drop user [GROUPICOPAL\uktma];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukrna') drop user [GROUPICOPAL\ukrna];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukvmi') drop user [GROUPICOPAL\ukvmi];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjcz') drop user [GROUPICOPAL\ukjcz];
+go
 
 if not exists (select 1 from dbo.sysusers where name = 'BmiBiEtlExtractor')
 	create user [BmiBiEtlExtractor] for login [BmiBiEtlExtractor] with default_schema = [etl];
@@ -31,16 +34,26 @@ exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\ukglu' ;
 exec sp_addrolemember N'db_owner', N'GROUPICOPAL\ukglu' ;
 go
 
-if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukvmi')
-	create user [GROUPICOPAL\ukvmi] for login [GROUPICOPAL\ukvmi] with default_schema = [dbo];
+if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukaou')
+	create user [GROUPICOPAL\ukaou] for login [GROUPICOPAL\ukaou] with default_schema = [dbo];
 go
-exec sp_addrolemember N'EtlDevelopers', N'GROUPICOPAL\ukvmi' ;
+exec sp_addrolemember N'DeploymentManagers', N'GROUPICOPAL\ukaou' ;
+exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\ukaou' ;
+exec sp_addrolemember N'db_owner', N'GROUPICOPAL\ukaou' ;
 go
 
-if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjcz')
-	create user [GROUPICOPAL\ukjcz] for login [GROUPICOPAL\ukjcz] with default_schema = [dbo];
+if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukrna')
+	create user [GROUPICOPAL\ukrna] for login [GROUPICOPAL\ukrna] with default_schema = [dbo];
 go
-exec sp_addrolemember N'EtlDevelopers', N'GROUPICOPAL\ukjcz' ;
+exec sp_addrolemember N'DeploymentManagers', N'GROUPICOPAL\ukrna' ;
+exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\ukrna' ;
+exec sp_addrolemember N'db_owner', N'GROUPICOPAL\ukrna' ;
+go
+
+if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukasm')
+	create user [GROUPICOPAL\ukasm] for login [GROUPICOPAL\ukasm] with default_schema = [dbo];
+go
+exec sp_addrolemember N'EtlDevelopers', N'GROUPICOPAL\ukasm' ;
 go
 
 if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjbo')
@@ -53,18 +66,12 @@ if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uktma')
 go
 exec sp_addrolemember N'EtlDevelopers', N'GROUPICOPAL\uktma' ;
 go
-if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukrna')
-	create user [GROUPICOPAL\ukrna] for login [GROUPICOPAL\ukrna] with default_schema = [dbo];
-go
-exec sp_addrolemember N'DeploymentManagers', N'GROUPICOPAL\ukrna' ;
-exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\ukrna' ;
-exec sp_addrolemember N'db_owner', N'GROUPICOPAL\ukrna' ;
-go
 
 use [profBIS_View]
 go
 grant showplan to [GROUPICOPAL\ukglu];
-grant showplan to [GROUPICOPAL\ukvmi];
-grant showplan to [GROUPICOPAL\ukjbo];
+grant showplan to [GROUPICOPAL\ukaou];
 grant showplan to [GROUPICOPAL\ukrna];
+grant showplan to [GROUPICOPAL\ukjbo];
+grant showplan to [GROUPICOPAL\ukasm];
 go

@@ -20,21 +20,27 @@ else
 			, default_database = [profBIS_View] ;
 go
 
+if exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukvmi' and [type] = 'U')
+	drop login [GROUPICOPAL\ukvmi] ;
+go
+if exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukjcz' and [type] = 'U')
+	drop login [GROUPICOPAL\ukjcz] ;
+go
 
 if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukglu' and [type] = 'U')
 	create login [GROUPICOPAL\ukglu] from windows with default_language = British, default_database = [profBIS_View];
 else
 	alter login [GROUPICOPAL\ukglu] with default_language = British, default_database = [profBIS_View];
 go
-if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukvmi' and [type] = 'U')
-	create login [GROUPICOPAL\ukvmi] from windows with default_language = British, default_database = [profBIS_View];
+if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukaou' and [type] = 'U')
+	create login [GROUPICOPAL\ukaou] from windows with default_language = British, default_database = [profBIS_View];
 else
-	alter login [GROUPICOPAL\ukvmi] with default_language = British, default_database = [profBIS_View];
+	alter login [GROUPICOPAL\ukaou] with default_language = British, default_database = [profBIS_View];
 go
-if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukjcz' and [type] = 'U')
-	create login [GROUPICOPAL\ukjcz] from windows with default_language = British, default_database = [profBIS_View];
+if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukasm' and [type] = 'U')
+	create login [GROUPICOPAL\ukasm] from windows with default_language = British, default_database = [profBIS_View];
 else
-	alter login [GROUPICOPAL\ukjcz] with default_language = British, default_database = [profBIS_View];
+	alter login [GROUPICOPAL\ukasm] with default_language = British, default_database = [profBIS_View];
 go
 if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukjbo' and [type] = 'U')
 	create login [GROUPICOPAL\ukjbo] from windows with default_language = British, default_database = [profBIS_View];
@@ -55,7 +61,7 @@ go
 use [master]
 go
 grant view server state to [GROUPICOPAL\ukglu];
-grant view server state to [GROUPICOPAL\ukvmi];
+grant view server state to [GROUPICOPAL\ukaou];
 grant view server state to [GROUPICOPAL\ukjbo];
 grant view server state to [GROUPICOPAL\ukrna];
 go

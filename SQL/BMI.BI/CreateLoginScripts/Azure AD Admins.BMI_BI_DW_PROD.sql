@@ -20,28 +20,28 @@ select * from sys.sql_logins;
 select * from sys.database_principals;
 */
 
-if not exists (select 1 from sys.sysusers where name = 'Greg.Lucas@icopal.com')
-	begin
-		create user [Greg.Lucas@icopal.com] from external provider;
-	end
-go
-exec sp_addrolemember N'db_accessadmin', N'Greg.Lucas@icopal.com' ;
-go
-exec sp_addrolemember N'db_owner', N'Greg.Lucas@icopal.com' ;
-go
-grant alter any user to [Greg.Lucas@icopal.com]
-go
+--if not exists (select 1 from sys.sysusers where name = 'greg.lucas@icopal.com')
+--	begin
+--		create user [greg.lucas@icopal.com] from external provider;
+--	end
+--go
+--exec sp_addrolemember N'db_accessadmin', N'greg.lucas@icopal.com' ;
+--go
+--exec sp_addrolemember N'db_owner', N'greg.lucas@icopal.com' ;
+--go
+--grant alter any user to [greg.lucas@icopal.com]
+--go
 
-if not exists (select 1 from sys.sysusers where name = 'matthew.basoo@icopal.com')
+if not exists (select 1 from sys.sysusers where name = 'andrew.couch@icopal.com')
 	begin
-		create user [matthew.basoo@icopal.com] from external provider;
+		create user [andrew.couch@icopal.com] from external provider;
 	end
 go
-exec sp_addrolemember N'db_accessadmin', N'matthew.basoo@icopal.com' ;
+exec sp_addrolemember N'db_accessadmin', N'andrew.couch@icopal.com' ;
 go
-exec sp_addrolemember N'db_owner', N'matthew.basoo@icopal.com' ;
+exec sp_addrolemember N'db_owner', N'andrew.couch@icopal.com' ;
 go
-grant alter any user to [matthew.basoo@icopal.com]
+grant alter any user to [andrew.couch@icopal.com]
 go
 
 if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')

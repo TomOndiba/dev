@@ -67,8 +67,8 @@ create table #RoleMembers
 go
 
 --! Actions
-declare @_DoDropInactiveUsers bit = 0 ;
-declare @_DoDropAllUsers bit = 0 ;
+declare @_DoDropInactiveUsers bit = 1 ;
+declare @_DoDropAllUsers bit = 1 ;
 declare @_DoAddDatabaseUsers bit = 1 ;
 declare @_DoAddRoleMembers bit = 1 ;
 declare @_Debug bit = 1 ;
@@ -127,24 +127,22 @@ values (0, '', '', '', 0, 0)
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
 --	, (1	, 'DEV'		, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 0)
 --	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 0)
-	, (1	, 'DEV'		, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'greg.lucas.sql'							, 'dbo'	, 0	, 1)
-	, (1	, 'DEV'		, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'matthew.basoo@icopal.com'				, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'greg.lucas.dba'							, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'greg.lucas.dba'							, 'dbo'	, 0	, 1)
+--	, (1	, 'DEV'		, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
+--	, (1	, 'PROD'	, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
-	, (1	, 'DEV'		, 'matthew.basoo.sql'						, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'matthew.basoo.sql'						, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'andrew.couch.dba'						, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'andrew.couch.dba'						, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
-	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
---	, (1	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
---	, (1	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
---	, (1	, 'DEV'		, 'vince.mitchell.sql'						, 'dbo'	, 1	, 1)
---	, (1	, 'PROD'	, 'vince.mitchell.sql'						, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'anthony.smart@icopal.com'				, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'anthony.smart@icopal.com'				, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'jason.bogart@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'jason.bogart@icopal.com'					, 'dbo'	, 1	, 1)
+--	, (1	, 'DEV'		, 'anthony.smart.sql'						, 'dbo'	, 1	, 1)
+--	, (1	, 'PROD'	, 'anthony.smart.sql'						, 'dbo'	, 1	, 1)
 --	, (1	, 'DEV'		, 'jason.bogart.sql'						, 'dbo'	, 1	, 1)
 --	, (1	, 'PROD'	, 'jason.bogart.sql'						, 'dbo'	, 1	, 1)
 
@@ -200,10 +198,14 @@ values (0, '', '', '', 0, 0)
 	, (0	, 'PROD'	, 'Humayun.Kabir@icopal.com'				, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'vincent.mitchell@icopal.com'				, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'vincent.mitchell@icopal.com'				, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'mathew.basoo@icopal.com'					, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'mathew.basoo@icopal.com'					, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'razia.nazir.sql'							, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'razia.nazir.sql'							, 'dbo'	, 1	, 0)
-	, (0	, 'DEV'		, 'vince.mitchell.sql'						, 'dbo'	, 1	, 0)
-	, (0	, 'PROD'	, 'vince.mitchell.sql'						, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'vincent.mitchell.sql'					, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'vincent.mitchell.sql'					, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'jason.bogart.sql'						, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'jason.bogart.sql'						, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'tom.manville.sql'						, 'dbo'	, 1	, 0)
@@ -218,32 +220,29 @@ values ('', '')
 	, ('greg.lucas@icopal.com'					, 'SqlDevelopers')
 	, ('greg.lucas@icopal.com'					, 'BatchManagers')
 	, ('greg.lucas@icopal.com'					, 'CodeReviewers')
-	, ('matthew.basoo@icopal.com'				, 'SqlDevelopers')
-	, ('matthew.basoo@icopal.com'				, 'BatchManagers')
-	, ('matthew.basoo@icopal.com'				, 'CodeReviewers')
+--	, ('andrew.couch@icopal.com'				, 'SqlDevelopers')
+--	, ('andrew.couch@icopal.com'				, 'BatchManagers')
+--	, ('andrew.couch@icopal.com'				, 'CodeReviewers')
 	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
 	, ('razia.nazir@icopal.com'					, 'BatchManagers')
 	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
-	, ('greg.lucas.sql'							, 'SqlDevelopers')
-	, ('greg.lucas.sql'							, 'BatchManagers')
-	, ('greg.lucas.sql'							, 'CodeReviewers')
-	, ('matthew.basoo.sql'						, 'SqlDevelopers')
-	, ('matthew.basoo.sql'						, 'BatchManagers')
-	, ('matthew.basoo.sql'						, 'CodeReviewers')
+	, ('greg.lucas.dba'							, 'SqlDevelopers')
+	, ('greg.lucas.dba'							, 'BatchManagers')
+	, ('greg.lucas.dba'							, 'CodeReviewers')
+	, ('andrew.couch.dba'						, 'SqlDevelopers')
+	, ('andrew.couch.dba'						, 'BatchManagers')
+	, ('andrew.couch.dba'						, 'CodeReviewers')
 
 	--! ETL Developers
-	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')
-	, ('Vincent.Mitchell@icopal.com'			, 'BatchManagers')
-	, ('Vincent.Mitchell@icopal.com'			, 'CodeReviewers')
-	, ('Jason.Bogart@icopal.com'				, 'EtlDevelopers')
-	, ('Jason.Bogart@icopal.com'				, 'BatchManagers')
-	, ('Jason.Bogart@icopal.com'				, 'CodeReviewers')
---	, ('Jarek.Czujak@icopal.com'				, 'EtlDevelopers')
---	, ('Jarek.Czujak@icopal.com'				, 'BatchManagers')
---	, ('Jarek.Czujak@icopal.com'				, 'CodeReviewers')
---	, ('vince.mitchell.sql'						, 'EtlDevelopers')
---	, ('vince.mitchell.sql'						, 'BatchManagers')
---	, ('vince.mitchell.sql'						, 'CodeReviewers')
+--	, ('anthony.smart@icopal.com'				, 'EtlDevelopers')
+--	, ('anthony.smart@icopal.com'				, 'BatchManagers')
+--	, ('anthony.smart@icopal.com'				, 'CodeReviewers')
+	, ('jason.bogart@icopal.com'				, 'EtlDevelopers')
+	, ('jason.bogart@icopal.com'				, 'BatchManagers')
+	, ('jason.bogart@icopal.com'				, 'CodeReviewers')
+--	, ('anthony.smart.sql'						, 'EtlDevelopers')
+--	, ('anthony.smart.sql'						, 'BatchManagers')
+--	, ('anthony.smart.sql'						, 'CodeReviewers')
 --	, ('jason.bogart.sql'						, 'EtlDevelopers')
 --	, ('jason.bogart.sql'						, 'BatchManagers')
 --	, ('jason.bogart.sql'						, 'CodeReviewers')
@@ -277,9 +276,9 @@ values ('', '')
 
 	--! Other Roles
 	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
-	, ('matthew.basoo@icopal.com'				, 'DeploymentManagers')
+	, ('andrew.couch@icopal.com'				, 'DeploymentManagers')
 	, ('razia.nazir@icopal.com'					, 'DeploymentManagers')
---	, ('greg.lucas.sql'							, 'DeploymentManagers')
+--	, ('greg.lucas.dba'							, 'DeploymentManagers')
 	, ('BmiBiDwFeedDev'							, 'EtlDevelopers')
 
 	, ('InfaDev'								, 'DataFeedWriters')
@@ -689,22 +688,22 @@ if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name(
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
-			create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.dba')
+			create user [greg.lucas.dba] for login [greg.lucas.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [greg.lucas.sql]
-		alter role [db_owner] add member [greg.lucas.sql]
-		grant alter any user to [greg.lucas.sql]
+		alter role [db_accessadmin] add member [greg.lucas.dba]
+		alter role [db_owner] add member [greg.lucas.dba]
+		grant alter any user to [greg.lucas.dba]
 
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'matthew.basoo.sql')
-			create user [matthew.basoo.sql] for login [matthew.basoo.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'andrew.couch.dba')
+			create user [andrew.couch.dba] for login [andrew.couch.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [matthew.basoo.sql]
-		alter role [db_owner] add member [matthew.basoo.sql]
-		grant alter any user to [matthew.basoo.sql]
+		alter role [db_accessadmin] add member [andrew.couch.dba]
+		alter role [db_owner] add member [andrew.couch.dba]
+		grant alter any user to [andrew.couch.dba]
 	end
 else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BI_DW_PROD'
 	begin
@@ -713,21 +712,21 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
-			create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.dba')
+			create user [greg.lucas.dba] for login [greg.lucas.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [greg.lucas.sql]
-		alter role [db_owner] add member [greg.lucas.sql]
-		grant alter any user to [greg.lucas.sql]
+		alter role [db_accessadmin] add member [greg.lucas.dba]
+		alter role [db_owner] add member [greg.lucas.dba]
+		grant alter any user to [greg.lucas.dba]
 
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'matthew.basoo.sql')
-			create user [matthew.basoo.sql] for login [matthew.basoo.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'andrew.couch.dba')
+			create user [andrew.couch.dba] for login [andrew.couch.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [matthew.basoo.sql]
-		alter role [db_owner] add member [matthew.basoo.sql]
-		grant alter any user to [matthew.basoo.sql]
+		alter role [db_accessadmin] add member [andrew.couch.dba]
+		alter role [db_owner] add member [andrew.couch.dba]
+		grant alter any user to [andrew.couch.dba]
 	end
 go

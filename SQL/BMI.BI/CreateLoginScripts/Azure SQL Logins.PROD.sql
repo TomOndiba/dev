@@ -93,11 +93,11 @@ go
 if exists(select * from sys.sql_logins where name = 'razia.nazir.sql')
   drop login [razia.nazir.sql] ;
 go
-if exists(select * from sys.database_principals where name = 'vince.mitchell.sql')
-  drop user [vince.mitchell.sql] ;
+if exists(select * from sys.database_principals where name = 'anthony.smart.sql')
+  drop user [anthony.smart.sql] ;
 go
-if exists(select * from sys.sql_logins where name = 'vince.mitchell.sql')
-  drop login [vince.mitchell.sql] ;
+if exists(select * from sys.sql_logins where name = 'anthony.smart.sql')
+  drop login [anthony.smart.sql] ;
 go
 if exists(select * from sys.database_principals where name = 'jason.bogart.sql')
   drop user [jason.bogart.sql] ;
@@ -117,12 +117,12 @@ go
 if exists(select * from sys.sql_logins where name = 'mark.bolton.sql')
   drop login [mark.bolton.sql] ;
 go
---if exists(select * from sys.database_principals where name = 'greg.lucas.sql')
---  drop user [greg.lucas.sql] ;
---go
---if exists(select * from sys.sql_logins where name = 'greg.lucas.sql')
---  drop login [greg.lucas.sql] ;
---go
+if exists(select * from sys.database_principals where name = 'greg.lucas.sql')
+  drop user [greg.lucas.sql] ;
+go
+if exists(select * from sys.sql_logins where name = 'greg.lucas.sql')
+  drop login [greg.lucas.sql] ;
+go
 --if exists(select * from sys.database_principals where name = 'gary.elliott.sql')
 --  drop user [gary.elliott.sql] ;
 --go
@@ -145,13 +145,13 @@ go
 --!
 --!
 --!
-if not exists (select 1 from sys.sql_logins where name = 'greg.lucas.sql')
-	create login [greg.lucas.sql] with password = 'Mko0Nhy6Vfgy!' ;
+if not exists (select 1 from sys.sql_logins where name = 'greg.lucas.dba')
+	create login [greg.lucas.dba] with password = 'Mko0Nhy6Vfgy!' ;
 else
-	alter login [greg.lucas.sql] with password = 'Mko0Nhy6Vfgy!' ;
+	alter login [greg.lucas.dba] with password = 'Mko0Nhy6Vfgy!' ;
 go
-if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
-	create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo];
+if not exists (select 1 from sys.database_principals where name = 'greg.lucas.dba')
+	create user [greg.lucas.dba] for login [greg.lucas.dba] with default_schema = [dbo];
 go
 
 if not exists (select 1 from sys.sql_logins where name = 'gary.elliott.sql')
@@ -198,13 +198,13 @@ go
 --!
 --!
 --!
-if not exists (select 1 from sys.sql_logins where name = 'vince.mitchell.sql')
-	create login [vince.mitchell.sql] with password = 'IjnTyu7*9Vfg-!456d' ;
+if not exists (select 1 from sys.sql_logins where name = 'anthony.smart.sql')
+	create login [anthony.smart.sql] with password = 'IjnTyu7*9Vfg-!456d' ;
 else
-	alter login [vince.mitchell.sql] with password = 'IjnTyu7*9Vfg-!456d' ;
+	alter login [anthony.smart.sql] with password = 'IjnTyu7*9Vfg-!456d' ;
 go
-if not exists (select 1 from sys.database_principals where name = 'vince.mitchell.sql')
-	create user [vince.mitchell.sql] for login [vince.mitchell.sql] with default_schema = [dbo];
+if not exists (select 1 from sys.database_principals where name = 'anthony.smart.sql')
+	create user [anthony.smart.sql] for login [anthony.smart.sql] with default_schema = [dbo];
 go
 
 --!

@@ -20,32 +20,32 @@ select * from sys.sql_logins;
 select * from sys.database_principals;
 */
 
---if exists(select * from sys.sysusers where name = 'INFA_SVC_DEV@icopal.com')
---  drop user [INFA_SVC_DEV@icopal.com] ;
+--if exists(select * from sys.sysusers where name = 'INFA_SVC_PROD@icopal.com')
+--  drop user [INFA_SVC_PROD@icopal.com] ;
 --go
 
---if not exists (select 1 from sys.sysusers where name = 'Greg.Lucas@icopal.com')
+--if not exists (select 1 from sys.sysusers where name = 'greg.lucas@icopal.com')
 --	begin
---		create user [Greg.Lucas@icopal.com] from external provider;
+--		create user [greg.lucas@icopal.com] from external provider;
 --	end
 --go
---alter role [dbmanager] add member [Greg.Lucas@icopal.com]
+--alter role [dbmanager] add member [greg.lucas@icopal.com]
 --go
---alter role [loginmanager] add member [Greg.Lucas@icopal.com]
+--alter role [loginmanager] add member [greg.lucas@icopal.com]
 --go
---grant alter any user to [Greg.Lucas@icopal.com]
+--grant alter any user to [greg.lucas@icopal.com]
 --go
 
-if not exists (select 1 from sys.sysusers where name = 'matthew.basoo@icopal.com')
+if not exists (select 1 from sys.sysusers where name = 'andrew.couch@icopal.com')
 	begin
-		create user [matthew.basoo@icopal.com] from external provider;
+		create user [andrew.couch@icopal.com] from external provider;
 	end
 go
---alter role [dbmanager] add member [matthew.basoo@icopal.com]
+--alter role [dbmanager] add member [andrew.couch@icopal.com]
 --go
---alter role [loginmanager] add member [matthew.basoo@icopal.com]
+--alter role [loginmanager] add member [andrew.couch@icopal.com]
 --go
---grant alter any user to [matthew.basoo@icopal.com]
+--grant alter any user to [andrew.couch@icopal.com]
 --go
 
 if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
@@ -54,19 +54,14 @@ if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
 	end
 go
 
-if not exists (select 1 from sys.sysusers where name = 'Vincent.Mitchell@icopal.com')
+if not exists (select 1 from sys.sysusers where name = 'anthony.smart@icopal.com')
 	begin
-		create user [Vincent.Mitchell@icopal.com] from external provider;
+		create user [anthony.smart@icopal.com] from external provider;
 	end
 go
-if not exists (select 1 from sys.sysusers where name = 'Jason.Bogart@icopal.com')
+if not exists (select 1 from sys.sysusers where name = 'jason.bogart@icopal.com')
 	begin
-		create user [Jason.Bogart@icopal.com] from external provider;
-	end
-go
-if not exists (select 1 from sys.sysusers where name = 'Jarek.Czujak@icopal.com')
-	begin
-		create user [Jarek.Czujak@icopal.com] from external provider;
+		create user [jason.bogart@icopal.com] from external provider;
 	end
 go
 if not exists (select 1 from sys.sysusers where name = 'tom.manville@icopal.com')

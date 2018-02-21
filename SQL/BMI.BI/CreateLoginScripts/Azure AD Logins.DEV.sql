@@ -48,6 +48,12 @@ if not exists (select * from sys.sysusers where name = 'razia.nazir@icopal.com')
 	end
 go
 
+if not exists (select * from sys.sysusers where name = 'stephen.lawrenson@icopal.com') -- Stephen Lawrence (UKSLA@icopal.git)
+	begin
+		create user [stephen.lawrenson.com] from external provider;
+	end
+go
+
 if not exists (select * from sys.sysusers where name = 'anthony.smart@icopal.com')
 	begin
 		create user [anthony.smart@icopal.com] from external provider;

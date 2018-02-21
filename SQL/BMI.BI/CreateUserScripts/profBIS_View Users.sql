@@ -10,6 +10,7 @@ go
 --if exists (select 1 from dbo.sysusers where name = 'BmiBiEtlExtractor') drop user [BmiBiEtlExtractor];
 --if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukglu') drop user [GROUPICOPAL\ukglu];
 if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukaou') drop user [GROUPICOPAL\ukaou];
+if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uksla') drop user [GROUPICOPAL\uksla];
 if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukasm') drop user [GROUPICOPAL\ukasm];
 if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukjbo') drop user [GROUPICOPAL\ukjbo];
 if exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uktma') drop user [GROUPICOPAL\uktma];
@@ -42,6 +43,14 @@ exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\ukaou' ;
 exec sp_addrolemember N'db_owner', N'GROUPICOPAL\ukaou' ;
 go
 
+if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\uksla')
+	create user [GROUPICOPAL\uksla] for login [GROUPICOPAL\uksla] with default_schema = [dbo];
+go
+exec sp_addrolemember N'DeploymentManagers', N'GROUPICOPAL\uksla' ;
+exec sp_addrolemember N'SqlDevelopers', N'GROUPICOPAL\uksla' ;
+exec sp_addrolemember N'db_owner', N'GROUPICOPAL\uksla' ;
+go
+
 if not exists (select 1 from dbo.sysusers where name = 'GROUPICOPAL\ukrna')
 	create user [GROUPICOPAL\ukrna] for login [GROUPICOPAL\ukrna] with default_schema = [dbo];
 go
@@ -71,6 +80,7 @@ use [profBIS_View]
 go
 grant showplan to [GROUPICOPAL\ukglu];
 grant showplan to [GROUPICOPAL\ukaou];
+grant showplan to [GROUPICOPAL\uksla];
 grant showplan to [GROUPICOPAL\ukrna];
 grant showplan to [GROUPICOPAL\ukjbo];
 grant showplan to [GROUPICOPAL\ukasm];

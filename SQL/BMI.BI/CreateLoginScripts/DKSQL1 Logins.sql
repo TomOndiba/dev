@@ -37,6 +37,11 @@ if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL
 else
 	alter login [GROUPICOPAL\ukaou] with default_language = British, default_database = [profBIS_View];
 go
+if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\uksla' and [type] = 'U')
+	create login [GROUPICOPAL\uksla] from windows with default_language = British, default_database = [profBIS_View];
+else
+	alter login [GROUPICOPAL\ukaou] with default_language = British, default_database = [profBIS_View];
+go
 if not exists (select 1 from sys.[server_principals] where [name] = 'GROUPICOPAL\ukasm' and [type] = 'U')
 	create login [GROUPICOPAL\ukasm] from windows with default_language = British, default_database = [profBIS_View];
 else
@@ -62,6 +67,7 @@ use [master]
 go
 grant view server state to [GROUPICOPAL\ukglu];
 grant view server state to [GROUPICOPAL\ukaou];
+grant view server state to [GROUPICOPAL\uksla];
 grant view server state to [GROUPICOPAL\ukjbo];
 grant view server state to [GROUPICOPAL\ukrna];
 go

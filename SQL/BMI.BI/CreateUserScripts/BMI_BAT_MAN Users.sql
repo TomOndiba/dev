@@ -117,16 +117,16 @@ values (0, '', '', '', 0, 0)
 --! DO NOT revoke database access for this user to avoid breaking other DBA-level permissions
 --	, (1	, 'DEV'		, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
 --	, (1	, 'PROD'	, 'greg.lucas@icopal.com'			, 'dbo'	, 0	, 1)
---	, (1	, 'DEV'		, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'razia.nazir@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'andrew.couch@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'andrew.couch@icopal.com'			, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
-	, (1	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Jason.Bogart@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
-	, (1	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'anthony.smart@icopal.com'				, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'anthony.smart@icopal.com'				, 'dbo'	, 1	, 1)
+	, (1	, 'DEV'		, 'jason.bogart@icopal.com'					, 'dbo'	, 1	, 1)
+	, (1	, 'PROD'	, 'jason.bogart@icopal.com'					, 'dbo'	, 1	, 1)
 
 	--! App/Report Developers
 	, (1	, 'DEV'		, 'tom.manville@icopal.com'					, 'dbo'	, 1	, 1)
@@ -141,6 +141,10 @@ values (0, '', '', '', 0, 0)
 	--! Expired User Accounts
 	, (0	, 'DEV'		, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'Jonathan.Holdcroft@icopal.com'			, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'Vincent.Mitchell@icopal.com'				, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'Jarek.Czujak@icopal.com'					, 'dbo'	, 1	, 0)
 ;
 
 insert #RoleMembers (UserName, RoleName)
@@ -152,17 +156,17 @@ values ('', '')
 	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
 	, ('razia.nazir@icopal.com'					, 'BatchManagers')
 	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
+	, ('andrew.couch@icopal.com'				, 'SqlDevelopers')
+	, ('andrew.couch@icopal.com'				, 'BatchManagers')
+	, ('andrew.couch@icopal.com'				, 'CodeReviewers')
 
 	--! ETL Developers
-	, ('Vincent.Mitchell@icopal.com'			, 'EtlDevelopers')
-	, ('Vincent.Mitchell@icopal.com'			, 'BatchManagers')
-	, ('Vincent.Mitchell@icopal.com'			, 'CodeReviewers')
-	, ('Jason.Bogart@icopal.com'				, 'EtlDevelopers')
-	, ('Jason.Bogart@icopal.com'				, 'BatchManagers')
-	, ('Jason.Bogart@icopal.com'				, 'CodeReviewers')
-	, ('Jarek.Czujak@icopal.com'				, 'EtlDevelopers')
-	, ('Jarek.Czujak@icopal.com'				, 'BatchManagers')
-	, ('Jarek.Czujak@icopal.com'				, 'CodeReviewers')
+	, ('anthony.smart@icopal.com'				, 'EtlDevelopers')
+	, ('anthony.smart@icopal.com'				, 'BatchManagers')
+	, ('anthony.smart@icopal.com'				, 'CodeReviewers')
+	, ('jason.bogart@icopal.com'				, 'EtlDevelopers')
+	, ('jason.bogart@icopal.com'				, 'BatchManagers')
+	, ('jason.bogart@icopal.com'				, 'CodeReviewers')
 
 	--! App/Report Developers
 	, ('tom.manville@icopal.com'				, 'BusinessAnalysts')
@@ -173,6 +177,7 @@ values ('', '')
 	--! Other Roles
 	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
 	, ('razia.nazir@icopal.com'					, 'DeploymentManagers')
+	, ('andrew.couch@icopal.com'				, 'DeploymentManagers')
 
 	, ('InfaDev'								, 'IcsDataFeeders')
 	, ('InfaProd'								, 'IcsDataFeeders')

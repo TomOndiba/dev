@@ -622,7 +622,7 @@ AddRoleMembers:
 		end
 	else
 		raiserror('[%s] step skipped as disabled', 0, 1, @_Step) ; 
-/*
+
 	--!
 	--! Add any special permissions for DEV
 	--!
@@ -638,7 +638,7 @@ AddRoleMembers:
 		begin
 			raiserror('Failed to run users script due incorrect Azure SQL Server instance or database', 16, 1) ;
 		end
-*/
+
 	--raiserror('ERROR THROWN TO FORCE ROLLBACK', 16, 1) ;
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

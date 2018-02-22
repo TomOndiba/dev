@@ -52,7 +52,11 @@ as
 	union all select 100144 , 'M3'				, 'M3 (DNK/SWE/BEL/SVK)'					, ''		, 'DNK'	, 'Denmark, Sweden, Belgium and Slovakia'	, null	, 'Y' , 'QVS', ''		
 	union all select 100145 , 'M3-v7'			, 'M3 v7 (FRA/ESP)'							, ''		, 'FRA'	, 'France and Spain'						, null	, 'Y' , 'QVS', ''		
 	union all select 100146 , 'Movex'			, 'Movex (DNK/SWE/BEL/SVK)'					, ''		, 'DNK'	, 'Denmark, Sweden, Belgium and Slovakia'	, null	, 'Y' , 'QVS', ''		
-	union all select 100147 , 'iScala-HUN'		, 'iScala (HUN)'							, ''		, 'HUN'	, 'Hungary'									, null	, 'Y' , 'PSA', ''		
+	union all select 100147 , 'iScala-HUN'		, 'iScala (HUN)'							, ''		, 'HUN'	, 'Hungary'									, null	, 'Y' , 'PSA', ''
+
+	union all select 100148 , 'EST-IBS'			,'Estonia - IBS ASW'						, ''		,'EST'	,'Estonia'									, null	, 'Y' ,'PSA', ''
+	union all select 100149 , 'LVA-IBS'			,'Latvia - IBS ASW'							, ''		,'LVA'	,'Latvia'									, null	, 'Y' ,'PSA', ''
+	union all select 100150 , 'LTU-IBS'			,'Lithuania - IBS ASW'						, ''		,'LTU'	, 'Lithuania'								, null	, 'Y' ,'PSA', ''
 )
 merge into dbo.DataSource as tgt
 using sourceCte as src

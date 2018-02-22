@@ -131,10 +131,14 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'greg.lucas.dba'							, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
+--	, (1	, 'DEV'		, 'stephen.lawrenson@icopal.com'					, 'dbo'	, 0	, 1)
+--	, (1	, 'PROD'	, 'stephen.lawrenson@icopal.com'					, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'DEV'		, 'andrew.couch.dba'						, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'andrew.couch.dba'						, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'stephen.lawrenson.dba'						, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'stephen.lawrenson.dba'						, 'dbo'	, 0	, 1)
 
 	--! ETL Developers
 	, (1	, 'DEV'		, 'anthony.smart@icopal.com'				, 'dbo'	, 1	, 1)
@@ -223,6 +227,9 @@ values ('', '')
 	, ('andrew.couch@icopal.com'				, 'SqlDevelopers')
 	, ('andrew.couch@icopal.com'				, 'BatchManagers')
 	, ('andrew.couch@icopal.com'				, 'CodeReviewers')
+--	, ('stephen.lawrenson@icopal.com'				, 'SqlDevelopers')
+--	, ('stephen.lawrenson@icopal.com'				, 'BatchManagers')
+--	, ('stephen.lawrenson@icopal.com'				, 'CodeReviewers')
 	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
 	, ('razia.nazir@icopal.com'					, 'BatchManagers')
 	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
@@ -232,6 +239,9 @@ values ('', '')
 	, ('andrew.couch.dba'						, 'SqlDevelopers')
 	, ('andrew.couch.dba'						, 'BatchManagers')
 	, ('andrew.couch.dba'						, 'CodeReviewers')
+	, ('stephen.lawrenson.dba'						, 'SqlDevelopers')
+	, ('stephen.lawrenson.dba'						, 'BatchManagers')
+	, ('stephen.lawrenson.dba'						, 'CodeReviewers')
 
 	--! ETL Developers
 	, ('anthony.smart@icopal.com'				, 'EtlDevelopers')
@@ -277,6 +287,7 @@ values ('', '')
 	--! Other Roles
 	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
 	, ('andrew.couch@icopal.com'				, 'DeploymentManagers')
+--	, ('stephen.lawrenson@icopal.com'				, 'DeploymentManagers')
 	, ('razia.nazir@icopal.com'					, 'DeploymentManagers')
 --	, ('greg.lucas.dba'							, 'DeploymentManagers')
 	, ('BmiBiDwFeedDev'							, 'EtlDevelopers')
@@ -704,6 +715,16 @@ if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name(
 		alter role [db_accessadmin] add member [andrew.couch.dba]
 		alter role [db_owner] add member [andrew.couch.dba]
 		grant alter any user to [andrew.couch.dba]
+
+		--!
+		--!
+		--!
+		if not exists (select 1 from sys.database_principals where name = 'stephen.lawrenson.dba')
+			create user [stephen.lawrenson.dba] for login [stephen.lawrenson.dba] with default_schema = [dbo] ;
+
+		alter role [db_accessadmin] add member [stephen.lawrenson.dba]
+		alter role [db_owner] add member [stephen.lawrenson.dba]
+		grant alter any user to [stephen.lawrenson.dba]
 	end
 else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BI_DW_PROD'
 	begin
@@ -728,5 +749,15 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		alter role [db_accessadmin] add member [andrew.couch.dba]
 		alter role [db_owner] add member [andrew.couch.dba]
 		grant alter any user to [andrew.couch.dba]
+
+		--!
+		--!
+		--!
+		if not exists (select 1 from sys.database_principals where name = 'stephen.lawrenson.dba')
+			create user [stephen.lawrenson.dba] for login [stephen.lawrenson.dba] with default_schema = [dbo] ;
+
+		alter role [db_accessadmin] add member [stephen.lawrenson.dba]
+		alter role [db_owner] add member [stephen.lawrenson.dba]
+		grant alter any user to [stephen.lawrenson.dba]
 	end
 go

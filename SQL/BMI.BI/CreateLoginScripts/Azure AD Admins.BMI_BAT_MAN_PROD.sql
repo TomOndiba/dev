@@ -56,17 +56,17 @@ go
 --!
 --!
 --!
---if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
---	begin
---		create user [stephen.lawrenson@icopal.com] from external provider;
---	end
---go
---alter role [db_accessadmin] add member [stephen.lawrenson@icopal.com]
---go
---alter role [db_owner] add member [stephen.lawrenson@icopal.com]
---go
---grant alter any user to [stephen.lawrenson@icopal.com]
---go
+if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
+	begin
+		create user [stephen.lawrenson@icopal.com] from external provider;
+	end
+go
+alter role [db_accessadmin] add member [stephen.lawrenson@icopal.com]
+go
+alter role [db_owner] add member [stephen.lawrenson@icopal.com]
+go
+grant alter any user to [stephen.lawrenson@icopal.com]
+go
 
 --!
 --! Razia created this DB and is the owner (i.e. aliased as dbo so cannot be added as razia.nazir@icopal.com)

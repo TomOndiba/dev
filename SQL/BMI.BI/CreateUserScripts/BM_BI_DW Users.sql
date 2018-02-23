@@ -131,8 +131,8 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'greg.lucas.dba'							, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
---	, (1	, 'DEV'		, 'stephen.lawrenson@icopal.com'					, 'dbo'	, 0	, 1)
---	, (1	, 'PROD'	, 'stephen.lawrenson@icopal.com'					, 'dbo'	, 0	, 1)
+	, (1	, 'DEV'		, 'stephen.lawrenson@icopal.com'					, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'stephen.lawrenson@icopal.com'					, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'DEV'		, 'andrew.couch.dba'						, 'dbo'	, 0	, 1)
@@ -227,9 +227,9 @@ values ('', '')
 	, ('andrew.couch@icopal.com'				, 'SqlDevelopers')
 	, ('andrew.couch@icopal.com'				, 'BatchManagers')
 	, ('andrew.couch@icopal.com'				, 'CodeReviewers')
---	, ('stephen.lawrenson@icopal.com'				, 'SqlDevelopers')
---	, ('stephen.lawrenson@icopal.com'				, 'BatchManagers')
---	, ('stephen.lawrenson@icopal.com'				, 'CodeReviewers')
+	, ('stephen.lawrenson@icopal.com'				, 'SqlDevelopers')
+	, ('stephen.lawrenson@icopal.com'				, 'BatchManagers')
+	, ('stephen.lawrenson@icopal.com'				, 'CodeReviewers')
 	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
 	, ('razia.nazir@icopal.com'					, 'BatchManagers')
 	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
@@ -287,9 +287,9 @@ values ('', '')
 	--! Other Roles
 	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
 	, ('andrew.couch@icopal.com'				, 'DeploymentManagers')
---	, ('stephen.lawrenson@icopal.com'				, 'DeploymentManagers')
+	, ('stephen.lawrenson@icopal.com'				, 'DeploymentManagers')
 	, ('razia.nazir@icopal.com'					, 'DeploymentManagers')
---	, ('greg.lucas.dba'							, 'DeploymentManagers')
+	, ('greg.lucas.dba'							, 'DeploymentManagers')
 	, ('BmiBiDwFeedDev'							, 'EtlDevelopers')
 
 	, ('InfaDev'								, 'DataFeedWriters')
@@ -639,7 +639,7 @@ AddRoleMembers:
 	--!
 	if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BI_DW_DEV'
 		begin
-			raiserror('Granting InfaDev CREATE TABLE access in DEV environment (only)', 16, 1) ;
+			raiserror('Granting InfaDev CREATE TABLE access in DEV environment (only)', 0, 0) with nowait ;
 
 			if exists (select 1 from sys.database_principals where name = 'InfaDev')
 				begin

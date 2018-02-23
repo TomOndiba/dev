@@ -50,17 +50,17 @@ go
 --!
 --!
 --!
---if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
---	begin
---		create user [stephen.lawrenson@icopal.com] from external provider;
---	end
---go
---exec sp_addrolemember N'db_accessadmin', N'stephen.lawrenson@icopal.com' ;
---go
---exec sp_addrolemember N'db_owner', N'stephen.lawrenson@icopal.com' ;
---go
---grant alter any user to [stephen.lawrenson@icopal.com]
---go
+if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
+	begin
+		create user [stephen.lawrenson@icopal.com] from external provider;
+	end
+go
+exec sp_addrolemember N'db_accessadmin', N'stephen.lawrenson@icopal.com' ;
+go
+exec sp_addrolemember N'db_owner', N'stephen.lawrenson@icopal.com' ;
+go
+grant alter any user to [stephen.lawrenson@icopal.com]
+go
 
 --!
 --!

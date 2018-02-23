@@ -50,11 +50,11 @@ go
 --grant alter any user to [andrew.couch@icopal.com]
 --go
 
---if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
---	begin
---		create user [stephen.lawrenson@icopal.com] from external provider;
---	end
---go
+if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
+	begin
+		create user [stephen.lawrenson@icopal.com] from external provider;
+	end
+go
 --alter role [dbmanager] add member [stephen.lawrenson@icopal.com]
 --go
 --alter role [loginmanager] add member [stephen.lawrenson@icopal.com]

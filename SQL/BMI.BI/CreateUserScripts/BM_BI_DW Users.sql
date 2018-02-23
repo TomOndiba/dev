@@ -639,15 +639,13 @@ AddRoleMembers:
 	--!
 	if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name() = 'BMI_BI_DW_DEV'
 		begin
+			raiserror('Granting InfaDev CREATE TABLE access in DEV environment (only)', 16, 1) ;
+
 			if exists (select 1 from sys.database_principals where name = 'InfaDev')
 				begin
 					grant alter on schema::tsa to [InfaDev];
 					grant create table to [InfaDev];
 				end 
-		end
-	else
-		begin
-			raiserror('Failed to run users script due incorrect Azure SQL Server instance or database', 16, 1) ;
 		end
 
 	--raiserror('ERROR THROWN TO FORCE ROLLBACK', 16, 1) ;

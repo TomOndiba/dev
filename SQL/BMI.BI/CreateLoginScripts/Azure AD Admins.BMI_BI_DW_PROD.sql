@@ -32,6 +32,9 @@ select * from sys.database_principals;
 --grant alter any user to [greg.lucas@icopal.com]
 --go
 
+--!
+--!
+--!
 if not exists (select 1 from sys.sysusers where name = 'andrew.couch@icopal.com')
 	begin
 		create user [andrew.couch@icopal.com] from external provider;
@@ -44,6 +47,24 @@ go
 grant alter any user to [andrew.couch@icopal.com]
 go
 
+--!
+--!
+--!
+--if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
+--	begin
+--		create user [stephen.lawrenson@icopal.com] from external provider;
+--	end
+--go
+--exec sp_addrolemember N'db_accessadmin', N'stephen.lawrenson@icopal.com' ;
+--go
+--exec sp_addrolemember N'db_owner', N'stephen.lawrenson@icopal.com' ;
+--go
+--grant alter any user to [stephen.lawrenson@icopal.com]
+--go
+
+--!
+--!
+--!
 if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
 	begin
 		create user [razia.nazir@icopal.com] from external provider;

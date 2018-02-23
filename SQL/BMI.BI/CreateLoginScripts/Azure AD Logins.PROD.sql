@@ -20,9 +20,11 @@ select * from sys.sql_logins;
 select * from sys.database_principals;
 */
 
---if exists(select * from sys.sysusers where name = 'INFA_SVC_PROD@icopal.com')
---  drop user [INFA_SVC_PROD@icopal.com] ;
---go
+/*
+if exists(select * from sys.sysusers where name = 'matthew.basoo@icopal.com')
+  drop user [matthew.basoo@icopal.com] ;
+go
+*/
 
 --if not exists (select 1 from sys.sysusers where name = 'greg.lucas@icopal.com')
 --	begin
@@ -48,11 +50,24 @@ go
 --grant alter any user to [andrew.couch@icopal.com]
 --go
 
+--if not exists (select 1 from sys.sysusers where name = 'stephen.lawrenson@icopal.com')
+--	begin
+--		create user [stephen.lawrenson@icopal.com] from external provider;
+--	end
+--go
+--alter role [dbmanager] add member [stephen.lawrenson@icopal.com]
+--go
+--alter role [loginmanager] add member [stephen.lawrenson@icopal.com]
+--go
+--grant alter any user to [stephen.lawrenson@icopal.com]
+--go
+
 if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
 	begin
 		create user [razia.nazir@icopal.com] from external provider;
 	end
 go
+
 
 if not exists (select 1 from sys.sysusers where name = 'anthony.smart@icopal.com')
 	begin

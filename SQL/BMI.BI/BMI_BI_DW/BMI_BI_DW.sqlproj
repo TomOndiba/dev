@@ -2037,6 +2037,27 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.1.0\058_Discovery_ProcurementSnapshot_Table_Modified.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_VAOFTBL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_VARBTBL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_VARITBL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_baan_tiitm001610.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\059_Tsa_Aspec4_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_VAOFTBL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_VARBTBL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_VARITBL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_baan_tiitm001610.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\060_Psa_Aspect4_M3_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\061_Tsa_Baan_Table_Added.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

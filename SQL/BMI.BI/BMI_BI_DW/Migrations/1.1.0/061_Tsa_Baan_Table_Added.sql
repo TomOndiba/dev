@@ -1,5 +1,9 @@
 ﻿-- <Migration ID="bc196043-8ef1-4daa-9ec8-28e8b1284001" />
-GO
+go
+
+if object_id('[tsa].[ics_land_baan_ttiitm004610]', 'U') is not null
+	drop table  [tsa].[ics_land_baan_ttiitm004610] ;
+
 
 PRINT N'Creating [tsa].[ics_land_baan_ttiitm004610]'
 GO

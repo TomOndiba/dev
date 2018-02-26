@@ -1,8 +1,8 @@
 ﻿-- <Migration ID="33a85079-9b59-430c-a6b7-675e712077bb" />
 GO
 
-if object_id('[tsa].[ics_land_baan_ttiitm004610]', 'U') is not null
-	drop table [tsa].[ics_land_baan_ttiitm004610] ;
+if object_id('[tsa].[ics_land_baan_tiitm001610]', 'U') is not null
+	drop table [tsa].[ics_land_baan_tiitm001610] ;
 
 	if object_id('[tsa].[ics_land_aspect4_VAOFTBL]', 'U') is not null
 	drop table [tsa].[ics_land_aspect4_VAOFTBL]
@@ -12,7 +12,6 @@ if object_id('[tsa].[ics_land_baan_ttiitm004610]', 'U') is not null
 	if object_id('[tsa].[ics_land_aspect4_VARBTBL]', 'U') is not null
 	drop table  [tsa].[ics_land_aspect4_VARBTBL]
 
-PRINT N'Creating [tsa].[ics_land_baan_tiitm001610]'
 GO
 CREATE TABLE [tsa].[ics_land_baan_tiitm001610]
 (

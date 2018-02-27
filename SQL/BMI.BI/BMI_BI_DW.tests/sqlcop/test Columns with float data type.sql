@@ -1,30 +1,31 @@
-﻿CREATE procedure [sqlcop].[test Columns with float data type]
-as
-begin
+﻿
+CREATE PROCEDURE [sqlcop].[test Columns with float data type]
+AS
+BEGIN
 	-- Written by George Mastros
 	-- February 25, 2012
 	-- http://sqlcop.lessthandot.com
 	-- http://blogs.lessthandot.com/index.php/DataMgmt/DBProgramming/do-not-use-the-float-data-type
 	
-	set nocount on
+	SET NOCOUNT ON
 	
-	declare @Output varchar(max)
-	set @Output = ''
+	DECLARE @Output VARCHAR(MAX)
+	SET @Output = ''
 			
-	select 	@Output = @Output + TABLE_SCHEMA + '.' + TABLE_NAME + '.' + COLUMN_NAME + char(13) + char(10)
-	from	INFORMATION_SCHEMA.COLUMNS
-	where	DATA_TYPE in ('float', 'real')
-	and TABLE_SCHEMA  not in ('tsa','psa', 'tSQLt','stg')
-	order by TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME
+	SELECT 	@Output = @Output + TABLE_SCHEMA + '.' + TABLE_NAME + '.' + COLUMN_NAME + CHAR(13) + CHAR(10)
+	FROM	INFORMATION_SCHEMA.COLUMNS
+	WHERE	DATA_TYPE IN ('float', 'real')
+	AND TABLE_SCHEMA  NOT IN ('tsa','psa', 'tSQLt','stg','discovery')
+	ORDER BY TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME
 
-	if @Output > '' 
-		begin
-			set @Output = char(13) + char(10) 
+	IF @Output > '' 
+		BEGIN
+			SET @Output = CHAR(13) + CHAR(10) 
 						  + 'For more information:  '
 						  + 'http://blogs.lessthandot.com/index.php/DataMgmt/DBProgramming/do-not-use-the-float-data-type' 
-						  + char(13) + char(10) 
-						  + char(13) + char(10) 
+						  + CHAR(13) + CHAR(10) 
+						  + CHAR(13) + CHAR(10) 
 						  + @Output
-			exec tSQLt.Fail @Output
-		end
-end;
+			EXEC tSQLt.Fail @Output
+		END
+END;

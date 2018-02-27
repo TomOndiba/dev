@@ -2058,6 +2058,27 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.1.0\061_Tsa_Baan_Table_Added.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\062_TSA_ibs_procurement_tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_est_procure_SROGRT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_est_procure_SROORPHE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_est_procure_SROORPPL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_est_procure_SROPRU.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_fin_procure_SROGRT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_fin_procure_SROORPHE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_fin_procure_SROORPPL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_fin_procure_SROPRU.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lat_procure_SROGRT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lat_procure_SROORPHE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lat_procure_SROORPPL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lat_procure_SROPRU.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lit_procure_SROGRT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lit_procure_SROORPHE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lit_procure_SROORPPL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_ibs_lit_procure_SROPRU.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

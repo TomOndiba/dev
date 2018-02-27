@@ -79,7 +79,7 @@ go
 --!
 --! Finally, run all un it tests as part of any build
 --!
-exec tSQLt.RunAll;
+--exec tSQLt.RunAll;
 go
 
 

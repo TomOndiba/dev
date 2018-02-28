@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[discovery].[procurement_snapshot_M3V10]') IS NOT NULL
+IF OBJECT_ID('[discovery].[procurement_snapshot_M3V10]') IS NOT NULL
 	DROP VIEW [discovery].[procurement_snapshot_M3V10];
 
 GO
@@ -6,6 +6,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
+
 
 
 
@@ -127,7 +129,34 @@ select
 	)																as DateDataExtracted
 from
 	psa.ics_stg_M3V10vil_POL_MPHEAD				h ---Header
-left outer join psa.ics_stg_M3V10vil_POL_MPLINE l
+
+left outer join
+(
+	select
+		c.IBPUNO
+	  , c.IBPNLI
+	  , c.IBITNO
+	  , sum(c.IBORQA) IBORQA
+	  , max(c.IBPUUN) IBPUUN
+	  , sum(c.IBCAQA) IBCAQA
+	  , sum(c.IBRVQA) IBRVQA
+	  , sum(c.IBRJQA) IBRJQA
+	  , sum(c.IBSDQA) IBSDQA
+	  , sum(c.IBLNAM) IBLNAM
+	  , max(c.IBPPUN) IBPPUN
+	  , max(c.IBDWDT) IBDWDT
+	  , max(c.IBCODT) IBCODT
+	  , max(c.IBPLDT) IBPLDT
+	  , max(IBPUST)	  IBPUST
+	  , max(IBPUSL)	  IBPUSL
+	  , max(IBLMDT)	  IBLMDT
+	from
+		psa.ics_stg_M3V10vil_POL_MPLINE c
+	group by
+		c.IBPNLI
+	  , c.IBITNO
+	  , c.IBPUNO
+)							l
 	on ---line
 h.IAPUNO = l.IBPUNO
 left outer join
@@ -309,7 +338,36 @@ select
 	)																as DateDataExtracted
 from
 	psa.ics_stg_M3V10ved_POL_MPHEAD				h ---Header
-left outer join psa.ics_stg_M3V10ved_POL_MPLINE l
+left outer join
+(
+	select
+		c.IBPUNO
+	  , c.IBPNLI
+	  , c.IBITNO
+	  , sum(c.IBORQA) IBORQA
+	  , max(c.IBPUUN) IBPUUN
+	  , sum(c.IBCAQA) IBCAQA
+	  , sum(c.IBRVQA) IBRVQA
+	  , sum(c.IBRJQA) IBRJQA
+	  , sum(c.IBSDQA) IBSDQA
+	  , sum(c.IBLNAM) IBLNAM
+	  , max(c.IBPPUN) IBPPUN
+	  , max(c.IBDWDT) IBDWDT
+	  , max(c.IBCODT) IBCODT
+	  , max(c.IBPLDT) IBPLDT
+	  , max(IBPUST)	  IBPUST
+	  , max(IBPUSL)	  IBPUSL
+	  , max(IBLMDT)	  IBLMDT
+	from
+		psa.ics_stg_M3V10ved_POL_MPLINE c
+	group by
+		c.IBPNLI
+	  , c.IBITNO
+	  , c.IBPUNO
+)							l
+
+
+
 	on ---line
 h.IAPUNO = l.IBPUNO
 left outer join
@@ -493,7 +551,35 @@ where
 	)																as DateDataExtracted
 from
 	psa.ics_stg_M3V10gen_POL_MPHEAD				h ---Header
-left outer join psa.ics_stg_M3V10gen_POL_MPLINE l
+left outer join
+
+(
+	select
+		c.IBPUNO
+	  , c.IBPNLI
+	  , c.IBITNO
+	  , sum(c.IBORQA) IBORQA
+	  , max(c.IBPUUN) IBPUUN
+	  , sum(c.IBCAQA) IBCAQA
+	  , sum(c.IBRVQA) IBRVQA
+	  , sum(c.IBRJQA) IBRJQA
+	  , sum(c.IBSDQA) IBSDQA
+	  , sum(c.IBLNAM) IBLNAM
+	  , max(c.IBPPUN) IBPPUN
+	  , max(c.IBDWDT) IBDWDT
+	  , max(c.IBCODT) IBCODT
+	  , max(c.IBPLDT) IBPLDT
+	  , max(IBPUST)	  IBPUST
+	  , max(IBPUSL)	  IBPUSL
+	  , max(IBLMDT)	  IBLMDT
+	from
+		psa.ics_stg_M3V10gen_POL_MPLINE c
+	group by
+		c.IBPNLI
+	  , c.IBITNO
+	  , c.IBPUNO
+)							l
+
 	on ---line
 h.IAPUNO = l.IBPUNO
 left outer join

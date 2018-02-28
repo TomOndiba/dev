@@ -1,0 +1,40 @@
+CREATE TABLE [psa].[ics_stg_aspect4_VAOFTBL]
+(
+[EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
+[EtlBatchRunId] [int] NOT NULL,
+[EtlStepRunId] [int] NOT NULL,
+[EtlThreadRunId] [int] NOT NULL,
+[DataSourceKey] [int] NOT NULL,
+[EtlSourceTable] [varchar] (200) NOT NULL,
+[EtlCreatedOn] [datetime] NOT NULL,
+[EtlCreatedBy] [varchar] (200) NOT NULL,
+[EtlUpdatedOn] [datetime] NOT NULL,
+[EtlUpdatedBy] [varchar] (200) NOT NULL,
+[EtlDeletedOn] [datetime] NULL,
+[EtlDeletedBy] [varchar] (200) NULL,
+[IsDeleted] [char] (1) NOT NULL,
+[IsIncomplete] [char] (1) NOT NULL,
+[VAOF_RECSTS] [decimal] (1, 0) NULL,
+[VAOF_RECID] [nvarchar] (2) NULL,
+[VAOF_VARENR] [nvarchar] (16) NOT NULL,
+[VAOF_ENHED] [nvarchar] (5) NOT NULL,
+[VAOF_FRADT] [decimal] (8, 0) NULL,
+[VAOF_KONCRN] [decimal] (3, 0) NULL,
+[VAOF_FIRMA] [decimal] (3, 0) NULL,
+[VAOF_OMRFAK] [decimal] (9, 4) NULL,
+[VAOF_OMRKOD] [nvarchar] (1) NULL,
+[VAOF_AENDDT] [decimal] (8, 0) NULL,
+[VAOF_AENDAF] [nvarchar] (10) NULL,
+[VAOF_OPRDT] [decimal] (8, 0) NULL,
+[VAOF_OPRAF] [nvarchar] (10) NULL,
+[VAOF_TS] [decimal] (8, 0) NULL,
+[VAOF_LGD] [decimal] (13, 5) NULL,
+[VAOF_BRD] [decimal] (13, 5) NULL,
+[VAOF_HQJ] [decimal] (13, 5) NULL,
+[VAOF_VGT] [decimal] (13, 5) NULL,
+[VAOF_TYPE] [nvarchar] (1) NULL,
+[VAOF_SVGT] [decimal] (13, 5) NULL
+)
+GO
+ALTER TABLE [psa].[ics_stg_aspect4_VAOFTBL] ADD CONSTRAINT [PK_psa_ics_stg_aspect4_VAOFTBL] PRIMARY KEY CLUSTERED  ([VAOF_VARENR], [VAOF_ENHED])
+GO

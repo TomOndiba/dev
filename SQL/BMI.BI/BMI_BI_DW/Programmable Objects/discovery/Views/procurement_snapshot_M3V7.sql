@@ -8,7 +8,9 @@ SET ANSI_NULLS ON
 GO
 
 
-create   view [discovery].[procurement_snapshot_M3V7]
+
+
+create view [discovery].[procurement_snapshot_M3V7]
 as
 select
 	cast(h.IACONO as nvarchar(255))									as Division
@@ -99,17 +101,15 @@ select
   , cast(l.IBPLDT as nvarchar(255))									as PlanningDeliveryDate
   , cast(null as nvarchar(255))										as 'StandardUnitofMeasure'
   , cast(null as nvarchar(255))										as 'StandardUnitofQty'
-  , cast(
-				  case
-					   when l.IBPUUN = 'KG'
-						   then 'TN'
-					   when l.IBPUUN = 'TN'
-						   then 'TN'
-					   when l.IBPUUN = 'M2'
-						   then 'M2'
-					   else null
-				   end
-			    as nvarchar(255))									as 'ReportingUnitofMeasure'
+  , cast(case
+			 when l.IBPUUN = 'KG'
+				 then 'TN'
+			 when l.IBPUUN = 'TN'
+				 then 'TN'
+			 when l.IBPUUN = 'M2'
+				 then 'M2'
+			 else null
+		 end as nvarchar(255))										as 'ReportingUnitofMeasure'
   , cast(null as nvarchar(255))										as 'ReportingUnitofQty'
   , null															as product_category_direct
   , cast(c.ProductHier1 as nvarchar(255))							as product_category_level_1
@@ -125,8 +125,36 @@ select
 		select	max(d.EtlCreatedOn) from psa.ics_stg_m3v7_MPHEAD d
 	)																as DateDataExtracted
 from
-	psa.ics_stg_m3v7_MPHEAD				h ---Header
-left outer join psa.ics_stg_m3v7_MPLINE l
+	psa.ics_stg_m3v7_MPHEAD h ---Header
+
+
+left outer join
+(
+	select
+		c.IBPUNO
+	  , c.IBPNLI
+	  , c.IBITNO
+	  , sum(c.IBORQA) IBORQA
+	  , max(c.IBPUUN) IBPUUN
+	  , sum(c.IBCAQA) IBCAQA
+	  , sum(c.IBRVQA) IBRVQA
+	  , sum(c.IBRJQA) IBRJQA
+	  , sum(c.IBSDQA) IBSDQA
+	  , sum(c.IBLNAM) IBLNAM
+	  , max(c.IBPPUN) IBPPUN
+	  , max(c.IBDWDT) IBDWDT
+	  , max(c.IBCODT) IBCODT
+	  , max(c.IBPLDT) IBPLDT
+	  , max(IBPUST)	  IBPUST
+	  , max(IBPUSL)	  IBPUSL
+	  , max(IBLMDT)	  IBLMDT
+	from
+		psa.ics_stg_m3v7_MPLINE c
+	group by
+		c.IBPNLI
+	  , c.IBITNO
+	  , c.IBPUNO
+)							l
 	on ---line
 h.IAPUNO = l.IBPUNO
 left outer join
@@ -143,7 +171,7 @@ left outer join
 	inner join tsa.PU_CATEGORY c
 		on c.CATEGORY_ID = pl.CATEGORY_ID
 			and (pl.SYSTEM_ID + 100100) = 100115
-)										c
+)							c
 	on replace(ltrim(replace(rtrim(c.MATERIAL_CODE), '0', ' ')), ' ', '0') = replace(ltrim(replace(rtrim(l.IBITNO), '0', ' ')), ' ', '0')
 left outer join
 (
@@ -156,13 +184,13 @@ left outer join
 	  , A.MUAUTP
 	  , A.MUDMCF
 	from
-		psa.ics_stg_m3v7_MITAUN		A
+		psa.ics_stg_m3v7_MITAUN		   A
 	inner join psa.ics_stg_m3v7_MITMAS B
 		on (A.MUITNO = B.MMITNO)
 			and A.MUAUTP = 1
 			and upper(A.MUALUN) in
 					('KG', 'M2', 'TN')
-)										cc
+)							cc
 	on cc.MUITNO = l.IBITNO
 		and cc.MMUNMS = cast(l.IBPUUN as nvarchar(255))
 where

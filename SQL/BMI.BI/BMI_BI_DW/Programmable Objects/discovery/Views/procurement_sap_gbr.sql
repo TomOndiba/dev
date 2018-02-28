@@ -9,6 +9,9 @@ GO
 
 
 
+
+
+
 --/****** Object:  View [discovery].[procurement_sap_gbr]    Script Date: 29/01/2018 14:56:49 ******/
 --SET ANSI_NULLS ON
 --GO
@@ -16,7 +19,7 @@ GO
 --SET QUOTED_IDENTIFIER ON
 --GO
 
-create view
+create   view
 
 
 --select * from 
@@ -28,8 +31,8 @@ as
 	select
 		''																						 as 'Division'
 	  , ekp.BUKRS																				 as [CompanyNumber]
-	  , ''																						 as [Facility]
-	  , be.WERKS																				 as [Warehouse]
+	  , ''																						 as [Warehouse]
+	  , be.WERKS																				 as [Facility]
 	  , be.EBELN																				 as [PurchaseOrder]
 	  , ek.BSART																				 [POType]
 	  , ''																						 as [LowestStatus]
@@ -100,13 +103,10 @@ as
 	  , cast(c.ProductHier4 as nvarchar(255))													 as product_category_level_4
 	  , cast(c.ProductHier5 as nvarchar(255))													 as product_category_level_5
 	  , ek.AEDAT																				 [ChangeDate]
-																														-- , case
-																														--	when ek.BUKRS = 'CC01'
-																														--		then 'SAP GBR'
-																														--	when ek.BUKRS = 'CC10'
-																														--		then 'SAP Ireland'
-																														--	else 'Not Known'
-																														--end	
+-- , case		--	when ek.BUKRS = 'CC01'
+	--		then 'SAP GBR'
+		--	when ek.BUKRS = 'CC10'
+				--		then 'SAP Ireland'			--	else 'Not Known'		--end	
 	  , 'UK'																					 as [DataSource]
 	  , ek.DataSourceKey																		 as DataSourceKey
 	  , cast(convert(char(8), ek.AEDAT, 112) as int)											 as EntryDate
@@ -116,7 +116,28 @@ as
 	  , row_number() over (partition by be.EBELN, be.MATNR order by ekp.MENGE asc, et.EINDT asc) rn
 	from
 		psa.ics_stg_SAP_GBR_EKKO			 ek
-	left outer join psa.ics_stg_SAP_GBR_EKBE be
+	left outer join
+	(
+		select
+			WERKS
+		  , EBELN
+		  , EBELP
+		  , MATNR
+		  , BWART
+		  , BEWTP
+		  , sum(case when BWART = 102 then MENGE * (-1) else MENGE end) as MENGE
+		from
+			psa.ics_stg_SAP_GBR_EKBE EKBE
+		where
+			upper(isnull(BEWTP, '-99')) = 'E'
+		group by
+			WERKS
+		  , EBELN
+		  , EBELP
+		  , MATNR
+		  , BWART
+		  , BEWTP
+	)										 be
 		on ek.EBELN = be.EBELN
 	left outer join psa.ics_stg_SAP_GBR_EKPO ekp
 		on ekp.EBELN = be.EBELN

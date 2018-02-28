@@ -4,9 +4,9 @@
 
 SET NOCOUNT ON
 
-SET IDENTITY_INSERT [dbo].[TsaToPsaLoadControlTable] ON
+SET IDENTITY_INSERT [TsaToPsaLoadControlTable] ON
 
-MERGE INTO [dbo].[TsaToPsaLoadControlTable] AS Target
+MERGE INTO [TsaToPsaLoadControlTable] AS Target
 USING (VALUES
   (1,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttdpur082610]','BMI_BI_DW','psa','[ics_stg_baan_ttdpur082610]','Full',100107,'[t_orno],[t_cpgp]','[t_orno],[t_cpgp]',0)
  ,(2,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_SAP_GBR_LFB1]','BMI_BI_DW','psa','[ics_stg_SAP_GBR_LFB1]','Full',100101,'[LIFNR],[BUKRS]','[LIFNR],[BUKRS]',0)
@@ -44,6 +44,7 @@ USING (VALUES
  ,(42,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttiitm004610]','BMI_BI_DW','psa','[ics_stg_baan_ttiitm004610]','Full',100107,'[t_unit],[t_basu],[t_item]','[t_unit],[t_basu],[t_item]',0)
  ,(43,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_SAP_GBR_T052U]','BMI_BI_DW','psa','[ics_stg_SAP_GBR_T052U]','Full',100101,'[ZTAGG],[ZTERM],[SPRAS],[MANDT]','[ZTAGG],[ZTERM],[SPRAS],[MANDT]',0)
  ,(44,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_INIFILE]','BMI_BI_DW','psa','[ics_stg_Symfonia_INIFILE]','Full',100130,'[sekcja],[plik],[klucz]','[sekcja],[plik],[klucz]',0)
+ ,(66,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_SAP_SVK_EKKO]','BMI_BI_DW','psa','[ics_stg_SAP_SVK_EKKO]','Full',100101,'[EBELN]','[EBELN]',0)
  ,(46,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttdpur336610]','BMI_BI_DW','psa','[ics_stg_baan_ttdpur336610]','Full',100107,'[t_pono],[t_dile],[t_cono]','[t_pono],[t_dile],[t_cono]',0)
  ,(47,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_SAP_GBR_TCURR]','BMI_BI_DW','psa','[ics_stg_SAP_GBR_TCURR]','Full',100101,'[GDATU],[TCURR],[FCURR],[KURST],[MANDT]','[GDATU],[TCURR],[FCURR],[KURST],[MANDT]',0)
  ,(48,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_M3V10ved_POL_OOHEAD]','BMI_BI_DW','psa','[ics_stg_M3V10ved_POL_OOHEAD]','Full',100140,'[OAORNO],[OACONO]','[OAORNO],[OACONO]',0)
@@ -61,7 +62,6 @@ USING (VALUES
  ,(62,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_SAP_SVK_EKET]','BMI_BI_DW','psa','[ics_stg_SAP_SVK_EKET]','Full',100101,'[ETENR],[EBELP],[EBELN]','[ETENR],[EBELP],[EBELN]',0)
  ,(64,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_RV]','BMI_BI_DW','psa','[ics_stg_Symfonia_RV]','Full',100130,'[id]','[id]',0)
  ,(65,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_iScala_HUN_PC013700]','BMI_BI_DW','psa','[ics_stg_iScala_HUN_PC013700]','Full',100147,'[PC01001]','[PC01001]',0)
- ,(66,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_SAP_SVK_EKKO]','BMI_BI_DW','psa','[ics_stg_SAP_SVK_EKKO]','Full',100101,'[EBELN]','[EBELN]',0)
  ,(67,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_IP]','BMI_BI_DW','psa','[ics_stg_Symfonia_IP]','Full',100130,'[id]','[id]',0)
  ,(68,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_M3V10vil_POL_CCURRA]','BMI_BI_DW','psa','[ics_stg_M3V10vil_POL_CCURRA]','Full',100141,'[CUDIVI],[CUCUTD],[CUCUCD],[CUCRTP],[CUCONO]','[CUDIVI],[CUCUTD],[CUCUCD],[CUCRTP],[CUCONO]',0)
  ,(69,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_iScala_HUN_PC033700]','BMI_BI_DW','psa','[ics_stg_iScala_HUN_PC033700]','Full',100147,'[PC03003],[PC03002],[PC03001]','[PC03003],[PC03002],[PC03001]',0)
@@ -145,6 +145,7 @@ USING (VALUES
  ,(172,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3_OCUSMA]','BMI_BI_DW','psa','[ics_stg_m3_OCUSMA]','Full',100144,'[OKCUNO],[OKCONO]','[OKCUNO],[OKCONO]',0)
  ,(174,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_StanyMinMax]','BMI_BI_DW','psa','[ics_stg_Symfonia_StanyMinMax]','Full',100130,'[id]','[id]',0)
  ,(175,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3_OINVOH]','BMI_BI_DW','psa','[ics_stg_m3_OINVOH]','Full',100144,'[UHIVNO],[UHDIVI],[UHCONO]','[UHIVNO],[UHDIVI],[UHCONO]',0)
+ ,(227,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_CP]','BMI_BI_DW','psa','[ics_stg_Symfonia_CP]','Full',100130,'[id]','[id]',0)
  ,(177,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3_OINVOL]','BMI_BI_DW','psa','[ics_stg_m3_OINVOL]','Full',100144,'[ONINPX],[ONIVRF],[ONWHLO],[ONDLIX],[ONORNO],[ONIVTP],[ONIVSQ],[ONYEA4],[ONIVNO],[ONDIVI],[ONCONO]','[ONINPX],[ONIVRF],[ONWHLO],[ONDLIX],[ONORNO],[ONIVTP],[ONIVSQ],[ONYEA4],[ONIVNO],[ONDIVI],[ONCONO]',0)
  ,(178,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_M3V10vil_POL_OCUSMA]','BMI_BI_DW','psa','[ics_stg_M3V10vil_POL_OCUSMA]','Full',100141,'[OKCUNO],[OKCONO]','[OKCUNO],[OKCONO]',0)
  ,(179,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3_OOHEAD]','BMI_BI_DW','psa','[ics_stg_m3_OOHEAD]','Full',100144,'[OAORNO],[OACONO]','[OAORNO],[OACONO]',0)
@@ -177,7 +178,6 @@ USING (VALUES
  ,(223,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line]','BMI_BI_DW','psa','[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Line]','Full',100139,'[Line_No_],[Document_Type],[Document_No_]','[Line_No_],[Document_Type],[Document_No_]',0)
  ,(224,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3v7_MITBAL]','BMI_BI_DW','psa','[ics_stg_m3v7_MITBAL]','Full',100145,'[MBITNO],[MBWHLO],[MBCONO]','[MBITNO],[MBWHLO],[MBCONO]',0)
  ,(226,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3v7_MITFAC]','BMI_BI_DW','psa','[ics_stg_m3v7_MITFAC]','Full',100145,'[M9ITNO],[M9FACI],[M9CONO]','[M9ITNO],[M9FACI],[M9CONO]',0)
- ,(227,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_CP]','BMI_BI_DW','psa','[ics_stg_Symfonia_CP]','Full',100130,'[id]','[id]',0)
  ,(228,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_M3V10gen_POL_MITAUN]','BMI_BI_DW','psa','[ics_stg_M3V10gen_POL_MITAUN]','Full',100113,'[MUITNO],[MUCONO],[MUAUTP],[MUALUN]','[MUITNO],[MUCONO],[MUAUTP],[MUALUN]',0)
  ,(229,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3v7_MITLOC]','BMI_BI_DW','psa','[ics_stg_m3v7_MITLOC]','Full',100145,'[MLREPN],[MLBANO],[MLWHSL],[MLITNO],[MLWHLO],[MLCONO]','[MLREPN],[MLBANO],[MLWHSL],[MLITNO],[MLWHLO],[MLCONO]',0)
  ,(231,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Line Discount]','BMI_BI_DW','psa','[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Line Discount]','Full',100139,'[Vendor_No_],[Variant_Code],[Unit_of_Measure_Code],[Starting_Date],[Minimum_Quantity],[Item_No_],[Currency_Code]','[Vendor_No_],[Variant_Code],[Unit_of_Measure_Code],[Starting_Date],[Minimum_Quantity],[Item_No_],[Currency_Code]',0)
@@ -193,6 +193,7 @@ USING (VALUES
  ,(243,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_CT]','BMI_BI_DW','psa','[ics_stg_Symfonia_CT]','Full',100130,'[id]','[id]',0)
  ,(246,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3v7_OCHCUS]','BMI_BI_DW','psa','[ics_stg_m3v7_OCHCUS]','Full',100145,'[OSFVDT],[OSCUNO],[OSCONO]','[OSFVDT],[OSCUNO],[OSCONO]',0)
  ,(247,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_M3V10gen_POL_MITWHL]','BMI_BI_DW','psa','[ics_stg_M3V10gen_POL_MITWHL]','Full',100113,'[MWWHLO],[MWCONO]','[MWWHLO],[MWCONO]',0)
+ ,(316,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttdpur001610]','BMI_BI_DW','psa','[ics_stg_baan_ttdpur001610]','Full',100107,'[t_qono]','[t_qono]',0)
  ,(248,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Navision_BGR_Icopal Bulgaria$Purchase Price]','BMI_BI_DW','psa','[ics_stg_Navision_BGR_Icopal Bulgaria$Purchase Price]','Full',100139,'[Vendor_No_],[Variant_Code],[Unit_of_Measure_Code],[Starting_Date],[Minimum_Quantity],[Item_No_],[Currency_Code]','[Vendor_No_],[Variant_Code],[Unit_of_Measure_Code],[Starting_Date],[Minimum_Quantity],[Item_No_],[Currency_Code]',0)
  ,(249,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3v7_OCUSMA]','BMI_BI_DW','psa','[ics_stg_m3v7_OCUSMA]','Full',100145,'[OKCUNO],[OKCONO]','[OKCUNO],[OKCONO]',0)
  ,(251,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_m3v7_OINVOH]','BMI_BI_DW','psa','[ics_stg_m3v7_OINVOH]','Full',100145,'[UHIVNO],[UHCONO]','[UHIVNO],[UHCONO]',0)
@@ -227,7 +228,6 @@ USING (VALUES
  ,(311,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_MZ]','BMI_BI_DW','psa','[ics_stg_Symfonia_MZ]','Full',100130,'[id]','[id]',0)
  ,(312,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttdpur000610]','BMI_BI_DW','psa','[ics_stg_baan_ttdpur000610]','Full',100107,'[t_sern]','[t_sern]',0)
  ,(314,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_DW]','BMI_BI_DW','psa','[ics_stg_Symfonia_DW]','Full',100130,'[id]','[id]',0)
- ,(316,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttdpur001610]','BMI_BI_DW','psa','[ics_stg_baan_ttdpur001610]','Full',100107,'[t_qono]','[t_qono]',0)
  ,(318,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_M3V10ved_POL_CCURRA]','BMI_BI_DW','psa','[ics_stg_M3V10ved_POL_CCURRA]','Full',100140,'[CUDIVI],[CUCUTD],[CUCUCD],[CUCRTP],[CUCONO]','[CUDIVI],[CUCUTD],[CUCUCD],[CUCRTP],[CUCONO]',0)
  ,(319,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttdpur002610]','BMI_BI_DW','psa','[ics_stg_baan_ttdpur002610]','Full',100107,'[t_qono],[t_pono]','[t_qono],[t_pono]',0)
  ,(322,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_PN]','BMI_BI_DW','psa','[ics_stg_Symfonia_PN]','Full',100130,'[id]','[id]',0)
@@ -296,6 +296,22 @@ USING (VALUES
  ,(405,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_Symfonia_HW]','BMI_BI_DW','psa','[ics_stg_Symfonia_HW]','Full',100130,'[id]','[id]',0)
  ,(407,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_baan_ttdpur081610]','BMI_BI_DW','psa','[ics_stg_baan_ttdpur081610]','Full',100107,'[t_orno],[t_item],[t_cntr]','[t_orno],[t_item],[t_cntr]',0)
  ,(408,'2018-02-19T00:46:04.447','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_SAP_GBR_LFA1]','BMI_BI_DW','psa','[ics_stg_SAP_GBR_LFA1]','Full',100101,'[LIFNR]','[LIFNR]',0)
+ ,(409,'2018-02-27T11:35:52.073','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lit_procure_SROPRU]','BMI_BI_DW','psa','[ics_stg_ibs_lit_procure_SROPRU]','Full',100150,'[PJPRDC]','[PJPRDC]',0)
+ ,(410,'2018-02-27T11:35:52.073','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lit_procure_SROORPPL]','BMI_BI_DW','psa','[ics_stg_ibs_lit_procure_SROORPPL]','Full',100150,'[OLORNO],[OLPRDC]','[OLORNO],[OLPRDC]',0)
+ ,(411,'2018-02-27T11:35:52.073','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lit_procure_SROORPHE]','BMI_BI_DW','psa','[ics_stg_ibs_lit_procure_SROORPHE]','Full',100150,'[OHORNO]','[OHORNO]',0)
+ ,(412,'2018-02-27T11:35:52.073','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lit_procure_SROGRT]','BMI_BI_DW','psa','[ics_stg_ibs_lit_procure_SROGRT]','Full',100150,'[GRORNO],[GRPRDC]','[GRORNO],[GRPRDC]',0)
+ ,(413,'2018-02-27T11:36:51.460','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lat_procure_SROPRU]','BMI_BI_DW','psa','[ics_stg_ibs_lat_procure_SROPRU]','Full',100149,'[PJPRDC]','[PJPRDC]',0)
+ ,(414,'2018-02-27T11:36:51.460','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lat_procure_SROORPPL]','BMI_BI_DW','psa','[ics_stg_ibs_lat_procure_SROORPPL]','Full',100149,'[OLORNO],[OLPRDC]','[OLORNO],[OLPRDC]',0)
+ ,(415,'2018-02-27T11:36:51.460','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lat_procure_SROORPHE]','BMI_BI_DW','psa','[ics_stg_ibs_lat_procure_SROORPHE]','Full',100149,'[OHORNO]','[OHORNO]',0)
+ ,(416,'2018-02-27T11:36:51.460','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_lat_procure_SROGRT]','BMI_BI_DW','psa','[ics_stg_ibs_lat_procure_SROGRT]','Full',100149,'[GRORNO],[GRPRDC]','[GRORNO],[GRPRDC]',0)
+ ,(417,'2018-02-27T11:38:17.347','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_fin_procure_SROPRU]','BMI_BI_DW','psa','[ics_stg_ibs_fin_procure_SROPRU]','Full',100112,'[PJPRDC]','[PJPRDC]',0)
+ ,(418,'2018-02-27T11:38:17.347','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_fin_procure_SROORPPL]','BMI_BI_DW','psa','[ics_stg_ibs_fin_procure_SROORPPL]','Full',100112,'[OLORNO],[OLPRDC]','[OLORNO],[OLPRDC]',0)
+ ,(419,'2018-02-27T11:38:17.347','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_fin_procure_SROORPHE]','BMI_BI_DW','psa','[ics_stg_ibs_fin_procure_SROORPHE]','Full',100112,'[OHORNO]','[OHORNO]',0)
+ ,(420,'2018-02-27T11:38:17.347','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_fin_procure_SROGRT]','BMI_BI_DW','psa','[ics_stg_ibs_fin_procure_SROGRT]','Full',100112,'[GRORNO],[GRPRDC]','[GRORNO],[GRPRDC]',0)
+ ,(421,'2018-02-27T11:39:31.360','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_est_procure_SROPRU]','BMI_BI_DW','psa','[ics_stg_ibs_est_procure_SROPRU]','Full',100148,'[PJPRDC]','[PJPRDC]',0)
+ ,(422,'2018-02-27T11:39:31.360','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_est_procure_SROORPPL]','BMI_BI_DW','psa','[ics_stg_ibs_est_procure_SROORPPL]','Full',100148,'[OLORNO],[OLPRDC]','[OLORNO],[OLPRDC]',0)
+ ,(423,'2018-02-27T11:39:31.360','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_est_procure_SROORPHE]','BMI_BI_DW','psa','[ics_stg_ibs_est_procure_SROORPHE]','Full',100148,'[OHORNO]','[OHORNO]',0)
+ ,(424,'2018-02-27T11:39:31.360','GROUPICOPAL\ukaou','BMI_BI_DW','tsa','[ics_land_ibs_est_procure_SROGRT]','BMI_BI_DW','psa','[ics_stg_ibs_est_procure_SROGRT]','Full',100148,'[GRORNO],[GRPRDC]','[GRORNO],[GRPRDC]',0)
 ) AS Source ([ID],[CreatedDate],[CreatedBy],[SourceDB],[SourceSchema],[SourceTable],[TargetDB],[TargetSchema],[TargetTable],[LoadMode],[DataSourceKey],[SourcePK],[TargetPK],[Done])
 ON (Target.[ID] = Source.[ID])
 WHEN MATCHED AND (
@@ -338,16 +354,18 @@ DECLARE @mergeError int
 SELECT @mergeError = @@ERROR, @mergeCount = @@ROWCOUNT
 IF @mergeError != 0
  BEGIN
- PRINT 'ERROR OCCURRED IN MERGE FOR [dbo].[TsaToPsaLoadControlTable]. Rows affected: ' + CAST(@mergeCount AS VARCHAR(100)); -- SQL should always return zero rows affected
+ PRINT 'ERROR OCCURRED IN MERGE FOR [TsaToPsaLoadControlTable]. Rows affected: ' + CAST(@mergeCount AS VARCHAR(100)); -- SQL should always return zero rows affected
  END
 ELSE
  BEGIN
- PRINT '[dbo].[TsaToPsaLoadControlTable] rows affected by MERGE: ' + CAST(@mergeCount AS VARCHAR(100));
+ PRINT '[TsaToPsaLoadControlTable] rows affected by MERGE: ' + CAST(@mergeCount AS VARCHAR(100));
  END
 GO
 
-SET IDENTITY_INSERT [dbo].[TsaToPsaLoadControlTable] OFF
+SET IDENTITY_INSERT [TsaToPsaLoadControlTable] OFF
 GO
 SET NOCOUNT OFF
 GO
+
+
 

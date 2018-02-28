@@ -10,6 +10,8 @@ GO
 
 
 
+
+
 create   view [discovery].[procurement_snapshot_M3]
 as
 select
@@ -143,7 +145,33 @@ select
 	)																as DateDataExtracted
 from
 	psa.ics_stg_m3_MPHEAD				h ---Header
-left outer join psa.ics_stg_m3_MPLINE l
+left outer join
+(
+	select
+		c.IBPUNO
+	  , c.IBPNLI
+	  , c.IBITNO
+	  , sum(c.IBORQA) IBORQA
+	  , max(c.IBPUUN) IBPUUN
+	  , sum(c.IBCAQA) IBCAQA
+	  , sum(c.IBRVQA) IBRVQA
+	  , sum(c.IBRJQA) IBRJQA
+	  , sum(c.IBSDQA) IBSDQA
+	  , sum(c.IBLNAM) IBLNAM
+	  , max(c.IBPPUN) IBPPUN
+	  , max(c.IBDWDT) IBDWDT
+	  , max(c.IBCODT) IBCODT
+	  , max(c.IBPLDT) IBPLDT
+	  , max(IBPUST)	  IBPUST
+	  , max(IBPUSL)	  IBPUSL
+	  , max(IBLMDT)	  IBLMDT
+	from
+		psa.ics_stg_m3_MPLINE c
+	group by
+		c.IBPNLI
+	  , c.IBITNO
+	  , c.IBPUNO
+)							l
 	on ---line
 h.IAPUNO = l.IBPUNO
 left outer join

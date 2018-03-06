@@ -52,24 +52,10 @@ if not exists (select 1 from sys.database_principals where name = 'InfaDev')
 	end
 go
 
-if not exists (select 1 from sys.database_principals where name = 'Jason.Bogart@icopal.com')
+if not exists (select 1 from sys.database_principals where name = 'jason.bogart@icopal.com')
 	begin
-		create user [Jason.Bogart@icopal.com] from external provider;
+		create user [jason.bogart@icopal.com] from external provider;
 
-		alter role [db_owner] add member [Jason.Bogart@icopal.com] ;
-	end
-go
-if not exists (select 1 from sys.database_principals where name = 'Jarek.Czujak@icopal.com')
-	begin
-		create user [Jarek.Czujak@icopal.com] from external provider;
-
-		alter role [db_owner] add member [Jarek.Czujak@icopal.com] ;
-	end
-go
-if not exists (select 1 from sys.database_principals where name = 'Vincent.Mitchell@icopal.com')
-	begin
-		create user [Vincent.Mitchell@icopal.com] from external provider;
-
-		alter role [db_owner] add member [Vincent.Mitchell@icopal.com] ;
+		alter role [db_owner] add member [jason.bogart@icopal.com] ;
 	end
 go

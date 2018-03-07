@@ -9,6 +9,10 @@ GO
 
 
 
+
+
+
+
 --6456
 
 
@@ -20,7 +24,7 @@ select
 
 	''									  as [Division]
   , po.t_comp							  [CompanyNumber]
-  , ''									  [Facility]
+  , 'p'									  [Facility]
   , po.t_cwar							  [Warehouse]
   , po.t_orno							  [PurchaseOrder]
   , ''									  [POType]
@@ -39,7 +43,7 @@ select
 				 ('M2', 'TN')
 				 then pl.t_oqua
 			 else case
-					  when (upper(con.t_conv) = 'KG')
+					  when (upper(con.t_conv) = 'KG' and upper(pl.t_cuqp) <> 'KG')
 						  then ((pl.t_oqua * t_conv) / 1000)
 					  when (upper(pl.t_cuqp) = 'KG')
 						  then (pl.t_oqua / 1000)
@@ -89,13 +93,21 @@ select
   , ''									  [StoredQtyConverted]
   , pl.t_cuqp							  [PurchaseOrderUnit]
   , pl.t_cupp							  [PurchasePriceUnit]
-  , po.t_ccur							  [LineAmountOrderCurrency]
+  , t_pric							  [LineAmountOrderCurrency]
   , pl.t_ddta							  [RequestedDeliveryDate]
   , pl.t_ddtc							  [ConfirmedDeliveryDate]
   , pl.t_ddtb							  [PlanningDeliveryDate]
   , ''									  [StandardUnitofMeasure]
   , ''									  [StandardUnitofQty]
-  , pl.t_cupp							  [ReportingUnitofMeasure]
+
+
+    ,case when pl.t_cupp='M2'
+  then pl.t_cupp
+  when   (pl.t_cupp='KG' or upper(t_unit)= 'KG') then 'TN'
+  else  upper(t_unit) end   ReportingUnitOfMeasure
+
+
+  
   , ''									  [ReportingUnitofQty]
   , null								  as product_category_direct
   , cast(c.ProductHier1 as nvarchar(255)) as product_category_level_1
@@ -159,11 +171,9 @@ left outer join
 	on replace(ltrim(replace(rtrim(c.MATERIAL_CODE), '0', ' ')), ' ', '0') = replace(ltrim(replace(rtrim(pl.t_item), '0', ' ')), ' ', '0') 
 
 	left outer join
-	psa.ics_stg_baan_tiitm001610 md
+	tsa.ics_land_baan_tiitm001610 md
 	on md.t_item=pl.t_item
 	where 	 year(po.t_ddat) > 2016
-
-
 
 
 

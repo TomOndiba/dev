@@ -2100,6 +2100,14 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_ibs_lit_procure_SROORPPL.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_ibs_lit_procure_SROPRU.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_sap_gbr_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_Baan_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3V10_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3V7_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3_GR.sql" />
+    <None Include="Migrations\1.1.0\064_PSA_Baan_Aspect4_Constraints.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

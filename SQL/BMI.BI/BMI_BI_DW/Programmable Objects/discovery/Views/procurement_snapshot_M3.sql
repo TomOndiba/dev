@@ -12,12 +12,15 @@ GO
 
 
 
+
+
+
 create   view [discovery].[procurement_snapshot_M3]
 as
 select
 	cast(h.IACONO as nvarchar(255))									as Division
   , cast(h.IADIVI as nvarchar(255))									as CompanyNumber
-  , cast(h.IAFACI as nvarchar(255))									as Facility
+  , 	cast(h.IAFACI as nvarchar(255))		as Facility--
   , cast(h.IAWHLO as nvarchar(255))									as Warehouse
   , cast(h.IAPUNO as nvarchar(255))									as PurchaseOrder
   , cast(h.IAORTY as nvarchar(255))									as POType
@@ -36,7 +39,7 @@ select
 				 ('M2', 'TN')
 				 then l.IBORQA
 			 else case
-					  when (upper(alternative) = 'KG')
+					  when (upper(alternative) = 'KG' and upper(l.IBPUUN)<>'KG' )
 						  then ((l.IBORQA / conversion) / 1000)
 					  when (upper(l.IBPUUN) = 'KG')
 						  then (l.IBORQA / 1000)
@@ -49,7 +52,7 @@ select
 				 ('M2', 'TN')
 				 then l.IBRVQA
 			 else case
-					  when (upper(alternative) = 'KG')
+					  when (upper(alternative) = 'KG'and upper(l.IBPUUN)<>'KG')
 						  then ((l.IBRVQA / conversion) / 1000)
 					  when (upper(l.IBPUUN) = 'KG')
 						  then (l.IBRVQA / 1000)
@@ -62,7 +65,7 @@ select
 				 ('M2', 'TN')
 				 then l.IBCAQA
 			 else case
-					  when (upper(alternative) = 'KG')
+					  when (upper(alternative) = 'KG'and upper(l.IBPUUN)<>'KG')
 						  then ((l.IBCAQA / conversion) / 1000)
 					  when (upper(l.IBPUUN) = 'KG')
 						  then (l.IBCAQA / 1000)
@@ -75,7 +78,7 @@ select
 				 ('M2', 'TN')
 				 then l.IBRJQA
 			 else case
-					  when (upper(l.IBPUUN) = 'KG')
+					  when (upper(l.IBPUUN) = 'KG'and upper(alternative)<>'KG')
 						  then (l.IBRJQA / 1000)
 					  when (upper(alternative) = 'KG')
 						  then ((l.IBRJQA / conversion) / 1000)
@@ -88,7 +91,7 @@ select
 				 ('M2', 'TN')
 				 then l.IBSDQA
 			 else case
-					  when (upper(alternative) = 'KG')
+					  when (upper(alternative) = 'KG'and upper(l.IBPUUN)<>'KG')
 						  then ((l.IBSDQA / conversion) / 1000)
 					  when (upper(l.IBPUUN) = 'KG')
 						  then (l.IBSDQA / 1000)
@@ -104,13 +107,13 @@ select
   , cast(null as nvarchar(255))										as 'StandardUnitofMeasure'
   , cast(null as nvarchar(255))										as 'StandardUnitofQty'
   , cast( case
-					   when l.IBPUUN = 'KG'
+					   when l.IBPUUN = 'KG' or cc.alternative='KG'
 						   then 'TN'
 					   when l.IBPUUN = 'TN'
 						   then 'TN'
 					   when l.IBPUUN = 'M2'
 						   then 'M2'
-					   else null
+					   else alternative
 				   end
 			   as nvarchar(255))									as 'ReportingUnitofMeasure'
   , cast(null as nvarchar(255))										as 'ReportingUnitofQty'
@@ -212,6 +215,7 @@ left outer join
 		and cc.MMUNMS = cast(l.IBPUUN as nvarchar(255))
 where
 	year(cast(IARGDT as nvarchar(20))) > '2016'
+		and h.IAFACI<>'900'
 	and ( ---po filter
 			isnull(h.IAPUSL, '') not in
 				('99')

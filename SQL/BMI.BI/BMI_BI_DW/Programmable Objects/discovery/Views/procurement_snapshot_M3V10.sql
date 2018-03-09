@@ -16,6 +16,7 @@ GO
 
 
 
+
 create      view [discovery].[procurement_snapshot_M3V10]
 as
 select
@@ -176,7 +177,7 @@ left outer join
 		tsa.PU_LINK_CATEGORY   pl
 	inner join tsa.PU_CATEGORY c
 		on c.CATEGORY_ID = pl.CATEGORY_ID
-			and (pl.SYSTEM_ID + 100100) = 100141
+			and (pl.SYSTEM_ID + 100100) = 100113
 )										c
 	on replace(ltrim(replace(rtrim(c.MATERIAL_CODE), '0', ' ')), ' ', '0') = replace(ltrim(replace(rtrim(l.IBITNO), '0', ' ')), ' ', '0')
 left outer join
@@ -231,7 +232,7 @@ where
 select
 	cast(h.IACONO as nvarchar(255))									as Division
   , cast(h.IADIVI as nvarchar(255))									as CompanyNumber
-  , '1'									as Facility---cast(h.IAFACI as nvarchar(255))
+  , cast(h.IAFACI as nvarchar(255))									as Facility---'1'
   , cast(h.IAWHLO as nvarchar(255))									as Warehouse
   , cast(h.IAPUNO as nvarchar(255))									as PurchaseOrder
   , cast(h.IAORTY as nvarchar(255))									as POType
@@ -388,7 +389,7 @@ left outer join
 		tsa.PU_LINK_CATEGORY   pl
 	inner join tsa.PU_CATEGORY c
 		on c.CATEGORY_ID = pl.CATEGORY_ID
-			and (pl.SYSTEM_ID + 100100) = 100140
+			and (pl.SYSTEM_ID + 100100) = 100113
 )										c
 	on replace(ltrim(replace(rtrim(c.MATERIAL_CODE), '0', ' ')), ' ', '0') = replace(ltrim(replace(rtrim(l.IBITNO), '0', ' ')), ' ', '0')
 left outer join
@@ -445,7 +446,7 @@ where
 		select
 	cast(h.IACONO as nvarchar(255))									as Division
   , cast(h.IADIVI as nvarchar(255))									as CompanyNumber
-  ,						'1'		as Facility--cast(h.IAFACI as nvarchar(255) )	
+  ,				cast(h.IAFACI as nvarchar(255) )			as Facility--'1'		
   , cast(h.IAWHLO as nvarchar(255))									as Warehouse
   , cast(h.IAPUNO as nvarchar(255))									as PurchaseOrder
   , cast(h.IAORTY as nvarchar(255))									as POType

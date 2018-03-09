@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[discovery].[procurement_snapshot_M3V10_GR]') IS NOT NULL
+IF OBJECT_ID('[discovery].[procurement_snapshot_M3V10_GR]') IS NOT NULL
 	DROP VIEW [discovery].[procurement_snapshot_M3V10_GR];
 
 GO
@@ -12,7 +12,9 @@ GO
 
 
 
-create       view [discovery].[procurement_snapshot_M3V10_GR]
+
+
+create         view [discovery].[procurement_snapshot_M3V10_GR]
 as
 select
 --count(*)
@@ -67,10 +69,10 @@ select
   , (
 
 
-		select	max(d.EtlCreatedOn) from tsa.ics_land_M3V10vil_POL_FGRECL d
+		select	max(d.EtlCreatedOn) from psa.ics_stg_M3V10vil_POL_FGRECL d
 	)									  as DateDataExtracted
 from
-	tsa.ics_land_M3V10vil_POL_FGRECL			  g
+	psa.ics_stg_M3V10vil_POL_FGRECL			  g
 left outer join
 (
 	select

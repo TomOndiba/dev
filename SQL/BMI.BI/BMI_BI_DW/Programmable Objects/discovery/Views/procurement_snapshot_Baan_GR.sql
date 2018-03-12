@@ -1,4 +1,4 @@
-﻿IF OBJECT_ID('[discovery].[procurement_snapshot_Baan_GR]') IS NOT NULL
+IF OBJECT_ID('[discovery].[procurement_snapshot_Baan_GR]') IS NOT NULL
 	DROP VIEW [discovery].[procurement_snapshot_Baan_GR];
 
 GO
@@ -6,6 +6,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
+
+
 
 
 create    view 
@@ -17,7 +20,7 @@ select
    cast(g.EtlCreatedOn as date) as  [DateDataExtracted]
   , 'Baan'								as  [DataSource]
   , '100107'							as DataSourceKey	
-   ,g.t_cwar 							as	[Facility]
+   ,'P'							as	[Facility]
   , g.t_orno						as  PurchaseOrderNumber
   ,cast( replace( cast(cast(	g.t_date as date) as nvarchar(25)) ,'-','') as int)							as GoodsReceivedDate
   , g.t_suno							as  Supplier
@@ -34,7 +37,7 @@ select
   , g.t_dqua							  as ReceivedQuantity
   , pl.t_cuqp							as GoodReceivedUnit
   , g.t_pric							  as PricePerUnit
-  , cast(g.t_dqua * g.t_pric as decimal(16,4))					as GoodsReceivedLineValueInLocalCurrency
+  , g.t_iamt				as GoodsReceivedLineValueInLocalCurrency
   , ''							as StandardUnitOfMeasure
     ,case when pl.t_cupp='M2'
   then pl.t_cupp
@@ -82,7 +85,7 @@ left outer join
 )											  c
 	on replace(ltrim(replace(rtrim(c.MATERIAL_CODE), '0', ' ')), ' ', '0') = replace(ltrim(replace(rtrim(g.t_item), '0', ' ')), ' ', '0') 
 	left outer join
-	tsa.ics_land_baan_tiitm001610 md
+	psa.ics_stg_baan_tiitm001610 md
 	on md.t_item=g.t_item
 where 	g.t_dqua <> 0 and year(g.t_date) > 2016
 GO

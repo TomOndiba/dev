@@ -9,7 +9,7 @@ GO
 
 
 
-create procedure [dbo].[PopulateTsaToPsaLoadControlTable]
+CREATE procedure [dbo].[PopulateTsaToPsaLoadControlTable]
 as
 
 	--<CommentHeader>
@@ -288,6 +288,32 @@ set
 where
 	SourceTable like '%aspect%' ;
 
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100112
+where
+	upper(SourceTable) like '%IBS%FIN%' ;
+
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100148
+where
+	upper(SourceTable) like '%IBS%EST%' ;
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100149
+where
+	upper(SourceTable) like '%IBS%LAT%' ;
+update
+	dbo.TsaToPsaLoadControlTable
+set
+	DataSourceKey = 100150
+where
+	upper(SourceTable) like '%IBS%LIT%' ;
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;
 		end try

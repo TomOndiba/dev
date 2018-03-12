@@ -13,6 +13,8 @@ GO
 
 
 
+
+
 --6456
 
 
@@ -24,7 +26,7 @@ select
 
 	''									  as [Division]
   , po.t_comp							  [CompanyNumber]
-  , 'p'									  [Facility]
+  , 'P'									  [Facility]
   , po.t_cwar							  [Warehouse]
   , po.t_orno							  [PurchaseOrder]
   , ''									  [POType]
@@ -171,7 +173,7 @@ left outer join
 	on replace(ltrim(replace(rtrim(c.MATERIAL_CODE), '0', ' ')), ' ', '0') = replace(ltrim(replace(rtrim(pl.t_item), '0', ' ')), ' ', '0') 
 
 	left outer join
-	tsa.ics_land_baan_tiitm001610 md
+	psa.ics_stg_baan_tiitm001610 md
 	on md.t_item=pl.t_item
 	where 	 year(po.t_ddat) > 2016
 

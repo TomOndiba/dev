@@ -71,5 +71,5 @@ CREATE TABLE [psa].[ics_stg_aspect4_VARITBL]
 [VARI_HQJ] [decimal] (11, 2) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_aspect4_VARITBL] ADD CONSTRAINT [PK_psa_ics_stg_aspect4_VARITBL] PRIMARY KEY CLUSTERED  ([VARI_NR], [VARI_FIRMA])
+ALTER TABLE [psa].[ics_stg_aspect4_VARITBL] ADD CONSTRAINT [psa_ics_stg_aspect4_VARITBL_PK] PRIMARY KEY CLUSTERED  ([VARI_NR], [VARI_FIRMA])
 GO

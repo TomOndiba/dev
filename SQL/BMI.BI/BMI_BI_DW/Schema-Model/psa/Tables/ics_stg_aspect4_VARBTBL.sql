@@ -155,5 +155,5 @@ CREATE TABLE [psa].[ics_stg_aspect4_VARBTBL]
 [VARB_ALFA9] [nvarchar] (1) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_aspect4_VARBTBL] ADD CONSTRAINT [PK_psa_ics_stg_aspect4_VARBTBL] PRIMARY KEY CLUSTERED  ([VARB_NR], [VARB_FIRMA])
+ALTER TABLE [psa].[ics_stg_aspect4_VARBTBL] ADD CONSTRAINT [psa_ics_stg_aspect4_VARBTBL_PK] PRIMARY KEY CLUSTERED  ([VARB_NR], [VARB_FIRMA])
 GO

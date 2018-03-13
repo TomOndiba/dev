@@ -2111,7 +2111,7 @@ Static Data;
     <None Include="Schema-Model\discovery\Tables\ProcurementSnapshotGR.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrations\1.1.0\065_20180309-1157_ukrna.sql" />
+    <None Include="Migrations\1.1.0\065_Create_discovery_ProcurementSnapshotGR_Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\discovery\Views\procurement_snapshot_est_IBS.sql" />
@@ -2120,6 +2120,30 @@ Static Data;
     <None Include="Programmable Objects\discovery\Views\procurement_snapshot_iScala_GR.sql" />
     <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lat_IBS.sql" />
     <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lit_IBS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_ORDHTBLS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_SSTATBL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_VEANTBL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_VIRKTBL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\066_Tsa_Aspect4_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_ORDHTBLS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_SSTATBL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_VEANTBL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_VIRKTBL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\067_Psa_Aspect4_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_est_IBS_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_fin_IBS_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lat_IBS_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lit_IBS_GR.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

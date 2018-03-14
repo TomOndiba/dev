@@ -2145,6 +2145,12 @@ Static Data;
     <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lat_IBS_GR.sql" />
     <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lit_IBS_GR.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\FlattenProductCategories.sql" />
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\RefreshAllProcurementGRData.sql" />
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\UoMMaraUpdate.sql" />
+    <None Include="Migrations\1.1.0\068_20180314-1331_ukrna.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

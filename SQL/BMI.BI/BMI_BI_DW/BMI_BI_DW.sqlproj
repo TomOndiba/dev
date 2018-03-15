@@ -55,7 +55,6 @@ StoredProcedure=[log4Utils].[JournalReader];
 StoredProcedure=[log4Utils].[JournalPrinter];
 StoredProcedure=[log4Utils].[ExceptionReader];
 StoredProcedure=[log4Private].[SessionInfoOutput];
-Table=[dbo].[IcopalCalendar];
 Function=[dbo].[Numbers];
 Role=[dbo].[db_ddladmin];
 Role=[dbo].[DataFeedWriters];
@@ -75,6 +74,8 @@ Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
 View=[discovery].[procurement_snapshot];
+Table=[psa].[ics_stg_aspect4_modmtbl];
+Table=[dbo].[IcopalCalendar];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -2149,7 +2150,13 @@ Static Data;
     <None Include="Programmable Objects\IcsApp\Stored Procedures\FlattenProductCategories.sql" />
     <None Include="Programmable Objects\IcsApp\Stored Procedures\RefreshAllProcurementGRData.sql" />
     <None Include="Programmable Objects\IcsApp\Stored Procedures\UoMMaraUpdate.sql" />
-    <None Include="Migrations\1.1.0\068_20180314-1331_ukrna.sql" />
+    <None Include="Migrations\1.1.0\068_Drop_SP_FlattenProductCategories.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\069_Create_Tsa_Aspect4_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\070_Create_Psa_Aspect4_Tables.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

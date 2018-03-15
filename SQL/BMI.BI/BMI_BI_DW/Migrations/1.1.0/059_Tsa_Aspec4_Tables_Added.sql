@@ -4,13 +4,13 @@ GO
 if object_id('[tsa].[ics_land_baan_tiitm001610]', 'U') is not null
 	drop table [tsa].[ics_land_baan_tiitm001610] ;
 
-	if object_id('[tsa].[ics_land_aspect4_VAOFTBL]', 'U') is not null
-	drop table [tsa].[ics_land_aspect4_VAOFTBL]
+	--if object_id('[tsa].[ics_land_aspect4_VAOFTBL]', 'U') is not null
+	--drop table [tsa].[ics_land_aspect4_VAOFTBL]
 
-	if object_id('[tsa].[ics_land_aspect4_VARITBL]', 'U') is not null
-	drop table  [tsa].[ics_land_aspect4_VARITBL]
-	if object_id('[tsa].[ics_land_aspect4_VARBTBL]', 'U') is not null
-	drop table  [tsa].[ics_land_aspect4_VARBTBL]
+	--if object_id('[tsa].[ics_land_aspect4_VARITBL]', 'U') is not null
+	--drop table  [tsa].[ics_land_aspect4_VARITBL]
+	--if object_id('[tsa].[ics_land_aspect4_VARBTBL]', 'U') is not null
+	--drop table  [tsa].[ics_land_aspect4_VARBTBL]
 
 GO
 CREATE TABLE [tsa].[ics_land_baan_tiitm001610]
@@ -177,8 +177,12 @@ CREATE TABLE [tsa].[ics_land_baan_tiitm001610]
 [t_Refcntu] [int] NULL
 )
 GO
-PRINT N'Creating [tsa].[ics_land_aspect4_VAOFTBL]'
-GO
+
+/*
+
+print N'Creating [tsa].[ics_land_aspect4_VAOFTBL]'
+go
+
 CREATE TABLE [tsa].[ics_land_aspect4_VAOFTBL]
 (
 [EtlBatchRunId] [int] NOT NULL,
@@ -436,3 +440,4 @@ CREATE TABLE [tsa].[ics_land_aspect4_VARITBL]
 [VARI_HQJ] [decimal] (11, 2) NULL
 )
 GO
+*/

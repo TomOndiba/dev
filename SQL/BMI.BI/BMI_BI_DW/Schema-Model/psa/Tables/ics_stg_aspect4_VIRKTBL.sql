@@ -28,5 +28,3 @@ CREATE TABLE [psa].[ics_stg_aspect4_VIRKTBL]
 [VIRK_TS] [decimal] (8, 0) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_aspect4_VIRKTBL] ADD CONSTRAINT [psa_ics_stg_aspect4_VIRKTBL_PK] PRIMARY KEY CLUSTERED  ([EtlRecordId])
-GO

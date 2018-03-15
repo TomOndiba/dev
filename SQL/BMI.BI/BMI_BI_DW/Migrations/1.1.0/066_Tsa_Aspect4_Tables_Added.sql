@@ -3,7 +3,7 @@ go
 
 if object_id('[tsa].[ics_land_aspect4_ORDHTBLS]', 'U') is not null
 	drop table [tsa].[ics_land_aspect4_ORDHTBLS] ;
-
+/*
 
 if object_id('[tsa].[ics_land_aspect4_SSTATBL]', 'U') is not null
 	drop table [tsa].[ics_land_aspect4_SSTATBL] ;
@@ -391,3 +391,4 @@ CREATE TABLE [tsa].[ics_land_aspect4_VIRKTBL]
 [VIRK_TS] [decimal] (8, 0) NULL
 )
 GO
+*/

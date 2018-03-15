@@ -15,7 +15,7 @@ CREATE TABLE [psa].[ics_stg_aspect4_VARITBL]
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_aspect4_VARITBL_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_aspect4_VARITBL_IsIncomplete] DEFAULT ('N'),
 [VARI_RECSTS] [decimal] (1, 0) NULL,
-[VARI_RECID] [nvarchar] (2) NULL,
+[VARI_RECID] [nvarchar] (2) NOT NULL,
 [VARI_NR] [nvarchar] (16) NOT NULL,
 [VARI_KONCRN] [decimal] (3, 0) NULL,
 [VARI_FIRMA] [decimal] (3, 0) NOT NULL,
@@ -71,5 +71,5 @@ CREATE TABLE [psa].[ics_stg_aspect4_VARITBL]
 [VARI_HQJ] [decimal] (11, 2) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_aspect4_VARITBL] ADD CONSTRAINT [psa_ics_stg_aspect4_VARITBL_PK] PRIMARY KEY CLUSTERED  ([VARI_NR], [VARI_FIRMA])
+ALTER TABLE [psa].[ics_stg_aspect4_VARITBL] ADD CONSTRAINT [psa_ics_stg_aspect4_VARITBL_PK] PRIMARY KEY CLUSTERED  ([VARI_NR], [VARI_FIRMA], [VARI_RECID])
 GO

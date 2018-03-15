@@ -1,5 +1,8 @@
 ﻿-- <Migration ID="a0818b1f-642c-49bf-96ca-58920296d73e" />
-GO
+
+select 1;
+
+/*GO
 
 PRINT N'Dropping constraints from [psa].[ics_stg_aspect4_VAOFTBL]'
 GO
@@ -375,3 +378,4 @@ PRINT N'Creating primary key [psa_ics_stg_aspect4_VARITBL_PK] on [psa].[ics_stg_
 GO
 ALTER TABLE [psa].[ics_stg_aspect4_VARITBL] ADD CONSTRAINT [psa_ics_stg_aspect4_VARITBL_PK] PRIMARY KEY CLUSTERED  ([VARI_NR], [VARI_FIRMA])
 GO
+*/

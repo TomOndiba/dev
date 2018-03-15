@@ -190,8 +190,9 @@ PRINT N'Creating primary key [PK_psa_ics_stg_M3_FGRECL] on [psa].[ics_stg_m3_FGR
 GO
 ALTER TABLE [psa].[ics_stg_m3_FGRECL] ADD CONSTRAINT [PK_psa_ics_stg_M3_FGRECL] PRIMARY KEY CLUSTERED  ([F2CONO], [F2DIVI], [F2PNLI], [F2PNLS], [F2PUNO], [F2RELP], [F2REPN])
 GO
-PRINT N'Creating [psa].[ics_stg_aspect4_VAOFTBL]'
-GO
+/*RINT N'Creating [psa].[ics_stg_aspect4_VAOFTBL]'
+go
+
 CREATE TABLE [psa].[ics_stg_aspect4_VAOFTBL]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
@@ -476,3 +477,4 @@ PRINT N'Creating primary key [PK_psa_ics_stg_aspect4_VARITBL] on [psa].[ics_stg_
 GO
 ALTER TABLE [psa].[ics_stg_aspect4_VARITBL] ADD CONSTRAINT [PK_psa_ics_stg_aspect4_VARITBL] PRIMARY KEY CLUSTERED  ([VARI_NR], [VARI_FIRMA])
 GO
+*/

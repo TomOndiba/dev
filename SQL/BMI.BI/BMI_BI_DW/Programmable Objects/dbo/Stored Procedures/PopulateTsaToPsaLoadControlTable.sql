@@ -314,6 +314,11 @@ set
 	DataSourceKey = 100150
 where
 	upper(SourceTable) like '%IBS%LIT%' ;
+UPDATE dbo.TsaToPsaLoadControlTable
+SET
+	DataSourceKey = 100131
+WHERE	
+	UPPER(SourceTable) LIKE '%CEGID%';
 /*************************************************************************************************************************************/
 		if object_id(N'dbo.PKTable') is not null drop table dbo.PKTable ;
 		end try

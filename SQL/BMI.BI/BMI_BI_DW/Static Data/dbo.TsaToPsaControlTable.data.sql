@@ -320,6 +320,11 @@ USING (VALUES
  ,(423,'2018-03-13T17:09:35.497','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_movex_MITMAS]','BMI_BI_DW','psa','[ics_stg_movex_MITMAS]','Full',100146,'[MMITNO],[MMCONO]','[MMITNO],[MMCONO]',0)
  ,(425,'2018-03-13T17:09:35.497','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_movex_MPLIND]','BMI_BI_DW','psa','[ics_stg_movex_MPLIND]','Full',100146,'[ICSUDO],[ICREPN],[ICPUNO],[ICPNLX],[ICPNLS],[ICPNLI]','[ICSUDO],[ICREPN],[ICPUNO],[ICPNLX],[ICPNLS],[ICPNLI]',0)
  ,(426,'2018-03-13T17:09:35.497','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_movex_MPLINE]','BMI_BI_DW','psa','[ics_stg_movex_MPLINE]','Full',100146,'[IBPUNO],[IBPNLS],[IBPNLI],[IBCONO]','[IBPUNO],[IBPNLS],[IBPNLI],[IBCONO]',0)
+ ,(427,'2018-03-13T17:09:35.497','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_cegid_comp_fra_procure_LIGNE]','BMI_BI_DW','psa','[ics_stg_cegid_comp_fra_procure_LIGNE]','Full',100131,'[GL_NUMERO],[GL_NUMLIGNE],[GL_SOUCHE]','[GL_NUMERO],[GL_NUMLIGNE],[GL_SOUCHE]',0)
+ ,(428,'2018-03-13T17:09:35.497','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_cegid_poly_fra_procure_LIGNE]','BMI_BI_DW','psa','[ics_stg_cegid_poly_fra_procure_LIGNE]','Full',100131,'[GL_NUMERO],[GL_NUMLIGNE],[GL_SOUCHE]','[GL_NUMERO],[GL_NUMLIGNE],[GL_SOUCHE]',0)
+ ,(429,'2018-03-13T17:09:35.497','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_cegid_comp_fra_procure_PIECE]','BMI_BI_DW','psa','[ics_stg_cegid_comp_fra_procure_PIECE]','Full',100131,'[GP_NUMERO],[GP_SOUCHE]','[GP_NUMERO],[GP_SOUCHE]',0)
+ ,(430,'2018-03-13T17:09:35.497','GROUPICOPAL\ukrna','BMI_BI_DW','tsa','[ics_land_cegid_poly_fra_procure_PIECE]','BMI_BI_DW','psa','[ics_stg_cegid_poly_fra_procure_PIECE]','Full',100131,'[GP_NUMERO],[GP_SOUCHE]','[GP_NUMERO],[GP_SOUCHE]',0)
+
 ) AS Source ([ID],[CreatedDate],[CreatedBy],[SourceDB],[SourceSchema],[SourceTable],[TargetDB],[TargetSchema],[TargetTable],[LoadMode],[DataSourceKey],[SourcePK],[TargetPK],[Done])
 ON (Target.[ID] = Source.[ID])
 WHEN MATCHED AND (

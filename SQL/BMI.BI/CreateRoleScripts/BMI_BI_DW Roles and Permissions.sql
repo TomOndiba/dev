@@ -43,7 +43,12 @@ if schema_id('etl') is not null
 	begin
 		exec (N'grant select on schema :: [etl] to [DataFeedReaders];');
 	end
-go
+GO
+IF SCHEMA_ID('discovery') IS NOT NULL
+	BEGIN
+		EXEC (N'grant select on schema :: [discovery] to [DataFeedReaders];');
+    END
+    
 if not exists (select * from sys.database_principals where type = 'R' and name = 'DataFeedWriters')
 	exec(N'create role [DataFeedWriters] authorization [dbo];') ;
 go
@@ -107,8 +112,13 @@ if objectpropertyex(object_id(N'utils.LoadDateDimension'), N'IsProcedure') is no
 if objectpropertyex(object_id(N'qvstg.DataSource'), N'IsUserTable') is not null exec (N'grant select on qvstg.DataSource to [BatchManagers];') ;
 
 --! The below is required to TRUNCATE the discovery.ProcurementSnapshotGR Table
-IF OBJECTPROPERTYEX(OBJECT_ID(N'discovery.ProcurementSnapshotGR'), N'IsUserTable') IS NOT NULL EXEC (N'grant alter on discovery.ProcurementSnapshotGR to [DataFeedWriters]');
-go
+IF OBJECTPROPERTYEX(OBJECT_ID(N'discovery.ProcurementSnapshotGR'), N'IsUserTable') IS NOT NULL 
+	BEGIN
+		EXEC (N'grant alter on discovery.ProcurementSnapshotGR to [DataFeedWriters];');
+		EXEC (N'grant INSERT on discovery.ProcurementSnapshotGR to [DataFeedWriters];');
+	end
+GO
+
 
 --!
 --! Create role to support the Power BI Reporting service and other users of the PBI views.

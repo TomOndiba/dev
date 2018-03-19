@@ -107,7 +107,7 @@ if objectpropertyex(object_id(N'utils.LoadDateDimension'), N'IsProcedure') is no
 if objectpropertyex(object_id(N'qvstg.DataSource'), N'IsUserTable') is not null exec (N'grant select on qvstg.DataSource to [BatchManagers];') ;
 
 --! The below is required to TRUNCATE the discovery.ProcurementSnapshotGR Table
-IF OBJECTPROPERTYEX(OBJECT_ID(N'discovery.ProcurementSnapshotGR'), N'IsUserTable') IS NOT NULL EXEC (N'grant alter on discovery.ProcurementSnapshotGR to [DataFeedWriters]';
+IF OBJECTPROPERTYEX(OBJECT_ID(N'discovery.ProcurementSnapshotGR'), N'IsUserTable') IS NOT NULL EXEC (N'grant alter on discovery.ProcurementSnapshotGR to [DataFeedWriters]');
 go
 
 --!

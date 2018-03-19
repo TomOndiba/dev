@@ -2176,6 +2176,24 @@ Static Data;
   <ItemGroup>
     <None Include="Migrations\1.1.0\070_Create_Psa_Aspect4_Tables.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\071_Create_tsa_CEGID_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_comp_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_comp_fra_procure_PIECE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_poly_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_poly_fra_procure_PIECE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\072_20180316-1612_UKSLA.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_comp_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_comp_fra_procure_PIECE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_poly_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_poly_fra_procure_PIECE.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

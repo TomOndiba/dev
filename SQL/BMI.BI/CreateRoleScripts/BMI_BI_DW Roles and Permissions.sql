@@ -84,8 +84,7 @@ go
 if schema_id('IcsApp') is not NULL
 	BEGIN
 	    exec (N'grant execute on schema :: [IcsApp] to [DataFeedWriters];');
-		EXEC (N'grant ALTER on [discovery].[ProcurementSnapshotGR] to [DataFeedWriters]';
-	END
+			END
 
 go
 

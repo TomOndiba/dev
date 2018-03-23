@@ -12,6 +12,8 @@ GO
 
 
 
+
+
 --/****** Object:  View [discovery].[procurement_sap_gbr]    Script Date: 29/01/2018 14:56:49 ******/
 --SET ANSI_NULLS ON
 --GO
@@ -19,7 +21,7 @@ GO
 --SET QUOTED_IDENTIFIER ON
 --GO
 
-create   view
+create view
 
 
 --select * from 
@@ -49,12 +51,22 @@ as
 				then null
 			when ekp.MEINS is not null
 				and ekp.MENGE is not null
-				and upper(ReportingUnitOfMeasure) = 'KG'
+				and (
+						upper(ReportingUnitOfMeasure) = 'KG'
+						and upper(ekp.MEINS) <> 'KG'
+					)
 				then round(((((mm.UMREN) / (mm.UMREZ)) * ekp.MENGE)) / 1000, 2)
 			when ekp.MEINS is not null
 				and ekp.MENGE is not null
-				and upper(ReportingUnitOfMeasure) <> 'KG'
+				and (
+						upper(ReportingUnitOfMeasure) <> 'KG'
+						and upper(ekp.MEINS) <> 'KG'
+					)
 				then round((((mm.UMREN) / (mm.UMREZ)) * ekp.MENGE), 2)
+			when ekp.MEINS is not null
+				and be.MENGE is not null
+				and (upper(ekp.MEINS) = 'KG')
+				then round(((ekp.MENGE)) / 1000, 2)
 		end																						 [OrderedQtyConverted]
 	  , case when be.BWART = 102 then be.MENGE * (-1) else be.MENGE end							 [ReceivedQuantity]
 	  , case
@@ -65,12 +77,22 @@ as
 				then be.MENGE * (-1)
 			when ekp.MEINS is not null
 				and be.MENGE is not null
-				and (upper(mm.ReportingUnitOfMeasure) <> 'KG')
+				and (
+						upper(mm.ReportingUnitOfMeasure) <> 'KG'
+						and upper(ekp.MEINS) <> 'KG'
+					)
 				then round(((mm.UMREN) / (mm.UMREZ) * be.MENGE), 2)
 			when ekp.MEINS is not null
 				and be.MENGE is not null
-				and (upper(mm.ReportingUnitOfMeasure) = 'KG')
+				and (
+						upper(mm.ReportingUnitOfMeasure) = 'KG'
+						and upper(ekp.MEINS) <> 'KG'
+					)
 				then round((((mm.UMREN) / (mm.UMREZ) * be.MENGE)) / 1000, 2)
+			when ekp.MEINS is not null
+				and be.MENGE is not null
+				and (upper(ekp.MEINS) = 'KG')
+				then round(((be.MENGE)) / 1000, 2)
 		end																						 [ReceivedQuantityConverted]
 	  , ''																						 [ApprovedQty]
 	  , ''																						 [RejectedQty]
@@ -88,7 +110,11 @@ as
 				or	ekp.MENGE is null
 				then null
 			else cast(case
-						  when upper(ReportingUnitOfMeasure) = 'KG'
+						  when
+						  (
+							  upper(ReportingUnitOfMeasure) = 'KG'
+							  or upper(ekp.MEINS) = 'KG'
+						  )
 							  then 'TN'
 						  else ReportingUnitOfMeasure
 					  end as nvarchar(255))
@@ -103,10 +129,10 @@ as
 	  , cast(c.ProductHier4 as nvarchar(255))													 as product_category_level_4
 	  , cast(c.ProductHier5 as nvarchar(255))													 as product_category_level_5
 	  , ek.AEDAT																				 [ChangeDate]
--- , case		--	when ek.BUKRS = 'CC01'
-	--		then 'SAP GBR'
-		--	when ek.BUKRS = 'CC10'
-				--		then 'SAP Ireland'			--	else 'Not Known'		--end	
+																														-- , case		--	when ek.BUKRS = 'CC01'
+																														--		then 'SAP GBR'
+																														--	when ek.BUKRS = 'CC10'
+																														--		then 'SAP Ireland'			--	else 'Not Known'		--end	
 	  , 'UK'																					 as [DataSource]
 	  , ek.DataSourceKey																		 as DataSourceKey
 	  , cast(convert(char(8), ek.AEDAT, 112) as int)											 as EntryDate
@@ -187,6 +213,7 @@ as
 		year(ek.AEDAT) >= '2017'
 		and upper(isnull(ekp.LOEKZ, '-99')) <> 'L' --po filter
 		and upper(isnull(be.BEWTP, '-99')) = 'E' --gr filter
+		and upper(ek.BSART)<>'UB'
 
 )
 select	* from	cte where	rn = 1 ;

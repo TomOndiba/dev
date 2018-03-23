@@ -81,8 +81,11 @@ go
 if schema_id('etl') is not null
 	exec (N'grant execute, select on schema :: [etl] to [DataFeedWriters];');
 go
-if schema_id('IcsApp') is not null
-	exec (N'grant execute on schema :: [IcsApp] to [DataFeedWriters];');
+if schema_id('IcsApp') is not NULL
+	BEGIN
+	    exec (N'grant execute on schema :: [IcsApp] to [DataFeedWriters];');
+			END
+
 go
 
 
@@ -102,6 +105,9 @@ if schema_id('psa') is not null exec (N'grant select on schema :: [psa] to [Batc
 if schema_id('etl') is not null exec (N'grant select on schema :: [etl] to [BatchManagers];') ;
 if objectpropertyex(object_id(N'utils.LoadDateDimension'), N'IsProcedure') is not null exec (N'grant exec on utils.LoadDateDimension to [BatchManagers];') ;
 if objectpropertyex(object_id(N'qvstg.DataSource'), N'IsUserTable') is not null exec (N'grant select on qvstg.DataSource to [BatchManagers];') ;
+
+--! The below is required to TRUNCATE the discovery.ProcurementSnapshotGR Table
+IF OBJECTPROPERTYEX(OBJECT_ID(N'discovery.ProcurementSnapshotGR'), N'IsUserTable') IS NOT NULL EXEC (N'grant alter on discovery.ProcurementSnapshotGR to [DataFeedWriters]';
 go
 
 --!

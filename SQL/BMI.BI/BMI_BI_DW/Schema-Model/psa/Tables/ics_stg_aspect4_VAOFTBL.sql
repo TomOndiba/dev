@@ -12,8 +12,8 @@ CREATE TABLE [psa].[ics_stg_aspect4_VAOFTBL]
 [EtlUpdatedBy] [varchar] (200) NOT NULL,
 [EtlDeletedOn] [datetime] NULL,
 [EtlDeletedBy] [varchar] (200) NULL,
-[IsDeleted] [char] (1) NOT NULL,
-[IsIncomplete] [char] (1) NOT NULL,
+[IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_aspect4_VAOFTBL_IsDeleted] DEFAULT ('N'),
+[IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_aspect4_VAOFTBL_IsIncomplete] DEFAULT ('N'),
 [VAOF_RECSTS] [decimal] (1, 0) NULL,
 [VAOF_RECID] [nvarchar] (2) NULL,
 [VAOF_VARENR] [nvarchar] (16) NOT NULL,
@@ -36,5 +36,5 @@ CREATE TABLE [psa].[ics_stg_aspect4_VAOFTBL]
 [VAOF_SVGT] [decimal] (13, 5) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_aspect4_VAOFTBL] ADD CONSTRAINT [PK_psa_ics_stg_aspect4_VAOFTBL] PRIMARY KEY CLUSTERED  ([VAOF_VARENR], [VAOF_ENHED])
+ALTER TABLE [psa].[ics_stg_aspect4_VAOFTBL] ADD CONSTRAINT [psa_ics_stg_aspect4_VAOFTBL_PK] PRIMARY KEY CLUSTERED  ([VAOF_VARENR], [VAOF_ENHED])
 GO

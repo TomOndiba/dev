@@ -55,7 +55,6 @@ StoredProcedure=[log4Utils].[JournalReader];
 StoredProcedure=[log4Utils].[JournalPrinter];
 StoredProcedure=[log4Utils].[ExceptionReader];
 StoredProcedure=[log4Private].[SessionInfoOutput];
-Table=[dbo].[IcopalCalendar];
 Function=[dbo].[Numbers];
 Role=[dbo].[db_ddladmin];
 Role=[dbo].[DataFeedWriters];
@@ -75,7 +74,26 @@ Table=[psa].[Customer1];
 Table=[dbo].[PKTable];
 StoredProcedure=[etl].[CheckForDuplicateQlikViewTransactions];
 View=[discovery].[procurement_snapshot];
-View=[discovery].[procurement_snapshot_M3V10_POL];
+Table=[psa].[ics_stg_aspect4_modmtbl];
+Table=[dbo].[IcopalCalendar];
+Role=[dbo].[BatchManagers];
+Role=[dbo].[SqlDevelopersDEV];
+Role=[dbo].[EtlDevelopersDEV];
+Role=[dbo].[BusinessAnalystsDEV];
+Schema=[dbo].[IcsApp];
+User=[PowerBiReaderDev];
+User=[stephen.lawrenson.dba];
+User=[razia.nazir.dba];
+User=[greg.lucas.dba];
+User=[george.whitby.sql];
+User=[BmiBiMartFeedDev];
+User=[InfaDev];
+User=[BmiBiDwFeedDev];
+User=[ReleaseManager];
+User=[SapBw4ExtractorDev];
+User=[andrew.couch.dba];
+User=[david.bradely.sql];
+User=[gary.elliott.sql];
 </ExcludeObjectsFromSync>
     <DeployChangesInitialImportDone>True</DeployChangesInitialImportDone>
     <DeployChangesExecutionOrder>
@@ -2099,6 +2117,82 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_ibs_lit_procure_SROORPHE.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_ibs_lit_procure_SROORPPL.sql" />
     <None Include="Schema-Model\psa\Tables\ics_stg_ibs_lit_procure_SROPRU.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_sap_gbr_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_Baan_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3V10_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3V7_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_M3_GR.sql" />
+    <None Include="Migrations\1.1.0\064_PSA_Baan_Aspect4_Constraints.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\discovery\Tables\ProcurementSnapshotGR.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\065_Create_discovery_ProcurementSnapshotGR_Table.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_est_IBS.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_fin_IBS.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_iScala.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_iScala_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lat_IBS.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lit_IBS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_ORDHTBLS.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_SSTATBL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_VEANTBL.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_aspect4_VIRKTBL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\066_Tsa_Aspect4_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_ORDHTBLS.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_SSTATBL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_VEANTBL.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_aspect4_VIRKTBL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\067_Psa_Aspect4_Tables_Added.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_est_IBS_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_fin_IBS_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lat_IBS_GR.sql" />
+    <None Include="Programmable Objects\discovery\Views\procurement_snapshot_lit_IBS_GR.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\FlattenProductCategories.sql" />
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\RefreshAllProcurementGRData.sql" />
+    <None Include="Programmable Objects\IcsApp\Stored Procedures\UoMMaraUpdate.sql" />
+    <None Include="Migrations\1.1.0\068_Drop_SP_FlattenProductCategories.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\069_Create_Tsa_Aspect4_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\070_Create_Psa_Aspect4_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\071_Create_tsa_CEGID_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_comp_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_comp_fra_procure_PIECE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_poly_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_poly_fra_procure_PIECE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\072_Create_psa_CEGID_Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_comp_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_comp_fra_procure_PIECE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_poly_fra_procure_LIGNE.sql" />
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_poly_fra_procure_PIECE.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

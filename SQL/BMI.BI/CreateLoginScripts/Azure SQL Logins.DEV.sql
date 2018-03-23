@@ -99,6 +99,12 @@ go
 
 
 
+if exists(select * from sys.database_principals where name = 'razia.nazir.dba')
+  drop user [razia.nazir.dba] ;
+go
+if exists(select * from sys.sql_logins where name = 'razia.nazir.dba')
+  drop login [razia.nazir.dba] ;
+go
 if exists(select * from sys.database_principals where name = 'razia.nazir.sql')
   drop user [razia.nazir.sql] ;
 go
@@ -176,15 +182,6 @@ else
 go
 if not exists (select 1 from sys.database_principals where name = 'stephen.lawrenson.dba')
 	create user [stephen.lawrenson.dba] for login [stephen.lawrenson.dba] with default_schema = [dbo];
-go
-
-if not exists (select 1 from sys.sql_logins where name = 'razia.nazir.dba')
-	create login [razia.nazir.dba] with password = 'VfBg%t6yBnDf' ;
-else
-	alter login [razia.nazir.dba] with password = 'VfBg%t6yBnDf' ;
-go
-if not exists (select 1 from sys.database_principals where name = 'razia.nazir.dba')
-	create user [razia.nazir.dba] for login [razia.nazir.dba] with default_schema = [dbo];
 go
 
 --!

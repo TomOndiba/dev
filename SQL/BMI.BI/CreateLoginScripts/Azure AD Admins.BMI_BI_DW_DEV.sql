@@ -20,17 +20,17 @@ select * from sys.sql_logins;
 select * from sys.database_principals;
 */
 
---if not exists (select 1 from sys.sysusers where name = 'greg.lucas@icopal.com')
---	begin
---		create user [greg.lucas@icopal.com] from external provider;
---	end
---go
---alter role [db_accessadmin] add member [greg.lucas@icopal.com]
---go
---alter role [db_owner] add member [greg.lucas@icopal.com]
---go
---grant alter any user to [greg.lucas@icopal.com]
---go
+if not exists (select 1 from sys.sysusers where name = 'greg.lucas@icopal.com')
+	begin
+		create user [greg.lucas@icopal.com] from external provider;
+	end
+go
+alter role [db_accessadmin] add member [greg.lucas@icopal.com]
+go
+alter role [db_owner] add member [greg.lucas@icopal.com]
+go
+grant alter any user to [greg.lucas@icopal.com]
+go
 
 if not exists (select 1 from sys.sysusers where name = 'andrew.couch@icopal.com')
 	begin
@@ -56,14 +56,3 @@ go
 grant alter any user to [stephen.lawrenson@icopal.com]
 go
 
-if not exists (select 1 from sys.sysusers where name = 'razia.nazir@icopal.com')
-	begin
-		create user [razia.nazir@icopal.com] from external provider;
-	end
-go
-alter role [db_accessadmin] add member [razia.nazir@icopal.com]
-go
-alter role [db_owner] add member [razia.nazir@icopal.com]
-go
-grant alter any user to [razia.nazir@icopal.com]
-go

@@ -632,16 +632,6 @@ if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name(
 		alter role [db_accessadmin] add member [stephen.lawrenson.dba]
 		alter role [db_owner] add member [stephen.lawrenson.dba]
 		grant alter any user to [stephen.lawrenson.dba]
-
-		--!
-		--!
-		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.dba')
-			create user [razia.nazir.dba] for login [razia.nazir.dba] with default_schema = [dbo] ;
-
-		alter role [db_accessadmin] add member [razia.nazir.dba]
-		alter role [db_owner] add member [razia.nazir.dba]
-		grant alter any user to [razia.nazir.dba]
 	end
 else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BAT_MAN_PROD'
 	begin
@@ -676,15 +666,5 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		alter role [db_accessadmin] add member [stephen.lawrenson.dba]
 		alter role [db_owner] add member [stephen.lawrenson.dba]
 		grant alter any user to [stephen.lawrenson.dba]
-
-		--!
-		--!
-		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.dba')
-			create user [razia.nazir.sql] for login [razia.nazir.dba] with default_schema = [dbo] ;
-
-		alter role [db_accessadmin] add member [razia.nazir.dba]
-		alter role [db_owner] add member [razia.nazir.dba]
-		grant alter any user to [razia.nazir.dba]
 	end
 go

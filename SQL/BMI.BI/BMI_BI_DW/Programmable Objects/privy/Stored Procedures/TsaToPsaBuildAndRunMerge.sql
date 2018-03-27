@@ -39,6 +39,9 @@ Version	ChangeDate		Author	BugRef	Narrative
 001		01-Aug-2017		RN		N/A		Created
 ------- ------------	------	-------	-----------------------------------------------------------------------------
 001		18-Sep-2017		RN		N/A		Cast numeric values to varchar(255) for merge statemnet isnull operation
+002		23-Mar-2017		SL		N/A		Added COLUMNPROPERTY(OBJECT_ID(TABLE_SCHEMA+'.'+TABLE_NAME),COLUMN_NAME,'IsComputed') = 0
+										To make sure computed columns are excluded if used in the tables								
+   
 
 **********************************************************************************************************************/
 --</CommentHeader>
@@ -82,7 +85,9 @@ begin
 	from
 		INFORMATION_SCHEMA.COLUMNS
 	where
-		TABLE_SCHEMA + '.[' + TABLE_NAME+']' = @STableName ;
+		TABLE_SCHEMA + '.[' + TABLE_NAME+']' = @STableName 
+		AND COLUMNPROPERTY(OBJECT_ID(TABLE_SCHEMA+'.'+TABLE_NAME),COLUMN_NAME,'IsComputed') = 0
+    ;
 
 			
 	alter table #TableStructure add id int identity(1, 1) ;

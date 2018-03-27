@@ -9,3 +9,5 @@ CREATE TABLE [dbo].[DataSourceTableGroups]
 [TableFilter] AS (((([ERP_System]+'_')+isnull([Source_Company]+'_',''))+isnull([Source_Country],''))+isnull('_'+[Subject_Area],'')) PERSISTED NOT NULL
 )
 GO
+ALTER TABLE [dbo].[DataSourceTableGroups] ADD CONSTRAINT [PK_DataSourceTableGroups] PRIMARY KEY CLUSTERED  ([ROWID])
+GO

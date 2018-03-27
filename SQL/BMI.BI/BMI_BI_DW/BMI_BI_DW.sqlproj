@@ -2258,6 +2258,14 @@ Static Data;
     <None Include="Schema-Model\psa\Tables\ics_stg_Navision_ROU_Standard_Purch_Line.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Standard_Purch_Line.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Programmable Objects\dbo\Stored Procedures\PopulateTsaToPsaLoadControlTable_NoDrop.sql" />
+    <None Include="Migrations\1.1.0\080_20180327-1545_UKSLA.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purch_Line_Discount.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purch_Code.sql" />
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>
   </PropertyGroup>

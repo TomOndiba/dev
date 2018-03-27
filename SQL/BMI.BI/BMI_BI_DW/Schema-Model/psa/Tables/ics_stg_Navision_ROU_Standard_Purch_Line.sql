@@ -14,21 +14,21 @@ CREATE TABLE [psa].[ics_stg_Navision_ROU_Standard_Purch_Line]
 [EtlDeletedBy] [varchar] (200) NULL,
 [IsDeleted] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_ROU_Standard_Purch_Line_IsDeleted] DEFAULT ('N'),
 [IsIncomplete] [char] (1) NOT NULL CONSTRAINT [DF_psa_ics_stg_Navision_ROU_Standard_Purch_Line_IsIncomplete] DEFAULT ('N'),
-[timestamp] [varbinary] (8) NULL,
-[Standard Purchase Code] [varchar] (10) NOT NULL,
-[Line No_] [int] NOT NULL,
-[Type] [int] NULL,
-[No_] [varchar] (20) NULL,
+[Amount_Excl__VAT] [decimal] (38, 20) NULL,
 [Description] [varchar] (50) NULL,
+[Line_No_] [int] NOT NULL,
+[No_] [varchar] (20) NULL,
 [Quantity] [decimal] (38, 20) NULL,
-[Amount Excl_ VAT] [decimal] (38, 20) NULL,
-[Unit of Measure Code] [varchar] (10) NULL,
-[Shortcut Dimension 1 Code] [varchar] (20) NULL,
-[Shortcut Dimension 2 Code] [varchar] (20) NULL,
-[Variant Code] [varchar] (10) NULL
+[Shortcut_Dimension_1_Code] [varchar] (20) NULL,
+[Shortcut_Dimension_2_Code] [varchar] (20) NULL,
+[Standard_Purchase_Code] [varchar] (10) NOT NULL,
+[timestamp] [varbinary] (max) NULL,
+[Type] [int] NULL,
+[Unit_of_Measure_Code] [varchar] (10) NULL,
+[Variant_Code] [varchar] (10) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_Navision_ROU_Standard_Purch_Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line] PRIMARY KEY CLUSTERED  ([Standard Purchase Code], [Line No_])
+ALTER TABLE [psa].[ics_stg_Navision_ROU_Standard_Purch_Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line] PRIMARY KEY CLUSTERED  ([Line_No_], [Standard_Purchase_Code])
 GO
 EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Navision_ROU_Standard_Purch_Line', NULL, NULL
 GO

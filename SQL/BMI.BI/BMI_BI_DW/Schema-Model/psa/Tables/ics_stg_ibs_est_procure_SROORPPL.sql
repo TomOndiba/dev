@@ -175,3 +175,5 @@ CREATE TABLE [psa].[ics_stg_ibs_est_procure_SROORPPL]
 GO
 ALTER TABLE [psa].[ics_stg_ibs_est_procure_SROORPPL] ADD CONSTRAINT [pk_psa_ics_stg_ibs_est_procure_SROORPPL] PRIMARY KEY CLUSTERED  ([OLORNO], [OLPRDC])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_est_procure_SROORPPL', NULL, NULL
+GO

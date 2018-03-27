@@ -125,3 +125,5 @@ CREATE TABLE [psa].[ics_stg_ibs_lit_procure_SROORPHE]
 GO
 ALTER TABLE [psa].[ics_stg_ibs_lit_procure_SROORPHE] ADD CONSTRAINT [pk_psa_ics_stg_ibs_lit_procure_SROORPHE] PRIMARY KEY CLUSTERED  ([OHORNO])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_lit_procure_SROORPHE', NULL, NULL
+GO

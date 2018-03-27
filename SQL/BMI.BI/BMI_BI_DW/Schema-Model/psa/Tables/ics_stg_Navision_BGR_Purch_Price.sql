@@ -28,3 +28,5 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Purch_Price]
 GO
 ALTER TABLE [psa].[ics_stg_Navision_BGR_Purch_Price] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Purch_Price] PRIMARY KEY CLUSTERED  ([Currency_Code], [Item_No_], [Minimum_Quantity], [Starting_Date], [Unit_of_Measure_Code], [Variant_Code], [Vendor_No_])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Navision_BGR_Purch_Price', NULL, NULL
+GO

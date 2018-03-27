@@ -77,3 +77,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_EKBE]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_EKBE] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_EKBE] PRIMARY KEY CLUSTERED  ([BUZEI], [BELNR], [GJAHR], [VGABE], [ZEKKN], [EBELP], [EBELN], [MANDT])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_EKBE', NULL, NULL
+GO

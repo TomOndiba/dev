@@ -148,3 +148,5 @@ CREATE TABLE [psa].[ics_stg_movex_MPLINE]
 GO
 ALTER TABLE [psa].[ics_stg_movex_MPLINE] ADD CONSTRAINT [PK_psa_ics_stg_movex_MPLINE] PRIMARY KEY CLUSTERED  ([IBCONO], [IBPUNO], [IBPNLI], [IBPNLS])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_movex_MPLINE', NULL, NULL
+GO

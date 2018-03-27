@@ -151,3 +151,5 @@ CREATE TABLE [psa].[ics_stg_Navision_ROU_Purch_Header]
 GO
 ALTER TABLE [psa].[ics_stg_Navision_ROU_Purch_Header] ADD CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Purch_Header] PRIMARY KEY CLUSTERED  ([Document_Type], [No_])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Navision_ROU_Purch_Header', NULL, NULL
+GO

@@ -204,3 +204,5 @@ CREATE TABLE [psa].[ics_stg_cegid_poly_fra_procure_PIECE]
 GO
 ALTER TABLE [psa].[ics_stg_cegid_poly_fra_procure_PIECE] ADD CONSTRAINT [PK_psa_ics_stg_cegid_poly_fra_procure_PIECE] PRIMARY KEY CLUSTERED  ([GP_NUMERO], [GP_SOUCHE])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_cegid_poly_fra_procure_PIECE', NULL, NULL
+GO

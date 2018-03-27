@@ -50,3 +50,5 @@ CREATE TABLE [psa].[ics_stg_Navision_ROU_Salesperson_Purchaser]
 GO
 ALTER TABLE [psa].[ics_stg_Navision_ROU_Salesperson_Purchaser] ADD CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Salesperson_Purchaser] PRIMARY KEY CLUSTERED  ([Code])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Navision_ROU_Salesperson_Purchaser', NULL, NULL
+GO

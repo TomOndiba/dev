@@ -59,3 +59,5 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPLIND]
 GO
 ALTER TABLE [psa].[ics_stg_m3v7_MPLIND] ADD CONSTRAINT [PK_psa_ics_stg_m3v7_MPLIND] PRIMARY KEY CLUSTERED  ([ICPUNO], [ICPNLI], [ICPNLS], [ICPNLX], [ICSUDO], [ICREPN])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3v7_MPLIND', NULL, NULL
+GO

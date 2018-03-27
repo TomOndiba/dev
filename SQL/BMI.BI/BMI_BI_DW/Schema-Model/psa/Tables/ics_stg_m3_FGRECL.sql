@@ -72,3 +72,5 @@ CREATE TABLE [psa].[ics_stg_m3_FGRECL]
 GO
 ALTER TABLE [psa].[ics_stg_m3_FGRECL] ADD CONSTRAINT [PK_psa_ics_stg_M3_FGRECL] PRIMARY KEY CLUSTERED  ([F2CONO], [F2DIVI], [F2PNLI], [F2PNLS], [F2PUNO], [F2RELP], [F2REPN])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3_FGRECL', NULL, NULL
+GO

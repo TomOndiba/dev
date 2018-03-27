@@ -130,3 +130,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_LFA1]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_LFA1] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_LFA1] PRIMARY KEY CLUSTERED  ([MANDT], [LIFNR])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_LFA1', NULL, NULL
+GO

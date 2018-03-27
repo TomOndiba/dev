@@ -102,3 +102,5 @@ CREATE TABLE [psa].[ics_stg_ibs_est_procure_SROGRT]
 GO
 ALTER TABLE [psa].[ics_stg_ibs_est_procure_SROGRT] ADD CONSTRAINT [pk_psa_ics_stg_ibs_est_procure_SROGRT] PRIMARY KEY CLUSTERED  ([GRORNO], [GRPRDC])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_est_procure_SROGRT', NULL, NULL
+GO

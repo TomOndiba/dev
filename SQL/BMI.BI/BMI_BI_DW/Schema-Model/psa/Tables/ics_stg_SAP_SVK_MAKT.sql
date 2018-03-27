@@ -23,3 +23,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_MAKT]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_MAKT] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_MAKT] PRIMARY KEY CLUSTERED  ([SPRAS], [MATNR])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_MAKT', NULL, NULL
+GO

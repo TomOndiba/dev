@@ -189,3 +189,5 @@ CREATE TABLE [psa].[ics_stg_m3_CMNDIV]
 GO
 ALTER TABLE [psa].[ics_stg_m3_CMNDIV] ADD CONSTRAINT [psa_ics_stg_m3_CMNDIV_PK] PRIMARY KEY CLUSTERED  ([CCCONO], [CCDIVI])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3_CMNDIV', NULL, NULL
+GO

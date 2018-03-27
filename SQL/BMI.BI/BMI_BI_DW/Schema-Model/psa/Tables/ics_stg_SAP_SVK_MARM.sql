@@ -44,3 +44,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_MARM]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_MARM] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_MARM] PRIMARY KEY CLUSTERED  ([MEINH], [MATNR])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_MARM', NULL, NULL
+GO

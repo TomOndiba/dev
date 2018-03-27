@@ -26,3 +26,5 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_TCURR]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_TCURR] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_TCURR_PK] PRIMARY KEY CLUSTERED  ([MANDT], [KURST], [FCURR], [TCURR], [GDATU])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_GBR_TCURR', NULL, NULL
+GO

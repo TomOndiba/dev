@@ -67,3 +67,5 @@ CREATE TABLE [psa].[ics_stg_Symfonia_DP]
 GO
 ALTER TABLE [psa].[ics_stg_Symfonia_DP] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_DP] PRIMARY KEY CLUSTERED  ([id])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Symfonia_DP', NULL, NULL
+GO

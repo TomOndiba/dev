@@ -21,3 +21,5 @@ CREATE TABLE [psa].[ics_stg_Symfonia__KonwersjaIdToCore]
 GO
 ALTER TABLE [psa].[ics_stg_Symfonia__KonwersjaIdToCore] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia__KonwersjaIdToCore] PRIMARY KEY CLUSTERED  ([coreId], [hmfID], [objId])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Symfonia__KonwersjaIdToCore', NULL, NULL
+GO

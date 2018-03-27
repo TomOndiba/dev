@@ -45,3 +45,5 @@ CREATE TABLE [psa].[ics_stg_ibs_fin_procure_SROPRU]
 GO
 ALTER TABLE [psa].[ics_stg_ibs_fin_procure_SROPRU] ADD CONSTRAINT [pk_psa_ics_stg_ibs_fin_procure_SROPRU] PRIMARY KEY CLUSTERED  ([PJPRDC])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_fin_procure_SROPRU', NULL, NULL
+GO

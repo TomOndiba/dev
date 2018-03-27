@@ -76,3 +76,5 @@ CREATE TABLE [psa].[ics_stg_aspect4_modmtbl]
 GO
 ALTER TABLE [psa].[ics_stg_aspect4_modmtbl] ADD CONSTRAINT [PK_psa_ics_stg_aspect4_modmtbl] PRIMARY KEY CLUSTERED  ([EtlRecordId])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_aspect4_modmtbl', NULL, NULL
+GO

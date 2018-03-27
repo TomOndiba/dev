@@ -105,3 +105,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_ADRC]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_ADRC] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_ADRC] PRIMARY KEY CLUSTERED  ([CLIENT], [DATE_FROM], [ADDRNUMBER])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_ADRC', NULL, NULL
+GO

@@ -45,3 +45,5 @@ CREATE TABLE [psa].[ics_stg_m3_CIDADR]
 GO
 ALTER TABLE [psa].[ics_stg_m3_CIDADR] ADD CONSTRAINT [psa_ics_stg_m3_CIDADR_PK] PRIMARY KEY CLUSTERED  ([SASUNO], [SAADTE], [SAADID], [SASTDT])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3_CIDADR', NULL, NULL
+GO

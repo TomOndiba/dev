@@ -31,3 +31,5 @@ CREATE TABLE [psa].[ics_stg_baan_ttdpur034610]
 GO
 ALTER TABLE [psa].[ics_stg_baan_ttdpur034610] ADD CONSTRAINT [PK_psa_ics_stg_baan_ttdpur034610] PRIMARY KEY CLUSTERED  ([t_cpgp], [t_dile], [t_suno])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_baan_ttdpur034610', NULL, NULL
+GO

@@ -22,3 +22,5 @@ CREATE TABLE [psa].[ics_stg_Symfonia_INIFILE]
 GO
 ALTER TABLE [psa].[ics_stg_Symfonia_INIFILE] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_INIFILE] PRIMARY KEY CLUSTERED  ([klucz], [plik], [sekcja])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Symfonia_INIFILE', NULL, NULL
+GO

@@ -104,3 +104,5 @@ CREATE TABLE [psa].[ics_stg_aspect4_ordltbli]
 GO
 ALTER TABLE [psa].[ics_stg_aspect4_ordltbli] ADD CONSTRAINT [PK_stg_aspect4_ordltbli] PRIMARY KEY CLUSTERED  ([ORDL_I_ORDRENR], [ORDL_I_LEV_LQBENR], [ORDL_I_LINIENR])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_aspect4_ordltbli', NULL, NULL
+GO

@@ -90,3 +90,5 @@ CREATE TABLE [psa].[ics_stg_m3v7_MITWHL]
 GO
 ALTER TABLE [psa].[ics_stg_m3v7_MITWHL] ADD CONSTRAINT [psa_ics_stg_m3v7_MITWHL_PK] PRIMARY KEY CLUSTERED  ([MWCONO], [MWWHLO])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3v7_MITWHL', NULL, NULL
+GO

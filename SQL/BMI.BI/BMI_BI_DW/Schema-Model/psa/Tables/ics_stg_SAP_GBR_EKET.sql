@@ -86,3 +86,5 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_EKET]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_EKET] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_EKET_PK] PRIMARY KEY CLUSTERED  ([EBELN], [EBELP], [ETENR])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_GBR_EKET', NULL, NULL
+GO

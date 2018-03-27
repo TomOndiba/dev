@@ -155,3 +155,5 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_LFA1]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_LFA1] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_LFA1_PK] PRIMARY KEY CLUSTERED  ([LIFNR])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_GBR_LFA1', NULL, NULL
+GO

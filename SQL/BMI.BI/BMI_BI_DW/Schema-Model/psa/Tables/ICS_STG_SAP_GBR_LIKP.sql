@@ -193,3 +193,5 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_LIKP]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_LIKP] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_LIKP_PK] PRIMARY KEY CLUSTERED  ([VBELN])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_GBR_LIKP', NULL, NULL
+GO

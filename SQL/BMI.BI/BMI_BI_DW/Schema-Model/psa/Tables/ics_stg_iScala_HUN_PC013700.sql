@@ -125,3 +125,5 @@ CREATE TABLE [psa].[ics_stg_iScala_HUN_PC013700]
 GO
 ALTER TABLE [psa].[ics_stg_iScala_HUN_PC013700] ADD CONSTRAINT [PK_psa_ics_stg_iScala_HUN_PC013700] PRIMARY KEY CLUSTERED  ([PC01001])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_iScala_HUN_PC013700', NULL, NULL
+GO

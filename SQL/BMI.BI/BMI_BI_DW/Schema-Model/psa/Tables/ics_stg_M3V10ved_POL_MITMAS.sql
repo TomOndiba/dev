@@ -223,6 +223,8 @@ CREATE TABLE [psa].[ics_stg_M3V10ved_POL_MITMAS]
 GO
 ALTER TABLE [psa].[ics_stg_M3V10ved_POL_MITMAS] ADD CONSTRAINT [PK_psa_ics_stg_M3V10ved_POL_MITMAS] PRIMARY KEY CLUSTERED  ([MMCONO], [MMITNO])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10ved_POL_MITMAS', NULL, NULL
+GO
 EXEC sp_addextendedproperty N'MS_Description', N'Mandatory reference to the database-specific unique identifier for the original source system of this data record.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10ved_POL_MITMAS', 'COLUMN', N'DataSourceKey'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'The Batch Run Id context in which this record was added or last updated on this table – soft link back to the Batch Management database (BMI_BAT_MAN).', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10ved_POL_MITMAS', 'COLUMN', N'EtlBatchRunId'

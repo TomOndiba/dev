@@ -105,3 +105,5 @@ CREATE TABLE [psa].[ics_stg_m3v7_MPHEAD]
 GO
 ALTER TABLE [psa].[ics_stg_m3v7_MPHEAD] ADD CONSTRAINT [PK_stg_m3v7_MPHEAD] PRIMARY KEY CLUSTERED  ([IAPUNO])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3v7_MPHEAD', NULL, NULL
+GO

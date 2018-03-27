@@ -69,3 +69,5 @@ CREATE TABLE [psa].[ics_stg_M3V10gen_POL_FPLEDG]
 GO
 ALTER TABLE [psa].[ics_stg_M3V10gen_POL_FPLEDG] ADD CONSTRAINT [PK_psa_ics_stg_M3V10gen_POL_FPLEDG] PRIMARY KEY CLUSTERED  ([EPCONO], [EPDIVI], [EPJRNO], [EPJSNO], [EPYEA4])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10gen_POL_FPLEDG', NULL, NULL
+GO

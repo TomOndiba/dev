@@ -91,6 +91,8 @@ CREATE TABLE [psa].[ics_stg_m3_MITFAC]
 GO
 ALTER TABLE [psa].[ics_stg_m3_MITFAC] ADD CONSTRAINT [PK_stg_m3_MITFAC] PRIMARY KEY CLUSTERED  ([M9CONO], [M9FACI], [M9ITNO])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3_MITFAC', NULL, NULL
+GO
 EXEC sp_addextendedproperty N'MS_Description', N'Mandatory reference to the database-specific unique identifier for the original source system of this data record.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3_MITFAC', 'COLUMN', N'DataSourceKey'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'The Batch Run Id context in which this record was added or last updated on this table – soft link back to the Batch Management database (BMI_BAT_MAN).', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3_MITFAC', 'COLUMN', N'EtlBatchRunId'

@@ -73,3 +73,5 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_LFM1]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_LFM1] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_LFM1_PK] PRIMARY KEY CLUSTERED  ([MANDT], [LIFNR], [EKORG])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_GBR_LFM1', NULL, NULL
+GO

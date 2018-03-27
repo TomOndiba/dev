@@ -57,3 +57,5 @@ CREATE TABLE [psa].[ics_stg_m3v7_CIDMAS]
 GO
 ALTER TABLE [psa].[ics_stg_m3v7_CIDMAS] ADD CONSTRAINT [psa_ics_stg_m3v7_CIDMAS_PK] PRIMARY KEY CLUSTERED  ([IDSUNO])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3v7_CIDMAS', NULL, NULL
+GO

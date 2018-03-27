@@ -25,3 +25,5 @@ CREATE TABLE [psa].[ics_stg_Symfonia_AU]
 GO
 ALTER TABLE [psa].[ics_stg_Symfonia_AU] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_AU] PRIMARY KEY CLUSTERED  ([id], [o_seed])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Symfonia_AU', NULL, NULL
+GO

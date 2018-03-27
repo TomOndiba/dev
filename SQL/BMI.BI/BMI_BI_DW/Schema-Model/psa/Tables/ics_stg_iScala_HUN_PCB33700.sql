@@ -21,3 +21,5 @@ CREATE TABLE [psa].[ics_stg_iScala_HUN_PCB33700]
 GO
 ALTER TABLE [psa].[ics_stg_iScala_HUN_PCB33700] ADD CONSTRAINT [PK_psa_ics_stg_iScala_HUN_PCB33700] PRIMARY KEY CLUSTERED  ([PCB3001], [PCB3002])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_iScala_HUN_PCB33700', NULL, NULL
+GO

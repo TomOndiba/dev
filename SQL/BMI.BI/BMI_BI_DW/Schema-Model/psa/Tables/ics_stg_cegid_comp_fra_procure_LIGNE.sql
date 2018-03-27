@@ -238,8 +238,20 @@ CREATE TABLE [psa].[ics_stg_cegid_comp_fra_procure_LIGNE]
 [GL_UNITEPRIX] [nvarchar] (3) NULL,
 [GL_PSTD] [decimal] (19, 4) NULL,
 [GL_GUIDWOL] [nvarchar] (36) NULL,
-[GL_ECARTUNI] [decimal] (15, 9) NULL
+[GL_ECARTUNI] [decimal] (15, 9) NULL,
+[PRE_GL_NATUREPIECCG_CAL] AS (ltrim(substring([GL_PIECEPRECEDENTE],(1),(3)))) PERSISTED,
+[PRE_GL_SOUCHE_CAL] AS (substring([GL_PIECEPRECEDENTE],(5),(3))) PERSISTED,
+[PRE_GL_NUMERO_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(9),(9)),(0))) PERSISTED,
+[PRE_GL_INDECIG_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(19),(3)),(0))) PERSISTED,
+[PRE_GL_NUMORDRE_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(23),(6)),(0))),
+[ORIG_GL_NATUREPIECCG_CAL] AS (ltrim(substring([GL_PIECEORIGINE],(1),(3)))) PERSISTED,
+[ORIG_GL_SOUCHE_CAL] AS (substring([GL_PIECEORIGINE],(5),(3))) PERSISTED,
+[ORIG_GL_NUMERO_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(9),(9)),(0))) PERSISTED,
+[ORIG_GL_INDECIG_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(19),(3)),(0))) PERSISTED,
+[ORIG_GL_NUMORDRE_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(23),(6)),(0)))
 )
 GO
 ALTER TABLE [psa].[ics_stg_cegid_comp_fra_procure_LIGNE] ADD CONSTRAINT [PK_psa_ics_stg_cegid_comp_fra_procure_LIGNE] PRIMARY KEY CLUSTERED  ([GL_NUMERO], [GL_NUMLIGNE], [GL_SOUCHE])
+GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_cegid_comp_fra_procure_LIGNE', NULL, NULL
 GO

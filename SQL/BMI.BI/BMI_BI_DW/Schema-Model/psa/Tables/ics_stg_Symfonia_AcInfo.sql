@@ -20,3 +20,5 @@ CREATE TABLE [psa].[ics_stg_Symfonia_AcInfo]
 GO
 ALTER TABLE [psa].[ics_stg_Symfonia_AcInfo] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_AcInfo] PRIMARY KEY CLUSTERED  ([Ac_Name])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Symfonia_AcInfo', NULL, NULL
+GO

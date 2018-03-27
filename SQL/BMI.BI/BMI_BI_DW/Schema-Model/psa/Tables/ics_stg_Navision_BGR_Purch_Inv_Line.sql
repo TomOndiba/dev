@@ -126,3 +126,5 @@ CREATE TABLE [psa].[ics_stg_Navision_BGR_Purch_Inv_Line]
 GO
 ALTER TABLE [psa].[ics_stg_Navision_BGR_Purch_Inv_Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_BGR_Purch_Inv_Line] PRIMARY KEY CLUSTERED  ([Document_No_], [Line_No_])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Navision_BGR_Purch_Inv_Line', NULL, NULL
+GO

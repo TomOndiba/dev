@@ -70,3 +70,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_EKET]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_EKET] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_EKET] PRIMARY KEY CLUSTERED  ([ETENR], [EBELP], [EBELN])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_EKET', NULL, NULL
+GO

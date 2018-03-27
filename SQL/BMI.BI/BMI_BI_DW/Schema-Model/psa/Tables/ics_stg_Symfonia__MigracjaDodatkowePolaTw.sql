@@ -22,3 +22,5 @@ CREATE TABLE [psa].[ics_stg_Symfonia__MigracjaDodatkowePolaTw]
 GO
 ALTER TABLE [psa].[ics_stg_Symfonia__MigracjaDodatkowePolaTw] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia__MigracjaDodatkowePolaTw] PRIMARY KEY CLUSTERED  ([id])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Symfonia__MigracjaDodatkowePolaTw', NULL, NULL
+GO

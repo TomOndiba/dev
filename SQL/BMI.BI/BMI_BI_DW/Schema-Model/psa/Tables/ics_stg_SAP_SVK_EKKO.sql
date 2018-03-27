@@ -112,3 +112,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_EKKO]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_EKKO] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_EKKO] PRIMARY KEY CLUSTERED  ([EBELN])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_EKKO', NULL, NULL
+GO

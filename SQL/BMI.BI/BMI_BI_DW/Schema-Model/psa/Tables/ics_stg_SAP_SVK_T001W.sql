@@ -74,3 +74,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_T001W]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_T001W] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_T001W] PRIMARY KEY CLUSTERED  ([MANDT], [WERKS])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_T001W', NULL, NULL
+GO

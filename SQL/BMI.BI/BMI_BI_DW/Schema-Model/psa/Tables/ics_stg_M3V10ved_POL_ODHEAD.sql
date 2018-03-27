@@ -86,6 +86,8 @@ CREATE TABLE [psa].[ics_stg_M3V10ved_POL_ODHEAD]
 GO
 ALTER TABLE [psa].[ics_stg_M3V10ved_POL_ODHEAD] ADD CONSTRAINT [PK_psa_ics_stg_M3V10ved_POL_ODHEAD] PRIMARY KEY CLUSTERED  ([UACONO], [UADLIX], [UAORNO], [UAWHLO])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10ved_POL_ODHEAD', NULL, NULL
+GO
 EXEC sp_addextendedproperty N'MS_Description', N'Mandatory reference to the database-specific unique identifier for the original source system of this data record.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10ved_POL_ODHEAD', 'COLUMN', N'DataSourceKey'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'The Batch Run Id context in which this record was added or last updated on this table – soft link back to the Batch Management database (BMI_BAT_MAN).', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_M3V10ved_POL_ODHEAD', 'COLUMN', N'EtlBatchRunId'

@@ -23,3 +23,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_T052U]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_T052U] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_T052U] PRIMARY KEY CLUSTERED  ([ZTAGG], [ZTERM], [SPRAS], [MANDT])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_T052U', NULL, NULL
+GO

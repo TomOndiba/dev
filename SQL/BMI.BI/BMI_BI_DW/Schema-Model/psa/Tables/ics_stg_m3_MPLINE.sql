@@ -191,3 +191,5 @@ CREATE TABLE [psa].[ics_stg_m3_MPLINE]
 GO
 ALTER TABLE [psa].[ics_stg_m3_MPLINE] ADD CONSTRAINT [PK_psa_ics_stg_m3_MPLINE] PRIMARY KEY CLUSTERED  ([IBFACI], [IBPUNO], [IBPNLI], [IBPNLS])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3_MPLINE', NULL, NULL
+GO

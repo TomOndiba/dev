@@ -127,3 +127,5 @@ CREATE TABLE [psa].[ics_stg_SAP_GBR_MBEW]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_GBR_MBEW] ADD CONSTRAINT [psa_ics_stg_SAP_GBR_MBEW_PK] PRIMARY KEY CLUSTERED  ([MATNR], [BWKEY])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_GBR_MBEW', NULL, NULL
+GO

@@ -23,3 +23,5 @@ CREATE TABLE [psa].[ics_stg_Symfonia_LOCAL_LOG]
 GO
 ALTER TABLE [psa].[ics_stg_Symfonia_LOCAL_LOG] ADD CONSTRAINT [PK_psa_ics_stg_Symfonia_LOCAL_LOG] PRIMARY KEY CLUSTERED  ([id], [term])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_Symfonia_LOCAL_LOG', NULL, NULL
+GO

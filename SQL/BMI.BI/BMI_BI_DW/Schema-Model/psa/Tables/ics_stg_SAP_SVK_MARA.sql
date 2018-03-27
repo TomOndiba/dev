@@ -181,3 +181,5 @@ CREATE TABLE [psa].[ics_stg_SAP_SVK_MARA]
 GO
 ALTER TABLE [psa].[ics_stg_SAP_SVK_MARA] ADD CONSTRAINT [PK_psa_ics_stg_SAP_SVK_MARA] PRIMARY KEY CLUSTERED  ([MATNR])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_SAP_SVK_MARA', NULL, NULL
+GO

@@ -42,6 +42,8 @@ CREATE TABLE [psa].[ics_stg_m3v7_MITPOP]
 GO
 ALTER TABLE [psa].[ics_stg_m3v7_MITPOP] ADD CONSTRAINT [PK_stg_m3v7_MITPOP] PRIMARY KEY CLUSTERED  ([MPCONO], [MPITNO], [MPE0PA], [MPPOPN])
 GO
+EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3v7_MITPOP', NULL, NULL
+GO
 EXEC sp_addextendedproperty N'MS_Description', N'Mandatory reference to the database-specific unique identifier for the original source system of this data record.', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3v7_MITPOP', 'COLUMN', N'DataSourceKey'
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'The Batch Run Id context in which this record was added or last updated on this table – soft link back to the Batch Management database (BMI_BAT_MAN).', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_m3v7_MITPOP', 'COLUMN', N'EtlBatchRunId'

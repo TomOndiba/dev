@@ -119,14 +119,10 @@ values (0, '', '', '', 0, 0)
 	, (1	, 'PROD'	, 'greg.lucas@icopal.com'					, 'dbo'	, 0	, 0)
 	, (1	, 'DEV'		, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'andrew.couch@icopal.com'					, 'dbo'	, 0	, 1)
-	, (1	, 'DEV'		, 'stephen.lawrenson@icopal.com'				, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'stephen.lawrenson@icopal.com'				, 'dbo'	, 0	, 1)
-	, (1	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
-	, (1	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 0	, 0)
+	, (1	, 'DEV'		, 'stephen.lawrenson@icopal.com'			, 'dbo'	, 0	, 1)
+	, (1	, 'PROD'	, 'stephen.lawrenson@icopal.com'			, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'greg.lucas.dba'							, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'greg.lucas.dba'							, 'dbo'	, 0	, 1)
-	, (1	, 'DEV'		, 'razia.nazir.dba'							, 'dbo'	, 0	, 1)
-	, (1	, 'PROD'	, 'razia.nazir.dba'							, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'andrew.couch.dba'						, 'dbo'	, 0	, 1)
 	, (1	, 'PROD'	, 'andrew.couch.dba'						, 'dbo'	, 0	, 1)
 	, (1	, 'DEV'		, 'stephen.lawrenson.dba'					, 'dbo'	, 0	, 1)
@@ -177,6 +173,10 @@ values (0, '', '', '', 0, 0)
 	, (0	, 'PROD'	, 'mark.bolton.sql'							, 'dbo'	, 1	, 0)
 	, (0	, 'DEV'		, 'matthew.basoo.sql'						, 'dbo'	, 1	, 0)
 	, (0	, 'PROD'	, 'matthew.basoo.sql'						, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'razia.nazir@icopal.com'					, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'razia.nazir@icopal.com'					, 'dbo'	, 1	, 0)
+	, (0	, 'DEV'		, 'razia.nazir.dba'							, 'dbo'	, 1	, 0)
+	, (0	, 'PROD'	, 'razia.nazir.dba'							, 'dbo'	, 1	, 0)
 ;
 
 insert #RoleMembers (UserName, RoleName)
@@ -191,15 +191,9 @@ values ('', '')
 	, ('stephen.lawrenson@icopal.com'			, 'SqlDevelopers')
 	, ('stephen.lawrenson@icopal.com'			, 'BatchManagers')
 	, ('stephen.lawrenson@icopal.com'			, 'CodeReviewers')
-	, ('razia.nazir@icopal.com'					, 'SqlDevelopers')
-	, ('razia.nazir@icopal.com'					, 'BatchManagers')
-	, ('razia.nazir@icopal.com'					, 'CodeReviewers')
 	, ('greg.lucas.dba'							, 'SqlDevelopers')
 	, ('greg.lucas.dba'							, 'BatchManagers')
 	, ('greg.lucas.dba'							, 'CodeReviewers')
-	, ('razia.nazir.dba'						, 'SqlDevelopers')
-	, ('razia.nazir.dba'						, 'BatchManagers')
-	, ('razia.nazir.dba'						, 'CodeReviewers')
 	, ('andrew.couch.dba'						, 'SqlDevelopers')
 	, ('andrew.couch.dba'						, 'BatchManagers')
 	, ('andrew.couch.dba'						, 'CodeReviewers')
@@ -225,7 +219,6 @@ values ('', '')
 	, ('greg.lucas@icopal.com'					, 'DeploymentManagers')
 	, ('andrew.couch@icopal.com'				, 'DeploymentManagers')
 	, ('stephen.lawrenson@icopal.com'			, 'DeploymentManagers')
-	, ('razia.nazir@icopal.com'					, 'DeploymentManagers')
 
 	, ('InfaDev'								, 'IcsDataFeeders')
 	, ('InfaProd'								, 'IcsDataFeeders')
@@ -639,16 +632,6 @@ if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name(
 		alter role [db_accessadmin] add member [stephen.lawrenson.dba]
 		alter role [db_owner] add member [stephen.lawrenson.dba]
 		grant alter any user to [stephen.lawrenson.dba]
-
-		--!
-		--!
-		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.dba')
-			create user [razia.nazir.dba] for login [razia.nazir.dba] with default_schema = [dbo] ;
-
-		alter role [db_accessadmin] add member [razia.nazir.dba]
-		alter role [db_owner] add member [razia.nazir.dba]
-		grant alter any user to [razia.nazir.dba]
 	end
 else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BAT_MAN_PROD'
 	begin
@@ -683,15 +666,5 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		alter role [db_accessadmin] add member [stephen.lawrenson.dba]
 		alter role [db_owner] add member [stephen.lawrenson.dba]
 		grant alter any user to [stephen.lawrenson.dba]
-
-		--!
-		--!
-		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.dba')
-			create user [razia.nazir.sql] for login [razia.nazir.dba] with default_schema = [dbo] ;
-
-		alter role [db_accessadmin] add member [razia.nazir.dba]
-		alter role [db_owner] add member [razia.nazir.dba]
-		grant alter any user to [razia.nazir.dba]
 	end
 go

@@ -32,3 +32,19 @@ modify
 	)
 go
 
+/*
+select * from sys.database_firewall_rules
+
+exec sys.sp_set_database_firewall_rule
+		@name = N'Air_St_Guest_WiFi_01'
+	, @start_ip_address = '62.254.106.194'
+	, @end_ip_address = '62.254.106.194'
+go
+
+exec sys.sp_set_database_firewall_rule
+		@name = N'dba_temp_2018'
+	, @start_ip_address = '86.162.93.212'
+	, @end_ip_address = '86.162.93.212'
+go
+
+*/

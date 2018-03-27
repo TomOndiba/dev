@@ -53,8 +53,8 @@ go
 
 exec sys.sp_set_database_firewall_rule
 		@name = N'dba_temp_2018'
-	, @start_ip_address = '81.129.146.215'
-	, @end_ip_address = '81.129.146.215'
+	, @start_ip_address = '86.162.93.212'
+	, @end_ip_address = '86.162.93.212'
 go
 
 */

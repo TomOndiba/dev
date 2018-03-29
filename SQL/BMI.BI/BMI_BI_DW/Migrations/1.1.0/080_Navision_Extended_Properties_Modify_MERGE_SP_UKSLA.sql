@@ -19,7 +19,9 @@ ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] DROP CONSTRAINT [D
 GO
 PRINT N'Altering [privy].[TsaToPsaBuildAndRunMerge]'
 GO
-ALTER procedure [privy].[TsaToPsaBuildAndRunMerge]
+DROP PROCEDURE IF EXISTS  [privy].[TsaToPsaBuildAndRunMerge]
+GO
+CREATE procedure [privy].[TsaToPsaBuildAndRunMerge]
 (
 	@RunType		  varchar(10)
   , @SourceTableName  varchar(200)

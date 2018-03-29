@@ -2260,11 +2260,18 @@ Static Data;
   </ItemGroup>
   <ItemGroup>
     <None Include="Programmable Objects\dbo\Stored Procedures\PopulateTsaToPsaLoadControlTable_NoDrop.sql" />
-    <None Include="Migrations\1.1.0\080_20180327-1545_UKSLA.sql" />
+    <None Include="Migrations\1.1.0\080_Navision_Extended_Properties_Modify_MERGE_SP_UKSLA.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema-Model\tsa\Tables\ics_land_Navision_BGR_Purch_Line_Discount.sql" />
     <None Include="Schema-Model\tsa\Tables\ics_land_Navision_ROU_Purch_Code.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\1.1.0\081_Create_CEGID_PIEDPORT_Tables _psa_tsa_UKSLA.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema-Model\psa\Tables\ics_stg_cegid_comp_fra_procure_PIEDPORT.sql" />
+    <None Include="Schema-Model\tsa\Tables\ics_land_cegid_comp_fra_procure_PIEDPORT.sql" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildProgramFiles32)\Microsoft SQL Server\140\DAC\bin\SqlPackage.exe" /action:Extract /tf:"$(SolutionDir)\dacpacs\$(MSBuildProjectName)_SQL2016.dacpac" /scs:"Data Source=(local);Initial Catalog=$(FinalShadowDatabase);Integrated Security=SSPI;Persist Security Info=False;"</PostBuildEvent>

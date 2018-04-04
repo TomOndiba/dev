@@ -105,4 +105,8 @@ GO
 DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Line]
 GO
 DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Line_Discount]
-go
+GO
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]
+GO
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_ Inv_ Line]
+

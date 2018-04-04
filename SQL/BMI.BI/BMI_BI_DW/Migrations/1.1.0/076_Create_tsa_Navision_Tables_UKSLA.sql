@@ -1,10 +1,10 @@
 ﻿-- <Migration ID="81d26144-b81a-48f1-8b8f-978d08959c4a" />
 GO
 
-IF OBJECT_ID('tsa.[ics_land_Navision_BGR_Purch_ Inv_ Line]', 'U') IS NOT NULL
+IF OBJECT_ID('tsa.[ics_land_Navision_BGR_Purch_Inv_Line]', 'U') IS NOT NULL
 BEGIN	
 
-	PRINT N'Dropping [tsa].[ics_land_Navision_BGR_Purch_ Inv_ Line]'
+	PRINT N'Dropping [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'
 	DROP TABLE [tsa].[ics_land_Navision_BGR_Purch_ Inv_ Line]
 END
 PRINT N'Creating [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'

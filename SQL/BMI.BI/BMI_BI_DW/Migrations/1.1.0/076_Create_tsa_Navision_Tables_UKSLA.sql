@@ -5,7 +5,7 @@ IF OBJECT_ID('tsa.[ics_land_Navision_BGR_Purch_Inv_Line]', 'U') IS NOT NULL
 BEGIN	
 
 	PRINT N'Dropping [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'
-	DROP TABLE [tsa].[ics_land_Navision_BGR_Purch_ Inv_ Line]
+	DROP TABLE [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]
 END
 PRINT N'Creating [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'
 GO

@@ -1,8 +1,10 @@
 ﻿-- <Migration ID="41f23f98-60ff-4829-9d30-4b17bc04af7b" />
 GO
 
+IF (ISNULL(OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_LIGNE'),0) = 0 OR (SELECT ISNULL(MAX(rows),0) FROM sys.partitions WHERE OBJECT_ID = OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_LIGNE')) =0)
+BEGIN
 PRINT N'Creating [psa].[ics_stg_cegid_comp_fra_procure_LIGNE]'
-GO
+
 CREATE TABLE [psa].[ics_stg_cegid_comp_fra_procure_LIGNE]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
@@ -245,13 +247,32 @@ CREATE TABLE [psa].[ics_stg_cegid_comp_fra_procure_LIGNE]
 [GL_GUIDWOL] [nvarchar] (36) NULL,
 [GL_ECARTUNI] [decimal] (15, 9) NULL
 )
-GO
+
 PRINT N'Creating primary key [PK_psa_ics_stg_cegid_comp_fra_procure_LIGNE] on [psa].[ics_stg_cegid_comp_fra_procure_LIGNE]'
-GO
+
 ALTER TABLE [psa].[ics_stg_cegid_comp_fra_procure_LIGNE] ADD CONSTRAINT [PK_psa_ics_stg_cegid_comp_fra_procure_LIGNE] PRIMARY KEY CLUSTERED  ([GL_NUMERO], [GL_NUMLIGNE], [GL_SOUCHE])
-GO
+END
+ELSE IF (SELECT COUNT(1) FROM sys.columns WHERE OBJECT_ID = OBJECT_ID('psa.ics_stg_cegid_cop_fra_procure_LIGNE') AND is_computed = 1) = 0
+BEGIN
+--No Computed Columns on table - they are either there or they aren't - Create them
+	ALTER TABLE psa.ics_stg_cegid_comp_fra_procure_LIGNE
+	ADD [PRE_GL_NATUREPIECCG_CAL] AS (ltrim(substring([GL_PIECEPRECEDENTE],(1),(3)))) PERSISTED,
+		[PRE_GL_SOUCHE_CAL] AS (substring([GL_PIECEPRECEDENTE],(5),(3))) PERSISTED,
+		[PRE_GL_NUMERO_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(9),(9)),(0))) PERSISTED,
+		[PRE_GL_INDECIG_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(19),(3)),(0))) PERSISTED,
+		[PRE_GL_NUMORDRE_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(23),(6)),(0))),
+		[ORIG_GL_NATUREPIECCG_CAL] AS (ltrim(substring([GL_PIECEORIGINE],(1),(3)))) PERSISTED,
+		[ORIG_GL_SOUCHE_CAL] AS (substring([GL_PIECEORIGINE],(5),(3))) PERSISTED,
+		[ORIG_GL_NUMERO_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(9),(9)),(0))) PERSISTED,
+		[ORIG_GL_INDECIG_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(19),(3)),(0))) PERSISTED,
+		[ORIG_GL_NUMORDRE_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(23),(6)),(0))) PERSISTED
+
+END
+
+
+
 PRINT N'Creating [psa].[ics_stg_cegid_comp_fra_procure_PIECE]'
-GO
+
 CREATE TABLE [psa].[ics_stg_cegid_comp_fra_procure_PIECE]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
@@ -460,8 +481,11 @@ PRINT N'Creating primary key [PK_psa_ics_stg_cegid_comp_fra_procure_PIECE] on [p
 GO
 ALTER TABLE [psa].[ics_stg_cegid_comp_fra_procure_PIECE] ADD CONSTRAINT [PK_psa_ics_stg_cegid_comp_fra_procure_PIECE] PRIMARY KEY CLUSTERED  ([GP_NUMERO], [GP_SOUCHE])
 GO
+
+IF (ISNULL(OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_LIGNE'),0) = 0 OR (SELECT ISNULL(MAX(rows),0) FROM sys.partitions WHERE OBJECT_ID = OBJECT_ID('psa.ics_stg_cegid_poly_fra_procure_LIGNE')) =0)
+BEGIN
 PRINT N'Creating [psa].[ics_stg_cegid_poly_fra_procure_LIGNE]'
-GO
+
 CREATE TABLE [psa].[ics_stg_cegid_poly_fra_procure_LIGNE]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
@@ -704,10 +728,29 @@ CREATE TABLE [psa].[ics_stg_cegid_poly_fra_procure_LIGNE]
 [GL_GUIDWOL] [nvarchar] (36) NULL,
 [GL_ECARTUNI] [decimal] (15, 9) NULL
 )
-GO
+
 PRINT N'Creating primary key [PK_psa_ics_stg_cegid_poly_fra_procure_LIGNE] on [psa].[ics_stg_cegid_poly_fra_procure_LIGNE]'
-GO
+
 ALTER TABLE [psa].[ics_stg_cegid_poly_fra_procure_LIGNE] ADD CONSTRAINT [PK_psa_ics_stg_cegid_poly_fra_procure_LIGNE] PRIMARY KEY CLUSTERED  ([GL_NUMERO], [GL_NUMLIGNE], [GL_SOUCHE])
+
+END
+ELSE IF (SELECT COUNT(1) FROM sys.columns WHERE OBJECT_ID = OBJECT_ID('psa.ics_stg_cegid_poly_fra_procure_LIGNE') AND is_computed = 1) = 0
+BEGIN
+--No Computed Columns on table - they are either there or they aren't - Create them
+	ALTER TABLE psa.ics_stg_cegid_poly_fra_procure_LIGNE
+	ADD [PRE_GL_NATUREPIECCG_CAL] AS (ltrim(substring([GL_PIECEPRECEDENTE],(1),(3)))) PERSISTED,
+		[PRE_GL_SOUCHE_CAL] AS (substring([GL_PIECEPRECEDENTE],(5),(3))) PERSISTED,
+		[PRE_GL_NUMERO_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(9),(9)),(0))) PERSISTED,
+		[PRE_GL_INDECIG_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(19),(3)),(0))) PERSISTED,
+		[PRE_GL_NUMORDRE_CAL] AS (CONVERT([int],substring([GL_PIECEPRECEDENTE],(23),(6)),(0))),
+		[ORIG_GL_NATUREPIECCG_CAL] AS (ltrim(substring([GL_PIECEORIGINE],(1),(3)))) PERSISTED,
+		[ORIG_GL_SOUCHE_CAL] AS (substring([GL_PIECEORIGINE],(5),(3))) PERSISTED,
+		[ORIG_GL_NUMERO_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(9),(9)),(0))) PERSISTED,
+		[ORIG_GL_INDECIG_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(19),(3)),(0))) PERSISTED,
+		[ORIG_GL_NUMORDRE_CAL] AS (CONVERT([int],substring([GL_PIECEORIGINE],(23),(6)),(0))) PERSISTED
+
+END
+
 GO
 PRINT N'Creating [psa].[ics_stg_cegid_poly_fra_procure_PIECE]'
 GO

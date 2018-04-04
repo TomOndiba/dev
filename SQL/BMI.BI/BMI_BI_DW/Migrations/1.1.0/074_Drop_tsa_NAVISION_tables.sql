@@ -67,3 +67,42 @@ GO
 
 DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Std_Purchase_Line]
 GO
+
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_And_Payables_Setup]
+GO
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Header]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Inv_Header]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Price]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Salesperson_Purchaser]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Standard_Purch_Line]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Standard_Purch_Line]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_And_Payables_Setup]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Header]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Inv_Header]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Inv_Line]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Line]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Price]
+GO					  
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Salesperson_Purchaser]
+go
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]
+GO
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_ Inv_ Line]
+GO
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Code]
+GO
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Line]
+GO
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Line_Discount]
+go

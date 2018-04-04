@@ -1632,7 +1632,7 @@ ALTER TABLE [psa].[ics_stg_Navision_ROU_Salesperson_Purchaser] ADD CONSTRAINT [P
 GO
 PRINT N'Creating [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'
 GO
-CREATE TABLE [tsa].[ics_land_Navision_BGR_Purch_ Inv_ Line]
+CREATE TABLE [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]
 (
 [EtlBatchRunId] [int] NOT NULL,
 [EtlStepRunId] [int] NOT NULL,
@@ -1641,8 +1641,8 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Purch_ Inv_ Line]
 [EtlSourceTable] [varchar] (200) NOT NULL,
 [EtlCreatedOn] [datetime] NOT NULL,
 [EtlCreatedBy] [varchar] (200) NOT NULL,
-[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_ Inv_ Line_ExcludeFromMerge] DEFAULT ((0)),
-[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_ Inv_ Line_IsDuplicate] DEFAULT ((0)),
+[ExcludeFromMerge] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_Inv Line_ExcludeFromMerge] DEFAULT ((0)),
+[IsDuplicate] [bit] NOT NULL CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_Inv_Line_IsDuplicate] DEFAULT ((0)),
 [Allow_Invoice_Disc_] [tinyint] NULL,
 [Amount] [decimal] (38, 20) NULL,
 [Amount_Including_VAT] [decimal] (38, 20) NULL,

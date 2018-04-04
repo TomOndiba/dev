@@ -64,3 +64,43 @@ GO
 /****** Object:  Table [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header]    Script Date: 20/03/2018 14:02:19 ******/
 DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Icopal Bulgaria$Purch_ Inv_ Header]
 GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_And_Payables_Setup]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_Code]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_Header]
+GO	
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_Inv_Header]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_Inv_Line]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_Line]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_Price]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Salesperson_Purchaser]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Standard_Purch_Line]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Standard_Purch_Line]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_And_Payables_Setup]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_Header]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_Inv_Header]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_Inv_Line]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_Line]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_Line_Discount]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_Price]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Salesperson_Purchaser]
+GO
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_BGR_Purch_Line_Discount]
+GO				
+DROP TABLE IF EXISTS [psa].[ics_stg_Navision_ROU_Purch_Code]	  
+go

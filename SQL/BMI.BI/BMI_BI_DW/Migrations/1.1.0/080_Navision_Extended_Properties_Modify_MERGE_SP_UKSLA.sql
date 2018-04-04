@@ -652,6 +652,9 @@ end ;
 GO
 PRINT N'Creating [tsa].[ics_land_Navision_BGR_Purch_Line_Discount]'
 GO
+
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_BGR_Purch_Line_Discount]
+GO
 CREATE TABLE [tsa].[ics_land_Navision_BGR_Purch_Line_Discount]
 (
 [EtlBatchRunId] [int] NOT NULL,
@@ -675,6 +678,8 @@ CREATE TABLE [tsa].[ics_land_Navision_BGR_Purch_Line_Discount]
 [timestamp] [varchar] (30) NULL
 )
 GO
+
+DROP TABLE IF EXISTS [tsa].[ics_land_Navision_ROU_Purch_Code]
 PRINT N'Creating [tsa].[ics_land_Navision_ROU_Purch_Code]'
 GO
 CREATE TABLE [tsa].[ics_land_Navision_ROU_Purch_Code]

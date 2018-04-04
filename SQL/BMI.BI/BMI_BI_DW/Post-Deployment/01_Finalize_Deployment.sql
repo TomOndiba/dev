@@ -8,4 +8,5 @@ Post-Deployment Script Template
  Example:      :setvar TableName MyTable
                SELECT * FROM [$(TableName)]
 --------------------------------------------------------------------------------------
+:r .\Static Data\dbo.Country.data.sql
 */

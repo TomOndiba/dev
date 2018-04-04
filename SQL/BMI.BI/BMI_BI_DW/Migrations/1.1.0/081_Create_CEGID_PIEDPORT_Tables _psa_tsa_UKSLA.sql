@@ -85,9 +85,9 @@ GO
 PRINT N'Creating [tsa].[ics_land_cegid_poly_fra_procure_PIEDPORT]'
 GO
 
-DROP TABLE IF EXISTS psa.ics_land_cegid_poly_fra_procure_PIEDPORT
+DROP TABLE IF EXISTS tsa.ics_land_cegid_comp_fra_procure_PIEDPORT
 GO
-CREATE TABLE [tsa].[ics_land_cegid_poly_fra_procure_PIEDPORT]
+CREATE TABLE [tsa].[ics_land_cegid_comp_fra_procure_PIEDPORT]
 (
 [EtlBatchRunId] [int] NOT NULL,
 [EtlStepRunId] [int] NOT NULL,
@@ -153,9 +153,4 @@ CREATE TABLE [tsa].[ics_land_cegid_poly_fra_procure_PIEDPORT]
 [GPT_FRAISFACTURE] [nvarchar] (18) NULL,
 [GPT_FACTUREFRAIS] [nvarchar] (1) NULL
 )
-GO
-GO
-PRINT N'Creating primary key [PK_psa_ics_stg_cegid_poly_fra_procure_PIEDPORT] on [psa].[ics_stg_cegid_poly_fra_procure_PIEDPORT]'
-GO
-ALTER TABLE [psa].[ics_stg_cegid_poly_fra_procure_PIEDPORT] ADD CONSTRAINT [PK_psa_ics_stg_cegid_poly_fra_procure_PIEDPORT] PRIMARY KEY CLUSTERED  ([GPT_NUMERO], [GPT_NUMPORT], [GPT_NATUREPIECEG])
 GO

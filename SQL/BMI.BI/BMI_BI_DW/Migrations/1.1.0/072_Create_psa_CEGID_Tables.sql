@@ -271,9 +271,12 @@ BEGIN
 
 END
 
-
-
+IF (ISNULL(OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_PIECE'),0) = 0 OR (SELECT ISNULL(MAX(rows),0) FROM sys.partitions WHERE OBJECT_ID = OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_PIECE')) =0)
+BEGIN
 PRINT N'Creating [psa].[ics_stg_cegid_comp_fra_procure_PIECE]'
+
+DROP TABLE IF EXISTS psa.ics_stg_cegid_comp_fra_procure_PIECE
+
 
 CREATE TABLE [psa].[ics_stg_cegid_comp_fra_procure_PIECE]
 (
@@ -478,11 +481,12 @@ CREATE TABLE [psa].[ics_stg_cegid_comp_fra_procure_PIECE]
 [GP_CODEAGENCE] [nvarchar] (6) NULL,
 [GP_MANDAT] [int] NULL
 )
-GO
+
 PRINT N'Creating primary key [PK_psa_ics_stg_cegid_comp_fra_procure_PIECE] on [psa].[ics_stg_cegid_comp_fra_procure_PIECE]'
-GO
+
 ALTER TABLE [psa].[ics_stg_cegid_comp_fra_procure_PIECE] ADD CONSTRAINT [PK_psa_ics_stg_cegid_comp_fra_procure_PIECE] PRIMARY KEY CLUSTERED  ([GP_NUMERO], [GP_SOUCHE])
-GO
+
+END
 
 IF (ISNULL(OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_LIGNE'),0) = 0 OR (SELECT ISNULL(MAX(rows),0) FROM sys.partitions WHERE OBJECT_ID = OBJECT_ID('psa.ics_stg_cegid_poly_fra_procure_LIGNE')) =0)
 BEGIN
@@ -755,9 +759,13 @@ BEGIN
 
 END
 
-GO
+IF (ISNULL(OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_LIGNE'),0) = 0 OR (SELECT ISNULL(MAX(rows),0) FROM sys.partitions WHERE OBJECT_ID = OBJECT_ID('psa.ics_stg_cegid_poly_fra_procure_LIGNE')) =0)
+BEGIN
+PRINT N'Creating [psa].[ics_stg_cegid_poly_fra_procure_LIGNE]'
+
+DROP TABLE IF EXISTS [psa].[ics_stg_cegid_poly_fra_procure_LIGNE]
 PRINT N'Creating [psa].[ics_stg_cegid_poly_fra_procure_PIECE]'
-GO
+
 CREATE TABLE [psa].[ics_stg_cegid_poly_fra_procure_PIECE]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),
@@ -961,14 +969,14 @@ CREATE TABLE [psa].[ics_stg_cegid_poly_fra_procure_PIECE]
 [GP_CODEAGENCE] [nvarchar] (6) NULL,
 [GP_MANDAT] [int] NULL
 )
-GO
+
 PRINT N'Creating primary key [PK_psa_ics_stg_cegid_poly_fra_procure_PIECE] on [psa].[ics_stg_cegid_poly_fra_procure_PIECE]'
-GO
+
 ALTER TABLE [psa].[ics_stg_cegid_poly_fra_procure_PIECE] ADD CONSTRAINT [PK_psa_ics_stg_cegid_poly_fra_procure_PIECE] PRIMARY KEY CLUSTERED  ([GP_NUMERO], [GP_SOUCHE])
-GO
+
 
 PRINT N'Adding Computed Columns on LIGNE Tables to Assist in Joining rather than Substringing'
-GO
+
 
 ALTER TABLE psa.ics_stg_cegid_comp_fra_procure_LIGNE
 ADD 
@@ -978,7 +986,7 @@ ADD
 	PRE_GL_INDECIG_CAL AS  CAST(SUBSTRING(GL_PIECEPRECEDENTE, 19, 3) AS INTEGER) PERSISTED,
 	PRE_GL_NUMORDRE_CAL AS CAST(SUBSTRING(GL_PIECEPRECEDENTE, 23, 6) AS INTEGER)
 
-GO
+
 
 ALTER TABLE psa.ics_stg_cegid_poly_fra_procure_LIGNE
 ADD 
@@ -988,7 +996,7 @@ ADD
 	PRE_GL_INDECIG_CAL AS  CAST(SUBSTRING(GL_PIECEPRECEDENTE, 19, 3) AS INTEGER) PERSISTED,
 	PRE_GL_NUMORDRE_CAL AS CAST(SUBSTRING(GL_PIECEPRECEDENTE, 23, 6) AS INTEGER)
 
-GO
+
 
 ALTER TABLE psa.ics_stg_cegid_comp_fra_procure_LIGNE
 ADD 
@@ -998,7 +1006,6 @@ ADD
 	ORIG_GL_INDECIG_CAL AS  CAST(SUBSTRING(GL_PIECEORIGINE, 19, 3) AS INTEGER) PERSISTED,
 	ORIG_GL_NUMORDRE_CAL AS CAST(SUBSTRING(GL_PIECEORIGINE, 23, 6) AS INTEGER)
 
-GO
 
 ALTER TABLE psa.ics_stg_cegid_poly_fra_procure_LIGNE
 ADD 
@@ -1007,5 +1014,4 @@ ADD
 	ORIG_GL_NUMERO_CAL AS CAST(SUBSTRING(GL_PIECEORIGINE, 9, 9) AS INTEGER) PERSISTED,
 	ORIG_GL_INDECIG_CAL AS  CAST(SUBSTRING(GL_PIECEORIGINE, 19, 3) AS INTEGER) PERSISTED,
 	ORIG_GL_NUMORDRE_CAL AS CAST(SUBSTRING(GL_PIECEORIGINE, 23, 6) AS INTEGER)
-
-GO
+END

@@ -3,18 +3,23 @@ GO
 
 PRINT N'Dropping constraints from [psa].[ics_stg_Navision_ROU_Standard_Purch_Line]'
 GO
+IF OBJECTPROPERTY(OBJECT_ID('PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line'), 'IsConstraint') = 1
+    
 ALTER TABLE [psa].[ics_stg_Navision_ROU_Standard_Purch_Line] DROP CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line]
 GO
 PRINT N'Dropping constraints from [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'
 GO
+IF OBJECTPROPERTY(OBJECT_ID('DF_tsa_ics_land_Navision_BGR_Purch_ Inv_Line_ExcludeFromMerge'), 'IsConstraint') = 1
 ALTER TABLE [tsa].[ics_land_Navision_BGR_Purch_Inv_Line] DROP CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_ Inv_Line_ExcludeFromMerge]
 GO
 PRINT N'Dropping constraints from [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'
 GO
+IF OBJECTPROPERTY(OBJECT_ID('DF_tsa_ics_land_Navision_BGR_Purch_Inv_Line_IsDuplicate'), 'IsConstraint') = 1
 ALTER TABLE [tsa].[ics_land_Navision_BGR_Purch_Inv_Line] DROP CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_Inv_Line_IsDuplicate]
 GO
 PRINT N'Dropping constraints from [tsa].[ics_land_Navision_ROU_Standard_Purch_Line]'
 GO
+IF OBJECTPROPERTY(OBJECT_ID('DF_tsa_ics_land_Navision_ROU_Standard_Purch_Line_ExcludedFromMerge'), 'IsConstraint') = 1
 ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] DROP CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Standard_Purch_Line_ExcludedFromMerge]
 GO
 PRINT N'Altering [privy].[TsaToPsaBuildAndRunMerge]'
@@ -270,6 +275,9 @@ end ;
 GO
 PRINT N'Creating [dbo].[PopulateTsaToPsaLoadControlTable_NoDrop]'
 GO
+
+DROP PROCEDURE IF EXISTS [dbo].[PopulateTsaToPsaLoadControlTable_NoDrop]
+go
 
 CREATE procedure [dbo].[PopulateTsaToPsaLoadControlTable_NoDrop]
 	  @Search VARCHAR(50) = null
@@ -701,59 +709,131 @@ CREATE TABLE [tsa].[ics_land_Navision_ROU_Purch_Code]
 GO
 PRINT N'Altering [tsa].[ics_land_Navision_ROU_Standard_Purch_Line]'
 GO
-ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] ADD
-[Line_No_] [int] NULL,
-[Variant_Code] [varchar] (10) NULL
+
+IF COL_LENGTH('tsa.ics_land_Navision_ROU_Standard_Purch_Line', 'Line_No_') IS  NULL
+BEGIN
+   ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] ADD
+	[Line_No_] [int] NULL
+END
+
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', 'Variant_Code') IS  NULL
+BEGIN
+   ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] ADD	
+	[Variant_Code] [varchar] (10) NULL
+END
+
 GO
-ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] DROP
-COLUMN [Standard Purchase Code],
-COLUMN [Line No_]
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', 'Standard Purchase Code') IS  NOT NULL
+BEGIN	
+	ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] DROP
+	COLUMN [Standard Purchase Code]
+END	
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', 'Standard Purchase Code') IS  NOT NULL
+BEGIN	
+	ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] DROP
+	COLUMN [Line No_]
+	end
 GO
-EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Amount Excl_ VAT]', N'Amount_Excl__VAT', N'COLUMN'
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', 'Amount Excl_ VAT') IS  NOT NULL
+begin
+	EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Amount Excl_ VAT]', N'Amount_Excl__VAT'--, N'COLUMN'
+END
 GO
-EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 1 Code]', N'Shortcut_Dimension_1_Code', N'COLUMN'
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', 'Shortcut Dimension 1 Code') IS  NOT NULL
+begin
+EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 1 Code]', N'Shortcut_Dimension_1_Code'--, N'COLUMN'
+END
 GO
-EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 2 Code]', N'Shortcut_Dimension_2_Code', N'COLUMN'
+
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', 'Shortcut Dimension 2 Code') IS  NOT NULL
+BEGIN	
+EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 2 Code]', N'Shortcut_Dimension_2_Code'--, N'COLUMN'
+END
 GO
-EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Variant Code]', N'Standard_Purchase_Code', N'COLUMN'
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', '[Variant Code]') IS  NOT NULL
+BEGIN
+EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Variant Code]', N'Standard_Purchase_Code'--, N'COLUMN'
+END
+
 GO
-EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Unit of Measure Code]', N'Unit_of_Measure_Code', N'COLUMN'
+IF COL_LENGTH('[tsa].[ics_land_Navision_ROU_Standard_Purch_Line]', 'Unit of Measure Code') IS  NOT NULL
+BEGIN
+EXEC sp_rename N'[tsa].[ics_land_Navision_ROU_Standard_Purch_Line].[Unit of Measure Code]', N'Unit_of_Measure_Code'--, N'COLUMN'
+END
 GO
 ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] ALTER COLUMN [timestamp] [varbinary] (max) NULL
 GO
 PRINT N'Altering [psa].[ics_stg_Navision_ROU_Standard_Purch_Line]'
 GO
-EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Amount Excl_ VAT]', N'Amount_Excl__VAT', N'COLUMN'
+IF COL_LENGTH('[psa].[ics_stg_Navision_ROU_Standard_Purch_Line]', 'Amount Excl_ VAT') IS  NOT NULL
+BEGIN
+EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Amount Excl_ VAT]', N'Amount_Excl__VAT'--, N'COLUMN'
+END
 GO
-EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Line No_]', N'Line_No_', N'COLUMN'
+IF COL_LENGTH('[psa].[ics_stg_Navision_ROU_Standard_Purch_Line]', 'Line No_') IS  NOT NULL
+BEGIN
+EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Line No_]', N'Line_No_'--, N'COLUMN'
+END
 GO
-EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 1 Code]', N'Shortcut_Dimension_1_Code', N'COLUMN'
+IF COL_LENGTH('[psa].[ics_stg_Navision_ROU_Standard_Purch_Line]', 'Shortcut Dimension 1 Code') IS  NOT NULL
+BEGIN
+EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 1 Code]', N'Shortcut_Dimension_1_Code'--, N'COLUMN'
+END
 GO
-EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 2 Code]', N'Shortcut_Dimension_2_Code', N'COLUMN'
+IF COL_LENGTH('[psa].[ics_stg_Navision_ROU_Standard_Purch_Line]', 'Shortcut Dimension 2 Code') IS  NOT NULL
+BEGIN	
+EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Shortcut Dimension 2 Code]', N'Shortcut_Dimension_2_Code'--, N'COLUMN'
+END
 GO
-EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Standard Purchase Code]', N'Standard_Purchase_Code', N'COLUMN'
+IF COL_LENGTH('[psa].[ics_stg_Navision_ROU_Standard_Purch_Line]', '[Standard Purchase Code]') IS  NOT NULL
+BEGIN
+EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Standard Purchase Code]', N'Standard_Purchase_Code'--, N'COLUMN'
+END
 GO
+IF COL_LENGTH('[psa].[ics_stg_Navision_ROU_Standard_Purch_Line]', 'Unit of Measure Code') IS  NOT NULL
+BEGIN
 EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Unit of Measure Code]', N'Unit_of_Measure_Code', N'COLUMN'
+END
 GO
-EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Variant Code]', N'Variant_Code', N'COLUMN'
+IF COL_LENGTH('[psa].[ics_stg_Navision_ROU_Standard_Purch_Line]', 'Variant Code') IS  NOT NULL
+BEGIN	
+EXEC sp_rename N'[psa].[ics_stg_Navision_ROU_Standard_Purch_Line].[Variant Code]', N'Variant_Code'--, N'COLUMN'
+END
 GO
 ALTER TABLE [psa].[ics_stg_Navision_ROU_Standard_Purch_Line] ALTER COLUMN [timestamp] [varbinary] (max) NULL
 GO
-PRINT N'Creating primary key [PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line] on [psa].[ics_stg_Navision_ROU_Standard_Purch_Line]'
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE  CONSTRAINT_TYPE = 'PRIMARY KEY'
+    AND TABLE_NAME = 'ics_stg_Navision_ROU_Standard_Purch_Line' 
+    AND TABLE_SCHEMA ='psa' )
+BEGIN
+	PRINT N'Creating primary key [PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line] on [psa].[ics_stg_Navision_ROU_Standard_Purch_Line]'
+	ALTER TABLE [psa].[ics_stg_Navision_ROU_Standard_Purch_Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line] PRIMARY KEY CLUSTERED  ([Line_No_], [Standard_Purchase_Code])
+END
 GO
-ALTER TABLE [psa].[ics_stg_Navision_ROU_Standard_Purch_Line] ADD CONSTRAINT [PK_psa_ics_stg_Navision_ROU_Standard_Purch_Line] PRIMARY KEY CLUSTERED  ([Line_No_], [Standard_Purchase_Code])
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE  CONSTRAINT_TYPE = 'PRIMARY KEY'
+    AND TABLE_NAME = 'ataSourceTableGroups' 
+    AND TABLE_SCHEMA ='dbo' )
+BEGIN
+	PRINT N'Creating primary key [PK_DataSourceTableGroups] on [dbo].[DataSourceTableGroups]'
+	ALTER TABLE [dbo].[DataSourceTableGroups] ADD CONSTRAINT [PK_DataSourceTableGroups] PRIMARY KEY CLUSTERED  ([ROWID])
+END
 GO
-PRINT N'Creating primary key [PK_DataSourceTableGroups] on [dbo].[DataSourceTableGroups]'
+
+
+IF OBJECTPROPERTY(OBJECT_ID('DF_tsa_ics_land_Navision_BGR_Purch_ Inv_ Line_ExcludeFromMerge'), 'IsConstraint') = 0
+	
+	ALTER TABLE [tsa].[ics_land_Navision_BGR_Purch_Inv_Line] ADD CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_ Inv_ Line_ExcludeFromMerge] DEFAULT ((0)) FOR [ExcludeFromMerge]
+
 GO
-ALTER TABLE [dbo].[DataSourceTableGroups] ADD CONSTRAINT [PK_DataSourceTableGroups] PRIMARY KEY CLUSTERED  ([ROWID])
-GO
-PRINT N'Adding constraints to [tsa].[ics_land_Navision_BGR_Purch_Inv_Line]'
-GO
-ALTER TABLE [tsa].[ics_land_Navision_BGR_Purch_Inv_Line] ADD CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_ Inv_ Line_ExcludeFromMerge] DEFAULT ((0)) FOR [ExcludeFromMerge]
-GO
+
+
+IF OBJECTPROPERTY(OBJECT_ID('DF_tsa_ics_land_Navision_BGR_Purch_ Inv_ Line_IsDuplicate'), 'IsConstraint') = 0
 ALTER TABLE [tsa].[ics_land_Navision_BGR_Purch_Inv_Line] ADD CONSTRAINT [DF_tsa_ics_land_Navision_BGR_Purch_ Inv_ Line_IsDuplicate] DEFAULT ((0)) FOR [IsDuplicate]
 GO
 PRINT N'Adding constraints to [tsa].[ics_land_Navision_ROU_Standard_Purch_Line]'
 GO
+IF OBJECTPROPERTY(OBJECT_ID('DF_tsa_ics_land_Navision_ROU_Standard_Purch_Line_ExcludeFromMerge'), 'IsConstraint') = 0
 ALTER TABLE [tsa].[ics_land_Navision_ROU_Standard_Purch_Line] ADD CONSTRAINT [DF_tsa_ics_land_Navision_ROU_Standard_Purch_Line_ExcludeFromMerge] DEFAULT ((0)) FOR [ExcludeFromMerge]
 GO

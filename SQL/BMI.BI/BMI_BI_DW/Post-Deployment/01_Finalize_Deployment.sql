@@ -9,4 +9,5 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]
 --------------------------------------------------------------------------------------
 :r .\Static Data\dbo.Country.data.sql
+:r .\Static Data\dbo.TsaToPsaControlTable.data.sql
 */

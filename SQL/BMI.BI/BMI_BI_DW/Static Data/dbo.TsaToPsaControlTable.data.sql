@@ -11,6 +11,7 @@ MERGE INTO [dbo].[TsaToPsaLoadControlTable] AS Target
 /*Copy The following data into the dbo.TsaToPsaControlTable.data.sql Script located within the Static Data Folder*/
 /*Excluding the Order Columns */
 /*Remove the leading ","  */
+---
 --
 USING (VALUES
 (5, '2018-03-13T17:09:35.497', 'GROUPICOPAL\ukrna', DB_NAME(), 'tsa', '[ics_land_M3V10gen_POL_CCURRA]', DB_NAME(), 'psa', '[ics_stg_M3V10gen_POL_CCURRA]', 'Full', 100113, '[CUDIVI],[CUCUTD],[CUCUCD],[CUCRTP],[CUCONO]','[CUDIVI],[CUCUTD],[CUCUCD],[CUCRTP],[CUCONO]',0) 

@@ -5,6 +5,8 @@ IF (ISNULL(OBJECT_ID('psa.ics_stg_cegid_comp_fra_procure_LIGNE'),0) = 0 OR (SELE
 BEGIN
 PRINT N'Creating [psa].[ics_stg_cegid_comp_fra_procure_LIGNE]'
 
+DROP TABLE IF EXISTS psa.ics_stg_cegid_comp_fra_procure_LIGNE
+
 CREATE TABLE [psa].[ics_stg_cegid_comp_fra_procure_LIGNE]
 (
 [EtlRecordId] [bigint] NOT NULL IDENTITY(1, 1),

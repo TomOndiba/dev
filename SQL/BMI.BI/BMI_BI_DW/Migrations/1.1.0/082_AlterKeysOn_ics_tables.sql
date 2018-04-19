@@ -3,22 +3,6 @@ GO
 
 PRINT N'Dropping extended properties'
 GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_est_procure_SROGRT', NULL, NULL
-GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_est_procure_SROORPPL', NULL, NULL
-GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_fin_procure_SROGRT', NULL, NULL
-GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_fin_procure_SROORPPL', NULL, NULL
-GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_lat_procure_SROGRT', NULL, NULL
-GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_lat_procure_SROORPPL', NULL, NULL
-GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_lit_procure_SROGRT', NULL, NULL
-GO
-EXEC sp_dropextendedproperty N'IncludeInMerge', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_lit_procure_SROORPPL', NULL, NULL
-GO
 PRINT N'Dropping constraints from [psa].[ics_stg_ibs_est_procure_SROGRT]'
 GO
 ALTER TABLE [psa].[ics_stg_ibs_est_procure_SROGRT] DROP CONSTRAINT [pk_psa_ics_stg_ibs_est_procure_SROGRT]

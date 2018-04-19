@@ -35,7 +35,7 @@
     <DeployChangesForProgrammableObjects>True</DeployChangesForProgrammableObjects>
     <DeployOnceUseSemver>True</DeployOnceUseSemver>
     <SemverInitialBaseline>True</SemverInitialBaseline>
-    <BuildOptionSkipShadowDeployVS>False</BuildOptionSkipShadowDeployVS>
+    <BuildOptionSkipShadowDeployVS>True</BuildOptionSkipShadowDeployVS>
     <ExcludeObjectsFromSync>
 StoredProcedure=[tsa].[BatchEndOnError];
 StoredProcedure=[tsa].[BatchEndOnStop];

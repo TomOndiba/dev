@@ -17,7 +17,7 @@ CREATE TABLE [psa].[ics_stg_ibs_est_procure_SROGRT]
 [GRSTAT] [nvarchar] (1) NULL,
 [GRGRKY] [decimal] (15, 0) NULL,
 [GRORNO] [decimal] (12, 0) NOT NULL,
-[GRLINE] [decimal] (5, 0) NULL,
+[GRLINE] [decimal] (5, 0) NOT NULL,
 [GRORDT] [nvarchar] (2) NULL,
 [GROREF] [nvarchar] (15) NULL,
 [GRSUNO] [nvarchar] (11) NULL,
@@ -100,7 +100,5 @@ CREATE TABLE [psa].[ics_stg_ibs_est_procure_SROGRT]
 [GRPHINQT] [decimal] (15, 3) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_ibs_est_procure_SROGRT] ADD CONSTRAINT [pk_psa_ics_stg_ibs_est_procure_SROGRT] PRIMARY KEY CLUSTERED  ([GRORNO], [GRPRDC])
-GO
-EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_est_procure_SROGRT', NULL, NULL
+ALTER TABLE [psa].[ics_stg_ibs_est_procure_SROGRT] ADD CONSTRAINT [pk_psa_ics_stg_ibs_est_procure_SROGRT] PRIMARY KEY CLUSTERED  ([GRORNO], [GRPRDC], [GRLINE])
 GO

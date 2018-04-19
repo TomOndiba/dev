@@ -17,7 +17,7 @@ CREATE TABLE [psa].[ics_stg_ibs_lit_procure_SROORPPL]
 [OLSTAT] [nvarchar] (1) NULL,
 [OLTYPE] [nvarchar] (1) NULL,
 [OLORNO] [decimal] (12, 0) NOT NULL,
-[OLLINE] [decimal] (5, 0) NULL,
+[OLLINE] [decimal] (5, 0) NOT NULL,
 [OLSUNO] [nvarchar] (11) NULL,
 [OLSROM] [nvarchar] (3) NULL,
 [OLORDT] [nvarchar] (2) NULL,
@@ -173,7 +173,5 @@ CREATE TABLE [psa].[ics_stg_ibs_lit_procure_SROORPPL]
 [OLRCXR] [decimal] (13, 7) NULL
 )
 GO
-ALTER TABLE [psa].[ics_stg_ibs_lit_procure_SROORPPL] ADD CONSTRAINT [pk_psa_ics_stg_ibs_lit_procure_SROORPPL] PRIMARY KEY CLUSTERED  ([OLORNO], [OLPRDC])
-GO
-EXEC sp_addextendedproperty N'IncludeInMerge', N'Y', 'SCHEMA', N'psa', 'TABLE', N'ics_stg_ibs_lit_procure_SROORPPL', NULL, NULL
+ALTER TABLE [psa].[ics_stg_ibs_lit_procure_SROORPPL] ADD CONSTRAINT [pk_psa_ics_stg_ibs_lit_procure_SROORPPL] PRIMARY KEY CLUSTERED  ([OLORNO], [OLPRDC], [OLLINE])
 GO

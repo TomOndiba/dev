@@ -673,22 +673,22 @@ if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmibidwh' and db_name(
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
-			create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.dba')
+			create user [greg.lucas.dba] for login [greg.lucas.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [greg.lucas.sql]
-		alter role [db_owner] add member [greg.lucas.sql]
-		grant alter any user to [greg.lucas.sql]
+		alter role [db_accessadmin] add member [greg.lucas.dba]
+		alter role [db_owner] add member [greg.lucas.dba]
+		grant alter any user to [greg.lucas.dba]
 
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
-			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+		--if not exists (select 1 from sys.database_principals where name = 'andrew.couch.dba')
+		--	create user [andrew.couch.dba] for login [andrew.couch.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [razia.nazir.sql]
-		alter role [db_owner] add member [razia.nazir.sql]
-		grant alter any user to [razia.nazir.sql]
+		--alter role [db_accessadmin] add member [andrew.couch.dba]
+		--alter role [db_owner] add member [andrew.couch.dba]
+		--grant alter any user to [andrew.couch.dba]
 	end
 else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and db_name() = 'BMI_BI_DW_PROD'
 	begin
@@ -697,21 +697,21 @@ else if cast(serverproperty('ServerName') as nvarchar(255)) = 'bmidwhprod' and d
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.sql')
-			create user [greg.lucas.sql] for login [greg.lucas.sql] with default_schema = [dbo] ;
+		if not exists (select 1 from sys.database_principals where name = 'greg.lucas.dba')
+			create user [greg.lucas.dba] for login [greg.lucas.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [greg.lucas.sql]
-		alter role [db_owner] add member [greg.lucas.sql]
-		grant alter any user to [greg.lucas.sql]
+		alter role [db_accessadmin] add member [greg.lucas.dba]
+		alter role [db_owner] add member [greg.lucas.dba]
+		grant alter any user to [greg.lucas.dba]
 
 		--!
 		--!
 		--!
-		if not exists (select 1 from sys.database_principals where name = 'razia.nazir.sql')
-			create user [razia.nazir.sql] for login [razia.nazir.sql] with default_schema = [dbo] ;
+		--if not exists (select 1 from sys.database_principals where name = 'andrew.couch.dba')
+		--	create user [andrew.couch.dba] for login [andrew.couch.dba] with default_schema = [dbo] ;
 
-		alter role [db_accessadmin] add member [razia.nazir.sql]
-		alter role [db_owner] add member [razia.nazir.sql]
-		grant alter any user to [razia.nazir.sql]
+		--alter role [db_accessadmin] add member [andrew.couch.dba]
+		--alter role [db_owner] add member [andrew.couch.dba]
+		--grant alter any user to [andrew.couch.dba]
 	end
 go

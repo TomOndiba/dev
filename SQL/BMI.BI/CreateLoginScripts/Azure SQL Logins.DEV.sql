@@ -28,6 +28,22 @@ go
 --! connection strings that do not specify a default database still work
 --!
 
+if not exists (select 1 from sys.sql_logins where name = 'greg.lucas.dba')
+	create login [greg.lucas.dba] with password = 'ZxcAsdQwe!23' ;
+else
+	alter login [greg.lucas.dba] with password = 'ZxcAsdQwe!23' ;
+go
+if not exists (select 1 from sys.database_principals where name = 'greg.lucas.dba')
+	create user [greg.lucas.dba] for login [greg.lucas.dba] with default_schema = [dbo];
+go
+alter role [dbmanager] add member [greg.lucas.dba]
+go
+alter role [loginmanager] add member [greg.lucas.dba]
+go
+grant alter any user to [greg.lucas.dba]
+go
+
+
 --!
 --!
 --!
